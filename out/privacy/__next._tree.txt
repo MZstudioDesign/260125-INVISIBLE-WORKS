@@ -1,0 +1,3 @@
+:HL["/_next/static/chunks/0fb249a7886e7dc4.css","style"]
+:HL["https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css","style",{"crossOrigin":"anonymous"}]
+0:{"buildId":"dq_P2xX4uisELkL9HjPs2","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"privacy","paramType":null,"paramKey":"privacy","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
