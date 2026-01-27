@@ -185,8 +185,14 @@ export default function Home() {
       </section>
 
       {/* ==================== CHANGE SECTION ==================== */}
-      <section id="change" className="relative bg-white">
-        <div className="max-w-5xl mx-auto px-6 py-32">
+      <section id="change" className="relative bg-white overflow-hidden">
+        {/* Gradient Horizon - 하단 배경으로 깔림 */}
+        <div className="absolute bottom-0 left-0 right-0 z-0">
+          <GradientHorizon variant="cosmicRise" height="500px" />
+        </div>
+
+        {/* 콘텐츠 */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 pb-64">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             {/* Left - Timeline */}
             <motion.div
@@ -231,9 +237,6 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-
-        {/* Gradient Horizon Transition */}
-        <GradientHorizon variant="cosmicRise" height="400px" />
       </section>
 
       {/* ==================== HOW WE DO SECTION ==================== */}
