@@ -228,7 +228,6 @@ Cloudflare, Inc. | 웹사이트 보안 및 CDN 서비스
 ▶ 개인정보 보호책임자
   - 성명: 오유택
   - 직책: 대표
-  - 연락처: 010-5150-7858
   - 이메일: mzstudio104@gmail.com
 
 ② 정보주체는 회사의 서비스(또는 사업)를 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자에게 문의하실 수 있습니다. 회사는 정보주체의 문의에 대해 지체 없이 답변 및 처리해드릴 것입니다.`,
@@ -302,7 +301,7 @@ Cloudflare, Inc. | 웹사이트 보안 및 CDN 서비스
                   <h2 className="text-xl font-semibold text-[#1a1a1a] mb-4">
                     {section.title}
                   </h2>
-                  <div className="text-[#1a1a1a]/70 leading-relaxed whitespace-pre-line text-sm md:text-base">
+                  <div className="text-[#1a1a1a]/70 leading-relaxed whitespace-pre-line text-sm md:text-base break-all">
                     {section.content}
                   </div>
                 </motion.div>

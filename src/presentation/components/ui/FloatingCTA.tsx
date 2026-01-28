@@ -3,11 +3,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { MessageCircle, X, ArrowUp, Phone, Mail, Calendar } from 'lucide-react';
+import { MessageCircle, X, ArrowUp, Mail, Calendar } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface FloatingCTAProps {
   /** 메인 버튼 라벨 */
   label?: string;
+  /** 닫기 버튼 라벨 */
+  closeLabel?: string;
   /** 메인 버튼 아이콘 */
   icon?: React.ReactNode;
   /** 클릭 핸들러 */
@@ -27,16 +30,21 @@ interface FloatingCTAProps {
  * FloatingCTA - 우측 하단 플로팅 CTA 버튼
  */
 export function FloatingCTA({
-  label = '문의하기',
+  label,
+  closeLabel,
   icon = <MessageCircle className="w-5 h-5" />,
   onClick,
   expandItems,
   position = 'bottom-right',
   className,
 }: FloatingCTAProps) {
+  const t = useTranslations('Components.FloatingCTA');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  
+  const displayLabel = label || t('contact');
+  const displayCloseLabel = closeLabel || t('close');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,7 +138,7 @@ export function FloatingCTA({
             whileTap={{ scale: 0.95 }}
           >
             {isExpanded ? <X className="w-5 h-5" /> : icon}
-            <span className="hidden sm:inline">{isExpanded ? '닫기' : label}</span>
+            <span className="hidden sm:inline">{isExpanded ? displayCloseLabel : displayLabel}</span>
           </motion.button>
         </motion.div>
       )}
@@ -195,24 +203,22 @@ export function ScrollToTop({ threshold = 400, className }: ScrollToTopProps) {
  * ContactFAB - 연락처 플로팅 버튼 (확장형)
  */
 export function ContactFAB() {
+  const t = useTranslations('Components.FloatingCTA');
+  
   return (
     <FloatingCTA
-      label="문의하기"
+      label={t('contact')}
+      closeLabel={t('close')}
       icon={<MessageCircle className="w-5 h-5" />}
       expandItems={[
         {
-          icon: <Phone className="w-4 h-4 text-[#7fa8c9]" />,
-          label: '전화 상담',
-          onClick: () => window.open('tel:+821012345678'),
-        },
-        {
           icon: <Mail className="w-4 h-4 text-[#7fa8c9]" />,
-          label: '이메일 문의',
+          label: t('email'),
           onClick: () => window.open('mailto:hello@invisible.works'),
         },
         {
           icon: <Calendar className="w-4 h-4 text-[#7fa8c9]" />,
-          label: '미팅 예약',
+          label: t('meeting'),
           onClick: () => window.open('/contact'),
         },
       ]}

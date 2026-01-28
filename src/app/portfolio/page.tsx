@@ -179,16 +179,17 @@ export default function PortfolioPage() {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1a1a1a] mb-6">
               Portfolio
             </h1>
-            <p className="text-xl text-[#1a1a1a]/60 max-w-2xl">
-              우리가 함께한 프로젝트들입니다. 각 프로젝트는 클라이언트의 비전을
-              현실로 만든 결과물입니다.
+            <p className="text-xl text-[#1a1a1a]/60 max-w-2xl leading-relaxed">
+              복잡한 과정 없이 완성된 웹사이트들입니다.
+              <br />
+              여러분의 다음 웹사이트도 이렇게 만들어집니다.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Filter */}
-      <section className="px-6 pb-12">
+      {/* Filter - 숨김 처리 (코드 유지) */}
+      <section className="hidden px-6 pb-12">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="flex flex-wrap gap-3"

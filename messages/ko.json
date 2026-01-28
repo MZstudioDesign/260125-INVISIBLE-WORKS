@@ -1,0 +1,269 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "process": "Process",
+    "about": "About",
+    "contact": "문의하기"
+  },
+  "Hero": {
+    "title": "Invisible Works",
+    "subtitle": "우리는 처음부터 다 보여주지 않습니다"
+  },
+  "Problem": {
+    "title1": "웹사이트는",
+    "title2": "신경 쓸 것이",
+    "title3": "끝도 없습니다",
+    "subtitle": "비싸고, 과정이 복잡하며, 관리하기 어렵습니다.",
+    "subtitleMobile": "비싸고, 과정이 복잡하며,\n관리하기 어렵습니다."
+  },
+  "Change": {
+    "badge": "그래서",
+    "line1": "우리는 일을 줄였습니다.",
+    "line2": "대신 고민을 늘렸습니다.",
+    "list1": "꼭 필요한 판단만",
+    "list2": "설명이 필요한 지점만",
+    "list3": "결과로 이어지는 과정만",
+    "closing": "그렇기에, 우리는 웹사이트를 다르게 만듭니다.",
+    "closingMobile": "그렇기에,\n우리는 웹사이트를\n다르게 만듭니다."
+  },
+  "Timeline": {
+    "item1": "전체가 복잡하게 느껴진 진행",
+    "item2": "왜 필요한지 모르겠던 단계들",
+    "item3": "결정할 게 너무 많았던 과정",
+    "item4": "이해하기 어려웠던 질문들",
+    "item5": "계속 늘어만 났던 수정 사항"
+  },
+  "HowWeDo": {
+    "badge": "Process",
+    "title": "이렇게 진행됩니다",
+    "step1Title": "내용 전달",
+    "step1Desc": "웹사이트에 들어갈 자료를 전달합니다. 텍스트, 이미지, 로고 등 필요한 자료를 정리해서 보내주시면 됩니다.",
+    "step2Title": "디자인 선택",
+    "step2Desc": "디자인 시안 3종 중 하나를 선택합니다.",
+    "step2Free": "여기까지 무료",
+    "step3Title": "웹사이트 완성",
+    "step3Desc": "선택한 디자인으로 웹사이트를 정교하게 완성합니다. 반응형, SEO, 성능 최적화까지 모두 포함됩니다."
+  },
+  "Portfolio": {
+    "title": "곧, 여러분의 웹사이트가 됩니다",
+    "titleMobile": "곧, 여러분의\n웹사이트가 됩니다",
+    "cta": "더 많은 작업물 보러가기"
+  },
+  "Why": {
+    "slide1Line1": "웹사이트는 필요하다고들 말합니다.",
+    "slide1Line2": "하지만 비용과 복잡함 앞에서 시작조차 못 하는 경우를",
+    "slide1Line3": "우리는 너무 많이 봤습니다.",
+    "slide2Line1": "그건 웹사이트가 어려워서가 아니라,",
+    "slide2Line2": "어렵게 만들어온 관행이",
+    "slide2Line3": "당연해졌기 때문이라고 생각했습니다.",
+    "slide3Line1": "그래서 우리는 그 복잡한 방식을 따르기보다,",
+    "slide3Line2": "그동안 당연하게 여겨지던 과정을",
+    "slide3Line3": "하나씩 걷어내기로 했습니다.",
+    "slide4Line1": "설명을 쉽게, 결정도 쉽게,",
+    "slide4Line2": "보이지 않는 곳에서 구조를 바꿔,",
+    "slide4Line3": "부담 없는 웹사이트를 만들 수 있도록.",
+    "slide5": "우리는 Invisible Works입니다."
+  },
+  "Footer": {
+    "cta": "내 웹사이트 디자인 보러가기",
+    "copyright": "© 2026 Invisible Works. All rights reserved.",
+    "links": {
+      "privacy": "개인정보 처리방침",
+      "terms": "이용약관"
+    },
+    "contact": {
+      "email": "mzstudio104@gmail.com"
+    }
+  },
+  "Contact": {
+    "title": "문의하기",
+    "subtitle": "어떤 웹사이트를 만들고 싶은가요?",
+    "step1Title": "어떤 업종/서비스인가요?",
+    "step2Title": "웹사이트로 가장 하고 싶은 건 뭔가요?",
+    "step3Title": "지금 갖고 있는 것만 체크해주세요.",
+    "step4Title": "웹사이트 견적을 받아본 적이 있나요?",
+    "step5Title": "연락 받을 방법 하나만 선택해주세요.",
+    "complete": "좋습니다. 곧 연락드리겠습니다.",
+    "industries": {
+      "cafe": "카페/식당",
+      "beauty": "뷰티/샵",
+      "academy": "학원/교육",
+      "medical": "병원/클리닉",
+      "brand": "브랜드/제조",
+      "fitness": "헬스/필라테스",
+      "office": "사무소/컨설팅",
+      "other": "기타 (직접 입력)"
+    },
+    "purposes": {
+      "trust": "신뢰감 전달",
+      "inquiry": "문의 유도",
+      "reservation": "예약 연결",
+      "sales": "판매 연결",
+      "unsure": "잘 모르겠어요 (추천)"
+    },
+    "assets": {
+      "social": "인스타그램/블로그/플레이스가 있어요",
+      "logo": "로고가 있어요",
+      "photos": "사진(매장/제품)이 있어요",
+      "content": "소개글/메뉴/가격표가 있어요",
+      "website": "기존 웹사이트가 있어요",
+      "none": "아직 없어요 (추천)"
+    },
+    "quote": {
+      "yes": "받아봤어요",
+      "no": "아직 안 받아봤어요 (추천)",
+      "yesMessage": "좋습니다. 기준이 있으시면 비교가 더 쉬워집니다.",
+      "noMessage": "꼭 한 번 받아보시는 걸 권합니다. 기준이 생기면 판단이 쉬워집니다."
+    },
+    "contactMethod": {
+      "sms": "문자 (추천)",
+      "email": "이메일",
+      "phone": "전화"
+    },
+    "buttons": {
+      "next": "다음",
+      "prev": "이전",
+      "submit": "입력 완료",
+      "goBack": "이전 단계로 되돌아가기"
+    }
+  },
+  "PortfolioPage": {
+    "title": "함께 만든 웹사이트들",
+    "description1": "우리가 함께한 프로젝트들입니다.",
+    "description2": "모든 프로젝트는 클라이언트의 비전과 함께 만들어졌습니다."
+  },
+  "Privacy": {
+    "title": "개인정보 처리방침"
+  },
+  "Terms": {
+    "title": "이용약관"
+  },
+  "LanguageSwitcher": {
+    "label": "언어"
+  },
+  "Components": {
+    "DialWheel": {
+      "items": ["도메인", "호스팅", "SSL인증", "보안", "속도", "구조", "레이아웃", "디자인", "콘텐츠", "반응형", "접근성", "SEO", "퍼포먼스", "브라우저호환", "모바일최적화", "유지보수", "업데이트", "백업", "배포", "관리"],
+      "title": "웹사이트는"
+    },
+    "Accordion": {
+      "prefix": "그리고,",
+      "freeText": "여기까지 무료",
+      "suffix": "입니다."
+    },
+    "Portfolio": {
+      "categories": {
+        "website": "웹사이트",
+        "landing": "랜딩페이지",
+        "webapp": "웹앱"
+      }
+    },
+    "CTA": {
+      "viewDesign": "내 웹사이트 디자인 보러가기",
+      "viewDesignMobile": "내 웹사이트 디자인\n보러 가기"
+    },
+    "FloatingCTA": {
+      "contact": "문의하기",
+      "close": "닫기",
+      "email": "이메일 문의",
+      "meeting": "미팅 예약"
+    }
+  },
+  "ContactForm": {
+    "title": "문의하기",
+    "subtitle": "어떤 웹사이트를 만들고 싶은가요?",
+    "steps": {
+      "step1": {
+        "title": "어떤 웹사이트를\n만들고 싶으신가요?",
+        "sub": "업종을 선택해주세요"
+      },
+      "step2": {
+        "title": "웹사이트로\n무엇을 하고 싶으세요?",
+        "sub": "목적을 알려주세요"
+      },
+      "step3": {
+        "title": "현재 갖고 계신 게\n있으신가요?",
+        "sub": "여러 개 선택 가능해요"
+      },
+      "step4": {
+        "title": "다른 곳에서\n견적을 받아보셨나요?",
+        "sub": "비교해보시면 판단이 쉬워져요"
+      },
+      "step5": {
+        "title": "연락은\n어떻게 드릴까요?",
+        "sub": "답변 드릴 연락처를 알려주세요"
+      }
+    },
+    "industries": {
+      "food": "음식점/카페",
+      "beauty": "뷰티/네일",
+      "fitness": "헬스/필라테스",
+      "education": "학원/교육",
+      "medical": "병원/클리닉",
+      "brand": "브랜드/제조",
+      "office": "사무실/오피스",
+      "other": "기타 (직접 입력)"
+    },
+    "purposes": {
+      "trust": "신뢰감 전달",
+      "inquiry": "문의 유도",
+      "reservation": "예약 연결",
+      "sales": "판매/결제",
+      "unknown": "잘 모르겠어요"
+    },
+    "assets": {
+      "sns": "인스타그램/블로그/플레이스가 있어요",
+      "logo": "로고가 있어요",
+      "photos": "사진(매장/제품)이 있어요",
+      "content": "소개글/메뉴/가격표가 있어요",
+      "website": "기존 웹사이트가 있어요",
+      "none": "아직 없어요"
+    },
+    "quote": {
+      "yes": "받아봤어요",
+      "no": "아직 안 받아봤어요",
+      "yesMessage": "좋습니다. 기준이 있으시면 비교가 더 쉬워집니다.",
+      "noMessage": "꼭 한 번 받아보시는 걸 권합니다.\n기준이 생기면 판단이 쉬워집니다."
+    },
+    "contactMethods": {
+      "sms": "문자",
+      "email": "이메일",
+      "call": "전화"
+    },
+    "linkTypes": {
+      "own": "자사 홈페이지",
+      "competitor": "경쟁사",
+      "style": "원하는 스타일",
+      "other": "직접 입력"
+    },
+    "placeholders": {
+      "phone": "010-0000-0000",
+      "email": "example@email.com",
+      "industryCustom": "예: 스타트업, 개인 브랜드, 프리랜서...",
+      "additionalNote": "궁금한 점이나 더 알려주고 싶은 내용이 있으면 편하게 적어주세요"
+    },
+    "errors": {
+      "invalidEmail": "올바른 이메일 형식이 아닙니다",
+      "invalidPhone": "올바른 전화번호 형식이 아닙니다 (10-11자리)"
+    },
+    "buttons": {
+      "next": "다음",
+      "prev": "이전",
+      "submit": "입력 완료",
+      "close": "닫기",
+      "goBack": "이전 단계로 되돌아가기",
+      "addLink": "링크 추가"
+    },
+    "labels": {
+      "recommended": "추천",
+      "linkSection": "참고할 링크가 있으면 남겨주세요 (선택)",
+      "linkType": "어떤 종류의 링크인가요?",
+      "keyboard": "Enter로 다음 · Esc로 뒤로"
+    },
+    "complete": {
+      "title": "좋습니다. 곧 연락드리겠습니다.",
+      "subtitle": "빠른 시일 내에 확인 후 답변드리겠습니다."
+    }
+  }
+}

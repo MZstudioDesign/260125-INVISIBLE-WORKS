@@ -1,0 +1,269 @@
+{
+  "Navigation": {
+    "home": "首页",
+    "portfolio": "作品集",
+    "process": "流程",
+    "about": "关于",
+    "contact": "联系我们"
+  },
+  "Hero": {
+    "title": "Invisible Works",
+    "subtitle": "我们不会一开始就展示所有"
+  },
+  "Problem": {
+    "title1": "网站",
+    "title2": "需要关注的",
+    "title3": "事情无穷无尽",
+    "subtitle": "昂贵、流程复杂、难以维护。",
+    "subtitleMobile": "昂贵、流程复杂、\n难以维护。"
+  },
+  "Change": {
+    "badge": "所以",
+    "line1": "我们减少了工作量。",
+    "line2": "取而代之，增加了思考。",
+    "list1": "只做必要的判断",
+    "list2": "只解释必要的要点",
+    "list3": "只保留能带来结果的流程",
+    "closing": "因此，我们用不同的方式制作网站。",
+    "closingMobile": "因此，\n我们用不同的方式\n制作网站。"
+  },
+  "Timeline": {
+    "item1": "令人困惑的整体流程",
+    "item2": "看似不必要的步骤",
+    "item3": "需要做太多决定",
+    "item4": "难以理解的问题",
+    "item5": "不断增加的修改"
+  },
+  "HowWeDo": {
+    "badge": "流程",
+    "title": "我们这样进行",
+    "step1Title": "提交内容",
+    "step1Desc": "发送网站所需的材料。只需整理并发送您的文字、图片、标志等必要材料。",
+    "step2Title": "选择设计",
+    "step2Desc": "从3个设计方案中选择一个。",
+    "step2Free": "到这里为止免费",
+    "step3Title": "完成网站",
+    "step3Desc": "我们根据您选择的设计精心完成网站。响应式设计、SEO和性能优化全部包含。"
+  },
+  "Portfolio": {
+    "title": "很快，这将成为您的网站",
+    "titleMobile": "很快，这将成为\n您的网站",
+    "cta": "查看更多作品"
+  },
+  "Why": {
+    "slide1Line1": "大家都说需要一个网站。",
+    "slide1Line2": "但我们见过太多人因为成本和复杂性",
+    "slide1Line3": "甚至无法开始。",
+    "slide2Line1": "不是网站很难做，",
+    "slide2Line2": "而是过于复杂的做法",
+    "slide2Line3": "已经变成了常态。",
+    "slide3Line1": "所以我们没有遵循复杂的方式，",
+    "slide3Line2": "而是决定一个一个地",
+    "slide3Line3": "去除那些理所当然的流程。",
+    "slide4Line1": "简单的说明，简单的决定，",
+    "slide4Line2": "在看不见的地方改变结构，",
+    "slide4Line3": "让您无负担地拥有网站。",
+    "slide5": "我们是 Invisible Works。"
+  },
+  "Footer": {
+    "cta": "查看您的网站设计",
+    "copyright": "© 2026 Invisible Works. 版权所有。",
+    "links": {
+      "privacy": "隐私政策",
+      "terms": "服务条款"
+    },
+    "contact": {
+      "email": "mzstudio104@gmail.com"
+    }
+  },
+  "Contact": {
+    "title": "联系我们",
+    "subtitle": "您想要什么样的网站？",
+    "step1Title": "您从事什么行业/服务？",
+    "step2Title": "您最想通过网站实现什么？",
+    "step3Title": "请勾选您目前拥有的。",
+    "step4Title": "您之前收到过网站报价吗？",
+    "step5Title": "您希望如何被联系？",
+    "complete": "好的，我们会尽快联系您。",
+    "industries": {
+      "cafe": "咖啡厅/餐厅",
+      "beauty": "美容/店铺",
+      "academy": "培训/教育",
+      "medical": "医院/诊所",
+      "brand": "品牌/制造",
+      "fitness": "健身/普拉提",
+      "office": "办公室/咨询",
+      "other": "其他（手动输入）"
+    },
+    "purposes": {
+      "trust": "建立信任",
+      "inquiry": "促进咨询",
+      "reservation": "启用预订",
+      "sales": "促进销售",
+      "unsure": "不确定（推荐）"
+    },
+    "assets": {
+      "social": "我有Instagram/博客/店铺页面",
+      "logo": "我有标志",
+      "photos": "我有照片（店铺/产品）",
+      "content": "我有介绍/菜单/价目表",
+      "website": "我有现有网站",
+      "none": "还没有（推荐）"
+    },
+    "quote": {
+      "yes": "是的，收到过",
+      "no": "还没有（推荐）",
+      "yesMessage": "很好。有参考会让比较更容易。",
+      "noMessage": "建议您先获取一个。有标准会让决策更容易。"
+    },
+    "contactMethod": {
+      "sms": "短信（推荐）",
+      "email": "邮件",
+      "phone": "电话"
+    },
+    "buttons": {
+      "next": "下一步",
+      "prev": "上一步",
+      "submit": "提交",
+      "goBack": "返回上一步"
+    }
+  },
+  "PortfolioPage": {
+    "title": "我们一起制作的网站",
+    "description1": "这些是我们合作过的项目。",
+    "description2": "每个项目都是与客户的愿景共同创造的。"
+  },
+  "Privacy": {
+    "title": "隐私政策"
+  },
+  "Terms": {
+    "title": "服务条款"
+  },
+  "LanguageSwitcher": {
+    "label": "语言"
+  },
+  "Components": {
+    "DialWheel": {
+      "items": ["域名", "托管", "SSL", "安全", "速度", "结构", "布局", "设计", "内容", "响应式", "可访问性", "SEO", "性能", "浏览器", "移动端", "维护", "更新", "备份", "部署", "管理"],
+      "title": "网站"
+    },
+    "Accordion": {
+      "prefix": "并且，",
+      "freeText": "到这里为止免费",
+      "suffix": "。"
+    },
+    "Portfolio": {
+      "categories": {
+        "website": "网站",
+        "landing": "落地页",
+        "webapp": "网页应用"
+      }
+    },
+    "CTA": {
+      "viewDesign": "查看您的网站设计",
+      "viewDesignMobile": "查看您的\n网站设计"
+    },
+    "FloatingCTA": {
+      "contact": "联系我们",
+      "close": "关闭",
+      "email": "邮件咨询",
+      "meeting": "预约会议"
+    }
+  },
+  "ContactForm": {
+    "title": "联系我们",
+    "subtitle": "您想要什么样的网站？",
+    "steps": {
+      "step1": {
+        "title": "您想要什么样的\n网站？",
+        "sub": "选择您的行业"
+      },
+      "step2": {
+        "title": "您想通过网站\n实现什么？",
+        "sub": "告诉我们您的目标"
+      },
+      "step3": {
+        "title": "您目前\n拥有什么？",
+        "sub": "可多选"
+      },
+      "step4": {
+        "title": "您之前收到过\n报价吗？",
+        "sub": "比较有助于决策"
+      },
+      "step5": {
+        "title": "我们如何\n联系您？",
+        "sub": "分享您的联系方式"
+      }
+    },
+    "industries": {
+      "food": "餐厅/咖啡厅",
+      "beauty": "美容/美甲",
+      "fitness": "健身/普拉提",
+      "education": "培训/教育",
+      "medical": "医院/诊所",
+      "brand": "品牌/制造",
+      "office": "办公室",
+      "other": "其他（手动输入）"
+    },
+    "purposes": {
+      "trust": "建立信任",
+      "inquiry": "促进咨询",
+      "reservation": "启用预订",
+      "sales": "促进销售",
+      "unknown": "不确定"
+    },
+    "assets": {
+      "sns": "我有Instagram/博客/店铺页面",
+      "logo": "我有标志",
+      "photos": "我有照片（店铺/产品）",
+      "content": "我有介绍/菜单/价目表",
+      "website": "我有现有网站",
+      "none": "还没有"
+    },
+    "quote": {
+      "yes": "是的，收到过",
+      "no": "还没有",
+      "yesMessage": "很好。有参考会让比较更容易。",
+      "noMessage": "建议您先获取一个。\n有标准会让决策更容易。"
+    },
+    "contactMethods": {
+      "sms": "短信",
+      "email": "邮件",
+      "call": "电话"
+    },
+    "linkTypes": {
+      "own": "自家网站",
+      "competitor": "竞争对手",
+      "style": "喜欢的风格",
+      "other": "手动输入"
+    },
+    "placeholders": {
+      "phone": "010-0000-0000",
+      "email": "example@email.com",
+      "industryCustom": "例如：初创公司、个人品牌、自由职业者...",
+      "additionalNote": "如有问题或其他信息，请随时分享"
+    },
+    "errors": {
+      "invalidEmail": "邮箱格式无效",
+      "invalidPhone": "电话格式无效（10-11位）"
+    },
+    "buttons": {
+      "next": "下一步",
+      "prev": "上一步",
+      "submit": "提交",
+      "close": "关闭",
+      "goBack": "返回上一步",
+      "addLink": "添加链接"
+    },
+    "labels": {
+      "recommended": "推荐",
+      "linkSection": "分享参考链接（可选）",
+      "linkType": "这是什么类型的链接？",
+      "keyboard": "Enter下一步 · Esc返回"
+    },
+    "complete": {
+      "title": "好的，我们会尽快联系您。",
+      "subtitle": "我们会尽快审核并回复。"
+    }
+  }
+}

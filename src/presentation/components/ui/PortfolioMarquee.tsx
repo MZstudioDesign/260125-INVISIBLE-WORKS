@@ -4,15 +4,19 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { GlassButton } from './GlassButton';
+import { useTranslations } from 'next-intl';
 
 // ============================================
 // Types
 // ============================================
 
+export type CategoryKey = 'website' | 'landing' | 'webapp';
+
 export interface PortfolioItem {
   id: string;
   title: string;
-  category: string;
+  category: CategoryKey;
   imageUrl: string;
   href?: string;
 }
@@ -20,6 +24,7 @@ export interface PortfolioItem {
 interface PortfolioCardProps {
   item: PortfolioItem;
   className?: string;
+  categoryLabel?: string;
 }
 
 interface MarqueeProps {
@@ -35,6 +40,7 @@ interface PortfolioMarqueeProps {
   pauseOnHover?: boolean;
   speed?: 'slow' | 'normal' | 'fast';
   className?: string;
+  locale?: string;
 }
 
 // ============================================
@@ -45,56 +51,56 @@ const defaultPortfolioItems: PortfolioItem[] = [
   {
     id: '1',
     title: 'Modern E-Commerce',
-    category: '웹사이트',
+    category: 'website',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/1',
   },
   {
     id: '2',
     title: 'Creative Agency',
-    category: '랜딩페이지',
+    category: 'landing',
     imageUrl: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/2',
   },
   {
     id: '3',
     title: 'SaaS Dashboard',
-    category: '웹앱',
+    category: 'webapp',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/3',
   },
   {
     id: '4',
     title: 'Restaurant Branding',
-    category: '웹사이트',
+    category: 'website',
     imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/4',
   },
   {
     id: '5',
     title: 'Fitness Platform',
-    category: '웹앱',
+    category: 'webapp',
     imageUrl: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/5',
   },
   {
     id: '6',
     title: 'Tech Startup',
-    category: '랜딩페이지',
+    category: 'landing',
     imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/6',
   },
   {
     id: '7',
     title: 'Portfolio Site',
-    category: '웹사이트',
+    category: 'website',
     imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/7',
   },
   {
     id: '8',
     title: 'Education Platform',
-    category: '웹앱',
+    category: 'webapp',
     imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop&q=80',
     href: '/portfolio/8',
   },
@@ -104,7 +110,7 @@ const defaultPortfolioItems: PortfolioItem[] = [
 // PortfolioCard Component
 // ============================================
 
-export function PortfolioCard({ item, className }: PortfolioCardProps) {
+export function PortfolioCard({ item, className, categoryLabel }: PortfolioCardProps) {
   const CardContent = (
     <motion.div
       className={cn(
@@ -115,7 +121,7 @@ export function PortfolioCard({ item, className }: PortfolioCardProps) {
         'transition-all duration-500 ease-out',
         'hover:border-[#7fa8c9]/40',
         'hover:shadow-[0_16px_48px_rgba(127,168,201,0.2)]',
-        'w-[320px] md:w-[380px] flex-shrink-0',
+        'w-[260px] md:w-[350px] flex-shrink-0',
         className
       )}
       whileHover={{ y: -8, scale: 1.02 }}
@@ -141,7 +147,7 @@ export function PortfolioCard({ item, className }: PortfolioCardProps) {
             'border border-[#7fa8c9]/20',
             'shadow-[0_4px_12px_rgba(0,0,0,0.1)]'
           )}>
-            {item.category}
+            {categoryLabel || item.category}
           </span>
         </div>
 
@@ -237,7 +243,21 @@ export function PortfolioMarquee({
   pauseOnHover = true,
   speed = 'normal',
   className,
+  locale = 'ko',
 }: PortfolioMarqueeProps) {
+  const t = useTranslations('Portfolio');
+  const tCategories = useTranslations('Components.Portfolio.categories');
+  
+  // 카테고리 번역 함수
+  const getCategoryLabel = (category: CategoryKey) => {
+    return tCategories(category);
+  };
+  
+  // 언어별 줄바꿈 클래스
+  const breakClass = locale === 'ko' ? 'break-keep' 
+    : locale.startsWith('zh') ? '' 
+    : 'hyphens-auto';
+
   // Split items for two rows
   const firstRowItems = items.slice(0, Math.ceil(items.length / 2));
   const secondRowItems = items.slice(Math.ceil(items.length / 2));
@@ -266,12 +286,10 @@ export function PortfolioMarquee({
           )}>
             Portfolio
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6">
-            우리가 만든 것들
+          <h2 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-6 ${breakClass}`}>
+            <span className="md:hidden whitespace-pre-line">{t('titleMobile')}</span>
+            <span className="hidden md:inline">{t('title')}</span>
           </h2>
-          <p className="text-lg text-[#1a1a1a]/60 max-w-2xl mx-auto">
-            신뢰를 쌓아온 결과물들입니다
-          </p>
         </motion.div>
       </div>
 
@@ -280,14 +298,22 @@ export function PortfolioMarquee({
         {/* First Row - Normal Direction */}
         <Marquee pauseOnHover={pauseOnHover} speed={speed}>
           {firstRowItems.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
+            <PortfolioCard 
+              key={item.id} 
+              item={item} 
+              categoryLabel={getCategoryLabel(item.category)}
+            />
           ))}
         </Marquee>
 
         {/* Second Row - Reverse Direction */}
         <Marquee pauseOnHover={pauseOnHover} speed={speed} reverse>
           {secondRowItems.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
+            <PortfolioCard 
+              key={item.id} 
+              item={item} 
+              categoryLabel={getCategoryLabel(item.category)}
+            />
           ))}
         </Marquee>
       </div>
@@ -300,28 +326,22 @@ export function PortfolioMarquee({
         transition={{ duration: 0.6, delay: 0.3 }}
         className="text-center mt-16"
       >
-        <Link
-          href="/portfolio"
-          className={cn(
-            'inline-flex items-center gap-3 px-8 py-4 rounded-2xl',
-            'bg-white/85 backdrop-blur-xl',
-            'border-2 border-[#7fa8c9]/25',
-            'text-[#1a1a1a] font-medium text-lg',
-            'shadow-[0_8px_32px_rgba(127,168,201,0.12)]',
-            'hover:border-[#7fa8c9]/50 hover:shadow-[0_12px_40px_rgba(127,168,201,0.2)]',
-            'transition-all duration-300',
-            'group'
-          )}
-        >
-          더 많은 작업물 보러가기
-          <svg
-            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <Link href={`/${locale}/portfolio`}>
+          <GlassButton
+            variant="outline"
+            size="lg"
+            className="gap-3 text-lg"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+            {t('cta')}
+            <svg
+              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </GlassButton>
         </Link>
       </motion.div>
 

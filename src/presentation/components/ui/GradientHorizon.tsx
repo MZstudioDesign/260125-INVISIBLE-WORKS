@@ -326,9 +326,9 @@ function WaveGlowHorizon() {
     <div className="absolute inset-0 bg-gradient-to-b from-white to-[#f5faff]">
       {/* Wave layer 1 */}
       <motion.div
-        className="absolute bottom-[30%] left-0 right-0"
+        className="absolute bottom-[10%] left-0 right-0"
         style={{
-          height: '100px',
+          height: '140px',
           background: 'radial-gradient(ellipse 80% 100% at 50% 100%, rgba(147, 197, 253, 0.2) 0%, transparent 60%)',
           filter: 'blur(25px)',
         }}
@@ -344,9 +344,9 @@ function WaveGlowHorizon() {
 
       {/* Wave layer 2 */}
       <motion.div
-        className="absolute bottom-[20%] left-0 right-0"
+        className="absolute bottom-[0%] left-0 right-0"
         style={{
-          height: '120px',
+          height: '168px',
           background: 'radial-gradient(ellipse 70% 100% at 50% 100%, rgba(96, 165, 250, 0.25) 0%, transparent 60%)',
           filter: 'blur(30px)',
         }}
@@ -363,9 +363,9 @@ function WaveGlowHorizon() {
 
       {/* Wave layer 3 */}
       <motion.div
-        className="absolute bottom-[10%] left-0 right-0"
+        className="absolute -bottom-[10%] left-0 right-0"
         style={{
-          height: '140px',
+          height: '196px',
           background: 'radial-gradient(ellipse 90% 100% at 50% 100%, rgba(59, 130, 246, 0.2) 0%, transparent 60%)',
           filter: 'blur(35px)',
         }}

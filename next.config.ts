@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -9,8 +11,7 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
-    unoptimized: true, // 정적 export에 필요
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

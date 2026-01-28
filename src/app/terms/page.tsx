@@ -236,7 +236,7 @@ export default function TermsPage() {
                   <h2 className="text-xl font-semibold text-[#1a1a1a] mb-4">
                     {section.title}
                   </h2>
-                  <div className="text-[#1a1a1a]/70 leading-relaxed whitespace-pre-line text-sm md:text-base">
+                  <div className="text-[#1a1a1a]/70 leading-relaxed whitespace-pre-line text-sm md:text-base break-all">
                     {section.content}
                   </div>
                 </motion.div>

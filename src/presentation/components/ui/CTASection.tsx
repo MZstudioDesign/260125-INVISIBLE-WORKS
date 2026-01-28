@@ -3,9 +3,11 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface CTASectionProps {
   text?: string;
+  mobileText?: string;
   href?: string;
   onClick?: () => void;
   className?: string;
@@ -21,17 +23,22 @@ interface CTASectionProps {
  * - 가운데 정렬
  */
 export function CTASection({
-  text = '내 웹사이트 디자인 보러 가기',
+  text,
+  mobileText,
   href = '#',
   onClick,
   className = '',
   variant = 'light',
 }: CTASectionProps) {
+  const t = useTranslations('Components.CTA');
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#7fa8c9]';
   const hoverColor = variant === 'dark' ? 'hover:text-white/80' : 'hover:text-[#5a8ab0]';
+  
+  const displayText = text || t('viewDesign');
+  const displayMobileText = mobileText || t('viewDesignMobile');
 
   return (
     <div
@@ -50,12 +57,12 @@ export function CTASection({
         {/* Text - Full width, responsive sizing */}
         <span className="text-[7vw] sm:text-[6vw] md:text-[5vw] lg:text-[4.5vw] xl:text-[4vw] font-semibold leading-tight text-center">
           {/* Mobile: break into two lines */}
-          <span className="md:hidden">
-            내 웹사이트 디자인<br />보러 가기
+          <span className="md:hidden whitespace-pre-line">
+            {displayMobileText}
           </span>
           {/* Desktop: single line */}
           <span className="hidden md:inline">
-            {text}
+            {displayText}
           </span>
         </span>
 

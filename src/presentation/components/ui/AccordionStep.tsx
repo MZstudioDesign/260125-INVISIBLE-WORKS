@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ChevronDown, ZoomIn, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { HighlightReveal } from './UnderlineReveal';
 
 interface StepItem {
   id: string;
@@ -14,15 +16,16 @@ interface StepItem {
 interface AccordionStepProps {
   items: StepItem[];
   className?: string;
-  defaultOpenFirst?: boolean;
+  defaultOpenAll?: boolean;
 }
 
 /**
  * AccordionStep - Accordion-style step component
  *
  * Features:
- * - First item open by default (optional)
- * - Click to toggle open/close
+ * - All items open by default (optional)
+ * - Multiple items can be open simultaneously
+ * - Click to toggle individual items
  * - Smooth height animation
  * - Step numbers with visual indicator
  * - Mobile responsive
@@ -30,16 +33,24 @@ interface AccordionStepProps {
 export function AccordionStep({
   items,
   className = '',
-  defaultOpenFirst = true,
+  defaultOpenAll = true,
 }: AccordionStepProps) {
-  // 첫 번째 아이템을 기본으로 열어둠
-  const [activeItem, setActiveItem] = useState<string | null>(
-    defaultOpenFirst && items.length > 0 ? items[0].id : null
+  // 기본값: 모든 아이템 열기
+  const [openItems, setOpenItems] = useState<Set<string>>(
+    defaultOpenAll ? new Set(items.map((item) => item.id)) : new Set()
   );
 
   const toggleItem = (id: string) => {
-    // 클릭 시 토글 (같은 거 클릭하면 닫힘, 다른 거 클릭하면 그것만 열림)
-    setActiveItem((prev) => (prev === id ? null : id));
+    // 클릭 시 해당 아이템만 토글 (다른 아이템에 영향 없음)
+    setOpenItems((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -49,7 +60,7 @@ export function AccordionStep({
           key={item.id}
           item={item}
           index={index}
-          isOpen={activeItem === item.id}
+          isOpen={openItems.has(item.id)}
           onToggle={() => toggleItem(item.id)}
         />
       ))}
@@ -101,7 +112,7 @@ function AccordionStepItem({
 
         {/* Title */}
         <div className="flex-grow">
-          <h3 className="text-lg md:text-xl lg:text-2xl font-light text-[#1a1a1a]">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#1a1a1a]">
             {item.title}
           </h3>
         </div>
@@ -143,16 +154,14 @@ interface DesignStepContentProps {
   description: string;
   images: { src: string; alt: string }[];
   freeEmphasis: string;
-  subText: string;
 }
 
 export function DesignStepContent({
   description,
   images,
-  freeEmphasis,
-  subText,
 }: DesignStepContentProps) {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const t = useTranslations('Components.Accordion');
 
   return (
     <div className="space-y-8">
@@ -193,15 +202,14 @@ export function DesignStepContent({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <p className="text-lg md:text-xl lg:text-2xl text-[#1a1a1a] leading-relaxed">
-          그리고,{' '}
-          <span className="font-semibold text-[#3b82f6]">
-            여기까지 무료
-          </span>
-          {' '}입니다.
-        </p>
-        <p className="text-[#1a1a1a]/50 text-sm md:text-base mt-3">
-          {subText}
+        <p className="text-xl md:text-2xl lg:text-3xl text-[#1a1a1a] leading-relaxed">
+          {t('prefix')}{' '}
+          <HighlightReveal color="#7fa8c9" delay={0.3}>
+            <span className="font-semibold text-[#1a1a1a]">
+              {t('freeText')}
+            </span>
+          </HighlightReveal>
+          {' '}{t('suffix')}
         </p>
       </motion.div>
 
@@ -261,9 +269,9 @@ export function SimpleStep({ items, className = '' }: SimpleStepProps) {
             {item.number}
           </div>
           <div className="pt-2">
-            <h3 className="text-lg md:text-xl font-light text-[#1a1a1a] mb-1">
-              {item.title}
-            </h3>
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#1a1a1a] mb-1">
+            {item.title}
+          </h3>
             {item.description && (
               <p className="text-[#1a1a1a]/60 text-sm md:text-base">{item.description}</p>
             )}

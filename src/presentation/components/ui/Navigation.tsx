@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface NavItem {
   label: string;
@@ -54,7 +55,7 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
       >
         <div
           className={cn(
-            'mx-4 mt-4 px-6 py-4 rounded-2xl',
+            'mx-2 md:mx-4 mt-3 md:mt-4 px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl',
             'transition-all duration-300',
             'bg-white/60 backdrop-blur-xl',
             'border border-white/40',
@@ -70,9 +71,9 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
                 <Image
                   src="/user_source/logo/logo-horizontal-black.png"
                   alt="Invisible Works"
-                  width={200}
-                  height={32}
-                  className="h-6 md:h-8 w-auto"
+                  width={160}
+                  height={24}
+                  className="h-2.5 md:h-5 w-auto"
                   priority
                 />
               )}
@@ -96,8 +97,9 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <div className="hidden md:block">
+            {/* Language Switcher & CTA Button */}
+            <div className="hidden md:flex items-center gap-4">
+              <LanguageSwitcher variant="compact" />
               {cta && (
                 <a
                   href={cta.href}
@@ -136,7 +138,7 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className={cn(
-                'md:hidden mx-4 mt-2 p-4 rounded-2xl',
+                'md:hidden mx-2 mt-2 p-4 rounded-xl',
                 'bg-white/90 backdrop-blur-xl',
                 'border border-[#7fa8c9]/20',
                 'shadow-[0_8px_32px_rgba(127,168,201,0.15)]'
@@ -174,6 +176,10 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
                     {cta.label}
                   </a>
                 )}
+                {/* Mobile Language Switcher */}
+                <div className="mt-4 pt-4 border-t border-[#7fa8c9]/20">
+                  <LanguageSwitcher />
+                </div>
               </div>
             </motion.div>
           )}

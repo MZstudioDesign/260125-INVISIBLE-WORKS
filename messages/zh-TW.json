@@ -1,0 +1,269 @@
+{
+  "Navigation": {
+    "home": "首頁",
+    "portfolio": "作品集",
+    "process": "流程",
+    "about": "關於",
+    "contact": "聯絡我們"
+  },
+  "Hero": {
+    "title": "Invisible Works",
+    "subtitle": "我們不會一開始就展示所有"
+  },
+  "Problem": {
+    "title1": "網站",
+    "title2": "需要關注的",
+    "title3": "事情無窮無盡",
+    "subtitle": "昂貴、流程複雜、難以維護。",
+    "subtitleMobile": "昂貴、流程複雜、\n難以維護。"
+  },
+  "Change": {
+    "badge": "所以",
+    "line1": "我們減少了工作量。",
+    "line2": "取而代之，增加了思考。",
+    "list1": "只做必要的判斷",
+    "list2": "只解釋必要的要點",
+    "list3": "只保留能帶來結果的流程",
+    "closing": "因此，我們用不同的方式製作網站。",
+    "closingMobile": "因此，\n我們用不同的方式\n製作網站。"
+  },
+  "Timeline": {
+    "item1": "令人困惑的整體流程",
+    "item2": "看似不必要的步驟",
+    "item3": "需要做太多決定",
+    "item4": "難以理解的問題",
+    "item5": "不斷增加的修改"
+  },
+  "HowWeDo": {
+    "badge": "流程",
+    "title": "我們這樣進行",
+    "step1Title": "提交內容",
+    "step1Desc": "發送網站所需的材料。只需整理並發送您的文字、圖片、標誌等必要材料。",
+    "step2Title": "選擇設計",
+    "step2Desc": "從3個設計方案中選擇一個。",
+    "step2Free": "到這裡為止免費",
+    "step3Title": "完成網站",
+    "step3Desc": "我們根據您選擇的設計精心完成網站。響應式設計、SEO和性能優化全部包含。"
+  },
+  "Portfolio": {
+    "title": "很快，這將成為您的網站",
+    "titleMobile": "很快，這將成為\n您的網站",
+    "cta": "查看更多作品"
+  },
+  "Why": {
+    "slide1Line1": "大家都說需要一個網站。",
+    "slide1Line2": "但我們見過太多人因為成本和複雜性",
+    "slide1Line3": "甚至無法開始。",
+    "slide2Line1": "不是網站很難做，",
+    "slide2Line2": "而是過於複雜的做法",
+    "slide2Line3": "已經變成了常態。",
+    "slide3Line1": "所以我們沒有遵循複雜的方式，",
+    "slide3Line2": "而是決定一個一個地",
+    "slide3Line3": "去除那些理所當然的流程。",
+    "slide4Line1": "簡單的說明，簡單的決定，",
+    "slide4Line2": "在看不見的地方改變結構，",
+    "slide4Line3": "讓您無負擔地擁有網站。",
+    "slide5": "我們是 Invisible Works。"
+  },
+  "Footer": {
+    "cta": "查看您的網站設計",
+    "copyright": "© 2026 Invisible Works. 版權所有。",
+    "links": {
+      "privacy": "隱私政策",
+      "terms": "服務條款"
+    },
+    "contact": {
+      "email": "mzstudio104@gmail.com"
+    }
+  },
+  "Contact": {
+    "title": "聯絡我們",
+    "subtitle": "您想要什麼樣的網站？",
+    "step1Title": "您從事什麼行業/服務？",
+    "step2Title": "您最想通過網站實現什麼？",
+    "step3Title": "請勾選您目前擁有的。",
+    "step4Title": "您之前收到過網站報價嗎？",
+    "step5Title": "您希望如何被聯繫？",
+    "complete": "好的，我們會儘快聯絡您。",
+    "industries": {
+      "cafe": "咖啡廳/餐廳",
+      "beauty": "美容/店鋪",
+      "academy": "培訓/教育",
+      "medical": "醫院/診所",
+      "brand": "品牌/製造",
+      "fitness": "健身/普拉提",
+      "office": "辦公室/諮詢",
+      "other": "其他（手動輸入）"
+    },
+    "purposes": {
+      "trust": "建立信任",
+      "inquiry": "促進諮詢",
+      "reservation": "啟用預訂",
+      "sales": "促進銷售",
+      "unsure": "不確定（推薦）"
+    },
+    "assets": {
+      "social": "我有Instagram/部落格/店鋪頁面",
+      "logo": "我有標誌",
+      "photos": "我有照片（店鋪/產品）",
+      "content": "我有介紹/菜單/價目表",
+      "website": "我有現有網站",
+      "none": "還沒有（推薦）"
+    },
+    "quote": {
+      "yes": "是的，收到過",
+      "no": "還沒有（推薦）",
+      "yesMessage": "很好。有參考會讓比較更容易。",
+      "noMessage": "建議您先獲取一個。有標準會讓決策更容易。"
+    },
+    "contactMethod": {
+      "sms": "簡訊（推薦）",
+      "email": "郵件",
+      "phone": "電話"
+    },
+    "buttons": {
+      "next": "下一步",
+      "prev": "上一步",
+      "submit": "提交",
+      "goBack": "返回上一步"
+    }
+  },
+  "PortfolioPage": {
+    "title": "我們一起製作的網站",
+    "description1": "這些是我們合作過的項目。",
+    "description2": "每個項目都是與客戶的願景共同創造的。"
+  },
+  "Privacy": {
+    "title": "隱私政策"
+  },
+  "Terms": {
+    "title": "服務條款"
+  },
+  "LanguageSwitcher": {
+    "label": "語言"
+  },
+  "Components": {
+    "DialWheel": {
+      "items": ["網域", "託管", "SSL", "安全", "速度", "結構", "佈局", "設計", "內容", "響應式", "可訪問性", "SEO", "性能", "瀏覽器", "行動端", "維護", "更新", "備份", "部署", "管理"],
+      "title": "網站"
+    },
+    "Accordion": {
+      "prefix": "並且，",
+      "freeText": "到這裡為止免費",
+      "suffix": "。"
+    },
+    "Portfolio": {
+      "categories": {
+        "website": "網站",
+        "landing": "落地頁",
+        "webapp": "網頁應用"
+      }
+    },
+    "CTA": {
+      "viewDesign": "查看您的網站設計",
+      "viewDesignMobile": "查看您的\n網站設計"
+    },
+    "FloatingCTA": {
+      "contact": "聯絡我們",
+      "close": "關閉",
+      "email": "郵件諮詢",
+      "meeting": "預約會議"
+    }
+  },
+  "ContactForm": {
+    "title": "聯絡我們",
+    "subtitle": "您想要什麼樣的網站？",
+    "steps": {
+      "step1": {
+        "title": "您想要什麼樣的\n網站？",
+        "sub": "選擇您的行業"
+      },
+      "step2": {
+        "title": "您想通過網站\n實現什麼？",
+        "sub": "告訴我們您的目標"
+      },
+      "step3": {
+        "title": "您目前\n擁有什麼？",
+        "sub": "可多選"
+      },
+      "step4": {
+        "title": "您之前收到過\n報價嗎？",
+        "sub": "比較有助於決策"
+      },
+      "step5": {
+        "title": "我們如何\n聯繫您？",
+        "sub": "分享您的聯絡方式"
+      }
+    },
+    "industries": {
+      "food": "餐廳/咖啡廳",
+      "beauty": "美容/美甲",
+      "fitness": "健身/普拉提",
+      "education": "培訓/教育",
+      "medical": "醫院/診所",
+      "brand": "品牌/製造",
+      "office": "辦公室",
+      "other": "其他（手動輸入）"
+    },
+    "purposes": {
+      "trust": "建立信任",
+      "inquiry": "促進諮詢",
+      "reservation": "啟用預訂",
+      "sales": "促進銷售",
+      "unknown": "不確定"
+    },
+    "assets": {
+      "sns": "我有Instagram/部落格/店鋪頁面",
+      "logo": "我有標誌",
+      "photos": "我有照片（店鋪/產品）",
+      "content": "我有介紹/菜單/價目表",
+      "website": "我有現有網站",
+      "none": "還沒有"
+    },
+    "quote": {
+      "yes": "是的，收到過",
+      "no": "還沒有",
+      "yesMessage": "很好。有參考會讓比較更容易。",
+      "noMessage": "建議您先獲取一個。\n有標準會讓決策更容易。"
+    },
+    "contactMethods": {
+      "sms": "簡訊",
+      "email": "郵件",
+      "call": "電話"
+    },
+    "linkTypes": {
+      "own": "自家網站",
+      "competitor": "競爭對手",
+      "style": "喜歡的風格",
+      "other": "手動輸入"
+    },
+    "placeholders": {
+      "phone": "010-0000-0000",
+      "email": "example@email.com",
+      "industryCustom": "例如：初創公司、個人品牌、自由職業者...",
+      "additionalNote": "如有問題或其他資訊，請隨時分享"
+    },
+    "errors": {
+      "invalidEmail": "郵箱格式無效",
+      "invalidPhone": "電話格式無效（10-11位）"
+    },
+    "buttons": {
+      "next": "下一步",
+      "prev": "上一步",
+      "submit": "提交",
+      "close": "關閉",
+      "goBack": "返回上一步",
+      "addLink": "添加連結"
+    },
+    "labels": {
+      "recommended": "推薦",
+      "linkSection": "分享參考連結（可選）",
+      "linkType": "這是什麼類型的連結？",
+      "keyboard": "Enter下一步 · Esc返回"
+    },
+    "complete": {
+      "title": "好的，我們會儘快聯絡您。",
+      "subtitle": "我們會儘快審核並回覆。"
+    }
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "process": "Process",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Invisible Works",
+    "subtitle": "We don't show everything at first"
+  },
+  "Problem": {
+    "title1": "Websites",
+    "title2": "require",
+    "title3": "endless attention",
+    "subtitle": "Expensive, complex process, and hard to maintain.",
+    "subtitleMobile": "Expensive, complex process,\nand hard to maintain."
+  },
+  "Change": {
+    "badge": "So",
+    "line1": "We reduced the work.",
+    "line2": "Instead, we increased the thinking.",
+    "list1": "Only essential decisions",
+    "list2": "Only necessary explanations",
+    "list3": "Only processes that lead to results",
+    "closing": "That's why we make websites differently.",
+    "closingMobile": "That's why\nwe make websites\ndifferently."
+  },
+  "Timeline": {
+    "item1": "Confusing overall process",
+    "item2": "Steps that seemed unnecessary",
+    "item3": "Too many decisions to make",
+    "item4": "Hard-to-understand questions",
+    "item5": "Never-ending revisions"
+  },
+  "HowWeDo": {
+    "badge": "Process",
+    "title": "How we work",
+    "step1Title": "Share Content",
+    "step1Desc": "Send us your materials for the website. Just organize and send your text, images, logos, and other necessary materials.",
+    "step2Title": "Choose Design",
+    "step2Desc": "Choose one from 3 design options.",
+    "step2Free": "Free until here",
+    "step3Title": "Complete Website",
+    "step3Desc": "We precisely complete your website with the chosen design. Responsive design, SEO, and performance optimization are all included."
+  },
+  "Portfolio": {
+    "title": "Soon, this will be your website",
+    "titleMobile": "Soon, this will be\nyour website",
+    "cta": "View more projects"
+  },
+  "Why": {
+    "slide1Line1": "Everyone says you need a website.",
+    "slide1Line2": "But we've seen too many cases where people",
+    "slide1Line3": "couldn't even start due to cost and complexity.",
+    "slide2Line1": "It's not that websites are difficult.",
+    "slide2Line2": "It's that the overly complex practices",
+    "slide2Line3": "have become the norm.",
+    "slide3Line1": "So instead of following the complex way,",
+    "slide3Line2": "we decided to strip away",
+    "slide3Line3": "the processes taken for granted.",
+    "slide4Line1": "Easy explanations, easy decisions,",
+    "slide4Line2": "changing the structure invisibly,",
+    "slide4Line3": "so you can have a website without burden.",
+    "slide5": "We are Invisible Works."
+  },
+  "Footer": {
+    "cta": "See your website design",
+    "copyright": "© 2026 Invisible Works. All rights reserved.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "contact": {
+      "email": "mzstudio104@gmail.com"
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "What kind of website do you want?",
+    "step1Title": "What industry/service are you in?",
+    "step2Title": "What do you want most from your website?",
+    "step3Title": "Check what you currently have.",
+    "step4Title": "Have you received a website quote before?",
+    "step5Title": "How would you like to be contacted?",
+    "complete": "Great. We'll contact you soon.",
+    "industries": {
+      "cafe": "Cafe/Restaurant",
+      "beauty": "Beauty/Shop",
+      "academy": "Academy/Education",
+      "medical": "Hospital/Clinic",
+      "brand": "Brand/Manufacturing",
+      "fitness": "Fitness/Pilates",
+      "office": "Office/Consulting",
+      "other": "Other (Enter manually)"
+    },
+    "purposes": {
+      "trust": "Build trust",
+      "inquiry": "Generate inquiries",
+      "reservation": "Enable reservations",
+      "sales": "Drive sales",
+      "unsure": "Not sure (Recommended)"
+    },
+    "assets": {
+      "social": "I have Instagram/Blog/Place",
+      "logo": "I have a logo",
+      "photos": "I have photos (store/products)",
+      "content": "I have descriptions/menu/price list",
+      "website": "I have an existing website",
+      "none": "Not yet (Recommended)"
+    },
+    "quote": {
+      "yes": "Yes, I have",
+      "no": "Not yet (Recommended)",
+      "yesMessage": "Great. Having a reference makes comparison easier.",
+      "noMessage": "We recommend getting one. Having a standard makes decisions easier."
+    },
+    "contactMethod": {
+      "sms": "Text (Recommended)",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "buttons": {
+      "next": "Next",
+      "prev": "Previous",
+      "submit": "Submit",
+      "goBack": "Go back to previous step"
+    }
+  },
+  "PortfolioPage": {
+    "title": "Websites we've built together",
+    "description1": "These are the projects we've worked on together.",
+    "description2": "Every project was created with our client's vision."
+  },
+  "Privacy": {
+    "title": "Privacy Policy"
+  },
+  "Terms": {
+    "title": "Terms of Service"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "Components": {
+    "DialWheel": {
+      "items": ["Domain", "Hosting", "SSL", "Security", "Speed", "Structure", "Layout", "Design", "Content", "Responsive", "Accessibility", "SEO", "Performance", "Browser", "Mobile", "Maintenance", "Updates", "Backup", "Deploy", "Management"],
+      "title": "Websites"
+    },
+    "Accordion": {
+      "prefix": "And,",
+      "freeText": "Free until here",
+      "suffix": "."
+    },
+    "Portfolio": {
+      "categories": {
+        "website": "Website",
+        "landing": "Landing Page",
+        "webapp": "Web App"
+      }
+    },
+    "CTA": {
+      "viewDesign": "See your website design",
+      "viewDesignMobile": "See your\nwebsite design"
+    },
+    "FloatingCTA": {
+      "contact": "Contact",
+      "close": "Close",
+      "email": "Email inquiry",
+      "meeting": "Book a meeting"
+    }
+  },
+  "ContactForm": {
+    "title": "Contact",
+    "subtitle": "What kind of website do you want?",
+    "steps": {
+      "step1": {
+        "title": "What kind of website\ndo you want?",
+        "sub": "Select your industry"
+      },
+      "step2": {
+        "title": "What do you want\nfrom your website?",
+        "sub": "Tell us your goal"
+      },
+      "step3": {
+        "title": "What do you\ncurrently have?",
+        "sub": "Multiple selections allowed"
+      },
+      "step4": {
+        "title": "Have you received\na quote before?",
+        "sub": "Comparison helps with decisions"
+      },
+      "step5": {
+        "title": "How should we\ncontact you?",
+        "sub": "Share your contact info"
+      }
+    },
+    "industries": {
+      "food": "Restaurant/Cafe",
+      "beauty": "Beauty/Nail",
+      "fitness": "Fitness/Pilates",
+      "education": "Academy/Education",
+      "medical": "Hospital/Clinic",
+      "brand": "Brand/Manufacturing",
+      "office": "Office",
+      "other": "Other (Enter manually)"
+    },
+    "purposes": {
+      "trust": "Build trust",
+      "inquiry": "Generate inquiries",
+      "reservation": "Enable reservations",
+      "sales": "Drive sales",
+      "unknown": "Not sure"
+    },
+    "assets": {
+      "sns": "I have Instagram/Blog/Place",
+      "logo": "I have a logo",
+      "photos": "I have photos (store/products)",
+      "content": "I have descriptions/menu/prices",
+      "website": "I have an existing website",
+      "none": "Not yet"
+    },
+    "quote": {
+      "yes": "Yes, I have",
+      "no": "Not yet",
+      "yesMessage": "Great. Having a reference makes comparison easier.",
+      "noMessage": "We recommend getting one.\nHaving a standard makes decisions easier."
+    },
+    "contactMethods": {
+      "sms": "Text",
+      "email": "Email",
+      "call": "Phone"
+    },
+    "linkTypes": {
+      "own": "Our website",
+      "competitor": "Competitor",
+      "style": "Preferred style",
+      "other": "Enter manually"
+    },
+    "placeholders": {
+      "phone": "010-0000-0000",
+      "email": "example@email.com",
+      "industryCustom": "e.g., Startup, Personal brand, Freelancer...",
+      "additionalNote": "Feel free to share any questions or additional information"
+    },
+    "errors": {
+      "invalidEmail": "Invalid email format",
+      "invalidPhone": "Invalid phone format (10-11 digits)"
+    },
+    "buttons": {
+      "next": "Next",
+      "prev": "Previous",
+      "submit": "Submit",
+      "close": "Close",
+      "goBack": "Go back to previous step",
+      "addLink": "Add link"
+    },
+    "labels": {
+      "recommended": "Recommended",
+      "linkSection": "Share reference links (optional)",
+      "linkType": "What type of link is this?",
+      "keyboard": "Enter for next · Esc for back"
+    },
+    "complete": {
+      "title": "Great. We'll contact you soon.",
+      "subtitle": "We'll review and respond as soon as possible."
+    }
+  }
+}

@@ -3,36 +3,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
+// Default fallback items when translations are not available
+const FALLBACK_ITEMS = [
+  '도메인', '호스팅', 'SSL인증', '보안', '속도', '구조', '레이아웃',
+  '디자인', '콘텐츠', '반응형', '접근성', 'SEO', '퍼포먼스',
+  '브라우저호환', '모바일최적화', '유지보수', '업데이트', '백업', '배포', '관리'
+];
+
 interface DialWheelProps {
   items?: string[];
   speed?: number;
   className?: string;
   showIndicator?: boolean;
 }
-
-// 기본 아이템 - 웹사이트 제작 시 신경쓸 것들
-const DEFAULT_ITEMS = [
-  '도메인',
-  '호스팅',
-  'SSL인증',
-  '보안',
-  '속도',
-  '구조',
-  '레이아웃',
-  '디자인',
-  '콘텐츠',
-  '반응형',
-  '접근성',
-  'SEO',
-  '퍼포먼스',
-  '브라우저호환',
-  '모바일최적화',
-  '유지보수',
-  '업데이트',
-  '백업',
-  '배포',
-  '관리',
-];
 
 /**
  * DialWheel - 3D 원통형 회전 텍스트
@@ -46,11 +29,14 @@ const DEFAULT_ITEMS = [
  * "웹사이트는 신경쓸 게 많다, 끝이 안보인다" 느낌 표현
  */
 export function DialWheel({
-  items = DEFAULT_ITEMS,
+  items: customItems,
   speed = 750,
   className = '',
   showIndicator = true,
 }: DialWheelProps) {
+  // Use custom items or fallback - translations handled by parent
+  const items = customItems || FALLBACK_ITEMS;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: '-10%' });
@@ -58,7 +44,7 @@ export function DialWheel({
   // 무한 루프 - 빠르게 회전
   useEffect(() => {
     if (!isInView) return;
-    
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % items.length);
     }, speed);
@@ -95,11 +81,11 @@ export function DialWheel({
             →
           </motion.div>
         )}
-        
+
         {/* 3D 원통형 휠 */}
-        <div 
+        <div
           className="relative h-[280px] w-[220px] overflow-hidden"
-          style={{ 
+          style={{
             perspective: '600px',
             perspectiveOrigin: 'center center',
           }}
@@ -109,24 +95,24 @@ export function DialWheel({
             <AnimatePresence initial={false} mode="popLayout">
               {visibleItems.map(({ itemIndex, offset, text }) => {
                 const isActive = offset === 0;
-                
+
                 // 3D 회전 각도 계산
                 const rotateX = offset * -18;
                 // Y 위치
                 const translateY = offset * itemHeight;
                 // Z 깊이 (가운데가 가장 앞)
                 const translateZ = -Math.abs(offset) * 15;
-                
+
                 // 투명도 (5개용)
                 // offset 0: 1.0 (가운데)
                 // offset ±1: 0.7
                 // offset ±2: 0.45
                 const opacity = isActive ? 1 : Math.max(0.4, 0.9 - Math.abs(offset) * 0.22);
-                
+
                 // 블러 (최소화)
                 // offset ±1: 0.5px, ±2: 1px
                 const blur = isActive ? 0 : Math.abs(offset) * 0.5;
-                
+
                 // 스케일
                 const scale = isActive ? 1.05 : 0.9 - Math.abs(offset) * 0.05;
 
@@ -135,7 +121,7 @@ export function DialWheel({
                     key={`item-${itemIndex}`}
                     className="absolute flex items-center justify-center w-full"
                     // 새 아이템: 아래에서 올라옴
-                    initial={{ 
+                    initial={{
                       y: 3 * itemHeight,
                       rotateX: -54,
                       z: -45,
@@ -143,7 +129,7 @@ export function DialWheel({
                       opacity: 0,
                     }}
                     // 현재 위치로 이동
-                    animate={{ 
+                    animate={{
                       y: translateY,
                       rotateX,
                       z: translateZ,
@@ -151,7 +137,7 @@ export function DialWheel({
                       opacity,
                     }}
                     // 나가는 아이템: 위로 사라짐
-                    exit={{ 
+                    exit={{
                       y: -3 * itemHeight,
                       rotateX: 54,
                       z: -45,
@@ -170,11 +156,10 @@ export function DialWheel({
                     }}
                   >
                     <span
-                      className={`text-2xl md:text-3xl whitespace-nowrap ${
-                        isActive
-                          ? 'text-white font-medium'
-                          : 'text-white/70 font-light'
-                      }`}
+                      className={`text-2xl md:text-3xl whitespace-nowrap ${isActive
+                        ? 'text-white font-medium'
+                        : 'text-white/70 font-light'
+                        }`}
                     >
                       {text}
                     </span>
@@ -190,15 +175,15 @@ export function DialWheel({
           </div>
 
           {/* 상단 페이드 그라데이션 - 미니멀 */}
-          <div 
+          <div
             className="absolute inset-x-0 top-0 h-12 pointer-events-none z-20"
             style={{
               background: 'linear-gradient(to bottom, black 0%, transparent 100%)',
             }}
           />
-          
+
           {/* 하단 페이드 그라데이션 - 미니멀 */}
-          <div 
+          <div
             className="absolute inset-x-0 bottom-0 h-12 pointer-events-none z-20"
             style={{
               background: 'linear-gradient(to top, black 0%, transparent 100%)',
@@ -220,8 +205,8 @@ interface DialWheelSectionProps {
 }
 
 export function DialWheelSection({
-  items = DEFAULT_ITEMS,
-  title = '웹사이트는',
+  items,
+  title = '신경 쓸 게 너무 많은 웹사이트',
   subtitle,
 }: DialWheelSectionProps) {
   return (

@@ -1,6 +1,6 @@
 # Invisible Works - 프로젝트 통합 문서
 
-> **Last Updated**: 2026-01-26  
+> **Last Updated**: 2026-01-28
 > 이 문서는 프로젝트의 모든 핵심 정보를 통합한 문서입니다.
 
 ---
@@ -11,10 +11,11 @@
 2. [브랜드 아이덴티티](#2-브랜드-아이덴티티)
 3. [컬러 시스템](#3-컬러-시스템)
 4. [아키텍처](#4-아키텍처)
-5. [컴포넌트 사용법](#5-컴포넌트-사용법)
-6. [Liquid Glass 구현](#6-liquid-glass-구현)
-7. [개발 진행 상황](#7-개발-진행-상황)
-8. [개발 규칙](#8-개발-규칙)
+5. [컴포넌트 목록](#5-컴포넌트-목록)
+6. [컴포넌트 상세 사용법](#6-컴포넌트-상세-사용법)
+7. [모바일 최적화](#7-모바일-최적화)
+8. [개발 진행 상황](#8-개발-진행-상황)
+9. [변경 이력](#9-변경-이력)
 
 ---
 
@@ -32,8 +33,21 @@
 | Core | Next.js 16, TypeScript (strict), Tailwind CSS 4 |
 | Animation | Framer Motion, CSS Animations |
 | UI | Magic UI 스타일, Glassmorphism |
-| Testing | Jest + React Testing Library |
-| Font | Pretendard |
+| 3D | Spline (Hero 섹션) |
+| Font | Pretendard (KO), Inter (EN), Noto Sans SC/TC (ZH) |
+| i18n | next-intl (App Router 통합) |
+
+### 페이지 구조 (다국어)
+| 경로 | 설명 |
+|------|------|
+| `/[locale]` | 메인 페이지 (7개 섹션) |
+| `/[locale]/portfolio` | 포트폴리오 갤러리 |
+| `/[locale]/contact` | 문의 폼 (5단계 Wizard) |
+| `/[locale]/design-system` | 디자인 시스템 데모 |
+| `/[locale]/privacy` | 개인정보 처리방침 |
+| `/[locale]/terms` | 이용약관 |
+
+**지원 언어**: `ko` (한국어), `en` (영어), `zh-CN` (중국어 간체), `zh-TW` (중국어 번체)
 
 ---
 
@@ -72,581 +86,385 @@
 |------|-----|------|
 | Pure White | `#FFFFFF` | 기본 배경 |
 | Soft Blue | `#f2f8fc` | 배경 그라데이션, 서브틀 필 |
-| Muted Aqua | `#7fa8c9` | 액센트, 인터랙티브 신호, orb |
+| Muted Aqua | `#7fa8c9` | 액센트, 인터랙티브 신호 |
 | Dark Gray | `#1a1a1a` | 기본 텍스트 |
-| Pure Black | `#000000` | 강조 텍스트 |
+| Pure Black | `#000000` | 강조 텍스트, Problem/Why 섹션 배경 |
 
 ### 컬러 규칙
 - 브랜드 키 컬러: **없음**
-- 블루는 '신호'로만 사용
+- 블루는 '신호'로만 사용 (CTA, 하이라이트, 인터랙션)
 - 따뜻함은 색이 아니라 **구조와 말투**로 구현
 
 ---
 
 ## 4. 아키텍처
 
-### Clean Architecture 구조
+### 폴더 구조
 
 ```
 src/
-├── domain/           # 비즈니스 규칙
-│   ├── entities/     # 비즈니스 객체
-│   └── interfaces/   # Repository 인터페이스
-├── application/      # 유즈케이스
-│   ├── use-cases/    # 앱 특화 로직
-│   └── dto/          # Data Transfer Objects
-├── infrastructure/   # 외부 연동
-│   ├── repositories/ # 데이터 접근 구현
-│   ├── services/     # 외부 서비스
-│   └── config/       # 설정
-├── presentation/     # UI 레이어
-│   ├── components/
-│   │   ├── common/   # AmbientBackground 등
-│   │   ├── sections/ # 페이지 섹션
-│   │   └── ui/       # Glass 컴포넌트들
-│   ├── hooks/
-│   └── styles/
-└── app/              # Next.js App Router
-    └── design-system/  # 디자인 시스템 페이지
+├── app/                      # Next.js App Router
+│   ├── [locale]/             # 다국어 라우팅 (ko, en, zh-CN, zh-TW)
+│   │   ├── page.tsx          # 메인 페이지
+│   │   ├── contact/page.tsx  # 문의 페이지 (5단계 Wizard, 다국어)
+│   │   ├── portfolio/page.tsx # 포트폴리오 갤러리
+│   │   ├── design-system/page.tsx # 디자인 시스템
+│   │   ├── privacy/page.tsx  # 개인정보 처리방침
+│   │   ├── terms/page.tsx    # 이용약관
+│   │   └── layout.tsx        # 다국어 레이아웃
+│   ├── globals.css           # 전역 스타일
+│   ├── layout.tsx            # 루트 레이아웃
+│   └── page.tsx              # 리다이렉트 (→ /ko)
+├── presentation/
+│   └── components/
+│       ├── ui/               # UI 컴포넌트 (30개)
+│       │   ├── index.ts      # 통합 export
+│       │   ├── GlassCard.tsx
+│       │   ├── GlassButton.tsx
+│       │   └── ... (28개 더)
+│       └── common/
+│           └── AmbientBackground.tsx
+├── i18n/                     # 다국어 설정
+│   ├── routing.ts
+│   └── request.ts
+├── lib/
+│   └── utils.ts              # cn() 유틸리티
+├── messages/                 # 번역 파일
+│   ├── ko.json
+│   ├── en.json
+│   ├── zh-CN.json
+│   └── zh-TW.json
+└── public/
+    └── user_source/
+        └── logo/             # 로고 이미지
 ```
 
 ---
 
-## 5. 컴포넌트 사용법
+## 5. 컴포넌트 목록
 
-### 📦 Import 방법
+### Base UI (6개)
+| 컴포넌트 | 설명 |
+|----------|------|
+| `GlassCard` | Glass 스타일 카드 컨테이너 |
+| `GlassButton` | 리플 효과 내장 버튼 |
+| `GlassBadge` | 라벨/태그 |
+| `GlassInput` | 입력 필드 |
+| `GlassTextarea` | 텍스트 영역 |
+| `GlassDivider` | 구분선 |
 
-모든 UI 컴포넌트는 `@/presentation/components/ui`에서 import합니다.
+### Navigation (2개)
+| 컴포넌트 | 설명 |
+|----------|------|
+| `Navigation` | 상단 네비게이션 (로고 + 링크 + CTA) |
+| `SideNavigation` | 사이드 섹션 네비게이션 |
+
+### Animation (6개)
+| 컴포넌트 | 설명 |
+|----------|------|
+| `RevealText` | 페이드/슬라이드/블러 텍스트 애니메이션 |
+| `SplitText` | 단어별 순차 등장 |
+| `CharacterReveal` | 글자별 순차 등장 |
+| `BlurFade` | 블러 페이드 효과 |
+| `TextAnimate` | 텍스트 애니메이션 |
+| `UnderlineReveal` / `HighlightReveal` | 밑줄/하이라이트 효과 |
+
+### Section Components (12개)
+| 컴포넌트 | 섹션 | 설명 |
+|----------|------|------|
+| `SplineEmbed` | Hero | Spline 3D 임베드 |
+| `DialWheel` | Problem | 회전하는 텍스트 휠 |
+| `TimelineBlur` | Change | 순차 스트라이크스루 타임라인 |
+| `GradientHorizon` | Change | 그라데이션 배경 |
+| `AccordionStep` | How We Do | 아코디언 스텝 |
+| `DesignStepContent` | How We Do | 디자인 단계 콘텐츠 |
+| `PortfolioMarquee` | Portfolio | 무한 스크롤 카드 |
+| `Marquee` | 공통 | 무한 스크롤 컴포넌트 |
+| `ScrollStory` | Why | 스크롤 고정 PPT 스타일 |
+| `ImageLightbox` | Portfolio | 이미지 라이트박스 |
+| `Footer` | Footer | CTA + 블랙 푸터 |
+| `CTASection` | CTA | CTA 섹션 |
+
+### Others (4개)
+| 컴포넌트 | 설명 |
+|----------|------|
+| `ContactModal` | 문의 모달 |
+| `PhotoStack` | 폴라로이드 스택 |
+| `Skeleton` | 로딩 플레이스홀더 |
+| `FloatingCTA` / `ScrollToTop` | 플로팅 버튼 |
+
+---
+
+## 6. 컴포넌트 상세 사용법
+
+### Import 방법
 
 ```tsx
 import {
-  // 카드 & 레이아웃
-  GlassCard,
-  GlassDivider,
-  
-  // 버튼
-  GlassButton,
-  
-  // 입력
-  GlassInput,
-  GlassTextarea,
-  
-  // 네비게이션
-  Navigation,
-  SideNavigation,
-  
-  // 유틸리티
-  GlassBadge,
-  Skeleton,
-  FloatingCTA,
-  ScrollToTop,
-  
-  // 애니메이션
-  RevealText,
-  SplitText,
-  CharacterReveal,
-  BlurFade,
+  // Base UI
+  GlassCard, GlassButton, GlassBadge, GlassInput, GlassTextarea, GlassDivider,
+  // Navigation
+  Navigation, SideNavigation,
+  // Animation
+  RevealText, SplitText, CharacterReveal, HighlightReveal,
+  // Section Components
+  SplineEmbed, DialWheel, TimelineBlur, GradientHorizon,
+  AccordionStep, DesignStepContent, PortfolioMarquee, Marquee,
+  ScrollStory, ImageLightbox, Footer, CTASection,
+  // Others
+  ContactModal, PhotoStack, Skeleton, FloatingCTA, ScrollToTop,
 } from '@/presentation/components/ui';
 
-// 배경
 import { AmbientBackground } from '@/presentation/components/common/AmbientBackground';
 ```
 
----
-
-### 🃏 GlassCard
-
-흰색 배경에 아쿠아 보더로 브랜드 아이덴티티를 강조하는 카드입니다.
+### GlassCard
 
 ```tsx
-// 기본 사용 (호버 시 살짝 떠오름)
+// 기본 (호버 효과 O)
 <GlassCard className="p-8">
   <h3>카드 제목</h3>
-  <p>카드 내용</p>
 </GlassCard>
 
-// 정적 카드 (폼, 콘텐츠 영역)
+// 정적 (호버 효과 X) - 폼 등에 사용
 <GlassCard className="p-8" hover={false}>
   <form>...</form>
 </GlassCard>
 ```
 
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `hover` | boolean | `true` | 호버 효과 활성화 |
-| `className` | string | - | 추가 스타일 |
-
----
-
-### 🔘 GlassButton
-
-리플 효과가 내장된 Glass 버튼입니다. 클릭 시 물결 효과가 자동 적용됩니다.
+### GlassButton
 
 ```tsx
-// Outline 버튼 (기본)
-<GlassButton variant="outline">
-  버튼 텍스트
-</GlassButton>
+// Outline (기본)
+<GlassButton variant="outline">버튼</GlassButton>
 
-// Accent 버튼 (강조)
-<GlassButton variant="accent">
-  버튼 텍스트
-</GlassButton>
+// Accent (CTA)
+<GlassButton variant="accent">문의하기</GlassButton>
 
-// 아이콘 포함
-<GlassButton variant="accent">
-  메시지 보내기
-  <Send className="w-4 h-4" />
-</GlassButton>
-
-// 사이즈 조절
-<GlassButton variant="outline" size="sm">Small</GlassButton>
-<GlassButton variant="outline" size="md">Medium</GlassButton>
-<GlassButton variant="outline" size="lg">Large</GlassButton>
+// 사이즈
+<GlassButton size="sm">Small</GlassButton>
+<GlassButton size="md">Medium</GlassButton>
+<GlassButton size="lg">Large</GlassButton>
 ```
 
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `variant` | `'outline'` \| `'accent'` | `'outline'` | 버튼 스타일 |
-| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 버튼 크기 |
-| `className` | string | - | 추가 스타일 |
-
-**스타일 가이드:**
-- `outline`: 일반 액션, 보조 버튼
-- `accent`: CTA, 주요 액션, 제출 버튼
-
----
-
-### 🏷️ GlassBadge
+### HighlightReveal
 
 ```tsx
-// Accent 배지 (강조)
-<GlassBadge variant="accent">
-  <Sparkles className="w-3.5 h-3.5" />
-  New Feature
-</GlassBadge>
-
-// Outline 배지
-<GlassBadge variant="outline">Category</GlassBadge>
-
-// 애니메이션 적용
-<GlassBadge variant="accent" animated>
-  Animated Badge
-</GlassBadge>
+// 텍스트 하이라이트 효과
+<p>
+  그리고,{' '}
+  <HighlightReveal color="#7fa8c9" delay={0.3}>
+    <span className="text-[#1a1a1a]">여기까지 무료</span>
+  </HighlightReveal>
+  {' '}입니다.
+</p>
 ```
 
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `variant` | `'accent'` \| `'outline'` | `'accent'` | 배지 스타일 |
-| `size` | `'sm'` \| `'md'` \| `'lg'` | `'md'` | 배지 크기 |
-| `animated` | boolean | `false` | 등장 애니메이션 |
-
----
-
-### 📝 GlassInput / GlassTextarea
+### DialWheel
 
 ```tsx
-// 기본 입력
-<GlassInput 
-  label="이름" 
-  placeholder="홍길동" 
-/>
+// 기본 (화살표 표시)
+<DialWheel showIndicator />
 
-// 이메일 타입
-<GlassInput 
-  label="이메일" 
-  placeholder="hello@example.com" 
-  type="email" 
-/>
+// 모바일용 (화살표 숨김)
+<DialWheel showIndicator={false} />
 
-// 에러 상태
-<GlassInput 
-  placeholder="에러 상태" 
-  error="올바른 이메일을 입력해주세요" 
-/>
-
-// 텍스트 영역
-<GlassTextarea 
-  label="메시지" 
-  placeholder="프로젝트에 대해 알려주세요..." 
-/>
+// 속도 커스텀 (기본값: 750ms)
+<DialWheel speed={1000} />
 ```
 
----
-
-### 🧭 Navigation
+### ScrollStory
 
 ```tsx
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+const slides = [
+  { id: 'slide-1', content: ['첫 번째 줄', '두 번째 줄'] },
+  { id: 'slide-2', content: ['슬라이드 2'] },
+  { id: 'slide-3', content: ['마지막'], isEnding: true },
 ];
 
-// 상단 네비게이션
-<Navigation
-  items={navItems}
-  cta={{ label: '문의하기', href: '#contact' }}
-/>
-
-// 사이드 네비게이션 (데스크톱)
-<SideNavigation sections={[
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-]} />
+<ScrollStory slides={slides} />
 ```
 
----
-
-### ✨ RevealText / SplitText / CharacterReveal
-
-스크롤 시 자연스럽게 드러나는 텍스트 애니메이션입니다.
+### Marquee
 
 ```tsx
-// RevealText - 다양한 효과
-<RevealText variant="fade">페이드 등장</RevealText>
-<RevealText variant="slide">슬라이드 등장</RevealText>
-<RevealText variant="blur">블러 해제</RevealText>
-<RevealText variant="mask">마스크 해제</RevealText>
-
-// 호버 시 애니메이션 재실행
-<RevealText variant="fade" replayOnHover>
-  호버하면 다시 애니메이션
-</RevealText>
-
-// SplitText - 단어별 순차 등장
-<SplitText 
-  text="우리는 처음부터 다 보여주지 않습니다"
-  className="text-3xl"
-  replayOnHover
-/>
-
-// CharacterReveal - 글자별 순차 등장
-<CharacterReveal 
-  text="Invisible Works"
-  className="text-4xl font-semibold"
-  replayOnHover
-/>
+<Marquee speed="normal" pauseOnHover reverse={false}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</Marquee>
 ```
 
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `variant` | `'fade'` \| `'slide'` \| `'blur'` \| `'mask'` | `'fade'` | 애니메이션 종류 |
-| `replayOnHover` | boolean | `false` | 호버 시 재실행 |
-| `delay` | number | `0` | 지연 시간 (초) |
-
----
-
-### 📏 GlassDivider
+### AccordionStep
 
 ```tsx
-<GlassDivider variant="line" />
-<GlassDivider variant="dots" />
-<GlassDivider variant="wave" />
-<GlassDivider variant="gradient" />
-```
-
----
-
-### ⏳ Skeleton
-
-블루 기가 도는 로딩 플레이스홀더입니다.
-
-```tsx
-<Skeleton width="100%" height={16} />
-<Skeleton width="85%" height={16} />
-<Skeleton width="70%" height={16} />
-```
-
----
-
-### 🎯 FloatingCTA / ScrollToTop
-
-```tsx
-// 플로팅 CTA
-<FloatingCTA
-  label="문의하기"
-  icon={<MessageCircle className="w-5 h-5" />}
-  expandItems={[
-    {
-      icon: <Phone className="w-4 h-4 text-[#7fa8c9]" />,
-      label: '전화 상담',
-      onClick: () => {},
-    },
-    {
-      icon: <Mail className="w-4 h-4 text-[#7fa8c9]" />,
-      label: '이메일 문의',
-      onClick: () => {},
-    },
-  ]}
-/>
-
-// 스크롤 투 탑
-<ScrollToTop />
-```
-
----
-
-### 🌊 AmbientBackground
-
-페이지 배경에 은은한 블러 오브 효과를 추가합니다.
-
-```tsx
-import { AmbientBackground } from '@/presentation/components/common/AmbientBackground';
-
-// 기본 사용 (lido 권장)
-<AmbientBackground variant="lido" />
-
-// 페이지 구조
-export default function Page() {
-  return (
-    <div className="min-h-screen">
-      <AmbientBackground variant="lido" />
-      {/* 페이지 콘텐츠 */}
-    </div>
-  );
-}
-```
-
-| Variant | 설명 |
-|---------|------|
-| `lido` | 권장. 은은한 아쿠아 오브 2개 |
-| `default` | 기본 배경 |
-| `subtle` | 더 약한 효과 |
-| `intense` | 강한 효과 |
-
----
-
-### 🎠 PortfolioMarquee (NEW)
-
-Magic UI Marquee 기반 좌우 무한 스크롤 포트폴리오 카드입니다.
-
-```tsx
-import { PortfolioMarquee, PortfolioCard } from '@/presentation/components/ui';
-
-// 포트폴리오 아이템 정의
-const portfolioItems = [
+const steps = [
   {
-    id: '1',
-    title: '프로젝트명',
-    category: '웹사이트',
-    imageUrl: '/portfolio/project1.jpg',
-    href: '/portfolio/1',
+    id: 'step1',
+    number: '01',
+    title: '내용 전달',
+    content: <p>설명...</p>,
   },
   // ...
 ];
 
-// 섹션에서 사용
-<PortfolioMarquee
-  items={portfolioItems}
-  pauseOnHover
-  speed="normal"
-/>
+<AccordionStep steps={steps} defaultOpenAll />
 ```
-
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `items` | PortfolioItem[] | required | 포트폴리오 아이템 배열 |
-| `pauseOnHover` | boolean | `true` | 호버 시 일시정지 |
-| `speed` | `'slow'` \| `'normal'` \| `'fast'` | `'normal'` | 스크롤 속도 |
-| `reverse` | boolean | `false` | 역방향 스크롤 |
-
-**주의사항:**
-- 이미지는 **스톡 이미지** 사용 필수 (플레이스홀더 X)
-- DB 연동 가능한 구조로 설계
 
 ---
 
-### 📬 ContactModal (NEW)
+## 7. 모바일 최적화
 
-CTA 클릭 시 모달로 표시되는 문의 폼입니다.
+### 줄바꿈 규칙
+
+| 클래스 | 용도 |
+|--------|------|
+| `break-keep` | 한국어 단어 단위 줄바꿈 (필수) |
+| `break-all` | URL 등 긴 문자열 |
+| `md:whitespace-nowrap` | PC에서 한 줄 유지 |
+
+### 반응형 줄바꿈 패턴
 
 ```tsx
-import { ContactModal } from '@/presentation/components/ui';
+// 모바일/PC 다른 줄바꿈
+<span className="md:hidden">모바일<br />텍스트</span>
+<span className="hidden md:inline">PC 텍스트 한 줄</span>
 
-const [isOpen, setIsOpen] = useState(false);
-
-<button onClick={() => setIsOpen(true)}>문의하기</button>
-
-<ContactModal
-  isOpen={isOpen}
-  onClose={() => setIsOpen(false)}
-/>
+// 모바일에서만 줄바꿈
+<br className="md:hidden" />
 ```
 
-| Prop | Type | Default | 설명 |
-|------|------|---------|------|
-| `isOpen` | boolean | required | 모달 열림 상태 |
-| `onClose` | () => void | required | 닫기 콜백 |
+### PC/모바일 차이점
 
-**특징:**
-- 새 페이지 이동 없이 모달로 처리
-- GlassInput/GlassTextarea 활용
-- 배경 오버레이 클릭 시 닫힘
+| 항목 | PC | 모바일 |
+|------|-----|--------|
+| Spline URL | 별도 URL | 별도 URL (모바일 최적화) |
+| DialWheel 화살표 | 표시 | 숨김 |
+| 네비 로고 높이 | `h-5` | `h-2.5` |
+| Footer 로고 | 중앙 | 맨 아래 |
+| CTA 화살표 | 텍스트 옆 | 텍스트 위 |
 
 ---
 
-## 6. Liquid Glass 구현
+## 8. 다국어 지원 (i18n)
 
-### 개요
-Apple WWDC 2025에서 발표된 Liquid Glass 디자인 언어를 웹에서 구현합니다.
-단순한 블러(Glassmorphism)를 넘어 **유리의 광학적 특성**을 모방합니다.
+### 설정
+- **라이브러리**: `next-intl` (App Router 통합)
+- **기본 언어**: 한국어 (`ko`)
+- **지원 언어**: `ko`, `en`, `zh-CN`, `zh-TW`
+- **라우팅**: Prefix 방식 (`/ko/`, `/en/`, `/zh-CN/`, `/zh-TW/`)
 
-### 현재 구현 (Simplified Glass)
-웹 브라우저 호환성을 위해 Glassmorphism 기반으로 구현:
+### 언어별 폰트
+| 언어 | 폰트 | CSS 클래스 |
+|------|------|-----------|
+| 한국어 (ko) | Pretendard Variable | `font-pretendard` |
+| 영어 (en) | Inter | `font-inter` |
+| 중국어 간체 (zh-CN) | Noto Sans SC | `font-noto-sc` |
+| 중국어 번체 (zh-TW) | Noto Sans TC | `font-noto-tc` |
 
-```css
-.iw-glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 16px;
-  border: 2px solid rgba(127, 168, 201, 0.25);
-  box-shadow:
-    0 12px 40px rgba(127, 168, 201, 0.12),
-    inset 0 2px 0 rgba(255, 255, 255, 0.95);
+### 언어별 줄바꿈 클래스
+| 언어 | 권장 클래스 | 설명 |
+|------|------------|------|
+| 한국어 | `break-keep` | 단어 단위 줄바꿈 |
+| 영어 | `hyphens-auto` | 자동 하이픈 처리 |
+| 중국어 | (기본) | 문자 단위 줄바꿈 |
+
+### 파일 구조
+```
+messages/
+├── ko.json       # 한국어 번역
+├── en.json       # 영어 번역
+├── zh-CN.json    # 중국어 간체 번역
+└── zh-TW.json    # 중국어 번체 번역
+
+src/
+├── i18n/
+│   ├── routing.ts    # 라우팅 설정
+│   └── request.ts    # 서버 요청 설정
+├── middleware.ts     # 언어 감지 미들웨어
+└── app/
+    └── [locale]/     # 다국어 페이지
+        ├── layout.tsx
+        ├── page.tsx
+        └── ...
+```
+
+### 번역 사용법
+```tsx
+// 클라이언트 컴포넌트에서
+import { useTranslations } from 'next-intl';
+
+export default function MyComponent() {
+  const t = useTranslations('Navigation');
+  return <h1>{t('contact')}</h1>;
 }
 ```
 
-### 배경 Orb 시스템 (variant="lido")
-
+### LanguageSwitcher 컴포넌트
 ```tsx
-// AmbientBackground variant="lido"
-Primary Orb:   300px, rgba(127, 168, 201, 0.25), blur(50px), top: 5%, right: 10%
-Secondary Orb: 250px, rgba(127, 168, 201, 0.2), blur(50px), bottom: 10%, left: 5%
-Background:    fixed, bg-white, -z-10
-```
+import { LanguageSwitcher } from '@/presentation/components/ui';
 
-### 핵심 파라미터
-
-| 파라미터 | 권장값 | 설명 |
-|----------|--------|------|
-| blur | 40-60px | 너무 높으면 원형 사라짐 |
-| opacity | 0.2-0.3 | 은은한 효과 |
-| size | 250-350px | 적당한 크기 |
-| position | fixed | 스크롤 시 고정 (깊이감) |
-
----
-
-## 7. 개발 진행 상황
-
-### ✅ Phase 1: Foundation (완료)
-- [x] Next.js 16 프로젝트 초기화
-- [x] Clean Architecture 폴더 구조
-- [x] shadcn/ui, framer-motion 설치
-- [x] Jest + React Testing Library 설정
-- [x] 테마 기본 설정
-
-### ✅ Phase 2: Context Gathering (완료)
-- [x] 브랜드 아이덴티티 정의
-- [x] 컬러 시스템 정의 (#f2f8fc, #7fa8c9)
-- [x] 비주얼 컨셉 정의 (Liquid Glass, 투명함)
-- [x] PROJECT.md 문서화
-- [x] LIQUID-GLASS.md 가이드 작성
-- [x] globals.css 브랜드 컬러 적용
-
-### ✅ Phase 3: Component Design (완료)
-- [x] AmbientBackground 컴포넌트
-- [x] GlassCard 컴포넌트 (단순화: bordered only)
-- [x] GlassButton 컴포넌트 (단순화: outline, accent + 리플 내장)
-- [x] RevealText / SplitText / CharacterReveal (replayOnHover 지원)
-- [x] GlassInput / GlassTextarea
-- [x] GlassNavigation
-- [x] GlassBadge (단순화: accent, outline)
-- [x] GlassDivider
-- [x] Skeleton (블루 기)
-- [x] Navigation (상단/사이드)
-- [x] FloatingCTA / ScrollToTop
-- [x] /design-system 페이지 완성
-
-### ✅ Phase 3.5: Section Components (완료 - 피드백 수정 완료)
-- [x] SplineEmbed - Hero 섹션용 Spline 3D 임베드
-- [x] ScrollingTextReel - Problem 섹션용 무한 스크롤 텍스트 (**수정됨**: 보이지 않는 문제 해결)
-- [x] TimelineBlur - Change 섹션용 타임라인 블러 효과 (**수정됨**: 원과 선 위치 정렬)
-- [x] GradientHorizon - 섹션 전환용 그라데이션 지평선 (**수정됨**: 위아래 마스킹 추가)
-- [x] AccordionStep - How We Do 섹션용 아코디언 스텝 (**수정됨**: "여기까지 무료 입니다" 단색 파랑)
-- [x] ImageLightbox - 이미지 라이트박스 (디자인 시안 미리보기)
-- [x] LargeQuote - Why We Work 섹션용 큰 타이포그래피 (**수정됨**: 3가지 안 - Apple/Cinematic/Minimal)
-- [x] CTASection - CTA 섹션 (**수정됨**: 배경 없이 한 줄 텍스트)
-- [x] Footer - CTA 포함 블랙 푸터 (**수정됨**: CTA+푸터 통합, 로고 이미지 추가)
-- [x] Navigation - 검정 로고 좌상단 추가
-- [x] /design-system 페이지에 모든 컴포넌트 쇼케이스 추가
-
-### ✅ Phase 4: Page Development (완료)
-- [x] Hero 섹션 (Spline 풀뷰포트 + Fallback)
-- [x] Problem 섹션 (DialWheel + 타이포그래피)
-- [x] Change 섹션 (TimelineBlur + GradientHorizon)
-- [x] How We Do 섹션 (AccordionStep + DesignStepContent)
-- [x] **Portfolio 섹션 (PortfolioMarquee - 2줄 Marquee 카드 갤러리)**
-- [x] Why We Work Like This 섹션 (StoryQuote)
-- [x] CTA + Footer (블랙 푸터, CTA 통합)
-- [x] **ContactModal (문의 모달 - GlassInput/Textarea 활용)**
-- [x] **/portfolio 페이지 (그리드 갤러리 + 필터링 + 라이트박스)**
-- [x] Navigation에 포트폴리오 링크 추가
-- [x] SideNavigation 6개 섹션 연결
-
-### ⏳ Phase 5: Polish (대기)
-- [ ] 전체 애니메이션 정리
-- [ ] 반응형 최적화
-- [ ] 성능 최적화
-- [ ] SEO 설정
-- [ ] 배포 준비
-
----
-
-## 8. 개발 규칙
-
-### TDD 준수
-1. **Red**: 실패하는 테스트 먼저 작성
-2. **Green**: 테스트 통과하는 최소 코드 작성
-3. **Refactor**: 코드 품질 개선
-
-### 섹션별 진행
-- 한 섹션씩 확인 후 다음 진행
-- 클라이언트 리뷰 후 수정
-
-### Liquid Glass 일관성
-- 모든 컴포넌트에 글래스 스타일 유지
-- 투명함과 신뢰의 브랜드 컨셉 반영
-
-### 문서 업데이트
-- 변경 시 DOCS.md 동기화
-- 컴포넌트 추가 시 목록 업데이트
-
-### 명령어
-
-```bash
-npm run dev          # 개발 서버
-npm run build        # 빌드
-npm run test         # 테스트
-npm run lint         # 린트
+// Navigation에 통합됨 (자동 표시)
+// 별도 사용 시:
+<LanguageSwitcher variant="compact" />  // 축약형 (KO, EN)
+<LanguageSwitcher />                    // 전체형 (한국어, English)
 ```
 
 ---
 
-## 변경 이력
+## 9. 개발 진행 상황
+
+### ✅ Phase 1-4 완료
+- [x] 프로젝트 초기화
+- [x] 브랜드/컬러 시스템 정의
+- [x] 30개 UI 컴포넌트 구현
+- [x] 메인 페이지 (7개 섹션)
+- [x] 포트폴리오 페이지
+- [x] 문의 페이지 (5단계 Wizard)
+- [x] 개인정보/이용약관 페이지
+- [x] 디자인 시스템 페이지
+
+### ✅ Phase 5: 모바일 최적화 완료
+- [x] 헤더 모바일 최적화
+- [x] Problem 섹션 줄바꿈
+- [x] Change 섹션 줄바꿈
+- [x] DialWheel 모바일 (화살표 숨김)
+- [x] Portfolio 제목 줄바꿈
+- [x] Marquee 모바일 사이즈 축소
+- [x] Why (ScrollStory) 모바일 최적화
+- [x] CTA 모바일 레이아웃
+- [x] Footer 로고 위치
+- [x] Contact 페이지 모바일 최적화
+- [x] 개인정보/이용약관 break-all 적용
+
+### ✅ Phase 6: 다국어 지원 완료
+- [x] next-intl 설치 및 설정
+- [x] 4개 언어 번역 파일 (ko, en, zh-CN, zh-TW)
+- [x] 언어별 폰트 설정 (Pretendard, Inter, Noto Sans SC/TC)
+- [x] [locale] 라우팅 구조
+- [x] LanguageSwitcher 컴포넌트
+- [x] Navigation 언어 전환 UI
+- [x] 모든 페이지 다국어 적용
+- [x] design-system 폰트 섹션 추가
+
+---
+
+## 9. 변경 이력
 
 | 날짜 | 변경 내용 |
 |------|----------|
-| 2026-01-26 | 프로젝트 초기화, Phase 1 완료 |
-| 2026-01-26 | 브랜드 아이덴티티, 컬러 시스템 정의 |
-| 2026-01-26 | Liquid Glass 구현 가이드 작성 |
-| 2026-01-26 | Phase 3 완료: 모든 컴포넌트 구현 |
-| 2026-01-26 | Navigation, FloatingCTA 컴포넌트 추가 |
-| 2026-01-26 | MD 파일 통합 (DOCS.md) |
-| 2026-01-26 | 컴포넌트 단순화 (GlassCard, GlassButton, GlassBadge) |
-| 2026-01-26 | 컴포넌트 사용법 가이드 추가 |
-| 2026-01-26 | Phase 3.5: 9개 섹션 컴포넌트 추가 (승인 대기) |
-| 2026-01-26 | 피드백 반영: 컴포넌트 대폭 수정 (3D 룰렛, 블루 호라이즌, 블랙 푸터 등) |
-| 2026-01-26 | 전체 피드백 수정 완료 - ScrollingTextReel, TimelineBlur, GradientHorizon, LargeQuote(3안), CTASection, Footer, Navigation 수정 |
-| 2026-01-26 | Phase 4 시작: PortfolioMarquee, ContactModal 컴포넌트 계획 추가 |
-| 2026-01-26 | 포트폴리오 섹션 및 /portfolio 페이지 계획 추가 |
-| 2026-01-27 | **Phase 4 완료**: 메인 페이지 전체 구현 (7개 섹션) |
-| 2026-01-27 | PortfolioMarquee 컴포넌트 구현 (Magic UI Marquee 기반) |
-| 2026-01-27 | ContactModal 컴포넌트 구현 (GlassInput/Textarea 활용) |
-| 2026-01-27 | /portfolio 페이지 구현 (그리드 갤러리 + 필터링 + 라이트박스) |
-| 2026-01-27 | 빌드 성공 확인 |
-| 2026-01-27 | Footer 풀페이지(min-h-screen) 검정 배경으로 수정 |
-| 2026-01-27 | /contact 페이지 구현 (문의 폼) |
-| 2026-01-27 | /privacy 페이지 구현 (개인정보 처리방침) |
-| 2026-01-27 | /terms 페이지 구현 (이용약관) |
+| 2026-01-26 | 프로젝트 초기화, Phase 1-3 완료 |
+| 2026-01-27 | Phase 4 완료 (메인, 포트폴리오, 문의 페이지) |
+| 2026-01-27 | PortfolioMarquee, ContactModal, ScrollStory 컴포넌트 추가 |
+| 2026-01-27 | Marquee 컴포넌트 분리 및 design-system 추가 |
+| 2026-01-27 | HighlightReveal 효과 추가 ("여기까지 무료" 하이라이트) |
+| 2026-01-27 | 문의 폼 5단계 Wizard로 전면 개편 |
+| 2026-01-27 | **Phase 5 완료: 전체 모바일 최적화** |
+| 2026-01-27 | break-keep, 반응형 줄바꿈, Spline 모바일 URL 분리 |
+| 2026-01-27 | CLAUDE.md, DOCS.md 전면 업데이트 |
+| 2026-01-27 | **다국어 지원 추가: ko, en, zh-CN, zh-TW** |
+| 2026-01-27 | next-intl 설정, LanguageSwitcher 컴포넌트 추가 |
+| 2026-01-27 | 언어별 폰트 설정 (Pretendard, Inter, Noto Sans SC/TC) |
+| 2026-01-28 | **Contact 페이지 완전 복원**: 5단계 Wizard + 완료 화면 링크/메모 |
+| 2026-01-28 | Contact 페이지 다국어 완전 지원 (ko, en, zh-CN, zh-TW) |
+| 2026-01-28 | 사용하지 않는 `/contact` 페이지 제거 (→ `/[locale]/contact`만 사용) |
