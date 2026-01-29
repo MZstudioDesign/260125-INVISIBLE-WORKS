@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, useState } from 'react';
-import { QuoteData, QuoteType, A4_WIDTH_PX, A4_HEIGHT_PX } from '@/lib/quote/types';
+import { QuoteData, QuoteType, QuoteLanguage, A4_WIDTH_PX, A4_HEIGHT_PX } from '@/lib/quote/types';
 import { getQuoteTemplate, getQuotePageCount } from './templates';
 import { cn } from '@/lib/utils';
 import { ZoomIn, ZoomOut, Maximize2, X } from 'lucide-react';
@@ -10,13 +10,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface QuotePreviewProps {
   data: QuoteData;
   type: QuoteType;
+  language?: QuoteLanguage;
   className?: string;
 }
 
 export const QuotePreview = forwardRef<HTMLDivElement, QuotePreviewProps>(
-  function QuotePreview({ data, type, className }, ref) {
+  function QuotePreview({ data, type, language = 'ko', className }, ref) {
     const TemplateComponent = getQuoteTemplate(type);
-    const pageCount = getQuotePageCount(type);
+    const pageCount = getQuotePageCount(type, data);
     const [currentPage, setCurrentPage] = useState(1);
     const [scale, setScale] = useState(0.65);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -29,27 +30,21 @@ export const QuotePreview = forwardRef<HTMLDivElement, QuotePreviewProps>(
         <div className={cn('flex flex-col items-center w-full', className)}>
           {/* Controls Bar */}
           <div className="flex items-center gap-4 mb-6 bg-white/5 backdrop-blur-xl px-5 py-2.5 rounded-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
-            {/* Page Nav */}
+            {/* Page Nav - Dynamic */}
             {pageCount > 1 && (
               <div className="flex items-center gap-2 border-r border-white/10 pr-4 mr-2">
-                <button
-                  onClick={() => setCurrentPage(1)}
-                  className={cn(
-                    'px-3 py-1 rounded text-xs font-medium transition-all',
-                    currentPage === 1 ? 'bg-white text-[#0f172a]' : 'text-white/60 hover:text-white'
-                  )}
-                >
-                  1
-                </button>
-                <button
-                  onClick={() => setCurrentPage(2)}
-                  className={cn(
-                    'px-3 py-1 rounded text-xs font-medium transition-all',
-                    currentPage === 2 ? 'bg-white text-[#0f172a]' : 'text-white/60 hover:text-white'
-                  )}
-                >
-                  2
-                </button>
+                {Array.from({ length: pageCount }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={cn(
+                      'px-3 py-1 rounded text-xs font-medium transition-all',
+                      currentPage === i + 1 ? 'bg-white text-[#0f172a]' : 'text-white/60 hover:text-white'
+                    )}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
               </div>
             )}
 
@@ -107,7 +102,7 @@ export const QuotePreview = forwardRef<HTMLDivElement, QuotePreviewProps>(
                   height: `${A4_HEIGHT_PX}px`,
                 }}
               >
-                <TemplateComponent data={data} pageNumber={currentPage} />
+                <TemplateComponent data={data} pageNumber={currentPage} language={language} />
               </div>
             </div>
           </div>
@@ -141,7 +136,7 @@ export const QuotePreview = forwardRef<HTMLDivElement, QuotePreviewProps>(
                   maxWidth: '100%',
                 }}
               >
-                <TemplateComponent data={data} pageNumber={currentPage} />
+                <TemplateComponent data={data} pageNumber={currentPage} language={language} />
               </motion.div>
             </motion.div>
           )}
@@ -155,12 +150,13 @@ export const QuotePreview = forwardRef<HTMLDivElement, QuotePreviewProps>(
 interface HiddenPreviewProps {
   data: QuoteData;
   type: QuoteType;
+  language?: QuoteLanguage;
   previewRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export function HiddenQuotePreview({ data, type, previewRef }: HiddenPreviewProps) {
+export function HiddenQuotePreview({ data, type, language = 'ko', previewRef }: HiddenPreviewProps) {
   const TemplateComponent = getQuoteTemplate(type);
-  const pageCount = getQuotePageCount(type);
+  const pageCount = getQuotePageCount(type, data);
 
   return (
     <div className="fixed -left-[9999px] -top-[9999px] pointer-events-none">
@@ -168,7 +164,7 @@ export function HiddenQuotePreview({ data, type, previewRef }: HiddenPreviewProp
         {/* 모든 페이지 렌더링 */}
         {Array.from({ length: pageCount }, (_, i) => (
           <div key={i + 1} data-page={i + 1}>
-            <TemplateComponent data={data} pageNumber={i + 1} />
+            <TemplateComponent data={data} pageNumber={i + 1} language={language} />
           </div>
         ))}
       </div>

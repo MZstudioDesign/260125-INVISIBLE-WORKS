@@ -1,29 +1,37 @@
 import {
   QuoteData,
+  QuoteLanguage,
   calculateSubtotal,
   calculateVAT,
   calculateTotal,
-  formatCurrency,
-  formatDate,
   calculateItemTotal,
   A4_WIDTH_PX,
   A4_HEIGHT_PX,
 } from '@/lib/quote/types';
 import { getServerOptionsText, getDomainOptionsText, formatWon, generateEstimateQuoteItems } from '@/lib/quote/settings';
+import { getTranslations, formatCurrencyByLanguage, formatDateByLanguage } from '@/lib/quote/translations';
 
-// Helper for multi-line currency
-function MultiLineCurrency({ amount, isTotal = false }: { amount: number | { min: number; max: number }; isTotal?: boolean }) {
+// Helper for multi-line currency with language support
+function MultiLineCurrency({
+  amount,
+  isTotal = false,
+  language = 'ko'
+}: {
+  amount: number | { min: number; max: number };
+  isTotal?: boolean;
+  language?: QuoteLanguage;
+}) {
   if (typeof amount === 'number') {
-    return <>{formatCurrency(amount)}</>;
+    return <>{formatCurrencyByLanguage(amount, language)}</>;
   }
   if (amount.min === amount.max) {
-    return <>{formatCurrency(amount.min)}</>;
+    return <>{formatCurrencyByLanguage(amount.min, language)}</>;
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.3 }}>
-      <span>{formatCurrency(amount.min)}</span>
-      <span style={{ fontSize: isTotal ? '12px' : '9px', color: '#666' }}>~ {formatCurrency(amount.max)}</span>
+      <span>{formatCurrencyByLanguage(amount.min, language)}</span>
+      <span style={{ fontSize: isTotal ? '12px' : '9px', color: '#666' }}>~ {formatCurrencyByLanguage(amount.max, language)}</span>
     </div>
   );
 }
@@ -31,6 +39,7 @@ function MultiLineCurrency({ amount, isTotal = false }: { amount: number | { min
 interface TemplateProps {
   data: QuoteData;
   pageNumber?: number;
+  language?: QuoteLanguage;
 }
 
 /**
@@ -38,8 +47,12 @@ interface TemplateProps {
  * - 모노톤 블랙 & 화이트
  * - 프로젝트 정보 기반 자동 항목 + 수동 항목 합산
  * - 범위 견적 지원
+ * - 다국어 지원 (한글/영어)
  */
-export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
+export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateProps) {
+  // Get translations
+  const t = getTranslations(language);
+
   // 1. 자동 생성 항목 (프로젝트 정보 기반)
   const autoItems = generateEstimateQuoteItems(data);
 
@@ -128,7 +141,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               lineHeight: 1,
             }}
           >
-            견적서
+            {t.title}
           </h1>
           <span
             style={{
@@ -139,7 +152,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               marginTop: '8px',
             }}
           >
-            NO. {data.quoteNumber.padStart(4, '0')}
+            {t.quoteNumber} {data.quoteNumber.padStart(4, '0')}
           </span>
         </div>
       </div>
@@ -158,9 +171,9 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
           borderBottom: `1px solid ${borderColor}`,
         }}
       >
-        <span>발행일: {formatDate(data.date) || '0000년 0월 0일'}</span>
+        <span>{t.issueDate}: {formatDateByLanguage(data.date, language) || (language === 'ko' ? '0000년 0월 0일' : 'TBD')}</span>
         {data.validUntil && (
-          <span>유효기간: {formatDate(data.validUntil)}</span>
+          <span>{t.validUntil}: {formatDateByLanguage(data.validUntil, language)}</span>
         )}
       </div>
 
@@ -186,7 +199,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               letterSpacing: '0.05em',
             }}
           >
-            수신
+            {t.to}
           </div>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#1a1a1a', marginBottom: '4px' }}>
             {data.clientName || '고객명'}
@@ -209,7 +222,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               letterSpacing: '0.05em',
             }}
           >
-            발신
+            {t.from}
           </div>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#1a1a1a', marginBottom: '4px' }}>
             {data.companyName || 'Invisible Works'}
@@ -238,10 +251,10 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
           color: primaryColor,
         }}
       >
-        <div>항목</div>
-        <div style={{ textAlign: 'center' }}>수량</div>
-        <div style={{ textAlign: 'right' }}>단가</div>
-        <div style={{ textAlign: 'right' }}>금액</div>
+        <div>{t.description}</div>
+        <div style={{ textAlign: 'center' }}>{t.quantity}</div>
+        <div style={{ textAlign: 'right' }}>{t.unitPrice}</div>
+        <div style={{ textAlign: 'right' }}>{t.amount}</div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
@@ -263,7 +276,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
             >
               <div style={{ fontWeight: 500, color: '#1a1a1a' }}>
                 {/* Description & Sub Items */}
-                {item.description || (item.id.startsWith('auto') ? '자동 항목' : `항목 ${index + 1}`)}
+                {item.description || (item.id.startsWith('auto') ? (language === 'ko' ? '자동 항목' : 'Auto Item') : `${language === 'ko' ? '항목' : 'Item'} ${index + 1}`)}
                 {item.inputType === 'text' && item.textValue && (
                   <span style={{ fontSize: '10px', color: mutedColor, marginLeft: '6px' }}>
                     [{item.textValue}]
@@ -289,18 +302,18 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
                 ) : item.inputType === 'percent' ? (
                   `${item.ratio}%`
                 ) : item.inputType === 'range' ? (
-                  <MultiLineCurrency amount={{ min: item.unitPrice, max: item.maxPrice || item.unitPrice }} />
+                  <MultiLineCurrency amount={{ min: item.unitPrice, max: item.maxPrice || item.unitPrice }} language={language} />
                 ) : (
-                  formatCurrency(item.unitPrice)
+                  formatCurrencyByLanguage(item.unitPrice, language)
                 )}
               </div>
 
               {/* Total Amount */}
               <div style={{ textAlign: 'right', fontWeight: 600, color: '#1a1a1a', fontFeatureSettings: '"tnum"' }}>
                 {item.inputType === 'text' ? (
-                  item.textValue || '별도 상담'
+                  item.textValue || t.tbd
                 ) : (
-                  <MultiLineCurrency amount={itemTotal} />
+                  <MultiLineCurrency amount={itemTotal} language={language} />
                 )}
               </div>
             </div>
@@ -333,7 +346,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               }}
             >
               <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                비고
+                {t.notes}
               </div>
               <div style={{ flex: 1, color: mutedColor, lineHeight: 1.5 }}>
                 {data.notes}
@@ -354,10 +367,10 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
                   }}
                 >
                   <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                    서버
+                    {t.server}
                   </div>
                   <div style={{ flex: 1, color: mutedColor }}>
-                    {getServerOptionsText()} (미정)
+                    {getServerOptionsText()} ({t.pending})
                   </div>
                 </div>
               )}
@@ -371,10 +384,10 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
                   }}
                 >
                   <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                    도메인
+                    {t.domain}
                   </div>
                   <div style={{ flex: 1, color: mutedColor }}>
-                    {getDomainOptionsText()} (미정)
+                    {getDomainOptionsText()} ({t.pending})
                   </div>
                 </div>
               )}
@@ -401,9 +414,9 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               color: mutedColor,
             }}
           >
-            <span>소계</span>
+            <span>{t.subtotal}</span>
             <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={subtotal} />
+              <MultiLineCurrency amount={subtotal} language={language} />
             </span>
           </div>
           <div
@@ -416,9 +429,9 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               color: mutedColor,
             }}
           >
-            <span>부가세 ({data.vatRate}%)</span>
+            <span>{t.vat} ({data.vatRate}%)</span>
             <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={vat} />
+              <MultiLineCurrency amount={vat} language={language} />
             </span>
           </div>
           <div
@@ -434,9 +447,9 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
               color: primaryColor,
             }}
           >
-            <span>합계</span>
+            <span>{t.total}</span>
             <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={total} isTotal />
+              <MultiLineCurrency amount={total} isTotal language={language} />
             </span>
           </div>
         </div>

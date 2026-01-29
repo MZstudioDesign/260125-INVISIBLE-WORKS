@@ -177,3 +177,92 @@ export async function updateInquiryOptionalFields(
     return true;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// Sheet2: Admin Config (Quote Settings)
+// ═══════════════════════════════════════════════════════════════
+
+const CONFIG_SHEET_TAB = process.env.GOOGLE_SHEET_CONFIG_TAB || '설정';
+
+// Raw config from Sheet2
+export interface RawQuoteConfig {
+    [key: string]: string;
+}
+
+/**
+ * Read quote settings from Sheet2 (Admin Config)
+ * Sheet format: Column A = key, Column B = value
+ */
+export async function getQuoteSettingsFromSheet(): Promise<RawQuoteConfig> {
+    const { sheets, sheetId } = await getSheetsClient();
+
+    try {
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId: sheetId,
+            range: `${CONFIG_SHEET_TAB}!A:B`,
+        });
+
+        const rows = response.data.values || [];
+        const config: RawQuoteConfig = {};
+
+        // Skip header row (index 0), parse key-value pairs
+        for (let i = 1; i < rows.length; i++) {
+            const [key, value] = rows[i];
+            if (key && value !== undefined) {
+                config[key.trim()] = value.toString().trim();
+            }
+        }
+
+        console.log('[GoogleSheets] Loaded config from Sheet2:', Object.keys(config).length, 'keys');
+        return config;
+    } catch (error) {
+        console.error('[GoogleSheets] Failed to load config from Sheet2:', error);
+        throw error;
+    }
+}
+
+/**
+ * Initialize Sheet2 with default config headers and values
+ */
+export async function initializeConfigSheet(): Promise<void> {
+    const { sheets, sheetId } = await getSheetsClient();
+
+    const defaultConfig = [
+        ['키', '값', '설명'],
+        ['page_cost_1_15', '400000', '1~15블록 페이지 비용'],
+        ['page_cost_15_30', '500000', '15~30블록 페이지 비용'],
+        ['page_cost_30_45', '600000', '30~45블록 페이지 비용'],
+        ['page_cost_extra', '30000', '45 초과 시 2페이지당 추가'],
+        ['uiux_normal', '1.0', '일반 스타일 배율'],
+        ['uiux_fancy', '1.2', '화려한 스타일 배율'],
+        ['feature_board', '100000', '게시판 비용'],
+        ['feature_shopping', '200000', '쇼핑 기본 비용'],
+        ['feature_product_extra', '10000', '상품 추가 비용 (1개당)'],
+        ['feature_product_base', '20', '기본 포함 상품 수'],
+        ['server_1year', '150000', '서버 1년'],
+        ['server_2year', '250000', '서버 2년'],
+        ['server_3year', '300000', '서버 3년'],
+        ['domain_per_year', '30000', '도메인 연 비용'],
+        ['domain_transfer', '30000', '도메인 이전비'],
+        ['revision_content', '50000', '콘텐츠 수정 비용'],
+        ['revision_layout', '100000', '레이아웃 수정 비용'],
+        ['company_name', 'Invisible Works', '회사명'],
+        ['company_rep', '오유택', '대표자'],
+        ['company_biznum', '377-44-01126', '사업자등록번호'],
+        ['company_email', 'invisibleworks.office@gmail.com', '이메일'],
+        ['company_address', '대구광역시 중구 남산동 677-58, 명륜로21길 33-11', '주소'],
+        ['company_website', 'invisibleworks.co', '웹사이트'],
+        ['bank_name', '카카오뱅크', '은행명'],
+        ['bank_account', '3333-14-9478697', '계좌번호'],
+        ['bank_holder', '오유택(엠지쓰studio)', '예금주'],
+    ];
+
+    await sheets.spreadsheets.values.update({
+        spreadsheetId: sheetId,
+        range: `${CONFIG_SHEET_TAB}!A1:C${defaultConfig.length}`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: { values: defaultConfig },
+    });
+
+    console.log('[GoogleSheets] Initialized config sheet with default values');
+}
+

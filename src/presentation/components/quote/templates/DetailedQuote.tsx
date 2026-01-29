@@ -3,21 +3,22 @@
 import QRCode from 'react-qr-code';
 import {
   QuoteData,
+  QuoteLanguage,
   calculateSubtotal,
   calculateVAT,
   calculateTotal,
   calculateBalanceDue,
   calculateItemTotal,
-  formatCurrency,
-  formatDate,
   A4_WIDTH_PX,
   A4_HEIGHT_PX,
 } from '@/lib/quote/types';
 import { formatWon } from '@/lib/quote/settings';
+import { getTranslations, formatCurrencyByLanguage, formatDateByLanguage } from '@/lib/quote/translations';
 
 interface TemplateProps {
   data: QuoteData;
   pageNumber?: number;
+  language?: QuoteLanguage;
 }
 
 // 압축형 약관 (1페이지용)
@@ -180,8 +181,12 @@ const DETAILED_TERMS = {
  * - 블랙 & 화이트 모노톤
  * - Pretendard 폰트
  * - 대괄호 [] 스타일 강조
+ * - 다국어 지원 (한글/영어)
  */
-export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
+export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: TemplateProps) {
+  // Get translations
+  const t = getTranslations(language);
+
   const subtotal = calculateSubtotal(data.items);
   const vat = calculateVAT(subtotal, data.vatRate);
   const total = calculateTotal(subtotal, vat);
@@ -192,7 +197,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
 
   // 2페이지: 세부 약관
   if (pageNumber === 2) {
-    return <DetailedQuotePage2 data={data} />;
+    return <DetailedQuotePage2 data={data} language={language} />;
   }
 
   return (
@@ -249,9 +254,9 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
         {/* 좌측: 날짜 + 고객 정보 */}
         <div>
           <div style={{ marginBottom: '4px' }}>
-            [{formatDate(data.date) || '0000년 0월 0일'}]
+            [{formatDateByLanguage(data.date, language) || (language === 'ko' ? '0000년 0월 0일' : 'TBD')}]
           </div>
-          <div style={{ marginBottom: '2px' }}>[{data.clientName || '고객명'}]</div>
+          <div style={{ marginBottom: '2px' }}>[{data.clientName || (language === 'ko' ? '고객명' : 'Client Name')}]</div>
           {data.clientAddress && (
             <div style={{ color: '#666', fontSize: '8px' }}>{data.clientAddress}</div>
           )}
@@ -268,7 +273,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
           <div style={{ marginBottom: '4px' }}>
             [#{data.quoteNumber?.padStart(6, '0') || '000001'}]
           </div>
-          <div>[{data.invoiceSubject || '견적서 제목'}]</div>
+          <div>[{data.invoiceSubject || (language === 'ko' ? '견적서 제목' : 'Quote Title')}]</div>
         </div>
 
         {/* 우측: INVOICE 타이틀 */}
@@ -299,10 +304,10 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
           marginBottom: '0',
         }}
       >
-        <div>항목</div>
-        <div style={{ textAlign: 'center' }}>수량</div>
-        <div style={{ textAlign: 'right' }}>단가</div>
-        <div style={{ textAlign: 'right' }}>금액</div>
+        <div>{t.description}</div>
+        <div style={{ textAlign: 'center' }}>{t.quantity}</div>
+        <div style={{ textAlign: 'right' }}>{t.unitPrice}</div>
+        <div style={{ textAlign: 'right' }}>{t.amount}</div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
@@ -322,7 +327,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
             >
               {/* Description */}
               <div style={{ fontWeight: 500 }}>
-                {item.description || `프로젝트 항목 ${index + 1}`}
+                {item.description || `${language === 'ko' ? '프로젝트 항목' : 'Project Item'} ${index + 1}`}
                 {item.inputType === 'text' && item.textValue && (
                   <span style={{ fontSize: '8px', color: '#666', marginLeft: '6px' }}>
                     [{item.textValue}]
@@ -342,18 +347,18 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
                 ) : item.inputType === 'percent' ? (
                   `${item.ratio}%`
                 ) : item.inputType === 'range' ? (
-                  formatCurrency({ min: item.unitPrice, max: item.maxPrice || item.unitPrice })
+                  formatCurrencyByLanguage({ min: item.unitPrice, max: item.maxPrice || item.unitPrice }, language)
                 ) : (
-                  formatCurrency(item.unitPrice)
+                  formatCurrencyByLanguage(item.unitPrice, language)
                 )}
               </div>
 
               {/* Total Amount */}
               <div style={{ textAlign: 'right', fontWeight: 500, fontFeatureSettings: '"tnum"' }}>
                 {item.inputType === 'text' ? (
-                  item.textValue || '별도 상담'
+                  item.textValue || t.tbd
                 ) : (
-                  formatCurrency(calculateItemTotal(item))
+                  formatCurrencyByLanguage(calculateItemTotal(item), language)
                 )}
               </div>
             </div>
@@ -407,7 +412,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               }}
             >
               <div style={{ fontSize: '7px', fontWeight: 600, marginBottom: '6px' }}>
-                [분할 결제 안내]
+                [{t.splitPayment}]
               </div>
               {data.paymentSplit.labels.map((label, index) => (
                 <div
@@ -421,10 +426,10 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
                 >
                   <span>{label} ({data.paymentSplit.ratios[index]}%)</span>
                   <span style={{ fontFeatureSettings: '"tnum"' }}>
-                    {formatCurrency({
+                    {formatCurrencyByLanguage({
                       min: Math.round(balanceDue.min * data.paymentSplit.ratios[index] / 100),
                       max: Math.round(balanceDue.max * data.paymentSplit.ratios[index] / 100)
-                    })}
+                    }, language)}
                   </span>
                 </div>
               ))}
@@ -441,9 +446,9 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
                 fontSize: '7px',
               }}
             >
-              <div style={{ fontWeight: 600, marginBottom: '4px' }}>[입금 계좌]</div>
+              <div style={{ fontWeight: 600, marginBottom: '4px' }}>[{t.bankAccount}]</div>
               <div>{data.bankName} {data.bankAccountNumber}</div>
-              <div style={{ color: '#666' }}>예금주: {data.bankAccountName}</div>
+              <div style={{ color: '#666' }}>{t.accountHolder}: {data.bankAccountName}</div>
             </div>
           )}
         </div>
@@ -458,8 +463,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               padding: '4px 0',
             }}
           >
-            <span style={{ fontWeight: 600 }}>SUBTOTAL:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrency(subtotal)}</span>
+            <span style={{ fontWeight: 600 }}>{t.subtotal.toUpperCase()}:</span>
+            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(subtotal, language)}</span>
           </div>
 
           {/* TAX */}
@@ -470,8 +475,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               padding: '4px 0',
             }}
           >
-            <span style={{ fontWeight: 600 }}>TAX ({data.vatRate}%):</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrency(vat)}</span>
+            <span style={{ fontWeight: 600 }}>{t.vat.toUpperCase()} ({data.vatRate}%):</span>
+            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(vat, language)}</span>
           </div>
 
           {/* TOTAL */}
@@ -482,8 +487,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               padding: '4px 0',
             }}
           >
-            <span style={{ fontWeight: 600 }}>TOTAL:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrency(total)}</span>
+            <span style={{ fontWeight: 600 }}>{t.total.toUpperCase()}:</span>
+            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(total, language)}</span>
           </div>
 
           {/* DISCOUNT */}
@@ -495,8 +500,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
                 padding: '4px 0',
               }}
             >
-              <span style={{ fontWeight: 600 }}>DISCOUNT:</span>
-              <span style={{ fontFeatureSettings: '"tnum"' }}>-{formatCurrency(data.discount || 0)}</span>
+              <span style={{ fontWeight: 600 }}>{t.discount.toUpperCase()}:</span>
+              <span style={{ fontFeatureSettings: '"tnum"' }}>-{formatCurrencyByLanguage(data.discount || 0, language)}</span>
             </div>
           )}
 
@@ -512,8 +517,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               fontSize: '11px',
             }}
           >
-            <span>BALANCE DUE:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrency(balanceDue)}</span>
+            <span>{t.balanceDue.toUpperCase()}:</span>
+            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(balanceDue, language)}</span>
           </div>
         </div>
       </div>
@@ -592,10 +597,10 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
                 textDecoration: 'underline',
               }}
             >
-              TERMS & CONDITIONS
+              {t.termsTitle}
             </div>
             <div style={{ fontSize: '5.5px', color: '#444', lineHeight: 1.4 }}>
-              {COMPACT_TERMS.map((term, index) => (
+              {t.compactTerms.map((term, index) => (
                 <div key={index} style={{ marginBottom: '2px' }}>
                   {index + 1}. {term}
                 </div>
@@ -647,7 +652,9 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
 /**
  * 세부 견적서 2페이지 - 세부 약관
  */
-function DetailedQuotePage2({ data }: { data: QuoteData }) {
+function DetailedQuotePage2({ data, language = 'ko' }: { data: QuoteData; language?: QuoteLanguage }) {
+  const t = getTranslations(language);
+
   return (
     <div
       style={{
@@ -681,10 +688,10 @@ function DetailedQuotePage2({ data }: { data: QuoteData }) {
             marginBottom: '6px',
           }}
         >
-          {DETAILED_TERMS.title}
+          {t.detailedTermsTitle}
         </div>
         <div style={{ fontSize: '7px', color: '#666' }}>
-          {DETAILED_TERMS.intro}
+          {t.detailedTermsIntro}
         </div>
       </div>
 
@@ -700,7 +707,7 @@ function DetailedQuotePage2({ data }: { data: QuoteData }) {
       >
         {/* 왼쪽 열: 1-8조 */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {DETAILED_TERMS.sections.slice(0, 8).map((section, index) => (
+          {t.detailedTermsSections.slice(0, 8).map((section, index) => (
             <div key={index}>
               <div
                 style={{
@@ -725,7 +732,7 @@ function DetailedQuotePage2({ data }: { data: QuoteData }) {
 
         {/* 오른쪽 열: 9-16조 */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {DETAILED_TERMS.sections.slice(8).map((section, index) => (
+          {t.detailedTermsSections.slice(8).map((section, index) => (
             <div key={index}>
               <div
                 style={{
@@ -766,7 +773,7 @@ function DetailedQuotePage2({ data }: { data: QuoteData }) {
           Invisible Works
         </div>
         <div style={{ textAlign: 'center' }}>
-          본 약관은 견적서 발행일 기준으로 적용됩니다.
+          {language === 'ko' ? '본 약관은 견적서 발행일 기준으로 적용됩니다.' : 'These terms apply as of the quotation issue date.'}
         </div>
         <div style={{ textAlign: 'right' }}>
           invisibleworks.co

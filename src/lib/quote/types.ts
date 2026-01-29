@@ -1,5 +1,8 @@
 // Quote/Invoice Types
 
+// Language for quote PDF
+export type QuoteLanguage = 'ko' | 'en';
+
 // 견적 항목 입력 타입
 export type QuoteItemType = 'fixed' | 'range' | 'text' | 'percent';
 
@@ -163,6 +166,7 @@ export interface QuoteState extends QuoteData {
   activeTab: QuoteType;
   isGenerating: boolean;
   showSettings: boolean;  // 관리자 설정 패널 표시 여부
+  language: QuoteLanguage; // PDF 언어 설정
 }
 
 // Constants - A4 Size
@@ -325,6 +329,7 @@ export const initialQuoteState: QuoteState = {
   activeTab: 'simple',
   isGenerating: false,
   showSettings: false,
+  language: 'ko',
 };
 
 // 새 항목 생성

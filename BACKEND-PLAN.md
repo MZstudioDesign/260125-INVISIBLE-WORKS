@@ -64,17 +64,32 @@ Client Form → API Route → Google Sheets (+ Email/SMS/AlimTalk)
 - **상태**: 보류 (나중에 구현)
 - **내용**: 자동 PDF 생성 및 OneDrive 업로드 등 자동화 기능은 현재 구현하지 않음.
 
-### 2.7 견적서 다국어 지원 (간단/세부) - **[⏳ TODO]**
-- **내용**: 견적서(Simple/Detailed) 내용을 국문/영문으로 분리하여 제공.
-- **구현**: 사용자가 선택한 언어에 맞춰 견적서 UI 텍스트 렌더링.
+### 2.7 견적서 다국어 지원 (간단/세부) - **[✅ DONE]**
+- **내용**: 견적서(Simple/Detailed) PDF를 국문/영문으로 전환 가능
+- **구현**:
+  - `src/lib/quote/translations.ts`: 한글/영어 번역 데이터 (라벨, 약관 등)
+  - QuoteGenerator에 언어 전환 버튼 (한글 | English)
+  - SimpleQuote, DetailedQuote 템플릿 다국어 적용
 
 ### 2.8 자동 알림 발송 - **[⏸️ DEFERRED]**
 - **상태**: 보류 (심사 대기 중)
 - **내용**: 카카오톡/문자/이메일 자동 발송 기능은 심사 완료 후 활성화 예정.
 
-### 2.9 견적서 페이지 분리 - **[⏳ TODO]**
-- **내용**: 견적서 내용이 길어질 경우, 푸터와 겹치지 않도록 페이지 분리(Pagination) 구현.
-- **구현**: 간단/세부 견적서 모두 적용.
+### 2.9 견적서 페이지 분리 - **[✅ DONE]**
+- **내용**: 견적서 내용이 길어질 경우 A4 단위로 자동 페이지 분리
+- **구현**:
+  - `src/lib/quote/pagination.ts`: 페이지네이션 유틸리티
+  - 동적 페이지 수 계산 (항목 수에 따라)
+  - QuotePreview 동적 페이지 네비게이션
+
+### 2.10 Google Sheet2 Admin Config - **[✅ DONE]**
+- **내용**: 하드코딩된 금액 설정을 Google Sheet2에서 동적 로드
+- **구현**:
+  - `GET /api/config/quote-settings`: 설정 조회 API
+  - `POST /api/config/init`: Sheet2 초기화 API
+  - GoogleSheetsService에 `getQuoteSettingsFromSheet()` 추가
+  - 서버 측 5분 캐싱, 실패 시 DEFAULT_SETTINGS fallback
+  - `src/presentation/hooks/useQuoteSettings.ts`: 클라이언트 훅
 
 ---
 
@@ -106,6 +121,9 @@ AZURE_TENANT_ID="..."
 AZURE_CLIENT_ID="..."
 AZURE_CLIENT_SECRET="..."
 ONEDRIVE_OWNER_EMAIL="..."
+
+# Google Sheet2 Admin Config (Optional)
+GOOGLE_SHEET_CONFIG_TAB="설정"
 ```
 
 ---
@@ -246,12 +264,14 @@ src/
 - [x] Honeypot 스팸 방지
 - [x] 웹사이트/이메일 주소 변경 (`invisibleworks.co`, `invisibleworks.office@gmail.com`)
 - [x] @azure/msal-node 패키지 설치
+- [x] 견적서 다국어 지원 (KR/EN) - translations.ts, 템플릿 적용
+- [x] 견적서 페이지 분리 (Pagination) - pagination.ts, 동적 페이지 수
+- [x] Google Sheet2 Admin Config - API, 캐싱, 클라이언트 훅
 
 ### ⏳ TODO
-- [ ] 견적서 다국어 지원 (KR/EN)
-- [ ] 견적서 페이지 분리 (Pagination)
 - [ ] 실서비스 배포 및 테스트
 - [ ] SEO 메타 태그 완성
+- [ ] Sheet2 초기 데이터 설정 (POST /api/config/init 호출)
 
 ### ⏸️ DEFERRED (보류/나중에)
 - [ ] 33분 스케줄러 (Cron)
@@ -262,10 +282,23 @@ src/
 
 ## 10. 상세 구현 계획 (Advanced Features)
 
-> **"D:\OneDrive - 대건중학교\260125 INVISIBLE WORKS\seriousandcarefulhardwork.md"** 파일을 참고하세요.
-> - **Google Sheets Admin Config**: Sheet2를 CMS로 사용
-> - **Bilingual Quote**: 국문/영문 견적서
-> - **Quote Pagination**: 견적서 내용 자동 페이지 분리
+> **구현 완료** - 아래 항목들이 모두 구현되었습니다.
+
+### 10.1 Google Sheets Admin Config (Sheet2)
+- **Sheet2 탭명**: `설정`
+- **구조**: A열(키), B열(값), C열(설명)
+- **API**: `GET /api/config/quote-settings`, `POST /api/config/init`
+- **캐싱**: 서버 5분 TTL, 클라이언트 1분 stale time
+
+### 10.2 Bilingual Quote (국문/영문)
+- **파일**: `src/lib/quote/translations.ts`
+- **지원 언어**: 한국어 (ko), English (en)
+- **번역 항목**: 라벨, 약관 (압축형/세부), 날짜/통화 포맷
+
+### 10.3 Quote Pagination (페이지 분리)
+- **파일**: `src/lib/quote/pagination.ts`
+- **동적 계산**: 항목 수에 따라 페이지 수 자동 결정
+- **적용**: SimpleQuote, DetailedQuote 모두
 
 ---
 

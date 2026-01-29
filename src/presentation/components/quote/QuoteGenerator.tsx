@@ -9,6 +9,7 @@ import {
   QuoteData,
   QuoteState,
   QuoteType,
+  QuoteLanguage,
   initialQuoteState,
 } from '@/lib/quote/types';
 import { generateQuotePDF } from '@/lib/quote/generatePDF';
@@ -40,6 +41,10 @@ export function QuoteGenerator() {
 
   const setActiveTab = (tab: QuoteType) => {
     setState((prev) => ({ ...prev, activeTab: tab }));
+  };
+
+  const setLanguage = (lang: QuoteLanguage) => {
+    setState((prev) => ({ ...prev, language: lang }));
   };
 
   // 필수 필드 검증
@@ -123,7 +128,7 @@ export function QuoteGenerator() {
         </div>
 
         {/* Tab Buttons */}
-        <div className="relative z-10 flex gap-2 mb-6 shrink-0 p-1 bg-white/5 rounded-xl backdrop-blur-sm border border-white/5">
+        <div className="relative z-10 flex gap-2 mb-4 shrink-0 p-1 bg-white/5 rounded-xl backdrop-blur-sm border border-white/5">
           <button
             onClick={() => setActiveTab('simple')}
             className={cn(
@@ -150,9 +155,35 @@ export function QuoteGenerator() {
           </button>
         </div>
 
+        {/* Language Toggle */}
+        <div className="relative z-10 flex gap-2 mb-6 shrink-0">
+          <button
+            onClick={() => setLanguage('ko')}
+            className={cn(
+              'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+              state.language === 'ko'
+                ? 'bg-white/15 text-white'
+                : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+            )}
+          >
+            한글
+          </button>
+          <button
+            onClick={() => setLanguage('en')}
+            className={cn(
+              'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+              state.language === 'en'
+                ? 'bg-white/15 text-white'
+                : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+            )}
+          >
+            English
+          </button>
+        </div>
+
         {/* Preview - Centered */}
         <div className="relative z-10 flex-1 flex items-center justify-center py-8">
-          <QuotePreview data={state} type={state.activeTab} />
+          <QuotePreview data={state} type={state.activeTab} language={state.language} />
         </div>
 
         {/* Download Button */}
@@ -207,7 +238,7 @@ export function QuoteGenerator() {
       </div>
 
 
-      <HiddenQuotePreview data={state} type={state.activeTab} previewRef={previewRef} />
+      <HiddenQuotePreview data={state} type={state.activeTab} language={state.language} previewRef={previewRef} />
 
       {/* Settings Panel */}
       <QuoteSettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />

@@ -1,2 +1,2 @@
 // Custom Hooks
-export {};
+export { useQuoteSettings } from './useQuoteSettings';
