@@ -1,117 +1,89 @@
-# Serious and Careful Hard Work Plan 🚀 (COMPREHENSIVE & STRICT)
+# Serious and Careful Hard Work Plan 🚀 (METHODOLOGY & ARCHITECTURE)
 
-> **CRITICAL GUIDELINE**:
-> 1.  Existing Code Logic & Values in `src/lib/quote/settings.ts` must be **PRESERVED 100%**. Use exact values.
-> 2.  **Simple Quote** and **Detailed Quote** must BOTH be upgraded (Admin Config, Bilingual).
-> 3.  **Detailed Quote** specifically requires **Pagination** (Page Splitting) while maintaining its exact Brutalist design.
+> **CRITICAL INSTRUCTION**: This document is the **Absolute Rulebook**. You MUST follow the "Required Methodology" section below for every single step.
 
 ---
 
-## 1. Admin Config (Google Sheets Integration)
+## 0. 🛠 Base Methodology (MANDATORY)
 
-### 1.1 Objective
-Move the hardcoded `DEFAULT_SETTINGS` from `src/lib/quote/settings.ts` to Google Sheets (Sheet2: `AdminConfig`), allowing dynamic updates without redeployment.
+**모든 작업 단계에서 아래의 도구와 스킬을 강제적으로 사용해야 합니다.**
 
-### 1.2 Google Sheet Structure (Target: `AdminConfig`)
-**Exact Mapping of `src/lib/quote/settings.ts` Constants**:
+### 0.1 Required Tools
+1.  **Context7**:
+    *   **Before Coding**: 각 기능을 구현하기 전, 반드시 `Context7`을 사용하여 최신 Best Practice를 리서치하십시오.
+    *   *Usage*: "Google Sheet caching pattern in Next.js", "React to PDF pagination optimized for html2canvas" 등의 쿼리를 수행하여 검증된 패턴만 적용할 것.
+2.  **Sequential Thinking**:
+    *   복잡한 로직(페이지네이션 알고리즘 등) 구현 시, `sequential-thinking` 툴을 먼저 사용하여 로직의 무결성을 검증한 후 코드를 작성할 것.
 
-| Section | Key (A열) | Value (B열) | Description (Not for code, just context) |
-| :--- | :--- | :--- | :--- |
-| **Page Cost** | `page_cost_tiers` | `[{"min":1,"max":15,"cost":400000},{"min":15,"max":30,"cost":500000},{"min":30,"max":45,"cost":600000}]` | JSON Array for Tiers |
-| | `page_cost_extra_per_two` | `30000` | Extra cost per 2 blocks > 45 |
-| **UI/UX** | `uiux_normal` | `1.0` | Normal multiplier |
-| | `uiux_fancy` | `1.2` | Fancy multiplier |
-| **Features** | `feat_board` | `100000` | Board feature cost |
-| | `feat_shopping_base` | `200000` | Shopping base cost |
-| | `feat_shopping_product_base` | `20` | Base product count |
-| | `feat_shopping_product_extra` | `10000` | Extra cost per product |
-| **Server** | `server_year1` | `150000` | 1 Year |
-| | `server_year2` | `250000` | 2 Years |
-| | `server_year3` | `300000` | 3 Years |
-| **Domain** | `domain_year` | `30000` | Per year |
-| | `domain_transfer` | `30000` | Transfer fee |
-| **Revision** | `rev_content` | `50000` | Content revision |
-| | `rev_layout` | `100000` | Layout revision |
-| **Company** | `info_name` | `Invisible Works` | |
-| | `info_representative` | `오유택` | |
-| | `info_biz_num` | `377-44-01126` | |
-| | `info_email` | `invisibleworks.office@gmail.com` | |
-| | `info_addr` | `대구광역시 중구 남산동 677-58, 명륜로21길 33-11` | |
-| | `info_website` | `invisibleworks.co` | |
-| **Bank** | `bank_name` | `카카오뱅크` | |
-| | `bank_account` | `3333-14-9478697` | |
-| | `bank_holder` | `오유택(엠지쓰studio)` | |
-
-### 1.3 Implementation Strategy
-1.  **Backend (`AdminConfigService`)**: Reads these keys and constructs a `QuoteSettings` object that perfectly matches the interface in `settings.ts`.
-2.  **Frontend Hook (`useQuoteSettings`)**: Currently uses localStorage. We will add an initial `fetch('/api/config')` to seed the state.
-3.  **Calculations**: `calculatePageCost`, `calculateFeatureCost` etc. in `settings.ts` will accept the settings object from the hook, ensuring dynamic pricing applies to **BOTH** Simple and Detailed quotes.
+### 0.2 Required Skills (Persona)
+1.  **Senior Backend Developer**:
+    *   **Architecture**: 단순한 API 호출이 아닌, '시스템'을 설계하십시오. (Caching, Error Handling, Failover, Type Safety).
+    *   **DB Design**: Google Sheet를 단순 시트가 아닌 **Relational Database**처럼 취급하여 설계하십시오. (Schema lock, Transaction-like stability).
+2.  **Senior Frontend Designer**:
+    *   **Component Design**: `DetailedQuote`와 `SimpleQuote`의 코드 중복을 최소화하고, '합성(Composition)' 패턴을 사용하여 재사용성을 극대화하십시오.
+    *   **UX Detail**: PDF 생성 중 로딩 상태, 오류 처리, 다국어 전환 시 깜빡임 방지 등 디테일을 챙기십시오.
 
 ---
 
-## 2. Bilingual Support (Simple & Detailed)
+## 1. Phase 1: Admin Config (The Sheet DB)
 
-### 2.1 Strategy
-Extract all Korean text strings from `SimpleQuote.tsx` and `DetailedQuote.tsx` into a Resource Bundle.
+### 1.1 Context7 Checklist
+- [ ] *Query*: "Next.js server-side caching for Google Sheets API"
+- [ ] *Query*: "Handling Google Sheets API rate limits in production"
 
-### 2.2 Resource Files
-- `src/lib/quote/locales/ko.ts`: Original text (Source of Truth).
-- `src/lib/quote/locales/en.ts`: English translation.
+### 1.2 Database Schema (Google Sheet: `AdminConfig`)
+**Sheet Identity**: `Sheet2` (Tab Name: `AdminConfig`)
+**Columns**: Key (A), Value_KO (B), Value_EN (C)
 
-### 2.3 Scope of Translation
-#### A. Simple Quote (`SimpleQuote.tsx`)
-- Headers: "견적서" -> "QUOTE" or "ESTIMATE", "NO.", "발행일" -> "DATE", "유효기간" -> "VALID UNTIL".
-- Info: "수신" -> "TO", "발신" -> "FROM".
-- Table: "항목" -> "ITEM", "수량" -> "QTY", "단가" -> "UNIT PRICE", "금액" -> "AMOUNT".
-- Footer: "비고" -> "NOTES", "소계" -> "SUBTOTAL", "부가세" -> "VAT", "합계" -> "TOTAL".
-- **Dynamic Items**: Automated items like "웹사이트 기획 및 디자인" must be translated dynamically or provided in English via the Locale map inside `settings.ts` logic.
+| Key | Value (Default) | Notes |
+| :--- | :--- | :--- |
+| `page_cost_tiers` | `[{"min":1,"max":15,"cost":400000},...]` | JSON String |
+| `page_cost_extra_per_two` | `30000` | |
+| `uiux_normal` | `1.0` | |
+| `uiux_fancy` | `1.2` | |
+| `backend_toggle` | `true` | **Context7** recommended toggle pattern |
 
-#### B. Detailed Quote (`DetailedQuote.tsx`)
-- Same headers/table keys as above.
-- **Terms (Critical)**: `COMPACT_TERMS` (Page 1 footer) and `DETAILED_TERMS` (Page 2) must be fully translated and swapped based on `data.language`.
-
-### 2.4 Data Update
-- Add `language: 'ko' | 'en'` to `QuoteData`.
-- Add simple toggle in `QuoteSettingsPanel`.
+### 1.3 Implementation (Senior Backend)
+-   **Service Layer**: `AdminConfigService` with LRU Cache (Memory).
+-   **Failover**: Sheet API 비정상 응답 시, 하드코딩된 `DEFAULT_SETTINGS`로 즉시 Fallback.
 
 ---
 
-## 3. Pagination & Layout (Detailed Quote Focus)
+## 2. Phase 2: Bilingual PDF System
 
-### 3.1 The Challenge
-`DetailedQuote.tsx` is currently hardcoded for Page 1 (Main) and Page 2 (Terms).
-User wants **"Quote Page Pagination"** (splitting long lists of items).
+### 2.1 Context7 Checklist
+- [ ] *Query*: "Next.js 14 i18n patterns for client-side components"
+- [ ] *Query*: "Dynamic text resizing for multilingual PDF generation"
 
-### 3.2 Solution: Chunking for Detailed Quote
-We will refactor `DetailedQuote` to accept `chunkIndex` (conceptually) or handle splitting internally.
-
-1.  **Item Splitting**:
-    -   Page 1 Capacity: ~8 items (due to large header/project info).
-    -   Page 2+ Capacity: ~12 items (simplified header).
-    -   Logic: `const chunks = splitItems(items, 8, 12);`
-2.  **Rendering**:
-    -   Render `numberOfChunks` pages for the Items.
-    -   Last Item Page contains the "Total Summary" section.
-    -   **After** all item pages, append the **Terms Page** (which itself might be 1-2 pages, currently fixed to 1 page for Detailed terms usually, but code shows `DetailedQuotePage2` is the terms page).
-3.  **Structure**:
-    ```tsx
-    // HiddenQuotePreview.tsx
-    // ...
-    {chunks.map((chunk, i) => (
-       <DetailedQuoteItemPage key={i} items={chunk} pageNum={i+1} totalPages={totalWithTerms} isLastItemPage={i===chunks.length-1} />
-    ))}
-    <DetailedQuoteTermsPage pageNum={chunks.length+1} ... />
-    ```
-
-### 3.3 Simple Quote Strategy
-- `SimpleQuote` is designed as a one-page summary.
-- **Decision**: Keep it simple. If items overflow, it will naturally extend vertically in HTML. `generatePDF` handles auto-paging for generic elements, but for perfect A4 control, we should ideally restrict Simple Quote usage to single page OR applying basic splitting if absolutely necessary. **Plan**: Focus strictly on **Detailed Quote Pagination** first as requested ("Detailed Quote Page Pagination" usually implies the contract-like document). `SimpleQuote` text translation is the priority there.
+### 2.2 Mechanism
+-   **Resource Bundle**: `src/lib/quote/locales/{ko,en}.ts`
+-   **Toggle UI**: `QuoteGenerator.tsx` 상단에 `[KR/EN]` 스위치 구현.
+-   **Data Flow**: 토글 변경 -> `QuoteData.language` 업데이트 -> PDF 리렌더링 -> 캡처.
 
 ---
 
-## 4. Execution Plan
-1.  **Google Sheet Setup**: Create `AdminConfig` tab and enter exact values.
-2.  **Locales**: Create `ko.ts`/`en.ts`.
-3.  **Code - Config**: Implement backend service and frontend hook integration.
-4.  **Code - Bilingual**: Replace text literals with `{t('key')}` in `SimpleQuote.tsx` and `DetailedQuote.tsx`.
-5.  **Code - Pagination**: Refactor `DetailedQuote.tsx` into `DetailedQuotePage1` (dynamic), `DetailedQuotePageN` (overflow), and `DetailedTerms`.
+## 3. Phase 3: Smart Pagination
+
+### 3.1 Context7 Checklist
+- [ ] *Query*: "html2canvas multi-page PDF generation best practices"
+- [ ] *Query*: "Algorithmic layout splitting for dynamic content in React"
+
+### 3.2 The Algorithm (Detailed & Simple)
+**Requirement**: 내용이 많아지면 A4 용지에 맞춰 자동으로 페이지가 나뉘어야 함 (`div[data-page]`).
+
+1.  **Measure**: 렌더링 전, 아이템 리스트의 예상 높이를 계산(Heuristic)하거나, 렌더링 후 DOM 높이를 측정.
+2.  **Chunking**:
+    -   `SimpleQuote`: 1페이지 한도 초과 시, 2페이지로 자연스럽게 오버플로우 허용 (푸터와 겹치지 않게 분리).
+    -   `DetailedQuote`: 8개/14개 단위로 엄격하게 배열 분할 (Slice).
+3.  **PDF Assembly**: `generatePDF.ts`는 `[data-page]` 속성이 있는 모든 요소를 순차적으로 캡처하여 `addPage()` 수행.
+
+---
+
+## 4. Execution Step Summary
+
+1.  **Research**: `Context7` + `Sequential Thinking` (5 mins).
+2.  **Backend**: `AdminConfigService` & API (20 mins).
+3.  **Frontend**: Locale Setup & Quote Component Refactoring (30 mins).
+4.  **Verification**: Test PDF generation with extreme cases (100 items).
+
+> **End Goal**: `.env`에 시트 ID만 넣으면, 고객이 직접 엑셀(구글시트)에서 가격과 문구를 수정하고, 결과물은 완벽한 2개국어 PDF로 나오는 시스템.
