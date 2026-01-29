@@ -221,7 +221,7 @@ D. Channel Talk (Channel Corp.)
 ▶ Personal Information Protection Officer
   - Name: Yutaek Oh
   - Position: CEO
-  - Email: mzstudio104@gmail.com
+  - Email: invisibleworks.office@gmail.com
 
 ② The data subject may inquire about all personal information protection related inquiries, complaint handling, damage relief, etc. that occurred while using the Company's service (or business) to the Personal Information Protection Officer. The Company will answer and handle the data subject's inquiries without delay.`,
         },

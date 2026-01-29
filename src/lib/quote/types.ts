@@ -275,8 +275,8 @@ export const initialQuoteState: QuoteState = {
   companyLogo: null,
   companyAddress: '대구광역시 중구 남산동 677-58, 명륜로21길 33-11',
   companyPhone: '',
-  companyEmail: 'mzstudio104@gmail.com',
-  companyWebsite: 'invisibleworks.studio',
+  companyEmail: 'invisibleworks.office@gmail.com',
+  companyWebsite: 'invisibleworks.co',
   companyRepresentative: '오유택',
   companyBusinessNumber: '377-44-01126',
 

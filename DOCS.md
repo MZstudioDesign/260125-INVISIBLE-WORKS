@@ -1,6 +1,6 @@
 # Invisible Works - 프로젝트 통합 문서
 
-> **Last Updated**: 2026-01-28
+> **Last Updated**: 2026-01-29
 > 이 문서는 프로젝트의 모든 핵심 정보를 통합한 문서입니다.
 
 ---
@@ -468,3 +468,6 @@ import { LanguageSwitcher } from '@/presentation/components/ui';
 | 2026-01-28 | **Contact 페이지 완전 복원**: 5단계 Wizard + 완료 화면 링크/메모 |
 | 2026-01-28 | Contact 페이지 다국어 완전 지원 (ko, en, zh-CN, zh-TW) |
 | 2026-01-28 | 사용하지 않는 `/contact` 페이지 제거 (→ `/[locale]/contact`만 사용) |
+| 2026-01-29 | **견적서 시스템 고도화**: 레거시 배송비 삭제, UI 리디자인 (`QuoteForm`) |
+| 2026-01-29 | `SectionHeader` 도입 및 견적 항목 입력 UI 개선 (Accordion 스타일, Numbering) |
+| 2026-01-29 | **문서 통합**: `SECTIONS.md` 내용을 `CLAUDE.md`로 통합 및 아키텍처 반영 |

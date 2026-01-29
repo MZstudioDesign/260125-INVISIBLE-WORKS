@@ -8,12 +8,11 @@
 
 | 파일 | 설명 |
 |------|------|
-| **CLAUDE.md** | 📌 이 파일 - 프로젝트 가이드, 구조, 규칙 |
+| **CLAUDE.md** | 📌 이 파일 - 프로젝트 가이드, 구조, 규칙, 섹션별 기획 포함 |
 | **DOCS.md** | 📚 통합 문서 (브랜드, 컬러, 컴포넌트 상세, 진행상황) |
-| **SECTIONS.md** | 📄 섹션별 기획서 (의도, 연출, 카피) |
 | **BUSINESS-CARD-TEMPLATES.md** | 🎨 명함 PDF 생성기 템플릿 가이드 |
 | **plan.md** | 📋 견적서 시스템 개선 계획 |
-| **README.md** | 📄 GitHub용 프로젝트 소개 |
+| **README.md** | 📄 GitHub용 프로젝트 소개 | |
 
 ---
 
@@ -43,17 +42,20 @@ npm run lint         # ESLint 검사
 | `/[locale]/privacy` | 개인정보 처리방침 | ✅ 완료 |
 | `/[locale]/terms` | 이용약관 | ✅ 완료 |
 
-### 메인 페이지 섹션 구성
+### 메인 페이지 섹션 상세 (총 10개 섹션)
 
-```
-1. Hero        - Spline 3D (PC/모바일 별도 URL)
-2. Problem     - DialWheel + 텍스트 (검정 배경)
-3. Change      - TimelineBlur + GradientHorizon
-4. How We Do   - AccordionStep (3단계, "여기까지 무료" 하이라이트)
-5. Portfolio   - PortfolioMarquee (2줄 무한 스크롤)
-6. Why         - ScrollStory (스크롤 고정 PPT 스타일)
-7. Footer      - CTA + 블랙 푸터
-```
+| # | 섹션 | 역할 & 목표 | 연출/컴포넌트 | 주요 카피/내용 |
+|---|------|------------|--------------|----------------|
+| **1** | **Hero** | 팀 소개, 무게감 전달 | **Spline 3D** 풀뷰포트 (PC/모바일 URL 분리) | (이미지로 전달) |
+| **2** | **Identity** | (추후) | - | - |
+| **3** | **Problem** | 사용자 상황 대변, 관찰자 시점 | **DialWheel** (3D 룰렛), 검정 배경 | "웹사이트는 비용이 크고... 관리하기 어렵습니다." |
+| **4** | **Change** | 거품 제거, 단순화 | **TimelineBlur** (복잡한 과정 흐려짐) → **GradientHorizon** | "우리는 일을 줄였습니다. 대신 고민을 늘렸습니다." |
+| **5** | **How We Do** | 진행 과정 명확화 (예측 가능성) | **AccordionStep** (스크롤 시 자동 펼침) | 1. 자료 전달 → 2. 디자인 선택 → 3. 완성 |
+| **6** | **Design Preview** | 시안의 구체화 (Sec 5 내부) | 세로형 이미지 3장 (라이트박스) | (시안 3종 중 선택) |
+| **7** | **Free Until Here** | 진입 장벽/리스크 제거 | **HighlightReveal** (강조 텍스트) | "그리고, **여기까지는 비용이 들지 않습니다.**" |
+| **8** | **Portfolio** | 신뢰 형성, 결과물 증명 | **PortfolioMarquee** (2줄 무한 스크롤 카드) | "우리가 만든 것들" (스톡 이미지 필수) |
+| **9** | **Why** | 감정적 이유, 태도 설명 | **ScrollStory** (PPT 스타일, 큰 여백) | "Invisible Works... 보이지 않는 곳에서 구조를 바꾸는 일" |
+| **10** | **CTA + Footer** | 부담 없는 첫 발 (문 열기) | **하단 CTA** (Blue 배경, 거대 텍스트 + 화살표 ↗) | "내 웹사이트 디자인 보러 가기 ↗" |
 
 ### Contact 페이지 (5단계 Wizard)
 
@@ -212,7 +214,7 @@ import {
 
 ### 5. 전화번호 노출 금지
 - 모든 페이지에서 개인 전화번호 노출 제거
-- 연락처는 이메일만 (`mzstudio104@gmail.com`)
+- 연락처는 이메일만 (`invisibleworks.office@gmail.com`)
 
 ### 6. 디자인 통일
 - `/design-system` 페이지 스타일 참고
@@ -228,9 +230,9 @@ import {
 Invisible Works
 대표: 오유택
 사업자등록번호: 377-44-01126
-이메일: mzstudio104@gmail.com
+이메일: invisibleworks.office@gmail.com
 주소: 대구광역시 중구 남산동 677-58, 명륜로21길 33-11
-웹사이트: invisibleworks.studio
+웹사이트: invisibleworks.co
 
 결제 계좌:
 카카오뱅크 3333-14-9478697
@@ -243,38 +245,19 @@ Invisible Works
 
 ```
 src/
-├── app/[locale]/           # Next.js App Router (i18n)
-│   ├── page.tsx            # 메인 페이지
-│   ├── contact/            # 문의 페이지
-│   ├── portfolio/          # 포트폴리오 페이지
-│   ├── design-system/      # 디자인 시스템
-│   ├── tools/
-│   │   └── business-card/  # 명함 PDF 생성기
-│   ├── privacy/            # 개인정보 처리방침
-│   └── terms/              # 이용약관
-├── presentation/
-│   └── components/
-│       ├── ui/             # 모든 UI 컴포넌트 (30개)
-│       │   └── index.ts    # 통합 export
-│       ├── business-card/  # 명함 생성기 컴포넌트
-│       │   ├── templates/  # 5종 템플릿
-│       │   └── index.ts
-│       ├── quote/          # 견적서 생성기 컴포넌트
-│       │   ├── templates/  # SimpleQuote, DetailedQuote (2페이지)
-│       │   ├── QuoteForm.tsx
-│       │   ├── QuotePreview.tsx
-│       │   ├── QuoteGenerator.tsx
-│       │   ├── QuoteSettingsPanel.tsx  # (예정) 관리자 설정
-│       │   └── index.ts
-│       └── common/         # AmbientBackground 등
-└── lib/
-    ├── utils.ts            # cn() 유틸리티
-    ├── businessCard/       # 명함 타입 및 PDF 생성
-    └── quote/              # 견적서 타입 및 PDF 생성
-        ├── types.ts        # QuoteData, QuoteItem 등
-        ├── generatePDF.ts  # PDF 생성 (다중 페이지 지원)
-        ├── settings.ts     # (예정) 비용 설정 상수
-        └── useQuoteSettings.ts  # (예정) 설정 상태 관리
+├── app/[locale]/           # Next.js App Router (i18n, Route Handlers)
+├── domain/                 # 비즈니스 로직, 엔티티, 인터페이스 (순수 TS - Clean Architecture)
+├── application/            # 유스케이스, 서비스 트레이트
+├── infrastructure/         # 외부 서비스 구현 (Email, DB 등)
+├── presentation/           # UI 컴포넌트, 클라이언트 상태 관리
+│   ├── components/
+│   │   ├── ui/             # 공통 UI (Atomic)
+│   │   ├── business-card/  # 명함 관련
+│   │   ├── quote/          # 견적서 관련
+│   │   └── common/         # 배경, 레이아웃 등
+│   └── hooks/              # Custom Hooks
+├── lib/                    # 유틸리티, 레거시 로직
+└── i18n/                   # 다국어 설정
 ```
 
 ---
@@ -286,6 +269,7 @@ src/
 | `sequential-thinking MCP` | 복잡한 로직 분석 |
 | `context7 MCP` | 라이브러리 문서 조회 |
 | `frontend-design skill` | UI 구현 |
+| `senior-backend skill` | 백엔드 설계 및 구현 |
 
 ---
 

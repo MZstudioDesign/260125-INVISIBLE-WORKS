@@ -187,8 +187,8 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
   const total = calculateTotal(subtotal, vat);
   const balanceDue = calculateBalanceDue(subtotal, vat, data.discount || 0);
 
-  // QR 값 - invisibleworks.studio 웹사이트로 고정
-  const qrValue = 'https://invisibleworks.studio';
+  // QR 값 - invisibleworks.co 웹사이트로 고정
+  const qrValue = 'https://invisibleworks.co';
 
   // 2페이지: 세부 약관
   if (pageNumber === 2) {
@@ -623,7 +623,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
             {data.companyAddress}
           </div>
           <div style={{ textAlign: 'right' }}>
-            invisibleworks.studio
+            invisibleworks.co
           </div>
         </div>
 
@@ -769,7 +769,7 @@ function DetailedQuotePage2({ data }: { data: QuoteData }) {
           본 약관은 견적서 발행일 기준으로 적용됩니다.
         </div>
         <div style={{ textAlign: 'right' }}>
-          invisibleworks.studio
+          invisibleworks.co
         </div>
       </div>
 

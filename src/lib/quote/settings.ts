@@ -115,9 +115,9 @@ export const DEFAULT_SETTINGS: QuoteSettings = {
     name: 'Invisible Works',
     representative: '오유택',
     businessNumber: '377-44-01126',
-    email: 'mzstudio104@gmail.com',
+    email: 'invisibleworks.office@gmail.com',
     address: '대구광역시 중구 남산동 677-58, 명륜로21길 33-11',
-    website: 'invisibleworks.studio',
+    website: 'invisibleworks.co',
   },
 
   bankInfo: {

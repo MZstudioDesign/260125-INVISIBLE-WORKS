@@ -1,6 +1,6 @@
 // Quote Submission Entity - Domain Layer
 
-export type ContactMethod = 'email' | 'sms' | 'phone';
+export type ContactMethod = 'email' | 'sms' | 'kakao';
 export type InquiryStatus = 'pending' | 'quote_sent' | 'converted' | 'rejected';
 
 export interface ScreenBlocks {
@@ -19,30 +19,44 @@ export interface DomainOption {
     years?: number;
 }
 
+export interface LinkItem {
+    type: string;
+    customType?: string;
+    url: string;
+}
+
 export interface QuoteSubmission {
     id?: string;
     created_at?: string;
 
-    // Client Information
-    client_name: string;
+    // Contact Form Data
+    client_name: string; // Used for Industry/Company Name if no separate name field
     client_phone?: string;
     client_email?: string;
     contact_method: ContactMethod;
 
-    // Project Information
-    screen_blocks: ScreenBlocks;
-    uiux_style: 'normal' | 'fancy';
-    features: string[];
-    special_notes: string[];
+    industry: string;
+    industry_custom?: string;
+    purpose: string;
+    current_assets: string[];
+    has_quote: string;
+    additional_links?: LinkItem[];
+    additional_note?: string;
 
-    // Options
-    server_option: ServerOption;
-    domain_option: DomainOption;
+    // Project Information (Optional in initial contact)
+    screen_blocks?: ScreenBlocks;
+    uiux_style?: 'normal' | 'fancy';
+    features?: string[];
+    special_notes?: string[];
+
+    // Options (Optional)
+    server_option?: ServerOption;
+    domain_option?: DomainOption;
 
     // Generated Data
     quote_number: string;
-    estimated_price_min: number;
-    estimated_price_max: number;
+    estimated_price_min?: number;
+    estimated_price_max?: number;
 
     // Status Tracking
     status: InquiryStatus;
@@ -68,18 +82,10 @@ export interface MessageTemplates {
 }
 
 // Factory function to create a new quote submission
-export function createQuoteSubmission(params: {
+export function createQuoteSubmission(params: Partial<QuoteSubmission> & {
     client_name: string;
-    client_phone?: string;
-    client_email?: string;
     contact_method: ContactMethod;
-    screen_blocks: ScreenBlocks;
-    uiux_style: 'normal' | 'fancy';
-    features: string[];
-    special_notes: string[];
-    server_option: ServerOption;
-    domain_option: DomainOption;
-}): Omit<QuoteSubmission, 'quote_number' | 'estimated_price_min' | 'estimated_price_max'> & { quote_number?: string } {
+}): Partial<QuoteSubmission> {
     return {
         ...params,
         status: 'pending',
@@ -89,5 +95,6 @@ export function createQuoteSubmission(params: {
 // Generate unique quote number
 export function generateQuoteNumber(): string {
     const timestamp = Date.now().toString(36).toUpperCase();
-    return `IW-${timestamp}`;
+    const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+    return `IW-${timestamp}-${random}`;
 }

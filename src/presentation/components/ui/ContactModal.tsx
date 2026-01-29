@@ -3,8 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { X, ArrowLeft, ArrowRight, Check, Plus, RotateCcw } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { X, ArrowLeft, ArrowRight, Check, Plus, RotateCcw, Loader2 } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 
 // ============================================
 // Types
@@ -32,6 +32,7 @@ interface FormData {
   contactValue: string;
   additionalLinks: LinkItem[];
   additionalNote: string;
+  _gotcha: string; // Honeypot field for bot prevention
 }
 
 const STORAGE_KEY = 'invisible-works-contact-form';
@@ -44,14 +45,14 @@ const industryKeys = ['food', 'beauty', 'fitness', 'education', 'medical', 'bran
 const purposeKeys = ['trust', 'inquiry', 'reservation', 'sales', 'unknown'] as const;
 const assetKeys = ['sns', 'logo', 'photos', 'content', 'website', 'none'] as const;
 const quoteKeys = ['yes', 'no'] as const;
-const contactMethodKeys = ['sms', 'email', 'call'] as const;
+const contactMethodKeys = ['kakao', 'sms', 'email'] as const;
 const linkTypeKeys = ['own', 'competitor', 'style', 'other'] as const;
 
 // Recommended items
 const recommendedPurposes = ['unknown'];
 const recommendedAssets = ['none'];
 const recommendedQuote = ['no'];
-const recommendedContactMethods = ['sms'];
+const recommendedContactMethods = ['kakao'];
 
 // ============================================
 // Validation
@@ -80,9 +81,26 @@ const formatPhone = (value: string): string => {
 
 export function ContactModal({ isOpen, onClose, className }: ContactModalProps) {
   const t = useTranslations('ContactForm');
-  
+  const locale = useLocale();
+
+  // Determine if this is a Korean locale
+  const isKorean = locale === 'ko';
+
+  // Filter contact methods based on locale
+  // KR: kakao (default), sms, email
+  // Global: email only
+  const availableContactMethods = isKorean
+    ? contactMethodKeys
+    : (['email'] as const);
+
+  // Get default contact method based on locale
+  const defaultContactMethod = isKorean ? 'kakao' : 'email';
+  const defaultContactValue = isKorean ? '010' : '';
+
   const [currentStep, setCurrentStep] = useState(1);
   const [isComplete, setIsComplete] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [contactError, setContactError] = useState('');
   const [formData, setFormData] = useState<FormData>({
     industry: '',
@@ -90,10 +108,11 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
     purpose: 'unknown',
     currentAssets: ['none'],
     hasQuote: 'no',
-    contactMethod: 'sms',
-    contactValue: '010',
+    contactMethod: defaultContactMethod,
+    contactValue: defaultContactValue,
     additionalLinks: [{ type: 'style', url: '' }],
     additionalNote: '',
+    _gotcha: '', // Honeypot - should remain empty
   });
 
   const totalSteps = 5;
@@ -238,9 +257,53 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
   }, [isOpen, currentStep, canProceed, handleNext, handleBack, isComplete]);
 
   const handleSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    localStorage.removeItem(STORAGE_KEY);
-    setIsComplete(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Prepare request body
+      const requestBody = {
+        clientName: formData.industryCustom || formData.industry,
+        clientPhone: formData.contactMethod !== 'email' ? formData.contactValue : undefined,
+        clientEmail: formData.contactMethod === 'email' ? formData.contactValue : undefined,
+        contactMethod: formData.contactMethod,
+        screenBlocks: { min: 1, max: 15 }, // Default estimate
+        uiuxStyle: 'normal' as const,
+        features: [],
+        specialNotes: [],
+        // Additional form data
+        industry: formData.industry,
+        industryCustom: formData.industryCustom,
+        purpose: formData.purpose,
+        currentAssets: formData.currentAssets,
+        hasQuote: formData.hasQuote,
+        additionalLinks: formData.additionalLinks.filter((l) => l.url.trim()),
+        additionalNote: formData.additionalNote,
+        locale,
+        // Honeypot field - should be empty for real users
+        _gotcha: formData._gotcha,
+      };
+
+      const response = await fetch('/api/quote/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Submission failed');
+      }
+
+      localStorage.removeItem(STORAGE_KEY);
+      setIsComplete(true);
+    } catch (error) {
+      console.error('Submit error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -254,10 +317,11 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
           purpose: 'unknown',
           currentAssets: ['none'],
           hasQuote: 'no',
-          contactMethod: 'sms',
-          contactValue: '010',
+          contactMethod: defaultContactMethod,
+          contactValue: defaultContactValue,
           additionalLinks: [{ type: 'style', url: '' }],
           additionalNote: '',
+          _gotcha: '',
         });
       }
     }, 300);
@@ -265,7 +329,7 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
   };
 
   const handleContactMethodChange = (methodId: string) => {
-    const isPhoneMethod = methodId === 'sms' || methodId === 'call';
+    const isPhoneMethod = methodId === 'kakao' || methodId === 'sms';
     setFormData((prev) => ({
       ...prev,
       contactMethod: methodId,
@@ -277,11 +341,11 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
   const handleContactValueChange = (value: string) => {
     const { contactMethod } = formData;
     let newValue = value;
-    
-    if (contactMethod === 'sms' || contactMethod === 'call') {
+
+    if (contactMethod === 'kakao' || contactMethod === 'sms') {
       newValue = formatPhone(value);
     }
-    
+
     setFormData((prev) => ({ ...prev, contactValue: newValue }));
     setContactError('');
   };
@@ -450,7 +514,7 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
         return (
           <div className="space-y-4">
             <div className="flex gap-2">
-              {contactMethodKeys.map((key) => (
+              {availableContactMethods.map((key) => (
                 <button
                   key={key}
                   onClick={() => handleContactMethodChange(key)}
@@ -462,7 +526,7 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
                   )}
                 >
                   {t(`contactMethods.${key}`)}
-                  {recommendedContactMethods.includes(key) && formData.contactMethod !== key && (
+                  {isKorean && recommendedContactMethods.includes(key) && formData.contactMethod !== key && (
                     <span className="ml-1 text-[10px] text-[#7fa8c9]/70">{t('labels.recommended')}</span>
                   )}
                 </button>
@@ -489,6 +553,23 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
               {contactError && (
                 <p className="mt-2 text-xs text-red-500">{contactError}</p>
               )}
+              {/* Honeypot field - hidden from real users, filled by bots */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={formData._gotcha}
+                onChange={(e) => setFormData((prev) => ({ ...prev, _gotcha: e.target.value }))}
+                tabIndex={-1}
+                autoComplete="off"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  opacity: 0,
+                  height: 0,
+                  width: 0,
+                }}
+                aria-hidden="true"
+              />
             </div>
           </div>
         );
@@ -501,6 +582,19 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
   // ============================================
   // Complete Screen
   // ============================================
+
+  // Get confirmation message based on selected contact method
+  const getCheckMessage = () => {
+    switch (formData.contactMethod) {
+      case 'kakao':
+        return t('complete.checkKakao');
+      case 'sms':
+        return t('complete.checkSms');
+      case 'email':
+      default:
+        return t('complete.checkEmail');
+    }
+  };
 
   const renderComplete = () => (
     <motion.div
@@ -518,11 +612,14 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
         >
           <Check className="w-9 h-9 text-white" />
         </motion.div>
-        <h2 className="text-xl font-bold text-[#1a1a1a] mb-3 leading-tight break-keep">
-          {t('complete.title')}
+        <h2 className="text-xl font-bold text-[#7fa8c9] mb-3 leading-tight break-keep">
+          {getCheckMessage()}
         </h2>
-        <p className="text-sm text-[#1a1a1a]/50">
-          {t('complete.subtitle')}
+        <p className="text-sm text-[#1a1a1a]/50 mb-2">
+          {t('complete.confirmMessage')}
+        </p>
+        <p className="text-sm text-[#1a1a1a]/70">
+          {t('complete.title')}
         </p>
       </div>
 
@@ -860,19 +957,31 @@ export function ContactModal({ isOpen, onClose, className }: ContactModalProps) 
                 {/* Footer */}
                 {!isComplete && (
                   <div className="px-5 md:px-8 pb-6 pt-4">
+                    {submitError && (
+                      <p className="text-sm text-red-500 text-center mb-3">{submitError}</p>
+                    )}
                     <button
                       onClick={handleNext}
-                      disabled={!canProceed()}
+                      disabled={!canProceed() || isSubmitting}
                       className={cn(
                         'w-full py-4 rounded-2xl font-semibold text-base flex items-center justify-center gap-2',
                         'transition-all duration-300',
-                        canProceed()
+                        canProceed() && !isSubmitting
                           ? 'bg-[#1a1a1a] text-white hover:bg-[#333]'
                           : 'bg-[#f2f8fc] text-[#1a1a1a]/30 cursor-not-allowed'
                       )}
                     >
-                      {currentStep === totalSteps ? t('buttons.submit') : t('buttons.next')}
-                      {canProceed() && <ArrowRight className="w-5 h-5" />}
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <span>처리 중...</span>
+                        </>
+                      ) : (
+                        <>
+                          {currentStep === totalSteps ? t('buttons.submit') : t('buttons.next')}
+                          {canProceed() && <ArrowRight className="w-5 h-5" />}
+                        </>
+                      )}
                     </button>
                     <p className="hidden md:block text-[10px] text-center text-[#1a1a1a]/30 mt-3">
                       {t('labels.keyboard')}

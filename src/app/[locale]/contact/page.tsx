@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowLeft, ArrowRight, Check, Plus, X, Home, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Plus, X, Home, RotateCcw, Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 // ============================================
@@ -27,6 +27,7 @@ interface FormData {
   contactValue: string;
   additionalLinks: LinkItem[];
   additionalNote: string;
+  _gotcha: string; // Honeypot field for bot prevention
 }
 
 const STORAGE_KEY = 'invisible-works-contact-form';
@@ -57,6 +58,11 @@ const translations: Record<string, {
     stepOf: string;
     completeTitle: string;
     completeSubtitle: string;
+    checkKakao: string;
+    checkSms: string;
+    checkEmail: string;
+    resubmitWithOptional: string;
+    submitting: string;
     linkPlaceholder: string;
     notePlaceholder: string;
     customIndustryPlaceholder: string;
@@ -98,9 +104,9 @@ const translations: Record<string, {
       { id: 'no', label: '아직 안 받아봤어요', recommended: true },
     ],
     contactMethods: [
-      { id: 'sms', label: '문자', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'kakao', label: '카카오톡', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'sms', label: '문자', placeholder: '010-0000-0000', type: 'tel' },
       { id: 'email', label: '이메일', placeholder: 'example@email.com', type: 'email' },
-      { id: 'call', label: '전화', placeholder: '010-0000-0000', type: 'tel' },
     ],
     linkTypes: [
       { id: 'own', label: '자사 홈페이지' },
@@ -127,8 +133,13 @@ const translations: Record<string, {
       enterNext: 'Enter로 다음 · Esc로 뒤로',
       escBack: 'Esc로 뒤로',
       stepOf: 'STEP {current} OF {total}',
-      completeTitle: '좋습니다. 곧 연락드리겠습니다.',
+      completeTitle: '접수 확인 메시지를 발송드렸습니다.',
       completeSubtitle: '빠른 시일 내에 확인 후 답변드리겠습니다.',
+      checkKakao: '카카오톡을 확인해주세요!',
+      checkSms: '문자를 확인해주세요!',
+      checkEmail: '이메일을 확인해주세요!',
+      resubmitWithOptional: '선택사항 포함해서 다시 발송하기',
+      submitting: '처리 중...',
       linkPlaceholder: '참고할 링크가 있으면 남겨주세요 (선택)',
       notePlaceholder: '궁금한 점이나 더 알려주고 싶은 내용이 있으면 편하게 적어주세요',
       customIndustryPlaceholder: '예: 스타트업, 개인 브랜드, 프리랜서...',
@@ -170,9 +181,9 @@ const translations: Record<string, {
       { id: 'no', label: 'Not yet', recommended: true },
     ],
     contactMethods: [
-      { id: 'sms', label: 'SMS', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'sms', label: 'SMS', placeholder: '010-0000-0000', type: 'tel' },
       { id: 'email', label: 'Email', placeholder: 'example@email.com', type: 'email' },
-      { id: 'call', label: 'Phone', placeholder: '010-0000-0000', type: 'tel' },
     ],
     linkTypes: [
       { id: 'own', label: 'Our website' },
@@ -199,8 +210,13 @@ const translations: Record<string, {
       enterNext: 'Enter for next · Esc for back',
       escBack: 'Esc for back',
       stepOf: 'STEP {current} OF {total}',
-      completeTitle: 'Great. We\'ll contact you soon.',
+      completeTitle: 'We\'ve sent you a confirmation message.',
       completeSubtitle: 'We\'ll review and respond as soon as possible.',
+      checkKakao: 'Please check your KakaoTalk!',
+      checkSms: 'Please check your text messages!',
+      checkEmail: 'Please check your email!',
+      resubmitWithOptional: 'Resend with optional info',
+      submitting: 'Processing...',
       linkPlaceholder: 'Share reference links if you have any (optional)',
       notePlaceholder: 'Feel free to share any questions or additional information',
       customIndustryPlaceholder: 'e.g., Startup, Personal brand, Freelancer...',
@@ -242,9 +258,9 @@ const translations: Record<string, {
       { id: 'no', label: '还没有', recommended: true },
     ],
     contactMethods: [
-      { id: 'sms', label: '短信', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'sms', label: '短信', placeholder: '010-0000-0000', type: 'tel' },
       { id: 'email', label: '邮件', placeholder: 'example@email.com', type: 'email' },
-      { id: 'call', label: '电话', placeholder: '010-0000-0000', type: 'tel' },
     ],
     linkTypes: [
       { id: 'own', label: '自有网站' },
@@ -271,8 +287,13 @@ const translations: Record<string, {
       enterNext: 'Enter下一步 · Esc返回',
       escBack: 'Esc返回',
       stepOf: '第{current}步，共{total}步',
-      completeTitle: '好的，我们会尽快联系您。',
+      completeTitle: '我们已向您发送了确认消息。',
       completeSubtitle: '我们会尽快审核并回复您。',
+      checkKakao: '请查看您的KakaoTalk！',
+      checkSms: '请查看您的短信！',
+      checkEmail: '请查看您的邮件！',
+      resubmitWithOptional: '包含选填信息重新发送',
+      submitting: '处理中...',
       linkPlaceholder: '如有参考链接请留下（选填）',
       notePlaceholder: '如有任何问题或补充信息，请随时告诉我们',
       customIndustryPlaceholder: '例如：创业公司、个人品牌、自由职业者...',
@@ -314,9 +335,9 @@ const translations: Record<string, {
       { id: 'no', label: '還沒有', recommended: true },
     ],
     contactMethods: [
-      { id: 'sms', label: '簡訊', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
+      { id: 'sms', label: '簡訊', placeholder: '010-0000-0000', type: 'tel' },
       { id: 'email', label: '郵件', placeholder: 'example@email.com', type: 'email' },
-      { id: 'call', label: '電話', placeholder: '010-0000-0000', type: 'tel' },
     ],
     linkTypes: [
       { id: 'own', label: '自有網站' },
@@ -343,8 +364,13 @@ const translations: Record<string, {
       enterNext: 'Enter下一步 · Esc返回',
       escBack: 'Esc返回',
       stepOf: '第{current}步，共{total}步',
-      completeTitle: '好的，我們會儘快聯繫您。',
+      completeTitle: '我們已向您發送了確認訊息。',
       completeSubtitle: '我們會儘快審核並回覆您。',
+      checkKakao: '請查看您的KakaoTalk！',
+      checkSms: '請查看您的簡訊！',
+      checkEmail: '請查看您的郵件！',
+      resubmitWithOptional: '包含選填資訊重新發送',
+      submitting: '處理中...',
       linkPlaceholder: '如有參考連結請留下（選填）',
       notePlaceholder: '如有任何問題或補充資訊，請隨時告訴我們',
       customIndustryPlaceholder: '例如：創業公司、個人品牌、自由職業者...',
@@ -392,7 +418,7 @@ export default function ContactPage() {
   const [contactError, setContactError] = useState('');
   // 한국어가 아닌 경우 이메일만 사용 가능
   const isKorean = locale === 'ko';
-  const defaultContactMethod = isKorean ? 'sms' : 'email';
+  const defaultContactMethod = isKorean ? 'kakao' : 'email';
   const defaultContactValue = isKorean ? '010' : '';
 
   const [formData, setFormData] = useState<FormData>({
@@ -405,7 +431,13 @@ export default function ContactPage() {
     contactValue: defaultContactValue,
     additionalLinks: [{ type: 'style', url: '' }],
     additionalNote: '',
+    _gotcha: '', // Honeypot - should remain empty
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [quoteNumber, setQuoteNumber] = useState<string | null>(null);
+  const [isResubmitting, setIsResubmitting] = useState(false);
 
   const totalSteps = 5;
 
@@ -532,13 +564,89 @@ export default function ContactPage() {
   }, [currentStep, canProceed, handleNext, handleBack, isComplete]);
 
   const handleSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    localStorage.removeItem(STORAGE_KEY);
-    setIsComplete(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const requestBody = {
+        clientName: formData.industryCustom || formData.industry,
+        clientPhone: formData.contactMethod !== 'email' ? formData.contactValue : undefined,
+        clientEmail: formData.contactMethod === 'email' ? formData.contactValue : undefined,
+        contactMethod: formData.contactMethod,
+        screenBlocks: { min: 1, max: 15 },
+        uiuxStyle: 'normal' as const,
+        features: [],
+        specialNotes: [],
+        industry: formData.industry,
+        industryCustom: formData.industryCustom,
+        purpose: formData.purpose,
+        currentAssets: formData.currentAssets,
+        hasQuote: formData.hasQuote,
+        additionalLinks: formData.additionalLinks.filter((l) => l.url.trim()),
+        additionalNote: formData.additionalNote,
+        locale,
+        _gotcha: formData._gotcha,
+      };
+
+      const response = await fetch('/api/quote/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Submission failed');
+      }
+
+      localStorage.removeItem(STORAGE_KEY);
+      setQuoteNumber(result.quoteNumber);
+      setIsComplete(true);
+    } catch (error) {
+      console.error('Submit error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleResubmitWithOptional = async () => {
+    if (!quoteNumber) return;
+
+    setIsResubmitting(true);
+    setSubmitError('');
+
+    try {
+      const links = formData.additionalLinks.filter((l) => l.url.trim());
+      const response = await fetch('/api/quote/update', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          quoteNumber,
+          additionalLinks: links,
+          additionalNote: formData.additionalNote,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Update failed');
+      }
+
+      // Show brief success feedback (could be a toast)
+      setSubmitError('');
+    } catch (error) {
+      console.error('Resubmit error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsResubmitting(false);
+    }
   };
 
   const handleContactMethodChange = (methodId: string) => {
-    const isPhoneMethod = methodId === 'sms' || methodId === 'call';
+    const isPhoneMethod = methodId === 'kakao' || methodId === 'sms';
     setFormData((prev) => ({
       ...prev,
       contactMethod: methodId,
@@ -551,7 +659,7 @@ export default function ContactPage() {
     const { contactMethod } = formData;
     let newValue = value;
 
-    if (contactMethod === 'sms' || contactMethod === 'call') {
+    if (contactMethod === 'kakao' || contactMethod === 'sms') {
       newValue = formatPhone(value);
     }
 
@@ -763,6 +871,23 @@ export default function ContactPage() {
               {contactError && (
                 <p className="mt-2 text-sm text-red-500">{contactError}</p>
               )}
+              {/* Honeypot field - hidden from real users, filled by bots */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={formData._gotcha}
+                onChange={(e) => setFormData((prev) => ({ ...prev, _gotcha: e.target.value }))}
+                tabIndex={-1}
+                autoComplete="off"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  opacity: 0,
+                  height: 0,
+                  width: 0,
+                }}
+                aria-hidden="true"
+              />
             </div>
           </div>
         );
@@ -808,11 +933,15 @@ export default function ContactPage() {
               >
                 <Check className="w-12 h-12 text-white" />
               </motion.div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-5 leading-tight break-keep">
-                {t.ui.completeTitle}
+              <h1 className="text-3xl md:text-4xl font-bold text-[#7fa8c9] mb-4 leading-tight break-keep">
+                {formData.contactMethod === 'kakao'
+                  ? t.ui.checkKakao
+                  : formData.contactMethod === 'sms'
+                    ? t.ui.checkSms
+                    : t.ui.checkEmail}
               </h1>
-              <p className="text-lg text-[#1a1a1a]/50">
-                {t.ui.completeSubtitle}
+              <p className="text-lg text-[#1a1a1a]/70">
+                {t.ui.completeTitle}
               </p>
             </div>
 
@@ -902,6 +1031,35 @@ export default function ContactPage() {
                   'focus:outline-none focus:border-[#7fa8c9]/30 focus:bg-white resize-none'
                 )}
               />
+
+              {/* Resubmit with optional data */}
+              {(formData.additionalLinks.some(l => l.url.trim()) || formData.additionalNote.trim()) && (
+                <button
+                  onClick={handleResubmitWithOptional}
+                  disabled={isResubmitting}
+                  className={cn(
+                    'flex items-center justify-center gap-2 w-full mt-4 py-4 rounded-2xl font-semibold',
+                    'bg-[#1a1a1a] text-white hover:bg-[#333]',
+                    'transition-all duration-200',
+                    isResubmitting && 'opacity-60 cursor-wait'
+                  )}
+                >
+                  {isResubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>{t.ui.submitting}</span>
+                    </>
+                  ) : (
+                    <>
+                      <ArrowRight className="w-5 h-5" />
+                      <span>{t.ui.resubmitWithOptional}</span>
+                    </>
+                  )}
+                </button>
+              )}
+              {submitError && (
+                <p className="text-sm text-red-500 text-center mt-2">{submitError}</p>
+              )}
             </div>
 
             <div className="space-y-3">
@@ -1013,19 +1171,31 @@ export default function ContactPage() {
         </div>
 
         <footer className="px-6 py-6">
+          {submitError && (
+            <p className="text-sm text-red-500 text-center mb-3">{submitError}</p>
+          )}
           <button
             onClick={handleNext}
-            disabled={!canProceed()}
+            disabled={!canProceed() || isSubmitting}
             className={cn(
               'w-full py-5 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2',
               'transition-all duration-300',
-              canProceed()
+              canProceed() && !isSubmitting
                 ? 'bg-gradient-to-r from-[#7fa8c9] to-[#5a8ab0] text-white shadow-[0_4px_24px_rgba(127,168,201,0.4)]'
                 : 'bg-[#f2f8fc] text-[#1a1a1a]/30 cursor-not-allowed'
             )}
           >
-            {currentStep === totalSteps ? t.ui.submit : t.ui.next}
-            {canProceed() && <ArrowRight className="w-5 h-5" />}
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>{t.ui.submitting}</span>
+              </>
+            ) : (
+              <>
+                {currentStep === totalSteps ? t.ui.submit : t.ui.next}
+                {canProceed() && <ArrowRight className="w-5 h-5" />}
+              </>
+            )}
           </button>
         </footer>
       </div>
@@ -1075,8 +1245,8 @@ export default function ContactPage() {
                     i + 1 === currentStep
                       ? 'w-8 bg-[#7fa8c9]'
                       : i + 1 < currentStep
-                      ? 'bg-[#7fa8c9]/60'
-                      : 'bg-white/20'
+                        ? 'bg-[#7fa8c9]/60'
+                        : 'bg-white/20'
                   )}
                 />
               ))}
@@ -1130,19 +1300,31 @@ export default function ContactPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
+              {submitError && (
+                <p className="text-sm text-red-500 text-center mb-3">{submitError}</p>
+              )}
               <button
                 onClick={handleNext}
-                disabled={!canProceed()}
+                disabled={!canProceed() || isSubmitting}
                 className={cn(
                   'w-full py-5 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3',
                   'transition-all duration-300',
-                  canProceed()
+                  canProceed() && !isSubmitting
                     ? 'bg-[#1a1a1a] text-white hover:bg-[#333] shadow-[0_4px_24px_rgba(0,0,0,0.15)]'
                     : 'bg-[#f2f8fc] text-[#1a1a1a]/30 cursor-not-allowed'
                 )}
               >
-                {currentStep === totalSteps ? t.ui.submit : t.ui.next}
-                {canProceed() && <ArrowRight className="w-5 h-5" />}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>{t.ui.submitting}</span>
+                  </>
+                ) : (
+                  <>
+                    {currentStep === totalSteps ? t.ui.submit : t.ui.next}
+                    {canProceed() && <ArrowRight className="w-5 h-5" />}
+                  </>
+                )}
               </button>
             </motion.div>
           </div>

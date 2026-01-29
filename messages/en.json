@@ -73,7 +73,7 @@
       "terms": "Terms of Service"
     },
     "contact": {
-      "email": "mzstudio104@gmail.com"
+      "email": "invisibleworks.office@gmail.com"
     }
   },
   "Contact": {
@@ -227,9 +227,9 @@
       "noMessage": "We recommend getting one.\nHaving a standard makes decisions easier."
     },
     "contactMethods": {
+      "kakao": "KakaoTalk",
       "sms": "Text",
-      "email": "Email",
-      "call": "Phone"
+      "email": "Email"
     },
     "linkTypes": {
       "own": "Our website",
@@ -263,7 +263,11 @@
     },
     "complete": {
       "title": "Great. We'll contact you soon.",
-      "subtitle": "We'll review and respond as soon as possible."
+      "subtitle": "We'll review and respond as soon as possible.",
+      "checkKakao": "Please check your KakaoTalk!",
+      "checkSms": "Please check your text messages!",
+      "checkEmail": "Please check your email!",
+      "confirmMessage": "We've sent you a confirmation message."
     }
   }
 }

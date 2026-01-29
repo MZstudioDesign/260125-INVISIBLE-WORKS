@@ -73,7 +73,7 @@
       "terms": "이용약관"
     },
     "contact": {
-      "email": "mzstudio104@gmail.com"
+      "email": "invisibleworks.office@gmail.com"
     }
   },
   "Contact": {
@@ -227,9 +227,9 @@
       "noMessage": "꼭 한 번 받아보시는 걸 권합니다.\n기준이 생기면 판단이 쉬워집니다."
     },
     "contactMethods": {
+      "kakao": "카카오톡",
       "sms": "문자",
-      "email": "이메일",
-      "call": "전화"
+      "email": "이메일"
     },
     "linkTypes": {
       "own": "자사 홈페이지",
@@ -263,7 +263,11 @@
     },
     "complete": {
       "title": "좋습니다. 곧 연락드리겠습니다.",
-      "subtitle": "빠른 시일 내에 확인 후 답변드리겠습니다."
+      "subtitle": "빠른 시일 내에 확인 후 답변드리겠습니다.",
+      "checkKakao": "카카오톡을 확인해주세요!",
+      "checkSms": "문자를 확인해주세요!",
+      "checkEmail": "이메일을 확인해주세요!",
+      "confirmMessage": "접수 확인 메시지를 발송드렸습니다."
     }
   }
 }

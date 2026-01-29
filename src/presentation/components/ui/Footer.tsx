@@ -103,10 +103,10 @@ export function Footer({ className = '', locale = 'ko' }: FooterProps) {
             <p>{locale === 'ko' ? '사업자등록번호 377-44-01126' : 'Business No. 377-44-01126'}</p>
             <p className="pt-2">
               <a
-                href="mailto:mzstudio104@gmail.com"
+                href="mailto:invisibleworks.office@gmail.com"
                 className="text-white/80 hover:text-[#60a5fa] transition-colors"
               >
-                mzstudio104@gmail.com
+                invisibleworks.office@gmail.com
               </a>
             </p>
           </motion.div>

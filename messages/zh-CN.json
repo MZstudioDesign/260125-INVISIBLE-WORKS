@@ -73,7 +73,7 @@
       "terms": "服务条款"
     },
     "contact": {
-      "email": "mzstudio104@gmail.com"
+      "email": "invisibleworks.office@gmail.com"
     }
   },
   "Contact": {
@@ -227,9 +227,9 @@
       "noMessage": "建议您先获取一个。\n有标准会让决策更容易。"
     },
     "contactMethods": {
+      "kakao": "KakaoTalk",
       "sms": "短信",
-      "email": "邮件",
-      "call": "电话"
+      "email": "邮件"
     },
     "linkTypes": {
       "own": "自家网站",
@@ -263,7 +263,11 @@
     },
     "complete": {
       "title": "好的，我们会尽快联系您。",
-      "subtitle": "我们会尽快审核并回复。"
+      "subtitle": "我们会尽快审核并回复。",
+      "checkKakao": "请查看您的KakaoTalk！",
+      "checkSms": "请查看您的短信！",
+      "checkEmail": "请查看您的邮件！",
+      "confirmMessage": "我们已向您发送了确认消息。"
     }
   }
 }

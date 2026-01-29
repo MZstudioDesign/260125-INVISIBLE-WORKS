@@ -4,6 +4,9 @@
 import { google } from 'googleapis';
 import { QuoteSubmission } from '@/domain/entities/QuoteSubmission';
 
+// Sheet tab name (Korean: 시트1)
+const SHEET_TAB = process.env.GOOGLE_SHEET_TAB || '시트1';
+
 // Create authenticated Sheets client
 async function getSheetsClient() {
     const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -38,6 +41,22 @@ export async function appendInquiryToSheet(inquiry: QuoteSubmission): Promise<vo
     const dateStr = now.toLocaleDateString('ko-KR');
     const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
 
+    // Format new fields
+    const industryStr = inquiry.industry_custom
+        ? `${inquiry.industry} (${inquiry.industry_custom})`
+        : inquiry.industry;
+
+    const linksStr = inquiry.additional_links
+        ? inquiry.additional_links.map(l => `[${l.type}] ${l.url}`).join('\n')
+        : '';
+
+    const noteStr = [
+        inquiry.additional_note,
+        ...(inquiry.special_notes || [])
+    ].filter(Boolean).join('\n');
+
+
+
     const values = [[
         dateStr,                                    // A: 날짜
         timeStr,                                    // B: 시간
@@ -46,17 +65,18 @@ export async function appendInquiryToSheet(inquiry: QuoteSubmission): Promise<vo
         inquiry.client_phone || '',                 // E: 전화번호
         inquiry.client_email || '',                 // F: 이메일
         inquiry.contact_method,                     // G: 연락방법
-        `${inquiry.screen_blocks.min}~${inquiry.screen_blocks.max}`, // H: 스크린블록
-        inquiry.uiux_style,                         // I: UI/UX스타일
-        inquiry.features.join(', '),                // J: 기능
-        inquiry.special_notes.join(', '),           // K: 특이사항
-        `${inquiry.estimated_price_min.toLocaleString()}원 ~ ${inquiry.estimated_price_max.toLocaleString()}원`, // L: 예상금액
-        inquiry.status,                             // M: 상태
+        industryStr,                                // H: 업종
+        inquiry.purpose,                            // I: 목적
+        inquiry.current_assets.join(', '),          // J: 보유항목
+        inquiry.has_quote,                          // K: 견적경험
+        linksStr,                                   // L: 추가링크
+        noteStr,                                    // M: 요청사항
+        inquiry.status,                             // N: 상태
     ]];
 
     await sheets.spreadsheets.values.append({
         spreadsheetId: sheetId,
-        range: 'Sheet1!A:M',
+        range: `${SHEET_TAB}!A:N`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values },
     });
@@ -76,17 +96,18 @@ export async function initializeSheetHeaders(): Promise<void> {
         '전화번호',
         '이메일',
         '연락방법',
-        '스크린블록',
-        'UI/UX스타일',
-        '기능',
-        '특이사항',
-        '예상금액',
+        '업종',
+        '목적',
+        '보유항목',
+        '견적경험',
+        '추가링크',
+        '요청사항',
         '상태',
     ]];
 
     await sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
-        range: 'Sheet1!A1:M1',
+        range: `${SHEET_TAB}!A1:N1`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values: headers },
     });
@@ -104,7 +125,7 @@ export async function updateInquiryStatusInSheet(
     // Find the row with matching quote number
     const response = await sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
-        range: 'Sheet1!C:C', // Quote number column
+        range: `${SHEET_TAB}!C:C`, // Quote number column
     });
 
     const rows = response.data.values || [];
@@ -113,9 +134,46 @@ export async function updateInquiryStatusInSheet(
     if (rowIndex > 0) { // Skip header row
         await sheets.spreadsheets.values.update({
             spreadsheetId: sheetId,
-            range: `Sheet1!M${rowIndex + 1}`, // Status column
+            range: `${SHEET_TAB}!N${rowIndex + 1}`, // Status column is now N
             valueInputOption: 'USER_ENTERED',
             requestBody: { values: [[newStatus]] },
         });
     }
 }
+
+/**
+ * Update optional fields (links, notes) for an existing inquiry
+ */
+export async function updateInquiryOptionalFields(
+    quoteNumber: string,
+    linksStr: string,
+    noteStr: string
+): Promise<boolean> {
+    const { sheets, sheetId } = await getSheetsClient();
+
+    // Find the row with matching quote number (column C)
+    const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: sheetId,
+        range: `${SHEET_TAB}!C:C`,
+    });
+
+    const rows = response.data.values || [];
+    const rowIndex = rows.findIndex(row => row[0] === quoteNumber);
+
+    if (rowIndex <= 0) { // Not found or is header row
+        console.log('[GoogleSheets] Quote not found:', quoteNumber);
+        return false;
+    }
+
+    // Update columns L (links) and M (notes)
+    await sheets.spreadsheets.values.update({
+        spreadsheetId: sheetId,
+        range: `${SHEET_TAB}!L${rowIndex + 1}:M${rowIndex + 1}`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: { values: [[linksStr, noteStr]] },
+    });
+
+    console.log('[GoogleSheets] Updated optional fields for:', quoteNumber);
+    return true;
+}
+
