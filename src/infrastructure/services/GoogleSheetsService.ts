@@ -67,16 +67,18 @@ export async function appendInquiryToSheet(inquiry: QuoteSubmission): Promise<vo
         inquiry.contact_method,                     // G: 연락방법
         industryStr,                                // H: 업종
         inquiry.purpose,                            // I: 목적
-        inquiry.current_assets.join(', '),          // J: 보유항목
-        inquiry.has_quote,                          // K: 견적경험
-        linksStr,                                   // L: 추가링크
-        noteStr,                                    // M: 요청사항
-        inquiry.status,                             // N: 상태
+        inquiry.preferred_color || '',              // J: 선호색상
+        inquiry.tone_and_manner || '',              // K: 톤앤매너
+        inquiry.current_assets.join(', '),          // L: 보유항목
+        inquiry.has_quote,                          // M: 견적경험
+        linksStr,                                   // N: 추가링크
+        noteStr,                                    // O: 요청사항
+        inquiry.status,                             // P: 상태
     ]];
 
     await sheets.spreadsheets.values.append({
         spreadsheetId: sheetId,
-        range: `${SHEET_TAB}!A:N`,
+        range: `${SHEET_TAB}!A:P`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values },
     });
@@ -98,6 +100,8 @@ export async function initializeSheetHeaders(): Promise<void> {
         '연락방법',
         '업종',
         '목적',
+        '선호색상',
+        '톤앤매너',
         '보유항목',
         '견적경험',
         '추가링크',
@@ -107,7 +111,7 @@ export async function initializeSheetHeaders(): Promise<void> {
 
     await sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
-        range: `${SHEET_TAB}!A1:N1`,
+        range: `${SHEET_TAB}!A1:P1`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values: headers },
     });
@@ -134,7 +138,7 @@ export async function updateInquiryStatusInSheet(
     if (rowIndex > 0) { // Skip header row
         await sheets.spreadsheets.values.update({
             spreadsheetId: sheetId,
-            range: `${SHEET_TAB}!N${rowIndex + 1}`, // Status column is now N
+            range: `${SHEET_TAB}!P${rowIndex + 1}`, // Status column is now P
             valueInputOption: 'USER_ENTERED',
             requestBody: { values: [[newStatus]] },
         });
@@ -165,10 +169,10 @@ export async function updateInquiryOptionalFields(
         return false;
     }
 
-    // Update columns L (links) and M (notes)
+    // Update columns N (links) and O (notes)
     await sheets.spreadsheets.values.update({
         spreadsheetId: sheetId,
-        range: `${SHEET_TAB}!L${rowIndex + 1}:M${rowIndex + 1}`,
+        range: `${SHEET_TAB}!N${rowIndex + 1}:O${rowIndex + 1}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: { values: [[linksStr, noteStr]] },
     });

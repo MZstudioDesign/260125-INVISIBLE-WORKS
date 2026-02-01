@@ -38,6 +38,8 @@ export interface QuoteSubmission {
     industry: string;
     industry_custom?: string;
     purpose: string;
+    preferred_color: string;
+    tone_and_manner: string;
     current_assets: string[];
     has_quote: string;
     additional_links?: LinkItem[];

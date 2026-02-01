@@ -86,6 +86,8 @@ export async function POST(request: NextRequest) {
             industry: body.industry,
             industry_custom: body.industryCustom,
             purpose: body.purpose,
+            preferred_color: body.preferredColor || 'auto',
+            tone_and_manner: body.toneAndManner || 'auto',
             current_assets: body.currentAssets,
             has_quote: body.hasQuote,
             additional_links: body.additionalLinks || [],

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowLeft, ArrowRight, Check, Plus, X, Home, RotateCcw, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Plus, X, Home, Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 // ============================================
@@ -23,6 +23,10 @@ interface FormData {
   purpose: string;
   currentAssets: string[];
   hasQuote: string;
+  preferredColor: string;
+  preferredColorCustom: string;
+  toneAndManner: string;
+  toneAndMannerCustom: string;
   contactMethod: string;
   contactValue: string;
   additionalLinks: LinkItem[];
@@ -41,6 +45,8 @@ const translations: Record<string, {
   purposes: { id: string; label: string; recommended?: boolean }[];
   currentAssets: { id: string; label: string; recommended?: boolean }[];
   quoteOptions: { id: string; label: string; recommended?: boolean }[];
+  preferredColors: { id: string; label: string; recommended?: boolean }[];
+  toneAndManners: { id: string; label: string; recommended?: boolean }[];
   contactMethods: { id: string; label: string; recommended?: boolean; placeholder: string; type: string }[];
   linkTypes: { id: string; label: string }[];
   stepTitles: { title: string; sub: string }[];
@@ -66,6 +72,8 @@ const translations: Record<string, {
     linkPlaceholder: string;
     notePlaceholder: string;
     customIndustryPlaceholder: string;
+    customColorPlaceholder: string;
+    customTonePlaceholder: string;
     customLinkTypePlaceholder: string;
     quoteYesMessage: string;
     quoteNoMessage: string;
@@ -103,6 +111,26 @@ const translations: Record<string, {
       { id: 'yes', label: '받아봤어요' },
       { id: 'no', label: '아직 안 받아봤어요', recommended: true },
     ],
+    preferredColors: [
+      { id: 'light', label: '밝은/화이트 톤' },
+      { id: 'warm', label: '따뜻한 톤 (베이지, 크림)' },
+      { id: 'cool', label: '쿨 톤 (블루, 그레이)' },
+      { id: 'dark', label: '다크 톤' },
+      { id: 'colorful', label: '화려하고 다채로운' },
+      { id: 'monochrome', label: '모노톤 (흑백)' },
+      { id: 'auto', label: '알아서 해주세요', recommended: true },
+      { id: 'other', label: '직접 입력' },
+    ],
+    toneAndManners: [
+      { id: 'modern', label: '모던/미니멀' },
+      { id: 'friendly', label: '따뜻하고 친근한' },
+      { id: 'luxury', label: '고급스럽고 세련된' },
+      { id: 'vibrant', label: '발랄하고 활기찬' },
+      { id: 'professional', label: '신뢰감 있고 전문적인' },
+      { id: 'natural', label: '자연스럽고 편안한' },
+      { id: 'auto', label: '알아서 해주세요', recommended: true },
+      { id: 'other', label: '직접 입력' },
+    ],
     contactMethods: [
       { id: 'kakao', label: '카카오톡', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
       { id: 'sms', label: '문자', placeholder: '010-0000-0000', type: 'tel' },
@@ -117,6 +145,8 @@ const translations: Record<string, {
     stepTitles: [
       { title: '어떤 웹사이트를\n만들고 싶으신가요?', sub: '업종을 선택해주세요' },
       { title: '웹사이트로\n무엇을 하고 싶으세요?', sub: '목적을 알려주세요' },
+      { title: '선호하는 색상이\n있으신가요?', sub: '웹사이트의 전체적인 색감이에요' },
+      { title: '어떤 분위기를\n원하시나요?', sub: '톤앤매너를 선택해주세요' },
       { title: '현재 갖고 계신 게\n있으신가요?', sub: '여러 개 선택 가능해요' },
       { title: '다른 곳에서\n견적을 받아보셨나요?', sub: '비교해보시면 판단이 쉬워져요' },
       { title: '연락은\n어떻게 드릴까요?', sub: '답변 드릴 연락처를 알려주세요' },
@@ -133,16 +163,18 @@ const translations: Record<string, {
       enterNext: 'Enter로 다음 · Esc로 뒤로',
       escBack: 'Esc로 뒤로',
       stepOf: 'STEP {current} OF {total}',
-      completeTitle: '접수 확인 메시지를 발송드렸습니다.',
-      completeSubtitle: '빠른 시일 내에 확인 후 답변드리겠습니다.',
-      checkKakao: '카카오톡을 확인해주세요!',
-      checkSms: '문자를 확인해주세요!',
-      checkEmail: '이메일을 확인해주세요!',
+      completeTitle: '접수가 확인되었습니다!',
+      completeSubtitle: '1시간 이내 확인 후 {contactMethod} 안내드릴게요.',
+      checkKakao: '카카오톡으로',
+      checkSms: '문자로',
+      checkEmail: '이메일로',
       resubmitWithOptional: '선택사항 포함해서 다시 발송하기',
       submitting: '처리 중...',
       linkPlaceholder: '참고할 링크가 있으면 남겨주세요 (선택)',
       notePlaceholder: '궁금한 점이나 더 알려주고 싶은 내용이 있으면 편하게 적어주세요',
       customIndustryPlaceholder: '예: 스타트업, 개인 브랜드, 프리랜서...',
+      customColorPlaceholder: '예: 파스텔톤, 브랜드 컬러 #FF5733...',
+      customTonePlaceholder: '예: 캐주얼하면서 신뢰감 있는...',
       customLinkTypePlaceholder: '어떤 종류의 링크인가요?',
       quoteYesMessage: '좋습니다. 기준이 있으시면 비교가 더 쉬워집니다.',
       quoteNoMessage: '꼭 한 번 받아보시는 걸 권합니다. 기준이 생기면 판단이 쉬워집니다.',
@@ -180,6 +212,26 @@ const translations: Record<string, {
       { id: 'yes', label: 'Yes, I have' },
       { id: 'no', label: 'Not yet', recommended: true },
     ],
+    preferredColors: [
+      { id: 'light', label: 'Light/White tone' },
+      { id: 'warm', label: 'Warm tone (Beige, Cream)' },
+      { id: 'cool', label: 'Cool tone (Blue, Gray)' },
+      { id: 'dark', label: 'Dark tone' },
+      { id: 'colorful', label: 'Colorful and vibrant' },
+      { id: 'monochrome', label: 'Monochrome (B&W)' },
+      { id: 'auto', label: 'Leave it to you', recommended: true },
+      { id: 'other', label: 'Enter manually' },
+    ],
+    toneAndManners: [
+      { id: 'modern', label: 'Modern/Minimal' },
+      { id: 'friendly', label: 'Warm and friendly' },
+      { id: 'luxury', label: 'Luxurious and sophisticated' },
+      { id: 'vibrant', label: 'Playful and energetic' },
+      { id: 'professional', label: 'Trustworthy and professional' },
+      { id: 'natural', label: 'Natural and relaxed' },
+      { id: 'auto', label: 'Leave it to you', recommended: true },
+      { id: 'other', label: 'Enter manually' },
+    ],
     contactMethods: [
       { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
       { id: 'sms', label: 'SMS', placeholder: '010-0000-0000', type: 'tel' },
@@ -194,6 +246,8 @@ const translations: Record<string, {
     stepTitles: [
       { title: 'What kind of website\ndo you want?', sub: 'Select your industry' },
       { title: 'What do you want\nfrom your website?', sub: 'Tell us your goal' },
+      { title: 'Do you have a\npreferred color?', sub: 'Overall color scheme for the website' },
+      { title: 'What mood do\nyou prefer?', sub: 'Choose a tone and manner' },
       { title: 'What do you\ncurrently have?', sub: 'Multiple selections allowed' },
       { title: 'Have you received\na quote before?', sub: 'Comparison helps with decisions' },
       { title: 'How should we\ncontact you?', sub: 'Share your contact info' },
@@ -210,16 +264,18 @@ const translations: Record<string, {
       enterNext: 'Enter for next · Esc for back',
       escBack: 'Esc for back',
       stepOf: 'STEP {current} OF {total}',
-      completeTitle: 'We\'ve sent you a confirmation message.',
-      completeSubtitle: 'We\'ll review and respond as soon as possible.',
-      checkKakao: 'Please check your KakaoTalk!',
-      checkSms: 'Please check your text messages!',
-      checkEmail: 'Please check your email!',
+      completeTitle: 'Your inquiry has been received!',
+      completeSubtitle: 'We\'ll review and contact you via {contactMethod} within 1 hour.',
+      checkKakao: 'KakaoTalk',
+      checkSms: 'SMS',
+      checkEmail: 'Email',
       resubmitWithOptional: 'Resend with optional info',
       submitting: 'Processing...',
       linkPlaceholder: 'Share reference links if you have any (optional)',
       notePlaceholder: 'Feel free to share any questions or additional information',
       customIndustryPlaceholder: 'e.g., Startup, Personal brand, Freelancer...',
+      customColorPlaceholder: 'e.g., Pastel tones, Brand color #FF5733...',
+      customTonePlaceholder: 'e.g., Casual yet trustworthy...',
       customLinkTypePlaceholder: 'What type of link is this?',
       quoteYesMessage: 'Great. Having a reference makes comparison easier.',
       quoteNoMessage: 'We recommend getting one. Having a standard makes decisions easier.',
@@ -257,6 +313,26 @@ const translations: Record<string, {
       { id: 'yes', label: '收到过' },
       { id: 'no', label: '还没有', recommended: true },
     ],
+    preferredColors: [
+      { id: 'light', label: '明亮/白色调' },
+      { id: 'warm', label: '暖色调（米色、奶油色）' },
+      { id: 'cool', label: '冷色调（蓝色、灰色）' },
+      { id: 'dark', label: '深色调' },
+      { id: 'colorful', label: '绚丽多彩' },
+      { id: 'monochrome', label: '黑白单色' },
+      { id: 'auto', label: '交给你们', recommended: true },
+      { id: 'other', label: '手动输入' },
+    ],
+    toneAndManners: [
+      { id: 'modern', label: '现代/极简' },
+      { id: 'friendly', label: '温暖友好' },
+      { id: 'luxury', label: '奢华精致' },
+      { id: 'vibrant', label: '活泼有活力' },
+      { id: 'professional', label: '可靠专业' },
+      { id: 'natural', label: '自然舒适' },
+      { id: 'auto', label: '交给你们', recommended: true },
+      { id: 'other', label: '手动输入' },
+    ],
     contactMethods: [
       { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
       { id: 'sms', label: '短信', placeholder: '010-0000-0000', type: 'tel' },
@@ -271,6 +347,8 @@ const translations: Record<string, {
     stepTitles: [
       { title: '您想要什么样的\n网站？', sub: '请选择您的行业' },
       { title: '您想通过网站\n实现什么？', sub: '告诉我们您的目标' },
+      { title: '您有喜欢的\n颜色吗？', sub: '网站的整体色调' },
+      { title: '您想要什么\n风格？', sub: '请选择氛围和调性' },
       { title: '您目前\n拥有什么？', sub: '可多选' },
       { title: '您之前收到过\n报价吗？', sub: '有比较才能做决定' },
       { title: '我们如何\n联系您？', sub: '请分享您的联系方式' },
@@ -287,16 +365,18 @@ const translations: Record<string, {
       enterNext: 'Enter下一步 · Esc返回',
       escBack: 'Esc返回',
       stepOf: '第{current}步，共{total}步',
-      completeTitle: '我们已向您发送了确认消息。',
-      completeSubtitle: '我们会尽快审核并回复您。',
-      checkKakao: '请查看您的KakaoTalk！',
-      checkSms: '请查看您的短信！',
-      checkEmail: '请查看您的邮件！',
+      completeTitle: '您的咨询已收到！',
+      completeSubtitle: '我们将在1小时内审核并通过{contactMethod}联系您。',
+      checkKakao: 'KakaoTalk',
+      checkSms: '短信',
+      checkEmail: '邮件',
       resubmitWithOptional: '包含选填信息重新发送',
       submitting: '处理中...',
       linkPlaceholder: '如有参考链接请留下（选填）',
       notePlaceholder: '如有任何问题或补充信息，请随时告诉我们',
       customIndustryPlaceholder: '例如：创业公司、个人品牌、自由职业者...',
+      customColorPlaceholder: '例如：粉彩色调、品牌色 #FF5733...',
+      customTonePlaceholder: '例如：休闲但值得信赖...',
       customLinkTypePlaceholder: '这是什么类型的链接？',
       quoteYesMessage: '很好。有参考标准会更容易比较。',
       quoteNoMessage: '建议您先获取一个报价。有标准才能做决定。',
@@ -334,6 +414,26 @@ const translations: Record<string, {
       { id: 'yes', label: '收到過' },
       { id: 'no', label: '還沒有', recommended: true },
     ],
+    preferredColors: [
+      { id: 'light', label: '明亮/白色調' },
+      { id: 'warm', label: '暖色調（米色、奶油色）' },
+      { id: 'cool', label: '冷色調（藍色、灰色）' },
+      { id: 'dark', label: '深色調' },
+      { id: 'colorful', label: '絢麗多彩' },
+      { id: 'monochrome', label: '黑白單色' },
+      { id: 'auto', label: '交給你們', recommended: true },
+      { id: 'other', label: '手動輸入' },
+    ],
+    toneAndManners: [
+      { id: 'modern', label: '現代/極簡' },
+      { id: 'friendly', label: '溫暖友好' },
+      { id: 'luxury', label: '奢華精緻' },
+      { id: 'vibrant', label: '活潑有活力' },
+      { id: 'professional', label: '可靠專業' },
+      { id: 'natural', label: '自然舒適' },
+      { id: 'auto', label: '交給你們', recommended: true },
+      { id: 'other', label: '手動輸入' },
+    ],
     contactMethods: [
       { id: 'kakao', label: 'KakaoTalk', recommended: true, placeholder: '010-0000-0000', type: 'tel' },
       { id: 'sms', label: '簡訊', placeholder: '010-0000-0000', type: 'tel' },
@@ -348,6 +448,8 @@ const translations: Record<string, {
     stepTitles: [
       { title: '您想要什麼樣的\n網站？', sub: '請選擇您的行業' },
       { title: '您想通過網站\n實現什麼？', sub: '告訴我們您的目標' },
+      { title: '您有喜歡的\n顏色嗎？', sub: '網站的整體色調' },
+      { title: '您想要什麼\n風格？', sub: '請選擇氛圍和調性' },
       { title: '您目前\n擁有什麼？', sub: '可多選' },
       { title: '您之前收到過\n報價嗎？', sub: '有比較才能做決定' },
       { title: '我們如何\n聯繫您？', sub: '請分享您的聯繫方式' },
@@ -364,16 +466,18 @@ const translations: Record<string, {
       enterNext: 'Enter下一步 · Esc返回',
       escBack: 'Esc返回',
       stepOf: '第{current}步，共{total}步',
-      completeTitle: '我們已向您發送了確認訊息。',
-      completeSubtitle: '我們會儘快審核並回覆您。',
-      checkKakao: '請查看您的KakaoTalk！',
-      checkSms: '請查看您的簡訊！',
-      checkEmail: '請查看您的郵件！',
+      completeTitle: '您的諮詢已收到！',
+      completeSubtitle: '我們將在1小時內審核並透過{contactMethod}聯繫您。',
+      checkKakao: 'KakaoTalk',
+      checkSms: '簡訊',
+      checkEmail: '郵件',
       resubmitWithOptional: '包含選填資訊重新發送',
       submitting: '處理中...',
       linkPlaceholder: '如有參考連結請留下（選填）',
       notePlaceholder: '如有任何問題或補充資訊，請隨時告訴我們',
       customIndustryPlaceholder: '例如：創業公司、個人品牌、自由職業者...',
+      customColorPlaceholder: '例如：粉彩色調、品牌色 #FF5733...',
+      customTonePlaceholder: '例如：休閒但值得信賴...',
       customLinkTypePlaceholder: '這是什麼類型的連結？',
       quoteYesMessage: '很好。有參考標準會更容易比較。',
       quoteNoMessage: '建議您先獲取一個報價。有標準才能做決定。',
@@ -427,6 +531,10 @@ export default function ContactPage() {
     purpose: 'unknown',
     currentAssets: ['none'],
     hasQuote: 'no',
+    preferredColor: 'auto',
+    preferredColorCustom: '',
+    toneAndManner: 'auto',
+    toneAndMannerCustom: '',
     contactMethod: defaultContactMethod,
     contactValue: defaultContactValue,
     additionalLinks: [{ type: 'style', url: '' }],
@@ -439,7 +547,7 @@ export default function ContactPage() {
   const [quoteNumber, setQuoteNumber] = useState<string | null>(null);
   const [isResubmitting, setIsResubmitting] = useState(false);
 
-  const totalSteps = 5;
+  const totalSteps = 7;
 
   // 언어 변경 시 연락 방법 초기화
   useEffect(() => {
@@ -505,10 +613,14 @@ export default function ContactPage() {
       case 2:
         return formData.purpose !== '';
       case 3:
-        return formData.currentAssets.length > 0;
+        return formData.preferredColor !== '' && (formData.preferredColor !== 'other' || formData.preferredColorCustom.trim() !== '');
       case 4:
-        return formData.hasQuote !== '';
+        return formData.toneAndManner !== '' && (formData.toneAndManner !== 'other' || formData.toneAndMannerCustom.trim() !== '');
       case 5:
+        return formData.currentAssets.length > 0;
+      case 6:
+        return formData.hasQuote !== '';
+      case 7:
         const validation = validateContactValue();
         return formData.contactValue.trim() !== '' && validation.valid;
       default:
@@ -517,7 +629,7 @@ export default function ContactPage() {
   }, [currentStep, formData, validateContactValue]);
 
   const handleNext = useCallback(() => {
-    if (currentStep === 5) {
+    if (currentStep === 7) {
       const validation = validateContactValue();
       if (!validation.valid) {
         setContactError(validation.error);
@@ -582,6 +694,8 @@ export default function ContactPage() {
         purpose: formData.purpose,
         currentAssets: formData.currentAssets,
         hasQuote: formData.hasQuote,
+        preferredColor: formData.preferredColor === 'other' ? formData.preferredColorCustom : formData.preferredColor,
+        toneAndManner: formData.toneAndManner === 'other' ? formData.toneAndMannerCustom : formData.toneAndManner,
         additionalLinks: formData.additionalLinks.filter((l) => l.url.trim()),
         additionalNote: formData.additionalNote,
         locale,
@@ -764,6 +878,98 @@ export default function ContactPage() {
 
       case 3:
         return (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              {t.preferredColors.map((item) => (
+                <GlassChip
+                  key={item.id}
+                  selected={formData.preferredColor === item.id}
+                  onClick={() => setFormData((prev) => ({ ...prev, preferredColor: item.id }))}
+                >
+                  {item.label}
+                  {item.recommended && formData.preferredColor !== item.id && (
+                    <span className="ml-1 text-xs opacity-60">✓</span>
+                  )}
+                </GlassChip>
+              ))}
+            </div>
+
+            <AnimatePresence>
+              {formData.preferredColor === 'other' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <input
+                    type="text"
+                    value={formData.preferredColorCustom}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, preferredColorCustom: e.target.value }))}
+                    placeholder={t.ui.customColorPlaceholder}
+                    className={cn(
+                      'w-full mt-3 px-6 py-5 bg-white/60 backdrop-blur-xl',
+                      'border-2 border-[#7fa8c9]/30 rounded-2xl',
+                      'text-lg text-[#1a1a1a] placeholder:text-[#1a1a1a]/30',
+                      'focus:outline-none focus:border-[#7fa8c9] focus:bg-white/80',
+                      'transition-all duration-200'
+                    )}
+                    autoFocus
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+
+      case 4:
+        return (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              {t.toneAndManners.map((item) => (
+                <GlassChip
+                  key={item.id}
+                  selected={formData.toneAndManner === item.id}
+                  onClick={() => setFormData((prev) => ({ ...prev, toneAndManner: item.id }))}
+                >
+                  {item.label}
+                  {item.recommended && formData.toneAndManner !== item.id && (
+                    <span className="ml-1 text-xs opacity-60">✓</span>
+                  )}
+                </GlassChip>
+              ))}
+            </div>
+
+            <AnimatePresence>
+              {formData.toneAndManner === 'other' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <input
+                    type="text"
+                    value={formData.toneAndMannerCustom}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, toneAndMannerCustom: e.target.value }))}
+                    placeholder={t.ui.customTonePlaceholder}
+                    className={cn(
+                      'w-full mt-3 px-6 py-5 bg-white/60 backdrop-blur-xl',
+                      'border-2 border-[#7fa8c9]/30 rounded-2xl',
+                      'text-lg text-[#1a1a1a] placeholder:text-[#1a1a1a]/30',
+                      'focus:outline-none focus:border-[#7fa8c9] focus:bg-white/80',
+                      'transition-all duration-200'
+                    )}
+                    autoFocus
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+
+      case 5:
+        return (
           <div className="space-y-3">
             {t.currentAssets.map((item) => (
               <GlassCheckbox
@@ -790,7 +996,7 @@ export default function ContactPage() {
           </div>
         );
 
-      case 4:
+      case 6:
         return (
           <div className="space-y-3">
             {t.quoteOptions.map((item) => (
@@ -819,7 +1025,7 @@ export default function ContactPage() {
           </div>
         );
 
-      case 5:
+      case 7:
         // 한국어가 아닌 경우 이메일만 표시
         const availableMethods = isKorean
           ? t.contactMethods
@@ -934,14 +1140,17 @@ export default function ContactPage() {
                 <Check className="w-12 h-12 text-white" />
               </motion.div>
               <h1 className="text-3xl md:text-4xl font-bold text-[#7fa8c9] mb-4 leading-tight break-keep">
-                {formData.contactMethod === 'kakao'
-                  ? t.ui.checkKakao
-                  : formData.contactMethod === 'sms'
-                    ? t.ui.checkSms
-                    : t.ui.checkEmail}
+                {t.ui.completeTitle}
               </h1>
               <p className="text-lg text-[#1a1a1a]/70">
-                {t.ui.completeTitle}
+                {t.ui.completeSubtitle.replace(
+                  '{contactMethod}',
+                  formData.contactMethod === 'kakao'
+                    ? t.ui.checkKakao
+                    : formData.contactMethod === 'sms'
+                      ? t.ui.checkSms
+                      : t.ui.checkEmail
+                )}
               </p>
             </div>
 
@@ -1062,32 +1271,19 @@ export default function ContactPage() {
               )}
             </div>
 
-            <div className="space-y-3">
-              <Link
-                href={`/${locale}`}
-                className={cn(
-                  'flex items-center justify-center gap-3 w-full py-5 rounded-2xl font-semibold text-lg',
-                  'bg-gradient-to-r from-[#7fa8c9] to-[#5a8ab0] text-white',
-                  'shadow-[0_4px_24px_rgba(127,168,201,0.4)]',
-                  'hover:shadow-[0_8px_32px_rgba(127,168,201,0.5)]',
-                  'transition-all duration-300'
-                )}
-              >
-                <Home className="w-5 h-5" />
-                {t.ui.home}
-              </Link>
-              <button
-                onClick={handleGoBackFromComplete}
-                className={cn(
-                  'flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-medium',
-                  'bg-[#f2f8fc] text-[#1a1a1a]/60 hover:bg-[#e8f1f8]',
-                  'transition-all duration-200'
-                )}
-              >
-                <RotateCcw className="w-4 h-4" />
-                {t.ui.goBack}
-              </button>
-            </div>
+            <Link
+              href={`/${locale}`}
+              className={cn(
+                'flex items-center justify-center gap-3 w-full py-5 rounded-2xl font-semibold text-lg',
+                'bg-gradient-to-r from-[#7fa8c9] to-[#5a8ab0] text-white',
+                'shadow-[0_4px_24px_rgba(127,168,201,0.4)]',
+                'hover:shadow-[0_8px_32px_rgba(127,168,201,0.5)]',
+                'transition-all duration-300'
+              )}
+            >
+              <Home className="w-5 h-5" />
+              {t.ui.home}
+            </Link>
           </motion.div>
         </div>
       </div>

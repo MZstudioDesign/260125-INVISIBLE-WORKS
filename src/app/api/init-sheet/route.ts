@@ -36,17 +36,18 @@ export async function GET() {
             '연락방법',
             '업종',
             '목적',
+            '선호색상',
+            '톤앤매너',
             '보유항목',
             '견적경험',
             '추가링크',
             '요청사항',
             '상태',
-            '예상금액',
         ]];
 
         await sheets.spreadsheets.values.update({
             spreadsheetId: sheetId,
-            range: `${SHEET_TAB}!A1:O1`,
+            range: `${SHEET_TAB}!A1:P1`,
             valueInputOption: 'USER_ENTERED',
             requestBody: { values: headers },
         });
