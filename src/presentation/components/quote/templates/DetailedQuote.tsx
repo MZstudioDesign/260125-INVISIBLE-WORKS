@@ -12,8 +12,9 @@ import {
   A4_WIDTH_PX,
   A4_HEIGHT_PX,
 } from '@/lib/quote/types';
-import { formatWon } from '@/lib/quote/settings';
+import { formatWon, getCompanyInfo, getBankInfo } from '@/lib/quote/settings';
 import { getTranslations, formatCurrencyByLanguage, formatDateByLanguage } from '@/lib/quote/translations';
+import { getPageInfo } from '@/lib/quote/pagination';
 
 interface TemplateProps {
   data: QuoteData;
@@ -187,17 +188,46 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
   // Get translations
   const t = getTranslations(language);
 
+  // Pagination Info
+  const pageInfo = getPageInfo(data.items, pageNumber, true);
+  const { isFirstPage, showTotals, items: pageItems } = pageInfo;
+
+  // Localized Info
+  const companyInfo = getCompanyInfo(language, {
+    name: data.companyName,
+    representative: data.companyRepresentative,
+    businessNumber: data.companyBusinessNumber,
+    email: data.companyEmail,
+    address: data.companyAddress,
+    website: data.companyWebsite,
+  });
+
+  const bankInfo = getBankInfo(language, {
+    bankName: data.bankName,
+    accountNumber: data.bankAccountNumber,
+    accountHolder: data.bankAccountName,
+  });
+
   const subtotal = calculateSubtotal(data.items);
   const vat = calculateVAT(subtotal, data.vatRate);
   const total = calculateTotal(subtotal, vat);
   const balanceDue = calculateBalanceDue(subtotal, vat, data.discount || 0);
 
+  // Payment Terms Localization
+  const defaultKoTerms = '발행일로부터 7일 이내';
+  const enTerms = 'Within 7 days of issue';
+  const displayPaymentTerms = (data.paymentTerms === defaultKoTerms && language === 'en')
+    ? enTerms
+    : data.paymentTerms;
+
   // QR 값 - invisibleworks.co 웹사이트로 고정
   const qrValue = 'https://invisibleworks.co';
 
-  // 2페이지: 세부 약관
-  if (pageNumber === 2) {
-    return <DetailedQuotePage2 data={data} language={language} />;
+  // 2페이지 이상의 마지막 페이지(약관) 처리
+  // getPageInfo에서 totalPages를 계산할 때 termsPage를 포함하므로, 
+  // pageNumber가 totalPages와 같으면 약관 페이지
+  if (pageNumber === pageInfo.totalPages) {
+    return <DetailedQuotePage2 data={data} language={language} pageNumber={pageNumber} totalPages={pageInfo.totalPages} />;
   }
 
   return (
@@ -208,7 +238,7 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
         backgroundColor: '#ffffff',
         fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
         color: '#000000',
-        padding: '32px 36px',
+        padding: isFirstPage ? '32px 36px 260px 36px' : '32px 36px 120px 36px',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
@@ -218,77 +248,81 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
       }}
     >
       {/* ═══════════════════════════════════════════════════════════════
-          LOGO - 대형 로고 (좌우 마진 기준 100px)
+          LOGO - 1페이지는 대형, 2페이지부터는 소형
       ═══════════════════════════════════════════════════════════════ */}
       <div
         style={{
-          marginBottom: '28px',
-          height: '100px',
+          marginBottom: isFirstPage ? '28px' : '20px',
+          height: isFirstPage ? '100px' : '40px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: isFirstPage ? 'flex-start' : 'space-between',
         }}
       >
         <img
           src="/user_source/logo/logo-horizontal-black.png"
           alt="Invisible Works"
           style={{
-            height: '100px',
+            height: isFirstPage ? '100px' : '40px',
             width: 'auto',
             objectFit: 'contain',
           }}
         />
+        {/* Page Number Logic Removed from Header as per request */}
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          HEADER - 날짜/고객 | 번호/제목 | INVOICE
+          HEADER - 날짜/고객 | 번호/제목 | INVOICE (1페이지에만 표시)
       ═══════════════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1.2fr 1fr',
-          gap: '16px',
-          marginBottom: '20px',
-          alignItems: 'start',
-        }}
-      >
-        {/* 좌측: 날짜 + 고객 정보 */}
-        <div>
-          <div style={{ marginBottom: '4px' }}>
-            [{formatDateByLanguage(data.date, language) || (language === 'ko' ? '0000년 0월 0일' : 'TBD')}]
-          </div>
-          <div style={{ marginBottom: '2px' }}>[{data.clientName || (language === 'ko' ? '고객명' : 'Client Name')}]</div>
-          {data.clientAddress && (
-            <div style={{ color: '#666', fontSize: '8px' }}>{data.clientAddress}</div>
-          )}
-          {data.clientPhone && (
-            <div style={{ color: '#666', fontSize: '8px' }}>T: {data.clientPhone}</div>
-          )}
-          {data.clientEmail && (
-            <div style={{ color: '#666', fontSize: '8px' }}>E: {data.clientEmail}</div>
-          )}
-        </div>
-
-        {/* 중앙: 견적번호 + 제목 */}
-        <div>
-          <div style={{ marginBottom: '4px' }}>
-            [#{data.quoteNumber?.padStart(6, '0') || '000001'}]
-          </div>
-          <div>[{data.invoiceSubject || (language === 'ko' ? '견적서 제목' : 'Quote Title')}]</div>
-        </div>
-
-        {/* 우측: INVOICE 타이틀 */}
+      {isFirstPage && (
         <div
           style={{
-            textAlign: 'right',
-            fontSize: '36px',
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
-            lineHeight: 1,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1.2fr 1fr',
+            gap: '16px',
+            marginBottom: '20px',
+            alignItems: 'start',
           }}
         >
-          INVOICE
+          {/* 좌측: 날짜 + 고객 정보 */}
+          <div>
+            <div style={{ marginBottom: '4px' }}>
+              [{formatDateByLanguage(data.date, language) || (language === 'ko' ? '0000년 0월 0일' : 'TBD')}]
+            </div>
+            <div style={{ marginBottom: '2px' }}>[{data.clientName || (language === 'ko' ? '고객명' : 'Client Name')}]</div>
+            {data.clientAddress && (
+              <div style={{ color: '#666', fontSize: '8px' }}>{data.clientAddress}</div>
+            )}
+            {data.clientPhone && (
+              <div style={{ color: '#666', fontSize: '8px' }}>T: {data.clientPhone}</div>
+            )}
+            {data.clientEmail && (
+              <div style={{ color: '#666', fontSize: '8px' }}>E: {data.clientEmail}</div>
+            )}
+          </div>
+
+          {/* 중앙: 견적번호 + 제목 */}
+          <div>
+            <div style={{ marginBottom: '4px' }}>
+              [#{data.quoteNumber?.padStart(6, '0') || '000001'}]
+            </div>
+            <div>[{data.invoiceSubject || (language === 'ko' ? '견적서 제목' : 'Quote Title')}]</div>
+          </div>
+
+          {/* 우측: INVOICE 타이틀 */}
+          <div
+            style={{
+              textAlign: 'right',
+              fontSize: '36px',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              lineHeight: 1,
+            }}
+          >
+            INVOICE
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ═══════════════════════════════════════════════════════════════
           TABLE HEADER
@@ -311,10 +345,10 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TABLE BODY - 항목들
+          TABLE BODY - 항목들 (Paginated)
       ═══════════════════════════════════════════════════════════════ */}
-      <div style={{ flex: '0 0 auto', minHeight: '160px' }}>
-        {data.items.map((item, index) => (
+      <div style={{ flex: '1 1 auto', minHeight: '160px', overflow: 'hidden' }}>
+        {pageItems.map((item, index) => (
           <div key={item.id}>
             {/* 메인 항목 */}
             <div
@@ -388,111 +422,76 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TOTALS - 합계 영역 (좌: 결제정보, 우: 합계)
+          TOTALS - 합계 영역 (마지막 페이지에만 표시)
       ═══════════════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginTop: '16px',
-          marginBottom: '20px',
-          gap: '40px',
-        }}
-      >
-        {/* 좌측: 결제 정보 */}
-        <div style={{ flex: 1 }}>
-          {/* 결제 분할 정보 */}
-          {data.paymentSplit && data.paymentSplit.type !== 'full' && (
-            <div
-              style={{
-                padding: '8px',
-                backgroundColor: '#f8f8f8',
-                borderRadius: '2px',
-                marginBottom: '8px',
-              }}
-            >
-              <div style={{ fontSize: '7px', fontWeight: 600, marginBottom: '6px' }}>
-                [{t.splitPayment}]
-              </div>
-              {data.paymentSplit.labels.map((label, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '7px',
-                    padding: '2px 0',
-                  }}
-                >
-                  <span>{label} ({data.paymentSplit.ratios[index]}%)</span>
-                  <span style={{ fontFeatureSettings: '"tnum"' }}>
-                    {formatCurrencyByLanguage({
-                      min: Math.round(balanceDue.min * data.paymentSplit.ratios[index] / 100),
-                      max: Math.round(balanceDue.max * data.paymentSplit.ratios[index] / 100)
-                    }, language)}
-                  </span>
+      {showTotals && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '16px',
+            marginBottom: '40px',
+            gap: '40px',
+            flex: '0 0 auto', // 높이 고정
+          }}
+        >
+          {/* 좌측: 결제 정보 */}
+          <div style={{ flex: 1 }}>
+            {/* 결제 분할 정보 */}
+            {data.paymentSplit && data.paymentSplit.type !== 'full' && (
+              <div
+                style={{
+                  padding: '8px',
+                  backgroundColor: '#f8f8f8',
+                  borderRadius: '2px',
+                  marginBottom: '8px',
+                }}
+              >
+                <div style={{ fontSize: '7px', fontWeight: 600, marginBottom: '6px' }}>
+                  [{t.splitPayment}]
                 </div>
-              ))}
-            </div>
-          )}
+                {data.paymentSplit.labels.map((label, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontSize: '7px',
+                      padding: '2px 0',
+                    }}
+                  >
+                    <span>{label} ({data.paymentSplit.ratios[index]}%)</span>
+                    <span style={{ fontFeatureSettings: '"tnum"' }}>
+                      {formatCurrencyByLanguage({
+                        min: Math.round(balanceDue.min * data.paymentSplit.ratios[index] / 100),
+                        max: Math.round(balanceDue.max * data.paymentSplit.ratios[index] / 100)
+                      }, language)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {/* 계좌 정보 */}
-          {data.bankName && data.bankAccountNumber && (
-            <div
-              style={{
-                padding: '6px 8px',
-                border: '1px solid #ddd',
-                borderRadius: '2px',
-                fontSize: '7px',
-              }}
-            >
-              <div style={{ fontWeight: 600, marginBottom: '4px' }}>[{t.bankAccount}]</div>
-              <div>{data.bankName} {data.bankAccountNumber}</div>
-              <div style={{ color: '#666' }}>{t.accountHolder}: {data.bankAccountName}</div>
-            </div>
-          )}
-        </div>
-
-        {/* 우측: 합계 */}
-        <div style={{ width: '200px' }}>
-          {/* SUBTOTAL */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '4px 0',
-            }}
-          >
-            <span style={{ fontWeight: 600 }}>{t.subtotal.toUpperCase()}:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(subtotal, language)}</span>
+            {/* 계좌 정보 (Localized) */}
+            {bankInfo.bankName && bankInfo.accountNumber && (
+              <div
+                style={{
+                  padding: '6px 8px',
+                  border: '1px solid #ddd',
+                  borderRadius: '2px',
+                  fontSize: '7px',
+                }}
+              >
+                <div style={{ fontWeight: 600, marginBottom: '4px' }}>[{t.bankAccount}]</div>
+                <div>{bankInfo.bankName} {bankInfo.accountNumber}</div>
+                <div style={{ color: '#666' }}>{t.accountHolder}: {bankInfo.accountHolder}</div>
+              </div>
+            )}
           </div>
 
-          {/* TAX */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '4px 0',
-            }}
-          >
-            <span style={{ fontWeight: 600 }}>{t.vat.toUpperCase()} ({data.vatRate}%):</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(vat, language)}</span>
-          </div>
-
-          {/* TOTAL */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '4px 0',
-            }}
-          >
-            <span style={{ fontWeight: 600 }}>{t.total.toUpperCase()}:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(total, language)}</span>
-          </div>
-
-          {/* DISCOUNT */}
-          {(data.discount || 0) > 0 && (
+          {/* 우측: 합계 */}
+          <div style={{ width: '200px' }}>
+            {/* SUBTOTAL */}
             <div
               style={{
                 display: 'flex',
@@ -500,31 +499,69 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
                 padding: '4px 0',
               }}
             >
-              <span style={{ fontWeight: 600 }}>{t.discount.toUpperCase()}:</span>
-              <span style={{ fontFeatureSettings: '"tnum"' }}>-{formatCurrencyByLanguage(data.discount || 0, language)}</span>
+              <span style={{ fontWeight: 600 }}>{t.subtotal.toUpperCase()}:</span>
+              <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(subtotal, language)}</span>
             </div>
-          )}
 
-          {/* BALANCE DUE */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '8px 0',
-              marginTop: '8px',
-              borderTop: '2px solid #000',
-              fontWeight: 700,
-              fontSize: '11px',
-            }}
-          >
-            <span>{t.balanceDue.toUpperCase()}:</span>
-            <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(balanceDue, language)}</span>
+            {/* TAX */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '4px 0',
+              }}
+            >
+              <span style={{ fontWeight: 600 }}>{t.vat.toUpperCase()} ({data.vatRate}%):</span>
+              <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(vat, language)}</span>
+            </div>
+
+            {/* TOTAL */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '4px 0',
+              }}
+            >
+              <span style={{ fontWeight: 600 }}>{t.total.toUpperCase()}:</span>
+              <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(total, language)}</span>
+            </div>
+
+            {/* DISCOUNT */}
+            {(data.discount || 0) > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '4px 0',
+                }}
+              >
+                <span style={{ fontWeight: 600 }}>{t.discount.toUpperCase()}:</span>
+                <span style={{ fontFeatureSettings: '"tnum"' }}>-{formatCurrencyByLanguage(data.discount || 0, language)}</span>
+              </div>
+            )}
+
+            {/* BALANCE DUE */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '8px 0',
+                marginTop: '8px',
+                borderTop: '2px solid #000',
+                fontWeight: 700,
+                fontSize: '11px',
+              }}
+            >
+              <span>{t.balanceDue.toUpperCase()}:</span>
+              <span style={{ fontFeatureSettings: '"tnum"' }}>{formatCurrencyByLanguage(balanceDue, language)}</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ═══════════════════════════════════════════════════════════════
-          FOOTER AREA (하단 고정) - WEBSITE + TERMS + 회사정보
+          FIXED FOOTER (하단 고정) - WEBSITE + TERMS + 회사정보
       ═══════════════════════════════════════════════════════════════ */}
       <div
         style={{
@@ -534,82 +571,83 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
           right: '36px',
         }}
       >
-        {/* WEBSITE & TERMS SECTION */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1.5fr',
-            gap: '24px',
-            paddingTop: '16px',
-            borderTop: '1px solid #000',
-            marginBottom: '16px',
-          }}
-        >
-          {/* 좌측: WEBSITE + QR */}
-          <div>
-            <div
-              style={{
-                fontSize: '18px',
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                marginBottom: '8px',
-                display: 'flex',
-                alignItems: 'baseline',
-                gap: '8px',
-              }}
-            >
-              WEBSITE
-              <span style={{ fontSize: '8px', fontWeight: 400 }}>
-                [INV NO. {data.quoteNumber}]
-              </span>
-            </div>
-
-            <div style={{ marginBottom: '8px', fontSize: '8px' }}>
-              {data.paymentTerms && (
-                <div>
-                  <span style={{ color: '#666' }}>[TERMS]</span> {data.paymentTerms}
-                </div>
-              )}
-            </div>
-
-            {/* QR Code - 웹사이트 링크 */}
-            <div style={{ marginTop: '8px' }}>
-              <div style={{ fontSize: '7px', color: '#666', marginBottom: '3px' }}>
-                SCAN TO VISIT WEBSITE
+        {/* WEBSITE & TERMS SECTION (Fixed on all pages -> Now only on 1st page) */}
+        {isFirstPage && (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1.5fr',
+              gap: '24px',
+              paddingTop: '16px',
+              borderTop: '1px solid #000',
+              marginBottom: '16px',
+            }}
+          >
+            {/* 좌측: WEBSITE + QR */}
+            <div>
+              <div
+                style={{
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  letterSpacing: '-0.02em',
+                  marginBottom: '8px',
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '8px',
+                }}
+              >
+                WEBSITE
+                <span style={{ fontSize: '8px', fontWeight: 400 }}>
+                  [INV NO. {data.quoteNumber}]
+                </span>
               </div>
-              <QRCode
-                value={qrValue}
-                size={50}
-                level="L"
-                bgColor="#ffffff"
-                fgColor="#000000"
-              />
-            </div>
-          </div>
 
-          {/* 우측: TERMS & CONDITIONS (압축형 약관) */}
-          <div>
-            <div
-              style={{
-                fontSize: '8px',
-                fontWeight: 700,
-                marginBottom: '8px',
-                textDecoration: 'underline',
-              }}
-            >
-              {t.termsTitle}
-            </div>
-            <div style={{ fontSize: '5.5px', color: '#444', lineHeight: 1.4 }}>
-              {t.compactTerms.map((term, index) => (
-                <div key={index} style={{ marginBottom: '2px' }}>
-                  {index + 1}. {term}
+              <div style={{ marginBottom: '8px', fontSize: '8px' }}>
+                {displayPaymentTerms && (
+                  <div>
+                    <span style={{ color: '#666' }}>[TERMS]</span> {displayPaymentTerms}
+                  </div>
+                )}
+              </div>
+
+              {/* QR Code - 웹사이트 링크 */}
+              <div style={{ marginTop: '8px' }}>
+                <div style={{ fontSize: '7px', color: '#666', marginBottom: '3px' }}>
+                  SCAN TO VISIT WEBSITE
                 </div>
-              ))}
+                <QRCode
+                  value={qrValue}
+                  size={50}
+                  level="L"
+                  bgColor="#ffffff"
+                  fgColor="#000000"
+                />
+              </div>
+            </div>
+
+            {/* 우측: TERMS & CONDITIONS (압축형 약관) */}
+            <div>
+              <div
+                style={{
+                  fontSize: '8px',
+                  fontWeight: 700,
+                  marginBottom: '8px',
+                  textDecoration: 'underline',
+                }}
+              >
+                {t.termsTitle}
+              </div>
+              <div style={{ fontSize: '5.5px', color: '#444', lineHeight: 1.4 }}>
+                {t.compactTerms.map((term, index) => (
+                  <div key={index} style={{ marginBottom: '2px' }}>
+                    {index + 1}. {term}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* 회사 정보 */}
+        )}
+        {/* 회사 정보 (Localized) */}
         <div
           style={{
             display: 'flex',
@@ -622,13 +660,13 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
           }}
         >
           <div style={{ fontWeight: 600 }}>
-            Invisible Works
+            {companyInfo.name}
           </div>
           <div style={{ textAlign: 'center' }}>
-            {data.companyAddress}
+            {companyInfo.address}
           </div>
           <div style={{ textAlign: 'right' }}>
-            invisibleworks.co
+            {companyInfo.website}
           </div>
         </div>
 
@@ -642,18 +680,36 @@ export function DetailedQuote({ data, pageNumber = 1, language = 'ko' }: Templat
             color: '#999',
           }}
         >
-          1 / 2
+          {pageNumber} / {pageInfo.totalPages}
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
 /**
  * 세부 견적서 2페이지 - 세부 약관
  */
-function DetailedQuotePage2({ data, language = 'ko' }: { data: QuoteData; language?: QuoteLanguage }) {
+function DetailedQuotePage2({
+  data,
+  language = 'ko',
+  pageNumber = 2,
+  totalPages = 2
+}: {
+  data: QuoteData;
+  language?: QuoteLanguage;
+  pageNumber?: number;
+  totalPages?: number;
+}) {
   const t = getTranslations(language);
+  const companyInfo = getCompanyInfo(language, {
+    name: data.companyName,
+    representative: data.companyRepresentative,
+    businessNumber: data.companyBusinessNumber,
+    email: data.companyEmail,
+    address: data.companyAddress,
+    website: data.companyWebsite,
+  });
 
   return (
     <div
@@ -770,13 +826,13 @@ function DetailedQuotePage2({ data, language = 'ko' }: { data: QuoteData; langua
         }}
       >
         <div style={{ fontWeight: 600 }}>
-          Invisible Works
+          {companyInfo.name}
         </div>
         <div style={{ textAlign: 'center' }}>
           {language === 'ko' ? '본 약관은 견적서 발행일 기준으로 적용됩니다.' : 'These terms apply as of the quotation issue date.'}
         </div>
         <div style={{ textAlign: 'right' }}>
-          invisibleworks.co
+          {companyInfo.website}
         </div>
       </div>
 
@@ -790,7 +846,7 @@ function DetailedQuotePage2({ data, language = 'ko' }: { data: QuoteData; langua
           color: '#999',
         }}
       >
-        2 / 2
+        {pageNumber} / {totalPages}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas-pro';
 import { FULL_WIDTH_MM, FULL_HEIGHT_MM, BusinessCardData } from './types';
 
 interface GeneratePDFOptions {
@@ -70,25 +70,25 @@ export async function svgToPngBase64(svgElement: SVGElement): Promise<string> {
       const canvas = document.createElement('canvas');
       canvas.width = img.width * 2;
       canvas.height = img.height * 2;
-      
+
       const ctx = canvas.getContext('2d');
       if (!ctx) {
         reject(new Error('Failed to get canvas context'));
         return;
       }
-      
+
       ctx.scale(2, 2);
       ctx.drawImage(img, 0, 0);
-      
+
       URL.revokeObjectURL(url);
       resolve(canvas.toDataURL('image/png'));
     };
-    
+
     img.onerror = () => {
       URL.revokeObjectURL(url);
       reject(new Error('Failed to load SVG'));
     };
-    
+
     img.src = url;
   });
 }
@@ -109,11 +109,11 @@ export async function processSvgFile(file: File): Promise<string> {
   const parser = new DOMParser();
   const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
   const svgElement = svgDoc.querySelector('svg');
-  
+
   if (!svgElement) {
     throw new Error('Invalid SVG file');
   }
-  
+
   // Set default dimensions if not present
   if (!svgElement.getAttribute('width')) {
     svgElement.setAttribute('width', '200');
@@ -121,6 +121,6 @@ export async function processSvgFile(file: File): Promise<string> {
   if (!svgElement.getAttribute('height')) {
     svgElement.setAttribute('height', '200');
   }
-  
+
   return svgToPngBase64(svgElement);
 }

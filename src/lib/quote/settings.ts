@@ -73,6 +73,9 @@ export interface QuoteSettings {
 // ═══════════════════════════════════════════════════════════════
 // 기본 설정값 (지침서 기준)
 // ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// 기본 설정값 (지침서 기준)
+// ═══════════════════════════════════════════════════════════════
 export const DEFAULT_SETTINGS: QuoteSettings = {
   pageCost: {
     tiers: [
@@ -128,6 +131,48 @@ export const DEFAULT_SETTINGS: QuoteSettings = {
 
   customFields: [],
 };
+
+// ═══════════════════════════════════════════════════════════════
+// 다국어 회사/은행 정보 헬퍼
+// ═══════════════════════════════════════════════════════════════
+export const COMPANY_INFO_EN = {
+  name: 'Invisible Works',
+  representative: 'Yutaek Oh',
+  businessNumber: '377-44-01126',
+  email: 'invisibleworks.office@gmail.com',
+  address: '33-11, Myeongnyun-ro 21-gil, Jung-gu, Daegu, Republic of Korea',
+  website: 'invisibleworks.co',
+};
+
+export const BANK_INFO_EN = {
+  bankName: 'Kakao Bank',
+  accountNumber: '3333-14-9478697',
+  accountHolder: 'Yutaek Oh (MZ Studio)',
+};
+
+export function getCompanyInfo(language: QuoteLanguage = 'ko', currentInfo?: QuoteSettings['companyInfo']) {
+  // If currentInfo is provided and differs from default KO, return it (user custom input)
+  if (currentInfo && currentInfo.name !== DEFAULT_SETTINGS.companyInfo.name) {
+    return currentInfo;
+  }
+
+  if (language === 'en') {
+    return COMPANY_INFO_EN;
+  }
+  return DEFAULT_SETTINGS.companyInfo;
+}
+
+export function getBankInfo(language: QuoteLanguage = 'ko', currentInfo?: QuoteSettings['bankInfo']) {
+  // If currentInfo is provided and differs from default KO, return it (user custom input)
+  if (currentInfo && currentInfo.accountNumber !== DEFAULT_SETTINGS.bankInfo.accountNumber) {
+    return currentInfo;
+  }
+
+  if (language === 'en') {
+    return BANK_INFO_EN;
+  }
+  return DEFAULT_SETTINGS.bankInfo;
+}
 
 // ═══════════════════════════════════════════════════════════════
 // 비용 계산 유틸리티
@@ -258,23 +303,34 @@ export function formatWon(amount: number): string {
  * 서버 옵션 텍스트 생성 (미정 시)
  */
 export function getServerOptionsText(
-  settings: QuoteSettings = DEFAULT_SETTINGS
+  settings: QuoteSettings = DEFAULT_SETTINGS,
+  language: QuoteLanguage = 'ko'
 ): string {
   const { year1, year2, year3 } = settings.serverCost;
+  if (language === 'en') {
+    return `1yr ₩${year1.toLocaleString()} / 2yrs ₩${year2.toLocaleString()} / 3yrs ₩${year3.toLocaleString()}`;
+  }
   return `1년 ${formatWon(year1)} / 2년 ${formatWon(year2)} / 3년 ${formatWon(year3)}`;
 }
 
 export function getDomainOptionsText(
-  settings: QuoteSettings = DEFAULT_SETTINGS
+  settings: QuoteSettings = DEFAULT_SETTINGS,
+  language: QuoteLanguage = 'ko'
 ): string {
   const { perYear, transfer } = settings.domainCost;
+  if (language === 'en') {
+    return `New: ₩${perYear.toLocaleString()}/yr × Years / Transfer: +₩${transfer.toLocaleString()}`;
+  }
   return `신규: 연 ${formatWon(perYear)} × 사용연수 / 이전: +${formatWon(transfer)}`;
 }
 
 // ═══════════════════════════════════════════════════════════════
 // 기능 비용 계산
 // ═══════════════════════════════════════════════════════════════
-import type { FeatureType, FeatureSelection, ScreenBlocks, UIUXStyle, SpecialNoteType } from './types';
+// ═══════════════════════════════════════════════════════════════
+// 기능 비용 계산
+// ═══════════════════════════════════════════════════════════════
+import type { FeatureType, FeatureSelection, ScreenBlocks, UIUXStyle, SpecialNoteType, QuoteLanguage } from './types';
 
 // ═══════════════════════════════════════════════════════════════
 // 특이사항 → 항목 변환 설정
@@ -284,28 +340,43 @@ import type { FeatureType, FeatureSelection, ScreenBlocks, UIUXStyle, SpecialNot
  * Each note generates a 'text' type item with "별도 상담" value
  */
 export const SPECIAL_NOTE_ITEM_CONFIG: Record<SpecialNoteType, {
-  description: string;
-  subItems: string[];
+  description: { ko: string; en: string };
+  subItems: { ko: string[]; en: string[] };
 }> = {
   multilingual: {
-    description: '다국어 사이트 구축',
-    subItems: ['번역 및 다국어 라우팅 설정', '언어별 콘텐츠 관리 시스템'],
+    description: { ko: '다국어 사이트 구축', en: 'Multilingual Site Setup' },
+    subItems: {
+      ko: ['번역 및 다국어 라우팅 설정', '언어별 콘텐츠 관리 시스템'],
+      en: ['Translation & Multilingual Routing', 'Content Management per Language']
+    },
   },
   renewal: {
-    description: '기존 사이트 이전/리뉴얼',
-    subItems: ['기존 콘텐츠 마이그레이션', '도메인 및 서버 이전 작업'],
+    description: { ko: '기존 사이트 이전/리뉴얼', en: 'Site Renewal / Migration' },
+    subItems: {
+      ko: ['기존 콘텐츠 마이그레이션', '도메인 및 서버 이전 작업'],
+      en: ['Content Migration', 'Domain & Server Transfer']
+    },
   },
   external: {
-    description: '외부 서비스 연동',
-    subItems: ['API 연동 개발', '인증 및 데이터 동기화'],
+    description: { ko: '외부 서비스 연동', en: 'External Service Integration' },
+    subItems: {
+      ko: ['API 연동 개발', '인증 및 데이터 동기화'],
+      en: ['API Development', 'Auth & Data Sync']
+    },
   },
   urgent: {
-    description: '긴급 일정 가산',
-    subItems: ['우선 작업 배정', '초과 근무 비용 포함'],
+    description: { ko: '긴급 일정 가산', en: 'Urgent Schedule Surcharge' },
+    subItems: {
+      ko: ['우선 작업 배정', '초과 근무 비용 포함'],
+      en: ['Priority Work Allocation', 'Overtime Costs Included']
+    },
   },
   security: {
-    description: '내부 보안 규정 대응',
-    subItems: ['보안 감사 대응', '특수 접근 제한 설정'],
+    description: { ko: '내부 보안 규정 대응', en: 'Security Compliance Force' },
+    subItems: {
+      ko: ['보안 감사 대응', '특수 접근 제한 설정'],
+      en: ['Security Audit Response', 'Access Control Setup']
+    },
   },
 };
 
@@ -381,9 +452,13 @@ import { createNewItem, QuoteItem, QuoteData, FEATURE_LABELS } from './types';
 /**
  * 프로젝트 정보를 기반으로 견적 항목 리스트 생성
  */
+/**
+ * 프로젝트 정보를 기반으로 견적 항목 리스트 생성
+ */
 export function generateEstimateQuoteItems(
   data: QuoteData,
-  settings: QuoteSettings = DEFAULT_SETTINGS
+  settings: QuoteSettings = DEFAULT_SETTINGS,
+  language: QuoteLanguage = 'ko'
 ): QuoteItem[] {
   const items: QuoteItem[] = [];
   const { screenBlocks, uiuxStyle, featureSelection, specialNotes } = data;
@@ -397,13 +472,21 @@ export function generateEstimateQuoteItems(
     const minCost = applyUiuxMultiplier(pageCosts.min, isFancy, settings);
     const maxCost = applyUiuxMultiplier(pageCosts.max, isFancy, settings);
 
-    const desc = `웹사이트 기획 및 디자인/개발 (${screenBlocks.min}~${screenBlocks.max} 블록)`;
+    const desc = language === 'en'
+      ? `Website Planning & Design/Dev (${screenBlocks.min}~${screenBlocks.max} blocks)`
+      : `웹사이트 기획 및 디자인/개발 (${screenBlocks.min}~${screenBlocks.max} 블록)`;
+
     const subItems = [];
-    if (isFancy) subItems.push('UI/UX: 화려한 스타일 적용 (1.2배)');
-    else subItems.push('UI/UX: 일반 스타일 적용');
+    if (isFancy) {
+      subItems.push(language === 'en' ? 'UI/UX: Premium Style (1.2x)' : 'UI/UX: 화려한 스타일 적용 (1.2배)');
+    } else {
+      subItems.push(language === 'en' ? 'UI/UX: Standard Style' : 'UI/UX: 일반 스타일 적용');
+    }
 
     // 리뉴얼인 경우
-    if (specialNotes.includes('renewal')) subItems.push('기존 사이트 리뉴얼');
+    if (specialNotes.includes('renewal')) {
+      subItems.push(language === 'en' ? 'Legacy Site Renewal' : '기존 사이트 리뉴얼');
+    }
 
     items.push({
       ...createNewItem(),
@@ -422,24 +505,30 @@ export function generateEstimateQuoteItems(
     if (['board', 'shopping'].includes(feature)) {
       let min = 0;
       let max = 0;
-      let name = FEATURE_LABELS[feature];
+      let name = FEATURE_LABELS[feature]; // TODO: This needs translation if FEATURE_LABELS is just string.
+      // Better to hardcode per feature for robust translation here or update FEATURE_LABELS structure.
+      // For now, let's switch string logic.
+
+      let featureName = '';
       let sub = '';
 
       if (feature === 'board') {
         min = max = settings.featureCost.board;
-        sub = '게시판 기능 구현';
+        featureName = language === 'en' ? 'Board System' : '게시판';
+        sub = language === 'en' ? 'Post/Comment Features' : '게시판 기능 구현';
       } else if (feature === 'shopping') {
         const pCount = featureSelection.productCount || { min: 20, max: 50 };
         min = calculateShoppingCost(pCount.min, settings);
         max = calculateShoppingCost(pCount.max, settings);
-        name += ` (상품 ${pCount.min}~${pCount.max}개)`;
-        sub = '쇼핑몰 결제 및 상품 관리 기능';
+        featureName = language === 'en' ? 'Shopping/Payment' : '쇼핑·결제';
+        featureName += language === 'en' ? ` (${pCount.min}~${pCount.max} products)` : ` (상품 ${pCount.min}~${pCount.max}개)`;
+        sub = language === 'en' ? 'Payment Gateway & Product Mgmt' : '쇼핑몰 결제 및 상품 관리 기능';
       }
 
       items.push({
         ...createNewItem(),
         id: `auto-feature-${feature}`,
-        description: `기능 추가: ${name}`,
+        description: language === 'en' ? `Feature: ${featureName}` : `기능 추가: ${featureName}`,
         subItems: [sub],
         quantity: 1,
         unitPrice: min,
@@ -458,12 +547,12 @@ export function generateEstimateQuoteItems(
       items.push({
         ...createNewItem(),
         id: `auto-special-${note}`,
-        description: config.description,
-        subItems: config.subItems,
+        description: config.description[language],
+        subItems: config.subItems[language],
         quantity: 1,
         unitPrice: 0,
         inputType: 'text',
-        textValue: '별도 상담',
+        textValue: language === 'en' ? 'TBD' : '별도 상담',
       });
     }
   });
@@ -474,8 +563,8 @@ export function generateEstimateQuoteItems(
     items.push({
       ...createNewItem(),
       id: 'auto-server',
-      description: `서버 유지관리 (${data.serverOption.years}년)`,
-      subItems: ['웹호스팅 및 서버 관리'],
+      description: language === 'en' ? `Server Maintenance (${data.serverOption.years} yr)` : `서버 유지관리 (${data.serverOption.years}년)`,
+      subItems: language === 'en' ? ['Hosting & Server Mgmt'] : ['웹호스팅 및 서버 관리'],
       quantity: 1,
       unitPrice: serverCost,
     });
@@ -486,12 +575,17 @@ export function generateEstimateQuoteItems(
     const years = data.domainOption.years || 1;
     const isTransfer = data.domainOption.type === 'transfer';
     const domainCost = calculateDomainCost(years, isTransfer, settings);
-    const typeText = isTransfer ? '이전' : '신규 등록';
+    const typeText = isTransfer
+      ? (language === 'en' ? 'Transfer' : '이전')
+      : (language === 'en' ? 'New Reg' : '신규 등록');
+
     items.push({
       ...createNewItem(),
       id: 'auto-domain',
-      description: `도메인 ${typeText} (${years}년)`,
-      subItems: isTransfer ? ['기존 도메인 이전 작업 포함'] : ['도메인 등록 및 설정'],
+      description: language === 'en' ? `Domain ${typeText} (${years} yr)` : `도메인 ${typeText} (${years}년)`,
+      subItems: isTransfer
+        ? (language === 'en' ? ['Includes Transfer Process'] : ['기존 도메인 이전 작업 포함'])
+        : (language === 'en' ? ['Registration & Setup'] : ['도메인 등록 및 설정']),
       quantity: 1,
       unitPrice: domainCost,
     });

@@ -3,21 +3,24 @@
 import { QuoteItem, A4_HEIGHT_PX } from './types';
 
 // Page layout constants (in pixels at 72dpi)
+// Page layout constants (in pixels at 72dpi)
+// Page layout constants (in pixels at 72dpi)
 export const PAGE_PADDING_TOP = 40;
-export const PAGE_PADDING_BOTTOM = 100; // Space for footer
+export const PAGE_PADDING_BOTTOM = 260; // Balanced: ~240px needed + 20px safety
+export const PAGE_PADDING_BOTTOM_CONTINUATION = 120; // Minimal footer for continuation pages (Company Info + Page No)
 export const HEADER_HEIGHT_FIRST_PAGE = 280; // Logo + title + info grid + table header
 export const HEADER_HEIGHT_CONTINUATION = 100; // Minimal header for continuation pages
 export const FOOTER_HEIGHT = 80;
 export const TABLE_HEADER_HEIGHT = 40;
 
 // Item height estimates (in pixels)
-export const ITEM_BASE_HEIGHT = 45; // Base height for an item row
+export const ITEM_BASE_HEIGHT = 60; // Increased base height to account for text wrapping (safe estimate)
 export const ITEM_SUBITEM_HEIGHT = 16; // Height per sub-item
-export const TOTALS_SECTION_HEIGHT = 200; // Height for totals section
+export const TOTALS_SECTION_HEIGHT = 260; // Adjusted for better fit (not too aggressive)
 
 // Available content height per page type
 export const CONTENT_HEIGHT_FIRST_PAGE = A4_HEIGHT_PX - PAGE_PADDING_TOP - HEADER_HEIGHT_FIRST_PAGE - PAGE_PADDING_BOTTOM;
-export const CONTENT_HEIGHT_CONTINUATION = A4_HEIGHT_PX - PAGE_PADDING_TOP - HEADER_HEIGHT_CONTINUATION - PAGE_PADDING_BOTTOM;
+export const CONTENT_HEIGHT_CONTINUATION = A4_HEIGHT_PX - PAGE_PADDING_TOP - HEADER_HEIGHT_CONTINUATION - PAGE_PADDING_BOTTOM_CONTINUATION;
 
 /**
  * Calculate estimated height for a quote item
@@ -42,32 +45,46 @@ export function paginateItems(items: QuoteItem[]): QuoteItem[][] {
   const pages: QuoteItem[][] = [];
   let currentPage: QuoteItem[] = [];
   let currentHeight = 0;
+
+  // Start with First Page settings
   let isFirstPage = true;
+  let availableHeight = CONTENT_HEIGHT_FIRST_PAGE;
 
-  // First page needs less content height due to larger header
-  let availableHeight = CONTENT_HEIGHT_FIRST_PAGE - TOTALS_SECTION_HEIGHT;
-
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
     const itemHeight = calculateItemHeight(item);
 
-    // Check if item fits on current page
-    if (currentHeight + itemHeight <= availableHeight) {
-      currentPage.push(item);
-      currentHeight += itemHeight;
-    } else {
-      // Start a new page
-      pages.push(currentPage);
-      currentPage = [item];
-      currentHeight = itemHeight;
+    // 1. Check if Item fits
+    if (currentHeight + itemHeight > availableHeight) {
+      // Push current page
+      if (currentPage.length > 0) {
+        pages.push(currentPage);
+      }
+
+      // Reset for next page (Continuation Page)
+      currentPage = [];
+      currentHeight = 0;
       isFirstPage = false;
       availableHeight = CONTENT_HEIGHT_CONTINUATION;
     }
+
+    currentPage.push(item);
+    currentHeight += itemHeight;
+
+    // 2. If Last Item, Check if Totals fit
+    if (i === items.length - 1) {
+      if (currentHeight + TOTALS_SECTION_HEIGHT > availableHeight) {
+        // Totals don't fit on this page, push current items
+        // and start a new empty page just for totals
+        pages.push(currentPage);
+        currentPage = [];
+        // The new page will be a continuation page (unless it was already page 1 and we split, but logic holds)
+      }
+    }
   }
 
-  // Add the last page
-  if (currentPage.length > 0) {
-    pages.push(currentPage);
-  }
+  // Push the final page
+  pages.push(currentPage);
 
   return pages.length > 0 ? pages : [[]];
 }

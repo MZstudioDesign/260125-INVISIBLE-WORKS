@@ -8,8 +8,9 @@ import {
   A4_WIDTH_PX,
   A4_HEIGHT_PX,
 } from '@/lib/quote/types';
-import { getServerOptionsText, getDomainOptionsText, formatWon, generateEstimateQuoteItems } from '@/lib/quote/settings';
+import { getServerOptionsText, getDomainOptionsText, formatWon, generateEstimateQuoteItems, DEFAULT_SETTINGS, getCompanyInfo, getBankInfo } from '@/lib/quote/settings';
 import { getTranslations, formatCurrencyByLanguage, formatDateByLanguage } from '@/lib/quote/translations';
+import { getPageInfo } from '@/lib/quote/pagination';
 
 // Helper for multi-line currency with language support
 function MultiLineCurrency({
@@ -53,14 +54,39 @@ export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateP
   // Get translations
   const t = getTranslations(language);
 
-  // 1. 자동 생성 항목 (프로젝트 정보 기반)
-  const autoItems = generateEstimateQuoteItems(data);
+  // 1. 자동 견적 항목 생성 (with Language)
+  const estimateItems = generateEstimateQuoteItems(data, DEFAULT_SETTINGS, language);
 
-  // 2. 전체 항목 병합 (빈 항목 제외)
+  // 2. 수동 입력 항목 (description이 있는 것만)
   const manualItems = data.items.filter(item => item.description.trim() !== '');
-  const allItems = [...autoItems, ...manualItems];
 
-  // 3. 기본 제작비 계산 (percent 계산용)
+  // 3. 합치기
+  const allItems = [...estimateItems, ...manualItems];
+
+  // Localized Info
+  const companyInfo = getCompanyInfo(language, {
+    name: data.companyName,
+    representative: data.companyRepresentative,
+    businessNumber: data.companyBusinessNumber,
+    email: data.companyEmail,
+    address: data.companyAddress,
+    website: data.companyWebsite,
+  });
+
+  const bankInfo = getBankInfo(language, {
+    bankName: data.bankName,
+    accountNumber: data.bankAccountNumber,
+    accountHolder: data.bankAccountName,
+  });
+
+  const subtotal = calculateSubtotal(allItems);
+
+  // Pagination
+  // SimpleQuote has a smaller footer (just page num & company info), so we can use less padding (e.g., 80px)
+  // compared to DetailedQuote which requires ~180px.
+  const pageInfo = getPageInfo(allItems, pageNumber, false, 80);
+  const { items: pageItems, showTotals, totalPages } = pageInfo;
+
   const pageItem = allItems.find(item => item.id === 'auto-page-cost');
   const baseCost = pageItem ? { min: pageItem.unitPrice, max: pageItem.maxPrice || pageItem.unitPrice } : { min: 0, max: 0 };
 
@@ -71,15 +97,7 @@ export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateP
   });
 
   // 5. 합계 계산 (범위 지원 + percent 반영)
-  const subtotal = allItems.reduce((acc, item) => {
-    if (item.inputType === 'text') return acc;
-    if (item.inputType === 'percent' && item.ratio) {
-      const percentAmt = getPercentAmount(item.ratio);
-      return { min: acc.min + percentAmt.min, max: acc.max + percentAmt.max };
-    }
-    const itemTotal = calculateItemTotal(item);
-    return { min: acc.min + itemTotal.min, max: acc.max + itemTotal.max };
-  }, { min: 0, max: 0 });
+  // Subtotal is calculated above using calculateSubtotal(allItems)
 
   const vat = calculateVAT(subtotal, data.vatRate);
   const total = calculateTotal(subtotal, vat);
@@ -228,7 +246,7 @@ export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateP
             {data.companyName || 'Invisible Works'}
           </div>
           <div style={{ fontSize: '11px', color: mutedColor, lineHeight: 1.6 }}>
-            {data.companyAddress}
+            {companyInfo.address}
             {data.companyPhone && <><br />{data.companyPhone}</>}
             {data.companyEmail && <><br />{data.companyEmail}</>}
           </div>
@@ -261,7 +279,7 @@ export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateP
           TABLE BODY
       ═══════════════════════════════════════════════════════════════ */}
       <div style={{ flex: 1, minHeight: '180px' }}>
-        {allItems.map((item, index) => {
+        {pageItems.map((item, index) => {
           const itemTotal = calculateItemTotal(item);
           return (
             <div
@@ -322,137 +340,168 @@ export function SimpleQuote({ data, pageNumber = 1, language = 'ko' }: TemplateP
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          TOTALS
+          TOTALS (Only on last page)
       ═══════════════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginTop: '24px',
-          paddingTop: '16px',
-        }}
-      >
-        {/* 좌측: 비고 + 옵션 안내 (항목처럼 가로 레이아웃) */}
-        <div style={{ flex: 1, paddingRight: '40px' }}>
-          {/* 비고 - 항목처럼 한 줄 */}
-          {data.notes && (
+      {showTotals && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '24px',
+            paddingTop: '16px',
+          }}
+        >
+          {/* 좌측: 비고 + 옵션 안내 (항목처럼 가로 레이아웃) */}
+          <div style={{ flex: 1, paddingRight: '40px' }}>
+            {/* 계좌 정보 (Localized) */}
+            {bankInfo.bankName && bankInfo.accountNumber && (
+              <div
+                style={{
+                  padding: '12px 16px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  fontSize: '9px',
+                  marginBottom: '16px', // Added margin-bottom for spacing
+                }}
+              >
+                <div style={{ fontWeight: 600, marginBottom: '6px', fontSize: '10px' }}>[{t.bankAccount}]</div>
+                <div style={{ marginBottom: '2px' }}>{bankInfo.bankName} {bankInfo.accountNumber}</div>
+                <div style={{ color: '#666' }}>{t.accountHolder}: {bankInfo.accountHolder}</div>
+              </div>
+            )}
+            {/* 비고 - 항목처럼 한 줄 */}
+            {data.notes && (
+              <div
+                style={{
+                  display: 'flex',
+                  fontSize: '10px',
+                  borderBottom: `1px solid ${borderColor}`,
+                  paddingBottom: '10px',
+                  marginBottom: '10px',
+                }}
+              >
+                <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
+                  {t.notes}
+                </div>
+                <div style={{ flex: 1, color: mutedColor, lineHeight: 1.5 }}>
+                  {data.notes}
+                </div>
+              </div>
+            )}
+
+            {/* 서버/도메인 미정 시 옵션 가격표 - 한 줄씩 */}
+            {(data.serverOption?.status === 'pending' || data.domainOption?.status === 'pending') && (
+              <div style={{ fontSize: '10px' }}>
+                {data.serverOption?.status === 'pending' && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      borderBottom: `1px solid ${borderColor}`,
+                      paddingBottom: '8px',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
+                      {t.server}
+                    </div>
+                    <div style={{ flex: 1, color: mutedColor }}>
+                      {getServerOptionsText(DEFAULT_SETTINGS, language)} ({t.pending})
+                    </div>
+                  </div>
+                )}
+                {data.domainOption?.status === 'pending' && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      borderBottom: `1px solid ${borderColor}`,
+                      paddingBottom: '8px',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
+                      {t.domain}
+                    </div>
+                    <div style={{ flex: 1, color: mutedColor }}>
+                      {getDomainOptionsText(DEFAULT_SETTINGS, language)} ({t.pending})
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* 우측: 합계 - 강조 박스 */}
+          <div
+            style={{
+              width: '220px',
+              backgroundColor: '#fafafa',
+              padding: '16px',
+              borderRadius: '4px',
+            }}
+          >
             <div
               style={{
                 display: 'flex',
-                fontSize: '10px',
-                borderBottom: `1px solid ${borderColor}`,
-                paddingBottom: '10px',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                fontSize: '11px',
                 marginBottom: '10px',
+                color: mutedColor,
               }}
             >
-              <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                {t.notes}
-              </div>
-              <div style={{ flex: 1, color: mutedColor, lineHeight: 1.5 }}>
-                {data.notes}
-              </div>
+              <span>{t.subtotal}</span>
+              <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
+                <MultiLineCurrency amount={subtotal} language={language} />
+              </span>
             </div>
-          )}
-
-          {/* 서버/도메인 미정 시 옵션 가격표 - 한 줄씩 */}
-          {(data.serverOption?.status === 'pending' || data.domainOption?.status === 'pending') && (
-            <div style={{ fontSize: '10px' }}>
-              {data.serverOption?.status === 'pending' && (
-                <div
-                  style={{
-                    display: 'flex',
-                    borderBottom: `1px solid ${borderColor}`,
-                    paddingBottom: '8px',
-                    marginBottom: '8px',
-                  }}
-                >
-                  <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                    {t.server}
-                  </div>
-                  <div style={{ flex: 1, color: mutedColor }}>
-                    {getServerOptionsText()} ({t.pending})
-                  </div>
-                </div>
-              )}
-              {data.domainOption?.status === 'pending' && (
-                <div
-                  style={{
-                    display: 'flex',
-                    borderBottom: `1px solid ${borderColor}`,
-                    paddingBottom: '8px',
-                    marginBottom: '8px',
-                  }}
-                >
-                  <div style={{ width: '60px', fontWeight: 700, color: primaryColor, flexShrink: 0 }}>
-                    {t.domain}
-                  </div>
-                  <div style={{ flex: 1, color: mutedColor }}>
-                    {getDomainOptionsText()} ({t.pending})
-                  </div>
-                </div>
-              )}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                fontSize: '11px',
+                marginBottom: '10px',
+                color: mutedColor,
+              }}
+            >
+              <span>{t.vat} ({data.vatRate}%)</span>
+              <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
+                <MultiLineCurrency amount={vat} language={language} />
+              </span>
             </div>
-          )}
-        </div>
-
-        {/* 우측: 합계 - 강조 박스 */}
-        <div
-          style={{
-            width: '220px',
-            backgroundColor: '#fafafa',
-            padding: '16px',
-            borderRadius: '4px',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              fontSize: '11px',
-              marginBottom: '10px',
-              color: mutedColor,
-            }}
-          >
-            <span>{t.subtotal}</span>
-            <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={subtotal} language={language} />
-            </span>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              fontSize: '11px',
-              marginBottom: '10px',
-              color: mutedColor,
-            }}
-          >
-            <span>{t.vat} ({data.vatRate}%)</span>
-            <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={vat} language={language} />
-            </span>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              fontSize: '16px',
-              fontWeight: 800,
-              marginTop: '12px',
-              paddingTop: '12px',
-              borderTop: `2px solid ${primaryColor}`,
-              color: primaryColor,
-            }}
-          >
-            <span>{t.total}</span>
-            <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
-              <MultiLineCurrency amount={total} isTotal language={language} />
-            </span>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                fontSize: '16px',
+                fontWeight: 800,
+                marginTop: '12px',
+                paddingTop: '12px',
+                borderTop: `2px solid ${primaryColor}`,
+                color: primaryColor,
+              }}
+            >
+              <span>{t.total}</span>
+              <span style={{ fontFeatureSettings: '"tnum"', textAlign: 'right' }}>
+                <MultiLineCurrency amount={total} isTotal language={language} />
+              </span>
+            </div>
           </div>
         </div>
+      )}
+
+      {/* Page Number */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '12px',
+          right: '48px',
+          fontSize: '10px',
+          color: '#999',
+        }}
+      >
+        {pageNumber} / {totalPages}
       </div>
 
     </div>
