@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { Suspense, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -141,6 +141,14 @@ function ProjectCard({ project, index, onClick, categoryLabel }: ProjectCardProp
 // ============================================
 
 export default function PortfolioPage() {
+  return (
+    <Suspense>
+      <PortfolioPageInner />
+    </Suspense>
+  );
+}
+
+function PortfolioPageInner() {
   const params = useParams();
   const searchParams = useSearchParams();
   const locale = params.locale as string;
