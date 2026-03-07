@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>아뜰리에 네일 — 손끝에서 완성되는 예술</title>
+  <meta name="description" content="가로수길 프리미엄 네일 아트 스튜디오. 당신만의 스타일을 디자인합니다." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    /* ========================= */
+    /* CSS VARS — DESIGN SYSTEM  */
+    /* ========================= */
+    :root {
+      --bg-page: #FAFAF8;
+      --bg-surface: #F5F0ED;
+      --bg-card: #FFFFFF;
+      --accent-primary: #C4959A;
+      --accent-secondary: #8B7355;
+      --link-color: #C4959A;
+      --text-primary: #2C2421;
+      --text-secondary: #6B5E57;
+      --text-muted: #A09890;
+      --color-success: #7A9B76;
+      --color-info: #7E9BB5;
+      --color-warning: #D4A76A;
+      --color-danger: #C47070;
+      --font-ui: 'Cormorant Garamond', serif;
+      --font-data: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+      --w-normal: 400;
+      --w-medium: 500;
+      --w-semibold: 600;
+      --w-bold: 700;
+      --type-page-title: clamp(2.5rem, 6vw, 4.5rem);
+      --type-section-title: clamp(1.75rem, 4vw, 3rem);
+      --type-card-title: clamp(1.125rem, 2vw, 1.375rem);
+      --type-body: 1rem;
+      --type-button: 0.875rem;
+      --type-meta: 0.75rem;
+      --ls-tight: -0.02em;
+      --ls-snug: -0.01em;
+      --ls-normal: 0;
+      --ls-wide: 0.05em;
+      --lh-page-title: 1.3;
+      --lh-section-title: 1.25;
+      --lh-card-title: 1.4;
+      --lh-body: 1.7;
+      --lh-button: 1.2;
+      --lh-meta: 1.5;
+      --gap-4: 16px;
+      --gap-6: 24px;
+      --gap-7: 32px;
+      --gap-8: 40px;
+      --gap-9: 48px;
+      --gap-10: 64px;
+      --pad-section: 80px 24px;
+      --pad-card: 24px;
+      --pad-button: 14px 32px;
+      --r-none: 0px;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 16px;
+      --sh-none: none;
+      --sh-sm: 0 1px 3px rgba(44,36,33,0.06);
+      --sh-md: 0 4px 12px rgba(44,36,33,0.08);
+      --sh-lg: 0 12px 24px rgba(44,36,33,0.1);
+      --border-width: 1px;
+      --border-default: #E8E2DD;
+      --border-strong: #C4959A;
+      --focus-ring: 2px solid #C4959A;
+      --icon-size-nav: 24px;
+      --icon-size-action: 20px;
+      --icon-size-inline: 16px;
+      --icon-color-active: #2C2421;
+      --icon-color-muted: #A09890;
+      --icon-color-on-accent: #FFFFFF;
+      --content-max-width: 1200px;
+      --content-padding-x: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      :root {
+        --content-padding-x: 48px;
+      }
+    }
+
+    /* ========================= */
+    /* BASE STYLES               */
+    /* ========================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-data);
+      font-weight: var(--w-normal);
+      color: var(--text-primary);
+      background-color: var(--bg-page);
+      line-height: var(--lh-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-ui);
+      letter-spacing: var(--ls-tight);
+    }
+
+    h1 {
+      font-size: var(--type-page-title);
+      font-weight: var(--w-bold);
+      line-height: var(--lh-page-title);
+    }
+
+    h2 {
+      font-size: var(--type-section-title);
+      font-weight: var(--w-semibold);
+      line-height: var(--lh-section-title);
+      letter-spacing: var(--ls-snug);
+    }
+
+    h3 {
+      font-size: var(--type-card-title);
+      font-weight: var(--w-semibold);
+      line-height: var(--lh-card-title);
+      font-family: var(--font-data);
+    }
+
+    p {
+      font-size: var(--type-body);
+      line-height: var(--lh-body);
+    }
+
+    /* ========================= */
+    /* ANIMATION                 */
+    /* ========================= */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section,
+      .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ========================= */
+    /* BUTTON STYLES             */
+    /* ========================= */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--pad-button);
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+      font-family: var(--font-data);
+      font-size: var(--type-button);
+      font-weight: var(--w-medium);
+      letter-spacing: var(--ls-wide);
+      line-height: var(--lh-button);
+      border-radius: var(--r-sm);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    .btn-primary:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--pad-button);
+      background-color: transparent;
+      color: #FFFFFF;
+      font-family: var(--font-data);
+      font-size: var(--type-button);
+      font-weight: var(--w-medium);
+      letter-spacing: var(--ls-wide);
+      line-height: var(--lh-button);
+      border-radius: var(--r-sm);
+      border: 1px solid rgba(255,255,255,0.6);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #FFFFFF;
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .btn-accent-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--pad-button);
+      background-color: transparent;
+      color: var(--accent-primary);
+      font-family: var(--font-data);
+      font-size: var(--type-button);
+      font-weight: var(--w-medium);
+      letter-spacing: var(--ls-wide);
+      line-height: var(--lh-button);
+      border-radius: var(--r-sm);
+      border: 1px solid var(--accent-primary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-accent-outline:hover {
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    /* ========================= */
+    /* EYEBROW META              */
+    /* ========================= */
+    .eyebrow {
+      font-family: var(--font-data);
+      font-size: var(--type-meta);
+      font-weight: var(--w-medium);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      line-height: var(--lh-meta);
+    }
+
+    /* ========================= */
+    /* NAVIGATION                */
+    /* ========================= */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background-color: rgba(250, 250, 248, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-default);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-bar.scrolled {
+      box-shadow: var(--sh-sm);
+    }
+
+    /* Hover underline for nav links */
+    .nav-link {
+      position: relative;
+      color: var(--text-secondary);
+      font-size: var(--type-meta);
+      font-weight: var(--w-medium);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent-primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* ========================= */
+    /* CARD HOVER                */
+    /* ========================= */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-md);
+    }
+
+    /* Image zoom on hover */
+    .img-zoom {
+      overflow: hidden;
+    }
+
+    .img-zoom img {
+      transition: transform 0.5s ease;
+    }
+
+    .img-zoom:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION                                                    -->
+<!-- ============================================================ -->
+<nav class="nav-bar" id="nav" aria-label="메인 내비게이션">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2" aria-label="아뜰리에 네일 홈">
+      <span style="font-family: var(--font-ui); font-size: 1.25rem; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em;">Atelier Nail</span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#artist" class="nav-link">Artist</a>
+      <a href="#booking" class="nav-link">Booking</a>
+    </div>
+
+    <!-- CTA + Mobile Menu -->
+    <div class="flex items-center gap-4">
+      <a href="#final-cta" class="btn-primary hidden sm:inline-flex" style="padding: 10px 24px; font-size: 0.8125rem;">예약하기</a>
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="메뉴 열기" aria-expanded="false">
+        <i data-lucide="menu" style="width: 24px; height: 24px; color: var(--text-primary);"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border-default); background-color: var(--bg-page);">
+    <div class="px-6 py-4 flex flex-col gap-3">
+      <a href="#portfolio" class="nav-link py-2">Portfolio</a>
+      <a href="#services" class="nav-link py-2">Services</a>
+      <a href="#artist" class="nav-link py-2">Artist</a>
+      <a href="#booking" class="nav-link py-2">Booking</a>
+      <a href="#final-cta" class="btn-primary text-center mt-2" style="padding: 12px 24px;">예약하기</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: HERO                                               -->
+<!-- MOVE: M-HERO-FULLBLEED-OVERLAY                                -->
+<!-- COMPONENT_REF: hero-luxury-serif | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-luxury-serif-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-screen flex items-center overflow-hidden" id="hero">
+  <!-- Background Image -->
+  <img src="./images/hero.jpg" alt="네일 아트 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+  <!-- Dark + Cyan Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-cyan-900/30"></div>
+  <!-- Overlapping Cyan Geometric Accent — top-right -->
+  <div class="absolute top-[8%] right-[6%] w-[340px] h-[420px] border-2 border-cyan-400/40 rounded-sm hidden lg:block" style="transform: rotate(3deg);"></div>
+  <!-- Overlapping Cyan Geometric Accent — offset frame -->
+  <div class="absolute top-[12%] right-[8%] w-[300px] h-[380px] bg-cyan-500/8 backdrop-blur-[2px] rounded-sm hidden lg:block" style="transform: rotate(-1deg);"></div>
+  <!-- Subtle Cyan glow orb -->
+  <div class="absolute top-1/3 right-[15%] w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl hidden md:block"></div>
+  <!-- Bottom accent line -->
+  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"></div>
+
+  <!-- Content Container -->
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 pt-24 pb-16 flex flex-col justify-center min-h-screen w-full">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 w-full">
+
+      <!-- Left: Text Content -->
+      <div class="max-w-xl lg:max-w-[55%] relative">
+        <!-- Decorative cyan left bar -->
+        <div class="absolute -left-4 top-0 w-[3px] h-full bg-gradient-to-b from-cyan-400 via-cyan-400/40 to-transparent hidden md:block"></div>
+        <p class="eyebrow mb-5 tracking-[0.25em] uppercase" style="color: #0ea5e9;">Garosugil Premium Nail Art Studio</p>
+        <h1 class="text-white mb-6 leading-[1.05]" style="font-size: clamp(2.8rem, 7vw, 5.2rem);">
+          손끝에서 완성되는<br><span style="color: #0ea5e9;">예술</span>
+        </h1>
+        <p class="text-white/60 mb-10 max-w-[420px]" style="font-size: var(--type-body); line-height: var(--lh-body);">
+          당신만의 스타일을 디자인합니다.<br class="hidden sm:block">
+          가로수길 아뜰리에 네일.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#final-cta" class="btn-primary">예약하기</a>
+          <a href="#portfolio" class="btn-secondary" style="border-color: rgba(14,165,233,0.4); color: #fff;">포트폴리오 보기</a>
+        </div>
+      </div>
+
+      <!-- Right: Overlapping Image Card with Cyan Border (visible on lg+) -->
+      <div class="hidden lg:block relative w-[360px] h-[440px] flex-shrink-0">
+        <!-- Cyan offset border frame behind -->
+        <div class="absolute -top-4 -left-4 w-full h-full border-2 border-cyan-400/50 rounded-sm"></div>
+        <!-- Main image card -->
+        <div class="relative w-full h-full rounded-sm overflow-hidden shadow-2xl shadow-cyan-900/20">
+          <img src="./images/hero.jpg" alt="네일 아트 디테일" class="w-full h-full object-cover" loading="eager" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        </div>
+        <!-- Small cyan tag -->
+        <div class="absolute -bottom-3 -right-3 bg-cyan-500 text-white text-xs tracking-widest uppercase px-4 py-2 rounded-sm font-medium shadow-lg">
+          Since 2019
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: ART PORTFOLIO — Seasonal Collections               -->
+<!-- MOVE: M-LAY-EDITORIAL-FEATURE (Editorial Move 1/2)            -->
+<!-- COMPONENT_REF: staggered-lookbook-4col-offset-mt12-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-lookbook-4col-offset-mt12-mt16-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="w-full py-20 lg:py-28 fade-in-section" style="background-color: var(--bg-page);" id="portfolio">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <!-- Section Header -->
+    <div class="mb-16 lg:mb-20">
+      <p class="eyebrow mb-4">Seasonal Collection</p>
+      <h2 style="color: var(--text-primary);">이번 시즌,<br>새로운 영감</h2>
+      <p class="mt-4 max-w-[440px]" style="color: var(--text-secondary);">
+        매 시즌 새롭게 선보이는<br class="hidden sm:block">
+        아뜰리에의 컬렉션을 만나보세요.
+      </p>
+    </div>
+
+    <!-- Staggered 4-Column Gallery (2:4:3:3 asymmetric) -->
+    <div class="grid grid-cols-12 gap-4 lg:gap-5">
+      <!-- Col 1: Narrow tall (col-span-2) -->
+      <div class="col-span-6 md:col-span-3 lg:col-span-2 md:mt-12 stagger-item img-zoom">
+        <div class="aspect-[2/3] rounded overflow-hidden" style="border-radius: var(--r-md);">
+          <img src="./images/portfolio_1.jpg" alt="Spring Blossom 컬렉션" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <p class="mt-3" style="font-size: var(--type-meta); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Spring Blossom</p>
+      </div>
+
+      <!-- Col 2: Main center (col-span-4) -->
+      <div class="col-span-6 md:col-span-4 lg:col-span-4 stagger-item img-zoom">
+        <div class="aspect-[3/4] rounded overflow-hidden" style="border-radius: var(--r-md);">
+          <img src="./images/portfolio_2.jpg" alt="Minimal Line Art 컬렉션" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <p class="mt-3" style="font-size: var(--type-meta); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Minimal Line Art</p>
+      </div>
+
+      <!-- Col 3: Medium (col-span-3) -->
+      <div class="col-span-6 md:col-span-3 lg:col-span-3 lg:mt-16 stagger-item img-zoom">
+        <div class="aspect-[4/5] rounded overflow-hidden" style="border-radius: var(--r-md);">
+          <img src="./images/portfolio_3.jpg" alt="Wedding Luxe 컬렉션" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <p class="mt-3" style="font-size: var(--type-meta); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Wedding Luxe</p>
+      </div>
+
+      <!-- Col 4: Small (col-span-3) -->
+      <div class="col-span-6 md:col-span-2 lg:col-span-3 lg:mt-6 stagger-item img-zoom">
+        <div class="aspect-[3/4] rounded overflow-hidden" style="border-radius: var(--r-md);">
+          <img src="./images/portfolio_4.jpg" alt="Daily Mood 컬렉션" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <p class="mt-3" style="font-size: var(--type-meta); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Daily Mood</p>
+      </div>
+    </div>
+
+    <!-- Collection Info Row: Text 4 + Gap 1 + Image 7 -->
+    <div class="grid grid-cols-12 gap-6 lg:gap-8 mt-16 lg:mt-24 items-center fade-in-section">
+      <div class="col-span-12 md:col-span-4">
+        <p class="eyebrow mb-3">Featured Work</p>
+        <h3 style="font-family: var(--font-ui); font-size: var(--type-section-title); font-weight: var(--w-semibold); color: var(--text-primary);">
+          손끝의 캔버스
+        </h3>
+        <p class="mt-4" style="color: var(--text-secondary); max-width: 360px;">
+          하나하나 핸드페인팅으로 완성되는<br class="hidden sm:block">
+          아뜰리에만의 시그니처 아트.
+        </p>
+      </div>
+      <div class="hidden lg:block col-span-1"></div>
+      <div class="col-span-12 md:col-span-8 lg:col-span-7 img-zoom">
+        <div class="aspect-[16/10] rounded overflow-hidden" style="border-radius: var(--r-md); box-shadow: var(--sh-lg);">
+          <img src="./images/portfolio_5.jpg" alt="시그니처 네일 아트 작업" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: SERVICES & PRICING                                 -->
+<!-- MOVE: M-LAY-OFFSET-OVERLAP                                    -->
+<!-- COMPONENT_REF: asymmetric-center-spotlight-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-center-spotlight-3-5-4-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section class="w-full py-20 lg:py-28 fade-in-section" style="background-color: var(--bg-surface);" id="services">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <p class="eyebrow mb-4">Service Menu</p>
+      <h2 style="color: var(--text-primary);">나에게 맞는<br>아트를 선택하세요</h2>
+      <p class="mt-4 mx-auto max-w-[480px]" style="color: var(--text-secondary);">
+        기본 케어부터 프리미엄 컬렉션까지,<br class="hidden sm:block">
+        모든 단계에서 정성을 담습니다.
+      </p>
+    </div>
+
+    <!-- Asymmetric 3-Column: 3:5:4 ratio -->
+    <div class="grid grid-cols-12 gap-6 items-start">
+
+      <!-- Col 1: Basic Care (col-span-3) -->
+      <div class="col-span-12 md:col-span-4 lg:col-span-3 stagger-item">
+        <div class="card-hover rounded overflow-hidden" style="background-color: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--r-md);">
+          <div class="img-zoom">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="./images/service_basic.jpg" alt="기본 젤 케어" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div style="padding: var(--pad-card);">
+            <p class="eyebrow mb-2">Basic Care</p>
+            <h3 style="color: var(--text-primary); margin-bottom: 8px;">기본 젤 케어</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9375rem; margin-bottom: 16px;">
+              깨끗한 큐티클 정리와<br>
+              단색 젤 컬러 시술.
+            </p>
+            <p style="font-family: var(--font-ui); font-size: 1.5rem; font-weight: var(--w-semibold); color: var(--text-primary);">₩35,000</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 2: Art Design — Spotlight (col-span-5) -->
+      <div class="col-span-12 md:col-span-4 lg:col-span-5 stagger-item">
+        <div class="card-hover rounded overflow-hidden" style="background-color: var(--bg-card); border: 2px solid var(--accent-primary); border-radius: var(--r-md); position: relative;">
+          <!-- Popular Badge -->
+          <div style="position: absolute; top: 16px; right: 16px; background-color: var(--accent-primary); color: #FFF; font-size: var(--type-meta); font-weight: var(--w-medium); letter-spacing: 0.1em; padding: 4px 12px; border-radius: var(--r-sm); z-index: 1;">POPULAR</div>
+          <div class="img-zoom">
+            <div class="aspect-[3/2] overflow-hidden">
+              <img src="./images/service_art.jpg" alt="트렌드 아트 디자인" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div style="padding: var(--pad-card);">
+            <p class="eyebrow mb-2">Art Design</p>
+            <h3 style="color: var(--text-primary); margin-bottom: 8px;">트렌드 아트 &<br>핸드페인팅</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9375rem; margin-bottom: 16px;">
+              최신 트렌드를 반영한 디자인 아트.<br>
+              핸드페인팅, 파츠, 호일 등 포함.
+            </p>
+            <p style="font-family: var(--font-ui); font-size: 1.5rem; font-weight: var(--w-semibold); color: var(--text-primary);">₩55,000 – 80,000</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 3: Premium (col-span-4) -->
+      <div class="col-span-12 md:col-span-4 lg:col-span-4 lg:mt-8 stagger-item">
+        <div class="card-hover rounded overflow-hidden" style="background-color: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--r-md);">
+          <div class="img-zoom">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="./images/service_premium.jpg" alt="프리미엄 컬렉션" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div style="padding: var(--pad-card);">
+            <p class="eyebrow mb-2">Premium Collection</p>
+            <h3 style="color: var(--text-primary); margin-bottom: 8px;">시즌 한정 컬렉션</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9375rem; margin-bottom: 16px;">
+              스와로브스키, 천연석 등<br>
+              프리미엄 소재의 한정 디자인.
+            </p>
+            <p style="font-family: var(--font-ui); font-size: 1.5rem; font-weight: var(--w-semibold); color: var(--text-primary);">₩100,000+</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small Note -->
+    <p class="text-center mt-10" style="color: var(--text-muted); font-size: 0.875rem;">
+      * 모든 시술은 기본 케어(큐티클 정리, 영양 오일)를 포함합니다. 디자인 복잡도에 따라 가격이 변동될 수 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: ARTIST PROFILE                                     -->
+<!-- MOVE: M-LAY-EDITORIAL-STORY (Editorial Move 2/2)              -->
+<!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section class="w-full py-20 lg:py-28 fade-in-section" style="background-color: var(--bg-page);" id="artist">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-6 lg:gap-8 items-center">
+      <!-- Text Block (4 columns, offset down) -->
+      <div class="col-span-12 md:col-span-5 lg:col-span-4 lg:pt-16 stagger-item">
+        <p class="eyebrow mb-4">Head Designer</p>
+        <h2 style="color: var(--text-primary); margin-bottom: 16px;">이서연</h2>
+        <div class="w-12 h-[2px] mb-6" style="background-color: var(--accent-primary);"></div>
+        <p style="color: var(--text-secondary); margin-bottom: 24px; max-width: 360px;">
+          디자인의 완성도는<br>
+          아티스트의 손끝에서 결정됩니다.
+        </p>
+        <!-- Credentials -->
+        <ul class="space-y-3" style="color: var(--text-secondary); font-size: 0.9375rem;">
+          <li class="flex items-start gap-3">
+            <i data-lucide="award" style="width: 18px; height: 18px; color: var(--accent-primary); flex-shrink: 0; margin-top: 2px;"></i>
+            <span>일본 네일리스트 기능검정 1급</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="trophy" style="width: 18px; height: 18px; color: var(--accent-primary); flex-shrink: 0; margin-top: 2px;"></i>
+            <span>2024 코리아 네일 아트 챔피언십 금상</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="badge-check" style="width: 18px; height: 18px; color: var(--accent-primary); flex-shrink: 0; margin-top: 2px;"></i>
+            <span>JNA 국제 네일 아티스트 인증</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="clock" style="width: 18px; height: 18px; color: var(--accent-primary); flex-shrink: 0; margin-top: 2px;"></i>
+            <span>경력 12년</span>
+          </li>
+        </ul>
+        <p class="mt-8" style="font-family: var(--font-ui); font-style: italic; color: var(--text-muted); font-size: 1.125rem;">
+          "네일은 가장 작은 캔버스에<br>
+          담는 가장 섬세한 예술입니다."
+        </p>
+      </div>
+
+      <!-- Gap Column -->
+      <div class="hidden lg:block col-span-1"></div>
+
+      <!-- Image Block (7 columns) -->
+      <div class="col-span-12 md:col-span-7 lg:col-span-7 stagger-item img-zoom">
+        <div class="aspect-[3/4] rounded overflow-hidden" style="border-radius: var(--r-md); box-shadow: var(--sh-lg);">
+          <img src="./images/artist_profile.jpg" alt="수석 디자이너 이서연" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: GALLERY DIVIDER (Full-bleed)                       -->
+<!-- MOVE: M-DIV-FULLBLEED-IMAGE                                   -->
+<!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[50vh] flex items-center">
+  <!-- Background Image -->
+  <img src="./images/gallery_divider.jpg" alt="네일 아트 갤러리" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
+  <!-- Content Container -->
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full">
+    <p class="eyebrow mb-4" style="color: rgba(255,255,255,0.6);">Gallery</p>
+    <h2 class="text-white mb-6">아름다움은<br>디테일에 있습니다</h2>
+    <p class="text-white/60 mb-8 mx-auto max-w-[400px]" style="font-size: var(--type-body);">
+      수백 가지 작업물 중에서<br class="hidden sm:block">
+      당신의 영감을 찾아보세요.
+    </p>
+    <a href="#portfolio" class="btn-primary">더 많은 작품 보기</a>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: PROCESS — 4 Steps                                  -->
+<!-- MOVE: M-LAY-TIMELINE-STEPPER                                  -->
+<!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="w-full py-20 lg:py-28 fade-in-section" style="background-color: var(--bg-surface);">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <p class="eyebrow mb-4">Process</p>
+      <h2 style="color: var(--text-primary);">완벽한 네일을 위한<br>네 가지 단계</h2>
+    </div>
+
+    <!-- 4-Step Process Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+      <!-- Step 1 -->
+      <div class="stagger-item text-center lg:text-left">
+        <div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: var(--accent-primary); color: #FFF;">
+            <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+          </div>
+          <span style="font-family: var(--font-ui); font-size: 1.125rem; font-weight: var(--w-semibold); color: var(--accent-primary);">상담</span>
+        </div>
+        <h3 style="margin-bottom: 8px;">디자인 상담</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9375rem;">
+          원하는 스타일과 컨디션을<br>
+          꼼꼼히 파악합니다.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="stagger-item text-center lg:text-left">
+        <div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: var(--accent-primary); color: #FFF;">
+            <i data-lucide="palette" style="width: 20px; height: 20px;"></i>
+          </div>
+          <span style="font-family: var(--font-ui); font-size: 1.125rem; font-weight: var(--w-semibold); color: var(--accent-primary);">디자인</span>
+        </div>
+        <h3 style="margin-bottom: 8px;">맞춤 디자인</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9375rem;">
+          취향과 트렌드를 반영한<br>
+          아트 시안을 제안합니다.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="stagger-item text-center lg:text-left">
+        <div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: var(--accent-primary); color: #FFF;">
+            <i data-lucide="sparkles" style="width: 20px; height: 20px;"></i>
+          </div>
+          <span style="font-family: var(--font-ui); font-size: 1.125rem; font-weight: var(--w-semibold); color: var(--accent-primary);">시술</span>
+        </div>
+        <h3 style="margin-bottom: 8px;">정밀 시술</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9375rem;">
+          한 올 한 올 정성을 담아<br>
+          디자인을 완성합니다.
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="stagger-item text-center lg:text-left">
+        <div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: var(--accent-primary); color: #FFF;">
+            <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
+          </div>
+          <span style="font-family: var(--font-ui); font-size: 1.125rem; font-weight: var(--w-semibold); color: var(--accent-primary);">케어</span>
+        </div>
+        <h3 style="margin-bottom: 8px;">애프터케어</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9375rem;">
+          유지 관리법과 함께<br>
+          다음 방문까지 케어합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: KEY COLOR BAND — Dusty Rose (40vh+)                -->
+<!-- MOVE: M-DIV-FULLBLEED-COLORBLOCK                              -->
+<!-- COMPONENT_REF: custom full-bleed | GRADE: n/a | MODE: fallback | FIDELITY: n/a -->
+<!-- ============================================================ -->
+<section class="relative w-full flex items-center" style="min-height: 50vh;">
+  <!-- Background Image -->
+  <img src="./images/key_color.jpg" alt="스페셜 데이 네일" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <!-- Dusty Rose Overlay -->
+  <div class="absolute inset-0" style="background-color: rgba(196, 149, 154, 0.78);"></div>
+  <!-- Content Container -->
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full fade-in-section">
+    <p class="eyebrow mb-4" style="color: rgba(255,255,255,0.8);">Special Day</p>
+    <h2 class="text-white mb-6" style="max-width: 600px; margin-left: auto; margin-right: auto;">당신의 특별한 날을 위해</h2>
+    <p class="text-white/80 mb-10 mx-auto max-w-[440px]" style="font-size: var(--type-body); line-height: var(--lh-body);">
+      웨딩, 파티, 기념일.<br>
+      중요한 순간을 더 빛나게 만들어 드립니다.
+    </p>
+    <a href="#final-cta" class="btn-primary" style="background-color: #FFFFFF; color: var(--accent-primary);">상담 예약하기</a>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: BOOKING INFO                                       -->
+<!-- MOVE: M-TRUST-AWARDS-CERTS (adapted for booking info)         -->
+<!-- COMPONENT_REF: testimonials-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/testimonials/testimonials-section-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section class="w-full py-20 lg:py-28 fade-in-section" style="background-color: var(--bg-page);" id="booking">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <p class="eyebrow mb-4">Visit Us</p>
+      <h2 style="color: var(--text-primary);">방문 안내</h2>
+    </div>
+
+    <!-- Info Cards Grid (2 + 1 layout) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Interior Image -->
+      <div class="md:col-span-7 stagger-item img-zoom">
+        <div class="aspect-[16/10] rounded overflow-hidden" style="border-radius: var(--r-md); box-shadow: var(--sh-md);">
+          <img src="./images/booking_interior.jpg" alt="아뜰리에 네일 인테리어" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Info Card -->
+      <div class="md:col-span-5 stagger-item">
+        <div class="h-full rounded flex flex-col justify-center" style="background-color: var(--bg-surface); border-radius: var(--r-md); padding: 32px;">
+          <!-- Address -->
+          <div class="flex items-start gap-4 mb-6">
+            <i data-lucide="map-pin" style="width: 20px; height: 20px; color: var(--accent-primary); flex-shrink: 0; margin-top: 3px;"></i>
+            <div>
+              <p style="font-weight: var(--w-medium); color: var(--text-primary); margin-bottom: 4px;">오시는 길</p>
+              <p style="color: var(--text-secondary); font-size: 0.9375rem;">서울 강남구 가로수길 47, 2층</p>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="flex items-start gap-4 mb-6">
+            <i data-lucide="clock" style="width: 20px; height: 20px; color: var(--accent-primary); flex-shrink: 0; margin-top: 3px;"></i>
+            <div>
+              <p style="font-weight: var(--w-medium); color: var(--text-primary); margin-bottom: 4px;">영업시간</p>
+              <p style="color: var(--text-secondary); font-size: 0.9375rem;">월–토 10:00 – 20:00</p>
+              <p style="color: var(--text-secondary); font-size: 0.9375rem;">일 11:00 – 18:00</p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-start gap-4 mb-6">
+            <i data-lucide="phone" style="width: 20px; height: 20px; color: var(--accent-primary); flex-shrink: 0; margin-top: 3px;"></i>
+            <div>
+              <p style="font-weight: var(--w-medium); color: var(--text-primary); margin-bottom: 4px;">전화 예약</p>
+              <p style="color: var(--text-secondary); font-size: 0.9375rem;">02-543-7821</p>
+            </div>
+          </div>
+
+          <!-- Booking Channels -->
+          <div class="flex items-start gap-4 mb-8">
+            <i data-lucide="calendar-check" style="width: 20px; height: 20px; color: var(--accent-primary); flex-shrink: 0; margin-top: 3px;"></i>
+            <div>
+              <p style="font-weight: var(--w-medium); color: var(--text-primary); margin-bottom: 4px;">온라인 예약</p>
+              <p style="color: var(--text-secondary); font-size: 0.9375rem;">네이버 예약 및 카카오톡 상담 가능</p>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <a href="#final-cta" class="btn-primary w-full text-center">예약 문의하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: FINAL CTA (Full-bleed)                             -->
+<!-- MOVE: M-CTA-FULLBLEED-FINAL                                   -->
+<!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="relative w-full flex items-center" style="min-height: 60vh;" id="final-cta">
+  <!-- Background Image -->
+  <img src="./images/cta.jpg" alt="네일 아트 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/65"></div>
+  <!-- Content Container -->
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full">
+    <p class="eyebrow mb-4" style="color: rgba(255,255,255,0.6);">Book Now</p>
+    <h2 class="text-white mb-6">지금, 당신만의<br>아트를 시작하세요</h2>
+    <p class="text-white/60 mb-10 mx-auto max-w-[440px]" style="font-size: var(--type-body); line-height: var(--lh-body);">
+      온라인으로 간편하게 예약하고<br class="hidden sm:block">
+      가로수길 아뜰리에에서 만나요.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="tel:02-543-7821" class="btn-primary" style="padding: 16px 40px; font-size: 1rem;">온라인 예약하기</a>
+      <a href="tel:02-543-7821" class="btn-secondary" style="padding: 16px 40px; font-size: 1rem;">전화 상담하기</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<footer class="w-full py-12" style="background-color: var(--text-primary);">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+      <!-- Brand -->
+      <div>
+        <p style="font-family: var(--font-ui); font-size: 1.25rem; font-weight: var(--w-semibold); color: #FFFFFF; margin-bottom: 8px;">Atelier Nail</p>
+        <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem;">손끝에서 완성되는 예술</p>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col sm:flex-row gap-8 sm:gap-16">
+        <div>
+          <p style="color: rgba(255,255,255,0.6); font-size: var(--type-meta); font-weight: var(--w-medium); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Contact</p>
+          <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.8;">
+            02-543-7821<br>
+            서울 강남구 가로수길 47, 2층
+          </p>
+        </div>
+        <div>
+          <p style="color: rgba(255,255,255,0.6); font-size: var(--type-meta); font-weight: var(--w-medium); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Hours</p>
+          <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.8;">
+            월–토 10:00 – 20:00<br>
+            일 11:00 – 18:00
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6" style="border-top: 1px solid rgba(255,255,255,0.1);">
+      <p style="color: rgba(255,255,255,0.3); font-size: 0.8125rem; text-align: center;">
+        &copy; 2026 아뜰리에 네일. All rights reserved. 이 웹사이트는 포트폴리오 목적으로 제작되었습니다.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT — Animation & Interactions                         -->
+<!-- ============================================================ -->
+<script>
+  // Initialize Lucide Icons
+  lucide.createIcons();
+
+  // =============================================
+  // 1. Scroll Reveal Animation (IntersectionObserver)
+  // =============================================
+  (function() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      // Show everything immediately
+      document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    // Fade-in sections
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(el => {
+      sectionObserver.observe(el);
+    });
+
+    // Stagger items
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const parent = entry.target.closest('section') || entry.target.parentElement;
+          const items = parent.querySelectorAll('.stagger-item');
+          items.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+            item.classList.add('is-visible');
+          });
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    // Observe parent containers of stagger items
+    const observed = new Set();
+    document.querySelectorAll('.stagger-item').forEach(el => {
+      const parent = el.closest('section') || el.parentElement;
+      if (!observed.has(parent)) {
+        observed.add(parent);
+        staggerObserver.observe(parent);
+      }
+    });
+  })();
+
+  // =============================================
+  // 2. Navigation Scroll Effect
+  // =============================================
+  (function() {
+    const nav = document.getElementById('nav');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
+  })();
+
+  // =============================================
+  // 3. Mobile Menu Toggle
+  // =============================================
+  (function() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (btn && menu) {
+      btn.addEventListener('click', () => {
+        const isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', !isOpen);
+      });
+
+      // Close menu when clicking a link
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

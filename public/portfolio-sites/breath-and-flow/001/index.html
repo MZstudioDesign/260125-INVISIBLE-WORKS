@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>브레스앤플로우 — 호흡으로 완성되는 균형</title>
+    <meta name="description" content="서울 북촌 요가 스튜디오. 빈야사, 인요가, 산전요가, 명상 클래스. 호흡으로 시작되는 나만의 균형을 찾으세요." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand': {
+                            bg: '#FAF7F2',
+                            surface: '#F0E8DD',
+                            accent: '#A68B6B',
+                            'accent-hover': '#8B7355',
+                            'accent-dark': '#6B5D50',
+                            text: '#2D2418',
+                            muted: '#6B5D50',
+                            light: '#9B8E82',
+                            border: '#E5DDD3',
+                            warm: '#D4C5B0',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"Noto Sans KR"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --color-bg: #FAF7F2;
+            --color-bg-section: #F0E8DD;
+            --color-text: #2D2418;
+            --color-text-muted: #6B5D50;
+            --color-accent: #A68B6B;
+            --color-accent-hover: #8B7355;
+            --color-accent-dark: #6B5D50;
+            --color-accent-text: #FFFFFF;
+            --border-color: #E5DDD3;
+            --shadow-card: 0 2px 8px rgba(45,36,24,0.06);
+            --shadow-hover: 0 8px 32px rgba(45,36,24,0.10);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Scroll Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section,
+            .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Button hover */
+        .btn-primary {
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: scale(1.03);
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        /* Card hover */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Image hover zoom */
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom:hover {
+            transform: scale(1.05);
+        }
+
+        /* Eyebrow label */
+        .eyebrow {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Schedule table */
+        .schedule-cell {
+            transition: background-color 0.2s ease;
+        }
+        .schedule-cell:hover {
+            background-color: #F0E8DD;
+        }
+
+        /* Mobile nav */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================= -->
+    <!-- HEADER / NAV -->
+    <!-- ============================================= -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16 md:h-20">
+            <a href="#" class="font-heading text-xl md:text-2xl font-semibold text-white tracking-tight" id="logo-text">
+                브레스앤플로우
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#philosophy" class="text-white/80 hover:text-white text-sm font-body transition-colors nav-link">철학</a>
+                <a href="#classes" class="text-white/80 hover:text-white text-sm font-body transition-colors nav-link">클래스</a>
+                <a href="#teachers" class="text-white/80 hover:text-white text-sm font-body transition-colors nav-link">강사진</a>
+                <a href="#studio" class="text-white/80 hover:text-white text-sm font-body transition-colors nav-link">공간</a>
+                <a href="#schedule" class="text-white/80 hover:text-white text-sm font-body transition-colors nav-link">시간표</a>
+                <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-brand-accent text-white px-5 py-2.5 rounded-full text-sm font-body font-medium nav-cta">
+                    상담 예약
+                </a>
+            </nav>
+            <button class="md:hidden text-white" id="mobile-menu-btn" aria-label="메뉴 열기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav fixed inset-0 z-[60] bg-brand-bg" id="mobile-nav">
+        <div class="flex items-center justify-between px-6 h-16">
+            <span class="font-heading text-xl font-semibold text-brand-text">브레스앤플로우</span>
+            <button id="mobile-close-btn" aria-label="메뉴 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="text-brand-text"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center gap-8 pt-16">
+            <a href="#philosophy" class="font-heading text-2xl text-brand-text mobile-nav-link">철학</a>
+            <a href="#classes" class="font-heading text-2xl text-brand-text mobile-nav-link">클래스</a>
+            <a href="#teachers" class="font-heading text-2xl text-brand-text mobile-nav-link">강사진</a>
+            <a href="#studio" class="font-heading text-2xl text-brand-text mobile-nav-link">공간</a>
+            <a href="#schedule" class="font-heading text-2xl text-brand-text mobile-nav-link">시간표</a>
+            <a href="#contact" class="btn-primary bg-brand-accent text-white px-8 py-3 rounded-full font-body mobile-nav-link">상담 예약</a>
+        </nav>
+    </div>
+
+    <main>
+
+    <!-- ============================================= -->
+    <!-- SECTION 1: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+    <!-- COMPONENT_REF: custom-hero | GRADE: A | MODE: direct | SNIPPET_PATH: na | FIDELITY: n/a -->
+    <!-- ============================================= -->
+    <section class="relative w-full min-h-screen flex items-center" id="hero">
+        <img
+            src="images/hero-yoga-pose.jpg"
+            alt="요가 수련 중인 여성, 따뜻한 자연광 아래"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 w-full pt-20">
+            <div class="max-w-2xl">
+                <p class="eyebrow text-white/60 mb-4">Breath & Flow Yoga Studio</p>
+                <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.3] mb-6">
+                    호흡이 흐르면,<br>
+                    몸과 마음이<br class="hidden sm:block">
+                    따라옵니다
+                </h1>
+                <p class="text-white/75 text-base md:text-lg max-w-[420px] mb-10 font-body leading-relaxed">
+                    서울 북촌, 자연광이 가득한 공간에서<br class="hidden sm:block">
+                    당신만의 균형을 찾아가는 시간.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="btn-primary inline-flex items-center justify-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full text-base font-body font-medium">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        무료 상담 신청
+                    </a>
+                    <a href="#classes" class="btn-secondary inline-flex items-center justify-center gap-2 border border-white/40 text-white px-8 py-4 rounded-full text-base font-body font-medium hover:bg-white/10">
+                        클래스 살펴보기
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-white/40 text-xs font-body tracking-widest uppercase">Scroll</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-40"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 2: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-STORY -->
+    <!-- COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text5-gap1-image6-offset-reference.html | FIDELITY: 80% -->
+    <!-- ============================================= -->
+    <section class="fade-in-section w-full bg-brand-bg" id="philosophy">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 lg:py-32">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+                <!-- Text Column: col-span-4 -->
+                <div class="lg:col-span-4 order-2 lg:order-1">
+                    <p class="eyebrow text-brand-accent mb-4">Our Philosophy</p>
+                    <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-6 leading-tight">
+                        호흡으로<br>
+                        완성되는 균형
+                    </h2>
+                    <p class="text-brand-muted text-base leading-relaxed mb-6 max-w-[360px]">
+                        브레스앤플로우는 화려한 동작이 아닌,<br class="hidden sm:block">
+                        깊은 호흡에서 시작합니다.<br class="hidden sm:block">
+                        매트 위에서 찾은 고요함이<br class="hidden sm:block">
+                        일상의 리듬을 바꿔줍니다.
+                    </p>
+                    <div class="flex flex-col gap-4 text-sm text-brand-muted">
+                        <div class="flex items-start gap-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mt-0.5 shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>15년 경력의 RYT-500 인증 강사진</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mt-0.5 shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>최대 8인 소규모 그룹 수업</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent mt-0.5 shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>자연광이 가득한 원목 스튜디오</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gap: col-span-1 -->
+                <div class="hidden lg:block lg:col-span-1"></div>
+                <!-- Image Column: col-span-7, offset -->
+                <div class="lg:col-span-7 order-1 lg:order-2">
+                    <div class="overflow-hidden rounded-2xl lg:translate-y-8">
+                        <img
+                            src="images/philosophy-sunrise-yoga.jpg"
+                            alt="일출 시간 요가 수련"
+                            class="w-full aspect-[4/3] object-cover img-zoom"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 3: CLASS TYPES | MOVE: M-LAY-ASYM-GRID -->
+    <!-- COMPONENT_REF: asymmetric-grid | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-3col-category-4-5-3-reference.html | FIDELITY: 75% -->
+    <!-- ============================================= -->
+    <section class="fade-in-section w-full bg-white" id="classes">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="text-center mb-14">
+                <p class="eyebrow text-brand-accent mb-3">Classes</p>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-4">
+                    나에게 맞는<br class="sm:hidden">
+                    수업을 찾아보세요
+                </h2>
+                <p class="text-brand-muted max-w-[420px] mx-auto">
+                    초보자부터 심화 수련자까지,<br class="hidden sm:block">
+                    각자의 속도에 맞춘 네 가지 프로그램.
+                </p>
+            </div>
+
+            <!-- Asymmetric 2x2 Grid: 7:5 then 5:7 -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Vinyasa Flow — Large -->
+                <div class="stagger-item md:col-span-7 group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white border border-brand-border card-hover">
+                        <div class="overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1764661441867-473a59a765bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                                alt="빈야사 플로우 요가 수업"
+                                class="w-full aspect-[16/10] object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-heading text-xl md:text-2xl font-semibold text-brand-text">빈야사 플로우</h3>
+                                <span class="text-sm text-brand-accent font-body font-medium">Vinyasa Flow</span>
+                            </div>
+                            <p class="text-brand-muted text-sm leading-relaxed mb-4">
+                                호흡과 움직임을 하나로 연결하는 역동적인 수련. 유연성과 근력을 동시에 키워갑니다.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-brand-light">
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    60분
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                    중급 이상
+                                </span>
+                                <span class="font-medium text-brand-accent">₩40,000 / 회</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yin Yoga — Small -->
+                <div class="stagger-item md:col-span-5 group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white border border-brand-border card-hover h-full">
+                        <div class="overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1758599879795-536d5f203de9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                                alt="인 요가 명상적 수련"
+                                class="w-full aspect-[16/10] object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-heading text-xl md:text-2xl font-semibold text-brand-text">인 요가</h3>
+                                <span class="text-sm text-brand-accent font-body font-medium">Yin Yoga</span>
+                            </div>
+                            <p class="text-brand-muted text-sm leading-relaxed mb-4">
+                                3~5분간 자세를 유지하며 깊은 이완을 경험합니다. 결합 조직과 관절의 유연성을 회복시킵니다.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-brand-light">
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    75분
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                    전 레벨
+                                </span>
+                                <span class="font-medium text-brand-accent">₩35,000 / 회</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prenatal — Small -->
+                <div class="stagger-item md:col-span-5 group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white border border-brand-border card-hover h-full">
+                        <div class="overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1566928706252-67dcab85f9f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                                alt="산전 요가 수업"
+                                class="w-full aspect-[16/10] object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-heading text-xl md:text-2xl font-semibold text-brand-text">산전 요가</h3>
+                                <span class="text-sm text-brand-accent font-body font-medium">Prenatal</span>
+                            </div>
+                            <p class="text-brand-muted text-sm leading-relaxed mb-4">
+                                임산부를 위한 안전한 호흡법과 스트레칭. 출산 준비와 심리적 안정을 돕습니다.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-brand-light">
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    50분
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                    임신 14주+
+                                </span>
+                                <span class="font-medium text-brand-accent">₩50,000 / 회</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meditation — Large -->
+                <div class="stagger-item md:col-span-7 group">
+                    <div class="relative overflow-hidden rounded-2xl bg-white border border-brand-border card-hover">
+                        <div class="overflow-hidden">
+                            <img
+                                src="https://images.unsplash.com/photo-1764192114257-ae9ecf97eb6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                                alt="명상 클래스"
+                                class="w-full aspect-[16/10] object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-heading text-xl md:text-2xl font-semibold text-brand-text">명상</h3>
+                                <span class="text-sm text-brand-accent font-body font-medium">Meditation</span>
+                            </div>
+                            <p class="text-brand-muted text-sm leading-relaxed mb-4">
+                                호흡 명상과 바디 스캔을 통해 깊은 내면의 고요를 만납니다. 스트레스 해소와 수면 개선에 효과적입니다.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-brand-light">
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    45분
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                    전 레벨
+                                </span>
+                                <span class="font-medium text-brand-accent">₩30,000 / 회</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly pass -->
+            <div class="mt-10 text-center">
+                <p class="text-brand-light text-sm">
+                    월 정기권 <span class="font-semibold text-brand-accent">₩180,000</span> · 주 3회 이상 수강 시 가장 합리적인 선택
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 4: TEACHERS | MOVE: M-INT-HOVER-REVEAL -->
+    <!-- COMPONENT_REF: reveal-on-hover | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/image-summary-text/reveal-on-hover-reference.html | FIDELITY: 75% -->
+    <!-- ============================================= -->
+    <section class="fade-in-section w-full bg-brand-surface" id="teachers">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="mb-14">
+                <p class="eyebrow text-brand-accent mb-3">Instructors</p>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-4">
+                    함께하는 강사진
+                </h2>
+                <p class="text-brand-muted max-w-[420px]">
+                    국제 공인 자격과 풍부한 수련 경험을 바탕으로<br class="hidden sm:block">
+                    개인별 맞춤 지도를 제공합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
+                <!-- Teacher 1: col-span-5 -->
+                <div class="stagger-item md:col-span-5">
+                    <div class="relative overflow-hidden rounded-2xl group cursor-pointer">
+                        <img
+                            src="images/teacher-kim.jpg"
+                            alt="김서연 강사 프로필"
+                            class="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end">
+                            <div class="p-6 md:p-8 w-full">
+                                <h3 class="font-heading text-2xl font-semibold text-white mb-1">김서연</h3>
+                                <p class="text-white/70 text-sm mb-3">대표 강사 · 빈야사 / 명상</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">RYT-500</span>
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">인도 Mysore 수련</span>
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">15년 경력</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Always visible on mobile -->
+                        <div class="md:hidden absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <h3 class="font-heading text-xl font-semibold text-white">김서연</h3>
+                            <p class="text-white/70 text-sm">대표 강사 · RYT-500 · 15년 경력</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher 2: col-span-4 -->
+                <div class="stagger-item md:col-span-4">
+                    <div class="relative overflow-hidden rounded-2xl group cursor-pointer">
+                        <img
+                            src="images/teacher-park.jpg"
+                            alt="박은지 강사 프로필"
+                            class="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end">
+                            <div class="p-6 md:p-8 w-full">
+                                <h3 class="font-heading text-2xl font-semibold text-white mb-1">박은지</h3>
+                                <p class="text-white/70 text-sm mb-3">인 요가 / 산전 요가</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">RYT-500</span>
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">산전요가 전문</span>
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">10년 경력</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:hidden absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <h3 class="font-heading text-xl font-semibold text-white">박은지</h3>
+                            <p class="text-white/70 text-sm">인 요가 / 산전 · RYT-500 · 10년 경력</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher 3: col-span-3, taller offset -->
+                <div class="stagger-item md:col-span-3 md:mt-12">
+                    <div class="relative overflow-hidden rounded-2xl group cursor-pointer">
+                        <img
+                            src="images/teacher-lee.jpg"
+                            alt="이하린 강사 프로필"
+                            class="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end">
+                            <div class="p-6 w-full">
+                                <h3 class="font-heading text-xl font-semibold text-white mb-1">이하린</h3>
+                                <p class="text-white/70 text-sm mb-3">명상 / 호흡법</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">E-RYT 200</span>
+                                    <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full">7년 경력</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:hidden absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <h3 class="font-heading text-xl font-semibold text-white">이하린</h3>
+                            <p class="text-white/70 text-sm">명상 / 호흡법 · E-RYT 200</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 5: STUDIO SPACE | MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: custom-fullbleed-divider | GRADE: A | MODE: direct | SNIPPET_PATH: na | FIDELITY: n/a -->
+    <!-- ============================================= -->
+    <section class="relative w-full min-h-[70vh] flex items-center" id="studio">
+        <img
+            src="images/studio-main.jpg"
+            alt="자연광이 들어오는 브레스앤플로우 요가 스튜디오"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+        />
+        <div class="absolute inset-0 bg-white/70"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 fade-in-section">
+                    <p class="eyebrow text-brand-accent mb-3">Our Space</p>
+                    <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-6 leading-tight">
+                        빛과 나무가<br>
+                        만드는 고요한 공간
+                    </h2>
+                    <p class="text-brand-muted leading-relaxed mb-8 max-w-[380px]">
+                        북촌 한옥마을 인근, 전면 유리창으로 쏟아지는 자연광.<br class="hidden sm:block">
+                        원목 마루와 자연 소재가 어우러진 60평 규모의 스튜디오에서<br class="hidden sm:block">
+                        온전한 나만의 시간을 보내세요.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 text-sm text-brand-muted">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent shrink-0"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+                            원목 마루
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-brand-muted">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent shrink-0"><path d="M12 2v20M2 12h20"/></svg>
+                            전면 유리창
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-brand-muted">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            공기청정 시스템
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-brand-muted">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-accent shrink-0"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            실내 식물 가든
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block lg:col-span-1"></div>
+                <div class="lg:col-span-6 fade-in-section">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="overflow-hidden rounded-xl">
+                            <img
+                                src="images/studio-interior-1.jpg"
+                                alt="스튜디오 내부 원목 마루"
+                                class="w-full aspect-square object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="overflow-hidden rounded-xl mt-8">
+                            <img
+                                src="images/studio-interior-2.jpg"
+                                alt="스튜디오 수련 공간"
+                                class="w-full aspect-square object-cover img-zoom"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 6: TESTIMONIALS | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color Band 40vh+) -->
+    <!-- COMPONENT_REF: testimonials-columns | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/testimonials/testimonials-columns-reference.html | FIDELITY: 70% -->
+    <!-- ============================================= -->
+    <section class="w-full" style="background-color: #D4C5B0;" id="testimonials">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28" style="min-height: 50vh;">
+            <div class="text-center mb-14 fade-in-section">
+                <p class="eyebrow text-brand-accent-dark mb-3">Voices</p>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-4">
+                    수련생들의 이야기
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Testimonial 1: col-span-4 -->
+                <div class="stagger-item md:col-span-4">
+                    <div class="bg-white/90 rounded-2xl p-8 h-full">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="text-brand-text text-sm leading-relaxed mb-6">
+                            "퇴근 후 긴장이 풀리지 않아 시작한 인요가가 3개월째. 이제는 일주일에 수업이 없으면 허전할 정도예요. 선생님이 제 몸 상태를 기억해주시는 게 좋습니다."
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-surface flex items-center justify-center font-heading font-semibold text-brand-accent text-sm">정H</div>
+                            <div>
+                                <p class="text-sm font-medium text-brand-text">정하은</p>
+                                <p class="text-xs text-brand-light">인 요가 · 6개월 수련</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2: col-span-5 -->
+                <div class="stagger-item md:col-span-5">
+                    <div class="bg-white/90 rounded-2xl p-8 h-full">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="text-brand-text text-sm leading-relaxed mb-6">
+                            "임신 20주차에 시작한 산전요가 덕분에 출산이 훨씬 수월했어요. 은지 선생님이 매주 제 상태에 맞게 동작을 조절해주셔서 끝까지 안심하고 수련할 수 있었습니다. 산후에도 다시 돌아올 예정입니다."
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-surface flex items-center justify-center font-heading font-semibold text-brand-accent text-sm">윤S</div>
+                            <div>
+                                <p class="text-sm font-medium text-brand-text">윤소민</p>
+                                <p class="text-xs text-brand-light">산전 요가 · 4개월 수련</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3: col-span-3 -->
+                <div class="stagger-item md:col-span-3">
+                    <div class="bg-white/90 rounded-2xl p-8 h-full">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#A68B6B" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="text-brand-text text-sm leading-relaxed mb-6">
+                            "아침 명상 수업이 하루를 완전히 바꿔놓았습니다. 집중력이 눈에 띄게 좋아졌어요."
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-surface flex items-center justify-center font-heading font-semibold text-brand-accent text-sm">김J</div>
+                            <div>
+                                <p class="text-sm font-medium text-brand-text">김준혁</p>
+                                <p class="text-xs text-brand-light">명상 · 1년 수련</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 7: WORKSHOPS & EVENTS | MOVE: M-LAY-ALTERNATING-ROWS -->
+    <!-- COMPONENT_REF: alternating-text5-img7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-text5-gap1-img6-reversed-reference.html | FIDELITY: 75% -->
+    <!-- ============================================= -->
+    <section class="fade-in-section w-full bg-white" id="workshops">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="mb-14">
+                <p class="eyebrow text-brand-accent mb-3">Workshops & Retreats</p>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-4">
+                    특별 프로그램
+                </h2>
+                <p class="text-brand-muted max-w-[420px]">
+                    계절마다 새로운 리트릿과 워크숍으로<br class="hidden sm:block">
+                    수련의 폭을 넓혀보세요.
+                </p>
+            </div>
+
+            <!-- Event 1 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16 fade-in-section">
+                <div class="lg:col-span-5 order-2 lg:order-1">
+                    <span class="inline-block text-xs font-body font-medium bg-brand-surface text-brand-accent px-4 py-1.5 rounded-full mb-4">2026년 봄 시즌</span>
+                    <h3 class="font-heading text-2xl md:text-3xl font-semibold text-brand-text mb-4">
+                        제주 힐링 리트릿
+                    </h3>
+                    <p class="text-brand-muted text-sm leading-relaxed mb-6 max-w-[380px]">
+                        제주 서귀포의 오름과 바다가 내려다보이는 리트릿 센터에서 2박 3일간 진행됩니다. 새벽 명상, 자연 속 빈야사, 로컬 식재료로 만든 건강식이 포함됩니다.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">4월 18-20일</span>
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">정원 12명</span>
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">₩580,000</span>
+                    </div>
+                    <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-brand-accent text-white px-6 py-3 rounded-full text-sm font-body font-medium">
+                        리트릿 문의하기
+                    </a>
+                </div>
+                <div class="hidden lg:block lg:col-span-1"></div>
+                <div class="lg:col-span-6 order-1 lg:order-2">
+                    <div class="overflow-hidden rounded-2xl">
+                        <img
+                            src="images/retreat-jeju.jpg"
+                            alt="제주 자연 속 요가 리트릿"
+                            class="w-full aspect-[16/10] object-cover img-zoom"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 2 (Reversed) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center fade-in-section">
+                <div class="lg:col-span-6">
+                    <div class="overflow-hidden rounded-2xl">
+                        <img
+                            src="images/workshop-breathing.jpg"
+                            alt="호흡법 워크숍"
+                            class="w-full aspect-[16/10] object-cover img-zoom"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+                <div class="hidden lg:block lg:col-span-1"></div>
+                <div class="lg:col-span-5">
+                    <span class="inline-block text-xs font-body font-medium bg-brand-surface text-brand-accent px-4 py-1.5 rounded-full mb-4">매월 마지막 토요일</span>
+                    <h3 class="font-heading text-2xl md:text-3xl font-semibold text-brand-text mb-4">
+                        프라나야마 심화 워크숍
+                    </h3>
+                    <p class="text-brand-muted text-sm leading-relaxed mb-6 max-w-[380px]">
+                        나디 쇼다나, 카팔라바티, 우자이 호흡 등 전통 프라나야마 기법을 3시간에 걸쳐 심도 있게 배웁니다. 호흡의 원리를 이해하고 일상에 적용하는 방법을 안내합니다.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">매월 마지막 토요일</span>
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">오전 10시-1시</span>
+                        <span class="text-xs border border-brand-border text-brand-muted px-3 py-1.5 rounded-full">₩80,000</span>
+                    </div>
+                    <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-brand-accent text-white px-6 py-3 rounded-full text-sm font-body font-medium">
+                        워크숍 신청하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 8: SCHEDULE & PRICING | MOVE: M-LAY-TIMELINE-STEPPER -->
+    <!-- COMPONENT_REF: custom-schedule | GRADE: A | MODE: direct | SNIPPET_PATH: na | FIDELITY: n/a -->
+    <!-- ============================================= -->
+    <section class="fade-in-section w-full bg-brand-surface" id="schedule">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Schedule -->
+                <div class="lg:col-span-7">
+                    <p class="eyebrow text-brand-accent mb-3">Schedule</p>
+                    <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-8">
+                        주간 시간표
+                    </h2>
+                    <div class="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
+                        <table class="w-full text-sm font-body min-w-[500px]">
+                            <thead>
+                                <tr class="border-b border-brand-border">
+                                    <th class="text-left py-3 pr-4 text-brand-light font-medium text-xs uppercase tracking-wider">시간</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">월</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">화</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">수</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">목</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">금</th>
+                                    <th class="text-left py-3 px-2 text-brand-light font-medium text-xs uppercase tracking-wider">토</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-brand-border/50">
+                                    <td class="py-3 pr-4 text-brand-light text-xs">07:00</td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                    <td class="py-3 px-2"></td>
+                                </tr>
+                                <tr class="border-b border-brand-border/50">
+                                    <td class="py-3 pr-4 text-brand-light text-xs">10:00</td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                </tr>
+                                <tr class="border-b border-brand-border/50">
+                                    <td class="py-3 pr-4 text-brand-light text-xs">14:00</td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-pink-700 text-xs font-medium">산전</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-pink-700 text-xs font-medium">산전</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                </tr>
+                                <tr class="border-b border-brand-border/50">
+                                    <td class="py-3 pr-4 text-brand-light text-xs">16:00</td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="py-3 px-2"></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 text-brand-light text-xs">19:00</td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">인 요가</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-text text-xs font-medium">빈야사</span></td>
+                                    <td class="schedule-cell py-3 px-2 rounded"><span class="text-brand-accent text-xs font-medium">명상</span></td>
+                                    <td class="py-3 px-2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pricing + Info -->
+                <div class="lg:col-span-5">
+                    <p class="eyebrow text-brand-accent mb-3">Pricing</p>
+                    <h2 class="font-heading text-3xl md:text-4xl font-semibold text-brand-text mb-8">
+                        수강 안내
+                    </h2>
+                    <div class="space-y-3 mb-6">
+                        <div class="bg-white rounded-2xl p-4 border border-brand-border">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-heading text-base font-semibold text-brand-text">1회 체험</h4>
+                                <span class="font-heading text-base font-semibold text-brand-accent">₩20,000</span>
+                            </div>
+                            <p class="text-xs text-brand-light mt-1">첫 방문 시 모든 클래스 체험 가능</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border-2 border-brand-accent">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <h4 class="font-heading text-base font-semibold text-brand-text">월 정기권</h4>
+                                    <span class="text-xs bg-brand-accent text-white px-2 py-0.5 rounded-full">인기</span>
+                                </div>
+                                <span class="font-heading text-base font-semibold text-brand-accent">₩180,000</span>
+                            </div>
+                            <p class="text-xs text-brand-light mt-1">주 무제한 수강 · 워크숍 10% 할인</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-brand-border">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-heading text-base font-semibold text-brand-text">10회 쿠폰</h4>
+                                <span class="font-heading text-base font-semibold text-brand-accent">₩320,000</span>
+                            </div>
+                            <p class="text-xs text-brand-light mt-1">유효기간 3개월 · 모든 클래스 적용</p>
+                        </div>
+                    </div>
+
+                    <!-- Location info -->
+                    <div class="bg-white rounded-2xl p-4 border border-brand-border">
+                        <h4 class="font-heading text-sm font-semibold text-brand-text mb-3">오시는 길</h4>
+                        <div class="space-y-3 text-sm text-brand-muted">
+                            <div class="flex items-start gap-3">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-brand-accent mt-0.5 shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>서울 종로구 북촌로 42길 18, 2층</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-brand-accent mt-0.5 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                <span>월-금 07:00-21:00 · 토 09:00-17:00</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-brand-accent mt-0.5 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <span>02-1234-5678</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-brand-accent mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span>안국역 2번 출구 도보 7분</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 9: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: custom-cta-fullbleed | GRADE: A | MODE: direct | SNIPPET_PATH: na | FIDELITY: n/a -->
+    <!-- ============================================= -->
+    <section class="relative w-full min-h-[60vh] flex items-center" id="contact">
+        <img
+            src="images/cta-peaceful-yoga.jpg"
+            alt="평화로운 요가 수련"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+        />
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 w-full text-center">
+            <div class="fade-in-section">
+                <p class="eyebrow text-white/50 mb-4">Begin Your Journey</p>
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-6 leading-tight">
+                    첫 호흡,<br>
+                    지금 시작하세요
+                </h2>
+                <p class="text-white/70 max-w-[420px] mx-auto mb-10 font-body">
+                    체험 수업은 언제든 환영합니다.<br class="hidden sm:block">
+                    부담 없이 상담을 신청해주세요.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="tel:0212345678" class="btn-primary inline-flex items-center justify-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full text-base font-body font-medium">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        전화 상담 02-1234-5678
+                    </a>
+                    <a href="#schedule" class="btn-secondary inline-flex items-center justify-center gap-2 border border-white/40 text-white px-8 py-4 rounded-full text-base font-body font-medium hover:bg-white/10">
+                        시간표 다시 보기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================================= -->
+    <!-- FOOTER -->
+    <!-- ============================================= -->
+    <footer class="w-full bg-brand-text">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+                <div class="md:col-span-4">
+                    <h3 class="font-heading text-xl font-semibold text-white mb-3">브레스앤플로우</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        호흡으로 완성되는 균형.<br>
+                        서울 북촌에서 만나는<br>
+                        당신만의 고요한 시간.
+                    </p>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-white/70 text-xs font-body font-medium uppercase tracking-wider mb-4">클래스</h4>
+                    <ul class="space-y-2 text-sm text-white/50">
+                        <li><a href="#classes" class="hover:text-white/80 transition-colors">빈야사 플로우</a></li>
+                        <li><a href="#classes" class="hover:text-white/80 transition-colors">인 요가</a></li>
+                        <li><a href="#classes" class="hover:text-white/80 transition-colors">산전 요가</a></li>
+                        <li><a href="#classes" class="hover:text-white/80 transition-colors">명상</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-white/70 text-xs font-body font-medium uppercase tracking-wider mb-4">연락처</h4>
+                    <ul class="space-y-2 text-sm text-white/50">
+                        <li>02-1234-5678</li>
+                        <li>hello@breathandflow.kr</li>
+                        <li>종로구 북촌로 42길 18, 2층</li>
+                    </ul>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="text-white/70 text-xs font-body font-medium uppercase tracking-wider mb-4">운영시간</h4>
+                    <ul class="space-y-2 text-sm text-white/50">
+                        <li>월-금 07:00-21:00</li>
+                        <li>토 09:00-17:00</li>
+                        <li>일요일 휴무</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-white/30 text-xs">&copy; 2026 브레스앤플로우. All rights reserved.</p>
+                <p class="text-white/20 text-xs">이 사이트는 포트폴리오 목적으로 제작되었습니다.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================= -->
+    <script>
+        // IntersectionObserver — Scroll Reveal
+        (function() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const observerOptions = { threshold: 0.1, rootMargin: '-50px 0px' };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-section').forEach(el => revealObserver.observe(el));
+
+            // Stagger items
+            const staggerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const parent = entry.target.closest('section') || entry.target.parentElement;
+                        const items = parent.querySelectorAll('.stagger-item');
+                        items.forEach((item, index) => {
+                            item.style.transitionDelay = `${index * 0.1}s`;
+                            item.classList.add('visible');
+                        });
+                        staggerObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stagger-item').forEach((el, i) => {
+                if (i === 0 || el.closest('section') !== document.querySelectorAll('.stagger-item')[i-1]?.closest('section')) {
+                    staggerObserver.observe(el);
+                }
+            });
+        })();
+
+        // Header scroll effect
+        (function() {
+            const header = document.getElementById('main-header');
+            const logo = document.getElementById('logo-text');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navCta = document.querySelector('.nav-cta');
+            let scrolled = false;
+
+            function updateHeader() {
+                const shouldScroll = window.scrollY > 80;
+                if (shouldScroll === scrolled) return;
+                scrolled = shouldScroll;
+
+                if (scrolled) {
+                    header.style.backgroundColor = 'rgba(250,247,242,0.95)';
+                    header.style.backdropFilter = 'blur(12px)';
+                    header.style.boxShadow = '0 1px 3px rgba(45,36,24,0.08)';
+                    logo.classList.remove('text-white');
+                    logo.classList.add('text-brand-text');
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-white/80', 'hover:text-white');
+                        link.classList.add('text-brand-muted', 'hover:text-brand-text');
+                    });
+                } else {
+                    header.style.backgroundColor = 'transparent';
+                    header.style.backdropFilter = 'none';
+                    header.style.boxShadow = 'none';
+                    logo.classList.add('text-white');
+                    logo.classList.remove('text-brand-text');
+                    navLinks.forEach(link => {
+                        link.classList.add('text-white/80', 'hover:text-white');
+                        link.classList.remove('text-brand-muted', 'hover:text-brand-text');
+                    });
+                }
+            }
+
+            window.addEventListener('scroll', updateHeader, { passive: true });
+            updateHeader();
+        })();
+
+        // Mobile menu
+        (function() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('mobile-close-btn');
+            const nav = document.getElementById('mobile-nav');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => nav.classList.add('open'));
+            closeBtn.addEventListener('click', () => nav.classList.remove('open'));
+            links.forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
+        })();
+    </script>
+
+</body>
+</html>

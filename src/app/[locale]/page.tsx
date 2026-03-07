@@ -68,21 +68,6 @@ export default function Home() {
       content: (
         <DesignStepContent
           description={t('HowWeDo.step2Desc')}
-          images={[
-            {
-              src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=600&fit=crop&q=80',
-              alt: 'Design 1',
-            },
-            {
-              src: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=600&fit=crop&q=80',
-              alt: 'Design 2',
-            },
-            {
-              src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=600&fit=crop&q=80',
-              alt: 'Design 3',
-            },
-          ]}
-          freeEmphasis={t('HowWeDo.step2Free')}
         />
       ),
     },

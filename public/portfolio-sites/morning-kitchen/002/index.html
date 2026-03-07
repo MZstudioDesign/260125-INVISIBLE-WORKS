@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모어닝 키친 — 하루를 여는 가장 따뜻한 식탁</title>
+    <meta name="description" content="연남동 브런치 카페 모어닝 키친. 매일 아침 정성껏 준비하는 계절의 식탁으로 당신의 하루를 시작하세요.">
+    <link rel="canonical" href="https://morningkitchen.kr">
+    <meta property="og:title" content="모어닝 키친 — 하루를 여는 가장 따뜻한 식탁">
+    <meta property="og:description" content="연남동 브런치 카페. 매일 아침 정성껏 준비하는 계절의 식탁.">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta property="og:url" content="https://morningkitchen.kr">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"DM Serif Display"', 'serif'],
+                        'sans': ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        'page': '#F7F4F0',
+                        'surface': '#EDE8E1',
+                        'sage': '#7A8B6F',
+                        'sage-dark': '#5F6D56',
+                        'terra': '#C4704E',
+                        'terra-dark': '#A85D3F',
+                        'warm-dark': '#2A2521',
+                        'warm-mid': '#6B5F55',
+                        'warm-light': '#9C8E82',
+                        'border-light': '#E0D8CF',
+                        'border-strong': '#C4B8AA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #F7F4F0;
+            --bg-surface: #EDE8E1;
+            --bg-card: #FFFFFF;
+            --accent-primary: #7A8B6F;
+            --accent-secondary: #C4704E;
+            --text-primary: #2A2521;
+            --text-secondary: #6B5F55;
+            --text-muted: #9C8E82;
+            --border-default: #E0D8CF;
+            --font-ui: 'DM Serif Display', serif;
+            --font-data: 'Noto Sans KR', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        button, a { transition: all 0.2s ease-in-out; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "모어닝 키친",
+        "description": "연남동 브런치 카페. 매일 아침 정성껏 준비하는 계절의 식탁.",
+        "image": "./images/hero.jpg",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "연남로 23길 18, 2층",
+            "addressLocality": "마포구",
+            "addressRegion": "서울특별시",
+            "postalCode": "03997"
+        },
+        "telephone": "02-338-0927",
+        "servesCuisine": "Brunch",
+        "priceRange": "₩₩",
+        "openingHours": ["Mo-Fr 08:00-17:00", "Sa-Su 09:00-18:00"]
+    }
+    </script>
+</head>
+
+<body class="bg-page text-warm-dark font-sans antialiased overflow-x-hidden">
+
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-sage focus:text-white focus:px-4 focus:py-2 focus:rounded">
+        본문 바로가기
+    </a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-page/90 backdrop-blur-sm border-b border-border-light">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <nav class="flex items-center justify-between h-16" aria-label="Main navigation">
+                <span class="font-serif text-lg tracking-wide text-warm-dark">Morning Kitchen</span>
+                <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.12em] text-warm-light font-medium">
+                    <a href="#menu" class="hover:text-sage">Menu</a>
+                    <a href="#space" class="hover:text-sage">Space</a>
+                    <a href="#story" class="hover:text-sage">Story</a>
+                    <a href="#location" class="hover:text-sage">Visit</a>
+                </div>
+                <button class="md:hidden text-warm-dark" aria-label="Open menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         SECTION 1: HERO — Full-Bleed Overlay (Bottom-Aligned)
+         MOVE: M-HERO-FULLBLEED-OVERLAY
+         ============================================================ -->
+    <!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 90% -->
+    <section class="relative w-full min-h-screen">
+        <img src="./images/hero.jpg" alt="Morning Kitchen cafe interior with warm morning light" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#2A2521]/85 via-[#2A2521]/40 to-[#2A2521]/15"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-sans">Brunch Cafe · Yeonnam-dong</p>
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+                오늘 아침,<br>당신의 식탁이 됩니다
+            </h1>
+            <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                매일 아침 여섯 시, 가장 신선한 재료로 시작하는 계절의 식탁을 준비합니다.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#menu" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-warm-dark transition-colors">
+                    메뉴 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content">
+
+    <!-- ============================================================
+         SECTION 2: PHILOSOPHY — Text-Only Center
+         MOVE: M-LAY-EDITORIAL-TYPO
+         ============================================================ -->
+    <!-- COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-testimonial-quote-reference.html | FIDELITY: 70% -->
+    <section class="fade-in-section w-full bg-white">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-xs uppercase tracking-[0.25em] text-sage mb-8 font-medium">Our Philosophy</p>
+                <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark mb-8">
+                    좋은 아침은<br>
+                    좋은 재료에서 시작됩니다
+                </h2>
+                <p class="text-warm-mid text-sm leading-[1.85] max-w-[440px] mx-auto">
+                    모어닝 키친은 매일 새벽 직접 고른 제철 식재료로<br class="hidden sm:block">
+                    하루를 여는 한 끼를 만듭니다.<br>
+                    빠르게 지나가는 아침이 아닌,<br class="hidden sm:block">
+                    천천히 음미하는 식탁을 제안합니다.
+                </p>
+                <div class="w-12 h-px bg-terra mx-auto mt-10"></div>
+                <p class="font-serif italic text-terra mt-6 text-lg">Morning Kitchen</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: SIGNATURE MENU — Alternating Rows (Typography + Image)
+         MOVE: M-LAY-ALTERNATING-ROWS ★ Editorial #1
+         ============================================================ -->
+    <!-- COMPONENT_REF: alternating-typo5-img7-order-swap | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-typo5-img7-order-swap-reference.html | FIDELITY: 75% -->
+    <section id="menu" class="fade-in-section w-full bg-page">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <p class="text-xs uppercase tracking-[0.25em] text-sage mb-4 font-medium">Signature Menu</p>
+            <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark mb-16">
+                매 계절, 새로운 메뉴가<br>
+                식탁 위에 오릅니다
+            </h2>
+
+            <!-- Menu Item 1 -->
+            <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center mb-16 lg:mb-20">
+                <div class="col-span-12 md:col-span-5">
+                    <p class="text-xs uppercase tracking-[0.15em] text-terra mb-3 font-medium">Brunch Signature</p>
+                    <h3 class="font-serif text-2xl md:text-3xl leading-tight text-warm-dark mb-4">
+                        모어닝 에그<br>
+                        베네딕트
+                    </h3>
+                    <p class="text-warm-mid text-sm leading-relaxed max-w-[320px] mb-3">
+                        유기농 달걀 포치와 수제 올랜데이즈 소스,<br class="hidden sm:block">
+                        직접 구운 잉글리시 머핀 위에 올린<br class="hidden sm:block">
+                        모어닝 키친의 시그니처 브런치.
+                    </p>
+                    <p class="font-serif text-xl text-sage">₩16,800</p>
+                </div>
+                <div class="col-span-12 md:col-span-7">
+                    <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                        <img src="./images/menu_main.jpg" alt="Morning egg benedict with hollandaise sauce" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="800" height="600" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Item 2: Reversed -->
+            <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center mb-16 lg:mb-20">
+                <div class="col-span-12 md:col-span-6 order-2 md:order-1">
+                    <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                        <img src="./images/menu_avocado.jpg" alt="Avocado toast with microgreens" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="600" height="450" />
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-5 md:col-start-8 order-1 md:order-2">
+                    <p class="text-xs uppercase tracking-[0.15em] text-terra mb-3 font-medium">Avocado Special</p>
+                    <h3 class="font-serif text-2xl md:text-3xl leading-tight text-warm-dark mb-4">
+                        아보카도<br>
+                        오픈 토스트
+                    </h3>
+                    <p class="text-warm-mid text-sm leading-relaxed max-w-[320px] mb-3">
+                        완숙 아보카도와 리코타 치즈,<br class="hidden sm:block">
+                        마이크로 그린을 올린 사워도우 토스트.<br class="hidden sm:block">
+                        발사믹 리덕션으로 마무리합니다.
+                    </p>
+                    <p class="font-serif text-xl text-sage">₩14,500</p>
+                </div>
+            </div>
+
+            <!-- Menu Item 3 -->
+            <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center">
+                <div class="col-span-12 md:col-span-5">
+                    <p class="text-xs uppercase tracking-[0.15em] text-terra mb-3 font-medium">Morning Bowl</p>
+                    <h3 class="font-serif text-2xl md:text-3xl leading-tight text-warm-dark mb-4">
+                        수제 그래놀라<br>
+                        요거트 보울
+                    </h3>
+                    <p class="text-warm-mid text-sm leading-relaxed max-w-[320px] mb-3">
+                        직접 구운 오트밀 그래놀라에<br class="hidden sm:block">
+                        그릭 요거트와 계절 과일을 듬뿍.<br class="hidden sm:block">
+                        아카시아 꿀을 곁들여 드립니다.
+                    </p>
+                    <p class="font-serif text-xl text-sage">₩12,800</p>
+                </div>
+                <div class="col-span-12 md:col-span-7">
+                    <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                        <img src="./images/menu_granola.jpg" alt="Homemade granola yogurt bowl with seasonal fruits" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="600" height="450" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: FULL-BLEED FOOD DIVIDER
+         MOVE: M-DIV-FULLBLEED-IMAGE
+         ============================================================ -->
+    <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+    <section class="relative w-full min-h-[50vh] flex items-center justify-center">
+        <img src="./images/divider_food.jpg" alt="Beautifully plated brunch dishes" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-black/55"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+            <p class="font-serif italic text-2xl md:text-3xl text-white/90 leading-relaxed">
+                "좋은 음식은 사람을<br class="hidden sm:block">
+                멈추게 하는 힘이 있다"
+            </p>
+            <div class="w-8 h-px bg-terra mx-auto mt-8"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: INGREDIENTS — Full-Bleed Key Color Section (Sage)
+         MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color 40vh+)
+         ============================================================ -->
+    <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+    <section class="fade-in-section relative w-full min-h-[60vh] flex items-center" id="story">
+        <img src="./images/ingredients.jpg" alt="Fresh seasonal ingredients from local farms" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0" style="background-color: rgba(122,139,111,0.78);"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20">
+            <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div class="col-span-12 lg:col-span-6">
+                    <p class="text-xs uppercase tracking-[0.25em] text-white/70 mb-6 font-medium">Our Ingredients</p>
+                    <h2 class="font-serif text-3xl md:text-4xl leading-snug text-white mb-6">
+                        농장에서 식탁까지,<br>
+                        가장 짧은 거리
+                    </h2>
+                    <p class="text-white/80 text-sm leading-[1.85] max-w-[400px]">
+                        파주의 유기농 농장에서 매일 새벽 배송되는<br class="hidden sm:block">
+                        제철 채소와 허브. 자연 방사 유정란과<br class="hidden sm:block">
+                        국내산 생크림으로 만드는 정직한 한 끼.
+                    </p>
+                </div>
+                <div class="col-span-12 lg:col-span-5 lg:col-start-8">
+                    <div class="aspect-[3/4] overflow-hidden rounded-sm">
+                        <img src="./images/seasonal.jpg" alt="Seasonal strawberry dessert" class="w-full h-full object-cover" loading="lazy" width="600" height="800" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: SPACE / INTERIOR — Editorial Story (4:1:7)
+         MOVE: M-LAY-EDITORIAL-STORY ★ Editorial #2
+         ============================================================ -->
+    <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+    <section id="space" class="fade-in-section w-full bg-white">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-12 gap-4 lg:gap-8 items-start">
+                <!-- Text: 4 cols -->
+                <div class="col-span-12 md:col-span-4 md:pt-16">
+                    <p class="text-xs uppercase tracking-[0.25em] text-sage mb-6 font-medium">Our Space</p>
+                    <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark mb-6">
+                        햇살이 머무는<br>
+                        고요한 아침
+                    </h2>
+                    <p class="text-warm-mid text-sm leading-[1.85] max-w-[300px] mb-8">
+                        남향 통유리로 쏟아지는 아침 햇살,<br class="hidden sm:block">
+                        내추럴 우드와 그린 플랜트가 어우러진<br class="hidden sm:block">
+                        우리만의 조용한 아침 공간.
+                    </p>
+                    <a href="#location" class="text-xs uppercase tracking-[0.15em] text-sage font-medium border-b border-sage pb-1 hover:text-sage-dark hover:border-sage-dark">
+                        방문 안내 →
+                    </a>
+                </div>
+                <!-- Gap: 1 col -->
+                <div class="hidden md:block md:col-span-1"></div>
+                <!-- Main Image: 7 cols -->
+                <div class="col-span-12 md:col-span-7">
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm">
+                        <img src="./images/interior_main.jpg" alt="Morning Kitchen interior with natural wood and morning sunlight" class="w-full h-full object-cover" loading="lazy" width="900" height="1125" />
+                    </div>
+                </div>
+            </div>
+            <!-- Sub image row -->
+            <div class="grid grid-cols-12 gap-4 lg:gap-8 mt-8">
+                <div class="col-span-12 md:col-span-5 md:col-start-5">
+                    <div class="aspect-[16/9] overflow-hidden rounded-sm">
+                        <img src="./images/interior_detail.jpg" alt="Cafe detail with plants and warm lighting" class="w-full h-full object-cover" loading="lazy" width="600" height="338" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: GALLERY — Lookbook Staggered (4-col offset)
+         MOVE: M-INT-HSCROLL-GALLERY (adapted as staggered grid)
+         ============================================================ -->
+    <!-- COMPONENT_REF: staggered-lookbook-4col-offset-mt12-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-lookbook-4col-offset-mt12-mt16-reference.html | FIDELITY: 70% -->
+    <section class="fade-in-section w-full bg-page">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.25em] text-sage mb-4 font-medium">Gallery</p>
+                    <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark">
+                        오늘의 식탁 풍경
+                    </h2>
+                </div>
+                <a href="https://instagram.com/morning_kitchen_ynm" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-warm-light hover:text-sage font-medium">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    @morning_kitchen_ynm
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-12 gap-3 lg:gap-5 items-start">
+                <div class="col-span-1 md:col-span-2 md:mt-12 stagger-item">
+                    <div class="aspect-[2/3] overflow-hidden rounded-sm">
+                        <img src="./images/menu_pastry.jpg" alt="Freshly baked pastries" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="300" height="450" />
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-4 stagger-item">
+                    <div class="aspect-[3/4] overflow-hidden rounded-sm">
+                        <img src="./images/gallery_1.jpg" alt="Beautifully plated breakfast" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="500" height="667" />
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-3 md:mt-16 stagger-item">
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm">
+                        <img src="./images/gallery_2.jpg" alt="Latte art in morning light" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="500" />
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-3 md:mt-6 stagger-item">
+                    <div class="aspect-[3/4] overflow-hidden rounded-sm">
+                        <img src="./images/gallery_3.jpg" alt="Chef preparing morning dishes" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="533" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: CHEF / MORNING ROUTINE — Offset Overlap Reverse
+         MOVE: M-LAY-OFFSET-OVERLAP
+         ============================================================ -->
+    <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+    <section class="fade-in-section w-full bg-surface">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-12 gap-4 lg:gap-8 items-center">
+                <!-- Image: 7 cols (left) — reversed from Space section -->
+                <div class="col-span-12 md:col-span-7 order-2 md:order-1">
+                    <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                        <img src="./images/chef.jpg" alt="Chef Kim preparing morning dishes with care" class="w-full h-full object-cover" loading="lazy" width="600" height="450" />
+                    </div>
+                </div>
+                <!-- Text: 4 cols (right) -->
+                <div class="col-span-12 md:col-span-4 md:col-start-9 order-1 md:order-2">
+                    <p class="text-xs uppercase tracking-[0.25em] text-terra mb-6 font-medium">Morning Routine</p>
+                    <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark mb-6">
+                        새벽 다섯 시,<br>
+                        주방에 불이 켜집니다
+                    </h2>
+                    <p class="text-warm-mid text-sm leading-[1.85] max-w-[300px]">
+                        김현우 셰프는 매일 새벽 다섯 시에 주방에 섭니다.<br class="hidden sm:block">
+                        르 꼬르동 블루 출신,<br class="hidden sm:block">
+                        10년간의 파리 생활을 마치고<br class="hidden sm:block">
+                        연남동에서 자신만의 아침을 짓기 시작했습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: REVIEWS — Testimonial Quote (Single Carousel Style)
+         MOVE: M-TRUST
+         ============================================================ -->
+    <!-- COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-testimonial-quote-reference.html | FIDELITY: 75% -->
+    <section class="fade-in-section w-full bg-white">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-xs uppercase tracking-[0.25em] text-sage mb-8 font-medium">Reviews</p>
+
+                <!-- Review Carousel (Simple JS) -->
+                <div id="review-carousel" class="relative">
+                    <div class="review-slide" data-index="0">
+                        <span class="font-serif text-4xl text-terra">&ldquo;</span>
+                        <p class="text-warm-mid text-sm leading-[1.85] mt-2 max-w-[480px] mx-auto">
+                            연남동에서 가장 좋아하는 곳이에요.<br class="hidden sm:block">
+                            에그 베네딕트가 정말 미쳤고,<br class="hidden sm:block">
+                            아침 햇살이 들어오는 창가 자리는 매번 힐링입니다.
+                        </p>
+                        <div class="flex items-center justify-center gap-1 mt-4">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="font-serif italic text-terra mt-4 text-lg">이지현</p>
+                        <p class="text-warm-light text-xs mt-1">네이버 리뷰</p>
+                    </div>
+
+                    <div class="review-slide hidden" data-index="1">
+                        <span class="font-serif text-4xl text-terra">&ldquo;</span>
+                        <p class="text-warm-mid text-sm leading-[1.85] mt-2 max-w-[480px] mx-auto">
+                            그래놀라 보울이 진짜 맛있어요.<br class="hidden sm:block">
+                            요거트도 직접 만드시는 건지 시판 제품이랑 확실히 다르고,<br class="hidden sm:block">
+                            분위기도 조용해서 혼자 오기 좋은 카페입니다.
+                        </p>
+                        <div class="flex items-center justify-center gap-1 mt-4">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="font-serif italic text-terra mt-4 text-lg">박서준</p>
+                        <p class="text-warm-light text-xs mt-1">카카오맵 리뷰</p>
+                    </div>
+
+                    <div class="review-slide hidden" data-index="2">
+                        <span class="font-serif text-4xl text-terra">&ldquo;</span>
+                        <p class="text-warm-mid text-sm leading-[1.85] mt-2 max-w-[480px] mx-auto">
+                            프렌치 토스트 브리오슈가 정말 부드럽고<br class="hidden sm:block">
+                            메이플 시럽이랑 완벽한 조합이에요.<br class="hidden sm:block">
+                            주말 아침마다 남편이랑 같이 오는 우리만의 루틴입니다.
+                        </p>
+                        <div class="flex items-center justify-center gap-1 mt-4">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4704E" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="font-serif italic text-terra mt-4 text-lg">최윤아</p>
+                        <p class="text-warm-light text-xs mt-1">인스타그램 DM</p>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-12 mt-8">
+                        <button onclick="changeReview(-1)" class="text-warm-light hover:text-warm-dark" aria-label="Previous review">&larr;</button>
+                        <span class="text-xs text-warm-light" id="review-counter">1 / 3</span>
+                        <button onclick="changeReview(1)" class="text-warm-light hover:text-warm-dark" aria-label="Next review">&rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: LOCATION & HOURS — Info Section
+         MOVE: Custom Info Layout
+         ============================================================ -->
+    <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+    <section id="location" class="fade-in-section w-full bg-page">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-12 gap-8 lg:gap-12">
+                <!-- Left: Info -->
+                <div class="col-span-12 md:col-span-5">
+                    <p class="text-xs uppercase tracking-[0.25em] text-sage mb-6 font-medium">Visit Us</p>
+                    <h2 class="font-serif text-3xl md:text-4xl leading-snug text-warm-dark mb-10">
+                        찾아오시는 길
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A8B6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <div>
+                                <p class="text-warm-dark text-sm font-medium mb-1">주소</p>
+                                <p class="text-warm-mid text-sm leading-relaxed">서울시 마포구 연남로23길 18, 2층<br>(연남동 568-26)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A8B6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <div>
+                                <p class="text-warm-dark text-sm font-medium mb-1">영업시간</p>
+                                <p class="text-warm-mid text-sm leading-relaxed">
+                                    월-금 08:00 — 17:00<br>
+                                    토-일 09:00 — 18:00<br>
+                                    <span class="text-terra">매주 화요일 정기 휴무</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A8B6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                            <div>
+                                <p class="text-warm-dark text-sm font-medium mb-1">전화</p>
+                                <p class="text-warm-mid text-sm">02-338-0927</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A8B6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                            <div>
+                                <p class="text-warm-dark text-sm font-medium mb-1">인스타그램</p>
+                                <a href="https://instagram.com/morning_kitchen_ynm" target="_blank" rel="noopener noreferrer" class="text-sage text-sm hover:text-sage-dark">@morning_kitchen_ynm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Map placeholder -->
+                <div class="col-span-12 md:col-span-7">
+                    <div class="aspect-[4/3] bg-surface rounded-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9C8E82" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <p class="text-warm-light text-xs uppercase tracking-[0.15em]">Naver Map</p>
+                            <p class="text-warm-mid text-xs mt-1">연남동 568-26</p>
+                        </div>
+                    </div>
+                    <p class="text-warm-light text-xs mt-3">
+                        <!-- Lucide ExternalLink -->
+                        <a href="https://map.naver.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-sage">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            네이버 지도에서 보기
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 11: FINAL CTA — Full-Bleed Background
+         MOVE: M-CTA-FULLBLEED-FINAL
+         ============================================================ -->
+    <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 70% -->
+    <section class="relative w-full min-h-[60vh] flex items-center justify-center">
+        <img src="./images/cta.jpg" alt="Morning Kitchen warm cafe atmosphere" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-black/65"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+            <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-6 font-medium">Morning Kitchen</p>
+            <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-snug text-white mb-6">
+                내일 아침,<br>
+                이 자리에서 만나요
+            </h2>
+            <p class="text-white/70 text-sm leading-relaxed max-w-[400px] mx-auto mb-10">
+                예약 없이도 편하게 방문하실 수 있어요.<br class="hidden sm:block">
+                다만, 주말 오전은 대기가 있을 수 있으니<br class="hidden sm:block">
+                여유롭게 와주세요.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="tel:02-338-0927" class="px-8 py-3.5 bg-sage text-white text-xs uppercase tracking-[0.15em] font-medium rounded hover:bg-sage-dark active:scale-95 transition-all">
+                    전화 예약하기
+                </a>
+                <a href="https://instagram.com/morning_kitchen_ynm" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 border border-white/40 text-white text-xs uppercase tracking-[0.15em] font-medium rounded hover:bg-white/10 transition-all">
+                    인스타그램 DM
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="w-full bg-warm-dark">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="font-serif text-xl text-white">Morning Kitchen</span>
+                    <p class="text-white/40 text-xs mt-2">서울시 마포구 연남로23길 18, 2층</p>
+                </div>
+                <div class="flex items-center gap-8 text-xs uppercase tracking-[0.12em] text-white/40">
+                    <a href="#menu" class="hover:text-white">Menu</a>
+                    <a href="#space" class="hover:text-white">Space</a>
+                    <a href="#story" class="hover:text-white">Story</a>
+                    <a href="#location" class="hover:text-white">Visit</a>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-white/30 text-xs">&copy; 2025 Morning Kitchen. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="https://instagram.com/morning_kitchen_ynm" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         SCRIPTS
+         ============================================================ -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.stagger-item').forEach((el, index) => {
+            const parent = el.closest('.grid');
+            if (parent) {
+                const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item'));
+                const i = siblings.indexOf(el);
+                el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+            } else {
+                el.style.transitionDelay = index * 0.1 + 's';
+            }
+            observer.observe(el);
+        });
+
+        // Reduced motion guard
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+                el.style.transition = 'none';
+                el.classList.add('animate-in');
+            });
+        }
+
+        // Review carousel
+        let currentReview = 0;
+        const totalReviews = 3;
+
+        function changeReview(direction) {
+            const slides = document.querySelectorAll('.review-slide');
+            slides[currentReview].classList.add('hidden');
+            currentReview = (currentReview + direction + totalReviews) % totalReviews;
+            slides[currentReview].classList.remove('hidden');
+            document.getElementById('review-counter').textContent = (currentReview + 1) + ' / ' + totalReviews;
+        }
+    </script>
+
+</body>
+</html>

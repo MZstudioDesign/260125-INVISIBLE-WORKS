@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코드랩 아카데미 — 생각을 코드로, 코드를 커리어로</title>
+    <meta name="description" content="코드랩 아카데미는 6개월 집중 부트캠프부터 1:1 멘토링까지, 실무 중심 코딩 교육으로 당신의 커리어 전환을 돕습니다. 강남역 5분.">
+    <link rel="canonical" href="https://www.codelabacademy.kr">
+    <meta property="og:title" content="코드랩 아카데미 — 생각을 코드로, 코드를 커리어로">
+    <meta property="og:description" content="실무 중심 코딩 교육. 6개월 부트캠프, 1:1 멘토링, 취업 연계까지.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.codelabacademy.kr">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-page': '#0A0A0A',
+                        'bg-surface': '#111111',
+                        'bg-card': '#1A1A1A',
+                        'accent': '#D4A04A',
+                        'accent-dark': '#B8860B',
+                        'txt': '#F5F0E8',
+                        'txt-secondary': '#9B9389',
+                        'txt-muted': '#6B6460',
+                        'border-subtle': 'rgba(212,160,74,0.15)',
+                        'border-strong': 'rgba(212,160,74,0.4)',
+                    },
+                    fontFamily: {
+                        'ui': ['"Space Grotesk"', 'sans-serif'],
+                        'mono': ['"IBM Plex Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg-page: #0A0A0A;
+            --bg-surface: #111111;
+            --bg-card: #1A1A1A;
+            --accent-primary: #D4A04A;
+            --accent-secondary: #B8860B;
+            --text-primary: #F5F0E8;
+            --text-secondary: #9B9389;
+            --text-muted: #6B6460;
+            --border-default: rgba(212,160,74,0.15);
+            --border-strong: rgba(212,160,74,0.4);
+            --font-ui: 'Space Grotesk', sans-serif;
+            --font-data: 'IBM Plex Mono', monospace;
+        }
+        html { scroll-behavior: smooth; }
+        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
+        .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+        button, a { transition: all 0.2s ease-in-out; }
+        .typing-cursor::after { content: '|'; animation: blink 1s infinite; color: var(--accent-primary); }
+        @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+        .counter-number { font-variant-numeric: tabular-nums; }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+            .typing-cursor::after { animation: none; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "코드랩 아카데미",
+        "description": "실무 중심 코딩 교육 아카데미. 프론트엔드, 백엔드, 데이터 사이언스, AI/ML 트랙 운영.",
+        "url": "https://www.codelabacademy.kr",
+        "telephone": "+82-2-555-0147",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "강남대로 396 삼성빌딩 12층",
+            "addressLocality": "서울특별시",
+            "addressRegion": "강남구",
+            "postalCode": "06224",
+            "addressCountry": "KR"
+        }
+    }
+    </script>
+</head>
+<body class="bg-bg-page text-txt font-ui antialiased overflow-x-hidden">
+
+<!-- HEADER (Fixed Nav) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-bg-page/90 backdrop-blur-sm border-b border-border-subtle">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 h-16 flex items-center justify-between">
+        <a href="#" class="font-mono text-sm font-semibold tracking-wider text-accent">&lt;CodeLab/&gt;</a>
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#philosophy" class="text-xs font-mono tracking-widest uppercase text-txt-secondary hover:text-accent">Philosophy</a>
+            <a href="#journey" class="text-xs font-mono tracking-widest uppercase text-txt-secondary hover:text-accent">Journey</a>
+            <a href="#curriculum" class="text-xs font-mono tracking-widest uppercase text-txt-secondary hover:text-accent">Tracks</a>
+            <a href="#mentors" class="text-xs font-mono tracking-widest uppercase text-txt-secondary hover:text-accent">Mentors</a>
+            <a href="#contact" class="inline-flex items-center px-5 py-2 bg-accent text-bg-page text-xs font-medium tracking-wide rounded hover:bg-accent-dark">상담 신청</a>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden text-txt" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-bg-page border-t border-border-subtle">
+        <div class="px-6 py-4 flex flex-col gap-4">
+            <a href="#philosophy" class="text-sm text-txt-secondary hover:text-accent">Philosophy</a>
+            <a href="#journey" class="text-sm text-txt-secondary hover:text-accent">Journey</a>
+            <a href="#curriculum" class="text-sm text-txt-secondary hover:text-accent">Tracks</a>
+            <a href="#mentors" class="text-sm text-txt-secondary hover:text-accent">Mentors</a>
+            <a href="#contact" class="inline-flex items-center justify-center px-5 py-2.5 bg-accent text-bg-page text-sm font-medium rounded">상담 신청</a>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+<!-- COMPONENT_REF: hero-center-aligned | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-center-aligned-reference.html | FIDELITY: 75% -->
+<section class="relative w-full min-h-screen flex items-center justify-center">
+    <img src="./images/hero.jpg" alt="Developer coding in warm ambient workspace" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-[#0A0A0A]"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center pt-20">
+        <p class="font-mono text-xs tracking-[0.3em] uppercase text-accent mb-6">Since 2019 · Gangnam, Seoul</p>
+        <h1 class="text-4xl md:text-5xl lg:text-[4.5rem] font-bold leading-[1.3] tracking-tight mb-6">
+            생각을 코드로,<br>
+            <span class="typing-cursor">코드를 커리어로</span>
+        </h1>
+        <p class="max-w-[480px] mx-auto text-txt-secondary text-base leading-relaxed mb-10">
+            코드랩 아카데미는 현직 시니어 엔지니어가<br class="hidden sm:block">
+            직접 설계한 커리큘럼으로 당신의 전환을 돕습니다.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact" class="inline-flex items-center justify-center px-8 py-3.5 bg-accent text-bg-page text-sm font-medium tracking-wide rounded hover:bg-accent-dark">
+                무료 상담 예약하기
+            </a>
+            <a href="#curriculum" class="inline-flex items-center justify-center px-8 py-3.5 border border-accent text-accent text-sm font-medium tracking-wide rounded hover:bg-accent hover:text-bg-page">
+                트랙 살펴보기
+            </a>
+        </div>
+        <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-12 text-center">
+            <div>
+                <p class="font-mono text-2xl md:text-3xl font-semibold text-accent counter-number" data-target="1247">0</p>
+                <p class="text-xs text-txt-muted font-mono tracking-wider mt-1">수료생</p>
+            </div>
+            <div>
+                <p class="font-mono text-2xl md:text-3xl font-semibold text-accent counter-number" data-target="94">0</p>
+                <p class="text-xs text-txt-muted font-mono tracking-wider mt-1">취업률 %</p>
+            </div>
+            <div>
+                <p class="font-mono text-2xl md:text-3xl font-semibold text-accent counter-number" data-target="47">0</p>
+                <p class="text-xs text-txt-muted font-mono tracking-wider mt-1">파트너 기업</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
+<!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 80% -->
+<section id="philosophy" class="fade-in-section w-full bg-bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="grid grid-cols-12 gap-8 items-start">
+            <div class="col-span-12 lg:col-span-5">
+                <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Our Philosophy</p>
+                <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-[1.15] tracking-tight">
+                    코드는 도구일 뿐,<br>
+                    진짜 배우는 건<br>
+                    <span class="text-accent">문제를 해결하는 사고</span>
+                </h2>
+            </div>
+            <div class="col-span-12 lg:col-span-6 lg:col-start-7 lg:pt-12">
+                <p class="text-txt-secondary text-base leading-[1.8] mb-6">
+                    코드랩은 단순한 코딩 학원이 아닙니다. 우리는 기술 너머의 사고력을 가르칩니다.
+                    프레임워크는 바뀌지만, 문제를 분석하고 해결하는 능력은 평생 갑니다.
+                </p>
+                <p class="text-txt-secondary text-base leading-[1.8] mb-8">
+                    모든 커리큘럼은 현직 시니어 엔지니어가 실무에서 매일 쓰는 패턴을 기반으로 설계됩니다.
+                    이론이 아닌 경험에서 출발하는 교육, 그것이 코드랩의 차이입니다.
+                </p>
+                <div class="w-16 h-px bg-accent/30"></div>
+                <p class="font-mono text-sm text-accent mt-4 italic">"Build to learn, not learn to build."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: JOURNEY PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
+<!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 70% -->
+<section id="journey" class="fade-in-section w-full bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Your Journey</p>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                입학에서 취업까지,<br>
+                <span class="text-accent">5단계 여정</span>
+            </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+            <!-- Step 1 -->
+            <div class="stagger-item md:col-span-4 bg-bg-card border border-border-subtle rounded-lg p-7 hover:border-border-strong transition-all group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+                    </div>
+                    <span class="font-mono text-xs text-accent tracking-wider">STEP 01</span>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">적성 진단</h3>
+                <p class="text-sm text-txt-secondary leading-relaxed">온라인 코딩 적성 테스트와 1:1 상담을 통해 당신에게 맞는 트랙을 찾습니다.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="stagger-item md:col-span-4 bg-bg-card border border-border-subtle rounded-lg p-7 hover:border-border-strong transition-all group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"/></svg>
+                    </div>
+                    <span class="font-mono text-xs text-accent tracking-wider">STEP 02</span>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">트랙 선택</h3>
+                <p class="text-sm text-txt-secondary leading-relaxed">Frontend, Backend, Data Science, AI/ML 중 전문 트랙을 선택합니다.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="stagger-item md:col-span-4 bg-bg-card border border-border-subtle rounded-lg p-7 hover:border-border-strong transition-all group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+                    </div>
+                    <span class="font-mono text-xs text-accent tracking-wider">STEP 03</span>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">집중 학습</h3>
+                <p class="text-sm text-txt-secondary leading-relaxed">매일 8시간, 실무 프로젝트 중심 커리큘럼으로 깊이 있는 학습을 진행합니다.</p>
+            </div>
+            <!-- Step 4 -->
+            <div class="stagger-item md:col-span-6 bg-bg-card border border-border-subtle rounded-lg p-7 hover:border-border-strong transition-all group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>
+                    </div>
+                    <span class="font-mono text-xs text-accent tracking-wider">STEP 04</span>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">포트폴리오 빌드</h3>
+                <p class="text-sm text-txt-secondary leading-relaxed">실제 서비스 수준의 팀 프로젝트를 완성하고, GitHub 포트폴리오와 기술 블로그를 정리합니다.</p>
+            </div>
+            <!-- Step 5 -->
+            <div class="stagger-item md:col-span-6 bg-bg-card border border-border-subtle rounded-lg p-7 hover:border-border-strong transition-all group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+                    </div>
+                    <span class="font-mono text-xs text-accent tracking-wider">STEP 05</span>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">커리어 런칭</h3>
+                <p class="text-sm text-txt-secondary leading-relaxed">이력서 코칭, 모의 면접, 파트너 기업 매칭까지. 취업이 완료될 때까지 지원합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: IMMERSION DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- COMPONENT_REF: (custom) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
+<section class="relative w-full min-h-[60vh] flex items-center justify-center">
+    <img src="./images/divider.jpg" alt="Collaborative coding workspace" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center">
+        <p class="font-mono text-xs tracking-[0.3em] uppercase text-accent mb-6">Immersive Environment</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
+            함께 몰입하는 공간에서,<br>
+            <span class="text-accent">함께 성장합니다</span>
+        </h2>
+        <p class="max-w-[420px] mx-auto text-txt-secondary text-sm leading-relaxed mt-6">
+            듀얼 모니터 워크스테이션, 협업 라운지,<br class="hidden sm:block">
+            24시간 개방 학습실까지 — 몰입에 최적화된 환경.
+        </p>
+    </div>
+</section>
+
+<!-- SECTION: CURRICULUM TRACKS | MOVE: M-LAY-EDITORIAL-FEATURE -->
+<!-- COMPONENT_REF: asymmetric-blog-large7-small5-stack | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-blog-large7-small5-stack-reference.html | FIDELITY: 70% -->
+<section id="curriculum" class="fade-in-section w-full bg-bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
+            <div>
+                <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Curriculum Tracks</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                    당신의 목표에 맞는<br>
+                    <span class="text-accent">전문 트랙</span>
+                </h2>
+            </div>
+            <p class="text-sm text-txt-secondary mt-4 md:mt-0 max-w-[320px]">
+                4개의 심화 트랙 중 하나를 선택하세요.<br>
+                각 트랙은 6개월 풀타임 기준으로 설계되었습니다.
+            </p>
+        </div>
+        <div class="grid grid-cols-12 gap-5">
+            <!-- Frontend (Large) -->
+            <div class="stagger-item col-span-12 lg:col-span-7 group relative overflow-hidden rounded-lg bg-bg-card border border-border-subtle hover:border-border-strong transition-all">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/track_frontend.jpg" alt="Frontend development code on screen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                </div>
+                <div class="p-6 md:p-7">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="font-mono text-xs text-accent tracking-wider">TRACK 01</span>
+                        <span class="text-xs text-txt-muted">·</span>
+                        <span class="text-xs text-txt-muted">6개월 풀타임</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Frontend Engineering</h3>
+                    <p class="text-sm text-txt-secondary leading-relaxed mb-4">React, Next.js, TypeScript 기반 모던 프론트엔드 개발. 디자인 시스템 구축부터 퍼포먼스 최적화까지.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">React</span>
+                        <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">Next.js</span>
+                        <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">TypeScript</span>
+                        <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Backend (Small stack) -->
+            <div class="col-span-12 lg:col-span-5 flex flex-col gap-5">
+                <div class="stagger-item group relative overflow-hidden rounded-lg bg-bg-card border border-border-subtle hover:border-border-strong transition-all flex-1">
+                    <div class="aspect-[16/9] lg:aspect-auto lg:h-40 overflow-hidden">
+                        <img src="./images/track_backend.jpg" alt="Server infrastructure and data center" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="font-mono text-xs text-accent tracking-wider">TRACK 02</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-1">Backend Engineering</h3>
+                        <p class="text-sm text-txt-secondary leading-relaxed">Node.js, Python, PostgreSQL, Docker 기반 서버 아키텍처 및 API 설계.</p>
+                    </div>
+                </div>
+                <div class="stagger-item group relative overflow-hidden rounded-lg bg-bg-card border border-border-subtle hover:border-border-strong transition-all flex-1">
+                    <div class="aspect-[16/9] lg:aspect-auto lg:h-40 overflow-hidden">
+                        <img src="./images/track_data.jpg" alt="Data visualization and analytics dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="font-mono text-xs text-accent tracking-wider">TRACK 03</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-1">Data Science</h3>
+                        <p class="text-sm text-txt-secondary leading-relaxed">Python, Pandas, SQL, Tableau 활용 데이터 분석 및 시각화 전문가 양성.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- AI/ML (Full width bottom) -->
+            <div class="stagger-item col-span-12 group relative overflow-hidden rounded-lg bg-bg-card border border-border-subtle hover:border-border-strong transition-all">
+                <div class="grid grid-cols-12 items-center">
+                    <div class="col-span-12 md:col-span-5 aspect-[16/10] md:aspect-auto md:h-full overflow-hidden">
+                        <img src="./images/track_ai.jpg" alt="AI machine learning neural network visualization" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    </div>
+                    <div class="col-span-12 md:col-span-7 p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="font-mono text-xs text-accent tracking-wider">TRACK 04</span>
+                            <span class="px-2 py-0.5 bg-accent text-bg-page text-xs font-mono rounded">NEW</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">AI / Machine Learning</h3>
+                        <p class="text-sm text-txt-secondary leading-relaxed mb-4">TensorFlow, PyTorch, LLM 활용 AI 엔지니어링. 모델 설계부터 프로덕션 배포까지 실무 파이프라인을 경험합니다.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">PyTorch</span>
+                            <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">TensorFlow</span>
+                            <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">LangChain</span>
+                            <span class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-mono rounded">MLOps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pricing Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
+            <div class="stagger-item bg-bg-card border border-border-subtle rounded-lg p-6 text-center hover:border-accent transition-all">
+                <p class="font-mono text-xs text-accent tracking-wider mb-2">BOOTCAMP</p>
+                <p class="text-2xl font-bold mb-1">₩4,800,000</p>
+                <p class="text-xs text-txt-muted">6개월 풀타임 · 주 5일</p>
+            </div>
+            <div class="stagger-item bg-bg-card border border-accent rounded-lg p-6 text-center relative">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-bg-page text-xs font-mono rounded-full">BEST</span>
+                <p class="font-mono text-xs text-accent tracking-wider mb-2">PART-TIME</p>
+                <p class="text-2xl font-bold mb-1">₩2,400,000</p>
+                <p class="text-xs text-txt-muted">3개월 파트타임 · 주 3일 저녁</p>
+            </div>
+            <div class="stagger-item bg-bg-card border border-border-subtle rounded-lg p-6 text-center hover:border-accent transition-all">
+                <p class="font-mono text-xs text-accent tracking-wider mb-2">1:1 MENTORING</p>
+                <p class="text-2xl font-bold mb-1">₩150,000</p>
+                <p class="text-xs text-txt-muted">세션 당 · 60분</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: MENTORS | MOVE: M-INT-HOVER-REVEAL -->
+<!-- COMPONENT_REF: staggered-lookbook-dark-offset-mt12 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-lookbook-dark-offset-mt12-reference.html | FIDELITY: 70% -->
+<section id="mentors" class="fade-in-section w-full bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Mentors</p>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                현장에서 온 멘토,<br>
+                <span class="text-accent">현장으로 이끄는 가이드</span>
+            </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Mentor 1 -->
+            <div class="stagger-item group relative overflow-hidden rounded-lg">
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1701463387028-3947648f1337?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="김진우 멘토" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                    <h3 class="text-base font-semibold text-white">김진우</h3>
+                    <p class="font-mono text-xs text-accent mt-1">Frontend Lead</p>
+                    <p class="text-xs text-white/60 mt-1">Ex-네이버 · 10년 경력</p>
+                </div>
+            </div>
+            <!-- Mentor 2 -->
+            <div class="stagger-item group relative overflow-hidden rounded-lg lg:mt-12">
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1581065178047-8ee15951ede6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="박서연 멘토" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                    <h3 class="text-base font-semibold text-white">박서연</h3>
+                    <p class="font-mono text-xs text-accent mt-1">Backend Architect</p>
+                    <p class="text-xs text-white/60 mt-1">Ex-카카오 · 12년 경력</p>
+                </div>
+            </div>
+            <!-- Mentor 3 -->
+            <div class="stagger-item group relative overflow-hidden rounded-lg">
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1686543972602-da0c7ea61ce2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="이한결 멘토" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                    <h3 class="text-base font-semibold text-white">이한결</h3>
+                    <p class="font-mono text-xs text-accent mt-1">Data Science Lead</p>
+                    <p class="text-xs text-white/60 mt-1">Ex-쿠팡 · 8년 경력</p>
+                </div>
+            </div>
+            <!-- Mentor 4 -->
+            <div class="stagger-item group relative overflow-hidden rounded-lg lg:mt-12">
+                <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="최유나 멘토" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                    <h3 class="text-base font-semibold text-white">최유나</h3>
+                    <p class="font-mono text-xs text-accent mt-1">AI/ML Engineer</p>
+                    <p class="text-xs text-white/60 mt-1">Ex-삼성 리서치 · 7년 경력</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: OUTCOMES | MOVE: M-RHYTHM-KEYCOLOR + M-TRUST-STAT-BAND -->
+<!-- COMPONENT_REF: (custom) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
+<section class="relative w-full min-h-[50vh] flex items-center">
+    <img src="./images/outcomes_bg.jpg" alt="Team celebrating project completion" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0" style="background: rgba(212,160,74,0.80);"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="text-center mb-14">
+            <p class="font-mono text-xs tracking-[0.3em] uppercase text-bg-page/80 mb-4">Proven Results</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-bg-page tracking-tight">
+                숫자가 증명하는<br>
+                코드랩의 성과
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 text-center">
+            <div class="fade-in-section">
+                <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="94">0</p>
+                <p class="text-sm text-bg-page/70 mt-2">취업률 (%)</p>
+            </div>
+            <div class="fade-in-section">
+                <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="4200">0</p>
+                <p class="text-sm text-bg-page/70 mt-2">평균 초봉 (만원)</p>
+            </div>
+            <div class="fade-in-section">
+                <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="1247">0</p>
+                <p class="text-sm text-bg-page/70 mt-2">누적 수료생</p>
+            </div>
+            <div class="fade-in-section">
+                <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="47">0</p>
+                <p class="text-sm text-bg-page/70 mt-2">파트너 기업</p>
+            </div>
+        </div>
+        <!-- Partner Logos (Text) -->
+        <div class="mt-16 pt-8 border-t border-bg-page/20">
+            <p class="font-mono text-xs tracking-[0.2em] text-bg-page/50 text-center mb-6">WHERE OUR GRADUATES WORK</p>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-bg-page/40 font-mono text-sm">
+                <span>네이버</span><span>카카오</span><span>라인</span><span>쿠팡</span><span>배달의민족</span><span>토스</span><span>당근</span><span>버킷플레이스</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: TESTIMONIALS | MOVE: M-LAY-ALTERNATING-ROWS -->
+<!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
+<section class="fade-in-section w-full bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+            <div>
+                <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Testimonials</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                    수료생들의<br>
+                    <span class="text-accent">솔직한 이야기</span>
+                </h2>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-5">
+            <!-- Testimonial 1 -->
+            <div class="stagger-item col-span-12 md:col-span-5 bg-bg-card border border-border-subtle rounded-lg p-7">
+                <span class="text-3xl text-accent font-ui">"</span>
+                <p class="text-txt-secondary text-sm leading-relaxed mt-2">
+                    비전공자로 6개월 부트캠프를 수료했습니다. 매일이 도전이었지만, 멘토들의 실무 피드백 덕분에 포트폴리오를 완성하고 네이버 파이낸셜에 입사했습니다.
+                </p>
+                <div class="flex items-center gap-3 mt-6">
+                    <img src="./images/testimonial_1.jpg" alt="김도현" class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                    <div>
+                        <p class="text-sm font-medium text-txt">김도현</p>
+                        <p class="font-mono text-xs text-txt-muted">Frontend · 2기 수료</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="stagger-item col-span-12 md:col-span-5 bg-bg-card border border-border-subtle rounded-lg p-7">
+                <span class="text-3xl text-accent font-ui">"</span>
+                <p class="text-txt-secondary text-sm leading-relaxed mt-2">
+                    마케터에서 데이터 엔지니어로 전직했습니다. 코드랩의 커리큘럼은 실무 프로젝트 위주라 취업 면접에서 바로 통했습니다. 감사합니다.
+                </p>
+                <div class="flex items-center gap-3 mt-6">
+                    <img src="./images/testimonial_2.jpg" alt="이수정" class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                    <div>
+                        <p class="text-sm font-medium text-txt">이수정</p>
+                        <p class="font-mono text-xs text-txt-muted">Data Science · 5기 수료</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block md:col-span-2"></div>
+            <!-- Testimonial 3 -->
+            <div class="hidden md:block md:col-span-2"></div>
+            <div class="stagger-item col-span-12 md:col-span-5 bg-bg-card border border-border-subtle rounded-lg p-7">
+                <span class="text-3xl text-accent font-ui">"</span>
+                <p class="text-txt-secondary text-sm leading-relaxed mt-2">
+                    현직 개발자인데도 배울 게 많았습니다. 1:1 멘토링으로 시스템 설계 역량을 키웠고, 시니어 포지션으로 이직에 성공했습니다.
+                </p>
+                <div class="flex items-center gap-3 mt-6">
+                    <img src="./images/testimonial_3.jpg" alt="정하은" class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                    <div>
+                        <p class="text-sm font-medium text-txt">정하은</p>
+                        <p class="font-mono text-xs text-txt-muted">Backend · 멘토링 수강</p>
+                    </div>
+                </div>
+            </div>
+            <div class="stagger-item col-span-12 md:col-span-5 bg-bg-card border border-accent/30 rounded-lg p-7">
+                <span class="text-3xl text-accent font-ui">"</span>
+                <p class="text-txt-secondary text-sm leading-relaxed mt-2">
+                    AI 트랙 1기 수료생입니다. LLM 파인튜닝부터 배포까지 실습한 경험이 취업에 결정적이었어요. 지금은 스타트업에서 AI 엔지니어로 일하고 있습니다.
+                </p>
+                <div class="flex items-center gap-3 mt-6">
+                    <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span class="text-accent text-sm font-semibold">윤</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-txt">윤성민</p>
+                        <p class="font-mono text-xs text-txt-muted">AI/ML · 7기 수료</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: FAQ | MOVE: M-INTERACTION-ACCORDION -->
+<!-- COMPONENT_REF: (custom) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
+<section class="fade-in-section w-full bg-bg-surface">
+    <div class="max-w-[840px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+        <div class="text-center mb-14">
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">FAQ</p>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                자주 묻는 질문
+            </h2>
+        </div>
+        <div class="space-y-3" id="faq-container">
+            <div class="faq-item border border-border-subtle rounded-lg overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                    <span class="text-sm font-medium pr-4">비전공자도 수강할 수 있나요?</span>
+                    <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-350 ease-out">
+                    <p class="px-5 pb-5 text-sm text-txt-secondary leading-relaxed">네, 전체 수료생의 약 60%가 비전공자입니다. 기초 프로그래밍 과정부터 시작하며, 적성 테스트를 통해 적합한 트랙을 추천해드립니다. 사전 지식 없이도 충분히 따라올 수 있도록 커리큘럼이 설계되어 있습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item border border-border-subtle rounded-lg overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                    <span class="text-sm font-medium pr-4">수업 시간은 어떻게 되나요?</span>
+                    <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-350 ease-out">
+                    <p class="px-5 pb-5 text-sm text-txt-secondary leading-relaxed">풀타임 부트캠프는 월~금 오전 10시~오후 7시 (점심 1시간 포함)입니다. 파트타임 과정은 월·수·금 저녁 7시~10시에 진행됩니다. 1:1 멘토링은 멘토와 시간을 조율하여 유연하게 진행합니다.</p>
+                </div>
+            </div>
+            <div class="faq-item border border-border-subtle rounded-lg overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                    <span class="text-sm font-medium pr-4">취업 지원은 어떻게 이루어지나요?</span>
+                    <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-350 ease-out">
+                    <p class="px-5 pb-5 text-sm text-txt-secondary leading-relaxed">수료 후 최대 6개월간 취업 지원을 제공합니다. 이력서·포트폴리오 1:1 리뷰, 모의 기술 면접 (주 2회), 파트너 기업 채용 연계, 커리어 상담이 포함됩니다. 수료 후 3개월 내 취업률은 94%입니다.</p>
+                </div>
+            </div>
+            <div class="faq-item border border-border-subtle rounded-lg overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                    <span class="text-sm font-medium pr-4">분할 납부나 할인이 가능한가요?</span>
+                    <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-350 ease-out">
+                    <p class="px-5 pb-5 text-sm text-txt-secondary leading-relaxed">최대 6개월 무이자 분할 납부가 가능합니다. 얼리버드 등록 시 10% 할인, 2인 이상 동시 등록 시 15% 할인이 적용됩니다. 국민내일배움카드 사용은 현재 지원하지 않습니다.</p>
+                </div>
+            </div>
+            <div class="faq-item border border-border-subtle rounded-lg overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                    <span class="text-sm font-medium pr-4">다음 기수는 언제 시작하나요?</span>
+                    <svg class="faq-icon w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-350 ease-out">
+                    <p class="px-5 pb-5 text-sm text-txt-secondary leading-relaxed">9기 부트캠프는 2026년 4월 7일 개강 예정이며, 3월 21일까지 얼리버드 등록이 가능합니다. 정원은 트랙별 20명으로 제한됩니다. 파트타임 과정은 매월 첫째 주 월요일에 시작합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: footer-get-in-touch | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/footer-get-in-touch-reference.html | FIDELITY: 70% -->
+<section id="contact" class="relative w-full min-h-[60vh] flex items-center">
+    <img src="./images/cta_bg.jpg" alt="Modern workspace with warm ambient lighting" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/75"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 text-center">
+        <p class="font-mono text-xs tracking-[0.3em] uppercase text-accent mb-6">Get Started</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-6">
+            당신의 커리어 전환,<br>
+            <span class="text-accent">지금 시작하세요</span>
+        </h2>
+        <p class="max-w-[420px] mx-auto text-txt-secondary text-sm leading-relaxed mb-10">
+            무료 상담을 통해 적성 테스트와<br class="hidden sm:block">
+            맞춤 트랙 추천을 받아보세요.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+82-2-555-0147" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-accent text-bg-page text-sm font-medium tracking-wide rounded hover:bg-accent-dark">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+                02-555-0147
+            </a>
+            <a href="#" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-accent text-accent text-sm font-medium tracking-wide rounded hover:bg-accent hover:text-bg-page">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                온라인 상담 신청
+            </a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full bg-bg-page border-t border-border-subtle">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-4">
+                <a href="#" class="font-mono text-sm font-semibold tracking-wider text-accent">&lt;CodeLab/&gt;</a>
+                <p class="text-xs text-txt-muted mt-3 leading-relaxed">
+                    서울특별시 강남구 강남대로 396<br>
+                    삼성빌딩 12층<br>
+                    02-555-0147
+                </p>
+            </div>
+            <div class="md:col-span-2">
+                <p class="font-mono text-xs text-accent tracking-wider mb-3">TRACKS</p>
+                <ul class="space-y-2 text-xs text-txt-muted">
+                    <li><a href="#" class="hover:text-txt transition-colors">Frontend</a></li>
+                    <li><a href="#" class="hover:text-txt transition-colors">Backend</a></li>
+                    <li><a href="#" class="hover:text-txt transition-colors">Data Science</a></li>
+                    <li><a href="#" class="hover:text-txt transition-colors">AI / ML</a></li>
+                </ul>
+            </div>
+            <div class="md:col-span-2">
+                <p class="font-mono text-xs text-accent tracking-wider mb-3">COMPANY</p>
+                <ul class="space-y-2 text-xs text-txt-muted">
+                    <li><a href="#" class="hover:text-txt transition-colors">소개</a></li>
+                    <li><a href="#" class="hover:text-txt transition-colors">채용</a></li>
+                    <li><a href="#" class="hover:text-txt transition-colors">블로그</a></li>
+                </ul>
+            </div>
+            <div class="md:col-span-4">
+                <p class="font-mono text-xs text-accent tracking-wider mb-3">OFFICE HOURS</p>
+                <p class="text-xs text-txt-muted leading-relaxed">
+                    월~금 09:00 – 22:00<br>
+                    토요일 10:00 – 18:00<br>
+                    일요일·공휴일 휴무
+                </p>
+                <div class="flex gap-4 mt-4">
+                    <a href="#" class="text-txt-muted hover:text-accent" aria-label="Instagram">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="text-txt-muted hover:text-accent" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
+                    </a>
+                    <a href="#" class="text-txt-muted hover:text-accent" aria-label="YouTube">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-txt-muted">&copy; 2026 코드랩 아카데미. All rights reserved.</p>
+            <div class="flex gap-6 text-xs text-txt-muted">
+                <a href="#" class="hover:text-txt transition-colors">개인정보처리방침</a>
+                <a href="#" class="hover:text-txt transition-colors">이용약관</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// Scroll Reveal Animation (IntersectionObserver)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+document.querySelectorAll('.stagger-item').forEach((el, index) => {
+    const parent = el.closest('.grid, .space-y-3');
+    if (parent) {
+        const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item'));
+        const i = siblings.indexOf(el);
+        el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+    } else {
+        el.style.transitionDelay = index * 0.1 + 's';
+    }
+    observer.observe(el);
+});
+
+// Counter Animation
+function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 1500;
+    const start = performance.now();
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = 'true';
+            animateCounter(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-number').forEach(el => counterObserver.observe(el));
+
+// FAQ Accordion
+document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const icon = item.querySelector('.faq-icon');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        // Close all others
+        document.querySelectorAll('.faq-item').forEach(other => {
+            if (other !== item) {
+                other.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+                other.querySelector('.faq-content').style.maxHeight = '0';
+                other.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+            }
+        });
+
+        if (isOpen) {
+            btn.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = '0';
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            btn.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.style.transform = 'rotate(45deg)';
+        }
+    });
+});
+
+// Mobile Menu Toggle
+const menuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+}
+
+// Reduced Motion Support
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        el.classList.add('animate-in');
+        el.style.transition = 'none';
+    });
+    document.querySelectorAll('.counter-number').forEach(el => {
+        el.textContent = parseInt(el.dataset.target).toLocaleString();
+        el.dataset.counted = 'true';
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>벳시그니처 동물의료센터 — 가족의 건강을 설계합니다</title>
+  <meta name="description" content="벳시그니처 동물의료센터는 내과, 외과, 치과, 피부과, 응급/ICU, 건강검진 등 전문 진료과목을 갖춘 프리미엄 동물병원입니다. 24시간 응급진료, 온라인 예약.">
+  <link rel="canonical" href="https://vetsignature.kr">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="벳시그니처 동물의료센터">
+  <meta property="og:description" content="가족의 건강을 설계합니다. 내과·외과·치과·피부과·응급ICU·건강검진 전문.">
+  <meta property="og:image" content="./images/hero_split.jpg">
+  <meta property="og:url" content="https://vetsignature.kr">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-page': '#FAFBFD',
+            'bg-surface': '#F0F3F8',
+            'bg-card': '#FFFFFF',
+            'accent-primary': '#2B5EA7',
+            'accent-secondary': '#A8C8E8',
+            'text-primary': '#0F1B3D',
+            'text-secondary': '#3D4F6F',
+            'text-muted': '#8B9AB5',
+            'border-default': '#D8DDE8',
+            'border-strong': '#B0B8CC',
+          },
+          fontFamily: {
+            'display': ['Playfair Display', 'serif'],
+            'body': ['Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          maxWidth: {
+            'content': '1200px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Design System Tokens + Animations -->
+  <style>
+    :root {
+      --bg-page: #FAFBFD;
+      --bg-surface: #F0F3F8;
+      --bg-card: #FFFFFF;
+      --accent-primary: #2B5EA7;
+      --accent-secondary: #A8C8E8;
+      --link-color: #2B5EA7;
+      --text-primary: #0F1B3D;
+      --text-secondary: #3D4F6F;
+      --text-muted: #8B9AB5;
+      --color-success: #3B9B6D;
+      --color-info: #2B5EA7;
+      --color-warning: #D4A843;
+      --color-danger: #C75050;
+      --font-display: 'Playfair Display', serif;
+      --font-ui: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+      --r-sm: 4px;
+      --r-md: 6px;
+      --r-lg: 10px;
+      --sh-sm: 0 1px 3px rgba(15,27,61,0.06);
+      --sh-md: 0 4px 16px rgba(15,27,61,0.08);
+      --sh-lg: 0 12px 32px rgba(15,27,61,0.1);
+      --border-default: #D8DDE8;
+      --content-max-width: 1200px;
+      --nav-height: 72px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-ui); color: var(--text-primary); background: var(--bg-page); }
+
+    /* Scroll Animations */
+    .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+    .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
+    .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+
+    /* Hover transitions */
+    button, a { transition: all 0.2s ease-in-out; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Timeline connector */
+    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--accent-secondary); transform: translateX(-50%); }
+    .timeline-node { width: 16px; height: 16px; border-radius: 50%; background: var(--accent-primary); border: 3px solid var(--accent-secondary); position: relative; z-index: 2; }
+
+    /* FAQ Accordion */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; padding-bottom: 0; }
+    .faq-answer.open { max-height: 300px; padding-bottom: 1.25rem; }
+
+    /* Checkup Card Hover Reveal */
+    .checkup-card .card-desc { transition: opacity 0.3s, height 0.3s; }
+    .checkup-card .card-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.3s; }
+    .checkup-card:hover .card-desc { opacity: 0; height: 0; overflow: hidden; }
+    .checkup-card:hover .card-details { max-height: 300px; opacity: 1; }
+
+    /* Card left-border accent */
+    .card-accent { border-left: 3px solid var(--accent-primary); }
+    .card-accent:hover { border-left-color: var(--accent-secondary); box-shadow: var(--sh-md); }
+
+    /* Nav blur */
+    .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  </style>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VeterinaryCare",
+    "name": "벳시그니처 동물의료센터",
+    "description": "내과, 외과, 치과, 피부과, 응급/ICU, 건강검진 전문 프리미엄 동물병원",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "송파구 올림픽로 326, 벳시그니처빌딩 2-4F",
+      "addressLocality": "서울특별시",
+      "postalCode": "05556",
+      "addressCountry": "KR"
+    },
+    "telephone": "+82-2-418-7582",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "21:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "09:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "10:00", "closes": "17:00" }
+    ],
+    "url": "https://vetsignature.kr"
+  }
+  </script>
+</head>
+
+<body class="bg-bg-page font-body antialiased overflow-x-hidden">
+
+  <!-- SKIP LINK -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent-primary focus:text-white focus:px-4 focus:py-2 focus:rounded">본문 바로가기</a>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="fixed top-0 left-0 w-full z-50 nav-blur bg-bg-page/90 border-b border-border-default/50" style="height: var(--nav-height);">
+    <div class="max-w-content mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <i data-lucide="heart-pulse" class="w-6 h-6 text-accent-primary"></i>
+        <span class="font-display text-xl font-bold text-text-primary tracking-tight">VetSignature</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-text-secondary">
+        <a href="#journey" class="hover:text-accent-primary">진료안내</a>
+        <a href="#departments" class="hover:text-accent-primary">진료과목</a>
+        <a href="#team" class="hover:text-accent-primary">의료진</a>
+        <a href="#checkup" class="hover:text-accent-primary">건강검진</a>
+        <a href="#faq" class="hover:text-accent-primary">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="tel:02-418-7582" class="hidden sm:flex items-center gap-1.5 text-sm text-accent-primary font-medium">
+          <i data-lucide="phone" class="w-4 h-4"></i>
+          02-418-7582
+        </a>
+        <a href="#booking" class="bg-accent-primary text-white text-sm font-medium px-5 py-2.5 rounded hover:brightness-110 active:scale-95 tracking-wide">
+          예약하기
+        </a>
+        <button class="md:hidden text-text-primary" id="menu-toggle" aria-label="메뉴 열기">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-bg-page border-t border-border-default px-6 py-4 space-y-3">
+      <a href="#journey" class="block text-sm text-text-secondary hover:text-accent-primary py-1">진료안내</a>
+      <a href="#departments" class="block text-sm text-text-secondary hover:text-accent-primary py-1">진료과목</a>
+      <a href="#team" class="block text-sm text-text-secondary hover:text-accent-primary py-1">의료진</a>
+      <a href="#checkup" class="block text-sm text-text-secondary hover:text-accent-primary py-1">건강검진</a>
+      <a href="#faq" class="block text-sm text-text-secondary hover:text-accent-primary py-1">FAQ</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ========== SECTION 1: HERO — FULL-BLEED OVERLAY ========== -->
+    <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+    <!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 85% -->
+    <section class="relative w-full min-h-screen">
+        <img src="./images/hero_split.jpg" alt="수의사가 반려견을 따뜻하게 진료하는 모습" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0F1B3D]/85 via-[#0F1B3D]/40 to-[#0F1B3D]/15"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-body">Premium Veterinary Care</p>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+                가족의 건강을<br>설계합니다
+            </h1>
+            <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                벳시그니처 동물의료센터는
+                반려동물의 건강한 일생을 함께 계획하는
+                프리미엄 전문 동물병원입니다.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#booking" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#0F1B3D]">
+                    진료 예약하기
+                </a>
+                <a href="tel:02-418-7582" class="bg-accent-primary text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:brightness-110">
+                    24시 응급전화
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 2: PATIENT JOURNEY — TIMELINE ========== -->
+    <!-- SECTION: PATIENT JOURNEY | MOVE: M-LAY-TIMELINE-STEPPER -->
+    <!-- COMPONENT_REF: timeline | GRADE: A | MODE: adapted | SNIPPET_PATH: custom-timeline | FIDELITY: 75% -->
+    <section id="journey" class="w-full bg-bg-surface py-24 fade-in-section">
+      <div class="max-w-content mx-auto px-6 lg:px-12">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <p class="text-sm font-medium tracking-widest uppercase text-text-muted mb-3">Patient Journey</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-text-primary leading-tight">
+            처음부터 끝까지,<br class="sm:hidden"> 한결같은 케어
+          </h2>
+          <p class="text-text-secondary mt-4 max-w-[480px] mx-auto">
+            예약부터 퇴원 후 관리까지 체계적인 진료 프로세스로<br class="hidden sm:block">
+            보호자님과 반려동물 모두 안심할 수 있습니다.
+          </p>
+        </div>
+
+        <!-- Timeline Desktop -->
+        <div class="hidden md:block relative">
+          <!-- Horizontal line -->
+          <div class="absolute top-8 left-0 right-0 h-0.5 bg-accent-secondary"></div>
+          <div class="grid grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="relative stagger-item">
+              <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-accent-primary flex items-center justify-center text-white relative z-10">
+                  <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                </div>
+              </div>
+              <div class="bg-bg-card p-6 rounded-md border border-border-default card-accent text-center">
+                <h3 class="font-semibold text-text-primary text-lg mb-2">온라인 예약</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">
+                  전화 또는 온라인으로 간편하게<br>
+                  원하는 시간에 예약합니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="relative stagger-item">
+              <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-accent-primary flex items-center justify-center text-white relative z-10">
+                  <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+                </div>
+              </div>
+              <div class="bg-bg-card p-6 rounded-md border border-border-default card-accent text-center">
+                <h3 class="font-semibold text-text-primary text-lg mb-2">초진 상담</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">
+                  반려동물의 이력과 증상을<br>
+                  상세히 파악합니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="relative stagger-item">
+              <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-accent-primary flex items-center justify-center text-white relative z-10">
+                  <i data-lucide="scan-face" class="w-6 h-6"></i>
+                </div>
+              </div>
+              <div class="bg-bg-card p-6 rounded-md border border-border-default card-accent text-center">
+                <h3 class="font-semibold text-text-primary text-lg mb-2">정밀 진단</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">
+                  CT/MRI, 혈액검사 등<br>
+                  첨단 장비로 정확히 진단합니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="relative stagger-item">
+              <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-accent-primary flex items-center justify-center text-white relative z-10">
+                  <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                </div>
+              </div>
+              <div class="bg-bg-card p-6 rounded-md border border-border-default card-accent text-center">
+                <h3 class="font-semibold text-text-primary text-lg mb-2">치료 & 사후관리</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">
+                  맞춤 치료 후 퇴원까지<br>
+                  보호자님께 경과를 공유합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Mobile -->
+        <div class="md:hidden space-y-6">
+          <div class="flex gap-4 items-start stagger-item">
+            <div class="w-12 h-12 rounded-full bg-accent-primary flex-shrink-0 flex items-center justify-center text-white"><i data-lucide="calendar-check" class="w-5 h-5"></i></div>
+            <div class="bg-bg-card p-4 rounded-md border border-border-default card-accent flex-1">
+              <h3 class="font-semibold text-text-primary mb-1">온라인 예약</h3>
+              <p class="text-sm text-text-secondary">전화 또는 온라인으로 간편하게 원하는 시간에 예약합니다.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start stagger-item">
+            <div class="w-12 h-12 rounded-full bg-accent-primary flex-shrink-0 flex items-center justify-center text-white"><i data-lucide="clipboard-list" class="w-5 h-5"></i></div>
+            <div class="bg-bg-card p-4 rounded-md border border-border-default card-accent flex-1">
+              <h3 class="font-semibold text-text-primary mb-1">초진 상담</h3>
+              <p class="text-sm text-text-secondary">반려동물의 이력과 증상을 상세히 파악합니다.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start stagger-item">
+            <div class="w-12 h-12 rounded-full bg-accent-primary flex-shrink-0 flex items-center justify-center text-white"><i data-lucide="scan-face" class="w-5 h-5"></i></div>
+            <div class="bg-bg-card p-4 rounded-md border border-border-default card-accent flex-1">
+              <h3 class="font-semibold text-text-primary mb-1">정밀 진단</h3>
+              <p class="text-sm text-text-secondary">CT/MRI, 혈액검사 등 첨단 장비로 정확히 진단합니다.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start stagger-item">
+            <div class="w-12 h-12 rounded-full bg-accent-primary flex-shrink-0 flex items-center justify-center text-white"><i data-lucide="heart-handshake" class="w-5 h-5"></i></div>
+            <div class="bg-bg-card p-4 rounded-md border border-border-default card-accent flex-1">
+              <h3 class="font-semibold text-text-primary mb-1">치료 & 사후관리</h3>
+              <p class="text-sm text-text-secondary">맞춤 치료 후 퇴원까지 보호자님께 경과를 공유합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 3: DEPARTMENTS — EDITORIAL MOSAIC ========== -->
+    <!-- SECTION: DEPARTMENTS | MOVE: M-LAY-EDITORIAL-MOSAIC -->
+    <!-- COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/ | FIDELITY: 75% -->
+    <section id="departments" class="w-full bg-bg-page py-24 fade-in-section">
+      <div class="max-w-content mx-auto px-6 lg:px-12">
+        <div class="mb-14">
+          <p class="text-sm font-medium tracking-widest uppercase text-text-muted mb-3">Departments</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-text-primary leading-tight">
+            전문 진료과목
+          </h2>
+          <p class="text-text-secondary mt-4 max-w-[480px]">
+            6개 전문 진료과목별 보드인증 수의사가<br class="hidden sm:block">
+            세분화된 진료를 제공합니다.
+          </p>
+        </div>
+
+        <!-- Mosaic Grid: Row 1 (4:5:3) -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5">
+          <div class="col-span-12 md:col-span-4 stagger-item">
+            <div class="bg-bg-card border border-border-default rounded-md p-6 h-full card-accent flex flex-col justify-between min-h-[200px] hover:shadow-md transition-shadow">
+              <i data-lucide="heart-pulse" class="w-6 h-6 text-accent-primary mb-4"></i>
+              <div>
+                <h3 class="font-semibold text-text-primary text-lg mb-2">내과</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">심장, 호흡기, 소화기, 내분비 질환 전문 진료. 정밀 혈액검사와 초음파 기반 정확한 진단.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-7 md:col-span-5 stagger-item">
+            <div class="relative overflow-hidden rounded-md aspect-[4/3] md:aspect-auto md:h-full min-h-[200px]">
+              <img src="./images/vet_consultation.jpg" alt="수의사의 정밀 진료 모습" class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-5">
+                <div>
+                  <h3 class="text-white font-semibold text-lg">외과</h3>
+                  <p class="text-white/80 text-sm mt-1">정형외과, 신경외과, 연부조직 수술.<br>최소침습 수술로 빠른 회복.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-5 md:col-span-3 stagger-item">
+            <div class="bg-accent-primary rounded-md p-6 h-full flex flex-col justify-end text-white min-h-[200px]">
+              <i data-lucide="smile" class="w-6 h-6 mb-3 opacity-80"></i>
+              <h3 class="font-semibold text-lg">치과</h3>
+              <p class="text-white/80 text-sm mt-1">스케일링, 발치, 치주 치료 전문.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mosaic Grid: Row 2 (3:5:4) -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-5">
+          <div class="col-span-5 md:col-span-3 stagger-item">
+            <div class="relative overflow-hidden rounded-md aspect-square min-h-[200px]">
+              <img src="./images/cat_vet.jpg" alt="고양이 피부과 진료" class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                <div>
+                  <h3 class="text-white font-semibold">피부과</h3>
+                  <p class="text-white/80 text-xs mt-0.5">알러지, 아토피, 피부 감염 치료</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-7 md:col-span-5 stagger-item">
+            <div class="bg-bg-card border border-border-default rounded-md p-6 h-full card-accent flex flex-col justify-between min-h-[200px] hover:shadow-md transition-shadow">
+              <div class="flex items-center gap-2 mb-4">
+                <i data-lucide="siren" class="w-6 h-6 text-red-500"></i>
+                <span class="text-xs font-semibold text-red-500 uppercase tracking-wider">24H Emergency</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-text-primary text-lg mb-2">응급 / ICU</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">365일 24시간 응급 진료 체계. 중환자실(ICU) 상시 운영, 실시간 모니터링.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4 stagger-item">
+            <div class="bg-bg-surface border border-border-default rounded-md p-6 h-full flex flex-col justify-between min-h-[200px] hover:shadow-md transition-shadow">
+              <i data-lucide="clipboard-check" class="w-6 h-6 text-accent-primary mb-4"></i>
+              <div>
+                <h3 class="font-semibold text-text-primary text-lg mb-2">건강검진</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">연령별 맞춤 건강검진 패키지. 조기 발견이 최선의 치료입니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 4: FACILITY — FULL-BLEED DIVIDER ========== -->
+    <!-- SECTION: FACILITY | MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: custom full-bleed divider | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
+    <section class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+      <img src="./images/facility_modern.jpg" alt="벳시그니처 동물의료센터 첨단 의료 시설" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0F1B3D]/80 to-[#0F1B3D]/40"></div>
+      <div class="relative max-w-content mx-auto px-6 lg:px-12 py-20 w-full">
+        <div class="max-w-[560px]">
+          <p class="text-sm font-medium tracking-widest uppercase text-white/60 mb-4">State-of-the-Art Facility</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-white leading-tight mb-4">
+            의료 기술에 대한<br>타협 없는 투자
+          </h2>
+          <p class="text-white/80 leading-relaxed max-w-[440px] mb-6">
+            독일 Siemens CT, 일본 Hitachi MRI, 미국 IDEXX 혈액분석 장비를 갖추고 있습니다. 인의(人醫) 수준의 장비로 정확한 진단을 약속합니다.
+          </p>
+          <div class="flex gap-8 text-white">
+            <div>
+              <p class="text-2xl font-bold">CT · MRI</p>
+              <p class="text-xs text-white/60 mt-1">정밀 영상 진단</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold">ICU</p>
+              <p class="text-xs text-white/60 mt-1">24시간 중환자 모니터링</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold">Lab</p>
+              <p class="text-xs text-white/60 mt-1">원내 즉시 검사</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 5: MEDICAL TEAM — EDITORIAL FEATURE ========== -->
+    <!-- SECTION: MEDICAL TEAM | MOVE: M-LAY-EDITORIAL-FEATURE -->
+    <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 75% -->
+    <section id="team" class="w-full bg-bg-page py-24 fade-in-section">
+      <div class="max-w-content mx-auto px-6 lg:px-12">
+        <div class="mb-14">
+          <p class="text-sm font-medium tracking-widest uppercase text-text-muted mb-3">Medical Team</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-text-primary leading-tight">
+            믿을 수 있는 전문 의료진
+          </h2>
+        </div>
+
+        <!-- Editorial: Text(4col) + Gap(1col) + Image(7col) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+          <!-- Text Block -->
+          <div class="lg:col-span-4">
+            <p class="text-text-secondary leading-[1.75] mb-8">
+              벳시그니처의 모든 진료는 각 분야 보드인증 전문의가 직접 담당합니다. 내과, 외과, 치과, 피부과, 응급의학과 등 세분화된 전문 진료 체계를 갖추고 있습니다.
+            </p>
+            <div class="space-y-6">
+              <div class="border-l-2 border-accent-primary pl-4">
+                <p class="font-semibold text-text-primary">김도현 원장 DVM, PhD</p>
+                <p class="text-sm text-text-muted mt-1">내과 전문 · 심장/호흡기</p>
+                <p class="text-sm text-text-secondary mt-1">서울대 수의학 박사 · 前 건국대 수의과 교수</p>
+              </div>
+              <div class="border-l-2 border-accent-secondary pl-4">
+                <p class="font-semibold text-text-primary">이수진 부원장 DVM, MS</p>
+                <p class="text-sm text-text-muted mt-1">외과 전문 · 정형외과/신경외과</p>
+                <p class="text-sm text-text-secondary mt-1">UC Davis 외과 펠로우 · ACVS 인증</p>
+              </div>
+              <div class="border-l-2 border-accent-primary pl-4">
+                <p class="font-semibold text-text-primary">박민재 진료수의사 DVM</p>
+                <p class="text-sm text-text-muted mt-1">피부과/치과 전문</p>
+                <p class="text-sm text-text-secondary mt-1">일본 Nihon 대학 피부과 연수 · JAVD 회원</p>
+              </div>
+            </div>
+            <a href="#booking" class="inline-flex items-center gap-2 mt-8 text-accent-primary font-medium text-sm hover:underline">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              의료진 상세 프로필 보기
+            </a>
+          </div>
+          <!-- Gap -->
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <!-- Image Block -->
+          <div class="lg:col-span-7">
+            <div class="grid grid-cols-12 gap-4">
+              <div class="col-span-12 md:col-span-7">
+                <div class="relative overflow-hidden rounded-md aspect-[4/3]">
+                  <img src="./images/vet_team.jpg" alt="벳시그니처 의료진 단체 사진" class="w-full h-full object-cover" loading="lazy">
+                </div>
+              </div>
+              <div class="col-span-6 md:col-span-5">
+                <div class="relative overflow-hidden rounded-md aspect-[3/4]">
+                  <img src="./images/vet_holding_dog.jpg" alt="수의사가 반려견을 안고 있는 모습" class="w-full h-full object-cover" loading="lazy">
+                </div>
+              </div>
+              <div class="col-span-6 md:col-span-5 md:-mt-16">
+                <div class="relative overflow-hidden rounded-md aspect-square">
+                  <img src="./images/vet_xray.jpg" alt="수의사가 영상 진단 결과를 분석하는 모습" class="w-full h-full object-cover" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 6: HEALTH CHECKUP — HOVER REVEAL CARDS ========== -->
+    <!-- SECTION: HEALTH CHECKUP | MOVE: M-INT-HOVER-REVEAL -->
+    <!-- COMPONENT_REF: reveal-on-hover | GRADE: A | MODE: adapted | SNIPPET_PATH: - | FIDELITY: 70% -->
+    <section id="checkup" class="w-full bg-bg-surface py-24 fade-in-section">
+      <div class="max-w-content mx-auto px-6 lg:px-12">
+        <div class="text-center mb-14">
+          <p class="text-sm font-medium tracking-widest uppercase text-text-muted mb-3">Health Checkup</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-text-primary leading-tight">
+            건강검진 패키지
+          </h2>
+          <p class="text-text-secondary mt-4 max-w-[480px] mx-auto">
+            연령과 건강 상태에 맞는 검진 프로그램으로<br class="hidden sm:block">
+            질병을 조기에 발견합니다.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Basic -->
+          <div class="checkup-card group relative overflow-hidden rounded-md bg-bg-card border border-border-default stagger-item hover:shadow-lg transition-all duration-300">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="./images/dog_portrait.jpg" alt="건강한 반려견" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-baseline justify-between mb-3">
+                <h3 class="font-semibold text-text-primary text-lg">Basic 검진</h3>
+                <p class="text-accent-primary font-bold text-xl">₩80,000</p>
+              </div>
+              <p class="card-desc text-sm text-text-secondary mb-4">1-6세 건강한 반려동물을 위한 기본 건강 스크리닝 패키지.</p>
+              <ul class="card-details space-y-2 text-sm text-text-secondary">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 신체검사 + 혈액검사</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 소변/분변 검사</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 흉부 X-ray</li>
+              </ul>
+              <a href="#booking" class="block mt-6 text-center bg-accent-primary text-white text-sm font-medium py-3 rounded hover:brightness-110 active:scale-95">
+                Basic 예약하기
+              </a>
+            </div>
+          </div>
+
+          <!-- Premium -->
+          <div class="checkup-card group relative overflow-hidden rounded-md bg-bg-card border-2 border-accent-primary stagger-item hover:shadow-lg transition-all duration-300">
+            <div class="absolute top-4 right-4 z-10 bg-accent-primary text-white text-xs font-semibold px-3 py-1 rounded-full">추천</div>
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="./images/puppy_happy.jpg" alt="활기찬 강아지" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-baseline justify-between mb-3">
+                <h3 class="font-semibold text-text-primary text-lg">Premium 검진</h3>
+                <p class="text-accent-primary font-bold text-xl">₩180,000</p>
+              </div>
+              <p class="card-desc text-sm text-text-secondary mb-4">전 연령 반려동물을 위한 종합 정밀 건강검진 패키지.</p>
+              <ul class="card-details space-y-2 text-sm text-text-secondary">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> Basic 전 항목 포함</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 복부 초음파</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 심장 초음파</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 갑상선 호르몬 검사</li>
+              </ul>
+              <a href="#booking" class="block mt-6 text-center bg-accent-primary text-white text-sm font-medium py-3 rounded hover:brightness-110 active:scale-95">
+                Premium 예약하기
+              </a>
+            </div>
+          </div>
+
+          <!-- Senior -->
+          <div class="checkup-card group relative overflow-hidden rounded-md bg-bg-card border border-border-default stagger-item hover:shadow-lg transition-all duration-300">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="./images/cat_close.jpg" alt="고양이 클로즈업" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-baseline justify-between mb-3">
+                <h3 class="font-semibold text-text-primary text-lg">Senior 검진</h3>
+                <p class="text-accent-primary font-bold text-xl">₩250,000</p>
+              </div>
+              <p class="card-desc text-sm text-text-secondary mb-4">7세 이상 시니어 반려동물을 위한 노령 특화 정밀 검진.</p>
+              <ul class="card-details space-y-2 text-sm text-text-secondary">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> Premium 전 항목 포함</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> CT 정밀 촬영</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 관절/척추 정밀 검사</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-primary"></i> 종양 표지자 검사</li>
+              </ul>
+              <a href="#booking" class="block mt-6 text-center bg-accent-primary text-white text-sm font-medium py-3 rounded hover:brightness-110 active:scale-95">
+                Senior 예약하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 7: TRUST & REVIEWS — KEY COLOR BAND ========== -->
+    <!-- SECTION: TRUST & REVIEWS | MOVE: M-DIV-FULLBLEED-COLORBLOCK + M-TRUST-AWARDS-CERTS -->
+    <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: - | FIDELITY: 75% -->
+    <section class="relative w-full min-h-[50vh] fade-in-section">
+      <img src="./images/dogs_playing.jpg" alt="행복하게 뛰어노는 반려견들" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-[#2B5EA7]/85"></div>
+      <div class="relative max-w-content mx-auto px-6 lg:px-12 py-20 w-full">
+        <div class="text-center mb-12">
+          <p class="text-sm font-medium tracking-widest uppercase text-white/60 mb-3">Trust & Certification</p>
+          <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-white leading-tight">
+            보호자님들의 신뢰
+          </h2>
+        </div>
+
+        <!-- Reviews -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-md p-6 stagger-item">
+            <div class="flex items-center gap-1 mb-3">
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            </div>
+            <p class="text-white/90 text-sm leading-relaxed mb-4">"12살 노견 심장 수술 후 ICU에서 24시간 모니터링해주셨습니다. 매일 사진과 함께 경과를 알려주셔서 정말 안심이 됐어요."</p>
+            <p class="text-white/50 text-xs">김서연 보호자 · 골든리트리버 '코코' 12세</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-md p-6 stagger-item">
+            <div class="flex items-center gap-1 mb-3">
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            </div>
+            <p class="text-white/90 text-sm leading-relaxed mb-4">"새벽 3시에 고양이가 호흡곤란이 와서 응급실에 갔는데, 즉시 산소실에 넣어주시고 정확한 진단을 내려주셨습니다. 생명의 은인이에요."</p>
+            <p class="text-white/50 text-xs">박지훈 보호자 · 페르시안 '눈이' 8세</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-md p-6 stagger-item">
+            <div class="flex items-center gap-1 mb-3">
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+              <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+            </div>
+            <p class="text-white/90 text-sm leading-relaxed mb-4">"건강검진 결과를 표와 그래프로 설명해주시고, 식단과 운동 가이드까지 문서로 받았어요. 이런 디테일은 처음입니다."</p>
+            <p class="text-white/50 text-xs">최유나 보호자 · 비숑프리제 '몽이' 5세</p>
+          </div>
+        </div>
+
+        <!-- Certification badges -->
+        <div class="flex flex-wrap justify-center gap-8 text-white/70 text-sm">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+            <span>AAHA 국제인증 동물병원</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="award" class="w-5 h-5"></i>
+            <span>대한수의사회 우수병원</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="badge-check" class="w-5 h-5"></i>
+            <span>KAHA 동물병원 품질인증</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 8: FAQ & BOOKING ========== -->
+    <!-- SECTION: FAQ | MOVE: M-TRUST-AWARDS-CERTS + FAQ -->
+    <!-- COMPONENT_REF: fluid-dropdown | GRADE: B | MODE: adapted | SNIPPET_PATH: - | FIDELITY: 80% -->
+    <section id="faq" class="w-full bg-bg-page py-24 fade-in-section">
+      <div class="max-w-content mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- FAQ -->
+          <div class="lg:col-span-7">
+            <p class="text-sm font-medium tracking-widest uppercase text-text-muted mb-3">FAQ</p>
+            <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-text-primary leading-tight mb-8">
+              자주 묻는 질문
+            </h2>
+
+            <div class="space-y-4" id="faq-list">
+              <div class="border border-border-default rounded-md overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-surface transition-colors" aria-expanded="false">
+                  <span class="font-medium text-text-primary pr-4">야간 응급 진료는 어떻게 이용하나요?</span>
+                  <i data-lucide="plus" class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform"></i>
+                </button>
+                <div class="faq-answer px-5">
+                  <p class="text-sm text-text-secondary leading-relaxed">벳시그니처는 365일 24시간 응급 진료를 운영합니다. 야간(21시~09시)에는 응급전화 02-418-7582로 연락하시면 당직 수의사가 즉시 안내해드립니다. 별도의 야간 진료 할증은 없습니다.</p>
+                </div>
+              </div>
+              <div class="border border-border-default rounded-md overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-surface transition-colors" aria-expanded="false">
+                  <span class="font-medium text-text-primary pr-4">반려동물 보험 적용이 가능한가요?</span>
+                  <i data-lucide="plus" class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform"></i>
+                </button>
+                <div class="faq-answer px-5">
+                  <p class="text-sm text-text-secondary leading-relaxed">네, 삼성화재, DB손해보험, 현대해상, KB손해보험 등 주요 펫보험사와 제휴되어 있습니다. 진료 시 보험증서를 제시하시면 원내에서 직접 청구 대행이 가능합니다.</p>
+                </div>
+              </div>
+              <div class="border border-border-default rounded-md overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-surface transition-colors" aria-expanded="false">
+                  <span class="font-medium text-text-primary pr-4">예방접종 스케줄은 어떻게 되나요?</span>
+                  <i data-lucide="plus" class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform"></i>
+                </button>
+                <div class="faq-answer px-5">
+                  <p class="text-sm text-text-secondary leading-relaxed">강아지는 생후 6주부터 종합백신(DHPPL) 2주 간격 5회, 광견병 3개월 이후 1회 접종합니다. 고양이는 생후 8주부터 종합백신(FVRCP) 3-4주 간격 3회 접종합니다. 이후 매년 추가 접종을 권장합니다.</p>
+                </div>
+              </div>
+              <div class="border border-border-default rounded-md overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-surface transition-colors" aria-expanded="false">
+                  <span class="font-medium text-text-primary pr-4">주차장이 있나요?</span>
+                  <i data-lucide="plus" class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform"></i>
+                </button>
+                <div class="faq-answer px-5">
+                  <p class="text-sm text-text-secondary leading-relaxed">건물 지하 1-2층에 전용 주차장(40대)이 있으며, 진료 고객은 최대 3시간 무료 주차가 가능합니다. 대형견 동반 시에도 엘리베이터로 편리하게 이동할 수 있습니다.</p>
+                </div>
+              </div>
+              <div class="border border-border-default rounded-md overflow-hidden">
+                <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-bg-surface transition-colors" aria-expanded="false">
+                  <span class="font-medium text-text-primary pr-4">첫 방문 시 준비할 것이 있나요?</span>
+                  <i data-lucide="plus" class="w-5 h-5 text-text-muted flex-shrink-0 faq-icon transition-transform"></i>
+                </button>
+                <div class="faq-answer px-5">
+                  <p class="text-sm text-text-secondary leading-relaxed">기존 접종 수첩, 복용 중인 약 목록, 이전 병원의 진료기록(가능한 경우)을 지참해주세요. 온라인 예약 시 사전 문진표를 작성하시면 대기 시간을 줄일 수 있습니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Info Sidebar -->
+          <div class="lg:col-span-5" id="booking">
+            <div class="bg-bg-surface border border-border-default rounded-md p-8 lg:sticky lg:top-24">
+              <h3 class="font-display text-2xl font-semibold text-text-primary mb-6">진료 예약</h3>
+              <div class="space-y-5">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-accent-primary flex-shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-medium text-text-primary text-sm">위치</p>
+                    <p class="text-sm text-text-secondary mt-0.5">서울 송파구 올림픽로 326,<br>벳시그니처빌딩 2-4F</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <i data-lucide="clock" class="w-5 h-5 text-accent-primary flex-shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-medium text-text-primary text-sm">진료시간</p>
+                    <p class="text-sm text-text-secondary mt-0.5">평일 09:00 – 21:00<br>토요일 09:00 – 18:00<br>일요일/공휴일 10:00 – 17:00</p>
+                    <p class="text-xs text-red-500 font-medium mt-1">응급진료 365일 24시간</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <i data-lucide="phone" class="w-5 h-5 text-accent-primary flex-shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-medium text-text-primary text-sm">연락처</p>
+                    <p class="text-sm text-text-secondary mt-0.5">대표 02-418-7582<br>응급 010-9876-7582</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <i data-lucide="car" class="w-5 h-5 text-accent-primary flex-shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-medium text-text-primary text-sm">주차</p>
+                    <p class="text-sm text-text-secondary mt-0.5">지하 전용 주차장 40대 (3시간 무료)</p>
+                  </div>
+                </div>
+              </div>
+              <a href="tel:02-418-7582" class="block mt-8 text-center bg-accent-primary text-white font-medium py-4 rounded hover:brightness-110 active:scale-95">
+                <i data-lucide="phone" class="w-4 h-4 inline mr-2"></i>
+                전화로 예약하기
+              </a>
+              <a href="#" class="block mt-3 text-center border border-accent-primary text-accent-primary font-medium py-4 rounded hover:bg-accent-primary hover:text-white active:scale-95">
+                <i data-lucide="calendar" class="w-4 h-4 inline mr-2"></i>
+                온라인 예약하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 9: FOOTER CTA — FULL-BLEED ========== -->
+    <!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80% -->
+    <section class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+      <img src="./images/sleeping_dog.jpg" alt="평화롭게 잠든 반려견" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0F1B3D]/85 to-[#0F1B3D]/50"></div>
+      <div class="relative max-w-content mx-auto px-6 lg:px-12 py-24 w-full text-center">
+        <p class="text-sm font-medium tracking-widest uppercase text-white/50 mb-4">Book Now</p>
+        <h2 class="font-display text-3xl md:text-[2.5rem] font-semibold text-white leading-tight mb-4">
+          소중한 가족의 건강,<br>지금 시작하세요
+        </h2>
+        <p class="text-white/70 max-w-[480px] mx-auto mb-8 leading-relaxed">
+          정기 건강검진부터 전문 진료까지,<br class="hidden sm:block">
+          벳시그니처가 함께하겠습니다.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="tel:02-418-7582" class="inline-flex items-center gap-2 bg-white text-text-primary font-medium px-8 py-4 rounded hover:bg-white/90 active:scale-95">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            02-418-7582
+          </a>
+          <a href="#booking" class="inline-flex items-center gap-2 border border-white/50 text-white font-medium px-8 py-4 rounded hover:bg-white/10 active:scale-95">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            온라인 예약
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="w-full bg-[#0F1B3D] text-white/60">
+    <div class="max-w-content mx-auto px-6 lg:px-12 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="heart-pulse" class="w-5 h-5 text-accent-secondary"></i>
+            <span class="font-display text-lg font-bold text-white">VetSignature</span>
+          </div>
+          <p class="text-sm leading-relaxed">벳시그니처 동물의료센터<br>서울 송파구 올림픽로 326, 벳시그니처빌딩 2-4F</p>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-white mb-3">진료시간</p>
+          <div class="text-sm space-y-1">
+            <p>평일 09:00 – 21:00</p>
+            <p>토요일 09:00 – 18:00</p>
+            <p>일/공휴일 10:00 – 17:00</p>
+            <p class="text-accent-secondary font-medium">응급진료 365일 24시간</p>
+          </div>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-white mb-3">연락처</p>
+          <div class="text-sm space-y-1">
+            <p>대표 02-418-7582</p>
+            <p>응급 010-9876-7582</p>
+            <p>이메일 info@vetsignature.kr</p>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+        <p>© 2026 벳시그니처 동물의료센터. All rights reserved.</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-white">개인정보처리방침</a>
+          <a href="#" class="hover:text-white">이용약관</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll reveal with IntersectionObserver
+    const observerOptions = { threshold: 0.1, rootMargin: '-50px 0px' };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => revealObserver.observe(el));
+
+    // Stagger animation
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.stagger-item');
+          items.forEach((item, i) => {
+            item.style.transitionDelay = `${i * 0.1}s`;
+            item.classList.add('animate-in');
+          });
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => {
+      if (el.querySelectorAll('.stagger-item').length > 0) {
+        staggerObserver.observe(el);
+      }
+    });
+
+    // Standalone stagger items (not inside fade-in-section)
+    document.querySelectorAll('.stagger-item').forEach(el => {
+      if (!el.closest('.fade-in-section')) {
+        revealObserver.observe(el);
+      }
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+        document.querySelectorAll('.faq-toggle').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+        // Toggle current
+        if (!isOpen) {
+          answer.classList.add('open');
+          icon.style.transform = 'rotate(45deg)';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+    }
+
+    // Nav scroll effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('shadow-md');
+      } else {
+        header.classList.remove('shadow-md');
+      }
+    });
+  </script>
+</body>
+</html>

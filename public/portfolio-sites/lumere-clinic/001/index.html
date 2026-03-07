@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>루메르 클리닉 — 피부 본연의 빛을 되찾다</title>
+  <meta name="description" content="루메르 클리닉은 과학적 피부 분석과 맞춤 시술로 건강한 아름다움을 설계합니다. 서울 신사동 피부과 전문 클리닉." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            accent: '#C4A882',
+            'accent-hover': '#B89A74',
+            surface: '#F8F7F4',
+            'text-primary': '#1A1A1A',
+            'text-secondary': '#4A4A4A',
+            'text-muted': '#8A8A8A',
+            border: '#E5E5E5',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #FFFFFF;
+      --bg-surface: #F8F7F4;
+      --bg-card: #FFFFFF;
+      --accent-primary: #C4A882;
+      --text-primary: #1A1A1A;
+      --text-secondary: #4A4A4A;
+      --text-muted: #8A8A8A;
+      --border-default: #E5E5E5;
+      --border-strong: #C4A882;
+      --font-ui: 'Cormorant Garamond', serif;
+      --font-data: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      --content-max-width: 1200px;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --sh-md: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-data); color: var(--text-primary); line-height: 1.7; }
+
+    /* Scroll animations */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* FAQ Accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+    .faq-item .faq-chevron {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Button hover */
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: #fff;
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(196,168,130,0.3);
+    }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      border: 1px solid var(--accent-primary);
+      color: var(--accent-primary);
+      background: transparent;
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--accent-primary);
+      color: #fff;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section,
+      .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .faq-answer { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body class="bg-white antialiased">
+
+  <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+  <!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/ | FIDELITY: 80% -->
+  <section class="relative w-full min-h-screen flex items-center">
+    <img
+      src="./images/hero.jpg"
+      alt="루메르 클리닉 밝고 깨끗한 진료 공간"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-white/75"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-32">
+      <div class="max-w-[640px]">
+        <p class="text-text-muted text-sm tracking-[0.2em] uppercase mb-6 font-sans">Dermatology Clinic</p>
+        <h1 class="font-serif font-bold text-text-primary leading-[1.3] mb-8" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+          피부 본연의 빛을<br>되찾는 시간
+        </h1>
+        <p class="text-text-secondary text-base leading-relaxed mb-10 max-w-[440px]">
+          루메르 클리닉은 과학적 피부 분석과<br class="hidden sm:block">맞춤 시술로 건강한 아름다움을 설계합니다.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#booking" class="btn-primary inline-flex items-center justify-center px-8 py-4 rounded text-sm font-medium tracking-[0.05em]">
+            온라인 상담 예약
+          </a>
+          <a href="#treatments" class="btn-secondary inline-flex items-center justify-center px-8 py-4 rounded text-sm font-medium tracking-[0.05em]">
+            시술 안내
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: TREATMENT MENU | MOVE: M-LAY-ASYM-GRID -->
+  <!-- COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-3col-category-4-5-3-reference.html | FIDELITY: 75% -->
+  <section id="treatments" class="fade-in-section w-full py-20 md:py-28 bg-white">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">Treatment Menu</p>
+        <h2 class="font-serif font-semibold text-text-primary leading-[1.2] mb-4" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+          당신의 피부를 위한<br>맞춤 솔루션
+        </h2>
+        <p class="text-text-secondary text-sm max-w-[400px] mx-auto">
+          피부 타입과 고민에 맞춘 정밀 시술로<br class="hidden sm:block">최적의 결과를 약속합니다.
+        </p>
+      </div>
+
+      <!-- Asymmetric Grid: 4:5:3 on desktop -->
+      <div class="grid grid-cols-12 gap-5 lg:gap-6">
+        <!-- Card 1: Laser & Tone (col-span-4) -->
+        <div class="stagger-item col-span-12 md:col-span-4 group">
+          <div class="overflow-hidden rounded-lg mb-4">
+            <img src="./images/treatment_laser.jpg" alt="레이저 토닝 시술 장면" class="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          </div>
+          <p class="text-xs text-accent tracking-[0.15em] uppercase mb-2">Laser & Tone</p>
+          <h3 class="font-sans font-semibold text-text-primary text-lg mb-2">레이저 & 톤 관리</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-3">
+            색소, 잡티, 모공 등 피부 톤 개선을 위한<br class="hidden sm:block">맞춤 레이저 프로그램
+          </p>
+          <p class="text-text-muted text-xs">₩150,000 – ₩300,000</p>
+        </div>
+
+        <!-- Card 2: Anti-Aging (col-span-5, taller) -->
+        <div class="stagger-item col-span-12 md:col-span-5 group md:-mt-6">
+          <div class="overflow-hidden rounded-lg mb-4">
+            <img src="./images/treatment_antiaging.jpg" alt="안티에이징 리프팅 시술" class="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          </div>
+          <p class="text-xs text-accent tracking-[0.15em] uppercase mb-2">Anti-Aging</p>
+          <h3 class="font-sans font-semibold text-text-primary text-lg mb-2">안티에이징</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-3">
+            주름, 탄력, 볼륨 등 노화 징후에 맞춘<br class="hidden sm:block">리프팅 & 재생 프로그램
+          </p>
+          <p class="text-text-muted text-xs">₩200,000 – ₩500,000</p>
+        </div>
+
+        <!-- Card 3: Skin Barrier (col-span-3) -->
+        <div class="stagger-item col-span-12 md:col-span-3 group md:mt-8">
+          <div class="overflow-hidden rounded-lg mb-4">
+            <img src="./images/treatment_skincare.jpg" alt="피부장벽 케어 시술" class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          </div>
+          <p class="text-xs text-accent tracking-[0.15em] uppercase mb-2">Skin Barrier</p>
+          <h3 class="font-sans font-semibold text-text-primary text-lg mb-2">피부장벽 케어</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-3">
+            예민하고 손상된 피부를 위한<br class="hidden sm:block">근본적인 장벽 회복 프로그램
+          </p>
+          <p class="text-text-muted text-xs">₩80,000 – ₩150,000</p>
+        </div>
+      </div>
+
+      <!-- Body Contouring row below -->
+      <div class="stagger-item mt-12 grid grid-cols-12 gap-5 lg:gap-6 items-center">
+        <div class="col-span-12 md:col-span-5">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/treatment_body.jpg" alt="바디 컨투어링 시술" class="w-full aspect-[16/9] object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class="hidden md:block md:col-span-1"></div>
+        <div class="col-span-12 md:col-span-6">
+          <p class="text-xs text-accent tracking-[0.15em] uppercase mb-2">Body Contouring</p>
+          <h3 class="font-sans font-semibold text-text-primary text-lg mb-2">바디 컨투어링</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-4">
+            비침습적 체형 관리 프로그램으로 자연스러운 바디라인을 완성합니다.
+            개인별 체형 분석 후 최적의 장비와 시술 조합을 설계합니다.
+          </p>
+          <a href="#booking" class="text-accent text-sm font-medium hover:underline inline-flex items-center gap-2">
+            상담 예약
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: DOCTOR PROFILE | MOVE: M-LAY-EDITORIAL-STORY -->
+  <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 80% -->
+  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
+        <!-- Text Block: col-span-4 -->
+        <div class="stagger-item col-span-12 md:col-span-4 md:pt-12">
+          <p class="text-xs text-accent tracking-[0.2em] uppercase mb-6">Medical Director</p>
+          <h2 class="font-serif font-semibold text-text-primary leading-[1.2] mb-6" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+            신뢰할 수 있는<br>피부과 전문의
+          </h2>
+          <div class="w-12 h-px bg-accent mb-6"></div>
+          <p class="text-text-secondary text-sm leading-relaxed mb-6">
+            이수연 원장은 서울대학교 의과대학을 졸업하고
+            대한피부과학회 정회원으로 활동하며,
+            SCI 학술지에 12편의 논문을 게재한
+            피부과 전문의입니다.
+          </p>
+          <ul class="space-y-3 text-sm text-text-secondary">
+            <li class="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              피부과 전문의 (대한의학회)
+            </li>
+            <li class="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              SCI 논문 12편 게재
+            </li>
+            <li class="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              서울대학교병원 피부과 전임의
+            </li>
+            <li class="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              대한피부과학회 정회원
+            </li>
+          </ul>
+        </div>
+
+        <!-- Gap: col-span-1 -->
+        <div class="hidden md:block md:col-span-1"></div>
+
+        <!-- Image: col-span-7 -->
+        <div class="stagger-item col-span-12 md:col-span-7">
+          <div class="overflow-hidden rounded-lg shadow-lg">
+            <img src="./images/doctor.jpg" alt="이수연 원장 프로필 사진" class="w-full aspect-[4/3] md:aspect-[16/10] object-cover" loading="lazy" />
+          </div>
+          <p class="text-text-muted text-xs mt-4 text-right italic">
+            "자연스러운 변화가 가장 아름다운 변화입니다."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: PHILOSOPHY DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+  <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
+  <section class="fade-in-section relative w-full min-h-[50vh] flex items-center">
+    <img
+      src="./images/divider.jpg"
+      alt="자연스러운 피부 케어 이미지"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20">
+      <div class="grid grid-cols-12 gap-8 items-center">
+        <div class="col-span-12 md:col-span-7">
+          <p class="text-white/60 text-xs tracking-[0.2em] uppercase mb-4">Our Philosophy</p>
+          <h2 class="font-serif font-semibold text-white leading-[1.2] mb-6" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+            변화는 과하지 않게,<br>아름다움은 자연스럽게
+          </h2>
+          <p class="text-white/80 text-sm leading-relaxed max-w-[480px]">
+            루메르 클리닉은 '티 나지 않는 시술'을 지향합니다.
+            환자 개개인의 피부 상태와 얼굴 조화를 면밀히 분석하여,
+            과하지 않으면서도 확실한 변화를 만들어냅니다.
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-5 flex justify-center md:justify-end">
+          <a href="#booking" class="btn-primary inline-flex items-center justify-center px-8 py-4 rounded text-sm font-medium tracking-[0.05em]">
+            무료 상담 신청
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
+  <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 70% -->
+  <section class="fade-in-section w-full py-20 md:py-28 bg-white">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">Treatment Process</p>
+        <h2 class="font-serif font-semibold text-text-primary leading-[1.2] mb-4" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+          첫 방문부터 사후관리까지
+        </h2>
+        <p class="text-text-secondary text-sm max-w-[400px] mx-auto">
+          체계적인 5단계 프로세스로<br class="hidden sm:block">정확한 진단과 최적의 결과를 보장합니다.
+        </p>
+      </div>
+
+      <!-- 5-Step Process: 3+2 layout -->
+      <div class="grid grid-cols-12 gap-6 lg:gap-8 mb-8">
+        <!-- Step 1 -->
+        <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-4 text-center">
+          <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-surface flex items-center justify-center border border-border">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-2 font-medium">Step 1</p>
+          <h3 class="font-sans font-semibold text-text-primary text-base mb-2">온라인 상담</h3>
+          <p class="text-text-secondary text-sm leading-relaxed max-w-[260px] mx-auto">
+            전화 또는 온라인으로 피부 고민을 먼저 공유해 주세요.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-4 text-center md:-mt-4">
+          <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-surface flex items-center justify-center border border-border">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-2 font-medium">Step 2</p>
+          <h3 class="font-sans font-semibold text-text-primary text-base mb-2">정밀 피부 분석</h3>
+          <p class="text-text-secondary text-sm leading-relaxed max-w-[260px] mx-auto">
+            첨단 피부 분석 장비로 피부 상태를 정확히 진단합니다.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-4 text-center">
+          <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-surface flex items-center justify-center border border-border">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          </div>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-2 font-medium">Step 3</p>
+          <h3 class="font-sans font-semibold text-text-primary text-base mb-2">맞춤 치료 설계</h3>
+          <p class="text-text-secondary text-sm leading-relaxed max-w-[260px] mx-auto">
+            분석 결과를 바탕으로 개인별 최적 시술 플랜을 설계합니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Steps 4-5 centered -->
+      <div class="grid grid-cols-12 gap-6 lg:gap-8">
+        <div class="hidden md:block md:col-span-2"></div>
+        <!-- Step 4 -->
+        <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-4 text-center">
+          <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-surface flex items-center justify-center border border-border">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-2 font-medium">Step 4</p>
+          <h3 class="font-sans font-semibold text-text-primary text-base mb-2">정밀 시술</h3>
+          <p class="text-text-secondary text-sm leading-relaxed max-w-[260px] mx-auto">
+            전문의가 직접 시술하며, 통증과 부작용을 최소화합니다.
+          </p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-4 text-center md:-mt-4">
+          <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-surface flex items-center justify-center border border-border">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-2 font-medium">Step 5</p>
+          <h3 class="font-sans font-semibold text-text-primary text-base mb-2">사후 관리</h3>
+          <p class="text-text-secondary text-sm leading-relaxed max-w-[260px] mx-auto">
+            시술 후 경과를 체계적으로 관리하고 최적의 결과를 유지합니다.
+          </p>
+        </div>
+        <div class="hidden md:block md:col-span-2"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: CLINIC INTERIOR | MOVE: M-INT-HSCROLL-GALLERY (staggered) -->
+  <!-- COMPONENT_REF: staggered-hotel-gallery-5-3-3-mt24 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-hotel-gallery-5-3-3-mt24-reference.html | FIDELITY: 75% -->
+  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="mb-16">
+        <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">Clinic Space</p>
+        <h2 class="font-serif font-semibold text-text-primary leading-[1.2] mb-4" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+          프라이빗한 공간에서<br>편안한 시술을
+        </h2>
+        <p class="text-text-secondary text-sm max-w-[420px]">
+          화이트 마블과 부드러운 조명으로 구성된<br class="hidden sm:block">루메르 클리닉만의 프라이빗 공간입니다.
+        </p>
+      </div>
+
+      <!-- Staggered Gallery Grid -->
+      <div class="grid grid-cols-12 gap-4 lg:gap-6">
+        <!-- Main large image -->
+        <div class="stagger-item col-span-12 md:col-span-5">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/interior_1.jpg" alt="루메르 클리닉 로비 공간" class="w-full aspect-[3/4] object-cover" loading="lazy" />
+          </div>
+        </div>
+        <!-- Spacer -->
+        <div class="hidden md:block md:col-span-1"></div>
+        <!-- Two stacked images with offset -->
+        <div class="stagger-item col-span-6 md:col-span-3 md:mt-24">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/interior_2.jpg" alt="1인 프라이빗 시술실" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class="stagger-item col-span-6 md:col-span-3 md:mt-12">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/interior_3.jpg" alt="상담실 내부" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Row -->
+      <div class="grid grid-cols-12 gap-4 lg:gap-6 mt-6">
+        <div class="hidden md:block md:col-span-3"></div>
+        <div class="stagger-item col-span-12 md:col-span-5 md:mt-4">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/interior_4.jpg" alt="대기 공간과 조명" class="w-full aspect-[16/9] object-cover" loading="lazy" />
+          </div>
+        </div>
+        <div class="hidden md:block md:col-span-1"></div>
+        <div class="col-span-12 md:col-span-3 flex items-end">
+          <p class="text-text-muted text-xs leading-relaxed italic">
+            모든 시술실은 독립된 프라이빗 공간으로 구성되어 있습니다.
+            예약제 운영으로 대기 없는 편안한 진료를 경험하실 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: SKINCARE KEY COLOR | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color 40vh+) -->
+  <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: custom | SNIPPET_PATH: na | FIDELITY: n/a -->
+  <section class="fade-in-section relative w-full" style="min-height: 50vh;">
+    <img
+      src="./images/keycolor_bg.jpg"
+      alt="스킨케어 제품 이미지"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0" style="background: rgba(196,168,130,0.82);"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+      <div class="grid grid-cols-12 gap-8 items-center">
+        <div class="col-span-12 md:col-span-6">
+          <p class="text-white/70 text-xs tracking-[0.2em] uppercase mb-4">Lumère Derma Line</p>
+          <h2 class="font-serif font-semibold text-white leading-[1.2] mb-6" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+            시술 이후에도<br>지속되는 관리
+          </h2>
+          <p class="text-white/90 text-sm leading-relaxed mb-8 max-w-[400px]">
+            루메르 더마 라인은 시술 전후 피부 컨디션을 최적화하기 위해
+            개발된 전문 스킨케어입니다. 피부과 전문의가 직접 처방하는
+            맞춤 홈케어로 시술 효과를 극대화합니다.
+          </p>
+          <div class="flex flex-wrap gap-6 text-white/90 text-sm">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              피부과 전문의 처방
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              임상 테스트 완료
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+              무향료·무색소
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 flex justify-center">
+          <div class="overflow-hidden rounded-lg shadow-2xl max-w-[400px]">
+            <img src="./images/skincare_product.jpg" alt="루메르 더마 라인 스킨케어 제품" class="w-full aspect-[3/4] object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: FAQ | MOVE: M-TRUST-AWARDS-CERTS (adapted to FAQ) -->
+  <!-- COMPONENT_REF: fluid-dropdown | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/etc/fluid-dropdown-reference.html | FIDELITY: 70% -->
+  <section id="booking" class="fade-in-section w-full py-20 md:py-28 bg-white">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-8 lg:gap-12">
+        <!-- FAQ Side -->
+        <div class="col-span-12 md:col-span-7">
+          <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">FAQ</p>
+          <h2 class="font-serif font-semibold text-text-primary leading-[1.2] mb-8" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+            자주 묻는 질문
+          </h2>
+
+          <div class="space-y-0">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item border-t border-border">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">시술 후 회복 기간은 얼마나 걸리나요?</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  시술 종류에 따라 다르지만, 대부분의 레이저 시술은 당일 일상생활이 가능합니다.
+                  리프팅 시술의 경우 2~3일 정도 가벼운 붓기가 있을 수 있으며, 상세한 회복 기간은 상담 시 안내드립니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item border-t border-border">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">부작용이 걱정됩니다. 안전한가요?</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  루메르 클리닉은 모든 시술 전 정밀 피부 분석을 진행하며, 환자의 피부 상태에 맞는 안전한 시술만 진행합니다.
+                  FDA 승인 장비만을 사용하고, 시술 후 경과 관찰까지 책임지는 시스템을 운영합니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item border-t border-border">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">패키지 프로그램이 있나요?</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  네, 시술 목적에 따라 3회/5회/10회 패키지를 제공합니다.
+                  패키지 이용 시 회당 비용이 절감되며, 첫 상담 시 패키지 할인 안내를 받으실 수 있습니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item border-t border-border">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">첫 방문 시 준비할 것이 있나요?</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  특별히 준비하실 것은 없습니다. 다만 현재 복용 중인 약이 있거나 피부 관련 병력이 있으시면
+                  상담 시 말씀해 주시면 더 정확한 진단이 가능합니다. 메이크업은 하지 않고 오시는 것을 권장합니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item border-t border-border">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">주차 및 찾아오시는 길을 알려주세요.</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  서울 강남구 압구정로 12길 38 루메르빌딩 4층에 위치해 있습니다.
+                  신사역 8번 출구에서 도보 5분 거리이며, 건물 내 무료 주차 2시간 이용 가능합니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 6 -->
+            <div class="faq-item border-t border-border border-b">
+              <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+                <span class="text-text-primary text-sm font-medium pr-4">진료 시간과 예약 방법이 궁금합니다.</span>
+                <svg class="faq-chevron shrink-0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-text-secondary text-sm leading-relaxed pb-5 pr-8">
+                  평일 10:00~19:00, 토요일 10:00~15:00 (일요일·공휴일 휴진)으로 운영됩니다.
+                  전화(02-543-8282), 카카오톡 채널, 또는 홈페이지를 통해 예약하실 수 있습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Info Side -->
+        <div class="col-span-12 md:col-span-5">
+          <div class="stagger-item bg-surface rounded-lg p-8 md:sticky md:top-8">
+            <h3 class="font-serif font-semibold text-text-primary text-xl mb-6">예약 및 상담 안내</h3>
+            <div class="space-y-5">
+              <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div>
+                  <p class="text-text-primary text-sm font-medium mb-1">오시는 길</p>
+                  <p class="text-text-secondary text-sm">서울 강남구 압구정로 12길 38<br>루메르빌딩 4층</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <div>
+                  <p class="text-text-primary text-sm font-medium mb-1">전화 예약</p>
+                  <p class="text-text-secondary text-sm">02-543-8282</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div>
+                  <p class="text-text-primary text-sm font-medium mb-1">진료 시간</p>
+                  <p class="text-text-secondary text-sm">
+                    평일 10:00 – 19:00<br>
+                    토요일 10:00 – 15:00<br>
+                    <span class="text-text-muted">일요일·공휴일 휴진</span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <div>
+                  <p class="text-text-primary text-sm font-medium mb-1">이메일</p>
+                  <p class="text-text-secondary text-sm">hello@lumere-clinic.kr</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-border">
+              <a href="#" class="btn-primary w-full inline-flex items-center justify-center px-8 py-4 rounded text-sm font-medium tracking-[0.05em]">
+                온라인 상담 예약
+              </a>
+              <p class="text-text-muted text-xs text-center mt-3">
+                카카오톡 채널에서도 예약 가능합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+  <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 75% -->
+  <section class="fade-in-section relative w-full min-h-[60vh] flex items-center">
+    <img
+      src="./images/cta_bg.jpg"
+      alt="루메르 클리닉 시술 공간"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+      <p class="text-white/50 text-xs tracking-[0.2em] uppercase mb-6">Book Your Consultation</p>
+      <h2 class="font-serif font-semibold text-white leading-[1.2] mb-6" style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+        지금, 당신의 피부를 위한<br>첫 번째 상담을 시작하세요
+      </h2>
+      <p class="text-white/70 text-sm leading-relaxed max-w-[440px] mx-auto mb-10">
+        루메르 클리닉의 전문 상담사가 당신의 피부 고민을<br class="hidden sm:block">
+        세심하게 듣고, 최적의 솔루션을 안내해 드립니다.
+      </p>
+      <a href="#booking" class="btn-primary inline-flex items-center justify-center px-10 py-4 rounded text-sm font-medium tracking-[0.05em]">
+        상담 예약하기
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-white border-t border-border">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="font-serif font-bold text-text-primary text-xl">LUMÈRE</p>
+          <p class="text-text-muted text-xs mt-1">루메르 클리닉 | 서울 강남구 압구정로 12길 38</p>
+        </div>
+        <div class="flex items-center gap-8 text-text-muted text-xs">
+          <a href="#treatments" class="hover:text-accent transition-colors">시술 안내</a>
+          <a href="#booking" class="hover:text-accent transition-colors">예약</a>
+          <span>02-543-8282</span>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-border/50 text-center">
+        <p class="text-text-muted text-xs">&copy; 2026 LUMÈRE CLINIC. All rights reserved. 사업자등록번호 123-45-67890</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- JavaScript: Scroll Animations + FAQ -->
+  <script>
+    // IntersectionObserver for fade-in sections
+    (function() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
+
+      // Stagger items
+      const staggerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const parent = entry.target.parentElement;
+              const siblings = parent ? Array.from(parent.querySelectorAll('.stagger-item')) : [];
+              const idx = siblings.indexOf(entry.target);
+              entry.target.style.transitionDelay = (idx >= 0 ? idx : 0) * 0.1 + 's';
+              entry.target.classList.add('is-visible');
+              staggerObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+      );
+
+      document.querySelectorAll('.stagger-item').forEach((el) => staggerObserver.observe(el));
+    })();
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach((faq) => {
+          faq.classList.remove('open');
+          faq.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked if wasn't open
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

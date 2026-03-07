@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프레임워크 스튜디오 — 브랜드의 이야기를 영상으로 설계하다</title>
+    <meta name="description" content="프레임워크 스튜디오는 브랜드 필름, 제품 영상, 기업 다큐멘터리를 제작하는 영상 프로덕션 스튜디오입니다. 성수동에 위치한 프리미엄 영상 제작사.">
+    <link rel="canonical" href="https://frameworkstudio.kr">
+    <meta property="og:title" content="프레임워크 스튜디오 — 브랜드의 이야기를 영상으로 설계하다">
+    <meta property="og:description" content="브랜드 필름, 제품 영상, 기업 다큐멘터리 — 프리미엄 영상 프로덕션.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://frameworkstudio.kr">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'page': '#000000',
+                        'surface': '#0a0a0a',
+                        'card': '#111111',
+                        'accent': '#e8e4df',
+                        'txt': '#f5f5f0',
+                        'txt-sec': '#8a8a8a',
+                        'txt-muted': '#555555',
+                        'bdr': '#1a1a1a',
+                        'bdr-strong': '#333333',
+                    },
+                    fontFamily: {
+                        'display': ['"Playfair Display"', 'Georgia', 'serif'],
+                        'body': ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #000000;
+            --bg-surface: #0a0a0a;
+            --bg-card: #111111;
+            --accent-primary: #e8e4df;
+            --text-primary: #f5f5f0;
+            --text-secondary: #8a8a8a;
+            --text-muted: #555555;
+            --border-default: #1a1a1a;
+            --border-strong: #333333;
+            --font-ui: 'Playfair Display', Georgia, serif;
+            --font-data: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-data); }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 250px;
+        }
+
+        /* Transitions */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* Film grain texture overlay */
+        .film-grain::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Logo marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .marquee-track { animation: none; }
+        }
+
+        /* Editorial helpers */
+        .editorial-uppercase { text-transform: uppercase; letter-spacing: 0.15em; }
+    </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoProductionCompany",
+        "name": "프레임워크 스튜디오",
+        "description": "브랜드의 이야기를 영상으로 설계하는 프리미엄 영상 프로덕션 스튜디오",
+        "url": "https://frameworkstudio.kr",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "성수이로 88, 3층",
+            "addressLocality": "성동구",
+            "addressRegion": "서울특별시",
+            "postalCode": "04790",
+            "addressCountry": "KR"
+        },
+        "telephone": "+82-2-6954-0120"
+    }
+    </script>
+</head>
+
+<body class="bg-page text-txt antialiased overflow-x-hidden">
+
+    <!-- Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-page focus:px-4 focus:py-2">본문으로 건너뛰기</a>
+
+    <!-- ============================================
+         HEADER / NAV
+    ============================================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-page/90 backdrop-blur-sm border-b border-bdr">
+        <nav class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 h-[72px] flex items-center justify-between" aria-label="Main navigation">
+            <a href="#" class="font-display text-xl font-bold text-txt tracking-tight">FRAMEWORK</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#services" class="text-xs editorial-uppercase text-txt-sec hover:text-txt">서비스</a>
+                <a href="#work" class="text-xs editorial-uppercase text-txt-sec hover:text-txt">작업</a>
+                <a href="#team" class="text-xs editorial-uppercase text-txt-sec hover:text-txt">팀</a>
+                <a href="#process" class="text-xs editorial-uppercase text-txt-sec hover:text-txt">프로세스</a>
+                <a href="#pricing" class="text-xs editorial-uppercase text-txt-sec hover:text-txt">가이드</a>
+                <a href="#contact" class="inline-block bg-accent text-page text-xs editorial-uppercase px-6 py-2.5 hover:brightness-110 active:scale-95">문의하기</a>
+            </div>
+            <button class="md:hidden text-txt" id="mobile-menu-btn" aria-label="메뉴 열기">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-page border-t border-bdr" id="mobile-menu">
+            <div class="px-6 py-6 space-y-4">
+                <a href="#services" class="block text-sm text-txt-sec hover:text-txt">서비스</a>
+                <a href="#work" class="block text-sm text-txt-sec hover:text-txt">작업</a>
+                <a href="#team" class="block text-sm text-txt-sec hover:text-txt">팀</a>
+                <a href="#process" class="block text-sm text-txt-sec hover:text-txt">프로세스</a>
+                <a href="#pricing" class="block text-sm text-txt-sec hover:text-txt">가이드</a>
+                <a href="#contact" class="block bg-accent text-page text-sm text-center px-6 py-3">문의하기</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ============================================
+             SECTION 1: HERO — M-HERO-FULLBLEED-OVERLAY
+             COMPONENT_REF: hero-luxury-serif | GRADE: A | MODE: adapted
+        ============================================= -->
+        <section class="relative w-full min-h-screen film-grain" aria-label="Hero">
+            <img src="./images/hero.jpg" alt="영상 촬영 현장의 시네마틱 조명" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" width="1920" height="1080">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-center items-start pt-[72px]">
+                <p class="text-xs editorial-uppercase text-txt-muted mb-6 tracking-[0.3em]">Video Production Studio</p>
+                <h1 class="font-display text-5xl md:text-7xl lg:text-[96px] font-bold leading-[1.3] text-txt">
+                    프레임 안에<br>브랜드를 담다
+                </h1>
+                <p class="font-body text-base md:text-lg text-txt-sec mt-8 max-w-[480px] leading-relaxed">
+                    브랜드의 본질을 영상으로 설계합니다.<br class="hidden sm:block">
+                    프레임워크 스튜디오.
+                </p>
+                <div class="flex items-center gap-4 mt-10">
+                    <a href="#work" class="inline-block bg-accent text-page text-xs editorial-uppercase px-8 py-4 hover:brightness-110 active:scale-95">쇼릴 보기</a>
+                    <a href="#contact" class="inline-block border border-accent text-accent text-xs editorial-uppercase px-8 py-4 hover:bg-accent hover:text-page">프로젝트 문의</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 2: SERVICES — M-LAY-EDITORIAL-FEATURE (Accordion + Collage)
+             COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: SERVICES | MOVE: M-LAY-EDITORIAL-FEATURE -->
+        <section id="services" class="w-full bg-surface py-24 md:py-32" aria-label="서비스">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-in-section">
+                    <!-- Left: Image collage -->
+                    <div class="col-span-12 md:col-span-5 relative">
+                        <div class="hidden lg:block absolute -left-4 top-0 bottom-0">
+                            <span class="font-display editorial-uppercase text-7xl font-bold text-card" style="writing-mode: vertical-lr; transform: rotate(180deg);">SERVICES</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 ml-0 lg:ml-16">
+                            <div class="col-span-2">
+                                <div class="relative aspect-[4/3] overflow-hidden stagger-item">
+                                    <img src="./images/service_brand_film.jpg" alt="브랜드 필름 촬영 현장" class="w-full h-full object-cover" loading="lazy" width="800" height="600">
+                                </div>
+                            </div>
+                            <div class="relative aspect-square overflow-hidden stagger-item">
+                                <img src="./images/service_product_video.jpg" alt="제품 영상 촬영" class="w-full h-full object-cover" loading="lazy" width="400" height="400">
+                            </div>
+                            <div class="relative aspect-square overflow-hidden stagger-item">
+                                <img src="./images/service_corporate.jpg" alt="기업 다큐멘터리 인터뷰" class="w-full h-full object-cover" loading="lazy" width="400" height="400">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Accordion list -->
+                    <div class="col-span-12 md:col-span-7">
+                        <p class="text-xs editorial-uppercase text-txt-muted mb-3 tracking-[0.2em]">What We Create</p>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-txt mb-10">우리가 만드는 영상</h2>
+
+                        <div class="space-y-0">
+                            <!-- Service 1 -->
+                            <div class="border-b border-bdr-strong py-5 flex items-center justify-between cursor-pointer accordion-trigger stagger-item" data-accordion="svc-1">
+                                <span class="text-sm editorial-uppercase tracking-wider font-medium text-txt">Brand Film</span>
+                                <span class="text-txt text-xl accordion-icon">+</span>
+                            </div>
+                            <div id="svc-1" class="accordion-content px-1">
+                                <p class="text-txt-sec text-sm leading-relaxed py-4">
+                                    브랜드의 비전과 가치를 하나의 서사로 엮어냅니다.<br>
+                                    30초 숏폼부터 5분 브랜드 다큐멘터리까지, 목적에 맞는 포맷을 설계합니다.
+                                </p>
+                            </div>
+
+                            <!-- Service 2 -->
+                            <div class="border-b border-bdr-strong py-5 flex items-center justify-between cursor-pointer accordion-trigger stagger-item" data-accordion="svc-2">
+                                <span class="text-sm editorial-uppercase tracking-wider font-medium text-txt">Product Video</span>
+                                <span class="text-txt text-xl accordion-icon">+</span>
+                            </div>
+                            <div id="svc-2" class="accordion-content px-1">
+                                <p class="text-txt-sec text-sm leading-relaxed py-4">
+                                    제품이 가진 물성과 디테일을 극대화하는 영상입니다.<br>
+                                    테이블탑 촬영, 매크로 렌즈 활용, 라이팅 디자인까지 섬세하게 컨트롤합니다.
+                                </p>
+                            </div>
+
+                            <!-- Service 3 -->
+                            <div class="border-b border-bdr-strong py-5 flex items-center justify-between cursor-pointer accordion-trigger stagger-item" data-accordion="svc-3">
+                                <span class="text-sm editorial-uppercase tracking-wider font-medium text-txt">Corporate Documentary</span>
+                                <span class="text-txt text-xl accordion-icon">+</span>
+                            </div>
+                            <div id="svc-3" class="accordion-content px-1">
+                                <p class="text-txt-sec text-sm leading-relaxed py-4">
+                                    기업의 철학, 사람, 현장을 다큐멘터리 형식으로 기록합니다.<br>
+                                    인터뷰 기반의 내러티브로 진정성 있는 브랜드 이미지를 구축합니다.
+                                </p>
+                            </div>
+
+                            <!-- Service 4 -->
+                            <div class="border-b border-bdr-strong py-5 flex items-center justify-between cursor-pointer accordion-trigger stagger-item" data-accordion="svc-4">
+                                <span class="text-sm editorial-uppercase tracking-wider font-medium text-txt">Social Content</span>
+                                <span class="text-txt text-xl accordion-icon">+</span>
+                            </div>
+                            <div id="svc-4" class="accordion-content px-1">
+                                <p class="text-txt-sec text-sm leading-relaxed py-4">
+                                    인스타그램, 유튜브, 틱톡 — 플랫폼별 최적화된 포맷으로 제작합니다.<br>
+                                    월 단위 패키지로 꾸준한 콘텐츠 운영을 지원합니다.
+                                </p>
+                            </div>
+
+                            <!-- Service 5 -->
+                            <div class="border-b border-bdr-strong py-5 flex items-center justify-between cursor-pointer accordion-trigger stagger-item" data-accordion="svc-5">
+                                <span class="text-sm editorial-uppercase tracking-wider font-medium text-txt">Event Coverage</span>
+                                <span class="text-txt text-xl accordion-icon">+</span>
+                            </div>
+                            <div id="svc-5" class="accordion-content px-1">
+                                <p class="text-txt-sec text-sm leading-relaxed py-4">
+                                    컨퍼런스, 런칭 이벤트, 전시회 현장을 멀티캠으로 기록합니다.<br>
+                                    하이라이트 릴과 풀 다큐멘터리 두 가지 버전으로 납품합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 3: SELECTED WORK — M-INT-HSCROLL-GALLERY (Staggered Dark)
+             COMPONENT_REF: staggered-lookbook-dark-offset-mt12 | GRADE: A | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: SELECTED WORK | MOVE: M-INT-HSCROLL-GALLERY -->
+        <section id="work" class="w-full bg-page py-24 md:py-32" aria-label="작업">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <!-- Header -->
+                <div class="mb-12 fade-in-section">
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] uppercase text-txt">
+                        Selected<br><span class="ml-16 md:ml-32 lg:ml-48">Work</span>
+                    </h2>
+                    <p class="text-xs text-txt-muted mt-4 tracking-wider editorial-uppercase">Recent projects by<br>Framework Studio</p>
+                </div>
+
+                <!-- Asymmetric grid row 1 -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-5 fade-in-section">
+                    <div class="hidden md:block md:col-span-3">
+                        <p class="text-xs text-txt-muted tracking-wider editorial-uppercase mt-4">Brand Film</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-6">
+                        <div class="relative aspect-[16/10] overflow-hidden group">
+                            <img src="./images/work_1.jpg" alt="브랜드 필름 프로젝트 스틸컷" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="800" height="500">
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3"></div>
+                </div>
+
+                <!-- Asymmetric grid row 2 -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-5 fade-in-section">
+                    <div class="col-span-6 md:col-span-4">
+                        <div class="relative aspect-[3/4] overflow-hidden group">
+                            <img src="./images/work_2.jpg" alt="제품 영상 촬영 스틸컷" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                    </div>
+                    <div class="col-span-6 md:col-span-3 flex flex-col justify-center">
+                        <h3 class="font-display text-2xl md:text-3xl font-bold uppercase leading-tight text-txt">Product<br>Films<br>2024</h3>
+                        <p class="text-xs text-txt-muted mt-4 tracking-wider editorial-uppercase">Fashion · F&B<br>Tech brands</p>
+                    </div>
+                    <div class="hidden md:block md:col-span-1"></div>
+                    <div class="col-span-12 md:col-span-4">
+                        <div class="relative aspect-[3/4] overflow-hidden mt-0 md:mt-12 group">
+                            <img src="./images/work_3.jpg" alt="기업 다큐멘터리 촬영 현장" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-5 mt-5 fade-in-section">
+                    <div class="col-span-12 md:col-span-5">
+                        <div class="relative aspect-[16/9] overflow-hidden group">
+                            <img src="./images/work_4.jpg" alt="이벤트 커버리지 하이라이트" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="800" height="450">
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:col-span-2"></div>
+                    <div class="col-span-12 md:col-span-5">
+                        <div class="relative aspect-[16/9] overflow-hidden md:mt-16 group">
+                            <img src="./images/work_5.jpg" alt="소셜 콘텐츠 시리즈" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="800" height="450">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 fade-in-section">
+                    <a href="#" class="inline-flex items-center gap-3 border border-accent text-accent editorial-uppercase text-xs tracking-wider px-8 py-3.5 hover:bg-accent hover:text-page">
+                        프로젝트 전체 보기 <span>&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 4: TEAM — M-DIV-FULLBLEED-IMAGE + M-LAY-EDITORIAL-STORY (Staggered Team)
+             COMPONENT_REF: staggered-team-3col-zigzag-offset | GRADE: A | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: TEAM DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <section class="relative w-full min-h-[50vh] film-grain" aria-label="팀 소개 배경">
+            <img src="./images/divider_team.jpg" alt="영상 제작 현장 뒤에서" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
+            <div class="absolute inset-0 bg-black/65"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex flex-col justify-center items-center text-center">
+                <p class="text-xs editorial-uppercase text-txt-muted mb-4 tracking-[0.3em] fade-in-section">Behind the Frame</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-txt fade-in-section">프레임 뒤의 사람들</h2>
+            </div>
+        </section>
+
+        <!-- SECTION: TEAM GRID | MOVE: M-LAY-EDITORIAL-STORY -->
+        <section id="team" class="w-full bg-surface py-24 md:py-32" aria-label="팀 구성원">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <p class="text-txt-sec text-sm max-w-xl mb-16 leading-relaxed fade-in-section">
+                    디렉터, 촬영감독, 편집자, 컬러리스트.<br>
+                    각 분야의 전문가가 하나의 팀으로 움직입니다.
+                </p>
+
+                <!-- Staggered 4-col team grid -->
+                <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-in-section">
+                    <!-- Director -->
+                    <div class="col-span-6 md:col-span-3 stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/team_director.jpg" alt="김도윤 디렉터" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-txt">김도윤</h3>
+                        <p class="text-[10px] editorial-uppercase tracking-widest text-txt-muted mt-1">Director</p>
+                    </div>
+                    <!-- DP -->
+                    <div class="col-span-6 md:col-span-3 md:-mt-8 stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/team_dp.jpg" alt="이정훈 촬영감독" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-txt">이정훈</h3>
+                        <p class="text-[10px] editorial-uppercase tracking-widest text-txt-muted mt-1">Director of Photography</p>
+                    </div>
+                    <!-- Editor -->
+                    <div class="col-span-6 md:col-span-3 md:mt-8 stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/team_editor.jpg" alt="박서연 편집자" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-txt">박서연</h3>
+                        <p class="text-[10px] editorial-uppercase tracking-widest text-txt-muted mt-1">Editor</p>
+                    </div>
+                    <!-- Colorist -->
+                    <div class="col-span-6 md:col-span-3 md:-mt-4 stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/team_colorist.jpg" alt="최민서 컬러리스트" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" width="400" height="530">
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-txt">최민서</h3>
+                        <p class="text-[10px] editorial-uppercase tracking-widest text-txt-muted mt-1">Colorist</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 5: EQUIPMENT / STUDIO — M-DIV-FULLBLEED-IMAGE
+             Full-bleed BTS imagery
+        ============================================= -->
+        <!-- SECTION: EQUIPMENT | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <section class="relative w-full min-h-[60vh] film-grain" aria-label="장비 및 스튜디오">
+            <img src="./images/divider_studio.jpg" alt="RED 카메라 시스템과 DaVinci Resolve 편집실" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
+            <div class="absolute inset-0 bg-black/65"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center">
+                <div class="max-w-xl fade-in-section">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-4 tracking-[0.3em]">Studio & Equipment</p>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-txt mb-6">
+                        성수동 3층,<br>우리의 작업실
+                    </h2>
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="stagger-item">
+                            <p class="text-xs editorial-uppercase text-txt-muted mb-2">Camera</p>
+                            <p class="text-sm text-txt">RED V-RAPTOR XL</p>
+                            <p class="text-sm text-txt">Sony FX6</p>
+                        </div>
+                        <div class="stagger-item">
+                            <p class="text-xs editorial-uppercase text-txt-muted mb-2">Post</p>
+                            <p class="text-sm text-txt">DaVinci Resolve Studio</p>
+                            <p class="text-sm text-txt">Adobe Premiere Pro</p>
+                        </div>
+                        <div class="stagger-item">
+                            <p class="text-xs editorial-uppercase text-txt-muted mb-2">Sound</p>
+                            <p class="text-sm text-txt">Sound Stage 40㎡</p>
+                            <p class="text-sm text-txt">Sennheiser MKH 416</p>
+                        </div>
+                        <div class="stagger-item">
+                            <p class="text-xs editorial-uppercase text-txt-muted mb-2">Lighting</p>
+                            <p class="text-sm text-txt">ARRI SkyPanel S60-C</p>
+                            <p class="text-sm text-txt">Aputure 600d Pro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 6: PROCESS — M-LAY-TIMELINE-STEPPER
+             COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
+        <section id="process" class="w-full bg-surface py-24 md:py-32" aria-label="제작 과정">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-16 fade-in-section">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-3 tracking-[0.2em]">Production Workflow</p>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-txt">제작 과정</h2>
+                    <p class="text-sm text-txt-sec mt-4 max-w-md mx-auto leading-relaxed">
+                        크리에이티브 브리프부터 최종 납품까지,<br class="hidden sm:block">
+                        모든 단계를 함께 설계합니다.
+                    </p>
+                </div>
+
+                <!-- 5 Steps horizontal -->
+                <div class="grid grid-cols-12 gap-4 md:gap-6 fade-in-section">
+                    <div class="col-span-6 md:col-span-12 lg:col-span-2 text-center stagger-item border border-bdr p-6 md:p-4">
+                        <span class="font-display text-4xl font-bold text-card block mb-3">01</span>
+                        <h4 class="text-xs editorial-uppercase tracking-wide text-txt font-medium">Creative Brief</h4>
+                        <p class="text-xs text-txt-muted mt-2 leading-relaxed">목표와 메시지를<br>함께 정의합니다</p>
+                    </div>
+                    <div class="col-span-6 md:col-span-12 lg:col-span-3 text-center md:-mt-0 lg:-mt-4 stagger-item border border-bdr p-6 md:p-4">
+                        <span class="font-display text-4xl font-bold text-card block mb-3">02</span>
+                        <h4 class="text-xs editorial-uppercase tracking-wide text-txt font-medium">Pre-Production</h4>
+                        <p class="text-xs text-txt-muted mt-2 leading-relaxed">콘티, 캐스팅, 로케이션<br>스카우팅을 진행합니다</p>
+                    </div>
+                    <div class="col-span-6 md:col-span-12 lg:col-span-2 text-center stagger-item border border-bdr p-6 md:p-4">
+                        <span class="font-display text-4xl font-bold text-card block mb-3">03</span>
+                        <h4 class="text-xs editorial-uppercase tracking-wide text-txt font-medium">Shoot</h4>
+                        <p class="text-xs text-txt-muted mt-2 leading-relaxed">전문 장비와 팀이<br>현장을 컨트롤합니다</p>
+                    </div>
+                    <div class="col-span-6 md:col-span-12 lg:col-span-3 text-center lg:-mt-4 stagger-item border border-bdr p-6 md:p-4">
+                        <span class="font-display text-4xl font-bold text-card block mb-3">04</span>
+                        <h4 class="text-xs editorial-uppercase tracking-wide text-txt font-medium">Post-Production</h4>
+                        <p class="text-xs text-txt-muted mt-2 leading-relaxed">편집, 컬러 그레이딩,<br>사운드 디자인</p>
+                    </div>
+                    <div class="col-span-12 lg:col-span-2 text-center stagger-item border border-bdr p-6 md:p-4">
+                        <span class="font-display text-4xl font-bold text-card block mb-3">05</span>
+                        <h4 class="text-xs editorial-uppercase tracking-wide text-txt font-medium">Delivery</h4>
+                        <p class="text-xs text-txt-muted mt-2 leading-relaxed">플랫폼별 최적화<br>파일을 납품합니다</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 7: CLIENT BRANDS — M-TRUST-LOGO-WALL
+             COMPONENT_REF: logo-carousel | GRADE: B | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: CLIENT BRANDS | MOVE: M-TRUST-LOGO-WALL -->
+        <section class="w-full bg-page py-20 md:py-24 border-y border-bdr" aria-label="함께한 브랜드">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-12 fade-in-section">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-3 tracking-[0.2em]">Trusted By</p>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-txt">함께한 브랜드</h2>
+                </div>
+            </div>
+
+            <!-- Logo marquee -->
+            <div class="overflow-hidden fade-in-section">
+                <div class="marquee-track">
+                    <!-- Fictional but realistic client names x2 for seamless loop -->
+                    <div class="flex items-center gap-16 px-8">
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">MAISON NOIRE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">VELVET ROASTERS</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">HYBE LABS</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">GRAIN COLLECTIVE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">SEOULSKIN</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">LAYER ARCHITECTURE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">STUDIO MATTE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">NEXON CREATIVE</span>
+                    </div>
+                    <div class="flex items-center gap-16 px-8">
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">MAISON NOIRE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">VELVET ROASTERS</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">HYBE LABS</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">GRAIN COLLECTIVE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">SEOULSKIN</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">LAYER ARCHITECTURE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">STUDIO MATTE</span>
+                        <span class="text-2xl font-display font-bold text-txt-muted whitespace-nowrap">NEXON CREATIVE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 8: PRICING GUIDE — M-LAY-ASYM-GRID (Key Color Band)
+        ============================================= -->
+        <!-- SECTION: PRICING | MOVE: M-LAY-ASYM-GRID -->
+        <section id="pricing" class="w-full bg-accent py-24 md:py-32" aria-label="프로젝트 가이드" style="min-height: 40vh;">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-16 fade-in-section">
+                    <p class="text-xs editorial-uppercase text-page/60 mb-3 tracking-[0.2em]">Project Guide</p>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-page">프로젝트 가이드</h2>
+                    <p class="text-sm text-page/70 mt-4 max-w-md mx-auto leading-relaxed">
+                        규모와 목적에 따라<br class="hidden sm:block">
+                        최적의 패키지를 제안합니다.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-12 gap-6 fade-in-section">
+                    <!-- Package 1 -->
+                    <div class="col-span-12 md:col-span-5 bg-page p-8 stagger-item">
+                        <p class="text-xs editorial-uppercase text-txt-muted mb-2 tracking-wider">Brand Film Package</p>
+                        <h3 class="font-display text-2xl font-bold text-txt mb-2">₩5,000,000 — 15,000,000</h3>
+                        <p class="text-sm text-txt-sec leading-relaxed mb-6">
+                            브랜드 핵심 가치를 담은 필름 제작.<br>
+                            기획, 촬영, 편집, 컬러 그레이딩 포함.
+                        </p>
+                        <ul class="space-y-2 text-sm text-txt-sec">
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                프리프로덕션 전 과정
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                1-2일 촬영 (멀티캠)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                2회 수정 포함
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Package 2 -->
+                    <div class="col-span-12 md:col-span-4 bg-page p-8 md:-mt-4 stagger-item">
+                        <p class="text-xs editorial-uppercase text-txt-muted mb-2 tracking-wider">Product Video</p>
+                        <h3 class="font-display text-2xl font-bold text-txt mb-2">₩2,000,000 — 5,000,000</h3>
+                        <p class="text-sm text-txt-sec leading-relaxed mb-6">
+                            제품의 디테일을 극대화하는 영상.<br>
+                            테이블탑 촬영 + 매크로 렌즈 활용.
+                        </p>
+                        <ul class="space-y-2 text-sm text-txt-sec">
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                스튜디오 촬영 1일
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                30초 / 60초 편집
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Package 3 -->
+                    <div class="col-span-12 md:col-span-3 bg-page p-8 stagger-item">
+                        <p class="text-xs editorial-uppercase text-txt-muted mb-2 tracking-wider">Social Content Monthly</p>
+                        <h3 class="font-display text-2xl font-bold text-txt mb-2">₩3,000,000 / 월</h3>
+                        <p class="text-sm text-txt-sec leading-relaxed mb-6">
+                            월 4-8편 콘텐츠 제작.<br>
+                            기획부터 포스팅까지.
+                        </p>
+                        <ul class="space-y-2 text-sm text-txt-sec">
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                릴스 / 숏폼
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                월간 리포트
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 fade-in-section">
+                    <a href="#contact" class="inline-block bg-page text-accent text-xs editorial-uppercase px-8 py-4 hover:brightness-110 active:scale-95">
+                        견적 문의하기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SECTION 9: FINAL CTA + FOOTER — M-CTA-FULLBLEED-FINAL + M-FOOTER-B2B-DETAILS
+             COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted
+        ============================================= -->
+        <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+        <section id="contact" class="relative w-full min-h-[60vh] film-grain" aria-label="프로젝트 문의">
+            <img src="./images/cta_final.jpg" alt="시네마틱 영상 촬영 현장" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center">
+                <p class="text-xs editorial-uppercase text-txt-muted mb-6 tracking-[0.3em] fade-in-section">Next Project</p>
+                <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-txt mb-6 fade-in-section">
+                    다음 프로젝트,<br>함께 시작할까요?
+                </h2>
+                <p class="text-base text-txt-sec mb-10 fade-in-section">제작 문의는 언제든 환영합니다.</p>
+
+                <!-- Inquiry form -->
+                <form class="w-full max-w-lg fade-in-section" onsubmit="event.preventDefault(); alert('문의가 접수되었습니다. 감사합니다!');">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <input type="text" placeholder="이름" required class="col-span-1 bg-white/10 border border-white/20 text-txt placeholder-txt-muted px-4 py-3 text-sm focus:outline-none focus:border-accent" aria-label="이름">
+                        <input type="email" placeholder="이메일" required class="col-span-1 bg-white/10 border border-white/20 text-txt placeholder-txt-muted px-4 py-3 text-sm focus:outline-none focus:border-accent" aria-label="이메일">
+                    </div>
+                    <input type="text" placeholder="프로젝트 유형 (브랜드 필름 / 제품 영상 / 기타)" class="w-full bg-white/10 border border-white/20 text-txt placeholder-txt-muted px-4 py-3 text-sm mb-4 focus:outline-none focus:border-accent" aria-label="프로젝트 유형">
+                    <textarea placeholder="프로젝트에 대해 간단히 알려주세요" rows="3" class="w-full bg-white/10 border border-white/20 text-txt placeholder-txt-muted px-4 py-3 text-sm mb-4 resize-none focus:outline-none focus:border-accent" aria-label="프로젝트 설명"></textarea>
+                    <button type="submit" class="w-full bg-accent text-page text-xs editorial-uppercase py-4 hover:brightness-110 active:scale-95 font-medium">
+                        프로젝트 문의
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-page border-t border-bdr">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="grid grid-cols-12 gap-8">
+                <div class="col-span-12 md:col-span-4">
+                    <p class="font-display text-2xl font-bold text-txt mb-4">FRAMEWORK</p>
+                    <p class="text-xs text-txt-muted leading-relaxed">
+                        브랜드의 이야기를<br>영상으로 설계합니다.
+                    </p>
+                </div>
+                <div class="col-span-6 md:col-span-3">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-4 tracking-wider">Contact</p>
+                    <p class="text-sm text-txt-sec leading-relaxed">
+                        hello@frameworkstudio.kr<br>
+                        02-6954-0120
+                    </p>
+                </div>
+                <div class="col-span-6 md:col-span-3">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-4 tracking-wider">Studio</p>
+                    <p class="text-sm text-txt-sec leading-relaxed">
+                        서울특별시 성동구<br>
+                        성수이로 88, 3층
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-2">
+                    <p class="text-xs editorial-uppercase text-txt-muted mb-4 tracking-wider">Social</p>
+                    <div class="space-y-2">
+                        <a href="#" class="block text-sm text-txt-sec hover:text-txt">Instagram</a>
+                        <a href="#" class="block text-sm text-txt-sec hover:text-txt">YouTube</a>
+                        <a href="#" class="block text-sm text-txt-sec hover:text-txt">Vimeo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-bdr mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-txt-muted">&copy; 2024 Framework Studio. All rights reserved.</p>
+                <div class="flex items-center gap-6 text-xs text-txt-muted">
+                    <a href="#" class="hover:text-txt">개인정보처리방침</a>
+                    <a href="#" class="hover:text-txt">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+    ============================================= -->
+    <script>
+        // Intersection Observer — Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.stagger-item').forEach((el, index) => {
+            const parent = el.closest('.grid, .space-y-0');
+            if (parent) {
+                const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item, :scope > div > .stagger-item'));
+                const i = siblings.indexOf(el);
+                el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+            } else {
+                el.style.transitionDelay = index * 0.1 + 's';
+            }
+            observer.observe(el);
+        });
+
+        // Accordion
+        document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const targetId = trigger.getAttribute('data-accordion');
+                const content = document.getElementById(targetId);
+                const icon = trigger.querySelector('.accordion-icon');
+
+                if (content.classList.contains('open')) {
+                    content.classList.remove('open');
+                    icon.textContent = '+';
+                } else {
+                    document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+                    document.querySelectorAll('.accordion-icon').forEach(i => i.textContent = '+');
+                    content.classList.add('open');
+                    icon.textContent = '\u2212';
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Reduced motion guard
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+                el.style.transition = 'none';
+            });
+            const marquee = document.querySelector('.marquee-track');
+            if (marquee) marquee.style.animation = 'none';
+        }
+    </script>
+
+</body>
+</html>

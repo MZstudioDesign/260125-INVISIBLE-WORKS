@@ -131,7 +131,27 @@
   "PortfolioPage": {
     "title": "함께 만든 웹사이트들",
     "description1": "우리가 함께한 프로젝트들입니다.",
-    "description2": "모든 프로젝트는 클라이언트의 비전과 함께 만들어졌습니다."
+    "description2": "모든 프로젝트는 클라이언트의 비전과 함께 만들어졌습니다.",
+    "noResults": "해당 카테고리의 프로젝트가 없습니다."
+  },
+  "PortfolioCategories": {
+    "all": "전체",
+    "education": "교육",
+    "beauty": "뷰티",
+    "brand": "브랜드",
+    "fitness": "피트니스",
+    "medical": "의료",
+    "business": "비즈니스",
+    "architecture": "건축",
+    "design": "디자인",
+    "legal": "법률",
+    "production": "영상",
+    "tech": "테크",
+    "veterinary": "동물병원",
+    "fnb": "식음료"
+  },
+  "PortfolioModal": {
+    "designLabel": "Design {number}"
   },
   "Privacy": {
     "title": "개인정보 처리방침"
@@ -150,7 +170,8 @@
     "Accordion": {
       "prefix": "그리고,",
       "freeText": "여기까지 무료",
-      "suffix": "입니다."
+      "suffix": "입니다.",
+      "clickToExplore": "클릭하여 살펴보기"
     },
     "Portfolio": {
       "categories": {

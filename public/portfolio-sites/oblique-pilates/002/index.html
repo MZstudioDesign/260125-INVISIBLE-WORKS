@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오블리크 필라테스 — 정렬, 그 이상의 움직임</title>
+    <meta name="description" content="삼성동 프리미엄 필라테스 스튜디오. PMA 인증 전문 강사진의 1:1 맞춤 프로그램으로 당신의 균형을 찾아드립니다.">
+    <link rel="canonical" href="https://oblique-pilates.kr">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="오블리크 필라테스 — 정렬, 그 이상의 움직임">
+    <meta property="og:description" content="삼성동 프리미엄 필라테스 스튜디오. 몸의 균형을 되찾는 공간.">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta property="og:url" content="https://oblique-pilates.kr">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        'sans': ['"Noto Sans KR"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep': '#0A0A0A',
+                        'surface': '#F7F7F7',
+                        'muted': '#8A8A8A',
+                        'secondary': '#4A4A4A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* === CSS VARS (from design_system.md) === */
+        :root {
+            --bg-page: #FFFFFF;
+            --bg-surface: #F7F7F7;
+            --accent-primary: #0A0A0A;
+            --text-primary: #0A0A0A;
+            --text-secondary: #4A4A4A;
+            --text-muted: #8A8A8A;
+            --border-default: #E5E5E5;
+            --border-strong: #0A0A0A;
+            --content-max-width: 1200px;
+        }
+
+        /* === SCROLL ANIMATIONS === */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === TRANSITIONS === */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* === HORIZONTAL SCROLL === */
+        .h-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .h-scroll-container::-webkit-scrollbar { display: none; }
+        .h-scroll-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+
+        /* === FAQ ACCORDION === */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .faq-content.open {
+            max-height: 300px;
+        }
+
+        /* === IMAGE GRAYSCALE === */
+        .img-mono {
+            filter: grayscale(100%) contrast(1.05);
+            transition: filter 0.5s ease;
+        }
+        .img-mono:hover {
+            filter: grayscale(30%) contrast(1.02);
+        }
+
+        /* === REDUCED MOTION === */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section,
+            .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .img-mono { transition: none; }
+            .faq-content { transition: none; }
+        }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "오블리크 필라테스",
+        "description": "삼성동 프리미엄 필라테스 스튜디오. PMA 인증 전문 강사진의 1:1 맞춤 프로그램.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "삼성로 96길 23 B1",
+            "addressLocality": "강남구",
+            "addressRegion": "서울특별시",
+            "postalCode": "06158",
+            "addressCountry": "KR"
+        },
+        "telephone": "+82-2-555-0192",
+        "url": "https://oblique-pilates.kr",
+        "priceRange": "₩45,000 - ₩100,000"
+    }
+    </script>
+</head>
+
+<body class="bg-white text-deep font-sans antialiased overflow-x-hidden">
+
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-deep focus:underline">
+        본문 바로가기
+    </a>
+
+    <!-- NAV -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <nav class="flex items-center justify-between h-16" aria-label="Main navigation">
+                <span class="font-serif text-lg font-semibold tracking-wide text-deep">OBLIQUE</span>
+                <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.12em] text-muted font-sans">
+                    <a href="#philosophy" class="hover:text-deep">Philosophy</a>
+                    <a href="#studio" class="hover:text-deep">Studio</a>
+                    <a href="#programs" class="hover:text-deep">Programs</a>
+                    <a href="#contact" class="hover:text-deep">Contact</a>
+                </div>
+                <button class="md:hidden" aria-label="메뉴 열기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY
+    ============================================================ -->
+    <section class="relative w-full min-h-screen" aria-label="Hero">
+        <img src="./images/hero.jpg" alt="리포머 위에서 필라테스 동작을 수행하는 여성" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/85 via-[#0A0A0A]/40 to-[#0A0A0A]/15"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-serif italic">Oblique Pilates Studio</p>
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+                정렬, 그 이상의 움직임
+            </h1>
+            <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                오블리크 필라테스는 단순한 운동을 넘어
+                당신의 몸이 기억하는 본래의 균형을 찾아갑니다.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#contact" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#0A0A0A] transition-colors">
+                    체험 수업 예약
+                </a>
+                <a href="#programs" class="bg-deep text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:brightness-110 transition-colors border border-deep">
+                    프로그램 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <main id="main-content">
+
+    <!-- ============================================================
+         SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO
+         COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 75%
+    ============================================================ -->
+    <section id="philosophy" class="fade-in-section w-full bg-white border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="font-serif italic text-muted text-sm">Our Philosophy</span>
+                <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-6 leading-[1.2]">
+                    우리가 믿는<br>한 가지
+                </h2>
+                <p class="text-secondary text-[0.9375rem] leading-relaxed mt-8 max-w-[440px] mx-auto">
+                    모든 몸에는 고유한 리듬이 있습니다.<br>
+                    그 리듬을 읽는 것에서 시작합니다.
+                </p>
+                <div class="w-16 h-px bg-gray-300 mx-auto mt-10"></div>
+                <p class="font-serif italic text-muted text-base mt-6">Balance begins from within.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: STUDIO GALLERY | MOVE: M-INT-HSCROLL-GALLERY
+         COMPONENT_REF: custom-hscroll-gallery | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a
+    ============================================================ -->
+    <section id="studio" class="fade-in-section w-full bg-surface border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 pt-20 md:pt-28 pb-8">
+            <span class="font-serif italic text-muted text-sm">The Space</span>
+            <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
+                공간이 말하는 것들
+            </h2>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed mt-4 max-w-[400px]">
+                삼성동 지하, 자연광이 스며드는<br>
+                리포머 12대의 프라이빗 스튜디오.
+            </p>
+        </div>
+
+        <!-- Horizontal Scroll Gallery -->
+        <div class="h-scroll-container pl-6 md:pl-8 lg:pl-[calc((100vw-1200px)/2+48px)] pb-20 md:pb-28 gap-4 lg:gap-6">
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_1.jpg"
+                         alt="리포머 장비가 정렬된 스튜디오 전경" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Reformer Studio</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_2.jpg"
+                         alt="자연광이 들어오는 스튜디오 창가" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Natural Light</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_3.jpg"
+                         alt="필라테스 소도구와 미니멀 인테리어" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Equipment Detail</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_4.jpg"
+                         alt="1:1 프라이빗 레슨 공간" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Private Room</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_5.jpg"
+                         alt="캐딜락 장비가 있는 전용 공간" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Cadillac Suite</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_6.jpg"
+                         alt="라커룸과 라운지 공간" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Lounge</p>
+            </div>
+            <div class="h-scroll-item w-[75vw] md:w-[50vw] lg:w-[45vw] flex-shrink-0 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/program_7.jpg"
+                         alt="그룹 수업 현장" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="563" />
+                </div>
+                <p class="text-xs text-muted mt-3 uppercase tracking-wider">Group Session</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: SCHEDULE & PRICING | MOVE: M-LAY-ASYM-GRID
+         COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 70%
+    ============================================================ -->
+    <section id="programs" class="fade-in-section w-full bg-white border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <span class="font-serif italic text-muted text-sm">Programs & Schedule</span>
+            <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
+                당신의 시간에<br>맞춰진 수업
+            </h2>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed mt-4 max-w-[400px]">
+                프라이빗 1:1 / 듀엣 2:1 / 그룹 4:1<br>
+                세 가지 방식으로 만나보세요.
+            </p>
+
+            <!-- Asymmetric Grid: 3 + 5 + 4 -->
+            <div class="grid grid-cols-12 gap-5 lg:gap-6 mt-12">
+                <!-- Card 1: Private (col-span-3) -->
+                <div class="col-span-12 md:col-span-3 stagger-item border border-gray-200 p-6 lg:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[11px] text-muted uppercase tracking-wider">Private 1:1</span>
+                        <h3 class="font-serif text-xl font-semibold text-deep mt-3 leading-tight">프라이빗</h3>
+                        <p class="text-secondary text-sm leading-relaxed mt-3">
+                            온전히 당신만을 위한 시간.<br>
+                            체형 분석 기반 맞춤 프로그램.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <p class="font-serif text-2xl font-bold text-deep">₩80,000</p>
+                        <p class="text-muted text-xs mt-1">/ 1회 50분</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Duet (col-span-5) — Featured -->
+                <div class="col-span-12 md:col-span-5 stagger-item border-2 border-deep p-6 lg:p-8 flex flex-col justify-between relative">
+                    <span class="absolute top-0 right-0 bg-deep text-white text-[10px] uppercase tracking-wider px-3 py-1">Recommended</span>
+                    <div>
+                        <span class="text-[11px] text-muted uppercase tracking-wider">Duet 2:1</span>
+                        <h3 class="font-serif text-xl font-semibold text-deep mt-3 leading-tight">듀엣</h3>
+                        <p class="text-secondary text-sm leading-relaxed mt-3">
+                            함께하는 동기부여와 개인 맞춤의 균형.<br>
+                            친구, 파트너와 함께하는 세션.
+                        </p>
+                    </div>
+                    <div class="mt-8 flex items-end justify-between">
+                        <div>
+                            <p class="font-serif text-2xl font-bold text-deep">₩55,000</p>
+                            <p class="text-muted text-xs mt-1">/ 1인 1회 50분</p>
+                        </div>
+                        <a href="#contact" class="inline-block px-6 py-2.5 bg-deep text-white text-xs uppercase tracking-wider hover:bg-white hover:text-deep border border-deep transition-all">
+                            예약하기
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Group (col-span-4) -->
+                <div class="col-span-12 md:col-span-4 stagger-item border border-gray-200 p-6 lg:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[11px] text-muted uppercase tracking-wider">Group 4:1</span>
+                        <h3 class="font-serif text-xl font-semibold text-deep mt-3 leading-tight">그룹</h3>
+                        <p class="text-secondary text-sm leading-relaxed mt-3">
+                            소수 정원제 그룹 수업.<br>
+                            함께하되, 놓치지 않는 세심함.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <p class="font-serif text-2xl font-bold text-deep">₩45,000</p>
+                        <p class="text-muted text-xs mt-1">/ 1회 50분</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rehab special mention -->
+            <div class="mt-8 border-t border-gray-200 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <span class="text-[11px] text-muted uppercase tracking-wider">Rehabilitation Program</span>
+                    <h3 class="font-serif text-lg font-semibold text-deep mt-1">재활 필라테스</h3>
+                    <p class="text-secondary text-sm mt-1">척추·관절 전문 재활 프로그램 · 의료진 연계 가능</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <p class="font-serif text-xl font-bold text-deep">₩100,000 <span class="text-muted text-xs font-sans font-normal">/ 1회 60분</span></p>
+                    <a href="#contact" class="px-5 py-2 border border-deep text-deep text-xs uppercase tracking-wider hover:bg-deep hover:text-white transition-all">
+                        상담 문의
+                    </a>
+                </div>
+            </div>
+
+            <!-- Schedule note -->
+            <div class="mt-10 text-center">
+                <p class="text-muted text-xs uppercase tracking-wider">
+                    Mon – Fri 07:00 – 21:00 &nbsp;·&nbsp; Sat 09:00 – 18:00 &nbsp;·&nbsp; Sun Closed
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: INSTRUCTOR | MOVE: M-LAY-EDITORIAL-FEATURE
+         COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-featured-image5-content7-reference.html | FIDELITY: 70%
+    ============================================================ -->
+    <section class="fade-in-section w-full bg-surface border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <!-- Left: Large image (col-span-7) -->
+                <div class="lg:col-span-7 aspect-[4/5] overflow-hidden">
+                    <img src="./images/team_1.jpg"
+                         alt="필라테스 강사가 회원의 동작을 교정하는 모습" class="w-full h-full object-cover img-mono" loading="lazy" width="900" height="1125" />
+                </div>
+
+                <!-- Right: Content (col-span-5) -->
+                <div class="lg:col-span-5 flex flex-col justify-center">
+                    <span class="font-serif italic text-muted text-sm">Our Instructors</span>
+                    <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
+                        10년의 경험이<br>이끄는 손
+                    </h2>
+                    <p class="text-secondary text-[0.9375rem] leading-relaxed mt-6 max-w-[360px]">
+                        PMA 인증 전문 강사진이<br>
+                        해부학 기반 맞춤 지도를 합니다.
+                    </p>
+
+                    <div class="mt-10 space-y-6">
+                        <div class="border-t border-gray-300 pt-5">
+                            <h3 class="text-sm font-medium text-deep">박서연 <span class="text-muted font-normal">· Head Instructor</span></h3>
+                            <p class="text-secondary text-xs mt-1 leading-relaxed">PMA CPT · 해부학 석사 · 경력 12년</p>
+                        </div>
+                        <div class="border-t border-gray-300 pt-5">
+                            <h3 class="text-sm font-medium text-deep">이도윤 <span class="text-muted font-normal">· Rehab Specialist</span></h3>
+                            <p class="text-secondary text-xs mt-1 leading-relaxed">PMA CPT · 물리치료학 전공 · 경력 8년</p>
+                        </div>
+                        <div class="border-t border-gray-300 pt-5">
+                            <h3 class="text-sm font-medium text-deep">김하은 <span class="text-muted font-normal">· Senior Instructor</span></h3>
+                            <p class="text-secondary text-xs mt-1 leading-relaxed">PMA CPT · BASI 자격 · 경력 7년</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: PROCESS | MOVE: M-DIV-FULLBLEED-COLORBLOCK
+         COMPONENT_REF: custom-key-color-process | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a
+    ============================================================ -->
+    <section class="relative w-full min-h-[55vh]">
+        <!-- Background Image -->
+        <img src="./images/divider.jpg"
+             alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="900" />
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/80"></div>
+        <!-- Content -->
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="fade-in-section">
+                <span class="font-serif italic text-white/60 text-sm">The Journey</span>
+                <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-white mt-4 leading-[1.2]">
+                    첫 방문부터<br>달라지는 4주
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mt-14">
+                <div class="stagger-item">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <span class="text-white/40 text-xs uppercase tracking-wider">Week 1</span>
+                    <h3 class="text-white font-serif text-lg font-semibold mt-2">초기 평가</h3>
+                    <p class="text-white/60 text-sm leading-relaxed mt-2">체형 분석, 움직임 패턴 평가,<br>개인 목표 설정</p>
+                </div>
+                <div class="stagger-item">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <span class="text-white/40 text-xs uppercase tracking-wider">Week 2</span>
+                    <h3 class="text-white font-serif text-lg font-semibold mt-2">체형 분석</h3>
+                    <p class="text-white/60 text-sm leading-relaxed mt-2">근력 불균형 진단,<br>유연성 측정, 맞춤 계획 수립</p>
+                </div>
+                <div class="stagger-item">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <span class="text-white/40 text-xs uppercase tracking-wider">Week 3</span>
+                    <h3 class="text-white font-serif text-lg font-semibold mt-2">맞춤 프로그램</h3>
+                    <p class="text-white/60 text-sm leading-relaxed mt-2">1:1 집중 교정 세션,<br>호흡과 코어 활성화</p>
+                </div>
+                <div class="stagger-item">
+                    <div class="w-8 h-px bg-white/40 mb-4"></div>
+                    <span class="text-white/40 text-xs uppercase tracking-wider">Week 4</span>
+                    <h3 class="text-white font-serif text-lg font-semibold mt-2">진도 체크</h3>
+                    <p class="text-white/60 text-sm leading-relaxed mt-2">변화 기록, 프로그램 조정,<br>장기 플랜 설계</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: TESTIMONIALS | MOVE: M-LAY-EDITORIAL-TYPO (Quote)
+         COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-testimonial-quote-reference.html | FIDELITY: 75%
+    ============================================================ -->
+    <section class="fade-in-section w-full bg-white border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="text-center mb-14">
+                <span class="font-serif italic text-muted text-sm">Voices</span>
+                <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
+                    변화를 경험한<br>분들의 이야기
+                </h2>
+            </div>
+
+            <!-- Quote carousel (static for HTML) -->
+            <div class="max-w-2xl mx-auto text-center" id="testimonial-container">
+                <div class="testimonial-slide">
+                    <span class="font-serif text-4xl italic text-muted/30">&ldquo;</span>
+                    <p class="text-secondary text-[0.9375rem] leading-relaxed mt-2 max-w-[480px] mx-auto">
+                        3개월 만에 만성 허리 통증이 사라졌어요. 단순히 운동이 아니라 제 몸을 이해하게 되는 시간이었습니다. 박서연 선생님의 섬세한 지도 덕분에 자세가 완전히 달라졌습니다.
+                    </p>
+                    <div class="mt-6">
+                        <p class="font-serif text-base italic text-deep">김수진</p>
+                        <p class="text-muted text-xs mt-1">프라이빗 회원 · 6개월 수강</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation dots -->
+            <div class="flex items-center justify-center gap-3 mt-8">
+                <button class="testimonial-dot w-2 h-2 bg-deep rounded-full" data-index="0" aria-label="후기 1"></button>
+                <button class="testimonial-dot w-2 h-2 bg-gray-300 rounded-full" data-index="1" aria-label="후기 2"></button>
+                <button class="testimonial-dot w-2 h-2 bg-gray-300 rounded-full" data-index="2" aria-label="후기 3"></button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: FAQ | MOVE: INTERACTION (Accordion)
+         COMPONENT_REF: custom-faq-accordion | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a
+    ============================================================ -->
+    <section class="fade-in-section w-full bg-surface border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+                <!-- Left: Title -->
+                <div class="lg:col-span-4">
+                    <span class="font-serif italic text-muted text-sm">FAQ</span>
+                    <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
+                        자주 묻는 질문
+                    </h2>
+                    <p class="text-secondary text-[0.9375rem] leading-relaxed mt-4">
+                        처음 방문하시는 분들이<br>가장 궁금해하시는 것들입니다.
+                    </p>
+                </div>
+
+                <!-- Right: Accordion -->
+                <div class="lg:col-span-8 space-y-0">
+                    <!-- Q1 -->
+                    <div class="border-t border-gray-300">
+                        <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" data-faq="faq1" aria-expanded="false">
+                            <span class="text-deep text-sm font-medium pr-4">필라테스를 처음 해보는데, 체험 수업이 가능한가요?</span>
+                            <span class="faq-icon text-muted text-lg flex-shrink-0">+</span>
+                        </button>
+                        <div id="faq1" class="faq-content">
+                            <p class="text-secondary text-sm leading-relaxed pb-5 pr-8">
+                                네, 첫 방문 시 무료 체험 수업을 진행합니다. 간단한 체형 평가 후 30분간 리포머 기초 수업을 경험하실 수 있습니다. 편한 운동복만 준비해 주세요.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="border-t border-gray-300">
+                        <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" data-faq="faq2" aria-expanded="false">
+                            <span class="text-deep text-sm font-medium pr-4">수업 예약과 취소는 어떻게 하나요?</span>
+                            <span class="faq-icon text-muted text-lg flex-shrink-0">+</span>
+                        </button>
+                        <div id="faq2" class="faq-content">
+                            <p class="text-secondary text-sm leading-relaxed pb-5 pr-8">
+                                전용 앱 또는 카카오톡 채널을 통해 예약하실 수 있습니다. 수업 24시간 전까지 무료 취소가 가능하며, 이후 취소 시 1회 차감됩니다.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="border-t border-gray-300">
+                        <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" data-faq="faq3" aria-expanded="false">
+                            <span class="text-deep text-sm font-medium pr-4">어떤 복장을 입고 가야 하나요?</span>
+                            <span class="faq-icon text-muted text-lg flex-shrink-0">+</span>
+                        </button>
+                        <div id="faq3" class="faq-content">
+                            <p class="text-secondary text-sm leading-relaxed pb-5 pr-8">
+                                움직임이 편한 운동복이면 충분합니다. 그립 양말은 스튜디오에서 판매하고 있으며, 첫 방문 시 무료로 한 켤레를 제공해 드립니다.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div class="border-t border-gray-300">
+                        <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" data-faq="faq4" aria-expanded="false">
+                            <span class="text-deep text-sm font-medium pr-4">허리 디스크가 있는데 수업이 가능한가요?</span>
+                            <span class="faq-icon text-muted text-lg flex-shrink-0">+</span>
+                        </button>
+                        <div id="faq4" class="faq-content">
+                            <p class="text-secondary text-sm leading-relaxed pb-5 pr-8">
+                                네, 재활 전문 강사가 의료 소견서를 참고하여 맞춤 재활 프로그램을 설계합니다. 초기 상담 시 진단서를 가져와 주시면 더 정확한 플랜 수립이 가능합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div class="border-t border-gray-300 border-b">
+                        <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" data-faq="faq5" aria-expanded="false">
+                            <span class="text-deep text-sm font-medium pr-4">주차 가능 여부와 오시는 길을 알려주세요.</span>
+                            <span class="faq-icon text-muted text-lg flex-shrink-0">+</span>
+                        </button>
+                        <div id="faq5" class="faq-content">
+                            <p class="text-secondary text-sm leading-relaxed pb-5 pr-8">
+                                건물 지하 주차장 2시간 무료 이용이 가능합니다. 삼성역 2번 출구에서 도보 5분 거리이며, 삼성로 96길 23 지하 1층에 위치해 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL
+         COMPONENT_REF: footer-get-in-touch | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/footer-get-in-touch-reference.html | FIDELITY: 70%
+    ============================================================ -->
+    <section id="contact" class="relative w-full min-h-[60vh]">
+        <!-- Background Image -->
+        <img src="./images/cta.jpg"
+             alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="900" />
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/75"></div>
+        <!-- Content -->
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 flex flex-col items-center justify-center text-center min-h-[60vh]">
+            <div class="fade-in-section">
+                <span class="font-serif italic text-white/50 text-sm">Get Started</span>
+                <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-white mt-4 leading-[1.2]">
+                    당신의 균형을<br>시작하세요
+                </h2>
+                <p class="text-white/60 text-[0.9375rem] leading-relaxed mt-6 max-w-[400px] mx-auto">
+                    지금 체험 수업을 신청하고<br>
+                    오블리크의 차이를 직접 느껴보세요.
+                </p>
+                <a href="tel:+82-2-555-0192" class="inline-block mt-8 px-10 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.15em] font-medium hover:bg-white hover:text-deep transition-all">
+                    무료 상담 신청
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-deep">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <span class="font-serif text-white text-base font-semibold tracking-wide">OBLIQUE PILATES</span>
+                    <p class="text-white/40 text-xs mt-2 leading-relaxed">
+                        서울특별시 강남구 삼성로 96길 23 B1<br>
+                        TEL 02-555-0192 · oblique@pilates.kr
+                    </p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-white/40 text-[10px] uppercase tracking-wider hover:text-white" aria-label="인스타그램">Instagram</a>
+                    <a href="#" class="text-white/40 text-[10px] uppercase tracking-wider hover:text-white" aria-label="카카오톡">KakaoTalk</a>
+                    <a href="#" class="text-white/40 text-[10px] uppercase tracking-wider hover:text-white" aria-label="네이버">Naver</a>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-6">
+                <p class="text-white/30 text-[10px] text-center">© 2026 오블리크 필라테스. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ============================================================
+         JAVASCRIPT
+    ============================================================ -->
+    <script>
+    // === INTERSECTION OBSERVER (Scroll Animations) ===
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.stagger-item').forEach((el, index) => {
+        const parent = el.closest('.grid, .h-scroll-container');
+        if (parent) {
+            const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item'));
+            const i = siblings.indexOf(el);
+            el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+        } else {
+            el.style.transitionDelay = index * 0.1 + 's';
+        }
+        observer.observe(el);
+    });
+
+    // === FAQ ACCORDION ===
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const targetId = trigger.getAttribute('data-faq');
+            const content = document.getElementById(targetId);
+            const icon = trigger.querySelector('.faq-icon');
+            const isOpen = content.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+            document.querySelectorAll('.faq-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.textContent = '−';
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // === TESTIMONIAL ROTATION ===
+    const testimonials = [
+        {
+            quote: '3개월 만에 만성 허리 통증이 사라졌어요. 단순히 운동이 아니라 제 몸을 이해하게 되는 시간이었습니다. 박서연 선생님의 섬세한 지도 덕분에 자세가 완전히 달라졌습니다.',
+            name: '김수진',
+            detail: '프라이빗 회원 · 6개월 수강'
+        },
+        {
+            quote: '출산 후 틀어진 골반이 걱정이었는데, 이도윤 선생님의 재활 프로그램으로 6주 만에 눈에 띄는 변화를 느꼈습니다. 아이를 안을 때 허리가 안 아파요.',
+            name: '정민서',
+            detail: '재활 프로그램 · 3개월 수강'
+        },
+        {
+            quote: '직장인으로 매일 앉아 있다 보니 어깨가 말려있었는데, 주 2회 듀엣 수업으로 동료들이 자세가 달라졌다고 놀랄 정도예요. 스트레스 해소도 됩니다.',
+            name: '한재원',
+            detail: '듀엣 회원 · 4개월 수강'
+        }
+    ];
+
+    let currentTestimonial = 0;
+    const container = document.getElementById('testimonial-container');
+    const dots = document.querySelectorAll('.testimonial-dot');
+
+    function showTestimonial(index) {
+        const t = testimonials[index];
+        container.innerHTML = `
+            <div class="testimonial-slide">
+                <span class="font-serif text-4xl italic text-muted/30">&ldquo;</span>
+                <p class="text-secondary text-[0.9375rem] leading-relaxed mt-2 max-w-[480px] mx-auto">${t.quote}</p>
+                <div class="mt-6">
+                    <p class="font-serif text-base italic text-deep">${t.name}</p>
+                    <p class="text-muted text-xs mt-1">${t.detail}</p>
+                </div>
+            </div>
+        `;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-deep', i === index);
+            dot.classList.toggle('bg-gray-300', i !== index);
+        });
+        currentTestimonial = index;
+    }
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            showTestimonial(parseInt(dot.getAttribute('data-index')));
+        });
+    });
+
+    // Auto-rotate every 5s
+    setInterval(() => {
+        showTestimonial((currentTestimonial + 1) % testimonials.length);
+    }, 5000);
+
+    // === REDUCED MOTION GUARD ===
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            el.classList.add('animate-in');
+            el.style.transition = 'none';
+            el.style.transitionDelay = '0s';
+        });
+    }
+    </script>
+
+</body>
+</html>

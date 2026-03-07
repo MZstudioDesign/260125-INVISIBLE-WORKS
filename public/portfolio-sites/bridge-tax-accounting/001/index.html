@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>브릿지 세무회계 — 기업의 성장을 연결하는 세무 전략</title>
+  <meta name="description" content="브릿지 세무회계는 법인세, 스타트업 세무, 세무조사 대응, 국제조세 등 기업 맞춤 세무 전략을 제공합니다. 무료 초기 상담을 신청하세요.">
+  <link rel="canonical" href="https://bridge-tax.kr">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="브릿지 세무회계 — 기업의 성장을 연결하는 세무 전략">
+  <meta property="og:description" content="법인세, 스타트업 세무, 세무조사 대응. 15년 경력의 세무 전문가 그룹.">
+  <meta property="og:url" content="https://bridge-tax.kr">
+  <meta property="og:image" content="./images/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'navy': '#1B2A4A',
+            'navy-hover': '#2A3F6B',
+            'navy-dark': '#0F1A2E',
+            'surface': '#F7F8FA',
+            'text-primary': '#1A1A1A',
+            'text-muted': '#6B7280',
+          },
+          fontFamily: {
+            'display': ['Playfair Display', 'serif'],
+            'body': ['Pretendard', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @font-face {
+      font-family: 'Pretendard';
+      src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+      font-display: swap;
+    }
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+    :root {
+      --color-accent: #1B2A4A;
+      --color-accent-hover: #2A3F6B;
+      --radius-card: 12px;
+      --radius-button: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Scroll Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.6s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-child {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-child.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* FAQ Accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    /* Button hover */
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border-radius: var(--radius-button);
+      padding: 14px 32px;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      letter-spacing: 0.01em;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .btn-primary:hover { background: var(--color-accent-hover); }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-secondary {
+      border: 1.5px solid var(--color-accent);
+      color: var(--color-accent);
+      border-radius: var(--radius-button);
+      padding: 14px 32px;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover { background: var(--color-accent); color: #fff; }
+
+    /* Card hover */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      z-index: 9999;
+      background: #1B2A4A;
+      color: #fff;
+      padding: 12px 24px;
+    }
+    .skip-link:focus { top: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .stagger-child {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .faq-answer { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "브릿지 세무회계",
+    "description": "기업의 성장을 연결하는 세무 전략 전문 법인",
+    "url": "https://bridge-tax.kr",
+    "telephone": "+82-2-555-0147",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "역삼로 172, 브릿지타워 8층",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "postalCode": "06241",
+      "addressCountry": "KR"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+
+<body class="bg-white text-text-primary font-body antialiased overflow-x-hidden">
+
+<a href="#main-content" class="skip-link">본문 바로가기</a>
+
+<!-- ==============================
+     NAVIGATION
+============================== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100" role="navigation" aria-label="Main navigation">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
+    <a href="#" class="font-display text-xl font-bold text-navy">Bridge</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-sm text-text-muted hover:text-navy transition-colors">서비스</a>
+      <a href="#track-record" class="text-sm text-text-muted hover:text-navy transition-colors">실적</a>
+      <a href="#team" class="text-sm text-text-muted hover:text-navy transition-colors">전문가</a>
+      <a href="#process" class="text-sm text-text-muted hover:text-navy transition-colors">프로세스</a>
+      <a href="#faq" class="text-sm text-text-muted hover:text-navy transition-colors">FAQ</a>
+      <a href="#contact" class="btn-primary text-sm !py-2.5 !px-6">무료 상담 신청</a>
+    </div>
+    <button class="md:hidden p-2" id="mobile-menu-btn" aria-label="메뉴 열기">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+    </button>
+  </div>
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden bg-white border-t border-gray-100 px-6 py-4 space-y-3" id="mobile-menu">
+    <a href="#services" class="block text-sm text-text-muted py-2">서비스</a>
+    <a href="#track-record" class="block text-sm text-text-muted py-2">실적</a>
+    <a href="#team" class="block text-sm text-text-muted py-2">전문가</a>
+    <a href="#process" class="block text-sm text-text-muted py-2">프로세스</a>
+    <a href="#faq" class="block text-sm text-text-muted py-2">FAQ</a>
+    <a href="#contact" class="btn-primary block text-center text-sm mt-2">무료 상담 신청</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<!-- ==============================
+     SECTION 1: HERO — Full-bleed + Navy Overlay
+============================== -->
+<section class="relative w-full min-h-screen flex items-end" aria-label="Hero">
+  <img src="./images/hero.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
+  <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/60 to-navy/30"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 pb-20 lg:pb-28 w-full">
+    <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-4 font-body">Tax Strategy Firm</p>
+    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-2xl">
+      기업의 성장을<br>연결하는 세무 전략
+    </h1>
+    <p class="text-white/70 text-base md:text-lg mt-6 max-w-md leading-relaxed">
+      세무는 비용이 아닙니다.<br class="hidden sm:block">
+      전략적 파트너와 함께라면, 절세는 성장의 시작점이 됩니다.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#contact" class="btn-primary">무료 초기 상담 신청</a>
+      <a href="#services" class="btn-secondary !border-white/60 !text-white hover:!bg-white/10">서비스 둘러보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 2: SERVICES — Editorial Feature (Asymmetric Grid)
+============================== -->
+<section id="services" class="py-24 lg:py-32 bg-white" aria-label="Services">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <div class="fade-up mb-16">
+      <p class="text-xs uppercase tracking-[0.2em] text-navy font-medium mb-3">Our Services</p>
+      <h2 class="font-body text-3xl md:text-4xl font-semibold text-text-primary leading-tight">
+        성장 단계별<br class="hidden sm:block">맞춤 세무 솔루션
+      </h2>
+    </div>
+
+    <!-- Editorial: Large card (col-7) + 2 small stacked (col-5) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Large featured card -->
+      <div class="lg:col-span-7 fade-up">
+        <div class="relative rounded-xl overflow-hidden h-[420px] group card-hover border border-gray-100">
+          <img src="./images/card_consulting.jpg" alt="법인세 전략 컨설팅" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/30 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8">
+            <div class="flex items-center gap-2 mb-3">
+              <svg class="w-5 h-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0h.008v.008h-.008V7.5z"/></svg>
+              <span class="text-white/60 text-xs uppercase tracking-wider">Corporate Tax</span>
+            </div>
+            <h3 class="text-2xl font-semibold text-white mb-2">법인세 전략</h3>
+            <p class="text-white/70 text-sm leading-relaxed max-w-sm">
+              단순 신고가 아닌, 사업 구조에 최적화된<br>절세 설계를 제안합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 stacked small cards -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <div class="rounded-xl border border-gray-100 p-7 h-[198px] flex flex-col justify-between card-hover stagger-child bg-white">
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <svg class="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+              <span class="text-xs uppercase tracking-wider text-text-muted">Startup Tax</span>
+            </div>
+            <h3 class="text-lg font-semibold text-text-primary">스타트업 세무 설계</h3>
+          </div>
+          <p class="text-sm text-text-muted leading-relaxed">법인 설립부터 투자 유치까지,<br>성장 단계에 맞는 세무 인프라를 구축합니다.</p>
+        </div>
+        <div class="rounded-xl border border-gray-100 p-7 h-[198px] flex flex-col justify-between card-hover stagger-child bg-white">
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <svg class="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+              <span class="text-xs uppercase tracking-wider text-text-muted">Audit Defense</span>
+            </div>
+            <h3 class="text-lg font-semibold text-text-primary">세무조사 대응</h3>
+          </div>
+          <p class="text-sm text-text-muted leading-relaxed">사전 리스크 진단부터 조사 대응 전략까지,<br>경험에 기반한 체계적 방어를 수행합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 additional service cards — different layout (3-col asymmetric) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+      <div class="md:col-span-4 rounded-xl border border-gray-100 p-7 card-hover stagger-child bg-white">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          <span class="text-xs uppercase tracking-wider text-text-muted">International Tax</span>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">국제조세 자문</h3>
+        <p class="text-sm text-text-muted leading-relaxed">이전가격, 조세조약, 해외법인 세무 —<br>글로벌 사업에 필요한 모든 조세 이슈를 다룹니다.</p>
+      </div>
+      <div class="md:col-span-5 rounded-xl border border-gray-100 p-7 card-hover stagger-child bg-white">
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+          <span class="text-xs uppercase tracking-wider text-text-muted">Payroll & Insurance</span>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">급여 · 4대보험 관리</h3>
+        <p class="text-sm text-text-muted leading-relaxed">급여 대장 작성, 원천징수, 4대보험 신고까지<br>인사 행정의 세무 파트를 일괄 위탁할 수 있습니다.</p>
+      </div>
+      <div class="md:col-span-3 rounded-xl bg-navy p-7 flex flex-col justify-between card-hover stagger-child text-white min-h-[180px]">
+        <p class="text-white/60 text-xs uppercase tracking-wider">Need Help?</p>
+        <div>
+          <p class="text-lg font-semibold mb-3">어떤 서비스가<br>필요하신가요?</p>
+          <a href="#contact" class="inline-block text-sm border border-white/40 text-white px-5 py-2 rounded-lg hover:bg-white/10 transition-colors">상담 신청 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 3: TRACK RECORD — Key Color Band (Navy, 40vh+)
+============================== -->
+<section id="track-record" class="relative min-h-[50vh] bg-navy py-24 lg:py-32" aria-label="Track Record">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <div class="fade-up mb-16 text-center">
+      <p class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Track Record</p>
+      <h2 class="font-body text-3xl md:text-4xl font-semibold text-white leading-tight">
+        숫자로 증명하는<br class="hidden sm:block">브릿지의 신뢰
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center">
+      <div class="stagger-child">
+        <p class="text-4xl lg:text-5xl font-bold text-white counter" data-target="15">0</p>
+        <p class="text-sm text-white/40 mt-2 uppercase tracking-wider">Years</p>
+        <p class="text-white/60 text-sm mt-1">업력</p>
+      </div>
+      <div class="stagger-child">
+        <p class="text-4xl lg:text-5xl font-bold text-white counter" data-target="840">0</p>
+        <p class="text-sm text-white/40 mt-2 uppercase tracking-wider">Clients</p>
+        <p class="text-white/60 text-sm mt-1">누적 자문 기업</p>
+      </div>
+      <div class="stagger-child">
+        <p class="text-4xl lg:text-5xl font-bold text-white"><span class="counter" data-target="98">0</span>%</p>
+        <p class="text-sm text-white/40 mt-2 uppercase tracking-wider">Success Rate</p>
+        <p class="text-white/60 text-sm mt-1">세무조사 방어 성공률</p>
+      </div>
+      <div class="stagger-child">
+        <p class="text-4xl lg:text-5xl font-bold text-white counter" data-target="127">0</p>
+        <p class="text-sm text-white/40 mt-2 uppercase tracking-wider">Billion KRW</p>
+        <p class="text-white/60 text-sm mt-1">연간 절세 실적 (억원)</p>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8 fade-up">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-semibold text-base mb-1">국세청 출신 세무사</h3>
+          <p class="text-white/50 text-sm leading-relaxed">20년 이상 경력의 국세청 출신 세무사가 직접 세무조사에 대응합니다.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.745 3.745 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-semibold text-base mb-1">한국세무사회 우수 법인</h3>
+          <p class="text-white/50 text-sm leading-relaxed">3년 연속 우수 세무 법인 선정, 체계적 품질 관리 시스템을 운영합니다.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-semibold text-base mb-1">실시간 세무 대시보드</h3>
+          <p class="text-white/50 text-sm leading-relaxed">전용 포털에서 세무 현황, 신고 이력, 절세 리포트를 실시간 확인할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 4: TEAM — Editorial Story (Text 4 + Gap 1 + Image 7)
+============================== -->
+<section id="team" class="py-24 lg:py-32 bg-surface" aria-label="Team">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+      <!-- Text block (col-span-4) -->
+      <div class="lg:col-span-4 fade-up lg:pt-12">
+        <p class="text-xs uppercase tracking-[0.2em] text-navy font-medium mb-3">Our Team</p>
+        <h2 class="font-body text-3xl md:text-4xl font-semibold text-text-primary leading-tight mb-6">
+          각 분야 최고의<br>전문가 그룹
+        </h2>
+        <p class="text-text-muted text-base leading-relaxed mb-8 max-w-sm">
+          브릿지 세무회계는 세무사, 공인회계사,<br>
+          산업별 전문 컨설턴트로 구성된 팀이<br>
+          기업의 세무 이슈를 종합적으로 해결합니다.
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-navy"></div>
+            <span class="text-sm text-text-primary">세무사 5명 (국세청 출신 2명)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-navy"></div>
+            <span class="text-sm text-text-primary">공인회계사 3명</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-navy"></div>
+            <span class="text-sm text-text-primary">산업별 전문 컨설턴트 4명</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gap (col-span-1) -->
+      <div class="hidden lg:block lg:col-span-1"></div>
+
+      <!-- Team cards (col-span-7) -->
+      <div class="lg:col-span-7 grid grid-cols-2 gap-5">
+        <div class="rounded-xl overflow-hidden card-hover stagger-child">
+          <div class="aspect-[3/4] overflow-hidden">
+            <img src="./images/profile_1.jpg" alt="김정현 대표 세무사" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="bg-white p-5">
+            <h3 class="font-semibold text-base">김정현</h3>
+            <p class="text-text-muted text-sm mt-1">대표 세무사 · 법인세 전략</p>
+            <p class="text-text-muted text-xs mt-2">국세청 15년 · 서울시립대 세무학 석사</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden card-hover stagger-child mt-8 lg:mt-12">
+          <div class="aspect-[3/4] overflow-hidden">
+            <img src="./images/profile_2.jpg" alt="박서영 세무사" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="bg-white p-5">
+            <h3 class="font-semibold text-base">박서영</h3>
+            <p class="text-text-muted text-sm mt-1">세무사 · 스타트업 세무</p>
+            <p class="text-text-muted text-xs mt-2">스타트업 전담 200+ · 고려대 경영학</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden card-hover stagger-child">
+          <div class="aspect-[3/4] overflow-hidden">
+            <img src="./images/profile_3.jpg" alt="이현우 공인회계사" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="bg-white p-5">
+            <h3 class="font-semibold text-base">이현우</h3>
+            <p class="text-text-muted text-sm mt-1">공인회계사 · 국제조세</p>
+            <p class="text-text-muted text-xs mt-2">Big 4 출신 · 미국 CPA</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden card-hover stagger-child mt-8 lg:mt-12">
+          <div class="aspect-[3/4] overflow-hidden">
+            <img src="./images/profile_4.jpg" alt="최은지 세무사" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="bg-white p-5">
+            <h3 class="font-semibold text-base">최은지</h3>
+            <p class="text-text-muted text-sm mt-1">세무사 · 세무조사 대응</p>
+            <p class="text-text-muted text-xs mt-2">국세청 조사국 출신 · 성균관대</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 5: DIVIDER — Full-bleed Quote
+============================== -->
+<section class="relative min-h-[50vh] flex items-center justify-center" aria-label="Philosophy">
+  <img src="./images/divider.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <div class="absolute inset-0 bg-navy/75"></div>
+  <div class="relative text-center max-w-2xl mx-auto px-6 fade-up">
+    <svg class="w-8 h-8 text-white/30 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
+    <blockquote class="font-display text-2xl md:text-3xl lg:text-4xl text-white font-bold leading-snug italic">
+      "세무는 과거의 기록이 아니라,<br>미래를 위한 설계입니다."
+    </blockquote>
+    <p class="text-white/50 text-sm mt-6">— 김정현, 브릿지 세무회계 대표</p>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 6: INDUSTRY FOCUS — Asymmetric Card Grid
+============================== -->
+<section class="py-24 lg:py-32 bg-white" aria-label="Industry Focus">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <div class="fade-up mb-16 text-center">
+      <p class="text-xs uppercase tracking-[0.2em] text-navy font-medium mb-3">Industry Focus</p>
+      <h2 class="font-body text-3xl md:text-4xl font-semibold text-text-primary leading-tight">
+        산업별 전문 세무 서비스
+      </h2>
+      <p class="text-text-muted text-base mt-4 max-w-lg mx-auto">각 산업의 세무 이슈와 규제 환경을 깊이 이해하는<br class="hidden sm:block">전담 팀이 맞춤 솔루션을 제공합니다.</p>
+    </div>
+
+    <!-- Asymmetric grid: 7+5 then 5+7 -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div class="md:col-span-7 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
+        <img src="./images/card_startup.jpg" alt="Tech Startup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-7">
+          <h3 class="text-xl font-semibold text-white mb-1">IT · 테크 스타트업</h3>
+          <p class="text-white/60 text-sm">R&D 세액공제, 스톡옵션 과세, 투자 유치 세무</p>
+        </div>
+      </div>
+      <div class="md:col-span-5 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
+        <img src="./images/card_office.jpg" alt="E-commerce" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-7">
+          <h3 class="text-xl font-semibold text-white mb-1">이커머스</h3>
+          <p class="text-white/60 text-sm">매입세액 공제, 해외 직구 관세, 플랫폼 수수료 처리</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+      <div class="md:col-span-5 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
+        <img src="./images/card_documents.jpg" alt="Manufacturing" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-7">
+          <h3 class="text-xl font-semibold text-white mb-1">제조업</h3>
+          <p class="text-white/60 text-sm">재고자산 평가, 감가상각, 수출입 부가세 환급</p>
+        </div>
+      </div>
+      <div class="md:col-span-7 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
+        <img src="./images/card_meeting.jpg" alt="Professional Services" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-7">
+          <h3 class="text-xl font-semibold text-white mb-1">전문직 서비스</h3>
+          <p class="text-white/60 text-sm">파트너십 과세, 성과 보수 원천징수, 퇴직금 세무</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 7: PROCESS — Timeline / Steps
+============================== -->
+<section id="process" class="py-24 lg:py-32 bg-surface" aria-label="Process">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+    <div class="fade-up mb-16 text-center">
+      <p class="text-xs uppercase tracking-[0.2em] text-navy font-medium mb-3">How We Work</p>
+      <h2 class="font-body text-3xl md:text-4xl font-semibold text-text-primary leading-tight">
+        체계적 4단계 프로세스
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Step 1 -->
+      <div class="relative stagger-child">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">1</div>
+          <div class="hidden lg:block flex-1 h-px bg-gray-200"></div>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">초기 상담</h3>
+        <p class="text-sm text-text-muted leading-relaxed">사업 현황과 세무 이슈를 파악하는 무료 초기 상담을 진행합니다. 대면 또는 화상 모두 가능합니다.</p>
+        <p class="text-xs text-navy font-medium mt-3 uppercase tracking-wider">Free · 30min</p>
+      </div>
+      <!-- Step 2 -->
+      <div class="relative stagger-child">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">2</div>
+          <div class="hidden lg:block flex-1 h-px bg-gray-200"></div>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">사업 진단</h3>
+        <p class="text-sm text-text-muted leading-relaxed">재무제표, 세무 신고 이력, 사업 구조를 종합 분석하여 리스크와 절세 기회를 진단합니다.</p>
+        <p class="text-xs text-navy font-medium mt-3 uppercase tracking-wider">1-2 Weeks</p>
+      </div>
+      <!-- Step 3 -->
+      <div class="relative stagger-child">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">3</div>
+          <div class="hidden lg:block flex-1 h-px bg-gray-200"></div>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">전략 제안</h3>
+        <p class="text-sm text-text-muted leading-relaxed">진단 결과를 바탕으로 절세 전략, 리스크 방어 방안, 장기 세무 로드맵을 제안합니다.</p>
+        <p class="text-xs text-navy font-medium mt-3 uppercase tracking-wider">Report Delivery</p>
+      </div>
+      <!-- Step 4 -->
+      <div class="relative stagger-child">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">4</div>
+        </div>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">상시 자문</h3>
+        <p class="text-sm text-text-muted leading-relaxed">전담 세무사가 배정되어 월별 세무 관리, 신고, 이슈 대응을 지속적으로 수행합니다.</p>
+        <p class="text-xs text-navy font-medium mt-3 uppercase tracking-wider">Ongoing</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-14 fade-up">
+      <a href="#contact" class="btn-primary">무료 초기 상담 신청하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 8: FAQ — Accordion
+============================== -->
+<section id="faq" class="py-24 lg:py-32 bg-white" aria-label="FAQ">
+  <div class="max-w-[800px] mx-auto px-6 lg:px-12">
+    <div class="fade-up mb-16 text-center">
+      <p class="text-xs uppercase tracking-[0.2em] text-navy font-medium mb-3">FAQ</p>
+      <h2 class="font-body text-3xl md:text-4xl font-semibold text-text-primary leading-tight">
+        자주 묻는 질문
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      <div class="faq-item border border-gray-100 rounded-xl stagger-child" data-faq>
+        <button class="w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+          <span class="text-base font-medium text-text-primary pr-4">비용은 어떻게 산정되나요?</span>
+          <span class="faq-icon text-xl text-navy flex-shrink-0">+</span>
+        </button>
+        <div class="faq-answer px-6">
+          <p class="text-sm text-text-muted leading-relaxed">매출 규모, 거래 유형, 서비스 범위에 따라 월 정액제로 운영됩니다. 초기 상담 시 사업 현황을 파악한 뒤 맞춤 견적을 안내해 드립니다. 숨겨진 비용이나 추가 요금은 없습니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl stagger-child" data-faq>
+        <button class="w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+          <span class="text-base font-medium text-text-primary pr-4">문의에 대한 응답 시간은 얼마나 걸리나요?</span>
+          <span class="faq-icon text-xl text-navy flex-shrink-0">+</span>
+        </button>
+        <div class="faq-answer px-6">
+          <p class="text-sm text-text-muted leading-relaxed">영업일 기준 4시간 이내 1차 응답을 원칙으로 합니다. 긴급 세무 이슈(세무조사 통보 등)의 경우 당일 대응 체계를 갖추고 있으며, 전담 세무사 직통 연락처를 제공합니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl stagger-child" data-faq>
+        <button class="w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+          <span class="text-base font-medium text-text-primary pr-4">기업 정보의 보안은 어떻게 보장하나요?</span>
+          <span class="faq-icon text-xl text-navy flex-shrink-0">+</span>
+        </button>
+        <div class="faq-answer px-6">
+          <p class="text-sm text-text-muted leading-relaxed">모든 기업 자료는 암호화된 클라우드 시스템에서 관리되며, 담당 세무사 외에는 열람이 불가합니다. 계약 시 비밀유지 협약(NDA)을 체결하며, ISO 27001 인증 기준의 정보보안 체계를 운영합니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl stagger-child" data-faq>
+        <button class="w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
+          <span class="text-base font-medium text-text-primary pr-4">기존 세무사에서 변경하려면 어떻게 하나요?</span>
+          <span class="faq-icon text-xl text-navy flex-shrink-0">+</span>
+        </button>
+        <div class="faq-answer px-6">
+          <p class="text-sm text-text-muted leading-relaxed">기존 세무 대리인 해임과 신규 수임 절차를 저희가 일괄 대행합니다. 기존 신고 데이터 이관부터 진행 중인 안건 인수까지, 공백 없는 전환을 보장합니다. 전환 과정에서 추가 비용은 발생하지 않습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 9: FINAL CTA — Full-bleed + Navy Overlay
+============================== -->
+<section id="contact" class="relative min-h-[60vh] flex items-center" aria-label="Contact CTA">
+  <img src="./images/cta.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <div class="absolute inset-0 bg-navy/80"></div>
+  <div class="relative max-w-[800px] mx-auto px-6 lg:px-12 text-center py-24 fade-up">
+    <p class="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">Free Consultation</p>
+    <h2 class="font-body text-3xl md:text-4xl font-semibold text-white leading-tight mb-6">
+      지금, 세무 전략의<br>첫 걸음을 시작하세요
+    </h2>
+    <p class="text-white/60 text-base leading-relaxed mb-10 max-w-md mx-auto">
+      초기 상담은 무료입니다.<br>
+      사업 현황에 맞는 절세 기회를 30분 안에 확인하실 수 있습니다.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="tel:02-555-0147" class="btn-primary !bg-white !text-navy hover:!bg-gray-100">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          02-555-0147
+        </span>
+      </a>
+      <a href="mailto:contact@bridge-tax.kr" class="btn-secondary !border-white/50 !text-white hover:!bg-white/10">이메일 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     FOOTER
+============================== -->
+<footer class="bg-navy-dark py-16 px-6" role="contentinfo">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+      <!-- Brand -->
+      <div class="md:col-span-5">
+        <h3 class="font-display text-xl font-bold text-white mb-4">Bridge</h3>
+        <p class="text-sm text-white/40 leading-relaxed max-w-sm mb-6">
+          브릿지 세무회계는 기업의 성장 단계에 맞는 세무 전략을 설계하고, 지속 가능한 절세 구조를 구축합니다.
+        </p>
+      </div>
+
+      <!-- Services -->
+      <div class="md:col-span-3">
+        <h4 class="text-sm font-semibold text-white mb-4">Services</h4>
+        <ul class="space-y-2">
+          <li><a href="#services" class="text-sm text-white/40 hover:text-white transition-colors">법인세 전략</a></li>
+          <li><a href="#services" class="text-sm text-white/40 hover:text-white transition-colors">스타트업 세무</a></li>
+          <li><a href="#services" class="text-sm text-white/40 hover:text-white transition-colors">세무조사 대응</a></li>
+          <li><a href="#services" class="text-sm text-white/40 hover:text-white transition-colors">국제조세 자문</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="md:col-span-4">
+        <h4 class="text-sm font-semibold text-white mb-4">Contact</h4>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-2 text-sm text-white/40">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"/></svg>
+            서울시 강남구 역삼로 172, 브릿지타워 8층
+          </li>
+          <li class="flex items-center gap-2 text-sm text-white/40">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            02-555-0147
+          </li>
+          <li class="flex items-center gap-2 text-sm text-white/40">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            contact@bridge-tax.kr
+          </li>
+          <li class="flex items-center gap-2 text-sm text-white/40">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            평일 09:00 - 18:00 (주말 · 공휴일 휴무)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/30">사업자등록번호 214-87-01234 · 대표 김정현</p>
+      <p class="text-xs text-white/30">&copy; 2025 Bridge Tax & Accounting. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- ==============================
+     SCRIPTS
+============================== -->
+<script>
+  // Intersection Observer for scroll animations
+  const observerOpts = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOpts);
+
+  document.querySelectorAll('.fade-up').forEach(el => scrollObserver.observe(el));
+  document.querySelectorAll('.stagger-child').forEach((el, i) => {
+    const parent = el.closest('.grid, .space-y-4, .flex');
+    if (parent) {
+      const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-child'));
+      const idx = siblings.indexOf(el);
+      el.style.transitionDelay = (idx >= 0 ? idx : i % 4) * 0.1 + 's';
+    }
+    scrollObserver.observe(el);
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('[data-faq]').forEach(item => {
+    const btn = item.querySelector('button');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('[data-faq]').forEach(f => f.classList.remove('open'));
+      document.querySelectorAll('[data-faq] button').forEach(b => b.setAttribute('aria-expanded', 'false'));
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Counter animation
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        const animate = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(target * eased).toLocaleString();
+          if (progress < 1) requestAnimationFrame(animate);
+          else el.textContent = target.toLocaleString();
+        };
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-label', mobileMenu.classList.contains('hidden') ? '메뉴 열기' : '메뉴 닫기');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+
+  // Navbar scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      nav.classList.add('shadow-sm');
+    } else {
+      nav.classList.remove('shadow-sm');
+    }
+  });
+
+  // Reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.fade-up, .stagger-child').forEach(el => {
+      el.classList.add('visible');
+      el.style.transition = 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

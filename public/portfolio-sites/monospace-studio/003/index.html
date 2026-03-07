@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모노스페이스 스튜디오 — 문제를 구조로 해결하다</title>
+    <meta name="description" content="모노스페이스 스튜디오는 UX 리서치부터 디자인 시스템까지, 측정 가능한 비즈니스 성과를 설계합니다.">
+    <link rel="canonical" href="https://monospace.studio">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="모노스페이스 스튜디오 — 문제를 구조로 해결하다">
+    <meta property="og:description" content="UX 리서치부터 디자인 시스템까지, 측정 가능한 비즈니스 성과를 설계합니다.">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta property="og:url" content="https://monospace.studio">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'ui': ['"Inter Tight"', 'system-ui', 'sans-serif'],
+                        'mono': ['"IBM Plex Mono"', 'monospace'],
+                        'body': ['Pretendard', '"Inter Tight"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'page': '#F0F0F0',
+                        'surface': '#E8E8E8',
+                        'card': '#FFFFFF',
+                        'dark': '#000000',
+                        'dark-surface': '#141414',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #F0F0F0;
+            --bg-surface: #E8E8E8;
+            --bg-card: #FFFFFF;
+            --bg-dark: #000000;
+            --bg-dark-surface: #141414;
+            --accent-primary: #000000;
+            --text-primary: #0A0A0A;
+            --text-secondary: #525252;
+            --text-muted: #8A8A8A;
+            --text-on-dark: #FFFFFF;
+            --text-on-dark-secondary: #A3A3A3;
+            --border-default: #D4D4D4;
+            --border-strong: #000000;
+            --font-ui: 'Inter Tight', sans-serif;
+            --font-data: 'IBM Plex Mono', monospace;
+            --font-body: 'Pretendard', 'Inter Tight', sans-serif;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .counter-animate { animation: none !important; }
+        }
+
+        /* Smooth transitions */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* Sticky case study */
+        .sticky-text {
+            position: sticky;
+            top: 120px;
+        }
+
+        /* Counter animation */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Horizontal rule */
+        .h-rule {
+            height: 1px;
+            background: var(--border-default);
+        }
+        .h-rule-dark {
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+        }
+    </style>
+</head>
+
+<body class="bg-page text-[#0A0A0A] font-body antialiased overflow-x-hidden">
+
+    <!-- Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white">
+        본문으로 건너뛰기
+    </a>
+
+    <!-- SECTION: HEADER / NAV -->
+    <header class="w-full bg-dark" role="banner">
+        <nav class="max-w-[1200px] mx-auto px-6 lg:px-12 flex items-center justify-between py-5" aria-label="Main navigation">
+            <a href="#" class="font-mono text-sm font-semibold tracking-[0.15em] uppercase text-white">
+                Monospace
+            </a>
+            <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.12em] text-white/60 font-mono">
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#services" class="hover:text-white transition-colors">Services</a>
+                <a href="#process" class="hover:text-white transition-colors">Process</a>
+                <a href="#team" class="hover:text-white transition-colors">Team</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden text-white" aria-label="메뉴 열기" id="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden bg-dark border-t border-white/10 px-6 py-4" id="mobile-menu">
+            <div class="flex flex-col gap-4 text-xs uppercase tracking-[0.12em] text-white/60 font-mono">
+                <a href="#work" class="hover:text-white py-2">Work</a>
+                <a href="#services" class="hover:text-white py-2">Services</a>
+                <a href="#process" class="hover:text-white py-2">Process</a>
+                <a href="#team" class="hover:text-white py-2">Team</a>
+                <a href="#contact" class="hover:text-white py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- SECTION: HERO | MOVE: M-HERO-SPLIT-MEDIA -->
+        <!-- COMPONENT_REF: hero-split-typography | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-split-typography-reference.html | FIDELITY: 75% -->
+        <section class="relative w-full min-h-screen flex items-center justify-center" aria-label="Hero">
+            <img src="./images/hero.jpg" alt="모노스페이스 스튜디오 UX 디자인 프로젝트 작업 화면" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            <div class="absolute inset-0 bg-black/65"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-6">UX/UI Design Studio</p>
+                <h1 class="font-ui text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.3] mb-6">
+                    디자인은 비즈니스<br>언어입니다
+                </h1>
+                <p class="text-white/70 max-w-[600px] mx-auto leading-relaxed mb-10">
+                    우리는 인터페이스를 설계하지 않습니다. 비즈니스 성과를 설계합니다.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#contact" class="bg-white text-black px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-colors">
+                        프로젝트 의뢰하기
+                    </a>
+                    <a href="#work" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-black transition-colors">
+                        작업 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: IMPACT NUMBERS | MOVE: M-TRUST-STAT-BAND -->
+        <section class="w-full bg-dark border-t border-white/10 py-16 lg:py-20 fade-in-section" aria-label="임팩트 지표">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+                    <div>
+                        <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Impact</p>
+                        <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-white leading-[1.2] tracking-tight">
+                            측정 가능한<br class="hidden sm:block">디자인
+                        </h2>
+                    </div>
+                    <p class="text-white/40 text-sm max-w-[320px] mt-4 md:mt-0 font-body leading-relaxed">
+                        디자인은 감각이 아니라 지표입니다.<br>
+                        우리가 함께한 프로젝트의 성과입니다.
+                    </p>
+                </div>
+
+                <div class="h-rule-dark mb-12"></div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+                    <div class="stagger-item">
+                        <p class="font-ui text-4xl lg:text-5xl font-bold text-white counter" data-target="340">0</p>
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/40 mt-2">% Conversion Uplift</p>
+                        <p class="text-white/30 text-sm mt-1">평균 전환율 향상</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="font-ui text-4xl lg:text-5xl font-bold text-white counter" data-target="52">0</p>
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/40 mt-2">Projects Delivered</p>
+                        <p class="text-white/30 text-sm mt-1">완료 프로젝트</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="font-ui text-4xl lg:text-5xl font-bold text-white counter" data-target="18">0</p>
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/40 mt-2">Design Systems Built</p>
+                        <p class="text-white/30 text-sm mt-1">구축 디자인 시스템</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="font-ui text-4xl lg:text-5xl font-bold text-white counter" data-target="97">0</p>
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/40 mt-2">% Client Retention</p>
+                        <p class="text-white/30 text-sm mt-1">재계약률</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SELECTED WORK (CASE STUDIES) | MOVE: M-INT-STICKY-STEPS -->
+        <section id="work" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="주요 프로젝트">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Selected Work</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-[#0A0A0A] leading-[1.2] tracking-tight">
+                        결과로 말합니다
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-12 gap-8 lg:gap-12">
+                    <!-- Left: Sticky intro text -->
+                    <div class="col-span-12 lg:col-span-4">
+                        <div class="sticky-text">
+                            <p class="text-[#525252] text-base leading-relaxed max-w-[320px]">
+                                각 프로젝트는 고유한 문제에서 출발합니다.<br>
+                                과정과 결과를 함께 읽어보세요.
+                            </p>
+                            <a href="#" class="inline-flex items-center gap-2 mt-6 text-[#0A0A0A] font-ui text-sm font-medium hover:opacity-60 transition-opacity">
+                                전체 케이스 보기
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Scrolling case studies -->
+                    <div class="col-span-12 lg:col-span-8 space-y-12">
+                        <!-- Case 1: Fintech -->
+                        <article class="stagger-item group">
+                            <div class="relative aspect-[16/10] overflow-hidden rounded-[2px] mb-6">
+                                <img src="./images/case_fintech.jpg"
+                                     alt="핀테크 대시보드 UX 리디자인 프로젝트 화면"
+                                     class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                     loading="lazy" />
+                            </div>
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-xs uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Fintech · 2025</p>
+                                    <h3 class="font-ui text-xl lg:text-[22px] font-semibold text-[#0A0A0A]">페이브릿지 — 결제 대시보드 리디자인</h3>
+                                    <p class="text-[#525252] text-sm mt-2 max-w-[480px]">복잡한 B2B 결제 흐름을 단순화하여 이탈률 42% 감소, 일일 활성 사용자 2.3배 증가를 달성했습니다.</p>
+                                </div>
+                                <span class="font-mono text-xs text-[#8A8A8A] whitespace-nowrap mt-1">UX Research · UI Design</span>
+                            </div>
+                            <div class="h-rule mt-8"></div>
+                        </article>
+
+                        <!-- Case 2: Healthcare -->
+                        <article class="stagger-item group">
+                            <div class="relative aspect-[16/10] overflow-hidden rounded-[2px] mb-6">
+                                <img src="./images/case_healthcare.jpg"
+                                     alt="헬스케어 앱 사용자 경험 디자인 프로젝트"
+                                     class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                     loading="lazy" />
+                            </div>
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-xs uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Healthcare · 2025</p>
+                                    <h3 class="font-ui text-xl lg:text-[22px] font-semibold text-[#0A0A0A]">메디플로우 — 비대면 진료 플랫폼</h3>
+                                    <p class="text-[#525252] text-sm mt-2 max-w-[480px]">환자-의사 매칭 시간을 평균 8분에서 90초로 단축. 예약 완료율 78% 향상.</p>
+                                </div>
+                                <span class="font-mono text-xs text-[#8A8A8A] whitespace-nowrap mt-1">Product Design · Design Sprint</span>
+                            </div>
+                            <div class="h-rule mt-8"></div>
+                        </article>
+
+                        <!-- Case 3: E-commerce -->
+                        <article class="stagger-item group">
+                            <div class="relative aspect-[16/10] overflow-hidden rounded-[2px] mb-6">
+                                <img src="./images/case_ecommerce.jpg"
+                                     alt="이커머스 모바일 앱 UI 디자인"
+                                     class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                     loading="lazy" />
+                            </div>
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-xs uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">E-commerce · 2024</p>
+                                    <h3 class="font-ui text-xl lg:text-[22px] font-semibold text-[#0A0A0A]">마켓블룸 — 라이브커머스 앱</h3>
+                                    <p class="text-[#525252] text-sm mt-2 max-w-[480px]">셀러 온보딩 프로세스를 12단계에서 4단계로 축소. 신규 셀러 등록 전환율 156% 증가.</p>
+                                </div>
+                                <span class="font-mono text-xs text-[#8A8A8A] whitespace-nowrap mt-1">UX Audit · Design System</span>
+                            </div>
+                            <div class="h-rule mt-8"></div>
+                        </article>
+
+                        <!-- Case 4: SaaS -->
+                        <article class="stagger-item group">
+                            <div class="relative aspect-[16/10] overflow-hidden rounded-[2px] mb-6">
+                                <img src="./images/case_saas.jpg"
+                                     alt="엔터프라이즈 SaaS 대시보드 디자인"
+                                     class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                     loading="lazy" />
+                            </div>
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-xs uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Enterprise SaaS · 2024</p>
+                                    <h3 class="font-ui text-xl lg:text-[22px] font-semibold text-[#0A0A0A]">데이터뷰 — 애널리틱스 플랫폼</h3>
+                                    <p class="text-[#525252] text-sm mt-2 max-w-[480px]">150개 이상의 컴포넌트로 구성된 디자인 시스템 구축. 디자인-개발 핸드오프 시간 60% 절감.</p>
+                                </div>
+                                <span class="font-mono text-xs text-[#8A8A8A] whitespace-nowrap mt-1">Design System · Product Design</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: DIVIDER QUOTE | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <section class="relative w-full min-h-[50vh] flex items-center" aria-label="인용구">
+            <img src="./images/divider_quote.jpg"
+                 alt=""
+                 class="absolute inset-0 w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 text-center w-full fade-in-section">
+                <blockquote>
+                    <p class="font-ui text-2xl md:text-3xl lg:text-[40px] font-semibold text-white leading-[1.3] tracking-tight italic max-w-[700px] mx-auto">
+                        "좋은 디자인은<br class="hidden sm:block">눈에 보이지 않습니다"
+                    </p>
+                    <cite class="block font-mono text-xs uppercase tracking-[0.2em] text-white/40 mt-8 not-italic">
+                        — Dieter Rams
+                    </cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- SECTION: SERVICES | MOVE: M-LAY-EDITORIAL-FEATURE -->
+        <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-featured-image5-content7-reference.html | FIDELITY: 75% -->
+        <section id="services" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="서비스 영역">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Services</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-[#0A0A0A] leading-[1.2] tracking-tight">
+                        우리가<br class="hidden sm:block">해결하는 영역
+                    </h2>
+                    <p class="text-[#525252] text-base mt-4 max-w-[400px]">
+                        리서치에서 런칭까지,<br>
+                        프로덕트의 모든 단계를 함께합니다.
+                    </p>
+                </div>
+
+                <!-- Editorial Feature: 1 large (7col) + content (5col) -->
+                <div class="grid grid-cols-12 gap-6 lg:gap-8">
+                    <!-- Large feature image -->
+                    <div class="col-span-12 lg:col-span-7 stagger-item">
+                        <div class="relative aspect-[4/3] overflow-hidden rounded-[2px]">
+                            <img src="./images/workspace.jpg"
+                                 alt="모노스페이스 스튜디오 작업 공간"
+                                 class="w-full h-full object-cover"
+                                 loading="lazy" />
+                        </div>
+                    </div>
+
+                    <!-- Service list (5col) -->
+                    <div class="col-span-12 lg:col-span-5 flex flex-col justify-center">
+                        <div class="space-y-0">
+                            <!-- Service 1 -->
+                            <div class="stagger-item py-6 border-b border-[#D4D4D4] group cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <svg class="w-5 h-5 text-[#8A8A8A] mt-0.5 flex-shrink-0 group-hover:text-[#0A0A0A] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                                    <div>
+                                        <h3 class="font-ui text-lg font-semibold text-[#0A0A0A]">UX Research</h3>
+                                        <p class="text-[#525252] text-sm mt-1">사용자 인터뷰, 사용성 테스트, 데이터 분석을 통해 문제의 본질을 파악합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service 2 -->
+                            <div class="stagger-item py-6 border-b border-[#D4D4D4] group cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <svg class="w-5 h-5 text-[#8A8A8A] mt-0.5 flex-shrink-0 group-hover:text-[#0A0A0A] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>
+                                    <div>
+                                        <h3 class="font-ui text-lg font-semibold text-[#0A0A0A]">UI Design System</h3>
+                                        <p class="text-[#525252] text-sm mt-1">일관된 사용자 경험을 위한 디자인 토큰, 컴포넌트, 가이드라인을 구축합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service 3 -->
+                            <div class="stagger-item py-6 border-b border-[#D4D4D4] group cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <svg class="w-5 h-5 text-[#8A8A8A] mt-0.5 flex-shrink-0 group-hover:text-[#0A0A0A] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+                                    <div>
+                                        <h3 class="font-ui text-lg font-semibold text-[#0A0A0A]">Product Design</h3>
+                                        <p class="text-[#525252] text-sm mt-1">비즈니스 목표와 사용자 니즈를 연결하는 프로덕트 전략과 인터페이스를 설계합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service 4 -->
+                            <div class="stagger-item py-6 border-b border-[#D4D4D4] group cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <svg class="w-5 h-5 text-[#8A8A8A] mt-0.5 flex-shrink-0 group-hover:text-[#0A0A0A] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                                    <div>
+                                        <h3 class="font-ui text-lg font-semibold text-[#0A0A0A]">Design Sprint</h3>
+                                        <p class="text-[#525252] text-sm mt-1">2주 안에 문제 정의부터 프로토타입 검증까지. 빠른 의사결정을 돕습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service 5 -->
+                            <div class="stagger-item py-6 group cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <svg class="w-5 h-5 text-[#8A8A8A] mt-0.5 flex-shrink-0 group-hover:text-[#0A0A0A] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+                                    <div>
+                                        <h3 class="font-ui text-lg font-semibold text-[#0A0A0A]">Usability Audit</h3>
+                                        <p class="text-[#525252] text-sm mt-1">기존 프로덕트의 사용성 문제를 진단하고 개선 로드맵을 제공합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#contact" class="inline-flex items-center gap-2 mt-8 font-ui text-sm font-medium text-[#0A0A0A] hover:opacity-60 transition-opacity">
+                            서비스 상세 보기
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PROCESS | MOVE: M-LAY-EDITORIAL-STORY -->
+        <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+        <section id="process" class="w-full bg-dark py-20 lg:py-28 fade-in-section" aria-label="디자인 프로세스">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Process</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-white leading-[1.2] tracking-tight">
+                        여섯 단계,<br class="hidden sm:block">하나의 흐름
+                    </h2>
+                    <p class="text-white/40 text-base mt-4 max-w-[400px]">
+                        체계적인 프로세스가<br>
+                        예측 가능한 결과를 만듭니다.
+                    </p>
+                </div>
+
+                <!-- Editorial Story: text(4) + gap(1) + image(7) -->
+                <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
+                    <!-- Left: Process steps -->
+                    <div class="col-span-12 lg:col-span-4 lg:pt-8">
+                        <div class="space-y-8">
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">01</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Discovery</h3>
+                                <p class="text-white/40 text-sm mt-1">비즈니스 목표, 사용자 니즈, 시장 환경을 깊이 이해합니다.</p>
+                            </div>
+                            <div class="h-rule-dark"></div>
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">02</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Define</h3>
+                                <p class="text-white/40 text-sm mt-1">리서치 인사이트를 기반으로 문제를 명확하게 정의합니다.</p>
+                            </div>
+                            <div class="h-rule-dark"></div>
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">03</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Design</h3>
+                                <p class="text-white/40 text-sm mt-1">와이어프레임부터 하이파이 목업까지, 구조를 시각화합니다.</p>
+                            </div>
+                            <div class="h-rule-dark"></div>
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">04</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Prototype</h3>
+                                <p class="text-white/40 text-sm mt-1">인터랙티브 프로토타입으로 가설을 빠르게 검증합니다.</p>
+                            </div>
+                            <div class="h-rule-dark"></div>
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">05</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Test</h3>
+                                <p class="text-white/40 text-sm mt-1">실제 사용자와 함께 테스트하고 데이터로 개선점을 찾습니다.</p>
+                            </div>
+                            <div class="h-rule-dark"></div>
+                            <div class="stagger-item">
+                                <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">06</p>
+                                <h3 class="font-ui text-lg font-semibold text-white">Launch</h3>
+                                <p class="text-white/40 text-sm mt-1">개발팀과 긴밀히 협업하여 완성도 높은 런칭을 지원합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gap column -->
+                    <div class="hidden lg:block lg:col-span-1"></div>
+
+                    <!-- Right: Large process image -->
+                    <div class="col-span-12 lg:col-span-7 mt-8 lg:mt-0 stagger-item">
+                        <div class="relative aspect-[4/3] lg:aspect-[3/4] overflow-hidden rounded-[2px]">
+                            <img src="./images/process_ux.jpg"
+                                 alt="UX 디자인 프로세스 - 와이어프레임 작업 중"
+                                 class="w-full h-full object-cover"
+                                 loading="lazy" />
+                        </div>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="font-mono text-xs uppercase tracking-[0.1em] text-white/30 border border-white/15 px-3 py-1.5 rounded-[2px]">Figma</span>
+                            <span class="font-mono text-xs uppercase tracking-[0.1em] text-white/30 border border-white/15 px-3 py-1.5 rounded-[2px]">Design Tokens</span>
+                            <span class="font-mono text-xs uppercase tracking-[0.1em] text-white/30 border border-white/15 px-3 py-1.5 rounded-[2px]">Atomic Design</span>
+                            <span class="font-mono text-xs uppercase tracking-[0.1em] text-white/30 border border-white/15 px-3 py-1.5 rounded-[2px]">User Testing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TEAM | MOVE: M-LAY-ALTERNATING-ROWS -->
+        <!-- COMPONENT_REF: alternating-text5-gap1-img6-reversed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-text5-gap1-img6-reversed-reference.html | FIDELITY: 70% -->
+        <section id="team" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="팀 소개">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Team</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-[#0A0A0A] leading-[1.2] tracking-tight">
+                        만드는 사람들
+                    </h2>
+                    <p class="text-[#525252] text-base mt-4 max-w-[400px]">
+                        삼성, 네이버, 카카오 출신 디자이너가<br>
+                        하나의 팀으로 움직입니다.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-12 gap-6 lg:gap-8 items-center mb-16 stagger-item">
+                    <!-- Team collaboration image -->
+                    <div class="col-span-12 lg:col-span-7">
+                        <div class="relative aspect-[16/10] overflow-hidden rounded-[2px]">
+                            <img src="./images/team_collab.jpg"
+                                 alt="모노스페이스 스튜디오 팀 협업 장면"
+                                 class="w-full h-full object-cover"
+                                 loading="lazy" />
+                        </div>
+                    </div>
+                    <!-- Gap -->
+                    <div class="hidden lg:block lg:col-span-1"></div>
+                    <!-- Text -->
+                    <div class="col-span-12 lg:col-span-4">
+                        <p class="text-[#525252] text-base leading-relaxed">
+                            각자 다른 산업에서 경험을 쌓은 디자이너들이 모여, 다양한 관점으로 문제를 바라봅니다. 빠르게 결론에 도달하되, 근거 없는 결정은 하지 않습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team members -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden rounded-[2px] mb-4 grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="./images/portrait_1.jpg" alt="김동현 디자인 디렉터" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <h3 class="font-ui text-base font-semibold text-[#0A0A0A]">김동현</h3>
+                        <p class="font-mono text-xs uppercase tracking-[0.1em] text-[#8A8A8A] mt-1">Design Director</p>
+                        <p class="text-[#525252] text-sm mt-2">ex-Samsung Design, Naver UX Lab. 15년차.</p>
+                    </div>
+                    <div class="stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden rounded-[2px] mb-4 grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="./images/portrait_2.jpg" alt="이서연 UX 리서처" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <h3 class="font-ui text-base font-semibold text-[#0A0A0A]">이서연</h3>
+                        <p class="font-mono text-xs uppercase tracking-[0.1em] text-[#8A8A8A] mt-1">Lead UX Researcher</p>
+                        <p class="text-[#525252] text-sm mt-2">ex-Kakao UX Research. HCI 석사. 사용성 전문.</p>
+                    </div>
+                    <div class="stagger-item">
+                        <div class="relative aspect-[3/4] overflow-hidden rounded-[2px] mb-4 grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="./images/portrait_3.jpg" alt="박준호 시니어 비주얼 디자이너" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <h3 class="font-ui text-base font-semibold text-[#0A0A0A]">박준호</h3>
+                        <p class="font-mono text-xs uppercase tracking-[0.1em] text-[#8A8A8A] mt-1">Senior Visual Designer</p>
+                        <p class="text-[#525252] text-sm mt-2">ex-Line Design. 디자인 시스템 및 모션 전문.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CLIENT INDUSTRIES | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
+        <section class="relative w-full py-20 lg:py-28 fade-in-section" aria-label="클라이언트 산업">
+            <img src="./images/industries_bg.jpg"
+                 alt=""
+                 class="absolute inset-0 w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Industries</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-white leading-[1.2] tracking-tight">
+                        산업을 이해해야<br class="hidden sm:block">디자인할 수 있습니다
+                    </h2>
+                    <p class="text-white/40 text-base mt-4 max-w-[400px]">
+                        핀테크부터 헬스케어까지,<br>
+                        각 산업의 맥락 위에 설계합니다.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+                    <div class="stagger-item border border-white/15 p-6 lg:p-8 rounded-[2px] hover:border-white/30 transition-colors">
+                        <svg class="w-6 h-6 text-white/60 mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/></svg>
+                        <h3 class="font-ui text-base font-semibold text-white">Fintech</h3>
+                        <p class="text-white/40 text-sm mt-2">결제, 투자, 보험</p>
+                    </div>
+                    <div class="stagger-item border border-white/15 p-6 lg:p-8 rounded-[2px] hover:border-white/30 transition-colors">
+                        <svg class="w-6 h-6 text-white/60 mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+                        <h3 class="font-ui text-base font-semibold text-white">Healthcare</h3>
+                        <p class="text-white/40 text-sm mt-2">원격 진료, EMR, 웰니스</p>
+                    </div>
+                    <div class="stagger-item border border-white/15 p-6 lg:p-8 rounded-[2px] hover:border-white/30 transition-colors">
+                        <svg class="w-6 h-6 text-white/60 mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                        <h3 class="font-ui text-base font-semibold text-white">E-commerce</h3>
+                        <p class="text-white/40 text-sm mt-2">마켓플레이스, D2C, 라이브</p>
+                    </div>
+                    <div class="stagger-item border border-white/15 p-6 lg:p-8 rounded-[2px] hover:border-white/30 transition-colors">
+                        <svg class="w-6 h-6 text-white/60 mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+                        <h3 class="font-ui text-base font-semibold text-white">Enterprise SaaS</h3>
+                        <p class="text-white/40 text-sm mt-2">HR, CRM, 애널리틱스</p>
+                    </div>
+                </div>
+
+                <!-- Pricing reference -->
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 stagger-item">
+                    <div class="border border-white/10 p-6 rounded-[2px]">
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">Design Sprint</p>
+                        <p class="font-ui text-2xl font-bold text-white">₩8,000,000</p>
+                        <p class="text-white/30 text-sm mt-1">2주 집중 프로그램</p>
+                    </div>
+                    <div class="border border-white/10 p-6 rounded-[2px]">
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">Product Design</p>
+                        <p class="font-ui text-2xl font-bold text-white">₩5,000,000</p>
+                        <p class="text-white/30 text-sm mt-1">월 리테이너</p>
+                    </div>
+                    <div class="border border-white/10 p-6 rounded-[2px]">
+                        <p class="font-mono text-xs uppercase tracking-[0.15em] text-white/30 mb-2">Design System</p>
+                        <p class="font-ui text-2xl font-bold text-white">₩15,000,000+</p>
+                        <p class="text-white/30 text-sm mt-1">규모에 따라 별도 견적</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TESTIMONIALS (on light bg) -->
+        <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
+        <section class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="클라이언트 후기">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+                <div class="mb-16">
+                    <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Testimonials</p>
+                    <h2 class="font-ui text-3xl lg:text-[40px] font-semibold text-[#0A0A0A] leading-[1.2] tracking-tight">
+                        클라이언트의 말
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-12 gap-6 lg:gap-8">
+                    <!-- Testimonial 1 (6col) -->
+                    <div class="col-span-12 md:col-span-6 bg-white border border-[#D4D4D4] p-8 lg:p-10 rounded-[2px] stagger-item">
+                        <svg class="w-8 h-8 text-[#D4D4D4] mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        <p class="text-[#0A0A0A] text-base leading-relaxed">
+                            모노스페이스 팀은 우리가 미처 발견하지 못한 사용자 문제를 찾아냈습니다. 디자인 스프린트를 통해 2주 만에 프로토타입을 만들었고, 실제 사용자 반응은 기대 이상이었습니다.
+                        </p>
+                        <div class="mt-8 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#E8E8E8] flex items-center justify-center font-ui text-sm font-semibold text-[#525252]">JK</div>
+                            <div>
+                                <p class="font-ui text-sm font-semibold text-[#0A0A0A]">정경호</p>
+                                <p class="font-mono text-xs text-[#8A8A8A]">페이브릿지 CPO</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 (6col) -->
+                    <div class="col-span-12 md:col-span-6 bg-white border border-[#D4D4D4] p-8 lg:p-10 rounded-[2px] stagger-item">
+                        <svg class="w-8 h-8 text-[#D4D4D4] mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        <p class="text-[#0A0A0A] text-base leading-relaxed">
+                            디자인 시스템 덕분에 개발 속도가 눈에 띄게 빨라졌습니다. 디자이너와 개발자 사이의 소통 비용이 확 줄었어요.
+                        </p>
+                        <div class="mt-8 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#E8E8E8] flex items-center justify-center font-ui text-sm font-semibold text-[#525252]">SL</div>
+                            <div>
+                                <p class="font-ui text-sm font-semibold text-[#0A0A0A]">서류진</p>
+                                <p class="font-mono text-xs text-[#8A8A8A]">데이터뷰 CTO</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 (6col, centered) -->
+                    <div class="col-span-12 md:col-span-6 md:col-start-4 bg-white border border-[#D4D4D4] p-8 lg:p-10 rounded-[2px] stagger-item">
+                        <svg class="w-8 h-8 text-[#D4D4D4] mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                        <p class="text-[#0A0A0A] text-base leading-relaxed">
+                            사용성 감사 결과를 받아보고 놀랐습니다. 데이터로 보여주니 경영진 설득이 한결 수월해졌어요.
+                        </p>
+                        <div class="mt-8 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#E8E8E8] flex items-center justify-center font-ui text-sm font-semibold text-[#525252]">MJ</div>
+                            <div>
+                                <p class="font-ui text-sm font-semibold text-[#0A0A0A]">민지현</p>
+                                <p class="font-mono text-xs text-[#8A8A8A]">메디플로우 Product Lead</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+        <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
+        <section id="contact" class="relative w-full min-h-[70vh] flex items-center" aria-label="프로젝트 문의">
+            <img src="./images/cta_bg.jpg"
+                 alt=""
+                 class="absolute inset-0 w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 w-full fade-in-section">
+                <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="col-span-12 lg:col-span-6">
+                        <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-4">Get in Touch</p>
+                        <h2 class="font-ui text-3xl md:text-4xl lg:text-[44px] font-bold text-white leading-[1.15] tracking-tight">
+                            다음 프로젝트를<br>시작하세요
+                        </h2>
+                        <p class="text-white/50 text-base mt-4 max-w-[360px]">
+                            아이디어 단계부터 함께합니다.<br>
+                            편하게 연락주세요.
+                        </p>
+
+                        <div class="mt-10 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                                <span class="font-mono text-sm text-white/60">hello@monospace.studio</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+                                <span class="font-mono text-sm text-white/60">02-555-0192</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+                                <span class="font-mono text-sm text-white/60">서울시 강남구 테헤란로 152, 7층</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 lg:col-span-6">
+                        <form class="space-y-4" onsubmit="event.preventDefault();" aria-label="프로젝트 문의 양식">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="이름" aria-label="이름"
+                                       class="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-4 py-3 text-sm font-body rounded-[2px] focus:outline-none focus:border-white/50 transition-colors" />
+                                <input type="text" placeholder="회사명" aria-label="회사명"
+                                       class="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-4 py-3 text-sm font-body rounded-[2px] focus:outline-none focus:border-white/50 transition-colors" />
+                            </div>
+                            <input type="email" placeholder="이메일" aria-label="이메일"
+                                   class="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-4 py-3 text-sm font-body rounded-[2px] focus:outline-none focus:border-white/50 transition-colors" />
+                            <select aria-label="관심 서비스"
+                                    class="w-full bg-white/10 border border-white/20 text-white/60 px-4 py-3 text-sm font-body rounded-[2px] focus:outline-none focus:border-white/50 transition-colors appearance-none">
+                                <option value="" disabled selected>관심 서비스</option>
+                                <option value="ux-research">UX Research</option>
+                                <option value="ui-design">UI Design System</option>
+                                <option value="product-design">Product Design</option>
+                                <option value="design-sprint">Design Sprint</option>
+                                <option value="usability-audit">Usability Audit</option>
+                            </select>
+                            <textarea placeholder="프로젝트에 대해 간단히 알려주세요" rows="4" aria-label="프로젝트 설명"
+                                      class="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-4 py-3 text-sm font-body rounded-[2px] focus:outline-none focus:border-white/50 transition-colors resize-none"></textarea>
+                            <button type="submit"
+                                    class="w-full bg-white text-black px-8 py-3.5 text-sm font-ui font-medium tracking-wide hover:bg-white/90 transition-colors rounded-[4px]">
+                                프로젝트 문의하기
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-dark py-12" role="contentinfo">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <a href="#" class="font-mono text-sm font-semibold tracking-[0.15em] uppercase text-white">Monospace</a>
+                    <p class="text-white/30 text-xs mt-2">© 2025 모노스페이스 스튜디오. All rights reserved.</p>
+                </div>
+                <div class="flex gap-6 text-xs font-mono uppercase tracking-[0.1em] text-white/40">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">Behance</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "모노스페이스 스튜디오",
+        "description": "UX/UI 디자인 스튜디오 - 문제를 구조로 해결하다",
+        "url": "https://monospace.studio",
+        "telephone": "+82-2-555-0192",
+        "email": "hello@monospace.studio",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "테헤란로 152, 7층",
+            "addressLocality": "강남구",
+            "addressRegion": "서울",
+            "postalCode": "06236",
+            "addressCountry": "KR"
+        },
+        "areaServed": "KR",
+        "priceRange": "₩₩₩"
+    }
+    </script>
+
+    <!-- JavaScript -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stagger-item').forEach((el, index) => {
+            const parent = el.closest('.grid, .space-y-12, .space-y-8');
+            if (parent) {
+                const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item, :scope > div > .stagger-item, :scope > article.stagger-item'));
+                const i = siblings.indexOf(el);
+                el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+            } else {
+                el.style.transitionDelay = index * 0.1 + 's';
+            }
+            observer.observe(el);
+        });
+
+        // Reduced motion guard
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+                el.classList.add('animate-in');
+                el.style.transition = 'none';
+            });
+        }
+
+        // Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.target);
+                    let current = 0;
+                    const increment = target / 40;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            entry.target.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            entry.target.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+</body>
+</html>

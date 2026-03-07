@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오블리크 필라테스 — 당신의 변화가 시작되는 곳</title>
+  <meta name="description" content="오블리크 필라테스는 삼성동에 위치한 프리미엄 필라테스 스튜디오입니다. 1:1 프라이빗, 그룹, 재활 프로그램을 통해 몸과 마음의 균형을 되찾으세요." />
+  <meta name="keywords" content="필라테스, 삼성동, 프라이빗 필라테스, 그룹 필라테스, 재활 운동, 스트레칭" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="오블리크 필라테스 — 당신의 변화가 시작되는 곳" />
+  <meta property="og:description" content="삼성동 프리미엄 필라테스 스튜디오. 1:1 프라이빗부터 그룹, 재활까지." />
+  <meta property="og:image" content="./images/hero-1.jpg" />
+  <meta property="og:url" content="https://oblique-pilates.kr" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'page': '#FAFAF8',
+            'surface': '#F5F0EB',
+            'card': '#FFFFFF',
+            'warm-charcoal': '#1C1917',
+            'taupe': '#A3896B',
+            'txt-primary': '#1C1917',
+            'txt-secondary': '#57534E',
+            'txt-muted': '#A8A29E',
+            'border-default': '#E7E5E4',
+            'border-strong': '#1C1917',
+          },
+          fontFamily: {
+            'display': ['"Playfair Display"', 'Georgia', 'serif'],
+            'body': ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #FAFAF8;
+      --bg-surface: #F5F0EB;
+      --bg-card: #FFFFFF;
+      --accent-primary: #1C1917;
+      --accent-secondary: #A3896B;
+      --text-primary: #1C1917;
+      --text-secondary: #57534E;
+      --text-muted: #A8A29E;
+      --border-default: #E7E5E4;
+      --border-strong: #1C1917;
+      --font-ui: 'Playfair Display', Georgia, serif;
+      --font-data: 'Inter', system-ui, sans-serif;
+      --content-max-width: 1200px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-data); color: var(--text-primary); background: var(--bg-page); }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -100px; left: 0;
+      background: var(--accent-primary); color: #fff;
+      padding: 8px 16px; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* Image sepia filter */
+    .img-warm { filter: sepia(15%) contrast(1.05) brightness(0.98); }
+
+    /* Hero Slider */
+    .slider { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+    .slide {
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    .slide.active { opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Scroll animations */
+    .fade-in-section {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-content.open { max-height: 300px; }
+    .accordion-icon { transition: transform 0.3s ease; }
+    .accordion-icon.rotated { transform: rotate(45deg); }
+
+    /* Dot nav */
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .dot.active { background: #fff; width: 28px; border-radius: 5px; }
+
+    /* Pill button */
+    .btn-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 36px; border-radius: 9999px;
+      font-family: var(--font-data); font-size: 0.875rem;
+      font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--accent-primary); color: #fff; }
+    .btn-primary:hover { background: #44403C; }
+    .btn-secondary { background: transparent; color: var(--accent-primary); border: 1px solid var(--accent-primary); }
+    .btn-secondary:hover { background: var(--accent-primary); color: #fff; }
+    .btn-white { background: #fff; color: var(--accent-primary); }
+    .btn-white:hover { background: #F5F0EB; }
+
+    /* Testimonial card dark */
+    .testimonial-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 32px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+      .slide { transition: none; }
+      .accordion-content { transition: none; }
+    }
+  </style>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "오블리크 필라테스",
+    "description": "삼성동 프리미엄 필라테스 스튜디오",
+    "url": "https://oblique-pilates.kr",
+    "telephone": "02-555-0823",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "삼성로 96길 14, 3층",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "postalCode": "06158",
+      "addressCountry": "KR"
+    },
+    "openingHours": ["Mo-Fr 07:00-22:00", "Sa 09:00-18:00"],
+    "priceRange": "₩₩₩"
+  }
+  </script>
+</head>
+<body>
+
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">본문 바로가기</a>
+
+<!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY (Slider) -->
+<!-- COMPONENT_REF: images-slider | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/images-slider-reference.html | FIDELITY: 75% -->
+<section class="slider" id="hero-slider" aria-label="히어로 슬라이더">
+  <div class="slide active">
+    <img src="./images/hero-1.jpg" alt="오블리크 필라테스 스튜디오 리포머 수업 전경" class="img-warm" loading="eager" />
+  </div>
+  <div class="slide">
+    <img src="./images/hero-2.jpg" alt="필라테스 수업 중 자세 교정 장면" class="img-warm" loading="eager" />
+  </div>
+  <div class="slide">
+    <img src="./images/hero-3.jpg" alt="리포머 위에서 코어 운동 중인 수강생" class="img-warm" loading="eager" />
+  </div>
+  <div class="slide">
+    <img src="./images/hero-4.jpg" alt="그룹 필라테스 수업 현장" class="img-warm" loading="eager" />
+  </div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 z-10"></div>
+  <!-- Content -->
+  <div class="absolute inset-0 z-20 flex items-end">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 pb-20 md:pb-28 w-full">
+      <p class="text-white/60 font-body text-xs uppercase tracking-[0.2em] mb-4">Premium Pilates Studio in Samseong</p>
+      <h1 class="font-display text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.3] mb-6 max-w-2xl">
+        당신의 변화가<br />시작되는 곳
+      </h1>
+      <p class="text-white/75 font-body text-base md:text-lg max-w-lg mb-8 leading-relaxed">
+        몸의 중심을 되찾는 순간,<br class="hidden md:block" />
+        삶의 균형이 달라집니다.
+      </p>
+      <a href="#programs" class="btn-pill btn-white">프로그램 둘러보기</a>
+    </div>
+  </div>
+  <!-- Dot Navigation -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2" id="hero-dots" role="tablist" aria-label="슬라이드 선택">
+    <button class="dot active" data-index="0" role="tab" aria-selected="true" aria-label="슬라이드 1"></button>
+    <button class="dot" data-index="1" role="tab" aria-selected="false" aria-label="슬라이드 2"></button>
+    <button class="dot" data-index="2" role="tab" aria-selected="false" aria-label="슬라이드 3"></button>
+    <button class="dot" data-index="3" role="tab" aria-selected="false" aria-label="슬라이드 4"></button>
+  </div>
+</section>
+
+<main id="main-content">
+
+<!-- SECTION: ABOUT / PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
+<!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 75% -->
+<section class="fade-in-section w-full bg-page py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-6">Our Philosophy</p>
+      <h2 class="font-display text-txt-primary text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.2] mb-8">
+        움직임은 치유이고,<br />균형은 예술입니다
+      </h2>
+      <div class="w-16 h-px bg-taupe mx-auto mb-8"></div>
+      <p class="text-txt-secondary font-body text-base md:text-lg leading-[1.8] mb-6">
+        오블리크 필라테스는 단순한 운동 공간이 아닙니다.<br class="hidden md:block" />
+        우리는 몸이 가진 고유한 이야기에 귀를 기울이고,<br class="hidden md:block" />
+        개인별 맞춤 프로그램을 통해 진정한 변화를 만들어갑니다.
+      </p>
+      <p class="text-txt-muted font-body text-sm leading-[1.8]">
+        2018년 개원 이래, 3,000명 이상의 회원이<br class="hidden md:block" />
+        오블리크에서 자신만의 균형을 찾았습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: PROGRAMS | MOVE: M-INT-HOVER-REVEAL (Accordion Collage) -->
+<!-- COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-image-collage-5-7-reference.html | FIDELITY: 75% -->
+<section id="programs" class="fade-in-section w-full bg-surface py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-8 lg:gap-12">
+      <!-- Left: Image Collage (5 cols) -->
+      <div class="col-span-12 md:col-span-5 relative">
+        <div class="grid grid-cols-2 gap-3">
+          <div class="col-span-2">
+            <img src="./images/program-1.jpg" alt="1:1 프라이빗 필라테스 세션" class="w-full aspect-[4/3] object-cover rounded-xl img-warm" loading="lazy" />
+          </div>
+          <div>
+            <img src="./images/program-2.jpg" alt="그룹 필라테스 수업" class="w-full aspect-square object-cover rounded-xl img-warm" loading="lazy" />
+          </div>
+          <div>
+            <img src="./images/program-3.jpg" alt="재활 필라테스 프로그램" class="w-full aspect-square object-cover rounded-xl img-warm" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <!-- Right: Accordion (7 cols) -->
+      <div class="col-span-12 md:col-span-7 flex flex-col justify-center">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Programs</p>
+        <h2 class="font-display text-txt-primary text-3xl md:text-4xl font-semibold leading-[1.25] mb-10">
+          당신에게 맞는<br />프로그램을 찾아보세요
+        </h2>
+
+        <!-- Accordion Items -->
+        <div class="border-t border-border-default">
+          <!-- Item 1 -->
+          <div class="border-b border-border-default">
+            <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="true" aria-controls="acc-1">
+              <span class="font-body text-txt-primary font-semibold text-lg">1:1 프라이빗 세션</span>
+              <span class="accordion-icon text-txt-muted text-2xl rotated">+</span>
+            </button>
+            <div id="acc-1" class="accordion-content open" role="region">
+              <div class="pb-5">
+                <p class="text-txt-secondary font-body text-sm leading-[1.7] mb-3">
+                  전담 강사와 함께하는 1:1 맞춤 레슨. 체형 분석부터 자세 교정, 근력 강화까지
+                  당신만을 위한 프로그램을 설계합니다.
+                </p>
+                <p class="text-taupe font-body text-sm font-medium">₩80,000 / 회</p>
+              </div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="border-b border-border-default">
+            <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="acc-2">
+              <span class="font-body text-txt-primary font-semibold text-lg">그룹 4 클래스</span>
+              <span class="accordion-icon text-txt-muted text-2xl">+</span>
+            </button>
+            <div id="acc-2" class="accordion-content" role="region">
+              <div class="pb-5">
+                <p class="text-txt-secondary font-body text-sm leading-[1.7] mb-3">
+                  최대 4인 소그룹으로 진행되는 클래스. 동기부여와 개인 피드백을 동시에 경험할 수 있는
+                  가장 인기 있는 프로그램입니다.
+                </p>
+                <p class="text-taupe font-body text-sm font-medium">₩45,000 / 회</p>
+              </div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="border-b border-border-default">
+            <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="acc-3">
+              <span class="font-body text-txt-primary font-semibold text-lg">재활 특화 프로그램</span>
+              <span class="accordion-icon text-txt-muted text-2xl">+</span>
+            </button>
+            <div id="acc-3" class="accordion-content" role="region">
+              <div class="pb-5">
+                <p class="text-txt-secondary font-body text-sm leading-[1.7] mb-3">
+                  물리치료사 출신 강사진이 설계한 재활 전문 커리큘럼. 디스크, 측만증, 수술 후 재활 등
+                  의료적 접근이 필요한 분들을 위한 프로그램입니다.
+                </p>
+                <p class="text-taupe font-body text-sm font-medium">₩100,000 / 회</p>
+              </div>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="border-b border-border-default">
+            <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="acc-4">
+              <span class="font-body text-txt-primary font-semibold text-lg">산전·산후 필라테스</span>
+              <span class="accordion-icon text-txt-muted text-2xl">+</span>
+            </button>
+            <div id="acc-4" class="accordion-content" role="region">
+              <div class="pb-5">
+                <p class="text-txt-secondary font-body text-sm leading-[1.7] mb-3">
+                  임신 기간과 출산 후 회복을 위한 전문 프로그램. 골반저근 강화와 코어 재건에 집중하여
+                  안전하고 효과적인 운동을 제공합니다.
+                </p>
+                <p class="text-taupe font-body text-sm font-medium">₩90,000 / 회</p>
+              </div>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="border-b border-border-default">
+            <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="acc-5">
+              <span class="font-body text-txt-primary font-semibold text-lg">주니어 체형 교정</span>
+              <span class="accordion-icon text-txt-muted text-2xl">+</span>
+            </button>
+            <div id="acc-5" class="accordion-content" role="region">
+              <div class="pb-5">
+                <p class="text-txt-secondary font-body text-sm leading-[1.7] mb-3">
+                  성장기 청소년을 위한 체형 교정 프로그램. 거북목, 라운드 숄더, 골반 틀어짐 등
+                  성장기에 교정해야 할 자세 문제를 집중적으로 다룹니다.
+                </p>
+                <p class="text-taupe font-body text-sm font-medium">₩70,000 / 회</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <a href="#contact" class="btn-pill btn-primary">상담 예약하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: STUDIO GALLERY | MOVE: M-LAY-EDITORIAL-FEATURE (Staggered Gallery) -->
+<!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 70% -->
+<section class="fade-in-section w-full bg-page py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+      <div>
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Our Space</p>
+        <h2 class="font-display text-txt-primary text-3xl md:text-4xl font-semibold leading-[1.25]">
+          공간이 만드는 차이
+        </h2>
+      </div>
+      <p class="text-txt-secondary font-body text-sm max-w-sm mt-4 md:mt-0 leading-[1.7]">
+        자연광이 가득한 120평 스튜디오.<br />
+        건축적 공간 설계가 움직임의 질을 바꿉니다.
+      </p>
+    </div>
+
+    <!-- Row 1: 5:3:4 stagger -->
+    <div class="grid grid-cols-12 gap-3 lg:gap-5">
+      <div class="col-span-12 md:col-span-5 stagger-item">
+        <img src="./images/studio-1.jpg" alt="오블리크 필라테스 리포머 장비가 정렬된 메인 홀" class="w-full aspect-square object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+      <div class="col-span-6 md:col-span-3 stagger-item">
+        <img src="./images/studio-2.jpg" alt="자연광이 드는 창가 수업 공간" class="w-full aspect-square object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+      <div class="col-span-6 md:col-span-4 md:mt-16 stagger-item">
+        <img src="./images/studio-3.jpg" alt="프라이빗 레슨룸 내부" class="w-full aspect-[4/3] object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Row 2: 3:4:1:4 stagger -->
+    <div class="grid grid-cols-12 gap-3 lg:gap-5 mt-5">
+      <div class="col-span-6 md:col-span-3 stagger-item">
+        <img src="./images/community-1.jpg" alt="필라테스 소도구 인테리어" class="w-full aspect-square object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+      <div class="col-span-6 md:col-span-4 stagger-item">
+        <img src="./images/instructor.jpg" alt="강사 교정 장면" class="w-full aspect-[3/2] object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+      <div class="hidden md:block md:col-span-1"></div>
+      <div class="col-span-12 md:col-span-4 stagger-item">
+        <img src="./images/community-2.jpg" alt="로비 라운지와 휴식 공간" class="w-full aspect-[4/5] object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: TRANSFORMATION (Divider) | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
+<!-- COMPONENT_REF: custom-key-color-process | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+<section class="fade-in-section relative w-full min-h-[55vh] flex items-center">
+  <img src="./images/transformation-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover img-warm" loading="lazy" />
+  <div class="absolute inset-0 bg-stone-900/80"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 w-full">
+    <p class="text-white/50 font-body text-xs uppercase tracking-[0.2em] mb-6">Your Transformation Journey</p>
+    <h2 class="font-display text-white text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.2] mb-12 max-w-xl">
+      변화는 과정이고,<br />우리는 동반자입니다
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+      <div class="border-l border-white/20 pl-6 stagger-item">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.15em] mb-2">Week 1-2</p>
+        <h3 class="text-white font-body text-base font-semibold mb-2">초기 평가</h3>
+        <p class="text-white/60 font-body text-sm leading-[1.7]">체형 분석, 움직임 평가,<br />개인 목표 설정</p>
+      </div>
+      <div class="border-l border-white/20 pl-6 stagger-item">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.15em] mb-2">Week 3-4</p>
+        <h3 class="text-white font-body text-base font-semibold mb-2">기초 구축</h3>
+        <p class="text-white/60 font-body text-sm leading-[1.7]">코어 인지, 호흡 패턴,<br />기본 동작 습득</p>
+      </div>
+      <div class="border-l border-white/20 pl-6 stagger-item">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.15em] mb-2">Week 5-8</p>
+        <h3 class="text-white font-body text-base font-semibold mb-2">심화 훈련</h3>
+        <p class="text-white/60 font-body text-sm leading-[1.7]">강도 점진적 증가,<br />근력 및 유연성 향상</p>
+      </div>
+      <div class="border-l border-white/20 pl-6 stagger-item">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.15em] mb-2">Week 9+</p>
+        <h3 class="text-white font-body text-base font-semibold mb-2">지속 성장</h3>
+        <p class="text-white/60 font-body text-sm leading-[1.7]">프로그램 고도화,<br />자기주도 운동 능력 확보</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: INSTRUCTOR | MOVE: M-LAY-EDITORIAL-STORY -->
+<!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+<section class="fade-in-section w-full bg-page py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-6 lg:gap-0">
+      <!-- Text Block (4 cols) -->
+      <div class="col-span-12 md:col-span-4 flex flex-col justify-center md:pr-4">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Instructor Team</p>
+        <h2 class="font-display text-txt-primary text-3xl md:text-4xl font-semibold leading-[1.25] mb-6">
+          전문성이<br />차이를 만듭니다
+        </h2>
+        <p class="text-txt-secondary font-body text-sm leading-[1.8] mb-8">
+          오블리크의 모든 강사는 PMA(Pilates Method Alliance) 국제 인증을 보유하고 있으며,
+          해부학 기반의 체계적인 교육을 이수했습니다. 평균 경력 7년 이상의 전문 강사진이
+          당신의 변화를 함께합니다.
+        </p>
+        <div class="space-y-4">
+          <div class="stagger-item">
+            <h3 class="font-body text-txt-primary text-sm font-semibold">박서연 대표원장</h3>
+            <p class="text-txt-muted font-body text-xs mt-1">PMA Certified · 경력 12년 · 재활전문</p>
+          </div>
+          <div class="stagger-item">
+            <h3 class="font-body text-txt-primary text-sm font-semibold">이도윤 수석강사</h3>
+            <p class="text-txt-muted font-body text-xs mt-1">STOTT PILATES · 경력 8년 · 산전산후전문</p>
+          </div>
+          <div class="stagger-item">
+            <h3 class="font-body text-txt-primary text-sm font-semibold">김하은 강사</h3>
+            <p class="text-txt-muted font-body text-xs mt-1">BASI Pilates · 경력 6년 · 체형교정전문</p>
+          </div>
+        </div>
+      </div>
+      <!-- Gap (1 col) -->
+      <div class="hidden md:block md:col-span-1"></div>
+      <!-- Image Block (7 cols) -->
+      <div class="col-span-12 md:col-span-7">
+        <img src="./images/hero-2.jpg" alt="오블리크 필라테스 강사진 레슨 장면" class="w-full aspect-[3/4] object-cover rounded-xl img-warm" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: TESTIMONIALS | MOVE: M-TRUST-AWARDS-CERTS -->
+<!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
+<section class="fade-in-section w-full bg-warm-charcoal py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+      <div>
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Testimonials</p>
+        <h2 class="font-display text-white text-3xl md:text-4xl font-semibold leading-[1.25]">
+          회원들의 이야기
+        </h2>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-4 lg:gap-6">
+      <!-- Card 1 -->
+      <div class="col-span-12 md:col-span-5 stagger-item">
+        <div class="testimonial-card h-full">
+          <span class="font-display text-taupe text-5xl leading-none">"</span>
+          <p class="text-white/85 font-body text-sm leading-[1.8] mt-4 mb-6">
+            3개월 만에 만성 허리 통증이 사라졌습니다. 병원에서도 못 고친 걸
+            필라테스로 해결하다니, 정말 놀라운 경험이었어요.
+            박서연 원장님의 정확한 동작 지도 덕분이에요.
+          </p>
+          <div class="border-t border-white/10 pt-4">
+            <p class="text-white font-body text-sm font-medium">김민지</p>
+            <p class="text-white/50 font-body text-xs mt-1">30대 · 재활 프로그램 · 수강 8개월</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-span-12 md:col-span-5 stagger-item">
+        <div class="testimonial-card h-full">
+          <span class="font-display text-taupe text-5xl leading-none">"</span>
+          <p class="text-white/85 font-body text-sm leading-[1.8] mt-4 mb-6">
+            출산 후 골반과 코어가 완전히 무너졌는데, 산후 프로그램을 통해
+            체형이 출산 전보다 오히려 좋아졌어요. 매일 가고 싶은 곳이에요.
+          </p>
+          <div class="border-t border-white/10 pt-4">
+            <p class="text-white font-body text-sm font-medium">이수현</p>
+            <p class="text-white/50 font-body text-xs mt-1">30대 · 산후 프로그램 · 수강 6개월</p>
+          </div>
+        </div>
+      </div>
+      <!-- Spacer -->
+      <div class="hidden md:block md:col-span-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: COMMUNITY / BENTO | MOVE: M-LAY-ASYM-GRID (Bento Mosaic) -->
+<!-- COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-mosaic-mixed-colspan-rowspan-reference.html | FIDELITY: 70% -->
+<section class="fade-in-section w-full bg-surface py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="text-center mb-12">
+      <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Why Oblique</p>
+      <h2 class="font-display text-txt-primary text-3xl md:text-4xl font-semibold leading-[1.25]">
+        오블리크가 특별한 이유
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4 lg:gap-5">
+      <!-- Large tile: 7 cols, row-span-2 -->
+      <div class="col-span-12 md:col-span-7 md:row-span-2 stagger-item">
+        <div class="bg-card rounded-xl border border-border-default p-8 h-full flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+          <div>
+            <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-taupe"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="font-display text-txt-primary text-2xl font-semibold mb-3">전원 국제 인증 강사진</h3>
+            <p class="text-txt-secondary font-body text-sm leading-[1.7] max-w-md">
+              PMA, STOTT, BASI 등 세계적으로 인정받는 인증을 보유한 전문 강사진.
+              평균 경력 7년 이상, 해부학 기반 체계적 교육 이수.
+              강사 개인의 전문 분야별 맞춤 배정으로 최적의 레슨을 보장합니다.
+            </p>
+          </div>
+          <div class="mt-8">
+            <img src="./images/hero-3.jpg" alt="전문 강사진 수업 장면" class="w-full aspect-[16/9] object-cover rounded-lg img-warm" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <!-- Small tile: 5 cols -->
+      <div class="col-span-12 md:col-span-5 stagger-item">
+        <div class="bg-card rounded-xl border border-border-default p-7 h-full shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-taupe"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="font-body text-txt-primary text-base font-semibold mb-2">삼성동 프리미엄 로케이션</h3>
+          <p class="text-txt-secondary font-body text-sm leading-[1.7]">
+            삼성역 도보 5분. 120평 규모의 자연광 스튜디오.
+            프라이빗 룸 3개, 그룹 룸 2개 완비.
+          </p>
+        </div>
+      </div>
+      <!-- Small tile: 5 cols -->
+      <div class="col-span-12 md:col-span-5 stagger-item">
+        <div class="bg-card rounded-xl border border-border-default p-7 h-full shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-taupe"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+          <h3 class="font-body text-txt-primary text-base font-semibold mb-2">맞춤형 커리큘럼</h3>
+          <p class="text-txt-secondary font-body text-sm leading-[1.7]">
+            정기 체형 분석과 진도 추적 시스템.
+            매 8주마다 프로그램을 재설계하여 정체기 없는 성장을 보장합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: FAQ | MOVE: INTERACTION -->
+<!-- COMPONENT_REF: custom-faq-accordion | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
+<section class="fade-in-section w-full bg-page py-24 md:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-8 lg:gap-12">
+      <!-- Left: Title (4 cols) -->
+      <div class="col-span-12 md:col-span-4">
+        <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">FAQ</p>
+        <h2 class="font-display text-txt-primary text-3xl md:text-4xl font-semibold leading-[1.25] mb-4">
+          자주 묻는 질문
+        </h2>
+        <p class="text-txt-secondary font-body text-sm leading-[1.7]">
+          궁금한 점이 있으시면<br />
+          언제든 연락해 주세요.
+        </p>
+      </div>
+      <!-- Right: Accordion (8 cols) -->
+      <div class="col-span-12 md:col-span-8">
+        <div class="border-t border-border-default">
+          <div class="border-b border-border-default">
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="faq-1">
+              <span class="font-body text-txt-primary font-medium text-base pr-4">필라테스를 처음 하는데, 괜찮을까요?</span>
+              <span class="accordion-icon text-txt-muted text-xl flex-shrink-0">+</span>
+            </button>
+            <div id="faq-1" class="accordion-content" role="region">
+              <p class="text-txt-secondary font-body text-sm leading-[1.7] pb-5">
+                물론입니다. 오블리크의 모든 프로그램은 초보자부터 상급자까지 레벨에 맞게 설계됩니다.
+                첫 방문 시 무료 체형 분석과 상담을 통해 가장 적합한 프로그램을 추천해 드립니다.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-border-default">
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="faq-2">
+              <span class="font-body text-txt-primary font-medium text-base pr-4">수업 예약과 취소는 어떻게 하나요?</span>
+              <span class="accordion-icon text-txt-muted text-xl flex-shrink-0">+</span>
+            </button>
+            <div id="faq-2" class="accordion-content" role="region">
+              <p class="text-txt-secondary font-body text-sm leading-[1.7] pb-5">
+                전용 앱 또는 전화(02-555-0823)로 예약 가능합니다.
+                수업 24시간 전까지 무료 취소가 가능하며, 이후 취소 시 1회 차감됩니다.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-border-default">
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="faq-3">
+              <span class="font-body text-txt-primary font-medium text-base pr-4">준비물이 있나요?</span>
+              <span class="accordion-icon text-txt-muted text-xl flex-shrink-0">+</span>
+            </button>
+            <div id="faq-3" class="accordion-content" role="region">
+              <p class="text-txt-secondary font-body text-sm leading-[1.7] pb-5">
+                편한 운동복만 준비해 주세요. 양말(미끄럼 방지 양말 권장)은 착용을 추천드리며,
+                스튜디오에서 구매도 가능합니다. 수건과 개인 매트는 제공됩니다.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-border-default">
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="faq-4">
+              <span class="font-body text-txt-primary font-medium text-base pr-4">주차는 가능한가요?</span>
+              <span class="accordion-icon text-txt-muted text-xl flex-shrink-0">+</span>
+            </button>
+            <div id="faq-4" class="accordion-content" role="region">
+              <p class="text-txt-secondary font-body text-sm leading-[1.7] pb-5">
+                건물 지하 주차장을 이용하실 수 있으며, 수업 시간 포함 2시간 무료 주차가 제공됩니다.
+                삼성역 2번 출구에서 도보 5분 거리이므로 대중교통 이용도 편리합니다.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-border-default">
+            <button class="faq-trigger w-full flex items-center justify-between py-5 text-left" aria-expanded="false" aria-controls="faq-5">
+              <span class="font-body text-txt-primary font-medium text-base pr-4">체험 수업이 있나요?</span>
+              <span class="accordion-icon text-txt-muted text-xl flex-shrink-0">+</span>
+            </button>
+            <div id="faq-5" class="accordion-content" role="region">
+              <p class="text-txt-secondary font-body text-sm leading-[1.7] pb-5">
+                1회 체험 수업을 ₩30,000에 제공합니다. 체험 수업에는 30분 체형 분석 + 50분 1:1 레슨이
+                포함되어 있어, 실제 프로그램을 충분히 경험해 보실 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 70% -->
+<section id="contact" class="fade-in-section relative w-full min-h-[60vh] flex items-center">
+  <img src="./images/cta-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover img-warm" loading="lazy" />
+  <div class="absolute inset-0 bg-black/65"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 w-full">
+    <div class="grid grid-cols-12 gap-8 items-center">
+      <!-- Text (7 cols) -->
+      <div class="col-span-12 md:col-span-7">
+        <p class="text-white/50 font-body text-xs uppercase tracking-[0.2em] mb-6">Get Started</p>
+        <h2 class="font-display text-white text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.2] mb-6">
+          첫 걸음을 내딛는 데<br />용기가 필요하지 않습니다
+        </h2>
+        <p class="text-white/70 font-body text-base leading-[1.7] mb-8 max-w-lg">
+          무료 상담을 통해 당신에게 맞는 프로그램을 찾아보세요.<br />
+          변화는 결심이 아니라, 시작에서 옵니다.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="tel:02-555-0823" class="btn-pill btn-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            02-555-0823
+          </a>
+          <a href="#programs" class="btn-pill btn-secondary border-white/40 text-white hover:bg-white hover:text-warm-charcoal">
+            프로그램 보기
+          </a>
+        </div>
+      </div>
+      <!-- Preview image (5 cols) -->
+      <div class="hidden md:block md:col-span-5">
+        <img src="./images/hero-4.jpg" alt="오블리크 필라테스 그룹 수업" class="w-full max-w-xs ml-auto aspect-[3/4] object-cover rounded-xl shadow-lg img-warm" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-warm-charcoal py-12">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+      <div>
+        <h3 class="font-display text-white text-lg font-semibold mb-4">오블리크 필라테스</h3>
+        <p class="text-white/50 font-body text-sm leading-[1.7]">
+          몸의 균형을 되찾는 공간.<br />
+          삼성동 프리미엄 필라테스 스튜디오.
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white/70 font-body text-xs uppercase tracking-[0.15em] mb-4">Contact</h4>
+        <p class="text-white/50 font-body text-sm leading-[1.8]">
+          서울특별시 강남구 삼성로 96길 14, 3층<br />
+          02-555-0823<br />
+          info@oblique-pilates.kr
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white/70 font-body text-xs uppercase tracking-[0.15em] mb-4">Hours</h4>
+        <p class="text-white/50 font-body text-sm leading-[1.8]">
+          월-금 07:00 — 22:00<br />
+          토요일 09:00 — 18:00<br />
+          일요일·공휴일 휴무
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <p class="text-white/30 font-body text-xs">© 2025 Oblique Pilates. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-white/30 hover:text-white/60 font-body text-xs transition-colors" aria-label="인스타그램">Instagram</a>
+        <a href="#" class="text-white/30 hover:text-white/60 font-body text-xs transition-colors" aria-label="네이버 블로그">Blog</a>
+        <a href="#" class="text-white/30 hover:text-white/60 font-body text-xs transition-colors" aria-label="카카오톡 채널">KakaoTalk</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+(function() {
+  'use strict';
+
+  // Reduced motion check
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // === Hero Slider ===
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+  let sliderInterval;
+
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    dots[currentSlide].setAttribute('aria-selected', 'false');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    dots[currentSlide].setAttribute('aria-selected', 'true');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  function startSlider() {
+    sliderInterval = setInterval(nextSlide, 5000);
+  }
+
+  function resetSlider() {
+    clearInterval(sliderInterval);
+    startSlider();
+  }
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goToSlide(parseInt(this.dataset.index));
+      resetSlider();
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      goToSlide((currentSlide - 1 + slides.length) % slides.length);
+      resetSlider();
+    } else if (e.key === 'ArrowRight') {
+      goToSlide((currentSlide + 1) % slides.length);
+      resetSlider();
+    }
+  });
+
+  startSlider();
+
+  // === Scroll Animations (IntersectionObserver) ===
+  if (!prefersReducedMotion) {
+    var fadeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(function(el) {
+      fadeObserver.observe(el);
+    });
+
+    var staggerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var items = entry.target.querySelectorAll('.stagger-item');
+          items.forEach(function(item, i) {
+            item.style.transitionDelay = (i * 0.1) + 's';
+            item.classList.add('visible');
+          });
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-30px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(function(section) {
+      if (section.querySelector('.stagger-item')) {
+        staggerObserver.observe(section);
+      }
+    });
+  } else {
+    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+
+  // === Program Accordion ===
+  document.querySelectorAll('.accordion-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var content = this.nextElementSibling;
+      var icon = this.querySelector('.accordion-icon');
+      var isOpen = content.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.accordion-content').forEach(function(c) { c.classList.remove('open'); });
+      document.querySelectorAll('.accordion-trigger').forEach(function(t) {
+        t.setAttribute('aria-expanded', 'false');
+        t.querySelector('.accordion-icon').classList.remove('rotated');
+      });
+
+      // Open clicked (if was closed)
+      if (!isOpen) {
+        content.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+        icon.classList.add('rotated');
+      }
+    });
+  });
+
+  // === FAQ Accordion ===
+  document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var content = this.nextElementSibling;
+      var icon = this.querySelector('.accordion-icon');
+      var isOpen = content.classList.contains('open');
+
+      // Close all FAQ
+      document.querySelectorAll('.faq-trigger').forEach(function(t) {
+        t.nextElementSibling.classList.remove('open');
+        t.setAttribute('aria-expanded', 'false');
+        t.querySelector('.accordion-icon').classList.remove('rotated');
+      });
+
+      if (!isOpen) {
+        content.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+        icon.classList.add('rotated');
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

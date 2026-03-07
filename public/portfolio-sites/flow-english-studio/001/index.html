@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>플로우잉글리시 스튜디오 — 말이 트이는 영어, 생각이 자라는 영어</title>
+  <meta name="description" content="플로우잉글리시 스튜디오는 대치동 프리미엄 영어학원입니다. 몰입형 회화, 소수정예 6인 이하 클래스, 원어민+이중언어 팀 티칭으로 아이의 영어가 자연스럽게 트입니다.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'serif-display': ['"DM Serif Display"', 'serif'],
+            'body': ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            'cream': '#FBF7F0',
+            'cream-dark': '#F5EDE0',
+            'warm-brown': '#8B6914',
+            'caramel': '#C4956A',
+            'chocolate': '#2C1810',
+            'brown-medium': '#5C4033',
+            'muted-beige': '#9C8578',
+            'border-cream': '#E8DFD4',
+            'border-strong': '#C4B5A3',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #FBF7F0;
+      --bg-surface: #F5EDE0;
+      --bg-card: #FFFFFF;
+      --accent-primary: #8B6914;
+      --accent-secondary: #C4956A;
+      --text-primary: #2C1810;
+      --text-secondary: #5C4033;
+      --text-muted: #9C8578;
+      --border-default: #E8DFD4;
+      --r-lg: 12px;
+      --r-md: 8px;
+      --sh-sm: 0 1px 3px rgba(44, 24, 16, 0.06);
+      --sh-md: 0 4px 12px rgba(44, 24, 16, 0.08);
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    /* Scroll Animations */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section,
+      .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Transitions */
+    button, a { transition: all 0.2s ease-in-out; }
+
+    /* FAQ Accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+    .faq-toggle svg {
+      transition: transform 0.3s ease;
+    }
+    .faq-toggle.active svg {
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-chocolate antialiased overflow-x-hidden">
+
+  <!-- ============================================================
+       SECTION 1: HERO (Full-Bleed)
+       Snippet: hero-luxury-serif (adapted → single bg + cream overlay)
+       ============================================================ -->
+  <section class="relative w-full min-h-screen overflow-hidden">
+    <img
+      src="./images/hero.jpg"
+      alt="플로우잉글리시 스튜디오 교실에서 웃으며 대화하는 학생들"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-white/75"></div>
+
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col items-center justify-center text-center">
+      <p class="text-xs tracking-[0.25em] uppercase text-muted-beige mb-5 fade-in-section">Premium English Studio in Daechi-dong</p>
+      <h1 class="font-serif-display text-5xl md:text-7xl lg:text-[88px] font-normal leading-[1.3] text-chocolate fade-in-section">
+        말이 트이는 영어,<br>생각이 자라는 영어
+      </h1>
+      <p class="mt-6 text-brown-medium text-base md:text-lg max-w-lg leading-relaxed fade-in-section">
+        소수정예 몰입형 수업으로<br>
+        아이의 영어가 자연스럽게 흘러나옵니다.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 fade-in-section">
+        <a href="#consult" class="inline-block bg-warm-brown text-white px-8 py-3.5 rounded-lg text-[15px] font-medium tracking-wide hover:brightness-110 active:scale-95">
+          무료 상담 신청하기
+        </a>
+        <a href="#programs" class="inline-block border border-warm-brown text-warm-brown px-8 py-3.5 rounded-lg text-[15px] font-medium tracking-wide hover:bg-warm-brown hover:text-white active:scale-95">
+          프로그램 보기
+        </a>
+      </div>
+    </div>
+
+    <!-- Warm Brown Info Band -->
+    <div class="relative w-full bg-warm-brown/90">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-4 grid grid-cols-3 gap-4 text-center text-white">
+        <div>
+          <p class="text-[11px] tracking-[0.2em] opacity-60 uppercase">Class Size</p>
+          <p class="text-sm font-semibold mt-1">최대 6인 소수정예</p>
+        </div>
+        <div class="border-l border-white/20">
+          <p class="text-[11px] tracking-[0.2em] opacity-60 uppercase">Teaching</p>
+          <p class="text-sm font-semibold mt-1">원어민 + 이중언어 팀</p>
+        </div>
+        <div class="border-l border-white/20">
+          <p class="text-[11px] tracking-[0.2em] opacity-60 uppercase">Since</p>
+          <p class="text-sm font-semibold mt-1">2018년 대치동 개원</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 2: METHODOLOGY (Editorial Split 4:1:7)
+       Snippet: split-text4-gap1-image7-editorial (adapted)
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28" id="methodology">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+        <!-- Text Block: 4 cols, offset top -->
+        <div class="col-span-12 md:col-span-4 md:pt-16">
+          <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-4">Our Philosophy</p>
+          <h2 class="font-serif-display text-3xl lg:text-4xl leading-tight text-chocolate">
+            외우는 영어가 아닌,<br>흘러나오는 영어
+          </h2>
+          <div class="h-[2px] w-12 bg-warm-brown mt-6 mb-6"></div>
+          <p class="text-brown-medium text-base leading-relaxed">
+            플로우잉글리시는 '영어를 공부한다'가 아니라<br>
+            '영어로 생각한다'를 목표로 합니다.<br><br>
+            질문하고, 토론하고, 발표하는 과정에서<br>
+            아이들은 자연스럽게 영어로 사고하는 힘을 기릅니다.
+          </p>
+          <div class="mt-8 space-y-3">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-warm-brown mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-brown-medium text-sm">100% 영어 몰입 환경 — 한국어 사용 제한</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-warm-brown mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-brown-medium text-sm">토론 · 프레젠테이션 · 저널 쓰기 통합 수업</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-warm-brown mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-brown-medium text-sm">월 1회 학부모 피드백 리포트 제공</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intentional Gap: 1 col -->
+        <div class="hidden md:block md:col-span-1"></div>
+
+        <!-- Large Image: 7 cols -->
+        <div class="col-span-12 md:col-span-7 mt-8 md:mt-0">
+          <div class="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-xl">
+            <img
+              src="./images/methodology_1.jpg"
+              alt="소그룹 영어 토론 수업 장면"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-4">
+            <div class="aspect-[4/3] overflow-hidden rounded-lg">
+              <img
+                src="./images/methodology_2.jpg"
+                alt="학생이 영어 프레젠테이션을 발표하는 모습"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-[4/3] overflow-hidden rounded-lg bg-cream-dark flex items-center justify-center p-6">
+              <blockquote class="text-center">
+                <p class="font-serif-display text-xl text-chocolate italic leading-snug">"Language is not<br>taught — it's caught."</p>
+                <cite class="text-muted-beige text-xs mt-3 block not-italic">— Stephen Krashen</cite>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 3: PROGRAMS (Asymmetric Grid — Featured + Cards)
+       Snippet: asymmetric-center-spotlight-3-5-4 (adapted → program pricing)
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28 bg-cream-dark" id="programs">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="text-center mb-16 fade-in-section">
+        <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-3">Programs</p>
+        <h2 class="font-serif-display text-3xl md:text-4xl text-chocolate">연령별 맞춤 프로그램</h2>
+        <p class="text-brown-medium mt-4 max-w-md mx-auto">
+          각 연령대의 언어 발달 단계에 맞춘<br>체계적인 커리큘럼을 운영합니다.
+        </p>
+      </div>
+
+      <!-- Asymmetric Grid: Featured (5) + Stacked Cards (3 + 4) -->
+      <div class="grid grid-cols-12 gap-5 lg:gap-6">
+
+        <!-- Featured Card: 5 cols -->
+        <div class="col-span-12 md:col-span-5 stagger-item">
+          <div class="relative h-full overflow-hidden rounded-xl group">
+            <img
+              src="./images/program_featured.jpg"
+              alt="영어로 자유롭게 대화하는 초등학생 그룹"
+              class="w-full h-full object-cover min-h-[400px] md:min-h-full"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-chocolate/80 via-chocolate/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <span class="inline-block bg-warm-brown text-white text-[11px] tracking-wider uppercase px-3 py-1 rounded-md mb-3">Most Popular</span>
+              <h3 class="font-serif-display text-2xl md:text-3xl text-white leading-snug">Junior Speaking</h3>
+              <p class="text-white/80 text-sm mt-2">11세 — 13세 · 주 3회 · 90분</p>
+              <div class="mt-4 flex items-baseline gap-2">
+                <span class="text-white text-2xl font-bold">₩380,000</span>
+                <span class="text-white/50 text-sm">/월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: 7 cols, 3 stacked cards -->
+        <div class="col-span-12 md:col-span-7 space-y-5">
+
+          <!-- Kids English -->
+          <div class="bg-white rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start stagger-item hover:shadow-md transition-shadow">
+            <div class="w-full sm:w-32 h-28 sm:h-24 overflow-hidden rounded-lg flex-shrink-0">
+              <img src="./images/program_kids.jpg" alt="동화책을 읽는 어린이" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif-display text-xl text-chocolate">Kids English</h3>
+                <span class="text-warm-brown font-bold text-lg">₩280,000<span class="text-muted-beige text-xs font-normal">/월</span></span>
+              </div>
+              <p class="text-muted-beige text-xs mt-1">7세 — 10세 · 주 2회 · 60분</p>
+              <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+                노래, 스토리텔링, 놀이 중심의 영어 첫걸음.<br>
+                자연스러운 발화 습관을 만들어 줍니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- Junior Speaking (compact) -->
+          <div class="bg-white rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start stagger-item hover:shadow-md transition-shadow">
+            <div class="w-full sm:w-32 h-28 sm:h-24 overflow-hidden rounded-lg flex-shrink-0">
+              <img src="./images/program_junior.jpg" alt="토론 수업 중인 중학생들" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif-display text-xl text-chocolate">Junior Speaking</h3>
+                <span class="text-warm-brown font-bold text-lg">₩380,000<span class="text-muted-beige text-xs font-normal">/월</span></span>
+              </div>
+              <p class="text-muted-beige text-xs mt-1">11세 — 13세 · 주 3회 · 90분</p>
+              <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+                토론과 프레젠테이션 중심 몰입 회화.<br>
+                논리적 사고력과 표현력을 함께 키웁니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- Academic Writing -->
+          <div class="bg-white rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start stagger-item hover:shadow-md transition-shadow">
+            <div class="w-full sm:w-32 h-28 sm:h-24 overflow-hidden rounded-lg flex-shrink-0">
+              <img src="./images/program_academic.jpg" alt="에세이를 작성하는 학생" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif-display text-xl text-chocolate">Academic Writing</h3>
+                <span class="text-warm-brown font-bold text-lg">₩450,000<span class="text-muted-beige text-xs font-normal">/월</span></span>
+              </div>
+              <p class="text-muted-beige text-xs mt-1">14세 — 16세 · 주 3회 · 120분</p>
+              <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+                아카데믹 에세이와 크리티컬 리딩 심화 과정.<br>
+                국제학교·특목고 준비에 최적화되어 있습니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 4: INSTRUCTORS (Staggered Gallery — adapted)
+       Snippet: staggered-hotel-gallery-5-3-3-mt24 (adapted → team profiles)
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28" id="instructors">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="mb-16 fade-in-section">
+        <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-3">Instructors</p>
+        <h2 class="font-serif-display text-3xl md:text-4xl text-chocolate">아이를 이해하는 선생님</h2>
+        <p class="text-brown-medium mt-4 max-w-lg">
+          원어민과 이중언어 교사가 팀을 이루어<br>
+          아이의 성장을 함께 이끕니다.
+        </p>
+      </div>
+
+      <!-- Staggered Grid: 5:3:4 with vertical offset -->
+      <div class="grid grid-cols-12 gap-5 lg:gap-6 items-start">
+        <!-- Lead Instructor: 5 cols -->
+        <div class="col-span-12 md:col-span-5 stagger-item">
+          <div class="relative aspect-[3/4] overflow-hidden rounded-xl">
+            <img
+              src="./images/instructor_1.jpg"
+              alt="수석 강사 Sarah Mitchell 프로필 사진"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="mt-4">
+            <h3 class="font-serif-display text-xl text-chocolate">Sarah Mitchell</h3>
+            <p class="text-muted-beige text-xs mt-1">Head Instructor · TESOL Certified</p>
+            <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+              Columbia University 교육학 석사. 12년간 아시아권<br>
+              영어 교육 경험. 아이들의 자발적 발화를 이끌어내는<br>
+              대화 중심 교수법 전문가.
+            </p>
+          </div>
+        </div>
+
+        <!-- Second Instructor: 3 cols, offset -->
+        <div class="col-span-6 md:col-span-3 md:mt-24 stagger-item">
+          <div class="relative aspect-[3/4] overflow-hidden rounded-xl">
+            <img
+              src="./images/instructor_2.jpg"
+              alt="강사 김하윤 프로필 사진"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="mt-4">
+            <h3 class="font-serif-display text-lg text-chocolate">김하윤</h3>
+            <p class="text-muted-beige text-xs mt-1">이중언어 교사 · 8년 경력</p>
+            <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+              연세대 영어영문학과 졸업.<br>
+              한국어와 영어 사이의 다리 역할로<br>
+              아이의 이해도를 높여줍니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Third Instructor: 4 cols, slightly offset -->
+        <div class="col-span-6 md:col-span-4 md:mt-12 stagger-item">
+          <div class="relative aspect-[3/4] overflow-hidden rounded-xl">
+            <img
+              src="./images/instructor_3.jpg"
+              alt="강사 James Park 프로필 사진"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="mt-4">
+            <h3 class="font-serif-display text-lg text-chocolate">James Park</h3>
+            <p class="text-muted-beige text-xs mt-1">원어민 교사 · Creative Writing</p>
+            <p class="text-brown-medium text-sm mt-2 leading-relaxed">
+              UC Berkeley 영문학 전공.<br>
+              창작 글쓰기와 스토리텔링으로<br>
+              아이들의 상상력을 영어로 표현하게 합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 5: CLASSROOM DIVIDER (Full-Bleed)
+       Accent color overlay on background image
+       ============================================================ -->
+  <section class="relative w-full min-h-[50vh] flex items-center">
+    <img
+      src="./images/divider.jpg"
+      alt="따뜻한 조명 아래 책으로 가득한 교실 풍경"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0" style="background-color: rgba(139, 105, 20, 0.80);"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-16 text-center fade-in-section">
+      <h2 class="font-serif-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug">
+        교실이 달라지면,<br>아이의 영어가 달라집니다
+      </h2>
+      <p class="text-white/70 mt-6 max-w-lg mx-auto text-base leading-relaxed">
+        아늑한 독서 코너, 원형 토론 테이블, 프레젠테이션 무대까지.<br>
+        영어가 자연스럽게 일어나는 공간을 만들었습니다.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 6: CLASSROOM ENVIRONMENT
+       Regular section with 2 images
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-5 lg:gap-6 items-center fade-in-section">
+        <!-- Image side: 7 cols -->
+        <div class="col-span-12 md:col-span-7 grid grid-cols-2 gap-4">
+          <div class="aspect-[4/5] overflow-hidden rounded-xl stagger-item">
+            <img
+              src="./images/classroom_1.jpg"
+              alt="아늑한 독서 코너에서 영어 원서를 읽는 학생"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="aspect-[4/5] overflow-hidden rounded-xl mt-8 stagger-item">
+            <img
+              src="./images/classroom_2.jpg"
+              alt="넓은 토론 테이블에서 그룹 활동 중인 학생들"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Text side: 5 cols -->
+        <div class="col-span-12 md:col-span-5 md:pl-4">
+          <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-4">Our Space</p>
+          <h2 class="font-serif-display text-2xl md:text-3xl text-chocolate leading-snug">
+            편안하지만 몰입되는,<br>우리만의 영어 공간
+          </h2>
+          <p class="text-brown-medium text-sm mt-5 leading-relaxed">
+            아이들이 좋아하는 공간에서 자연스럽게 영어에 빠져들 수 있도록<br>
+            교실 환경을 세심하게 설계했습니다.
+          </p>
+          <ul class="mt-6 space-y-3 text-brown-medium text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-caramel mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.331 0 4.466.89 6.064 2.346m0-14.304a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.346"/></svg>
+              <span>1,200권 이상의 영어 원서 라이브러리</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-caramel mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+              <span>6인 이하 소그룹 전용 원형 토론 테이블</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-caramel mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+              <span>개인 프레젠테이션 무대 & 녹화 장비</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 7: PARENT TESTIMONIALS (Full-Bleed Key Color — 40vh+)
+       Snippet: testimonials-section (adapted → warm cream cards on brown bg)
+       ============================================================ -->
+  <section class="relative w-full" style="min-height: 50vh;">
+    <img
+      src="./images/testimonial.jpg"
+      alt="학부모와 아이가 함께 웃고 있는 따뜻한 장면"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0" style="background-color: rgba(139, 105, 20, 0.82);"></div>
+
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
+      <!-- Section Header -->
+      <div class="text-center mb-14 fade-in-section">
+        <p class="text-xs tracking-[0.2em] uppercase text-white/50 mb-3">Parent Reviews</p>
+        <h2 class="font-serif-display text-3xl md:text-4xl text-white">부모님들의 이야기</h2>
+        <p class="text-white/60 mt-3 max-w-md mx-auto">
+          플로우잉글리시를 직접 경험한 학부모님들의 솔직한 후기입니다.
+        </p>
+      </div>
+
+      <!-- Testimonial Cards: 3-col (not uniform — varied heights) -->
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white/95 rounded-xl p-7 stagger-item">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-brown-medium text-sm leading-relaxed mb-5">
+            "다른 학원에서는 입도 못 떼던 아이가 여기 오고 3개월 만에<br>
+            영어로 자기 의견을 말하기 시작했어요. 선생님들이 강요하지 않고<br>
+            자연스럽게 이끌어주시는 게 정말 달랐습니다."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-cream-dark flex items-center justify-center text-warm-brown font-semibold text-sm">박</div>
+            <div>
+              <p class="font-semibold text-sm text-chocolate">박지영</p>
+              <p class="text-muted-beige text-xs">Kids English 학부모 · 수강 1년</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/95 rounded-xl p-7 stagger-item">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-brown-medium text-sm leading-relaxed mb-5">
+            "수업이 끝나고 집에 오면 영어로 혼잣말하는 모습을 봐요.<br>
+            '영어가 재미있다'는 말을 학원에서 처음 들었습니다.<br>
+            매달 오는 리포트도 아이의 성장이 눈에 보여서 좋아요."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-cream-dark flex items-center justify-center text-warm-brown font-semibold text-sm">이</div>
+            <div>
+              <p class="font-semibold text-sm text-chocolate">이수현</p>
+              <p class="text-muted-beige text-xs">Junior Speaking 학부모 · 수강 2년</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/95 rounded-xl p-7 stagger-item">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-warm-brown" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-brown-medium text-sm leading-relaxed mb-5">
+            "대치동에 영어학원이 많지만 이렇게 소수정예로<br>
+            한 아이 한 아이 케어해주는 곳은 처음이에요.<br>
+            Academic Writing 반 덕분에 국제학교 입시 에세이도<br>
+            자신감 있게 준비할 수 있었습니다."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-cream-dark flex items-center justify-center text-warm-brown font-semibold text-sm">최</div>
+            <div>
+              <p class="font-semibold text-sm text-chocolate">최민서</p>
+              <p class="text-muted-beige text-xs">Academic Writing 학부모 · 수강 1년 6개월</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 8: FAQ
+       Snippet: accordion-image-collage-5-7 (adapted → FAQ accordion + images)
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28 bg-cream-dark" id="faq">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-6 lg:gap-10">
+
+        <!-- Left: Images 5 cols -->
+        <div class="col-span-12 md:col-span-5 fade-in-section">
+          <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-3">FAQ</p>
+          <h2 class="font-serif-display text-3xl md:text-4xl text-chocolate mb-8">
+            자주 묻는 질문
+          </h2>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="aspect-[3/4] overflow-hidden rounded-xl">
+              <img src="./images/classroom_1.jpg" alt="교실 환경" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="aspect-[3/4] overflow-hidden rounded-xl mt-6">
+              <img src="./images/methodology_2.jpg" alt="수업 장면" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: FAQ Accordion 7 cols -->
+        <div class="col-span-12 md:col-span-7 md:pt-8" id="faq-list">
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">한 반에 몇 명인가요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                모든 반은 최대 6명으로 운영됩니다. 선생님이 각 학생의 발화량을 충분히 확보하고
+                개별 피드백을 줄 수 있도록 소수정예를 철저히 지키고 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">레벨 테스트는 어떻게 진행되나요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                무료 상담 시 원어민 교사와 15분간 1:1 대화 형식으로 레벨 테스트를 진행합니다.
+                읽기·듣기·말하기를 종합적으로 평가하여 가장 적합한 반을 안내드립니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">학습 경과 보고서를 받을 수 있나요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                매월 학부모 피드백 리포트를 제공합니다. 아이의 발화 빈도, 어휘 성장,
+                참여도, 그리고 담당 교사의 소견이 포함됩니다. 분기별 학부모 면담도 진행합니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">체험 수업이 가능한가요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                네, 무료 체험 수업(1회)을 제공합니다. 레벨 테스트 후 해당 반의 정규 수업에
+                참여하여 실제 수업 분위기를 경험해보실 수 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">수업 시간표는 어떻게 되나요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                Kids English는 월·수 4:00–5:00, Junior Speaking은 월·수·금 4:30–6:00,
+                Academic Writing은 화·목·토 3:00–5:00에 진행됩니다.
+                반별 정원이 차면 대기 접수를 받고 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-border-cream">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" onclick="toggleFaq(this)">
+              <span class="text-chocolate font-medium pr-4">중간에 반 변경이 가능한가요?</span>
+              <svg class="w-5 h-5 text-warm-brown flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            </button>
+            <div class="faq-answer px-0">
+              <p class="text-brown-medium text-sm leading-relaxed pb-1">
+                분기마다 레벨 재평가를 진행하며, 실력 향상이 확인되면 상위 반으로 이동합니다.
+                반 변경 시에는 학부모님과 상담 후 결정됩니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 9: CONSULTATION CTA (Regular — Booking Info)
+       ============================================================ -->
+  <section class="w-full py-20 md:py-28" id="consult">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center fade-in-section">
+
+        <!-- Text: 7 cols -->
+        <div class="col-span-12 md:col-span-7">
+          <p class="text-xs tracking-[0.2em] uppercase text-muted-beige mb-3">Consultation</p>
+          <h2 class="font-serif-display text-3xl md:text-4xl text-chocolate leading-snug">
+            우리 아이에게 맞는 영어,<br>직접 확인해보세요
+          </h2>
+          <p class="text-brown-medium mt-5 leading-relaxed max-w-lg">
+            무료 상담에서는 아이의 현재 영어 수준을 진단하고,<br>
+            맞춤 학습 플랜을 제안드립니다.<br>
+            부담 없이 편하게 방문해 주세요.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg bg-cream-dark flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-warm-brown" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              </div>
+              <div>
+                <p class="text-muted-beige text-xs">상담 전화</p>
+                <p class="text-chocolate font-medium">02-555-0147</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg bg-cream-dark flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-warm-brown" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-muted-beige text-xs">상담 시간</p>
+                <p class="text-chocolate font-medium">월–금 10:00 – 19:00 · 토 10:00 – 14:00</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg bg-cream-dark flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-warm-brown" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-muted-beige text-xs">오시는 길</p>
+                <p class="text-chocolate font-medium">서울특별시 강남구 대치동 943-16, 삼성빌딩 3층</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="tel:02-555-0147" class="inline-block mt-10 bg-warm-brown text-white px-8 py-3.5 rounded-lg text-[15px] font-medium tracking-wide hover:brightness-110 active:scale-95">
+            전화 상담 바로 연결
+          </a>
+        </div>
+
+        <!-- Visual: 5 cols -->
+        <div class="col-span-12 md:col-span-5 stagger-item">
+          <div class="bg-white rounded-xl p-8 border border-border-cream">
+            <h3 class="font-serif-display text-xl text-chocolate mb-6 text-center">수업 시간표</h3>
+            <div class="space-y-4 text-sm">
+              <div class="flex justify-between items-center py-3 border-b border-border-cream">
+                <div>
+                  <p class="text-chocolate font-medium">Kids English</p>
+                  <p class="text-muted-beige text-xs">7세–10세</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-brown-medium">월 · 수</p>
+                  <p class="text-muted-beige text-xs">16:00–17:00</p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-border-cream">
+                <div>
+                  <p class="text-chocolate font-medium">Junior Speaking</p>
+                  <p class="text-muted-beige text-xs">11세–13세</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-brown-medium">월 · 수 · 금</p>
+                  <p class="text-muted-beige text-xs">16:30–18:00</p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center py-3">
+                <div>
+                  <p class="text-chocolate font-medium">Academic Writing</p>
+                  <p class="text-muted-beige text-xs">14세–16세</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-brown-medium">화 · 목 · 토</p>
+                  <p class="text-muted-beige text-xs">15:00–17:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 10: FINAL CTA + FOOTER (Full-Bleed)
+       Snippet: cta-footer-fullbleed + cta-footer-dark-minimal (adapted)
+       ============================================================ -->
+  <section class="relative w-full min-h-[60vh] flex items-center">
+    <img
+      src="./images/cta.jpg"
+      alt="따뜻한 빛이 드는 영어 교실"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-black/70"></div>
+
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center fade-in-section">
+      <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-4">Flow English Studio</p>
+      <h2 class="font-serif-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug">
+        아이의 영어가<br>자연스럽게 흘러나오는 순간,<br>그 시작은 여기입니다
+      </h2>
+      <p class="text-white/60 mt-6 max-w-md mx-auto leading-relaxed">
+        지금 무료 상담을 신청하시면<br>
+        레벨 테스트와 체험 수업을 함께 안내드립니다.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:02-555-0147" class="inline-block bg-white text-chocolate px-8 py-3.5 rounded-lg text-[15px] font-medium tracking-wide hover:bg-warm-brown hover:text-white transition-colors active:scale-95">
+          02-555-0147 전화 상담
+        </a>
+        <a href="#consult" class="inline-block border border-white/40 text-white px-8 py-3.5 rounded-lg text-[15px] font-medium tracking-wide hover:bg-white/10 active:scale-95">
+          오시는 길 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full bg-cream border-t border-border-cream">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div>
+          <p class="font-serif-display text-xl text-chocolate">플로우잉글리시 스튜디오</p>
+          <p class="text-muted-beige text-xs mt-2">Flow English Studio</p>
+        </div>
+        <div class="text-sm text-brown-medium space-y-1">
+          <p>서울특별시 강남구 대치동 943-16, 삼성빌딩 3층</p>
+          <p>02-555-0147 · contact@flowenglish.kr</p>
+        </div>
+        <div class="flex items-center gap-6 text-xs uppercase tracking-wider text-muted-beige">
+          <a href="#methodology" class="hover:text-chocolate">교육철학</a>
+          <a href="#programs" class="hover:text-chocolate">프로그램</a>
+          <a href="#instructors" class="hover:text-chocolate">강사진</a>
+          <a href="#faq" class="hover:text-chocolate">FAQ</a>
+          <a href="#consult" class="hover:text-chocolate">상담</a>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-border-cream flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-beige">
+        <p>&copy; 2026 플로우잉글리시 스튜디오. All rights reserved.</p>
+        <p>사업자등록번호 214-88-01234 · 대표 김서연</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    // Scroll Animation: IntersectionObserver
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => {
+      animObserver.observe(el);
+    });
+
+    document.querySelectorAll('.stagger-item').forEach((el, index) => {
+      const parent = el.closest('.grid, .space-y-5');
+      if (parent) {
+        const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item, :scope > div > .stagger-item'));
+        const i = siblings.indexOf(el);
+        el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+      } else {
+        el.style.transitionDelay = index * 0.1 + 's';
+      }
+      animObserver.observe(el);
+    });
+
+    // Reduced Motion Preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.transition = 'none';
+      });
+    }
+
+    // FAQ Accordion
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-toggle').forEach(t => t.classList.remove('active'));
+
+      // Open clicked (if it was closed)
+      if (!isOpen) {
+        answer.classList.add('open');
+        btn.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

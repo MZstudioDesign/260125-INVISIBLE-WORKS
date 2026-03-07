@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레가토 법률사무소 — 전략적 대응, 결과 중심 법률 서비스</title>
+    <meta name="description" content="레가토 법률사무소 — 복잡한 법률 분쟁에서 가장 날카로운 해법을 설계합니다. 기업자문, 지식재산, 노동쟁의, 부동산, 형사변호 전문.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-page': '#0B1222',
+                        'bg-surface': '#111B2E',
+                        'bg-card': '#162236',
+                        'accent': '#6B8EAE',
+                        'text-primary': '#EDEFF2',
+                        'text-secondary': '#8E9AB0',
+                        'text-muted': '#4D5A6E',
+                        'border-default': '#1A2A40',
+                        'border-strong': '#263A54',
+                    },
+                    fontFamily: {
+                        'heading': ['"DM Serif Display"', 'serif'],
+                        'body': ['"Noto Sans KR"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg-page: #0B1222;
+            --bg-surface: #111B2E;
+            --bg-card: #162236;
+            --accent-primary: #6B8EAE;
+            --link-color: #6B8EAE;
+            --text-primary: #EDEFF2;
+            --text-secondary: #8E9AB0;
+            --text-muted: #4D5A6E;
+            --border-default: #1A2A40;
+            --border-strong: #263A54;
+            --border-width: 1px;
+            --font-heading: 'DM Serif Display', serif;
+            --font-ui: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            --r-sm: 2px;
+            --r-md: 6px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-page); color: var(--text-primary); font-family: var(--font-ui); }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
+        .stagger-item {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+
+        /* Counter Animation */
+        .counter-value { font-variant-numeric: tabular-nums; }
+
+        /* Accordion */
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+
+        /* Horizontal Scroll */
+        .hscroll-container { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .hscroll-container::-webkit-scrollbar { display: none; }
+        .hscroll-card { scroll-snap-align: start; flex-shrink: 0; }
+
+        /* Sticky Steps */
+        .sticky-label { position: sticky; top: 100px; }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+            .hscroll-container { scroll-behavior: auto; }
+        }
+
+        button, a { transition: all 0.2s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-bg-page focus:px-4 focus:py-2 focus:rounded">본문으로 건너뛰기</a>
+
+    <!-- NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-bg-page/90 backdrop-blur-sm border-b border-border-default">
+        <nav class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 h-16 flex items-center justify-between">
+            <a href="#" class="font-heading text-xl text-text-primary tracking-wide">LEGATO</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#why" class="text-xs tracking-[0.06em] uppercase text-text-secondary hover:text-text-primary">철학</a>
+                <a href="#attorneys" class="text-xs tracking-[0.06em] uppercase text-text-secondary hover:text-text-primary">변호사</a>
+                <a href="#practice" class="text-xs tracking-[0.06em] uppercase text-text-secondary hover:text-text-primary">업무분야</a>
+                <a href="#results" class="text-xs tracking-[0.06em] uppercase text-text-secondary hover:text-text-primary">실적</a>
+                <a href="#contact" class="text-xs tracking-[0.06em] uppercase bg-accent text-bg-page px-5 py-2 rounded-[2px] hover:brightness-110">상담 예약</a>
+            </div>
+            <button class="md:hidden text-text-primary" id="mobile-menu-btn" aria-label="메뉴 열기">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-bg-surface border-t border-border-default" id="mobile-menu">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#why" class="block text-sm text-text-secondary hover:text-text-primary">철학</a>
+                <a href="#attorneys" class="block text-sm text-text-secondary hover:text-text-primary">변호사</a>
+                <a href="#practice" class="block text-sm text-text-secondary hover:text-text-primary">업무분야</a>
+                <a href="#results" class="block text-sm text-text-secondary hover:text-text-primary">실적</a>
+                <a href="#contact" class="block text-sm bg-accent text-bg-page px-4 py-2 rounded-[2px] text-center">상담 예약</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ============================================== -->
+        <!-- SECTION 1: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+        <!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 90% -->
+        <!-- ============================================== -->
+        <section class="relative w-full min-h-screen">
+            <img src="./images/hero.jpg" alt="레가토 법률사무소 법률 서적과 법정" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B1222]/85 via-[#0B1222]/40 to-[#0B1222]/15"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-body">Legato Law Firm</p>
+                <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+                    승소는 전략에서<br>시작됩니다
+                </h1>
+                <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                    복잡한 법률 분쟁에서 가장 날카로운 해법을 설계합니다. 레가토 법률사무소, 결과로 증명하는 법률 파트너.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#0B1222] transition-colors">
+                        무료 상담 신청
+                    </a>
+                    <a href="#results" class="bg-accent text-[#0B1222] px-8 py-3 text-sm uppercase tracking-[0.15em] font-medium hover:brightness-110 transition-colors">
+                        주요 사례 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: WHY US | MOVE: M-LAY-EDITORIAL-FEATURE -->
+        <!-- COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | FIDELITY: 80% -->
+        <!-- ============================================== -->
+        <section id="why" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-12 gap-6 lg:gap-10 items-start">
+                    <!-- Text: 5 cols, offset down -->
+                    <div class="col-span-12 md:col-span-5 md:pt-16 stagger-item">
+                        <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">WHY LEGATO</p>
+                        <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25] mb-6">
+                            원칙이 아닌<br>결과를 약속합니다
+                        </h2>
+                        <p class="text-text-secondary text-base leading-[1.75] max-w-[360px] mb-8">
+                            모든 사건은 고유합니다. 정해진 공식이 아닌,<br class="hidden sm:block">
+                            맞춤 전략으로 최적의 결론을 이끌어냅니다.
+                        </p>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4 stagger-item">
+                                <div class="w-10 h-10 rounded-[6px] bg-bg-card border border-border-default flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-text-primary text-[15px] font-medium mb-1">선제적 리스크 분석</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed">사건 수임 전 잠재 리스크를<br class="hidden sm:block">선제적으로 파악합니다.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 stagger-item">
+                                <div class="w-10 h-10 rounded-[6px] bg-bg-card border border-border-default flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-text-primary text-[15px] font-medium mb-1">다분야 협업 전략</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed">5개 전문 분야 변호사가<br class="hidden sm:block">동시 투입되어 시너지를 냅니다.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 stagger-item">
+                                <div class="w-10 h-10 rounded-[6px] bg-bg-card border border-border-default flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-text-primary text-[15px] font-medium mb-1">실시간 진행 공유</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed">전용 포털을 통해 사건 진행 상황을<br class="hidden sm:block">실시간으로 확인할 수 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gap: 1 col -->
+                    <div class="hidden md:block md:col-span-1"></div>
+                    <!-- Image collage: 6 cols -->
+                    <div class="col-span-12 md:col-span-6 grid grid-cols-2 gap-3 stagger-item">
+                        <div class="col-span-2 relative aspect-[16/9] overflow-hidden rounded-[2px]">
+                            <img src="./images/modern_office.jpg" alt="현대적인 법률사무소 내부" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-[2px]">
+                            <img src="./images/strategy_desk.jpg" alt="전략 회의 테이블" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-[2px]">
+                            <img src="./images/business_meeting.jpg" alt="비즈니스 미팅" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: ATTORNEYS | MOVE: M-INT-HSCROLL-GALLERY -->
+        <!-- COMPONENT_REF: scroll-x-carousel | GRADE: B | MODE: adapted | FIDELITY: 75% -->
+        <!-- ============================================== -->
+        <section id="attorneys" class="w-full bg-bg-page py-24 lg:py-[100px] fade-in-section">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-10">
+                <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">OUR ATTORNEYS</p>
+                <div class="flex items-end justify-between">
+                    <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25]">
+                        각 분야 최전선의<br>전문가 그룹
+                    </h2>
+                    <div class="hidden md:flex gap-3">
+                        <button class="w-10 h-10 border border-border-strong rounded-[2px] flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent" id="scroll-left" aria-label="이전 변호사">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                        </button>
+                        <button class="w-10 h-10 border border-border-strong rounded-[2px] flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent" id="scroll-right" aria-label="다음 변호사">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pl-6 md:pl-8 lg:pl-[calc((100vw-1200px)/2+48px)]">
+                <div class="hscroll-container pr-6" id="attorney-scroll">
+                    <!-- Attorney 1 -->
+                    <div class="hscroll-card w-[300px] md:w-[340px] stagger-item">
+                        <div class="aspect-[3/4] overflow-hidden rounded-[2px] mb-5 bg-bg-card">
+                            <img src="./images/profile_1.jpg" alt="박준혁 대표변호사" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                        </div>
+                        <p class="text-accent text-[12px] tracking-[0.1em] uppercase mb-1">MANAGING PARTNER</p>
+                        <h3 class="font-heading text-xl text-text-primary mb-2">박준혁</h3>
+                        <p class="text-text-secondary text-sm leading-relaxed max-w-[300px]">
+                            서울대 법학전문대학원 졸업. 대법원 재판연구관 출신.<br>
+                            기업자문 및 M&A 분야 15년 경력. 주요 대기업 고문 변호사.
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">기업자문</span>
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">M&A</span>
+                        </div>
+                    </div>
+                    <!-- Attorney 2 -->
+                    <div class="hscroll-card w-[300px] md:w-[340px] stagger-item">
+                        <div class="aspect-[3/4] overflow-hidden rounded-[2px] mb-5 bg-bg-card">
+                            <img src="./images/profile_2.jpg" alt="이서연 파트너변호사" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                        </div>
+                        <p class="text-accent text-[12px] tracking-[0.1em] uppercase mb-1">PARTNER</p>
+                        <h3 class="font-heading text-xl text-text-primary mb-2">이서연</h3>
+                        <p class="text-text-secondary text-sm leading-relaxed max-w-[300px]">
+                            고려대 법학전문대학원 졸업. 전 특허법원 기술심리관.<br>
+                            지식재산권 및 특허 소송 전문. 200건 이상 특허 분쟁 해결.
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">지식재산</span>
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">특허</span>
+                        </div>
+                    </div>
+                    <!-- Attorney 3 -->
+                    <div class="hscroll-card w-[300px] md:w-[340px] stagger-item">
+                        <div class="aspect-[3/4] overflow-hidden rounded-[2px] mb-5 bg-bg-card">
+                            <img src="./images/profile_3.jpg" alt="김도윤 파트너변호사" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                        </div>
+                        <p class="text-accent text-[12px] tracking-[0.1em] uppercase mb-1">PARTNER</p>
+                        <h3 class="font-heading text-xl text-text-primary mb-2">김도윤</h3>
+                        <p class="text-text-secondary text-sm leading-relaxed max-w-[300px]">
+                            연세대 법학전문대학원 졸업. 전 검찰 특수부 출신.<br>
+                            형사변호 및 기업 컴플라이언스 전문. 무죄 판결 다수.
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">형사변호</span>
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">컴플라이언스</span>
+                        </div>
+                    </div>
+                    <!-- Attorney 4 -->
+                    <div class="hscroll-card w-[300px] md:w-[340px] stagger-item">
+                        <div class="aspect-[3/4] overflow-hidden rounded-[2px] mb-5 bg-bg-card relative">
+                            <div class="absolute inset-0 bg-bg-card flex items-center justify-center">
+                                <svg class="w-16 h-16 text-border-strong" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                            </div>
+                        </div>
+                        <p class="text-accent text-[12px] tracking-[0.1em] uppercase mb-1">SENIOR ASSOCIATE</p>
+                        <h3 class="font-heading text-xl text-text-primary mb-2">최민규</h3>
+                        <p class="text-text-secondary text-sm leading-relaxed max-w-[300px]">
+                            성균관대 법학전문대학원 졸업.<br>
+                            노동쟁의 및 부동산 거래 분야 전문. 기업 노무관리 자문.
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">노동쟁의</span>
+                            <span class="text-[11px] text-text-muted border border-border-default px-2 py-0.5 rounded-[2px]">부동산</span>
+                        </div>
+                    </div>
+                    <!-- Spacer -->
+                    <div class="w-6 flex-shrink-0"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: PRACTICE AREAS | MOVE: M-LAY-ASYM-GRID -->
+        <!-- COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | FIDELITY: 80% -->
+        <!-- ============================================== -->
+        <section id="practice" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-14">
+                    <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">PRACTICE AREAS</p>
+                    <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25]">전문 영역</h2>
+                </div>
+
+                <!-- Row 1: 3 cards (4:5:3) -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-6 mb-4 lg:mb-6">
+                    <div class="col-span-12 md:col-span-4 stagger-item">
+                        <div class="bg-bg-card border border-border-default rounded-[6px] p-7 h-full hover:border-accent transition-colors group">
+                            <svg class="w-6 h-6 text-accent mb-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0H21"/></svg>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">기업자문</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">M&A, 기업 구조조정, 계약 검토,<br>경영권 분쟁 등 기업 법률 전반을<br>전략적으로 지원합니다.</p>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 stagger-item">
+                        <div class="bg-bg-card border border-border-default rounded-[6px] p-7 h-full hover:border-accent transition-colors group">
+                            <svg class="w-6 h-6 text-accent mb-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">지식재산 · 특허</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">특허 출원·등록, 기술 이전, 라이선스 계약,<br>특허 침해 소송까지 지식재산 전 영역을<br>체계적으로 다룹니다.</p>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3 stagger-item">
+                        <div class="bg-bg-card border border-border-default rounded-[6px] p-7 h-full hover:border-accent transition-colors group">
+                            <svg class="w-6 h-6 text-accent mb-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">노동쟁의</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">해고 무효, 임금 체불,<br>단체교섭 대리 등.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 2: 2 cards (7:5) -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-7 stagger-item">
+                        <div class="bg-bg-card border border-border-default rounded-[6px] p-7 h-full hover:border-accent transition-colors group">
+                            <svg class="w-6 h-6 text-accent mb-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"/></svg>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">부동산</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">상업용 부동산 거래, 재개발·재건축 분쟁, 임대차 보증금 분쟁, 건축 하자 소송 등 부동산 관련 법률 이슈에 대한 종합 솔루션을 제공합니다.</p>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 stagger-item">
+                        <div class="bg-bg-card border border-border-default rounded-[6px] p-7 h-full hover:border-accent transition-colors group">
+                            <svg class="w-6 h-6 text-accent mb-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/></svg>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">형사변호</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">기업 임직원 형사 사건, 경제 범죄,<br>사기·횡령 등 형사 전문 변호를 제공합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 5: TESTIMONIALS | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | FIDELITY: 85% -->
+        <!-- ============================================== -->
+        <section class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+            <img src="./images/conference_room.jpg" alt="법률 상담실" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
+                <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">CLIENT VOICES</p>
+                <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25] mb-12">
+                    의뢰인이 말하는<br>레가토의 차이
+                </h2>
+                <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="col-span-12 md:col-span-5 stagger-item">
+                        <div class="bg-bg-page/60 border border-border-default p-6 lg:p-8 rounded-[2px] backdrop-blur-sm">
+                            <span class="text-3xl text-accent font-heading">"</span>
+                            <p class="text-text-secondary text-sm leading-relaxed mt-2 max-w-[320px]">
+                                3년간 끌어온 특허 분쟁이 레가토를 만나고 6개월 만에 해결됐습니다.
+                                처음부터 전략이 달랐고, 매주 진행 상황을 공유받을 수 있어 안심이 됐습니다.
+                            </p>
+                            <div class="mt-6">
+                                <p class="text-text-primary text-sm font-medium">김태호 대표</p>
+                                <p class="text-text-muted text-xs mt-0.5">넥스젠 테크놀로지 대표이사</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 stagger-item">
+                        <div class="bg-bg-page/60 border border-border-default p-6 lg:p-8 rounded-[2px] backdrop-blur-sm">
+                            <span class="text-3xl text-accent font-heading">"</span>
+                            <p class="text-text-secondary text-sm leading-relaxed mt-2 max-w-[320px]">
+                                부당해고 소송에서 완전한 원직 복직 판결을 받았습니다.
+                                김도윤 변호사의 논리 구성이 정말 치밀했고,
+                                법정에서의 대응이 인상적이었습니다.
+                            </p>
+                            <div class="mt-6">
+                                <p class="text-text-primary text-sm font-medium">이승재</p>
+                                <p class="text-text-muted text-xs mt-0.5">前 글로벌커머스 사업부장</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:col-span-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 6: CASE RESULTS | MOVE: M-TRUST-STAT-BAND (KEY COLOR) -->
+        <!-- COMPONENT_REF: number-ticker | GRADE: B | MODE: adapted | FIDELITY: 75% -->
+        <!-- ============================================== -->
+        <section id="results" class="relative w-full min-h-[50vh] flex items-center fade-in-section">
+            <img src="./images/courthouse_modern.jpg" alt="법원 건물 외관" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0" style="background: rgba(11,18,34,0.88);"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
+                <div class="text-center mb-14">
+                    <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">PROVEN RESULTS</p>
+                    <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25]">
+                        숫자가 말하는<br>신뢰의 기록
+                    </h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+                    <div class="text-center stagger-item">
+                        <div class="text-accent font-heading text-4xl lg:text-5xl mb-2">
+                            <span class="counter-value" data-target="94.7" data-suffix="%" data-decimal="1">0</span>
+                        </div>
+                        <p class="text-text-secondary text-sm">승소율</p>
+                    </div>
+                    <div class="text-center stagger-item">
+                        <div class="text-accent font-heading text-4xl lg:text-5xl mb-2">
+                            <span class="counter-value" data-target="3200" data-suffix="+" data-decimal="0">0</span>
+                        </div>
+                        <p class="text-text-secondary text-sm">누적 상담 건수</p>
+                    </div>
+                    <div class="text-center stagger-item">
+                        <div class="text-accent font-heading text-4xl lg:text-5xl mb-2">
+                            <span class="counter-value" data-target="85" data-suffix="건" data-decimal="0">0</span>
+                        </div>
+                        <p class="text-text-secondary text-sm">기업 고문 계약</p>
+                    </div>
+                    <div class="text-center stagger-item">
+                        <div class="text-accent font-heading text-4xl lg:text-5xl mb-2">
+                            <span class="counter-value" data-target="4.2" data-suffix="개월" data-decimal="1">0</span>
+                        </div>
+                        <p class="text-text-secondary text-sm">평균 해결 기간</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 7: PROCESS | MOVE: M-INT-STICKY-STEPS -->
+        <!-- COMPONENT_REF: feature-showcase | GRADE: A | MODE: adapted | FIDELITY: 70% -->
+        <!-- ============================================== -->
+        <section class="w-full bg-bg-page py-24 lg:py-[100px] fade-in-section">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    <!-- Left: Sticky Label -->
+                    <div class="lg:col-span-4">
+                        <div class="sticky-label">
+                            <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">HOW WE WORK</p>
+                            <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25] mb-6">
+                                체계적 5단계<br>프로세스
+                            </h2>
+                            <p class="text-text-secondary text-base leading-[1.75] max-w-[300px]">
+                                첫 상담부터 사건 해결까지,<br>
+                                투명하고 체계적인 절차를 따릅니다.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Right: Steps -->
+                    <div class="lg:col-span-8 space-y-0">
+                        <div class="border-t border-border-default py-8 stagger-item group">
+                            <div class="flex items-start gap-6">
+                                <span class="text-accent font-heading text-2xl leading-none mt-1 flex-shrink-0 w-12">01</span>
+                                <div>
+                                    <h3 class="text-text-primary text-lg font-medium mb-2">초기 상담</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed max-w-[480px]">30분 무료 상담을 통해 사건 개요를 파악하고 법적 쟁점을 정리합니다. 의뢰인의 목표와 기대치를 명확히 확인합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-border-default py-8 stagger-item group">
+                            <div class="flex items-start gap-6">
+                                <span class="text-accent font-heading text-2xl leading-none mt-1 flex-shrink-0 w-12">02</span>
+                                <div>
+                                    <h3 class="text-text-primary text-lg font-medium mb-2">사건 분석</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed max-w-[480px]">관련 법률, 판례, 증거를 종합 분석합니다. 다분야 변호사가 협업하여 다각도 검토를 수행합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-border-default py-8 stagger-item group">
+                            <div class="flex items-start gap-6">
+                                <span class="text-accent font-heading text-2xl leading-none mt-1 flex-shrink-0 w-12">03</span>
+                                <div>
+                                    <h3 class="text-text-primary text-lg font-medium mb-2">전략 수립</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed max-w-[480px]">분석 결과를 바탕으로 맞춤형 법률 전략을 설계합니다. 예상 시나리오별 대응 방안을 마련합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-border-default py-8 stagger-item group">
+                            <div class="flex items-start gap-6">
+                                <span class="text-accent font-heading text-2xl leading-none mt-1 flex-shrink-0 w-12">04</span>
+                                <div>
+                                    <h3 class="text-text-primary text-lg font-medium mb-2">대리 수행</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed max-w-[480px]">소송, 중재, 협상 등 법적 절차를 대리합니다. 전용 포털을 통해 실시간 진행 현황을 공유합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-border-default border-b py-8 stagger-item group">
+                            <div class="flex items-start gap-6">
+                                <span class="text-accent font-heading text-2xl leading-none mt-1 flex-shrink-0 w-12">05</span>
+                                <div>
+                                    <h3 class="text-text-primary text-lg font-medium mb-2">사건 해결</h3>
+                                    <p class="text-text-secondary text-sm leading-relaxed max-w-[480px]">최종 결과를 도출하고 후속 조치를 안내합니다. 필요 시 이행 감시 및 추가 자문을 제공합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 8: OFFICE DIVIDER | MOVE: M-DIV-PARALLAX-LIGHT -->
+        <!-- ============================================== -->
+        <section class="relative w-full min-h-[50vh] flex items-center fade-in-section">
+            <img src="./images/law_books.jpg" alt="법률 서적 서가" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+                <blockquote class="font-heading text-2xl md:text-3xl lg:text-[36px] text-text-primary leading-[1.3] italic max-w-[600px] mx-auto">
+                    "법은 방패가 아닌<br>칼이 되어야 합니다"
+                </blockquote>
+                <p class="text-text-muted text-sm mt-6">— 레가토 법률사무소</p>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 9: FAQ | MOVE: M-LAY-SPLIT-PROOF -->
+        <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | FIDELITY: 80% -->
+        <!-- ============================================== -->
+        <section class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-12 gap-8 lg:gap-12">
+                    <!-- Left: Title -->
+                    <div class="col-span-12 md:col-span-5">
+                        <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">FAQ</p>
+                        <h2 class="font-heading text-3xl lg:text-[36px] text-text-primary leading-[1.25] mb-4">자주 묻는 질문</h2>
+                        <p class="text-text-secondary text-base leading-[1.75] max-w-[340px]">
+                            상담 전 궁금한 사항을 확인하세요.<br>
+                            더 자세한 내용은 전화로 안내드립니다.
+                        </p>
+                    </div>
+                    <!-- Right: Accordion -->
+                    <div class="col-span-12 md:col-span-7">
+                        <div class="divide-y divide-border-default">
+                            <div class="py-5 cursor-pointer group" data-accordion>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">상담 비용은 어떻게 되나요?</span>
+                                    <span class="text-text-muted text-lg accordion-icon transition-transform">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p class="text-sm text-text-secondary mt-3 leading-relaxed">초기 상담 30분은 무료입니다. 이후 정식 수임 시 사건 유형과 난이도에 따라 착수금과 성공보수를 안내드립니다. 별도의 숨겨진 비용은 일체 없습니다.</p>
+                                </div>
+                            </div>
+                            <div class="py-5 cursor-pointer group" data-accordion>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">고문 계약은 어떤 방식인가요?</span>
+                                    <span class="text-text-muted text-lg accordion-icon transition-transform">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p class="text-sm text-text-secondary mt-3 leading-relaxed">월정액 고문료 기반으로 운영됩니다. 기업 규모와 자문 범위에 따라 맞춤 설계하며, 긴급 사안 발생 시 24시간 내 초동 대응이 가능합니다.</p>
+                                </div>
+                            </div>
+                            <div class="py-5 cursor-pointer group" data-accordion>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">비밀유지는 어떻게 보장되나요?</span>
+                                    <span class="text-text-muted text-lg accordion-icon transition-transform">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p class="text-sm text-text-secondary mt-3 leading-relaxed">변호사-의뢰인 비밀유지 의무는 법적으로 보장됩니다. 추가로 모든 자료는 암호화 보관되며, NDA 체결도 가능합니다.</p>
+                                </div>
+                            </div>
+                            <div class="py-5 cursor-pointer group" data-accordion>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">사건 처리 기간은 보통 어느 정도인가요?</span>
+                                    <span class="text-text-muted text-lg accordion-icon transition-transform">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p class="text-sm text-text-secondary mt-3 leading-relaxed">사건 유형에 따라 다르지만, 평균 4.2개월 내 해결을 목표로 합니다. 긴급 사안의 경우 별도의 신속 절차를 운영합니다.</p>
+                                </div>
+                            </div>
+                            <div class="py-5 cursor-pointer group" data-accordion>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">주말이나 공휴일에도 연락 가능한가요?</span>
+                                    <span class="text-text-muted text-lg accordion-icon transition-transform">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p class="text-sm text-text-secondary mt-3 leading-relaxed">긴급 연락처(02-536-7890)는 24시간 운영됩니다. 구속 사건, 긴급 가처분 등 시급한 사안은 즉시 대응합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 10: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+        <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | FIDELITY: 85% -->
+        <!-- ============================================== -->
+        <section id="contact" class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+            <img src="./images/building_exterior.jpg" alt="사무실 건물 외관" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full">
+                <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-5">SCHEDULE CONSULTATION</p>
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-[42px] text-text-primary leading-[1.2] mb-6">
+                    지금, 전략을<br>시작하십시오
+                </h2>
+                <p class="text-text-secondary text-base leading-[1.75] max-w-[420px] mx-auto mb-10">
+                    첫 상담 30분 무료. 24시간 긴급 연락 가능.<br>
+                    비밀이 보장되는 안전한 상담을 약속합니다.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="tel:02-536-7890" class="inline-block bg-accent text-bg-page text-[14px] font-medium tracking-[0.06em] uppercase px-8 py-4 rounded-[2px] hover:brightness-110 active:scale-95">
+                        02-536-7890
+                    </a>
+                    <a href="#" class="inline-block border border-text-primary text-text-primary text-[14px] font-medium tracking-[0.06em] uppercase px-8 py-4 rounded-[2px] hover:bg-text-primary hover:text-bg-page">
+                        비밀 상담 예약
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-bg-page border-t border-border-default">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <span class="font-heading text-2xl text-text-primary tracking-wide">LEGATO</span>
+                    <p class="text-text-muted text-sm mt-3 leading-relaxed">
+                        레가토 법률사무소<br>
+                        서울특별시 서초구 서초대로 396, 서초타워 12층<br>
+                        사업자등록번호 214-87-01234
+                    </p>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="text-text-secondary text-xs uppercase tracking-[0.1em] mb-3">업무분야</h4>
+                    <ul class="space-y-2 text-text-muted text-sm">
+                        <li><a href="#" class="hover:text-text-primary">기업자문</a></li>
+                        <li><a href="#" class="hover:text-text-primary">지식재산</a></li>
+                        <li><a href="#" class="hover:text-text-primary">노동쟁의</a></li>
+                        <li><a href="#" class="hover:text-text-primary">부동산</a></li>
+                        <li><a href="#" class="hover:text-text-primary">형사변호</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-text-secondary text-xs uppercase tracking-[0.1em] mb-3">연락처</h4>
+                    <ul class="space-y-2 text-text-muted text-sm">
+                        <li>대표전화: 02-536-7890</li>
+                        <li>긴급연락: 010-9876-5432</li>
+                        <li>FAX: 02-536-7891</li>
+                        <li>Email: contact@legato-law.co.kr</li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-text-secondary text-xs uppercase tracking-[0.1em] mb-3">운영시간</h4>
+                    <ul class="space-y-2 text-text-muted text-sm">
+                        <li>평일: 09:00 – 18:00</li>
+                        <li>토요일: 사전 예약 시 상담</li>
+                        <li>긴급: 24시간 대응</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-border-default mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-text-muted text-xs">© 2026 레가토 법률사무소. All rights reserved.</p>
+                <div class="flex gap-6 text-text-muted text-xs">
+                    <a href="#" class="hover:text-text-primary">개인정보처리방침</a>
+                    <a href="#" class="hover:text-text-primary">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Intersection Observer — Scroll Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('animate-in');
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stagger-item').forEach((el, index) => {
+            const parent = el.closest('.grid, .space-y-0, .hscroll-container, .divide-y');
+            if (parent) {
+                const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item, :scope > div > .stagger-item'));
+                const i = siblings.indexOf(el);
+                el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+            } else {
+                el.style.transitionDelay = index * 0.1 + 's';
+            }
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseFloat(el.dataset.target);
+                    const suffix = el.dataset.suffix || '';
+                    const decimal = parseInt(el.dataset.decimal) || 0;
+                    const duration = 2000;
+                    const start = performance.now();
+
+                    function update(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const current = target * eased;
+                        el.textContent = current.toFixed(decimal) + suffix;
+                        if (progress < 1) requestAnimationFrame(update);
+                    }
+                    requestAnimationFrame(update);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+
+        // Accordion
+        document.querySelectorAll('[data-accordion]').forEach(item => {
+            item.addEventListener('click', () => {
+                const content = item.querySelector('.accordion-content');
+                const icon = item.querySelector('.accordion-icon');
+                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+                document.querySelectorAll('.accordion-content').forEach(c => { c.style.maxHeight = '0px'; });
+                document.querySelectorAll('.accordion-icon').forEach(i => { i.textContent = '+'; i.style.transform = 'rotate(0deg)'; });
+
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.textContent = '\u2212';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Horizontal Scroll Buttons
+        const scrollContainer = document.getElementById('attorney-scroll');
+        const scrollLeft = document.getElementById('scroll-left');
+        const scrollRight = document.getElementById('scroll-right');
+        if (scrollContainer && scrollLeft && scrollRight) {
+            scrollLeft.addEventListener('click', () => scrollContainer.scrollBy({ left: -360, behavior: 'smooth' }));
+            scrollRight.addEventListener('click', () => scrollContainer.scrollBy({ left: 360, behavior: 'smooth' }));
+        }
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+        }
+
+        // Reduced Motion Guard
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+                el.classList.add('animate-in');
+                el.style.transition = 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>

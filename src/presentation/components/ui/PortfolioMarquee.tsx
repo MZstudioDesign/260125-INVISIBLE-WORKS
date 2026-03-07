@@ -1,30 +1,31 @@
 'use client';
 
+import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GlassButton } from './GlassButton';
 import { useTranslations } from 'next-intl';
+import {
+  portfolioProjects,
+  getRandomProjects,
+  type PortfolioProject,
+  type CategoryKey,
+} from '@/data/portfolio-projects';
 
 // ============================================
 // Types
 // ============================================
 
-export type CategoryKey = 'website' | 'landing' | 'webapp';
-
-export interface PortfolioItem {
-  id: string;
-  title: string;
-  category: CategoryKey;
-  imageUrl: string;
-  href?: string;
-}
+export type { CategoryKey };
+export type PortfolioItem = PortfolioProject;
 
 interface PortfolioCardProps {
-  item: PortfolioItem;
+  project: PortfolioProject;
   className?: string;
   categoryLabel?: string;
+  locale?: string;
 }
 
 interface MarqueeProps {
@@ -36,7 +37,7 @@ interface MarqueeProps {
 }
 
 interface PortfolioMarqueeProps {
-  items?: PortfolioItem[];
+  items?: PortfolioProject[];
   pauseOnHover?: boolean;
   speed?: 'slow' | 'normal' | 'fast';
   className?: string;
@@ -44,148 +45,76 @@ interface PortfolioMarqueeProps {
 }
 
 // ============================================
-// Default Portfolio Items (Stock Images)
-// ============================================
-
-const defaultPortfolioItems: PortfolioItem[] = [
-  {
-    id: '1',
-    title: 'Modern E-Commerce',
-    category: 'website',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/1',
-  },
-  {
-    id: '2',
-    title: 'Creative Agency',
-    category: 'landing',
-    imageUrl: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/2',
-  },
-  {
-    id: '3',
-    title: 'SaaS Dashboard',
-    category: 'webapp',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/3',
-  },
-  {
-    id: '4',
-    title: 'Restaurant Branding',
-    category: 'website',
-    imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/4',
-  },
-  {
-    id: '5',
-    title: 'Fitness Platform',
-    category: 'webapp',
-    imageUrl: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/5',
-  },
-  {
-    id: '6',
-    title: 'Tech Startup',
-    category: 'landing',
-    imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/6',
-  },
-  {
-    id: '7',
-    title: 'Portfolio Site',
-    category: 'website',
-    imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/7',
-  },
-  {
-    id: '8',
-    title: 'Education Platform',
-    category: 'webapp',
-    imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop&q=80',
-    href: '/portfolio/8',
-  },
-];
-
-// ============================================
 // PortfolioCard Component
 // ============================================
 
-export function PortfolioCard({ item, className, categoryLabel }: PortfolioCardProps) {
-  const CardContent = (
-    <motion.div
-      className={cn(
-        'relative group overflow-hidden rounded-2xl',
-        'bg-white/85 backdrop-blur-xl',
-        'border-2 border-[#7fa8c9]/20',
-        'shadow-[0_8px_32px_rgba(127,168,201,0.1)]',
-        'transition-all duration-500 ease-out',
-        'hover:border-[#7fa8c9]/40',
-        'hover:shadow-[0_16px_48px_rgba(127,168,201,0.2)]',
-        'w-[260px] md:w-[350px] flex-shrink-0',
-        className
-      )}
-      whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-    >
-      {/* Image Container */}
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <Image
-          src={item.imageUrl}
-          alt={item.title}
-          fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          sizes="(max-width: 768px) 320px, 380px"
-        />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+export function PortfolioCard({ project, className, categoryLabel, locale = 'ko' }: PortfolioCardProps) {
+  return (
+    <Link href={`/${locale}/portfolio?open=${project.id}`} className="block">
+      <motion.div
+        className={cn(
+          'relative group overflow-hidden rounded-2xl',
+          'bg-white/85 backdrop-blur-xl',
+          'border-2 border-[#7fa8c9]/20',
+          'shadow-[0_8px_32px_rgba(127,168,201,0.1)]',
+          'transition-all duration-500 ease-out',
+          'hover:border-[#7fa8c9]/40',
+          'hover:shadow-[0_16px_48px_rgba(127,168,201,0.2)]',
+          'w-[260px] md:w-[350px] flex-shrink-0',
+          className
+        )}
+        whileHover={{ y: -8, scale: 1.02 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        {/* Image */}
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <Image
+            src={project.thumbnail}
+            alt={project.name}
+            fill
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+            sizes="(max-width: 768px) 320px, 380px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        {/* Category Badge */}
-        <div className="absolute top-4 left-4">
-          <span className={cn(
-            'px-3 py-1.5 rounded-full text-xs font-medium',
-            'bg-white/90 backdrop-blur-md text-[#1a1a1a]',
-            'border border-[#7fa8c9]/20',
-            'shadow-[0_4px_12px_rgba(0,0,0,0.1)]'
-          )}>
-            {categoryLabel || item.category}
-          </span>
-        </div>
+          {/* Category Badge */}
+          <div className="absolute top-4 left-4">
+            <span className={cn(
+              'px-3 py-1.5 rounded-full text-xs font-medium',
+              'bg-white/90 backdrop-blur-md text-[#1a1a1a]',
+              'border border-[#7fa8c9]/20',
+              'shadow-[0_4px_12px_rgba(0,0,0,0.1)]'
+            )}>
+              {categoryLabel || project.category}
+            </span>
+          </div>
 
-        {/* Hover Arrow */}
-        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-          <div className={cn(
-            'w-10 h-10 rounded-full flex items-center justify-center',
-            'bg-[#7fa8c9] text-white',
-            'shadow-[0_4px_16px_rgba(127,168,201,0.4)]'
-          )}>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+          {/* Hover Arrow */}
+          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+            <div className={cn(
+              'w-10 h-10 rounded-full flex items-center justify-center',
+              'bg-[#7fa8c9] text-white',
+              'shadow-[0_4px_16px_rgba(127,168,201,0.4)]'
+            )}>
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-[#1a1a1a] group-hover:text-[#7fa8c9] transition-colors duration-300">
-          {item.title}
-        </h3>
-      </div>
+        {/* Content */}
+        <div className="p-5">
+          <h3 className="text-lg font-semibold text-[#1a1a1a] group-hover:text-[#7fa8c9] transition-colors duration-300">
+            {project.name}
+          </h3>
+        </div>
 
-      {/* Bottom Accent Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#7fa8c9] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-    </motion.div>
+        {/* Bottom Accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#7fa8c9] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </motion.div>
+    </Link>
   );
-
-  if (item.href) {
-    return (
-      <Link href={item.href} className="block">
-        {CardContent}
-      </Link>
-    );
-  }
-
-  return CardContent;
 }
 
 // ============================================
@@ -208,8 +137,7 @@ function Marquee({
   return (
     <div
       className={cn(
-        'group flex overflow-hidden [--gap:1.5rem]',
-        pauseOnHover && '[&:hover>div]:animation-play-state-paused',
+        'flex overflow-hidden [--gap:1.5rem]',
         className
       )}
       style={{ '--duration': speedMap[speed] } as React.CSSProperties}
@@ -221,11 +149,8 @@ function Marquee({
             'flex shrink-0 gap-[var(--gap)] pr-[var(--gap)]',
             'animate-marquee',
             reverse && 'animate-marquee-reverse',
-            pauseOnHover && 'group-hover:[animation-play-state:paused]'
           )}
-          style={{
-            animationDuration: 'var(--duration)',
-          }}
+          style={{ animationDuration: 'var(--duration)' }}
         >
           {children}
         </div>
@@ -239,36 +164,27 @@ function Marquee({
 // ============================================
 
 export function PortfolioMarquee({
-  items = defaultPortfolioItems,
   pauseOnHover = true,
   speed = 'normal',
   className,
   locale = 'ko',
 }: PortfolioMarqueeProps) {
   const t = useTranslations('Portfolio');
-  const tCategories = useTranslations('Components.Portfolio.categories');
-  
-  // 카테고리 번역 함수
-  const getCategoryLabel = (category: CategoryKey) => {
-    return tCategories(category);
-  };
-  
-  // 언어별 줄바꿈 클래스
-  const breakClass = locale === 'ko' ? 'break-keep' 
-    : locale.startsWith('zh') ? '' 
+  const tCategories = useTranslations('PortfolioCategories');
+
+  const breakClass = locale === 'ko' ? 'break-keep'
+    : locale.startsWith('zh') ? ''
     : 'hyphens-auto';
 
-  // Split items for two rows
-  const firstRowItems = items.slice(0, Math.ceil(items.length / 2));
-  const secondRowItems = items.slice(Math.ceil(items.length / 2));
+  // Pick 10 random projects, stable per mount
+  const randomProjects = useMemo(() => getRandomProjects(10), []);
+  const firstRow = randomProjects.slice(0, 5);
+  const secondRow = randomProjects.slice(5);
 
   return (
     <section
       id="portfolio"
-      className={cn(
-        'relative py-24 md:py-32 overflow-hidden',
-        className
-      )}
+      className={cn('relative py-24 md:py-32 overflow-hidden', className)}
     >
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
@@ -295,30 +211,30 @@ export function PortfolioMarquee({
 
       {/* Marquee Rows */}
       <div className="space-y-8">
-        {/* First Row - Normal Direction */}
         <Marquee pauseOnHover={pauseOnHover} speed={speed}>
-          {firstRowItems.map((item) => (
-            <PortfolioCard 
-              key={item.id} 
-              item={item} 
-              categoryLabel={getCategoryLabel(item.category)}
+          {firstRow.map((project) => (
+            <PortfolioCard
+              key={project.id}
+              project={project}
+              categoryLabel={tCategories(project.category)}
+              locale={locale}
             />
           ))}
         </Marquee>
 
-        {/* Second Row - Reverse Direction */}
         <Marquee pauseOnHover={pauseOnHover} speed={speed} reverse>
-          {secondRowItems.map((item) => (
-            <PortfolioCard 
-              key={item.id} 
-              item={item} 
-              categoryLabel={getCategoryLabel(item.category)}
+          {secondRow.map((project) => (
+            <PortfolioCard
+              key={project.id}
+              project={project}
+              categoryLabel={tCategories(project.category)}
+              locale={locale}
             />
           ))}
         </Marquee>
       </div>
 
-      {/* CTA Button */}
+      {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -327,11 +243,7 @@ export function PortfolioMarquee({
         className="text-center mt-16"
       >
         <Link href={`/${locale}/portfolio`}>
-          <GlassButton
-            variant="outline"
-            size="lg"
-            className="gap-3 text-lg"
-          >
+          <GlassButton variant="outline" size="lg" className="gap-3 text-lg">
             {t('cta')}
             <svg
               className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"

@@ -131,7 +131,27 @@
   "PortfolioPage": {
     "title": "Websites we've built together",
     "description1": "These are the projects we've worked on together.",
-    "description2": "Every project was created with our client's vision."
+    "description2": "Every project was created with our client's vision.",
+    "noResults": "No projects in this category."
+  },
+  "PortfolioCategories": {
+    "all": "All",
+    "education": "Education",
+    "beauty": "Beauty",
+    "brand": "Brand",
+    "fitness": "Fitness",
+    "medical": "Medical",
+    "business": "Business",
+    "architecture": "Architecture",
+    "design": "Design",
+    "legal": "Legal",
+    "production": "Production",
+    "tech": "Tech",
+    "veterinary": "Veterinary",
+    "fnb": "F&B"
+  },
+  "PortfolioModal": {
+    "designLabel": "Design {number}"
   },
   "Privacy": {
     "title": "Privacy Policy"
@@ -150,7 +170,8 @@
     "Accordion": {
       "prefix": "And,",
       "freeText": "Free until here",
-      "suffix": "."
+      "suffix": ".",
+      "clickToExplore": "Click to explore"
     },
     "Portfolio": {
       "categories": {

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>루미노 우드 — 시간이 지나도 남는 가구</title>
+  <meta name="description" content="루미노 우드는 20년 이상의 장인이 천연 원목으로 한 점 한 점 수공예하는 프리미엄 가구 브랜드입니다. 월넛, 화이트 오크 원목 가구 맞춤 제작.">
+  <meta name="keywords" content="수공예 가구, 원목 가구, 월넛 가구, 맞춤 가구, 루미노우드, 핸드메이드 가구">
+  <link rel="canonical" href="https://luminowood.kr">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="루미노 우드 — 시간이 지나도 남는 가구">
+  <meta property="og:description" content="천연 원목, 장인의 손끝에서 태어나는 가구. 맞춤 제작 문의 및 파주 쇼룸 예약.">
+  <meta property="og:image" content="./images/hero.jpg">
+  <meta property="og:url" content="https://luminowood.kr">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="루미노 우드 — 시간이 지나도 남는 가구">
+  <meta name="twitter:description" content="천연 원목, 장인의 손끝에서 태어나는 가구.">
+  <meta name="twitter:image" content="./images/hero.jpg">
+
+  <!-- Naver Verification Placeholder -->
+  <meta name="naver-site-verification" content="PLACEHOLDER">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-page': '#F5F0EB',
+            'bg-surface': '#2A2520',
+            'bg-card': '#FFFFFF',
+            'accent': '#8B5E3C',
+            'accent-secondary': '#C49A6C',
+            'text-primary': '#1A1714',
+            'text-secondary': '#4A4035',
+            'text-muted': '#8C8070',
+            'border-default': '#D9D0C5',
+            'border-strong': '#3D3630',
+          },
+          fontFamily: {
+            'ui': ['Playfair Display', 'serif'],
+            'body': ['Noto Sans KR', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #F5F0EB;
+      --bg-surface: #2A2520;
+      --bg-card: #FFFFFF;
+      --accent-primary: #8B5E3C;
+      --accent-secondary: #C49A6C;
+      --link-color: #8B5E3C;
+      --text-primary: #1A1714;
+      --text-secondary: #4A4035;
+      --text-muted: #8C8070;
+      --border-default: #D9D0C5;
+      --border-strong: #3D3630;
+      --font-ui: 'Playfair Display', serif;
+      --font-body: 'Noto Sans KR', system-ui, sans-serif;
+      --r-none: 0px;
+      --r-sm: 2px;
+      --sh-md: 0 4px 16px rgba(26,23,20,0.07);
+      --content-max-width: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background-color: var(--bg-page);
+      line-height: 1.7;
+    }
+
+    /* Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: var(--accent-primary);
+      color: #fff;
+      padding: 8px 16px;
+      z-index: 100;
+      font-size: 14px;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Scroll Animations */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section,
+      .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Button hover */
+    .btn-primary {
+      transition: filter 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 2px 4px rgba(26,23,20,0.05);
+    }
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+    .btn-secondary {
+      transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+    }
+    .btn-secondary:hover {
+      background-color: var(--accent-primary);
+      color: #fff;
+    }
+    .btn-secondary:active {
+      transform: scale(0.95);
+    }
+
+    /* Image hover */
+    .img-hover {
+      transition: transform 0.5s ease;
+    }
+    .img-hover:hover {
+      transform: scale(1.03);
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-content.open {
+      max-height: 500px;
+    }
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+    .accordion-icon.rotated {
+      transform: rotate(45deg);
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FurnitureStore",
+    "name": "루미노 우드",
+    "description": "천연 원목 수공예 가구 브랜드. 월넛, 화이트 오크 원목 맞춤 가구 제작.",
+    "url": "https://luminowood.kr",
+    "telephone": "+82-31-946-7820",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "경기도 파주시 탄현면 헤이리마을길 82-15",
+      "addressLocality": "파주시",
+      "addressRegion": "경기도",
+      "postalCode": "10859",
+      "addressCountry": "KR"
+    },
+    "priceRange": "₩₩₩"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+  <!-- ============================================ -->
+  <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY (left-aligned) -->
+  <!-- COMPONENT_REF: hero-left-aligned | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/ | FIDELITY: 80% -->
+  <!-- ============================================ -->
+  <section class="relative w-full min-h-screen" aria-label="히어로">
+    <img src="./images/hero.jpg" alt="공방에서 월넛 원목을 다듬는 장인의 손" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex items-center">
+      <div class="max-w-[640px]">
+        <p class="font-body text-xs md:text-sm tracking-[0.08em] uppercase text-white/60 mb-6">Handcrafted Furniture Since 2004</p>
+        <h1 class="font-ui text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.3] tracking-tight mb-8">
+          나무가 가구가 되는<br>
+          <em class="italic font-semibold underline decoration-accent decoration-[3px] underline-offset-[6px]">긴 시간</em>의 이야기
+        </h1>
+        <p class="font-body text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-[440px]">
+          한 그루의 나무가 한 점의 가구로 완성되기까지.<br class="hidden sm:block">
+          루미노 우드는 그 시간을 소중히 다룹니다.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#collection" class="btn-primary inline-block bg-accent text-white font-body text-sm md:text-base font-medium tracking-[0.04em] uppercase px-9 py-4 text-center">컬렉션 보기</a>
+          <a href="#contact" class="btn-secondary inline-block border border-white/40 text-white font-body text-sm md:text-base font-medium tracking-[0.04em] uppercase px-9 py-4 text-center hover:bg-white hover:text-text-primary">맞춤 제작 문의</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+
+    <!-- ============================================ -->
+    <!-- SECTION: BRAND STORY | MOVE: M-LAY-EDITORIAL-STORY (dark bg) -->
+    <!-- COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 75% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section w-full bg-bg-surface py-20 md:py-28 lg:py-32" aria-label="브랜드 스토리">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+          <!-- Text Block: col-span-5 -->
+          <div class="lg:col-span-5 lg:pr-4">
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent-secondary mb-5">Our Story</p>
+            <h2 class="font-ui text-3xl md:text-4xl font-semibold text-white leading-[1.2] tracking-[-0.01em] mb-6">
+              세상에 하나뿐인 가구를<br>
+              만드는 사람들
+            </h2>
+            <p class="font-body text-base md:text-lg text-white/70 leading-relaxed mb-6 max-w-[400px]">
+              2004년, 파주의 작은 공방에서 시작했습니다.<br class="hidden sm:block">
+              합판과 접착제 대신, 원목 한 장 한 장을<br class="hidden sm:block">
+              손으로 다듬어 가구를 만듭니다.
+            </p>
+            <p class="font-body text-base md:text-lg text-white/70 leading-relaxed max-w-[400px]">
+              빠르게 만들어 빠르게 버려지는 것들 사이에서,<br class="hidden sm:block">
+              시간이 지나도 남는 가구를 짓습니다.
+            </p>
+          </div>
+          <!-- Gap: col-span-1 -->
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <!-- Image Block: col-span-6 -->
+          <div class="lg:col-span-6 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/brand-story.jpg" alt="루미노 우드 공방에서 완성된 소파" class="w-full h-auto object-cover aspect-[4/3] img-hover" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: COLLECTION | MOVE: M-LAY-ALTERNATING-ROWS -->
+    <!-- COMPONENT_REF: alternating-brand-showcase-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/ | FIDELITY: 75% -->
+    <!-- ============================================ -->
+    <section id="collection" class="fade-in-section w-full bg-bg-page py-20 md:py-28 lg:py-32" aria-label="컬렉션">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="mb-16">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-text-muted mb-4">Collection</p>
+          <h2 class="font-ui text-3xl md:text-4xl font-semibold text-text-primary leading-[1.2] tracking-[-0.01em]">
+            손끝에서 완성되는<br>
+            네 가지 시그니처
+          </h2>
+        </div>
+
+        <!-- Row 1: Image left (7) + Text right (5) — Dining Table -->
+        <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center mb-16 lg:mb-24">
+          <div class="lg:col-span-7 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/collection-dining.jpg" alt="6인용 월넛 다이닝 테이블" class="w-full h-auto object-cover aspect-[16/10] img-hover" loading="lazy">
+          </div>
+          <div class="lg:col-span-4 lg:col-start-9">
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent mb-3">Dining Table</p>
+            <h3 class="font-ui text-xl md:text-2xl font-semibold text-text-primary leading-[1.3] mb-3">솔리드 월넛<br>다이닝 테이블</h3>
+            <p class="font-body text-base text-text-secondary leading-relaxed mb-4">매일의 식사가 특별해지는 자리. 천연 월넛의 깊은 결이 세월과 함께 더 아름다워집니다.</p>
+            <p class="font-body text-sm text-text-muted">₩2,800,000 — ₩4,500,000</p>
+          </div>
+        </div>
+
+        <!-- Row 2: Text left (4) + Image right (7) — Bookshelf -->
+        <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center mb-16 lg:mb-24">
+          <div class="lg:col-span-4 order-2 lg:order-1">
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent mb-3">Bookshelf</p>
+            <h3 class="font-ui text-xl md:text-2xl font-semibold text-text-primary leading-[1.3] mb-3">화이트 오크<br>북셸프</h3>
+            <p class="font-body text-base text-text-secondary leading-relaxed mb-4">단순한 수납을 넘어, 공간을 정의하는 오브제. 오크 특유의 밝은 목리가 방에 온기를 더합니다.</p>
+            <p class="font-body text-sm text-text-muted">₩1,200,000 —</p>
+          </div>
+          <div class="lg:col-span-7 lg:col-start-6 order-1 lg:order-2 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/collection-bookshelf.jpg" alt="화이트 오크 북셸프" class="w-full h-auto object-cover aspect-[4/3] img-hover" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Row 3: Two items side by side — Desk + Chair -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          <div class="stagger-item">
+            <div class="overflow-hidden mb-5" style="border-radius: var(--r-sm);">
+              <img src="./images/collection-desk.jpg" alt="월넛 라이팅 데스크" class="w-full h-auto object-cover aspect-[4/3] img-hover" loading="lazy">
+            </div>
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent mb-2">Writing Desk</p>
+            <h3 class="font-ui text-xl font-semibold text-text-primary leading-[1.3] mb-2">월넛 라이팅 데스크</h3>
+            <p class="font-body text-sm text-text-secondary leading-relaxed mb-2">집중의 시간을 위한 단정한 공간. 서랍 하나까지 장부 결합으로 마감했습니다.</p>
+            <p class="font-body text-sm text-text-muted">₩1,800,000 —</p>
+          </div>
+          <div class="stagger-item">
+            <div class="overflow-hidden mb-5" style="border-radius: var(--r-sm);">
+              <img src="./images/collection-chair.jpg" alt="오크 다이닝 체어" class="w-full h-auto object-cover aspect-[4/3] img-hover" loading="lazy">
+            </div>
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent mb-2">Dining Chair</p>
+            <h3 class="font-ui text-xl font-semibold text-text-primary leading-[1.3] mb-2">오크 다이닝 체어</h3>
+            <p class="font-body text-sm text-text-secondary leading-relaxed mb-2">오래 앉아도 편안한 곡선. 등받이의 곡률 하나에도 장인의 수십 년이 담겨 있습니다.</p>
+            <p class="font-body text-sm text-text-muted">₩680,000 —</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: PHILOSOPHY | MOVE: M-DIV-FULLBLEED-COLORBLOCK (key color) -->
+    <!-- COMPONENT_REF: custom-key-color-philosophy | GRADE: n/a | MODE: custom | FIDELITY: n/a -->
+    <!-- ============================================ -->
+    <section class="fade-in-section relative w-full min-h-[50vh]" aria-label="소재 철학">
+      <img src="./images/philosophy.jpg" alt="천연 월넛 원목의 나이테와 결" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0" style="background: rgba(139,94,60,0.82);"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+        <div class="max-w-[720px] mx-auto text-center">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-white/60 mb-5">Material Philosophy</p>
+          <h2 class="font-ui text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.4] tracking-[-0.01em] mb-8">
+            합판은 없습니다.<br>
+            <em class="italic">진짜 나무</em>만 씁니다.
+          </h2>
+          <p class="font-body text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-[520px] mx-auto">
+            북미산 솔리드 월넛과 유럽산 화이트 오크.<br class="hidden sm:block">
+            천연 오일 마감으로 나무가 숨 쉬도록.<br class="hidden sm:block">
+            베니어, MDF, 접착제를 쓰지 않는 것이 원칙입니다.
+          </p>
+          <div class="flex flex-wrap justify-center gap-x-10 gap-y-4">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="font-body text-sm text-white/80">솔리드 월넛</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="font-body text-sm text-white/80">화이트 오크</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="font-body text-sm text-white/80">천연 오일 마감</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="font-body text-sm text-white/80">No 베니어</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: PROCESS | MOVE: M-LAY-EDITORIAL-FEATURE (dark bg, accordion) -->
+    <!-- COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 70% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section w-full bg-bg-surface py-20 md:py-28 lg:py-32" aria-label="맞춤 제작 과정">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="mb-16">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-accent-secondary mb-4">Custom Order Process</p>
+          <h2 class="font-ui text-3xl md:text-4xl font-semibold text-white leading-[1.2] tracking-[-0.01em]">
+            한 점의 가구가<br>
+            완성되기까지
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0">
+          <!-- Accordion: col-span-5 -->
+          <div class="lg:col-span-5 lg:pr-6">
+            <!-- Step 1 -->
+            <div class="border-t border-border-strong py-5">
+              <button class="accordion-trigger flex items-center justify-between w-full text-left" aria-expanded="true">
+                <div class="flex items-center gap-4">
+                  <svg class="w-5 h-5 text-accent-secondary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+                  <span class="font-body text-base font-medium text-white">상담 및 컨설팅</span>
+                </div>
+                <svg class="accordion-icon rotated w-5 h-5 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              </button>
+              <div class="accordion-content open">
+                <p class="font-body text-sm text-white/60 leading-relaxed pt-3 pb-2 pl-9">공간의 크기, 용도, 취향을 함께 이야기합니다. 사진이나 도면이 있다면 더 좋습니다.</p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="border-t border-border-strong py-5">
+              <button class="accordion-trigger flex items-center justify-between w-full text-left" aria-expanded="false">
+                <div class="flex items-center gap-4">
+                  <svg class="w-5 h-5 text-accent-secondary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+                  <span class="font-body text-base font-medium text-white">수종 선택 및 디자인</span>
+                </div>
+                <svg class="accordion-icon w-5 h-5 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              </button>
+              <div class="accordion-content">
+                <p class="font-body text-sm text-white/60 leading-relaxed pt-3 pb-2 pl-9">월넛과 오크 중 수종을 선택하고, 크기·형태·마감을 확정합니다. 원목 샘플을 직접 만져보실 수 있습니다.</p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="border-t border-border-strong py-5">
+              <button class="accordion-trigger flex items-center justify-between w-full text-left" aria-expanded="false">
+                <div class="flex items-center gap-4">
+                  <svg class="w-5 h-5 text-accent-secondary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.1-5.1m0 0L11.42 4.97m-5.1 5.1H21M3 21h18"/></svg>
+                  <span class="font-body text-base font-medium text-white">수작업 제작 (4-6주)</span>
+                </div>
+                <svg class="accordion-icon w-5 h-5 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              </button>
+              <div class="accordion-content">
+                <p class="font-body text-sm text-white/60 leading-relaxed pt-3 pb-2 pl-9">건조된 원목을 재단하고, 장부 결합과 대패 작업으로 한 점 한 점 만듭니다. 제작 과정은 사진으로 공유해 드립니다.</p>
+              </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="border-t border-border-strong py-5">
+              <button class="accordion-trigger flex items-center justify-between w-full text-left" aria-expanded="false">
+                <div class="flex items-center gap-4">
+                  <svg class="w-5 h-5 text-accent-secondary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+                  <span class="font-body text-base font-medium text-white">배송 및 설치</span>
+                </div>
+                <svg class="accordion-icon w-5 h-5 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              </button>
+              <div class="accordion-content">
+                <p class="font-body text-sm text-white/60 leading-relaxed pt-3 pb-2 pl-9">수도권은 직접 배송·설치합니다. 가구의 위치와 수평을 꼼꼼히 맞추고, 관리 방법을 안내해 드립니다.</p>
+              </div>
+            </div>
+            <div class="border-t border-border-strong"></div>
+          </div>
+          <!-- Gap: col-span-1 -->
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <!-- Image: col-span-6 -->
+          <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+            <div class="overflow-hidden" style="border-radius: var(--r-sm);">
+              <img src="./images/process-1.jpg" alt="원목 재단 과정" class="w-full h-full object-cover aspect-[3/4] img-hover" loading="lazy">
+            </div>
+            <div class="overflow-hidden mt-8" style="border-radius: var(--r-sm);">
+              <img src="./images/process-2.jpg" alt="천연 오일 마감 과정" class="w-full h-full object-cover aspect-[3/4] img-hover" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: WORKSHOP DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 70% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section relative w-full min-h-[50vh]" aria-label="공방">
+      <img src="./images/workshop-divider.jpg" alt="루미노 우드 공방 전경, 도구와 대패밥" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-black/65"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex items-center justify-center text-center">
+        <div>
+          <h2 class="font-ui text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.2] tracking-[-0.01em] mb-4">
+            <em class="italic">손으로 짓는</em> 시간
+          </h2>
+          <p class="font-body text-base md:text-lg text-white/70 leading-relaxed max-w-[480px] mx-auto">
+            기계가 대신할 수 없는 것들이 있습니다.<br class="hidden sm:block">
+            나무의 결을 읽고, 적합한 결합을 찾는 일.<br class="hidden sm:block">
+            그것이 루미노 우드의 방식입니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: CRAFTSMAN | MOVE: M-LAY-EDITORIAL-STORY (light bg, reversed) -->
+    <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 75% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section w-full bg-bg-page py-20 md:py-28 lg:py-32" aria-label="장인 소개">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+          <!-- Image Block: col-span-7 -->
+          <div class="lg:col-span-7 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/craftsman.jpg" alt="장인 강민호, 공방에서 원목을 다듬는 모습" class="w-full h-auto object-cover aspect-[4/3] img-hover" loading="lazy">
+          </div>
+          <!-- Gap: col-span-1 -->
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <!-- Text Block: col-span-4 -->
+          <div class="lg:col-span-4">
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-text-muted mb-5">Master Craftsman</p>
+            <h2 class="font-ui text-3xl md:text-4xl font-semibold text-text-primary leading-[1.2] tracking-[-0.01em] mb-6">
+              강민호<br>
+              <span class="text-2xl md:text-3xl font-normal text-text-secondary">목수, 20년</span>
+            </h2>
+            <p class="font-body text-base text-text-secondary leading-relaxed mb-6">
+              스무 살에 시작한 목공이 어느새 반평생이 됐습니다. 스승에게 배운 전통 장부 결합 기법을 고집하며, 못 하나 쓰지 않는 가구를 만듭니다.
+            </p>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+                <span class="font-body text-sm text-text-secondary">전통 목공예 사사 (이수 장인)</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+                <span class="font-body text-sm text-text-secondary">2004년 루미노 우드 설립</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+                <span class="font-body text-sm text-text-secondary">누적 제작 1,200점 이상</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: SHOWROOM | MOVE: M-LAY-ASYM-GRID (staggered gallery) -->
+    <!-- COMPONENT_REF: staggered-hotel-gallery-5-3-3-mt24 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/ | FIDELITY: 70% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section w-full bg-bg-surface py-20 md:py-28 lg:py-32" aria-label="쇼룸">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 mb-16">
+          <div class="lg:col-span-6">
+            <p class="font-body text-xs tracking-[0.08em] uppercase text-accent-secondary mb-4">Showroom</p>
+            <h2 class="font-ui text-3xl md:text-4xl font-semibold text-white leading-[1.2] tracking-[-0.01em]">
+              파주 헤이리,<br>
+              나무를 만나는 공간
+            </h2>
+          </div>
+          <div class="lg:col-span-5 lg:col-start-8 flex items-end">
+            <p class="font-body text-base text-white/60 leading-relaxed">
+              완성된 가구를 직접 보고 만질 수 있습니다.<br class="hidden sm:block">
+              원목 샘플과 마감재도 비치되어 있으니,<br class="hidden sm:block">
+              맞춤 제작 상담도 현장에서 가능합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Staggered Gallery -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-5">
+          <div class="stagger-item md:col-span-5 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/showroom-1.jpg" alt="파주 쇼룸 내부, 다이닝 세트 전시" class="w-full h-full object-cover aspect-[3/4] img-hover" loading="lazy">
+          </div>
+          <div class="stagger-item md:col-span-4 md:mt-16 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/showroom-2.jpg" alt="쇼룸 거실 가구 세팅" class="w-full h-full object-cover aspect-[4/5] img-hover" loading="lazy">
+          </div>
+          <div class="stagger-item md:col-span-3 md:mt-8 overflow-hidden" style="border-radius: var(--r-sm);">
+            <img src="./images/showroom-3.jpg" alt="원목 샘플 전시 공간" class="w-full h-full object-cover aspect-[3/4] img-hover" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Showroom Info -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="stagger-item flex items-start gap-3">
+            <svg class="w-5 h-5 text-accent-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            <div>
+              <p class="font-body text-sm font-medium text-white mb-1">주소</p>
+              <p class="font-body text-sm text-white/60">경기도 파주시 탄현면<br>헤이리마을길 82-15</p>
+            </div>
+          </div>
+          <div class="stagger-item flex items-start gap-3">
+            <svg class="w-5 h-5 text-accent-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div>
+              <p class="font-body text-sm font-medium text-white mb-1">운영 시간</p>
+              <p class="font-body text-sm text-white/60">화 — 토 10:00 — 18:00<br>일·월 휴무 (예약제 운영)</p>
+            </div>
+          </div>
+          <div class="stagger-item flex items-start gap-3">
+            <svg class="w-5 h-5 text-accent-secondary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            <div>
+              <p class="font-body text-sm font-medium text-white mb-1">예약 문의</p>
+              <p class="font-body text-sm text-white/60">031-946-7820<br>hello@luminowood.kr</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: TESTIMONIALS | MOVE: M-TRUST-AWARDS-CERTS (light bg) -->
+    <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 75% -->
+    <!-- ============================================ -->
+    <section class="fade-in-section w-full bg-bg-page py-20 md:py-28 lg:py-32" aria-label="고객 후기">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="text-center mb-16">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-text-muted mb-4">Testimonials</p>
+          <h2 class="font-ui text-3xl md:text-4xl font-semibold text-text-primary leading-[1.2] tracking-[-0.01em]">
+            함께한 분들의 이야기
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Review 1 -->
+          <div class="stagger-item bg-bg-surface p-7 md:p-8" style="border-radius: var(--r-sm);">
+            <div class="flex gap-1 mb-5">
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+            </div>
+            <p class="font-body text-sm text-white/70 leading-relaxed mb-6">"10년 된 다이닝 테이블이 오히려 더 예뻐졌어요. 아이들이 쓰다 생긴 작은 흠집도 이제는 추억이 됐습니다. 이런 가구는 처음이에요."</p>
+            <div>
+              <p class="font-body text-sm font-medium text-white">김서연</p>
+              <p class="font-body text-xs text-white/40">월넛 6인 다이닝 세트 · 2016</p>
+            </div>
+          </div>
+          <!-- Review 2 -->
+          <div class="stagger-item bg-bg-surface p-7 md:p-8" style="border-radius: var(--r-sm);">
+            <div class="flex gap-1 mb-5">
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+            </div>
+            <p class="font-body text-sm text-white/70 leading-relaxed mb-6">"설계사무소 미팅 테이블을 맞춤 제작했습니다. 클라이언트들이 테이블부터 칭찬하세요. 6주를 기다린 보람이 있었습니다."</p>
+            <div>
+              <p class="font-body text-sm font-medium text-white">박준형</p>
+              <p class="font-body text-xs text-white/40">오크 미팅 테이블 2400 · 2022</p>
+            </div>
+          </div>
+          <!-- Review 3 -->
+          <div class="stagger-item bg-bg-surface p-7 md:p-8" style="border-radius: var(--r-sm);">
+            <div class="flex gap-1 mb-5">
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+              <svg class="w-4 h-4 text-accent-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+            </div>
+            <p class="font-body text-sm text-white/70 leading-relaxed mb-6">"엄마가 쓰시던 화장대를 리폼해 달라고 했는데, 나무를 살리면서 새것처럼 바꿔주셨어요. 정성이 느껴지는 작업이었습니다."</p>
+            <div>
+              <p class="font-body text-sm font-medium text-white">이하은</p>
+              <p class="font-body text-xs text-white/40">월넛 화장대 리폼 · 2024</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: footer-get-in-touch | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 75% -->
+    <!-- ============================================ -->
+    <section id="contact" class="fade-in-section relative w-full min-h-[60vh]" aria-label="문의하기">
+      <img src="./images/cta-bg.jpg" alt="완성된 월넛 다이닝 세트가 놓인 공간" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center justify-center text-center">
+        <div class="max-w-[600px]">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-white/50 mb-5">Get In Touch</p>
+          <h2 class="font-ui text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.2] tracking-[-0.01em] mb-6">
+            당신만의 가구,<br>
+            함께 그려보겠습니다
+          </h2>
+          <p class="font-body text-base md:text-lg text-white/70 leading-relaxed mb-10">
+            공간에 맞는 가구를 상담해 드립니다.<br class="hidden sm:block">
+            쇼룸 방문 예약도 언제든 환영합니다.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:031-946-7820" class="btn-primary inline-block bg-accent text-white font-body text-sm md:text-base font-medium tracking-[0.04em] uppercase px-9 py-4 text-center">맞춤 제작 문의</a>
+            <a href="#showroom" class="btn-secondary inline-block border border-white/40 text-white font-body text-sm md:text-base font-medium tracking-[0.04em] uppercase px-9 py-4 text-center hover:bg-white hover:text-text-primary">쇼룸 예약하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-bg-surface py-12" aria-label="푸터">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+        <div class="md:col-span-4">
+          <p class="font-ui text-2xl font-bold text-white tracking-tight mb-3">LUMINO WOOD</p>
+          <p class="font-body text-sm text-white/50 leading-relaxed">시간이 지나도 남는 가구.<br>천연 원목 수공예 가구 브랜드.</p>
+        </div>
+        <div class="md:col-span-3 md:col-start-6">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-white/40 mb-3">Contact</p>
+          <p class="font-body text-sm text-white/60 leading-relaxed">031-946-7820<br>hello@luminowood.kr</p>
+        </div>
+        <div class="md:col-span-3 md:col-start-10">
+          <p class="font-body text-xs tracking-[0.08em] uppercase text-white/40 mb-3">Location</p>
+          <p class="font-body text-sm text-white/60 leading-relaxed">경기도 파주시 탄현면<br>헤이리마을길 82-15</p>
+        </div>
+      </div>
+      <div class="border-t border-border-strong pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
+        <p class="font-body text-xs text-white/30">&copy; 2024 루미노 우드. All rights reserved.</p>
+        <p class="font-body text-xs text-white/30">사업자등록번호 128-86-01234</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript: Scroll Animations -->
+  <script>
+    // IntersectionObserver for fade-in sections
+    (function() {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mq.matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(function(el) {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-50px 0px' });
+
+      document.querySelectorAll('.fade-in-section').forEach(function(section) {
+        sectionObserver.observe(section);
+      });
+
+      // Stagger items
+      const staggerObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const parent = entry.target.closest('section') || entry.target.parentElement;
+            const siblings = parent.querySelectorAll('.stagger-item');
+            siblings.forEach(function(item, index) {
+              item.style.transitionDelay = (index * 0.1) + 's';
+              item.classList.add('is-visible');
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-30px 0px' });
+
+      document.querySelectorAll('.stagger-item').forEach(function(item, index) {
+        if (index === 0 || !item.previousElementSibling || !item.previousElementSibling.classList.contains('stagger-item')) {
+          staggerObserver.observe(item);
+        }
+      });
+    })();
+
+    // Accordion
+    (function() {
+      document.querySelectorAll('.accordion-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+          const content = this.nextElementSibling;
+          const icon = this.querySelector('.accordion-icon');
+          const isOpen = content.classList.contains('open');
+
+          // Close all
+          document.querySelectorAll('.accordion-content').forEach(function(c) { c.classList.remove('open'); });
+          document.querySelectorAll('.accordion-icon').forEach(function(i) { i.classList.remove('rotated'); });
+          document.querySelectorAll('.accordion-trigger').forEach(function(t) { t.setAttribute('aria-expanded', 'false'); });
+
+          if (!isOpen) {
+            content.classList.add('open');
+            icon.classList.add('rotated');
+            this.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

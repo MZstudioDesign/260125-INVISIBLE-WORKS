@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에코라브 스킨 — 피부가 기억하는 제주의 시간</title>
+    <meta name="description" content="제주 보태니컬 농원에서 직접 재배한 원료로 만든 비건 스킨케어. EWG 그린 등급, 동물실험 반대. 에코라브 스킨.">
+    <meta property="og:title" content="에코라브 스킨 — 피부가 기억하는 제주의 시간">
+    <meta property="og:description" content="10년의 연구, 제주 식물에서 찾은 답. 당신의 피부에 자연의 시간을 선물합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="#">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'Georgia', 'serif'],
+                        'sans': ['Noto Sans KR', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'page': '#FAF8F3',
+                        'surface': '#F0EBE1',
+                        'forest': {
+                            DEFAULT: '#3D5A3E',
+                            light: '#8BA888',
+                            dark: '#2E4A2F',
+                        },
+                        'deep': '#1A1A18',
+                        'warm': {
+                            DEFAULT: '#4A4A42',
+                            muted: '#8A8A7E',
+                        },
+                        'sand': {
+                            DEFAULT: '#E0DACE',
+                            strong: '#B8B0A0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #FAF8F3;
+            --bg-surface: #F0EBE1;
+            --bg-card: #FFFFFF;
+            --accent-primary: #3D5A3E;
+            --accent-secondary: #8BA888;
+            --link-color: #2E4A2F;
+            --text-primary: #1A1A18;
+            --text-secondary: #4A4A42;
+            --text-muted: #8A8A7E;
+            --border-default: #E0DACE;
+            --border-strong: #B8B0A0;
+            --font-ui: 'DM Serif Display', serif;
+            --font-data: 'Noto Sans KR', sans-serif;
+            --content-max-width: 1200px;
+            --content-narrow: 800px;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            font-family: var(--font-data);
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Horizontal Scroll */
+        .hscroll-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .hscroll-container::-webkit-scrollbar { display: none; }
+        .hscroll-item { scroll-snap-align: start; }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section,
+            .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Button Transitions */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-primary);
+            opacity: 0.3;
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: 3px solid var(--bg-page);
+            position: absolute;
+            left: 19px;
+            top: 4px;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            z-index: 999;
+            padding: 0.5rem 1rem;
+            background: var(--accent-primary);
+            color: white;
+        }
+        .skip-link:focus {
+            left: 0;
+        }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "에코라브 스킨",
+        "description": "제주 보태니컬 농원에서 직접 재배한 원료로 만든 비건 스킨케어 브랜드",
+        "url": "#",
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "제주특별자치도",
+            "addressLocality": "서귀포시"
+        }
+    }
+    </script>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<!-- HEADER / NAV -->
+<header class="fixed top-0 left-0 w-full z-50 bg-page/90 backdrop-blur-sm border-b border-sand">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16">
+        <a href="#" class="font-serif text-xl text-deep tracking-tight" aria-label="에코라브 스킨 홈">ECOLOVE SKIN</a>
+        <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+            <a href="#story" class="text-sm text-warm hover:text-forest transition-colors">스토리</a>
+            <a href="#products" class="text-sm text-warm hover:text-forest transition-colors">제품</a>
+            <a href="#sustainability" class="text-sm text-warm hover:text-forest transition-colors">지속가능성</a>
+            <a href="#faq" class="text-sm text-warm hover:text-forest transition-colors">FAQ</a>
+            <a href="#cta-final" class="text-sm font-medium text-white bg-forest px-5 py-2 hover:brightness-110 active:scale-95">구매하기</a>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden text-deep" aria-label="메뉴 열기">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-page border-t border-sand">
+        <div class="px-6 py-4 space-y-3">
+            <a href="#story" class="block text-sm text-warm py-2">스토리</a>
+            <a href="#products" class="block text-sm text-warm py-2">제품</a>
+            <a href="#sustainability" class="block text-sm text-warm py-2">지속가능성</a>
+            <a href="#faq" class="block text-sm text-warm py-2">FAQ</a>
+            <a href="#cta-final" class="block text-sm font-medium text-white bg-forest px-5 py-3 text-center mt-2">구매하기</a>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: HERO — M-HERO-FULLBLEED-OVERLAY -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-screen" aria-label="Hero">
+    <img src="./images/hero.jpg" alt="제주 자연에서 영감을 받은 에코라브 스킨 제품" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/85 via-[#1A1A18]/40 to-[#1A1A18]/15"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-sans">ECOLOVE SKIN · JEJU BOTANICAL</p>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+            피부가 기억하는<br>제주의 시간
+        </h1>
+        <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+            10년의 연구, 제주 식물에서 찾은 답.
+            당신의 피부에 자연의 시간을 선물합니다.
+        </p>
+        <div class="flex flex-wrap gap-4">
+            <a href="#products" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#1A1A18] transition-colors">
+                컬렉션 보기
+            </a>
+            <a href="#story" class="bg-forest text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:brightness-110 transition-colors">
+                브랜드 스토리
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: FOUNDER STORY — M-LAY-EDITORIAL-FEATURE -->
+<!-- COMPONENT_REF: asymmetric-blog-large7-small5-stack | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="story" class="fade-in-section w-full bg-surface" aria-label="창업자 스토리">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">OUR STORY</p>
+        <h2 class="font-serif text-deep leading-[1.35] mb-12" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+            제주에서 시작된<br>작은 약속
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Large Image (col-7) -->
+            <div class="lg:col-span-7">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/founder.jpg" alt="에코라브 스킨 김소연 대표" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+            </div>
+            <!-- Text + Small Image Stack (col-5) -->
+            <div class="lg:col-span-5 flex flex-col justify-between gap-8">
+                <div>
+                    <p class="text-warm leading-[1.8] mb-6">
+                        피부과 전문의 출신 김소연 대표가<br class="hidden sm:block">
+                        아토피를 앓는 딸을 위해 시작한 연구.<br class="hidden sm:block">
+                        제주 서귀포 보태니컬 농원에서 직접 재배한<br class="hidden sm:block">
+                        원료로, 가족에게 바를 수 있는<br class="hidden sm:block">
+                        화장품만을 만듭니다.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-forest hover:text-forest-dark group">
+                        더 알아보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="aspect-[16/9] overflow-hidden">
+                    <img src="./images/jeju_farm.jpg" alt="제주 서귀포 보태니컬 농원 전경" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: INGREDIENT PROCESS — M-LAY-TIMELINE-STEPPER -->
+<!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/ | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="fade-in-section w-full bg-page" aria-label="원료의 여정">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <div class="max-w-[480px] mb-16">
+            <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">INGREDIENT JOURNEY</p>
+            <h2 class="font-serif text-deep leading-[1.35] mb-4" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+                원료의 여정,<br>농장에서 피부까지
+            </h2>
+            <p class="text-warm leading-relaxed">
+                모든 과정은 제주 자체 연구소에서 진행됩니다.
+            </p>
+        </div>
+
+        <!-- Timeline — Desktop: horizontal, Mobile: vertical -->
+        <div class="hidden lg:grid grid-cols-4 gap-8">
+            <div class="stagger-item relative group">
+                <div class="w-12 h-12 border-2 border-forest flex items-center justify-center mb-6 group-hover:bg-forest group-hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+                </div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-2">Step 01</p>
+                <h3 class="font-serif text-lg text-deep mb-2">채취</h3>
+                <p class="text-sm text-warm leading-relaxed">제주 서귀포 농원에서<br>이른 아침 직접 수확합니다.</p>
+                <div class="hidden lg:block absolute top-[26px] left-[52px] w-[calc(100%+32px-52px)] h-px bg-sand-strong"></div>
+            </div>
+            <div class="stagger-item relative group">
+                <div class="w-12 h-12 border-2 border-forest flex items-center justify-center mb-6 group-hover:bg-forest group-hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M12 14v4"/><path d="M20 7H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M12 14a4 4 0 0 0 4 4h4"/><path d="M12 14a4 4 0 0 1-4 4H4"/></svg>
+                </div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-2">Step 02</p>
+                <h3 class="font-serif text-lg text-deep mb-2">저온 추출</h3>
+                <p class="text-sm text-warm leading-relaxed">35°C 이하 저온에서<br>유효 성분을 최대한 보존합니다.</p>
+                <div class="hidden lg:block absolute top-[26px] left-[52px] w-[calc(100%+32px-52px)] h-px bg-sand-strong"></div>
+            </div>
+            <div class="stagger-item relative group">
+                <div class="w-12 h-12 border-2 border-forest flex items-center justify-center mb-6 group-hover:bg-forest group-hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-2">Step 03</p>
+                <h3 class="font-serif text-lg text-deep mb-2">48시간 숙성</h3>
+                <p class="text-sm text-warm leading-relaxed">자체 발효 기술로<br>피부 흡수율을 극대화합니다.</p>
+                <div class="hidden lg:block absolute top-[26px] left-[52px] w-[calc(100%+32px-52px)] h-px bg-sand-strong"></div>
+            </div>
+            <div class="stagger-item group">
+                <div class="w-12 h-12 border-2 border-forest flex items-center justify-center mb-6 group-hover:bg-forest group-hover:text-white transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                </div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-2">Step 04</p>
+                <h3 class="font-serif text-lg text-deep mb-2">무균 충전</h3>
+                <p class="text-sm text-warm leading-relaxed">클린룸 환경에서<br>안전하게 제품화합니다.</p>
+            </div>
+        </div>
+
+        <!-- Mobile Timeline (vertical) -->
+        <div class="lg:hidden relative pl-14">
+            <div class="timeline-line"></div>
+            <div class="stagger-item relative pb-10">
+                <div class="timeline-dot"></div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-1">Step 01</p>
+                <h3 class="font-serif text-lg text-deep mb-1">채취</h3>
+                <p class="text-sm text-warm leading-relaxed">제주 서귀포 농원에서 이른 아침 직접 수확합니다.</p>
+            </div>
+            <div class="stagger-item relative pb-10">
+                <div class="timeline-dot"></div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-1">Step 02</p>
+                <h3 class="font-serif text-lg text-deep mb-1">저온 추출</h3>
+                <p class="text-sm text-warm leading-relaxed">35°C 이하 저온에서 유효 성분을 최대한 보존합니다.</p>
+            </div>
+            <div class="stagger-item relative pb-10">
+                <div class="timeline-dot"></div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-1">Step 03</p>
+                <h3 class="font-serif text-lg text-deep mb-1">48시간 숙성</h3>
+                <p class="text-sm text-warm leading-relaxed">자체 발효 기술로 피부 흡수율을 극대화합니다.</p>
+            </div>
+            <div class="stagger-item relative">
+                <div class="timeline-dot"></div>
+                <p class="text-xs tracking-[0.15em] uppercase text-forest font-medium mb-1">Step 04</p>
+                <h3 class="font-serif text-lg text-deep mb-1">무균 충전</h3>
+                <p class="text-sm text-warm leading-relaxed">클린룸 환경에서 안전하게 제품화합니다.</p>
+            </div>
+        </div>
+
+        <!-- Process images -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+            <div class="stagger-item aspect-[16/9] overflow-hidden">
+                <img src="./images/process_harvest.jpg" alt="제주 보태니컬 농원 원료 수확 과정" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="stagger-item aspect-[16/9] overflow-hidden">
+                <img src="./images/process_lab.jpg" alt="에코라브 스킨 자체 연구소 추출 과정" class="w-full h-full object-cover" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: PRODUCT LINEUP — M-INT-HSCROLL-GALLERY -->
+<!-- COMPONENT_REF: card-carousel (adapted to hscroll) | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/image-title-text/ | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section id="products" class="fade-in-section w-full bg-surface" aria-label="제품 라인업">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <div class="flex items-end justify-between mb-12">
+            <div>
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">THE COLLECTION</p>
+                <h2 class="font-serif text-deep leading-[1.35]" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+                    자연이 만든<br>네 가지 약속
+                </h2>
+            </div>
+            <div class="hidden md:flex items-center gap-3">
+                <button id="scroll-left" class="w-10 h-10 border border-sand-strong flex items-center justify-center text-warm hover:border-forest hover:text-forest transition-colors" aria-label="이전 제품">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button id="scroll-right" class="w-10 h-10 border border-sand-strong flex items-center justify-center text-warm hover:border-forest hover:text-forest transition-colors" aria-label="다음 제품">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="product-scroll" class="hscroll-container flex gap-6 pb-4">
+            <!-- Product 1: Cleanser -->
+            <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
+                <div class="aspect-[3/4] overflow-hidden">
+                    <img src="./images/product_cleanser.jpg" alt="에코라브 보태니컬 클렌저" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Cleanser</p>
+                    <h3 class="font-serif text-lg text-deep mb-1">보태니컬 클렌저</h3>
+                    <p class="text-sm text-warm leading-relaxed mb-4">제주 동백 오일 베이스<br>저자극 약산성 폼</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base font-medium text-deep">₩28,000</span>
+                        <a href="#" class="text-xs tracking-[0.1em] uppercase text-forest hover:underline">상세보기</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 2: Serum -->
+            <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
+                <div class="aspect-[3/4] overflow-hidden">
+                    <img src="./images/product_serum.jpg" alt="에코라브 세이지 리페어 세럼" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Serum</p>
+                    <h3 class="font-serif text-lg text-deep mb-1">세이지 리페어 세럼</h3>
+                    <p class="text-sm text-warm leading-relaxed mb-4">세이지 추출물 38%<br>피부장벽 강화 앰플</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base font-medium text-deep">₩48,000</span>
+                        <a href="#" class="text-xs tracking-[0.1em] uppercase text-forest hover:underline">상세보기</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 3: Cream -->
+            <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
+                <div class="aspect-[3/4] overflow-hidden">
+                    <img src="./images/product_cream.jpg" alt="에코라브 에버그린 크림" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Cream</p>
+                    <h3 class="font-serif text-lg text-deep mb-1">에버그린 크림</h3>
+                    <p class="text-sm text-warm leading-relaxed mb-4">48시간 숙성 녹차 발효<br>깊은 보습 수분크림</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base font-medium text-deep">₩38,000</span>
+                        <a href="#" class="text-xs tracking-[0.1em] uppercase text-forest hover:underline">상세보기</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 4: Special Set -->
+            <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
+                <div class="aspect-[3/4] overflow-hidden">
+                    <img src="./images/product_set.jpg" alt="에코라브 제주 컬렉션 스페셜 세트" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs tracking-[0.1em] uppercase text-forest-light mb-2">Best Value</p>
+                    <h3 class="font-serif text-lg text-deep mb-1">제주 컬렉션 세트</h3>
+                    <p class="text-sm text-warm leading-relaxed mb-4">클렌저 + 세럼 + 크림<br>파우치 + 미니 사이즈 포함</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-base font-medium text-deep">₩98,000</span>
+                        <a href="#" class="text-xs tracking-[0.1em] uppercase text-forest hover:underline">상세보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: NATURE DIVIDER (Full-Bleed, Parallax) — M-DIV-PARALLAX-LIGHT -->
+<!-- COMPONENT_REF: text-parallax-content (adapted) | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/image-title-text/ | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[60vh] flex items-center justify-center" aria-label="성분 인증">
+    <img src="./images/nature_divider.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <div class="absolute inset-0 bg-[#3D5A3E]/75"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+        <h2 class="font-serif text-white leading-[1.35] mb-6" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+            모든 성분은<br>EWG 그린 등급입니다
+        </h2>
+        <p class="text-white/80 text-base leading-relaxed max-w-[480px] mx-auto mb-8">
+            비건 인증 · 동물실험 반대 · 피부 자극 테스트 완료
+        </p>
+        <div class="flex items-center justify-center gap-10 flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <span class="text-white/90 text-xs tracking-wider">EWG GREEN</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.4 18.5 2c1 5.5-1 8-3 10.5M7 18a4 4 0 0 1-.5-8.5 5 5 0 0 1 10 0A4 4 0 0 1 7 18Z"/></svg>
+                </div>
+                <span class="text-white/90 text-xs tracking-wider">VEGAN</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+                </div>
+                <span class="text-white/90 text-xs tracking-wider">CRUELTY FREE</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <div class="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </div>
+                <span class="text-white/90 text-xs tracking-wider">DERMA TESTED</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: SUSTAINABILITY — M-LAY-ALTERNATING-ROWS -->
+<!-- COMPONENT_REF: alternating-brand-showcase-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/ | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section id="sustainability" class="fade-in-section w-full bg-page" aria-label="지속가능성">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <div class="max-w-[480px] mb-16">
+            <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">FOR THE EARTH</p>
+            <h2 class="font-serif text-deep leading-[1.35] mb-4" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+                지구를 위한<br>작은 선택들
+            </h2>
+        </div>
+
+        <!-- Row 1: Image Left (7) + Text Right (5) -->
+        <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+            <div class="lg:col-span-7">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/sustainability_1.jpg" alt="에코라브 스킨 재활용 가능 패키징" class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+            <div class="lg:col-span-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 border border-forest flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-forest"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9"/></svg>
+                    </div>
+                    <h3 class="font-serif text-xl text-deep">리필 프로그램</h3>
+                </div>
+                <p class="text-warm leading-[1.8]">
+                    용기를 반납하면 다음 주문에서 15% 할인.<br class="hidden sm:block">
+                    수거된 용기는 세척 후 재사용되며,<br class="hidden sm:block">
+                    사용 불가 시 100% 재활용 처리됩니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Row 2: Text Left (5) + Image Right (7) -->
+        <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+            <div class="lg:col-span-5 order-2 lg:order-1">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 border border-forest flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-forest"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></svg>
+                    </div>
+                    <h3 class="font-serif text-xl text-deep">재활용 패키징</h3>
+                </div>
+                <p class="text-warm leading-[1.8]">
+                    모든 외부 포장은 FSC 인증 종이,<br class="hidden sm:block">
+                    대두잉크 인쇄를 사용합니다.<br class="hidden sm:block">
+                    플라스틱 사용량을 연간 82% 줄였습니다.
+                </p>
+            </div>
+            <div class="lg:col-span-7 order-1 lg:order-2">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/sustainability_2.jpg" alt="에코라브 FSC 인증 친환경 포장재" class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Image Left (7) + Text Right (5) -->
+        <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7">
+                <div class="aspect-[16/10] overflow-hidden">
+                    <img src="./images/sustainability_3.jpg" alt="에코라브 탄소중립 배송 프로그램" class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+            <div class="lg:col-span-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 border border-forest flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-forest"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.4 18.5 2c1 5.5-1 8-3 10.5M7 18a4 4 0 0 1-.5-8.5 5 5 0 0 1 10 0A4 4 0 0 1 7 18Z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-xl text-deep">탄소중립 배송</h3>
+                </div>
+                <p class="text-warm leading-[1.8]">
+                    모든 배송에서 발생하는 탄소를<br class="hidden sm:block">
+                    제주 조림 사업으로 상쇄합니다.<br class="hidden sm:block">
+                    2024년 기준 142톤 CO₂ 상쇄 완료.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: REVIEWS — M-LAY-EDITORIAL-TYPO -->
+<!-- COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section class="fade-in-section w-full bg-surface" aria-label="고객 리뷰">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3 text-center">REAL VOICES</p>
+        <h2 class="font-serif text-deep leading-[1.35] mb-16 text-center" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+            피부가 먼저<br>알아본 변화
+        </h2>
+
+        <!-- Large Quote -->
+        <div class="stagger-item max-w-[700px] mx-auto text-center mb-16">
+            <span class="font-serif text-5xl text-forest/30 italic">&ldquo;</span>
+            <p class="text-lg text-deep leading-[1.8] -mt-4 mb-6">
+                아토피로 고생하던 딸에게 써보고 깜짝 놀랐어요.<br class="hidden sm:block">
+                첫 주부터 뺨의 붉은기가 줄었고, 한 달 후엔<br class="hidden sm:block">
+                피부결이 눈에 띄게 달라졌습니다.
+            </p>
+            <div class="flex items-center justify-center gap-3">
+                <img src="./images/review_1.jpg" alt="리뷰어 이정은" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                <div class="text-left">
+                    <p class="text-sm font-medium text-deep">이정은</p>
+                    <p class="text-xs text-warm-muted">민감성 · 세럼 3개월 사용</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two smaller quotes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="stagger-item bg-white p-8 border border-sand">
+                <div class="flex gap-1 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <p class="text-warm leading-[1.8] mb-6">
+                    남자라 스킨케어에 관심 없었는데, 여자친구 권유로 세트 써봤습니다. 세안 후 당김이 없고 다음 날 피부가 촉촉해요. 이제 직접 재구매합니다.
+                </p>
+                <div class="flex items-center gap-3">
+                    <img src="./images/review_2.jpg" alt="리뷰어 박준혁" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    <div>
+                        <p class="text-sm font-medium text-deep">박준혁</p>
+                        <p class="text-xs text-warm-muted">복합성 · 세트 2개월 사용</p>
+                    </div>
+                </div>
+            </div>
+            <div class="stagger-item bg-white p-8 border border-sand">
+                <div class="flex gap-1 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#3D5A3E" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <p class="text-warm leading-[1.8] mb-6">
+                    임신 중 화장품을 다 바꿨는데, 에코라브는 EWG 그린 등급이라 안심하고 씁니다. 크림 텍스처가 가볍고 흡수가 빨라서 여름에도 좋아요.
+                </p>
+                <div class="flex items-center gap-3">
+                    <img src="./images/review_3.jpg" alt="리뷰어 한수진" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    <div>
+                        <p class="text-sm font-medium text-deep">한수진</p>
+                        <p class="text-xs text-warm-muted">건성 · 크림 4개월 사용</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: TRUST CERTIFICATION (Full-Bleed, Key Color 40vh+) — M-TRUST-AWARDS-CERTS -->
+<!-- COMPONENT_REF: dark-testimonial-cards-text (adapted) | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[50vh] flex items-center" aria-label="인증 및 신뢰">
+    <img src="./images/trust_bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <div class="absolute inset-0 bg-[#3D5A3E]/80"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
+        <div class="text-center mb-12">
+            <p class="text-xs font-medium tracking-[0.15em] uppercase text-white/60 mb-3">CERTIFIED TRUST</p>
+            <h2 class="font-serif text-white leading-[1.35]" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+                신뢰할 수 있는 약속
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="stagger-item text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <p class="text-white font-medium text-sm mb-1">EWG 그린 등급</p>
+                <p class="text-white/60 text-xs">전 성분 안전 인증</p>
+            </div>
+            <div class="stagger-item text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.4 18.5 2c1 5.5-1 8-3 10.5M7 18a4 4 0 0 1-.5-8.5 5 5 0 0 1 10 0A4 4 0 0 1 7 18Z"/></svg>
+                </div>
+                <p class="text-white font-medium text-sm mb-1">한국 비건 인증원</p>
+                <p class="text-white/60 text-xs">100% 식물 유래 성분</p>
+            </div>
+            <div class="stagger-item text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                </div>
+                <p class="text-white font-medium text-sm mb-1">KFDA 안전 검증</p>
+                <p class="text-white/60 text-xs">식약처 기능성 화장품</p>
+            </div>
+            <div class="stagger-item text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </div>
+                <p class="text-white font-medium text-sm mb-1">피부 임상 테스트</p>
+                <p class="text-white/60 text-xs">저자극 인체적용시험 완료</p>
+            </div>
+        </div>
+
+        <!-- Panoramic ingredient image -->
+        <div class="mt-12 aspect-[21/6] overflow-hidden">
+            <img src="./images/ingredient_panoramic.jpg" alt="에코라브 스킨 핵심 보태니컬 원료" class="w-full h-full object-cover" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: PURCHASE FAQ — Accordion (Sticky-style) -->
+<!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section id="faq" class="fade-in-section w-full bg-page" aria-label="자주 묻는 질문">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <!-- Left sticky header (col-5) -->
+            <div class="lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">FAQ</p>
+                <h2 class="font-serif text-deep leading-[1.35] mb-4" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+                    자주 묻는 질문
+                </h2>
+                <p class="text-warm leading-relaxed mb-6">
+                    구매, 배송, 교환/환불에 대해<br class="hidden sm:block">
+                    가장 많이 문의하시는 내용입니다.
+                </p>
+                <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-forest hover:text-forest-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    1:1 문의하기
+                </a>
+            </div>
+
+            <!-- Right accordion (col-7) -->
+            <div class="lg:col-span-7 space-y-0">
+                <div class="border-t border-sand">
+                    <button class="accordion-btn w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+                        <span class="text-base font-medium text-deep group-hover:text-forest transition-colors">배송은 얼마나 걸리나요?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-warm-muted transition-transform accordion-icon"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="text-warm text-sm leading-relaxed pb-5">
+                            평일 오후 2시 이전 주문 시 당일 출고되며, 제주 출발 기준 내륙 1~2일, 도서산간 2~3일 소요됩니다. 무료 배송 기준 금액은 50,000원입니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="border-t border-sand">
+                    <button class="accordion-btn w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+                        <span class="text-base font-medium text-deep group-hover:text-forest transition-colors">교환/환불 정책이 어떻게 되나요?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-warm-muted transition-transform accordion-icon"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="text-warm text-sm leading-relaxed pb-5">
+                            수령 후 7일 이내 미개봉 제품에 한해 100% 환불 가능합니다. 개봉 후에도 피부 트러블 발생 시 고객센터(064-738-2580)로 연락주시면 교환 또는 환불 처리해 드립니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="border-t border-sand">
+                    <button class="accordion-btn w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+                        <span class="text-base font-medium text-deep group-hover:text-forest transition-colors">민감한 피부에도 사용할 수 있나요?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-warm-muted transition-transform accordion-icon"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="text-warm text-sm leading-relaxed pb-5">
+                            모든 제품은 인체적용시험을 통해 저자극 판정을 받았으며, 아토피 피부를 가진 대표의 딸이 직접 테스트한 제품입니다. 다만 개인 차가 있으니, 처음에는 소량 패치 테스트를 권장합니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="border-t border-sand">
+                    <button class="accordion-btn w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+                        <span class="text-base font-medium text-deep group-hover:text-forest transition-colors">리필 프로그램은 어떻게 참여하나요?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-warm-muted transition-transform accordion-icon"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="text-warm text-sm leading-relaxed pb-5">
+                            제품 수령 시 동봉된 리필 봉투에 빈 용기를 넣어 반송하시면, 다음 주문에서 15% 할인 코드를 발급해 드립니다. 착불 발송이며, 배송비는 에코라브에서 부담합니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="border-t border-b border-sand">
+                    <button class="accordion-btn w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+                        <span class="text-base font-medium text-deep group-hover:text-forest transition-colors">샘플 키트를 먼저 받아볼 수 있나요?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-warm-muted transition-transform accordion-icon"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="text-warm text-sm leading-relaxed pb-5">
+                            네, 클렌저·세럼·크림 미니 사이즈 3종이 포함된 샘플 키트를 9,900원에 제공합니다. 추후 본품 구매 시 샘플 키트 금액만큼 할인 적용됩니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 10: FINAL CTA (Full-Bleed) — M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section id="cta-final" class="relative w-full min-h-[60vh] flex items-center justify-center" aria-label="구매하기">
+    <img src="./images/cta_bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+        <p class="text-xs font-medium tracking-[0.15em] uppercase text-white/50 mb-4">ECOLOVE SKIN</p>
+        <h2 class="font-serif text-white leading-[1.35] mb-6" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+            당신의 피부에게<br>자연의 시간을
+        </h2>
+        <p class="text-white/70 text-base leading-relaxed max-w-[440px] mx-auto mb-10">
+            제주 보태니컬 농원에서 온<br class="hidden sm:block">
+            진심을 담은 스킨케어를 만나보세요.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="#" class="inline-block text-sm font-medium tracking-[0.05em] text-white bg-forest px-10 py-4 hover:brightness-110 active:scale-95">지금 구매하기</a>
+            <a href="#" class="inline-block text-sm font-medium tracking-[0.05em] text-white border border-white/40 px-10 py-4 hover:bg-white/10">샘플 키트 신청</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full bg-deep text-white/70">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+            <div class="md:col-span-4">
+                <p class="font-serif text-lg text-white mb-3">ECOLOVE SKIN</p>
+                <p class="text-sm leading-relaxed">
+                    제주특별자치도 서귀포시 남원읍<br>
+                    보태니컬로 128<br>
+                    사업자등록번호 616-81-XXXXX
+                </p>
+            </div>
+            <div class="md:col-span-2">
+                <p class="text-xs uppercase tracking-[0.15em] text-white/40 mb-3">Shop</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">전체 제품</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">베스트셀러</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">샘플 키트</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">리필 프로그램</a></li>
+                </ul>
+            </div>
+            <div class="md:col-span-2">
+                <p class="text-xs uppercase tracking-[0.15em] text-white/40 mb-3">About</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">브랜드 스토리</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">성분 철학</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">지속가능성</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">제주 농원</a></li>
+                </ul>
+            </div>
+            <div class="md:col-span-2">
+                <p class="text-xs uppercase tracking-[0.15em] text-white/40 mb-3">Support</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">자주 묻는 질문</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">1:1 문의</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">배송 안내</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">교환/환불</a></li>
+                </ul>
+            </div>
+            <div class="md:col-span-2">
+                <p class="text-xs uppercase tracking-[0.15em] text-white/40 mb-3">Connect</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors" aria-label="KakaoTalk">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </a>
+                </div>
+                <p class="text-sm mt-4">CS 064-738-2580</p>
+                <p class="text-xs text-white/40 mt-1">평일 10:00 ~ 18:00</p>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/30">
+            <p>&copy; 2025 에코라브 스킨. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white/60">이용약관</a>
+                <a href="#" class="hover:text-white/60">개인정보처리방침</a>
+                <a href="#" class="hover:text-white/60">통신판매업신고</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    // Scroll reveal animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+    // Stagger animation
+    const staggerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const items = entry.target.querySelectorAll('.stagger-item');
+                items.forEach((item, i) => {
+                    item.style.transitionDelay = `${i * 0.1}s`;
+                    item.classList.add('animate-in');
+                });
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(el => staggerObserver.observe(el));
+
+    // Also observe standalone stagger items
+    document.querySelectorAll('.stagger-item').forEach(el => {
+        if (!el.closest('.fade-in-section')) {
+            observer.observe(el);
+        }
+    });
+
+    // Reduced motion guard
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            el.classList.add('animate-in');
+            el.style.transition = 'none';
+        });
+    }
+
+    // Accordion
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.accordion-icon');
+            const isOpen = content.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.accordion-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+            document.querySelectorAll('.accordion-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+            // Open clicked
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // Product horizontal scroll buttons
+    const scrollContainer = document.getElementById('product-scroll');
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+
+    if (scrollLeftBtn && scrollContainer) {
+        scrollLeftBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: -320, behavior: 'smooth' });
+        });
+    }
+    if (scrollRightBtn && scrollContainer) {
+        scrollRightBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: 320, behavior: 'smooth' });
+        });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

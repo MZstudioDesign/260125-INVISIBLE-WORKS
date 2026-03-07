@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스트래티움 컨설팅 — 전략의 중심에는 언제나 사람이 있습니다</title>
+  <meta name="description" content="스트래티움 컨설팅은 데이터와 통찰 너머, 조직을 움직이는 '사람'에 집중하는 전략 컨설팅 펌입니다. 성장 전략, 디지털 전환, M&A 자문, 조직 설계." />
+  <link rel="canonical" href="https://www.stratium.co.kr" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="스트래티움 컨설팅 — 전략으로 성장을 설계하다" />
+  <meta property="og:description" content="데이터와 통찰 너머, 조직을 움직이는 '사람'에 집중하는 전략 컨설팅." />
+  <meta property="og:image" content="https://www.stratium.co.kr/images/hero.jpg" />
+  <meta property="og:url" content="https://www.stratium.co.kr" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'Pretendard Variable', 'sans-serif'],
+          },
+          colors: {
+            charcoal: '#2D2D2D',
+            teal: { 600: '#0D9488', 700: '#0F766E', 800: '#115E59' },
+            page: '#F7F8FA',
+            surface: '#FFFFFF',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #F7F8FA;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --accent-primary: #0D9488;
+      --text-primary: #2D2D2D;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+      --font-ui: 'Cormorant Garamond', serif;
+      --font-data: 'Inter', 'Pretendard Variable', sans-serif;
+      --border-default: #E5E7EB;
+      --border-strong: #D1D5DB;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --sh-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --sh-md: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    body {
+      font-family: var(--font-data);
+      color: var(--text-primary);
+      background-color: var(--bg-page);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-ui); }
+
+    /* Scroll Animations */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Counter animation */
+    .counter-value { font-variant-numeric: tabular-nums; }
+
+    /* Horizontal scroll case studies */
+    .hscroll-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary) transparent;
+      padding-bottom: 16px;
+    }
+    .hscroll-container::-webkit-scrollbar { height: 4px; }
+    .hscroll-container::-webkit-scrollbar-track { background: transparent; }
+    .hscroll-container::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 2px; }
+    .hscroll-card {
+      flex: 0 0 380px;
+      scroll-snap-align: start;
+    }
+    @media (max-width: 640px) {
+      .hscroll-card { flex: 0 0 85vw; }
+    }
+
+    /* Team offset */
+    .team-offset:nth-child(2) { transform: translateY(48px); }
+    @media (max-width: 768px) { .team-offset:nth-child(2) { transform: none; } }
+
+    /* Grayscale to color on hover */
+    .grayscale-hover { filter: grayscale(100%); transition: filter 0.5s ease; }
+    .grayscale-hover:hover { filter: grayscale(0%); }
+
+    /* Timeline line */
+    .timeline-line { position: relative; }
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-default);
+    }
+    @media (min-width: 768px) {
+      .timeline-line::before { left: 50%; transform: translateX(-1px); }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section, .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .grayscale-hover { filter: none; }
+      .team-offset:nth-child(2) { transform: none; }
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 9999;
+      background: var(--accent-primary);
+      color: white;
+      padding: 8px 16px;
+      border-radius: var(--r-sm);
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "스트래티움 컨설팅",
+    "description": "전략으로 성장을 설계하는 경영 컨설팅 펌",
+    "url": "https://www.stratium.co.kr",
+    "telephone": "+82-2-6275-0300",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "여의대로 108 파크원타워 42층",
+      "addressLocality": "영등포구",
+      "addressRegion": "서울",
+      "postalCode": "07335",
+      "addressCountry": "KR"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00"
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">본문 바로가기</a>
+
+  <!-- HEADER / NAV -->
+  <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100" role="banner">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16">
+      <a href="#" class="font-serif text-xl font-bold tracking-tight text-charcoal" aria-label="스트래티움 컨설팅 홈">STRATIUM</a>
+      <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        <a href="#philosophy" class="text-sm font-sans text-gray-600 hover:text-teal-600 transition-colors">철학</a>
+        <a href="#services" class="text-sm font-sans text-gray-600 hover:text-teal-600 transition-colors">서비스</a>
+        <a href="#cases" class="text-sm font-sans text-gray-600 hover:text-teal-600 transition-colors">사례</a>
+        <a href="#team" class="text-sm font-sans text-gray-600 hover:text-teal-600 transition-colors">팀</a>
+        <a href="#contact" class="text-sm font-sans text-gray-600 hover:text-teal-600 transition-colors">문의</a>
+      </nav>
+      <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-sans font-medium rounded hover:bg-teal-700 transition-colors">
+        전략 상담 예약
+      </a>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-charcoal" aria-label="메뉴 열기" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <a href="#philosophy" class="text-sm font-sans text-gray-600 py-2">철학</a>
+        <a href="#services" class="text-sm font-sans text-gray-600 py-2">서비스</a>
+        <a href="#cases" class="text-sm font-sans text-gray-600 py-2">사례</a>
+        <a href="#team" class="text-sm font-sans text-gray-600 py-2">팀</a>
+        <a href="#contact" class="text-sm font-sans bg-teal-600 text-white text-center py-3 rounded">전략 상담 예약</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+    <!-- COMPONENT_REF: hero-center-aligned | GRADE: A | MODE: adapted | SNIPPET_PATH: hero-full-bleed/hero-center-aligned-reference.html | FIDELITY: 75% -->
+    <section class="relative w-full min-h-screen flex items-center" aria-label="Hero">
+      <img src="./images/hero.jpg" alt="스트래티움 컨설팅 팀이 함께 전략을 논의하는 모습" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/65 to-charcoal/80"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center py-32">
+        <p class="text-teal-600 font-sans text-sm tracking-[0.2em] uppercase mb-6 font-medium">Strategic Consulting</p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.3] mb-6">
+          전략의 중심에는<br>언제나 사람이 있습니다
+        </h1>
+        <p class="font-sans text-lg text-white/80 max-w-[480px] mx-auto mb-10 leading-relaxed">
+          스트래티움은 데이터와 통찰 너머,<br class="hidden sm:block">조직을 움직이는 '사람'에 집중합니다.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#contact" class="px-8 py-3.5 bg-teal-600 text-white font-sans font-medium rounded hover:bg-teal-700 transition-colors text-sm">
+            전략 상담 예약하기
+          </a>
+          <a href="#services" class="px-8 py-3.5 border border-white/30 text-white font-sans font-medium rounded hover:bg-white/10 transition-colors text-sm">
+            서비스 둘러보기
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
+    <!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: content-sections/text-only-about-section-reference.html | FIDELITY: 75% -->
+    <section id="philosophy" class="fade-in-section w-full py-24 lg:py-32 bg-page" aria-label="철학">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="max-w-[800px]">
+          <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Our Philosophy</p>
+          <h2 class="font-serif text-3xl lg:text-5xl font-bold text-charcoal leading-[1.2] mb-8">
+            우리가 믿는 것
+          </h2>
+          <div class="space-y-6">
+            <p class="font-sans text-lg lg:text-xl text-gray-600 leading-[1.8]">
+              숫자만으로는 기업이 바뀌지 않습니다.<br class="hidden sm:block">
+              변화를 이끄는 건 결국 사람입니다.
+            </p>
+            <p class="font-sans text-base text-gray-500 leading-[1.8] max-w-[640px]">
+              스트래티움 컨설팅은 2011년 설립 이래, 전략의 본질은 조직을 구성하는
+              사람들에게 있다는 믿음을 지켜왔습니다. 우리는 분석 리포트가 아닌,
+              실행 가능한 변화를 만듭니다.
+            </p>
+          </div>
+          <div class="mt-12 flex items-center gap-8">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <p class="font-sans text-sm font-semibold text-charcoal">People-First</p>
+                <p class="font-sans text-xs text-gray-400">사람 중심 접근</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              </div>
+              <div>
+                <p class="font-sans text-sm font-semibold text-charcoal">Data-Driven</p>
+                <p class="font-sans text-xs text-gray-400">데이터 기반 의사결정</p>
+              </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              </div>
+              <div>
+                <p class="font-sans text-sm font-semibold text-charcoal">Execution</p>
+                <p class="font-sans text-xs text-gray-400">실행까지 책임</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: SERVICES | MOVE: M-LAY-EDITORIAL-STORY -->
+    <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+    <section id="services" class="fade-in-section w-full py-24 lg:py-32 bg-white" aria-label="서비스">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Our Services</p>
+        <h2 class="font-serif text-3xl lg:text-4xl font-bold text-charcoal leading-[1.25] mb-16">
+          성장의 모든 국면에서<br>함께합니다
+        </h2>
+
+        <!-- Service 1: Growth Strategy — Text left (4col) + Gap (1col) + Image right (7col) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 mb-20 items-start">
+          <div class="lg:col-span-4 stagger-item">
+            <div class="flex items-center gap-3 mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/><polyline points="16,7 22,7 22,13"/></svg>
+              <span class="font-sans text-xs tracking-[0.15em] uppercase text-teal-600 font-medium">Growth Strategy</span>
+            </div>
+            <h3 class="font-serif text-2xl font-semibold text-charcoal mb-4">성장 전략</h3>
+            <p class="font-sans text-base text-gray-500 leading-[1.7] mb-6">
+              시장 진입부터 스케일업까지,<br class="hidden sm:block">
+              데이터에 기반한 성장 로드맵을 설계합니다.
+              신규 시장 분석, 경쟁 우위 전략, 수익 모델 최적화.
+            </p>
+            <a href="#contact" class="font-sans text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors inline-flex items-center gap-1">
+              자세히 보기
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <div class="lg:col-span-7 stagger-item">
+            <img src="./images/card_service1.jpg" alt="성장 전략 데이터 분석 대시보드" class="w-full h-[320px] object-cover rounded-lg" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Service 2: Digital Transformation — Image left (7col) + Gap (1col) + Text right (4col) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 mb-20 items-start">
+          <div class="lg:col-span-7 order-2 lg:order-1 stagger-item">
+            <img src="./images/card_service2.jpg" alt="디지털 전환 프로젝트 협업 모습" class="w-full h-[320px] object-cover rounded-lg" loading="lazy" />
+          </div>
+          <div class="hidden lg:block lg:col-span-1 order-2"></div>
+          <div class="lg:col-span-4 order-1 lg:order-3 stagger-item">
+            <div class="flex items-center gap-3 mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/></svg>
+              <span class="font-sans text-xs tracking-[0.15em] uppercase text-teal-600 font-medium">Digital Transformation</span>
+            </div>
+            <h3 class="font-serif text-2xl font-semibold text-charcoal mb-4">디지털 전환</h3>
+            <p class="font-sans text-base text-gray-500 leading-[1.7] mb-6">
+              레거시 시스템을 넘어,<br class="hidden sm:block">
+              조직의 디지털 역량을 근본부터 재설계합니다.
+              프로세스 자동화, 데이터 인프라, AI 도입 전략.
+            </p>
+            <a href="#contact" class="font-sans text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors inline-flex items-center gap-1">
+              자세히 보기
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Service 3 & 4: Two smaller cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="stagger-item group bg-page rounded-lg p-8 border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 3.5-8.97 8.97"/><path d="m17.5 8 4.5-4.5"/></svg>
+              <span class="font-sans text-xs tracking-[0.15em] uppercase text-teal-600 font-medium">M&A Advisory</span>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-charcoal mb-3">M&A 자문</h3>
+            <p class="font-sans text-sm text-gray-500 leading-[1.7]">
+              인수합병의 전 과정에서 실사부터 PMI까지 전략적 파트너로 함께합니다. 기업가치 평가, 시너지 분석, 통합 로드맵.
+            </p>
+          </div>
+          <div class="stagger-item group bg-page rounded-lg p-8 border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              <span class="font-sans text-xs tracking-[0.15em] uppercase text-teal-600 font-medium">Organizational Design</span>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-charcoal mb-3">조직 설계</h3>
+            <p class="font-sans text-sm text-gray-500 leading-[1.7]">
+              변화에 민첩하게 대응하는 조직 구조를 만듭니다. 거버넌스 재편, 인재 전략, 성과 관리 체계 수립.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: IMPACT (KEY COLOR) | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
+    <!-- COMPONENT_REF: bento-intro5-stats-grid7 | GRADE: A | MODE: adapted | SNIPPET_PATH: bento-mosaic/bento-intro5-stats-grid7-reference.html | FIDELITY: 70% -->
+    <section class="fade-in-section w-full py-24 lg:py-32 bg-charcoal" aria-label="성과" style="min-height:50vh;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <!-- Left: Intro (5col) -->
+          <div class="lg:col-span-5">
+            <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Our Impact</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-white leading-[1.25] mb-6">
+              우리가 만든 변화
+            </h2>
+            <p class="font-sans text-base text-gray-400 leading-[1.7]">
+              스트래티움과 함께한 기업들이<br class="hidden sm:block">
+              경험한 실질적 성과를 소개합니다.
+            </p>
+          </div>
+          <!-- Right: Stats Grid (7col) -->
+          <div class="lg:col-span-7">
+            <div class="grid grid-cols-2 gap-8">
+              <div class="stagger-item">
+                <p class="font-sans text-4xl lg:text-5xl font-bold text-teal-600 counter-value" data-target="340">0</p>
+                <p class="font-sans text-sm text-gray-400 mt-2">프로젝트 완수</p>
+              </div>
+              <div class="stagger-item">
+                <p class="font-sans text-4xl lg:text-5xl font-bold text-teal-600 counter-value" data-target="97" data-suffix="%">0</p>
+                <p class="font-sans text-sm text-gray-400 mt-2">고객 재계약률</p>
+              </div>
+              <div class="stagger-item">
+                <p class="font-sans text-4xl lg:text-5xl font-bold text-teal-600 counter-value" data-target="2.8" data-suffix="x" data-decimal="true">0</p>
+                <p class="font-sans text-sm text-gray-400 mt-2">평균 매출 성장률</p>
+              </div>
+              <div class="stagger-item">
+                <p class="font-sans text-4xl lg:text-5xl font-bold text-teal-600 counter-value" data-target="14">0</p>
+                <p class="font-sans text-sm text-gray-400 mt-2">산업 분야 커버리지</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CASE STUDIES | MOVE: M-INT-HSCROLL-GALLERY -->
+    <!-- COMPONENT_REF: scroll-x-carousel (custom hscroll) | GRADE: B | MODE: adapted | SNIPPET_PATH: image-summary-text/scroll-x-carousel-reference.html | FIDELITY: 70% -->
+    <section id="cases" class="fade-in-section w-full py-24 lg:py-32 bg-page" aria-label="사례">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Case Studies</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-charcoal leading-[1.25]">
+              기업의 전환점을<br>함께 만들었습니다
+            </h2>
+          </div>
+          <p class="hidden md:block font-sans text-sm text-gray-400">← 스크롤하여 더 보기</p>
+        </div>
+        <div class="hscroll-container">
+          <!-- Case 1 -->
+          <div class="hscroll-card stagger-item">
+            <div class="bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <img src="./images/card_case1.jpg" alt="시리즈B 스타트업에서 18개월 만에 코스닥 상장 달성" class="w-full h-[220px] object-cover" loading="lazy" />
+              <div class="p-6">
+                <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Growth Strategy</span>
+                <h3 class="font-serif text-xl font-semibold text-charcoal mt-2 mb-3">시리즈B → 코스닥 상장<br>18개월의 여정</h3>
+                <p class="font-sans text-sm text-gray-500 leading-[1.7] mb-4">
+                  AI 바이오텍 스타트업의 기업가치 500억 달성까지, 투자 유치 전략과 IPO 로드맵을 함께 설계했습니다.
+                </p>
+                <div class="flex gap-6 pt-4 border-t border-gray-100">
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">500억</p>
+                    <p class="font-sans text-xs text-gray-400">기업가치</p>
+                  </div>
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">18개월</p>
+                    <p class="font-sans text-xs text-gray-400">소요 기간</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Case 2 -->
+          <div class="hscroll-card stagger-item">
+            <div class="bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <img src="./images/card_case2.jpg" alt="제조업 디지털 전환으로 운영 효율 42% 개선" class="w-full h-[220px] object-cover" loading="lazy" />
+              <div class="p-6">
+                <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Digital Transformation</span>
+                <h3 class="font-serif text-xl font-semibold text-charcoal mt-2 mb-3">제조업 디지털 전환<br>운영 효율의 재정의</h3>
+                <p class="font-sans text-sm text-gray-500 leading-[1.7] mb-4">
+                  연매출 3,000억 규모 제조기업의 스마트 팩토리 전환. 공정 자동화와 예측 보전으로 가동률을 극대화했습니다.
+                </p>
+                <div class="flex gap-6 pt-4 border-t border-gray-100">
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">42%</p>
+                    <p class="font-sans text-xs text-gray-400">효율 개선</p>
+                  </div>
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">₩180억</p>
+                    <p class="font-sans text-xs text-gray-400">비용 절감</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Case 3 -->
+          <div class="hscroll-card stagger-item">
+            <div class="bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <img src="./images/card_case3.jpg" alt="금융사 합병 후 통합 PMI 프로젝트" class="w-full h-[220px] object-cover" loading="lazy" />
+              <div class="p-6">
+                <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">M&A Advisory</span>
+                <h3 class="font-serif text-xl font-semibold text-charcoal mt-2 mb-3">금융사 PMI<br>두 조직, 하나의 문화</h3>
+                <p class="font-sans text-sm text-gray-500 leading-[1.7] mb-4">
+                  국내 중견 증권사 합병 후 Post-Merger Integration. 조직 문화 통합과 시스템 일원화를 12개월 내 완료했습니다.
+                </p>
+                <div class="flex gap-6 pt-4 border-t border-gray-100">
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">12개월</p>
+                    <p class="font-sans text-xs text-gray-400">통합 완료</p>
+                  </div>
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">98%</p>
+                    <p class="font-sans text-xs text-gray-400">인력 유지율</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Case 4 -->
+          <div class="hscroll-card stagger-item">
+            <div class="bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <img src="./images/card_case4.jpg" alt="유통 대기업 조직 재설계 프로젝트" class="w-full h-[220px] object-cover" loading="lazy" />
+              <div class="p-6">
+                <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Organizational Design</span>
+                <h3 class="font-serif text-xl font-semibold text-charcoal mt-2 mb-3">유통 대기업<br>애자일 조직 전환</h3>
+                <p class="font-sans text-sm text-gray-500 leading-[1.7] mb-4">
+                  5,000명 규모 유통 기업의 거버넌스 재편. 사업부제에서 스쿼드 기반으로의 전환을 설계하고 실행했습니다.
+                </p>
+                <div class="flex gap-6 pt-4 border-t border-gray-100">
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">5,000명</p>
+                    <p class="font-sans text-xs text-gray-400">조직 규모</p>
+                  </div>
+                  <div>
+                    <p class="font-sans text-lg font-bold text-teal-600">35%</p>
+                    <p class="font-sans text-xs text-gray-400">의사결정 속도↑</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-10">
+          <a href="#contact" class="font-sans text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors inline-flex items-center gap-2">
+            전체 사례 보기
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TEAM | MOVE: M-LAY-OFFSET-OVERLAP -->
+    <!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 70% -->
+    <section id="team" class="fade-in-section w-full py-24 lg:py-32 bg-white" aria-label="팀">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Leadership</p>
+        <h2 class="font-serif text-3xl lg:text-4xl font-bold text-charcoal leading-[1.25] mb-6">
+          전략가들
+        </h2>
+        <p class="font-sans text-base text-gray-500 leading-[1.7] mb-16 max-w-[480px]">
+          글로벌 컨설팅 펌 출신 전문가들이<br class="hidden sm:block">
+          직접 프로젝트를 리드합니다.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          <!-- CEO -->
+          <div class="stagger-item team-offset">
+            <div class="overflow-hidden rounded-lg mb-5">
+              <img src="./images/profile_1.jpg" alt="김현수 대표이사" class="w-full h-[400px] object-cover grayscale-hover" loading="lazy" />
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-charcoal">김현수</h3>
+            <p class="font-sans text-sm text-teal-600 font-medium mt-1">대표이사 · CEO</p>
+            <p class="font-sans text-sm text-gray-500 mt-3 leading-[1.6]">
+              前 McKinsey & Company 파트너. 서울대 경영학과, Wharton MBA. 15년간 200+ 전략 프로젝트 리드.
+            </p>
+          </div>
+          <!-- MD -->
+          <div class="stagger-item team-offset">
+            <div class="overflow-hidden rounded-lg mb-5">
+              <img src="./images/profile_2.jpg" alt="박지연 전무이사" class="w-full h-[400px] object-cover grayscale-hover" loading="lazy" />
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-charcoal">박지연</h3>
+            <p class="font-sans text-sm text-teal-600 font-medium mt-1">전무이사 · Managing Director</p>
+            <p class="font-sans text-sm text-gray-500 mt-3 leading-[1.6]">
+              前 BCG 프린시펄. 연세대 경제학과, INSEAD MBA. 디지털 전환 전략 전문. 제조·유통·금융 산업 특화.
+            </p>
+          </div>
+          <!-- Senior Director -->
+          <div class="stagger-item team-offset">
+            <div class="overflow-hidden rounded-lg mb-5">
+              <img src="./images/profile_3.jpg" alt="이승민 상무" class="w-full h-[400px] object-cover grayscale-hover" loading="lazy" />
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-charcoal">이승민</h3>
+            <p class="font-sans text-sm text-teal-600 font-medium mt-1">상무 · Senior Director</p>
+            <p class="font-sans text-sm text-gray-500 mt-3 leading-[1.6]">
+              前 Bain & Company 매니저. KAIST 산업공학, MIT Sloan MBA. M&A 및 PMI 전문. 금융·헬스케어 산업.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TESTIMONIALS | MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
+    <section class="fade-in-section relative w-full py-24 lg:py-32" aria-label="파트너사 이야기">
+      <img src="./images/divider_testimonial.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0 bg-charcoal/85"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Testimonials</p>
+        <h2 class="font-serif text-3xl lg:text-4xl font-bold text-white leading-[1.25] mb-16">
+          파트너사의 이야기
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="stagger-item bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-teal-600 mb-4"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" fill="currentColor"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="currentColor"/></svg>
+            <p class="font-sans text-sm text-gray-300 leading-[1.8] mb-6">
+              "스트래티움의 가장 큰 차별점은 리포트를 주고 떠나지 않는다는 점입니다. 우리 팀 옆에서 실행까지 함께했고, 결과로 증명했습니다."
+            </p>
+            <div>
+              <p class="font-sans text-sm font-semibold text-white">정태환</p>
+              <p class="font-sans text-xs text-gray-500">바이오젠 테크놀로지 · CEO</p>
+            </div>
+          </div>
+          <div class="stagger-item bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-teal-600 mb-4"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" fill="currentColor"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="currentColor"/></svg>
+            <p class="font-sans text-sm text-gray-300 leading-[1.8] mb-6">
+              "합병 후 가장 어려운 건 사람의 문제였습니다. 스트래티움은 조직 문화의 갈등을 정면으로 다루면서도 섬세하게 풀어주었습니다."
+            </p>
+            <div>
+              <p class="font-sans text-sm font-semibold text-white">윤서진</p>
+              <p class="font-sans text-xs text-gray-500">한강증권 · COO</p>
+            </div>
+          </div>
+          <div class="stagger-item bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-teal-600 mb-4"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" fill="currentColor"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="currentColor"/></svg>
+            <p class="font-sans text-sm text-gray-300 leading-[1.8] mb-6">
+              "디지털 전환이 IT 투자라고만 생각했는데, 스트래티움은 조직과 프로세스부터 바꿔야 한다는 걸 깨닫게 해주었습니다. 진짜 전환이었습니다."
+            </p>
+            <div>
+              <p class="font-sans text-sm font-semibold text-white">김도현</p>
+              <p class="font-sans text-xs text-gray-500">대산중공업 · 전략기획실장</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
+    <!-- COMPONENT_REF: timeline (custom vertical timeline) | GRADE: B | MODE: adapted | SNIPPET_PATH: steps/timeline-reference.html | FIDELITY: 70% -->
+    <section class="fade-in-section w-full py-24 lg:py-32 bg-page" aria-label="프로세스">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="text-center mb-16">
+          <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Our Process</p>
+          <h2 class="font-serif text-3xl lg:text-4xl font-bold text-charcoal leading-[1.25] mb-4">
+            협업의 여정
+          </h2>
+          <p class="font-sans text-base text-gray-500 leading-[1.7] max-w-[480px] mx-auto">
+            첫 미팅부터 성과 리뷰까지,<br class="hidden sm:block">
+            투명하고 밀도 높은 프로세스.
+          </p>
+        </div>
+
+        <div class="timeline-line max-w-[800px] mx-auto">
+          <!-- Step 1 -->
+          <div class="stagger-item relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8 mb-12 md:mb-16">
+            <div class="md:w-1/2 md:text-right md:pr-12">
+              <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Step 01</span>
+              <h3 class="font-serif text-xl font-semibold text-charcoal mt-2">디스커버리 워크숍</h3>
+              <p class="font-sans text-sm text-gray-500 mt-2 leading-[1.7]">
+                경영진과의 심층 인터뷰, 조직 진단, 핵심 과제 정의. 2-3일간의 집중 워크숍으로 시작합니다.
+              </p>
+            </div>
+            <div class="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 w-[12px] h-[12px] rounded-full bg-teal-600 border-2 border-white shadow-sm z-10 mt-1"></div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+          <!-- Step 2 -->
+          <div class="stagger-item relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8 mb-12 md:mb-16">
+            <div class="md:w-1/2 md:pr-12"></div>
+            <div class="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 w-[12px] h-[12px] rounded-full bg-teal-600 border-2 border-white shadow-sm z-10 mt-1"></div>
+            <div class="md:w-1/2 md:pl-12">
+              <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Step 02</span>
+              <h3 class="font-serif text-xl font-semibold text-charcoal mt-2">전략 어세스먼트</h3>
+              <p class="font-sans text-sm text-gray-500 mt-2 leading-[1.7]">
+                시장·경쟁·내부역량 분석을 통해 전략적 기회와 리스크를 정밀하게 매핑합니다.
+              </p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="stagger-item relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8 mb-12 md:mb-16">
+            <div class="md:w-1/2 md:text-right md:pr-12">
+              <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Step 03</span>
+              <h3 class="font-serif text-xl font-semibold text-charcoal mt-2">실행 로드맵</h3>
+              <p class="font-sans text-sm text-gray-500 mt-2 leading-[1.7]">
+                분석 결과를 실행 가능한 90일/180일/365일 단위의 구체적 액션 플랜으로 전환합니다.
+              </p>
+            </div>
+            <div class="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 w-[12px] h-[12px] rounded-full bg-teal-600 border-2 border-white shadow-sm z-10 mt-1"></div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+          <!-- Step 4 -->
+          <div class="stagger-item relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8 mb-12 md:mb-16">
+            <div class="md:w-1/2 md:pr-12"></div>
+            <div class="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 w-[12px] h-[12px] rounded-full bg-teal-600 border-2 border-white shadow-sm z-10 mt-1"></div>
+            <div class="md:w-1/2 md:pl-12">
+              <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Step 04</span>
+              <h3 class="font-serif text-xl font-semibold text-charcoal mt-2">실행 지원</h3>
+              <p class="font-sans text-sm text-gray-500 mt-2 leading-[1.7]">
+                전담 팀이 클라이언트 조직에 상주하며 전략의 실행을 직접 지원합니다. 매주 진척도를 점검합니다.
+              </p>
+            </div>
+          </div>
+          <!-- Step 5 -->
+          <div class="stagger-item relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+            <div class="md:w-1/2 md:text-right md:pr-12">
+              <span class="font-sans text-xs text-teal-600 font-medium tracking-wide uppercase">Step 05</span>
+              <h3 class="font-serif text-xl font-semibold text-charcoal mt-2">성과 리뷰</h3>
+              <p class="font-sans text-sm text-gray-500 mt-2 leading-[1.7]">
+                정량적 KPI 달성도를 측정하고, 지속 가능한 성장을 위한 후속 전략을 제안합니다.
+              </p>
+            </div>
+            <div class="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 w-[12px] h-[12px] rounded-full bg-teal-600 border-2 border-white shadow-sm z-10 mt-1"></div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT | MOVE: M-FOOTER-B2B-DETAILS -->
+    <!-- COMPONENT_REF: text-vision-cta-form | GRADE: A | MODE: adapted | SNIPPET_PATH: content-sections/text-vision-cta-form-reference.html | FIDELITY: 75% -->
+    <section id="contact" class="fade-in-section w-full py-24 lg:py-32 bg-white" aria-label="문의">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <!-- Left: Info (5col) -->
+          <div class="lg:col-span-5">
+            <p class="text-teal-600 font-sans text-sm tracking-[0.15em] uppercase mb-4 font-medium">Get In Touch</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-bold text-charcoal leading-[1.25] mb-6">
+              다음 전환점을<br>함께 설계하겠습니다
+            </h2>
+            <p class="font-sans text-base text-gray-500 leading-[1.7] mb-10">
+              30분 무료 전략 상담으로<br class="hidden sm:block">
+              귀사의 가능성을 확인하세요.
+            </p>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="font-sans text-sm font-semibold text-charcoal">주소</p>
+                  <p class="font-sans text-sm text-gray-500">서울 영등포구 여의대로 108<br>파크원타워 42층</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <p class="font-sans text-sm font-semibold text-charcoal">전화</p>
+                  <p class="font-sans text-sm text-gray-500">02-6275-0300</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div>
+                  <p class="font-sans text-sm font-semibold text-charcoal">이메일</p>
+                  <p class="font-sans text-sm text-gray-500">consult@stratium.co.kr</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-teal-600/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <p class="font-sans text-sm font-semibold text-charcoal">영업시간</p>
+                  <p class="font-sans text-sm text-gray-500">월-금 09:00 – 18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right: Form (7col) -->
+          <div class="lg:col-span-7">
+            <form class="bg-page rounded-lg p-8 lg:p-10 border border-gray-100" aria-label="전략 상담 신청 폼">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="name" class="font-sans text-sm font-medium text-charcoal mb-2 block">이름 *</label>
+                  <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent" placeholder="홍길동" />
+                </div>
+                <div>
+                  <label for="company" class="font-sans text-sm font-medium text-charcoal mb-2 block">회사명 *</label>
+                  <input type="text" id="company" name="company" required class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent" placeholder="주식회사 OO" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="email" class="font-sans text-sm font-medium text-charcoal mb-2 block">이메일 *</label>
+                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent" placeholder="name@company.com" />
+                </div>
+                <div>
+                  <label for="phone" class="font-sans text-sm font-medium text-charcoal mb-2 block">연락처</label>
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent" placeholder="010-0000-0000" />
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="service" class="font-sans text-sm font-medium text-charcoal mb-2 block">관심 서비스</label>
+                <select id="service" name="service" class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent text-gray-500">
+                  <option value="">선택해주세요</option>
+                  <option value="growth">성장 전략</option>
+                  <option value="digital">디지털 전환</option>
+                  <option value="mna">M&A 자문</option>
+                  <option value="org">조직 설계</option>
+                  <option value="other">기타</option>
+                </select>
+              </div>
+              <div class="mb-8">
+                <label for="message" class="font-sans text-sm font-medium text-charcoal mb-2 block">프로젝트 개요</label>
+                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-200 rounded text-sm font-sans focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent resize-none" placeholder="현재 직면한 과제나 원하시는 방향을 간략히 알려주세요."></textarea>
+              </div>
+              <button type="submit" class="w-full py-3.5 bg-teal-600 text-white font-sans font-medium rounded hover:bg-teal-700 transition-colors text-sm">
+                무료 상담 신청하기
+              </button>
+              <p class="font-sans text-xs text-gray-400 mt-4 text-center">
+                제출 후 1영업일 이내에 담당 컨설턴트가 연락드립니다.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
+    <section class="relative w-full min-h-[60vh] flex items-center" aria-label="CTA">
+      <img src="./images/cta_footer.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full">
+        <h2 class="font-serif text-3xl lg:text-5xl font-bold text-white leading-[1.2] mb-6">
+          성장의 다음 챕터,<br>지금 시작하세요
+        </h2>
+        <p class="font-sans text-base text-white/70 mb-10 max-w-[400px] mx-auto">
+          스트래티움과 함께라면<br class="hidden sm:block">
+          불확실성 속에서도 방향을 찾을 수 있습니다.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#contact" class="px-8 py-3.5 bg-teal-600 text-white font-sans font-medium rounded hover:bg-teal-700 transition-colors text-sm">
+            전략 상담 예약
+          </a>
+          <a href="tel:02-6275-0300" class="px-8 py-3.5 border border-white/30 text-white font-sans font-medium rounded hover:bg-white/10 transition-colors text-sm">
+            02-6275-0300
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-charcoal py-12" role="contentinfo">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+        <div>
+          <p class="font-serif text-lg font-bold text-white mb-3">STRATIUM</p>
+          <p class="font-sans text-xs text-gray-500 leading-[1.6]">
+            전략으로 성장을 설계하다.<br>
+            © 2026 스트래티움 컨설팅. All rights reserved.
+          </p>
+        </div>
+        <div>
+          <p class="font-sans text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Services</p>
+          <ul class="space-y-2">
+            <li><a href="#services" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">성장 전략</a></li>
+            <li><a href="#services" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">디지털 전환</a></li>
+            <li><a href="#services" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">M&A 자문</a></li>
+            <li><a href="#services" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">조직 설계</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-sans text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Company</p>
+          <ul class="space-y-2">
+            <li><a href="#philosophy" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">철학</a></li>
+            <li><a href="#team" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">리더십</a></li>
+            <li><a href="#cases" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">사례</a></li>
+            <li><a href="#contact" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">문의</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-sans text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Contact</p>
+          <ul class="space-y-2">
+            <li class="font-sans text-sm text-gray-500">서울 영등포구 여의대로 108</li>
+            <li class="font-sans text-sm text-gray-500">파크원타워 42층</li>
+            <li><a href="tel:02-6275-0300" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">02-6275-0300</a></li>
+            <li><a href="mailto:consult@stratium.co.kr" class="font-sans text-sm text-gray-500 hover:text-white transition-colors">consult@stratium.co.kr</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="font-sans text-xs text-gray-600">사업자등록번호: 107-86-XXXXX | 대표: 김현수</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-gray-600 hover:text-white transition-colors" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-white transition-colors" aria-label="Blog">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript: Scroll Animations + Counter + Mobile Menu -->
+  <script>
+    // Scroll Reveal (IntersectionObserver)
+    document.addEventListener('DOMContentLoaded', function() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-50px' });
+
+      document.querySelectorAll('.fade-in-section').forEach(function(el) {
+        observer.observe(el);
+      });
+
+      // Stagger items
+      const staggerObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const items = entry.target.querySelectorAll('.stagger-item');
+            items.forEach(function(item, i) {
+              item.style.transitionDelay = (i * 0.1) + 's';
+              item.classList.add('is-visible');
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-50px' });
+
+      document.querySelectorAll('section').forEach(function(section) {
+        if (section.querySelector('.stagger-item')) {
+          staggerObserver.observe(section);
+        }
+      });
+
+      // Counter Animation
+      const counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.counter-value');
+            counters.forEach(function(counter) {
+              const target = parseFloat(counter.getAttribute('data-target'));
+              const suffix = counter.getAttribute('data-suffix') || '';
+              const isDecimal = counter.getAttribute('data-decimal') === 'true';
+              const duration = 2000;
+              const start = performance.now();
+
+              function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+              function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeOutCubic(progress);
+                const current = eased * target;
+                counter.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+              }
+              requestAnimationFrame(update);
+            });
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.counter-value').forEach(function(el) {
+        counterObserver.observe(el.closest('section') || el.parentElement);
+      });
+
+      // Mobile menu toggle
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function() {
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', !expanded);
+          menu.classList.toggle('hidden');
+        });
+        menu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

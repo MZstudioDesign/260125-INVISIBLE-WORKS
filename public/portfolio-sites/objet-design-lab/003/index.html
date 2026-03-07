@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오브제 디자인랩 — 빛이 머무는 곳에 공간이 시작됩니다</title>
+  <meta name="description" content="오브제 디자인랩은 빛과 여백으로 일상의 풍경을 바꿉니다. 주거·상업 공간 인테리어 디자인 스튜디오." />
+  <link rel="canonical" href="https://objetdesignlab.co.kr" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="오브제 디자인랩 — 빛이 머무는 곳에 공간이 시작됩니다" />
+  <meta property="og:description" content="빛과 여백으로 일상의 풍경을 바꾸는 인테리어 디자인 스튜디오" />
+  <meta property="og:image" content="./images/hero.jpg" />
+  <meta property="og:url" content="https://objetdesignlab.co.kr" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Nanum Gothic', 'sans-serif'],
+          },
+          colors: {
+            page: '#FDFCF8',
+            surface: '#F5F3ED',
+            card: '#FFFFFF',
+            olive: { DEFAULT: '#5C6B4F', light: '#8B9A7B' },
+            txt: { DEFAULT: '#1C1C1A', secondary: '#4A4A45', muted: '#8A8A82' },
+            border: { DEFAULT: '#E5E3DC', strong: '#C4C1B8' },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-page: #FDFCF8;
+      --bg-surface: #F5F3ED;
+      --bg-card: #FFFFFF;
+      --accent-primary: #5C6B4F;
+      --accent-secondary: #8B9A7B;
+      --text-primary: #1C1C1A;
+      --text-secondary: #4A4A45;
+      --text-muted: #8A8A82;
+      --border-default: #E5E3DC;
+      --border-strong: #C4C1B8;
+      --font-ui: 'Playfair Display', serif;
+      --font-data: 'Nanum Gothic', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-data); color: var(--text-primary); background: var(--bg-page); }
+
+    /* Scroll Animations */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .stagger-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section,
+      .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+    .accordion-content.open {
+      max-height: 500px;
+    }
+
+    /* Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      z-index: 100;
+      padding: 8px 16px;
+      background: var(--accent-primary);
+      color: #fff;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Sticky Nav */
+    .nav-scrolled {
+      background: rgba(253, 252, 248, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 3px rgba(28,28,26,0.04);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<!-- HEADER / NAV -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 h-[72px] flex items-center justify-between">
+    <a href="#" class="font-serif text-xl font-semibold tracking-tight text-white transition-colors">오브제 디자인랩</a>
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+      <a href="#philosophy" class="text-sm text-white/80 hover:text-white transition-colors tracking-wide">철학</a>
+      <a href="#gallery" class="text-sm text-white/80 hover:text-white transition-colors tracking-wide">프로젝트</a>
+      <a href="#services" class="text-sm text-white/80 hover:text-white transition-colors tracking-wide">서비스</a>
+      <a href="#team" class="text-sm text-white/80 hover:text-white transition-colors tracking-wide">팀</a>
+      <a href="#contact" class="text-sm text-white/80 hover:text-white transition-colors tracking-wide">문의</a>
+    </nav>
+    <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="메뉴 열기">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-page hidden flex-col items-center justify-center gap-8">
+  <button id="mobile-menu-close" class="absolute top-6 right-6" aria-label="메뉴 닫기">
+    <i data-lucide="x" class="w-6 h-6 text-txt"></i>
+  </button>
+  <a href="#philosophy" class="text-lg font-serif text-txt">철학</a>
+  <a href="#gallery" class="text-lg font-serif text-txt">프로젝트</a>
+  <a href="#services" class="text-lg font-serif text-txt">서비스</a>
+  <a href="#team" class="text-lg font-serif text-txt">팀</a>
+  <a href="#contact" class="text-lg font-serif text-txt">문의</a>
+</div>
+
+<main id="main-content">
+
+<!-- ============================================================ -->
+<!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+<!-- COMPONENT_REF: hero-luxury-serif | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-luxury-serif-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-screen flex items-center">
+  <img src="./images/hero.jpg" alt="밝은 자연광이 가득한 현대적 거실 인테리어" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-32">
+    <div class="max-w-[640px]">
+      <p class="text-xs tracking-[0.2em] uppercase text-white/60 mb-6 font-sans">Interior Design Studio</p>
+      <h1 class="font-serif text-4xl md:text-5xl lg:text-[52px] font-bold text-white leading-[1.3] tracking-tight mb-8">
+        빛이 머무는 곳에<br>공간이 시작됩니다
+      </h1>
+      <p class="text-base md:text-lg text-white/75 leading-relaxed mb-10 font-sans max-w-[420px]">
+        오브제 디자인랩은 빛과 여백으로<br class="hidden sm:block">일상의 풍경을 바꿉니다.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-olive text-white text-sm font-medium tracking-wide rounded-sm hover:brightness-110 transition-all active:scale-95">
+          무료 상담 예약
+        </a>
+        <a href="#gallery" class="inline-flex items-center justify-center px-8 py-4 border border-white/40 text-white text-sm font-medium tracking-wide rounded-sm hover:bg-white/10 transition-all">
+          프로젝트 보기
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
+<!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section id="philosophy" class="fade-in-section w-full bg-page">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+      <div class="lg:col-span-5">
+        <p class="text-xs tracking-[0.15em] uppercase text-olive font-sans mb-4">Design Philosophy</p>
+        <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-txt leading-[1.25] tracking-tight">
+          비움으로<br>채우다
+        </h2>
+      </div>
+      <div class="lg:col-span-1"></div>
+      <div class="lg:col-span-6 pt-2">
+        <p class="text-base text-txt-secondary leading-[1.75] mb-6 max-w-[480px]">
+          좋은 공간은 채우는 것이 아니라<br class="hidden sm:block">비우는 것에서 시작합니다.
+        </p>
+        <p class="text-base text-txt-secondary leading-[1.75] max-w-[480px]">
+          불필요한 요소를 덜어내고, 자연광의 흐름을 따라<br class="hidden sm:block">
+          공간의 본질에 집중합니다. 소재 하나, 빛 한 줄기가<br class="hidden sm:block">
+          공간의 분위기를 완전히 바꿀 수 있다고 믿습니다.
+        </p>
+        <div class="mt-10 flex gap-12">
+          <div>
+            <p class="font-serif text-3xl font-semibold text-olive">270<span class="text-xl">+</span></p>
+            <p class="text-xs text-txt-muted tracking-wide mt-1">완성 프로젝트</p>
+          </div>
+          <div>
+            <p class="font-serif text-3xl font-semibold text-olive">12</p>
+            <p class="text-xs text-txt-muted tracking-wide mt-1">년의 경험</p>
+          </div>
+          <div>
+            <p class="font-serif text-3xl font-semibold text-olive">3</p>
+            <p class="text-xs text-txt-muted tracking-wide mt-1">KID Award</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: SEASONAL GALLERY | MOVE: M-LAY-EDITORIAL-FEATURE -->
+<!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="gallery" class="fade-in-section w-full bg-surface">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+    <div class="mb-16">
+      <p class="text-xs tracking-[0.15em] uppercase text-olive font-sans mb-4">Selected Projects</p>
+      <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-txt leading-[1.25] tracking-tight">
+        계절이 바뀌어도<br>머물고 싶은 공간
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Large image -->
+      <div class="stagger-item md:col-span-5 group">
+        <div class="relative overflow-hidden rounded-sm aspect-[3/4]">
+          <img src="./images/gallery_1.jpg" alt="밝은 톤의 현대적 거실 인테리어 프로젝트" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-sm font-sans">한남동 주거 리노베이션</p>
+          </div>
+        </div>
+      </div>
+      <!-- Small images stacked -->
+      <div class="stagger-item md:col-span-3 flex flex-col gap-6">
+        <div class="relative overflow-hidden rounded-sm aspect-[4/3] group">
+          <img src="./images/gallery_2.jpg" alt="고급스러운 주방 인테리어 디자인" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-xs font-sans">성수동 키친 디자인</p>
+          </div>
+        </div>
+        <div class="relative overflow-hidden rounded-sm aspect-[4/3] group">
+          <img src="./images/gallery_3.jpg" alt="깔끔한 모던 키친 인테리어" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-xs font-sans">논현동 쇼룸</p>
+          </div>
+        </div>
+      </div>
+      <!-- Medium image with offset -->
+      <div class="stagger-item md:col-span-4 md:mt-16 flex flex-col gap-6">
+        <div class="relative overflow-hidden rounded-sm aspect-[4/5] group">
+          <img src="./images/gallery_4.jpg" alt="미니멀한 침실 인테리어 공간" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-xs font-sans">청담동 펜트하우스</p>
+          </div>
+        </div>
+        <div class="relative overflow-hidden rounded-sm aspect-[3/2] group">
+          <img src="./images/gallery_5.jpg" alt="모던한 오피스 공간 디자인" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-xs font-sans">강남 오피스 리뉴얼</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: DIVIDER | MOVE: M-DIV-PARALLAX-LIGHT -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[50vh] flex items-center justify-center">
+  <img src="./images/divider.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation" />
+  <div class="absolute inset-0" style="background: rgba(92, 107, 79, 0.75);"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+    <blockquote class="font-serif text-2xl md:text-[36px] text-white leading-[1.3] italic tracking-tight max-w-[600px] mx-auto">
+      "공간은 삶의 배경이 아니라,<br>삶 그 자체입니다."
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PROCESS | MOVE: M-INT-STICKY-STEPS -->
+<!-- COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-image-collage-5-7-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section id="process" class="fade-in-section w-full bg-page">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+    <div class="mb-16">
+      <p class="text-xs tracking-[0.15em] uppercase text-olive font-sans mb-4">Design Process</p>
+      <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-txt leading-[1.25] tracking-tight">
+        상상에서 현실까지
+      </h2>
+      <p class="text-base text-txt-secondary leading-[1.75] mt-4 max-w-[400px]">
+        여섯 단계의 설계 여정으로<br class="hidden sm:block">꿈꾸던 공간을 완성합니다.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <!-- Left: Accordion Steps -->
+      <div class="lg:col-span-5 space-y-0">
+        <!-- Step 1 -->
+        <div class="accordion-item border-t border-border" data-index="0">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="true">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">01</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">현장 방문</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content open">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              공간의 빛, 동선, 구조를 직접 확인합니다.<br>고객의 라이프스타일을 경청하는 것에서 시작합니다.
+            </p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="accordion-item border-t border-border" data-index="1">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">02</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">컨셉 제안</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              무드보드와 소재 팔레트를 기반으로<br>공간의 방향성을 시각적으로 제안합니다.
+            </p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="accordion-item border-t border-border" data-index="2">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">03</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">3D 렌더링</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              실제와 동일한 3D 시뮬레이션으로<br>완성될 공간을 미리 경험합니다.
+            </p>
+          </div>
+        </div>
+        <!-- Step 4 -->
+        <div class="accordion-item border-t border-border" data-index="3">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">04</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">소재 선정</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              쇼룸에서 직접 만지고 비교하며<br>공간에 어울리는 소재를 결정합니다.
+            </p>
+          </div>
+        </div>
+        <!-- Step 5 -->
+        <div class="accordion-item border-t border-border" data-index="4">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">05</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">시공</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              전담 PM이 현장을 관리하며<br>디자인 의도가 정확히 구현되도록 합니다.
+            </p>
+          </div>
+        </div>
+        <!-- Step 6 -->
+        <div class="accordion-item border-t border-border border-b" data-index="5">
+          <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left group" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <span class="font-serif text-lg text-olive">06</span>
+              <span class="text-sm font-semibold text-txt group-hover:text-olive transition-colors">스타일링</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-txt-muted transition-transform duration-300"></i>
+          </button>
+          <div class="accordion-content">
+            <p class="text-sm text-txt-secondary leading-relaxed pb-5 pl-10">
+              가구, 조명, 오브제 배치로<br>공간에 생명을 불어넣습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Image -->
+      <div class="lg:col-span-7">
+        <div class="relative overflow-hidden rounded-sm aspect-[4/3] lg:aspect-auto lg:h-full">
+          <img src="./images/process.jpg" alt="인테리어 설계 도면과 소재 샘플" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: SERVICES / PRICING | MOVE: M-LAY-EDITORIAL-MOSAIC -->
+<!-- COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-mosaic-mixed-colspan-rowspan-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section id="services" class="fade-in-section w-full bg-surface">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+    <div class="mb-16">
+      <p class="text-xs tracking-[0.15em] uppercase text-olive font-sans mb-4">Services</p>
+      <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-txt leading-[1.25] tracking-tight">
+        당신의 공간에 맞는<br>디자인을 제안합니다
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <!-- Residential - Large Card -->
+      <div class="stagger-item md:col-span-7 md:row-span-2 bg-card border border-border rounded-md p-8 flex flex-col justify-between min-h-[360px] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-sm bg-olive/10 flex items-center justify-center">
+              <i data-lucide="home" class="w-5 h-5 text-olive"></i>
+            </div>
+            <p class="text-xs tracking-[0.1em] uppercase text-olive font-sans">Residential</p>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-txt mb-3">주거 공간</h3>
+          <p class="text-sm text-txt-secondary leading-relaxed max-w-[360px]">
+            아파트, 빌라, 단독주택까지.<br>
+            일상의 리듬에 맞춘 공간을 설계합니다.
+          </p>
+        </div>
+        <div class="mt-8 flex items-end justify-between">
+          <div>
+            <p class="text-xs text-txt-muted mb-1">예상 비용</p>
+            <p class="font-serif text-xl font-semibold text-olive">500 — 1,500<span class="text-sm text-txt-muted ml-1">만원</span></p>
+          </div>
+          <a href="#contact" class="text-sm text-olive font-medium hover:underline flex items-center gap-1 transition-colors">
+            상담 신청 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Commercial -->
+      <div class="stagger-item md:col-span-5 bg-txt rounded-md p-8 flex flex-col justify-between min-h-[170px] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-sm bg-white/10 flex items-center justify-center">
+            <i data-lucide="building-2" class="w-5 h-5 text-white"></i>
+          </div>
+          <p class="text-xs tracking-[0.1em] uppercase text-white/60 font-sans">Commercial</p>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">상업 공간</h3>
+        <p class="text-sm text-white/60 leading-relaxed">카페, 레스토랑, 리테일, 오피스</p>
+        <p class="font-serif text-lg font-semibold text-olive-light mt-4">1,000 — 3,000<span class="text-sm text-white/40 ml-1">만원</span></p>
+      </div>
+      <!-- Renovation -->
+      <div class="stagger-item md:col-span-3 bg-card border border-border rounded-md p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <div class="w-8 h-8 rounded-sm bg-olive/10 flex items-center justify-center mb-4">
+          <i data-lucide="refresh-cw" class="w-4 h-4 text-olive"></i>
+        </div>
+        <h3 class="font-serif text-lg font-semibold text-txt mb-2">리노베이션</h3>
+        <p class="text-xs text-txt-muted leading-relaxed">기존 공간의 가치를<br>새롭게 끌어올립니다</p>
+      </div>
+      <!-- Styling -->
+      <div class="stagger-item md:col-span-2 bg-olive rounded-md p-6 flex flex-col justify-center items-center text-center hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <i data-lucide="sparkles" class="w-5 h-5 text-white mb-3"></i>
+        <h3 class="font-serif text-base font-semibold text-white">스타일링</h3>
+        <p class="text-xs text-white/60 mt-1">가구·조명·오브제</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: AWARDS / TRUST | MOVE: M-TRUST-STAT-BAND -->
+<!-- ============================================================ -->
+<section class="w-full bg-[#2C3325]">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="stagger-item">
+        <p class="font-serif text-3xl md:text-4xl font-bold text-white">270<span class="text-lg">+</span></p>
+        <p class="text-xs text-white/60 tracking-wide mt-2 font-sans">완성 프로젝트</p>
+      </div>
+      <div class="stagger-item">
+        <p class="font-serif text-3xl md:text-4xl font-bold text-white">12</p>
+        <p class="text-xs text-white/60 tracking-wide mt-2 font-sans">년 경력</p>
+      </div>
+      <div class="stagger-item">
+        <p class="font-serif text-3xl md:text-4xl font-bold text-white">3</p>
+        <p class="text-xs text-white/60 tracking-wide mt-2 font-sans">KID Award 수상</p>
+      </div>
+      <div class="stagger-item">
+        <p class="font-serif text-3xl md:text-4xl font-bold text-white">98<span class="text-lg">%</span></p>
+        <p class="text-xs text-white/60 tracking-wide mt-2 font-sans">고객 재이용률</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: TEAM | MOVE: M-LAY-EDITORIAL-STORY -->
+<!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="team" class="fade-in-section w-full bg-page">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
+    <div class="mb-16">
+      <p class="text-xs tracking-[0.15em] uppercase text-olive font-sans mb-4">Our Team</p>
+      <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-txt leading-[1.25] tracking-tight">
+        공간을 읽는 사람들
+      </h2>
+      <p class="text-base text-txt-secondary leading-[1.75] mt-4 max-w-[400px]">
+        서로 다른 시선으로<br class="hidden sm:block">하나의 공간을 완성합니다.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <!-- Text -->
+      <div class="lg:col-span-4 space-y-10">
+        <!-- Designer 1 -->
+        <div class="stagger-item">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-border">
+              <img src="./images/team_1.jpg" alt="이서윤 수석 디자이너 포트레이트" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div>
+              <p class="font-serif text-lg font-semibold text-txt">이서윤</p>
+              <p class="text-xs text-txt-muted">수석 디자이너 · 주거 공간 전문</p>
+            </div>
+          </div>
+          <p class="text-sm text-txt-secondary leading-relaxed">
+            홍익대학교 실내건축학과 졸업. KID Award 2회 수상.<br>
+            10년간 100여 건의 주거 프로젝트를 이끌었습니다.<br>
+            "빛이 가장 아름다운 순간을 포착하는 것이 저의 일입니다."
+          </p>
+        </div>
+        <!-- Designer 2 -->
+        <div class="stagger-item">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-border">
+              <img src="./images/team_2.jpg" alt="박준혁 시니어 디자이너 포트레이트" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div>
+              <p class="font-serif text-lg font-semibold text-txt">박준혁</p>
+              <p class="text-xs text-txt-muted">시니어 디자이너 · 상업 공간 전문</p>
+            </div>
+          </div>
+          <p class="text-sm text-txt-secondary leading-relaxed">
+            건국대학교 인테리어디자인학과 졸업. KID Award 1회 수상.<br>
+            카페, 레스토랑, 리테일 등 80여 건의 상업 공간 경험.<br>
+            "공간이 브랜드를 말하게 하고 싶습니다."
+          </p>
+        </div>
+      </div>
+      <!-- Gap -->
+      <div class="hidden lg:block lg:col-span-1"></div>
+      <!-- Image -->
+      <div class="lg:col-span-7">
+        <div class="relative overflow-hidden rounded-sm aspect-[4/3]">
+          <img src="./images/gallery_6.jpg" alt="디자인팀이 작업한 모던 인테리어 공간" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: SHOWROOM | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[60vh] flex items-center">
+  <img src="./images/showroom.jpg" alt="오브제 디자인랩 논현동 쇼룸 내부" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <div class="absolute inset-0 bg-black/65"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20">
+    <div class="max-w-[480px]">
+      <p class="text-xs tracking-[0.15em] uppercase text-white/50 font-sans mb-4">Showroom</p>
+      <h2 class="font-serif text-3xl md:text-[38px] font-semibold text-white leading-[1.25] tracking-tight mb-6">
+        소재를 직접<br>만져보세요
+      </h2>
+      <p class="text-base text-white/70 leading-[1.75] mb-8 font-sans">
+        논현동 쇼룸에서 당신의 공간을<br class="hidden sm:block">미리 경험할 수 있습니다.
+      </p>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <i data-lucide="map-pin" class="w-4 h-4 text-olive-light"></i>
+          <p class="text-sm text-white/80 font-sans">서울 강남구 논현로 172길 14, 2층</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="clock" class="w-4 h-4 text-olive-light"></i>
+          <p class="text-sm text-white/80 font-sans">월~금 10:00 — 19:00 (예약제)</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="phone" class="w-4 h-4 text-olive-light"></i>
+          <p class="text-sm text-white/80 font-sans">02-517-0925</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: cta-consulting-fullwidth | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-consulting-fullwidth-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="contact" class="relative w-full min-h-[60vh] flex items-center">
+  <img src="./images/cta.jpg" alt="프리미엄 인테리어 공간 분위기" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <div class="absolute inset-0 bg-black/70"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+    <p class="text-xs tracking-[0.15em] uppercase text-white/50 font-sans mb-6">Free Consultation</p>
+    <h2 class="font-serif text-3xl md:text-[42px] font-semibold text-white leading-[1.2] tracking-tight mb-6">
+      당신의 공간,<br>어디서부터 시작할까요?
+    </h2>
+    <p class="text-base text-white/65 leading-relaxed mb-10 font-sans max-w-[400px] mx-auto">
+      초기 상담은 무료입니다.<br class="hidden sm:block">부담 없이 공간에 대한 이야기를 들려주세요.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <a href="tel:02-517-0925" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-olive text-white text-sm font-medium tracking-wide rounded-sm hover:brightness-110 transition-all active:scale-95">
+        <i data-lucide="phone" class="w-4 h-4"></i>
+        02-517-0925
+      </a>
+      <a href="mailto:hello@objetdesignlab.co.kr" class="inline-flex items-center justify-center px-8 py-4 border border-white/40 text-white text-sm font-medium tracking-wide rounded-sm hover:bg-white/10 transition-all">
+        이메일 문의
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full bg-txt">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div class="md:col-span-4">
+        <p class="font-serif text-lg text-white font-semibold mb-3">오브제 디자인랩</p>
+        <p class="text-xs text-white/40 leading-relaxed">
+          서울 강남구 논현로 172길 14, 2층<br>
+          사업자등록번호 215-88-01234<br>
+          대표 이서윤
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <p class="text-xs text-white/60 font-semibold mb-3 tracking-wide uppercase">Menu</p>
+        <div class="space-y-2">
+          <a href="#philosophy" class="block text-xs text-white/40 hover:text-white/70 transition-colors">디자인 철학</a>
+          <a href="#gallery" class="block text-xs text-white/40 hover:text-white/70 transition-colors">프로젝트</a>
+          <a href="#services" class="block text-xs text-white/40 hover:text-white/70 transition-colors">서비스</a>
+          <a href="#team" class="block text-xs text-white/40 hover:text-white/70 transition-colors">팀</a>
+        </div>
+      </div>
+      <div class="md:col-span-3">
+        <p class="text-xs text-white/60 font-semibold mb-3 tracking-wide uppercase">Contact</p>
+        <div class="space-y-2">
+          <p class="text-xs text-white/40">02-517-0925</p>
+          <p class="text-xs text-white/40">hello@objetdesignlab.co.kr</p>
+          <p class="text-xs text-white/40">월~금 10:00 — 19:00</p>
+        </div>
+      </div>
+      <div class="md:col-span-3 flex md:justify-end items-start">
+        <div class="flex gap-4">
+          <a href="#" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors" aria-label="인스타그램">
+            <svg class="w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:border-white/50 transition-colors" aria-label="네이버 블로그">
+            <span class="text-white/40 text-xs font-bold">N</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 mt-10 pt-6">
+      <p class="text-xs text-white/30 text-center">© 2026 오브제 디자인랩. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "InteriorDesignStudio",
+  "name": "오브제 디자인랩",
+  "alternateName": "Objet Design Lab",
+  "url": "https://objetdesignlab.co.kr",
+  "telephone": "02-517-0925",
+  "email": "hello@objetdesignlab.co.kr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "논현로 172길 14, 2층",
+    "addressLocality": "강남구",
+    "addressRegion": "서울",
+    "postalCode": "06040",
+    "addressCountry": "KR"
+  },
+  "openingHours": "Mo-Fr 10:00-19:00",
+  "priceRange": "₩₩₩"
+}
+</script>
+
+<!-- Scripts -->
+<script>
+  // Initialize Lucide Icons
+  lucide.createIcons();
+
+  // Scroll Animation Observer
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+    // Stagger items
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.stagger-item');
+          items.forEach((item, i) => {
+            item.style.transitionDelay = `${i * 0.1}s`;
+            item.classList.add('visible');
+          });
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+      if (section.querySelector('.stagger-item')) {
+        staggerObserver.observe(section);
+      }
+    });
+
+    // Standalone stagger containers (trust band)
+    const trustBand = document.querySelector('.bg-olive');
+    if (trustBand) {
+      const trustObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.stagger-item').forEach((item, i) => {
+              item.style.transitionDelay = `${i * 0.1}s`;
+              item.classList.add('visible');
+            });
+            trustObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      trustObserver.observe(trustBand);
+    }
+  })();
+
+  // Sticky Nav
+  (function() {
+    const header = document.getElementById('site-header');
+    const links = header.querySelectorAll('a, button');
+    let scrolled = false;
+
+    window.addEventListener('scroll', () => {
+      const isScrolled = window.scrollY > 80;
+      if (isScrolled !== scrolled) {
+        scrolled = isScrolled;
+        header.classList.toggle('nav-scrolled', scrolled);
+        links.forEach(link => {
+          if (scrolled) {
+            link.classList.remove('text-white', 'text-white/80');
+            link.classList.add('text-txt', 'text-txt-secondary');
+          } else {
+            link.classList.remove('text-txt', 'text-txt-secondary');
+            if (link.tagName === 'A' && !link.classList.contains('font-serif')) {
+              link.classList.add('text-white/80');
+            } else {
+              link.classList.add('text-white');
+            }
+          }
+        });
+      }
+    });
+  })();
+
+  // Mobile Menu
+  (function() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const close = document.getElementById('mobile-menu-close');
+
+    btn.addEventListener('click', () => {
+      menu.classList.remove('hidden');
+      menu.classList.add('flex');
+    });
+
+    close.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+      });
+    });
+  })();
+
+  // Accordion
+  (function() {
+    const items = document.querySelectorAll('.accordion-item');
+    items.forEach(item => {
+      const trigger = item.querySelector('.accordion-trigger');
+      const content = item.querySelector('.accordion-content');
+      const icon = trigger.querySelector('[data-lucide="chevron-down"]');
+
+      trigger.addEventListener('click', () => {
+        const isOpen = content.classList.contains('open');
+
+        // Close all
+        items.forEach(other => {
+          other.querySelector('.accordion-content').classList.remove('open');
+          other.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+          const otherIcon = other.querySelector('[data-lucide="chevron-down"]');
+          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+        });
+
+        // Open clicked
+        if (!isOpen) {
+          content.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+          if (icon) icon.style.transform = 'rotate(180deg)';
+        }
+      });
+
+      // Set initial state
+      if (content.classList.contains('open') && icon) {
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

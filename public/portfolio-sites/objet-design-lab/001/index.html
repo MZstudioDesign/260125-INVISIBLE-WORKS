@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오브제 디자인랩 — 공간에 깊이를 더하다</title>
+    <meta name="description" content="오브제 디자인랩은 빛과 소재를 중심으로 주거·상업 공간을 설계하는 프리미엄 인테리어 디자인 스튜디오입니다. 논현동 쇼룸에서 직접 확인하세요.">
+    <link rel="canonical" href="https://objet-designlab.kr">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="오브제 디자인랩 — 공간에 깊이를 더하다">
+    <meta property="og:description" content="빛과 소재가 만드는 정제된 아름다움. 프리미엄 인테리어 디자인 스튜디오.">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta property="og:url" content="https://objet-designlab.kr">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Fonts: Pretendard via CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'ui': ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    colors: {
+                        'bg-page': '#FAFAF7',
+                        'bg-surface': '#F2F0EB',
+                        'bg-card': '#FFFFFF',
+                        'accent': '#8C7E6E',
+                        'accent-light': '#C4B5A4',
+                        'text-primary': '#1A1A18',
+                        'text-secondary': '#5C5C58',
+                        'text-muted': '#9C9890',
+                        'border-default': '#E8E5DF',
+                        'border-strong': '#C4B5A4',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        :root {
+            --bg-page: #FAFAF7;
+            --bg-surface: #F2F0EB;
+            --bg-card: #FFFFFF;
+            --accent-primary: #8C7E6E;
+            --accent-secondary: #C4B5A4;
+            --text-primary: #1A1A18;
+            --text-secondary: #5C5C58;
+            --text-muted: #9C9890;
+            --border-default: #E8E5DF;
+            --border-strong: #C4B5A4;
+            --font-ui: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            --content-max-width: 1200px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-ui);
+            background: var(--bg-page);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            z-index: 999;
+            padding: 1rem;
+            background: var(--accent-primary);
+            color: #fff;
+        }
+        .skip-link:focus { top: 0; }
+    </style>
+</head>
+<body class="bg-bg-page text-text-primary font-ui antialiased overflow-x-hidden">
+
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-bg-page/90 backdrop-blur-sm border-b border-border-default/50" aria-label="Main navigation">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-4 flex items-center justify-between">
+        <a href="#" class="text-lg font-semibold tracking-tight text-text-primary">오브제 디자인랩</a>
+        <div class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
+            <a href="#portfolio" class="hover:text-text-primary">포트폴리오</a>
+            <a href="#services" class="hover:text-text-primary">서비스</a>
+            <a href="#team" class="hover:text-text-primary">팀</a>
+            <a href="#process" class="hover:text-text-primary">프로세스</a>
+            <a href="#showroom" class="hover:text-text-primary">쇼룸</a>
+        </div>
+        <a href="#contact" class="hidden md:inline-block bg-accent text-white text-sm px-5 py-2 rounded hover:brightness-110 active:scale-95">상담 예약</a>
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="메뉴 열기">
+            <i data-lucide="menu" class="w-6 h-6 text-text-primary"></i>
+        </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-bg-page border-t border-border-default px-6 py-4 space-y-3">
+        <a href="#portfolio" class="block text-sm text-text-secondary hover:text-text-primary">포트폴리오</a>
+        <a href="#services" class="block text-sm text-text-secondary hover:text-text-primary">서비스</a>
+        <a href="#team" class="block text-sm text-text-secondary hover:text-text-primary">팀</a>
+        <a href="#process" class="block text-sm text-text-secondary hover:text-text-primary">프로세스</a>
+        <a href="#showroom" class="block text-sm text-text-secondary hover:text-text-primary">쇼룸</a>
+        <a href="#contact" class="block bg-accent text-white text-sm px-5 py-2 rounded text-center">상담 예약</a>
+    </div>
+</nav>
+
+<main id="main-content">
+
+<!-- ============================================================ -->
+<!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+<!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-fullbleed-overlay-reference.html | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-screen">
+    <img src="./images/hero.jpg" alt="밝은 자연광이 들어오는 현대적 거실 인테리어" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" width="1920" height="1080">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-center items-start">
+        <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-6">Interior Design Studio</p>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.3] tracking-tight">
+            공간에<br>깊이를 더하다
+        </h1>
+        <p class="text-white/70 text-base md:text-lg mt-6 max-w-[400px] leading-relaxed">
+            빛과 소재가 만드는 정제된 아름다움.<br class="hidden sm:block">
+            오브제 디자인랩이 당신의 일상을 설계합니다.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#contact" class="bg-accent text-white px-8 py-3.5 text-sm tracking-wide rounded hover:brightness-110 active:scale-95">무료 상담 예약하기</a>
+            <a href="#portfolio" class="border border-white/30 text-white px-8 py-3.5 text-sm tracking-wide rounded hover:bg-white/10">포트폴리오 보기</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PORTFOLIO GALLERY | MOVE: M-LAY-EDITORIAL-MOSAIC -->
+<!-- COMPONENT_REF: staggered-hotel-gallery-5-3-3-mt24 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-hotel-gallery-5-3-3-mt24-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="portfolio" class="w-full py-24 md:py-32 bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <!-- Section header -->
+        <div class="mb-16 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Portfolio</p>
+            <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
+                우리가 만든<br>공간의 기록
+            </h2>
+            <p class="text-text-secondary mt-4 max-w-[440px] leading-relaxed">
+                주거, 상업, 리노베이션 — 180여 건의 프로젝트가<br class="hidden sm:block">증명하는 디자인의 깊이.
+            </p>
+        </div>
+
+        <!-- Row 1: Asymmetric gallery -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-in-section">
+            <!-- Large image: 5 cols -->
+            <div class="col-span-12 md:col-span-5 stagger-item">
+                <div class="aspect-[3/4] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_1.jpg" alt="현대적 거실 디자인 프로젝트" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">한남동 레지던스 · 2024</p>
+            </div>
+            <!-- Gap: 1 col -->
+            <div class="hidden md:block md:col-span-1"></div>
+            <!-- Small image: 3 cols, offset -->
+            <div class="col-span-6 md:col-span-3 md:mt-24 stagger-item">
+                <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_2.jpg" alt="프리미엄 주방 인테리어" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">성수동 카페 · 2024</p>
+            </div>
+            <!-- Small image: 3 cols -->
+            <div class="col-span-6 md:col-span-3 stagger-item">
+                <div class="aspect-[16/10] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_3.jpg" alt="모던 오피스 공간 설계" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">강남 오피스 · 2023</p>
+            </div>
+        </div>
+
+        <!-- Row 2: Staggered -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 mt-6 fade-in-section">
+            <div class="hidden md:block md:col-span-2"></div>
+            <div class="col-span-6 md:col-span-4 stagger-item">
+                <div class="aspect-[4/5] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_4.jpg" alt="미니멀 침실 인테리어" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">이태원 빌라 · 2023</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 md:mt-12 stagger-item">
+                <div class="aspect-[3/2] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_5.jpg" alt="리테일 매장 디자인" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">청담 부티크 · 2024</p>
+            </div>
+            <div class="col-span-12 md:col-span-3 md:-mt-8 stagger-item">
+                <div class="aspect-[4/3] overflow-hidden rounded-sm">
+                    <img src="./images/portfolio_6.jpg" alt="럭셔리 리빙 디자인" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                </div>
+                <p class="text-[11px] uppercase tracking-[0.15em] text-text-muted mt-3">용산 펜트하우스 · 2024</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: BEFORE/AFTER | MOVE: M-LAY-OFFSET-OVERLAP -->
+<!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section class="w-full py-24 md:py-32 bg-bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+            <!-- Text block: 4 cols, offset -->
+            <div class="col-span-12 md:col-span-4 md:pt-16">
+                <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Before & After</p>
+                <h2 class="text-3xl lg:text-[40px] font-semibold leading-tight tracking-tight">
+                    같은 공간,<br>다른 세계
+                </h2>
+                <div class="h-px w-12 bg-accent mt-6 mb-6"></div>
+                <p class="text-text-secondary text-base leading-relaxed">
+                    구조를 바꾸지 않아도 달라집니다.<br class="hidden sm:block">
+                    소재와 빛의 재구성만으로 공간이 숨 쉽니다.
+                </p>
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="layers" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium">소재 재구성</p>
+                            <p class="text-xs text-text-muted mt-1">기존 마감재를 분석하고 최적의 대안을 제안합니다</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="sun" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium">조명 리디자인</p>
+                            <p class="text-xs text-text-muted mt-1">자연광과 인공조명의 레이어를 새로 설계합니다</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="palette" class="w-5 h-5 text-accent mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium">컬러 리밸런싱</p>
+                            <p class="text-xs text-text-muted mt-1">공간의 톤을 통일하여 시각적 깊이를 만듭니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gap: 1 col -->
+            <div class="hidden md:block md:col-span-1"></div>
+            <!-- Large image: 7 cols -->
+            <div class="col-span-12 md:col-span-7 mt-8 md:mt-0">
+                <div class="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-sm shadow-lg">
+                    <img src="./images/before_after.jpg" alt="리노베이션 전후 비교 - 밝고 현대적으로 변화된 거실" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="flex justify-between mt-4">
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-text-muted">압구정 레지던스 리노베이션</span>
+                    <span class="text-[11px] uppercase tracking-[0.15em] text-accent">2024</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: DESIGN PHILOSOPHY | MOVE: M-LAY-EDITORIAL-STORY -->
+<!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section class="w-full py-24 md:py-32 bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+            <!-- Large image first on this row (reversed editorial story) -->
+            <div class="col-span-12 md:col-span-7">
+                <div class="relative aspect-[4/3] overflow-hidden rounded-sm">
+                    <img src="./images/philosophy.jpg" alt="자연 소재 샘플 - 원목, 자연석, 리넨 텍스처" class="w-full h-full object-cover" loading="lazy">
+                </div>
+            </div>
+            <!-- Gap: 1 col -->
+            <div class="hidden md:block md:col-span-1"></div>
+            <!-- Text block: 4 cols, offset down -->
+            <div class="col-span-12 md:col-span-4 md:pt-20">
+                <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Philosophy</p>
+                <h2 class="text-3xl lg:text-[40px] font-semibold leading-tight tracking-tight">
+                    소재가 먼저,<br>스타일은 그 다음
+                </h2>
+                <div class="h-px w-12 bg-accent mt-6 mb-6"></div>
+                <p class="text-text-secondary text-base leading-relaxed">
+                    원목의 결, 자연석의 질감, 리넨의 촉감.<br class="hidden sm:block">
+                    손에 닿는 것부터 디자인합니다.
+                </p>
+                <ul class="mt-8 space-y-3">
+                    <li class="flex items-center gap-3 text-sm text-text-secondary">
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                        Material-first approach
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-text-secondary">
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                        Light as design element
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-text-secondary">
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                        Custom furniture integration
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- ============================================================ -->
+<section class="relative w-full min-h-[50vh]">
+    <img src="./images/divider.jpg" alt="빛이 공간을 완성하는 순간" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex flex-col justify-center items-center text-center">
+        <h2 class="text-3xl md:text-[40px] font-semibold text-white leading-tight tracking-tight fade-in-section">
+            빛이 공간을<br>완성하는 순간
+        </h2>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: SERVICES / PRICING | MOVE: M-LAY-ASYM-GRID -->
+<!-- COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 70% -->
+<!-- ============================================================ -->
+<section id="services" class="w-full py-24 md:py-32 bg-bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <!-- Section header -->
+        <div class="mb-16 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Services</p>
+            <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
+                프로젝트에 맞는<br>정확한 설계
+            </h2>
+            <p class="text-text-secondary mt-4 max-w-[440px] leading-relaxed">
+                주거부터 상업 공간까지.<br class="hidden sm:block">규모와 목적에 따른 맞춤형 설계를 제안합니다.
+            </p>
+        </div>
+
+        <!-- Asymmetric Cards: 3:5:4 grid -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-in-section">
+            <!-- Card 1: Residential — 5 cols -->
+            <div class="col-span-12 md:col-span-5 stagger-item">
+                <div class="bg-bg-card border border-border-default rounded-lg p-8 h-full hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-300">
+                    <i data-lucide="home" class="w-6 h-6 text-accent mb-6"></i>
+                    <h3 class="text-xl font-semibold mb-2">주거 공간</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">
+                        아파트, 빌라, 단독주택의 전체 설계부터<br>부분 리노베이션까지.
+                    </p>
+                    <div class="border-t border-border-default pt-4">
+                        <p class="text-xs text-text-muted">시작 금액</p>
+                        <p class="text-lg font-semibold text-accent mt-1">₩5,000,000 ~</p>
+                        <p class="text-xs text-text-muted mt-1">평형 · 범위에 따라 변동</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Commercial — 4 cols -->
+            <div class="col-span-12 md:col-span-4 md:mt-12 stagger-item">
+                <div class="bg-bg-card border border-border-default rounded-lg p-8 h-full hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-300">
+                    <i data-lucide="building-2" class="w-6 h-6 text-accent mb-6"></i>
+                    <h3 class="text-xl font-semibold mb-2">상업 공간</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">
+                        카페, 레스토랑, 리테일, 오피스 등<br>브랜드 정체성을 공간으로 번역합니다.
+                    </p>
+                    <div class="border-t border-border-default pt-4">
+                        <p class="text-xs text-text-muted">시작 금액</p>
+                        <p class="text-lg font-semibold text-accent mt-1">₩10,000,000 ~</p>
+                        <p class="text-xs text-text-muted mt-1">업종 · 면적에 따라 변동</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Styling — 3 cols -->
+            <div class="col-span-12 md:col-span-3 stagger-item">
+                <div class="bg-bg-card border border-border-default rounded-lg p-8 h-full hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-300">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-accent mb-6"></i>
+                    <h3 class="text-xl font-semibold mb-2">스타일링</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">
+                        가구, 조명, 소품 배치로<br>공간의 분위기를 완성합니다.
+                    </p>
+                    <div class="border-t border-border-default pt-4">
+                        <p class="text-xs text-text-muted">시작 금액</p>
+                        <p class="text-lg font-semibold text-accent mt-1">₩2,000,000 ~</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center fade-in-section">
+            <a href="#contact" class="inline-block bg-accent text-white px-8 py-3.5 text-sm tracking-wide rounded hover:brightness-110 active:scale-95">견적 문의하기</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: TEAM | MOVE: M-LAY-EDITORIAL-FEATURE -->
+<!-- COMPONENT_REF: staggered-team-3col-zigzag-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-team-3col-zigzag-offset-reference.html | FIDELITY: 80% -->
+<!-- ============================================================ -->
+<section id="team" class="w-full py-24 md:py-32 bg-bg-page">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <!-- Section header -->
+        <div class="mb-16 text-center fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Team</p>
+            <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
+                공간을 읽는 사람들
+            </h2>
+            <p class="text-text-secondary mt-4 max-w-[480px] mx-auto leading-relaxed">
+                각자의 전문 영역에서 10년 이상의 경력.<br class="hidden sm:block">
+                한국실내건축학회 인증 디자이너 4인이 함께합니다.
+            </p>
+        </div>
+
+        <!-- Team grid: staggered zigzag -->
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-in-section">
+            <!-- Member 1: no offset -->
+            <div class="col-span-6 md:col-span-3 stagger-item">
+                <div class="aspect-[3/4] overflow-hidden rounded-sm mb-4">
+                    <img src="./images/team_1.jpg" alt="김도현 수석 디자이너" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy">
+                </div>
+                <h3 class="text-base font-semibold">김도현</h3>
+                <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted mt-1">Lead Designer · Residential</p>
+            </div>
+            <!-- Member 2: offset up -->
+            <div class="col-span-6 md:col-span-3 md:-mt-8 stagger-item">
+                <div class="aspect-[3/4] overflow-hidden rounded-sm mb-4">
+                    <img src="./images/team_2.jpg" alt="이서연 공간디자이너" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy">
+                </div>
+                <h3 class="text-base font-semibold">이서연</h3>
+                <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted mt-1">Senior Designer · Commercial</p>
+            </div>
+            <!-- Member 3: offset down -->
+            <div class="col-span-6 md:col-span-3 md:mt-8 stagger-item">
+                <div class="aspect-[3/4] overflow-hidden rounded-sm mb-4">
+                    <img src="./images/team_3.jpg" alt="박준혁 프로젝트 매니저" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy">
+                </div>
+                <h3 class="text-base font-semibold">박준혁</h3>
+                <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted mt-1">Project Manager · Renovation</p>
+            </div>
+            <!-- Member 4: slight offset -->
+            <div class="col-span-6 md:col-span-3 md:-mt-4 stagger-item">
+                <div class="aspect-[3/4] overflow-hidden rounded-sm mb-4">
+                    <img src="./images/team_4.jpg" alt="최예린 스타일링 디렉터" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy">
+                </div>
+                <h3 class="text-base font-semibold">최예린</h3>
+                <p class="text-[11px] uppercase tracking-[0.12em] text-text-muted mt-1">Styling Director · Furniture</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
+<!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="process" class="w-full py-24 md:py-32 bg-bg-surface">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <!-- Section header -->
+        <div class="mb-16 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Process</p>
+            <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
+                상담에서 스타일링까지<br>6단계 프로세스
+            </h2>
+            <p class="text-text-secondary mt-4 max-w-[440px] leading-relaxed">
+                현장 방문부터 최종 스타일링까지.<br class="hidden sm:block">매 단계마다 3D 렌더링으로 소통합니다.
+            </p>
+        </div>
+
+        <!-- Process steps: 3-column grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 fade-in-section">
+            <!-- Step 1 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">01</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">현장 방문</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">공간의 구조, 채광, 동선을 직접 확인합니다. 생활 패턴과 취향을 듣습니다.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">02</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">콘셉트 제안</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">무드보드와 공간 콘셉트를 제안합니다. 두세 가지 방향 중 선택합니다.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">03</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">3D 렌더링</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">실제와 동일한 3D 렌더링으로 완성본을 미리 확인합니다.</p>
+            </div>
+            <!-- Step 4 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">04</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">소재 선정</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">쇼룸에서 300종 이상의 소재 샘플을 직접 보고 만져봅니다.</p>
+            </div>
+            <!-- Step 5 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">05</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">시공 관리</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">전담 매니저가 시공 전 과정을 관리합니다. 주간 리포트를 제공합니다.</p>
+            </div>
+            <!-- Step 6 -->
+            <div class="stagger-item">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl font-bold text-accent/30">06</span>
+                    <div class="h-px flex-1 bg-border-default"></div>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">파이널 스타일링</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">가구, 조명, 소품 배치로 공간에 생명을 불어넣습니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: SHOWROOM | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- ============================================================ -->
+<section id="showroom" class="relative w-full min-h-[60vh]">
+    <img src="./images/showroom.jpg" alt="오브제 디자인랩 논현동 쇼룸 내부" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
+        <div class="grid grid-cols-12 gap-8 items-center w-full fade-in-section">
+            <div class="col-span-12 md:col-span-7">
+                <p class="text-xs uppercase tracking-[0.2em] text-white/50 mb-4">Showroom</p>
+                <h2 class="text-3xl md:text-[40px] font-semibold text-white leading-tight tracking-tight">
+                    논현동 쇼룸에서<br>직접 확인하세요
+                </h2>
+                <p class="text-white/60 mt-4 text-sm max-w-[400px] leading-relaxed">
+                    소재 샘플 300종, 커스텀 가구 원본을<br class="hidden sm:block">직접 보고 만져볼 수 있습니다.
+                </p>
+                <div class="mt-8 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-white/50"></i>
+                        <span class="text-white/80 text-sm">서울특별시 강남구 논현로 172길 14, 2층</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="clock" class="w-4 h-4 text-white/50"></i>
+                        <span class="text-white/80 text-sm">월–금 10:00–19:00 (예약제 운영)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="phone" class="w-4 h-4 text-white/50"></i>
+                        <span class="text-white/80 text-sm">02-543-8910</span>
+                    </div>
+                </div>
+                <a href="#contact" class="inline-block mt-8 bg-white text-text-primary px-8 py-3.5 text-sm tracking-wide rounded hover:bg-accent hover:text-white transition-colors active:scale-95">
+                    쇼룸 방문 예약
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
+<!-- ============================================================ -->
+<section id="contact" class="relative w-full min-h-[60vh]">
+    <img src="./images/cta.jpg" alt="프리미엄 인테리어 공간" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center fade-in-section">
+        <p class="text-xs uppercase tracking-[0.25em] text-white/40 mb-6">Free Consultation</p>
+        <h2 class="text-3xl md:text-[48px] font-semibold text-white leading-tight tracking-tight">
+            첫 만남은<br>무료입니다
+        </h2>
+        <p class="text-white/60 mt-6 text-base max-w-[400px] leading-relaxed">
+            공간의 가능성을 함께 이야기합니다.<br class="hidden sm:block">
+            부담 없이 상담을 시작하세요.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4 justify-center">
+            <a href="tel:02-543-8910" class="bg-accent text-white px-10 py-4 text-sm tracking-wide rounded hover:brightness-110 active:scale-95">
+                무료 디자인 상담 신청
+            </a>
+            <a href="mailto:hello@objet-designlab.kr" class="border border-white/30 text-white px-10 py-4 text-sm tracking-wide rounded hover:bg-white/10">
+                이메일 문의
+            </a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="w-full bg-text-primary text-white/60 py-16">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-8">
+            <!-- Brand -->
+            <div class="col-span-12 md:col-span-4">
+                <p class="text-white font-semibold text-lg mb-3">오브제 디자인랩</p>
+                <p class="text-sm leading-relaxed">
+                    공간에 깊이를 더하다.<br>
+                    빛과 소재 중심의 프리미엄 인테리어.
+                </p>
+            </div>
+            <!-- Contact -->
+            <div class="col-span-6 md:col-span-3">
+                <p class="text-white text-sm font-medium mb-3">Contact</p>
+                <ul class="space-y-2 text-sm">
+                    <li>02-543-8910</li>
+                    <li>hello@objet-designlab.kr</li>
+                    <li>월–금 10:00–19:00</li>
+                </ul>
+            </div>
+            <!-- Location -->
+            <div class="col-span-6 md:col-span-3">
+                <p class="text-white text-sm font-medium mb-3">Location</p>
+                <p class="text-sm leading-relaxed">
+                    서울특별시 강남구<br>
+                    논현로 172길 14, 2층<br>
+                    쇼룸 예약제 운영
+                </p>
+            </div>
+            <!-- Links -->
+            <div class="col-span-12 md:col-span-2">
+                <p class="text-white text-sm font-medium mb-3">Follow</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Kakao</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs">&copy; 2024 오브제 디자인랩. All rights reserved.</p>
+            <p class="text-xs">사업자등록번호 123-45-67890 · 대표 김도현</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe fade-in sections
+    document.querySelectorAll('.fade-in-section').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Observe stagger items with delay
+    document.querySelectorAll('.stagger-item').forEach((el, index) => {
+        const parent = el.closest('.grid');
+        if (parent) {
+            const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item'));
+            const i = siblings.indexOf(el);
+            el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+        } else {
+            el.style.transitionDelay = index * 0.1 + 's';
+        }
+        observer.observe(el);
+    });
+
+    // Reduced motion guard
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            el.classList.add('animate-in');
+            el.style.transition = 'none';
+        });
+    }
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+</script>
+
+</body>
+</html>

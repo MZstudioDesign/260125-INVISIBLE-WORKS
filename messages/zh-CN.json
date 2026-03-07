@@ -131,7 +131,27 @@
   "PortfolioPage": {
     "title": "我们一起制作的网站",
     "description1": "这些是我们合作过的项目。",
-    "description2": "每个项目都是与客户的愿景共同创造的。"
+    "description2": "每个项目都是与客户的愿景共同创造的。",
+    "noResults": "该分类暂无项目。"
+  },
+  "PortfolioCategories": {
+    "all": "全部",
+    "education": "教育",
+    "beauty": "美容",
+    "brand": "品牌",
+    "fitness": "健身",
+    "medical": "医疗",
+    "business": "商务",
+    "architecture": "建筑",
+    "design": "设计",
+    "legal": "法律",
+    "production": "影视",
+    "tech": "科技",
+    "veterinary": "宠物医院",
+    "fnb": "餐饮"
+  },
+  "PortfolioModal": {
+    "designLabel": "设计 {number}"
   },
   "Privacy": {
     "title": "隐私政策"
@@ -150,7 +170,8 @@
     "Accordion": {
       "prefix": "并且，",
       "freeText": "到这里为止免费",
-      "suffix": "。"
+      "suffix": "。",
+      "clickToExplore": "点击查看详情"
     },
     "Portfolio": {
       "categories": {

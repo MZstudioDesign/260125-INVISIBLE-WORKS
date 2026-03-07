@@ -47,6 +47,7 @@ export { Footer, SimpleFooter, FooterSection } from './Footer';
 // ===== NEW - Phase 4 Components =====
 export { PortfolioMarquee, PortfolioCard, PortfolioSection } from './PortfolioMarquee';
 export type { PortfolioItem } from './PortfolioMarquee';
+export { PortfolioModal, usePortfolioModal } from './PortfolioModal';
 export { ContactModal, useContactModal } from './ContactModal';
 export { PhotoStack, PhotoStackSection } from './PhotoStack';
 export type { PhotoItem } from './PhotoStack';

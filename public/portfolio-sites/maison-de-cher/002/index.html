@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메종 드 쉐르 — 당신만을 위한 뷰티 여정</title>
+    <meta name="description" content="메종 드 쉐르는 한 분 한 분의 개성에 맞춘 프라이빗 헤어 디자인을 제안합니다. 압구정 프리미엄 헤어 살롱.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="메종 드 쉐르 — 당신만을 위한 뷰티 여정">
+    <meta property="og:description" content="프라이빗 헤어 디자인 살롱. 1:1 맞춤 컨설팅으로 당신만의 스타일을 설계합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['"Bebas Neue"', 'sans-serif'],
+                        'body': ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        'ivory': '#F7F5F0',
+                        'linen': '#EFECE6',
+                        'charcoal': '#1C1C1E',
+                        'warm-gray': '#4A4A4F',
+                        'muted': '#8E8E93',
+                        'gold': '#C4A87C',
+                        'border-light': '#E5E2DC',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #F7F5F0;
+            --bg-surface: #EFECE6;
+            --bg-card: #FFFFFF;
+            --accent-primary: #C4A87C;
+            --accent-secondary: #1C1C1E;
+            --text-primary: #1C1C1E;
+            --text-secondary: #4A4A4F;
+            --text-muted: #8E8E93;
+            --font-ui: 'Bebas Neue', sans-serif;
+            --font-data: 'Noto Sans KR', sans-serif;
+            --content-max-width: 1200px;
+        }
+
+        body {
+            font-family: var(--font-data);
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        button, a { transition: all 0.2s ease-in-out; }
+
+        /* Sticky steps */
+        .step-content {
+            opacity: 0.3;
+            transform: scale(0.98);
+            transition: all 0.4s ease;
+        }
+        .step-content.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Review card hover */
+        .review-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(28,28,30,0.08);
+        }
+
+        /* Service accordion */
+        .service-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .service-panel.open {
+            max-height: 300px;
+        }
+
+        /* Mobile nav */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-gold focus:text-white focus:px-4 focus:py-2">본문 바로가기</a>
+
+    <!-- ============================================================
+         HEADER / NAV
+    ============================================================ -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-border-light">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <nav class="flex items-center justify-between h-16">
+                <a href="#" class="font-display text-2xl tracking-wide text-charcoal">MAISON DE CHER</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#process" class="text-xs font-medium tracking-[0.08em] uppercase text-muted hover:text-charcoal">Process</a>
+                    <a href="#stylists" class="text-xs font-medium tracking-[0.08em] uppercase text-muted hover:text-charcoal">Stylists</a>
+                    <a href="#services" class="text-xs font-medium tracking-[0.08em] uppercase text-muted hover:text-charcoal">Services</a>
+                    <a href="#space" class="text-xs font-medium tracking-[0.08em] uppercase text-muted hover:text-charcoal">Space</a>
+                    <a href="#booking" class="px-5 py-2 bg-charcoal text-white text-xs font-medium tracking-[0.08em] uppercase hover:bg-gold">예약하기</a>
+                </div>
+                <!-- Mobile hamburger -->
+                <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="메뉴 열기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Panel -->
+    <div id="mobile-nav" class="mobile-nav fixed inset-0 z-50 bg-charcoal text-white md:hidden">
+        <div class="flex items-center justify-between px-6 h-16 border-b border-white/10">
+            <span class="font-display text-2xl tracking-wide">MAISON DE CHER</span>
+            <button id="mobile-close-btn" class="p-2" aria-label="메뉴 닫기">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-8 pt-20">
+            <a href="#process" class="mobile-nav-link text-lg font-display tracking-widest uppercase">Process</a>
+            <a href="#stylists" class="mobile-nav-link text-lg font-display tracking-widest uppercase">Stylists</a>
+            <a href="#services" class="mobile-nav-link text-lg font-display tracking-widest uppercase">Services</a>
+            <a href="#space" class="mobile-nav-link text-lg font-display tracking-widest uppercase">Space</a>
+            <a href="#booking" class="mobile-nav-link mt-4 px-8 py-3 bg-gold text-charcoal text-sm font-medium tracking-wider uppercase">예약하기</a>
+        </div>
+    </div>
+
+    <main id="main-content">
+
+    <!-- ============================================================
+         SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY
+         COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 90%
+    ============================================================ -->
+    <section class="relative w-full min-h-screen">
+        <img src="./images/hero.jpg" alt="메종 드 쉐르 헤어 스타일링" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/40 to-charcoal/15"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-body">Private Hair Design Salon</p>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] max-w-3xl mb-6 uppercase">
+                Your Beauty<br>Journey Begins
+            </h1>
+            <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                메종 드 쉐르는 한 분 한 분의 개성에 맞춘 프라이빗 헤어 디자인을 제안합니다.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#booking" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-charcoal transition-colors">
+                    나만의 스타일 찾기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER
+         COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/ | FIDELITY: 80%
+    ============================================================ -->
+    <section id="process" class="w-full bg-white py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="text-center mb-16 fade-in-section">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Consultation Process</p>
+                <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">쉐르만의 4단계 컨설팅</h2>
+                <p class="mt-4 text-warm-gray text-sm max-w-[400px] mx-auto leading-relaxed">
+                    첫 만남부터 완성까지,<br>
+                    당신의 스타일을 함께 설계합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-12 gap-6 lg:gap-8">
+                <!-- Step 01 -->
+                <div class="col-span-12 sm:col-span-6 lg:col-span-3 stagger-item">
+                    <span class="font-display text-6xl text-border-light">01</span>
+                    <div class="mt-3 mb-4 w-full h-px bg-border-light"></div>
+                    <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase mb-2">상담 & 진단</h3>
+                    <p class="text-xs text-muted leading-relaxed">
+                        두피 상태, 모질, 라이프스타일을<br>
+                        종합적으로 분석합니다.
+                    </p>
+                </div>
+                <!-- Step 02 -->
+                <div class="col-span-12 sm:col-span-6 lg:col-span-3 stagger-item">
+                    <span class="font-display text-6xl text-border-light">02</span>
+                    <div class="mt-3 mb-4 w-full h-px bg-border-light"></div>
+                    <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase mb-2">스타일 설계</h3>
+                    <p class="text-xs text-muted leading-relaxed">
+                        얼굴형과 개성을 반영한<br>
+                        맞춤 디자인을 제안합니다.
+                    </p>
+                </div>
+                <!-- Step 03 -->
+                <div class="col-span-12 sm:col-span-6 lg:col-span-3 stagger-item">
+                    <span class="font-display text-6xl text-border-light">03</span>
+                    <div class="mt-3 mb-4 w-full h-px bg-border-light"></div>
+                    <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase mb-2">시술 & 완성</h3>
+                    <p class="text-xs text-muted leading-relaxed">
+                        1인 전용 부스에서<br>
+                        온전히 집중하여 시술합니다.
+                    </p>
+                </div>
+                <!-- Step 04 -->
+                <div class="col-span-12 sm:col-span-6 lg:col-span-3 stagger-item">
+                    <span class="font-display text-6xl text-border-light">04</span>
+                    <div class="mt-3 mb-4 w-full h-px bg-border-light"></div>
+                    <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase mb-2">애프터 케어</h3>
+                    <p class="text-xs text-muted leading-relaxed">
+                        시술 후 홈케어 가이드와<br>
+                        정기 관리를 안내합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: STYLIST TEAM | MOVE: M-LAY-EDITORIAL-MOSAIC (Editorial #1)
+         COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/ | FIDELITY: 75%
+    ============================================================ -->
+    <section id="stylists" class="w-full bg-ivory py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="mb-12 fade-in-section">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Our Designers</p>
+                <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">디자이너를<br>소개합니다</h2>
+                <p class="mt-4 text-warm-gray text-sm max-w-[400px] leading-relaxed">
+                    각 분야 10년 이상의 경력,<br>
+                    당신의 이야기를 듣는 것부터 시작합니다.
+                </p>
+            </div>
+
+            <!-- Editorial Mosaic: 5:3:4 staggered -->
+            <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                <!-- Stylist 1: 5 cols -->
+                <div class="col-span-12 md:col-span-5 stagger-item">
+                    <div class="relative aspect-[3/4] overflow-hidden group">
+                        <img src="./images/stylist_1.jpg" alt="크리에이티브 디렉터 이서윤" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl text-charcoal tracking-wide uppercase">이서윤</h3>
+                        <p class="text-xs text-gold tracking-[0.1em] uppercase mt-1">Creative Director</p>
+                        <p class="text-xs text-muted mt-2 leading-relaxed">17년 경력 · 런던 Vidal Sassoon Academy 수료<br>스타일의 본질을 찾아드립니다.</p>
+                    </div>
+                </div>
+                <!-- Stylist 2: 3 cols -->
+                <div class="col-span-6 md:col-span-3 md:mt-16 stagger-item">
+                    <div class="relative aspect-[3/4] overflow-hidden group">
+                        <img src="./images/stylist_2.jpg" alt="컬러 스페셜리스트 박진우" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl text-charcoal tracking-wide uppercase">박진우</h3>
+                        <p class="text-xs text-gold tracking-[0.1em] uppercase mt-1">Color Specialist</p>
+                        <p class="text-xs text-muted mt-2 leading-relaxed">12년 경력 · Wella 컬러 마스터</p>
+                    </div>
+                </div>
+                <!-- Stylist 3: 4 cols -->
+                <div class="col-span-6 md:col-span-4 md:mt-8 stagger-item">
+                    <div class="relative aspect-[3/4] overflow-hidden group">
+                        <img src="./images/stylist_3.jpg" alt="케어 전문가 김하은" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-display text-xl text-charcoal tracking-wide uppercase">김하은</h3>
+                        <p class="text-xs text-gold tracking-[0.1em] uppercase mt-1">Care Expert</p>
+                        <p class="text-xs text-muted mt-2 leading-relaxed">10년 경력 · 두피 트리콜로지 전문</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: SERVICES | MOVE: M-INT-STICKY-STEPS
+         COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 75%
+    ============================================================ -->
+    <section id="services" class="w-full bg-white py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="mb-12 fade-in-section">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Services</p>
+                <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">맞춤 서비스</h2>
+                <p class="mt-4 text-warm-gray text-sm max-w-[400px] leading-relaxed">
+                    컷부터 컬러, 두피 케어까지<br>
+                    모든 시술은 1:1 상담 후 진행됩니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-12 gap-6 lg:gap-8">
+                <!-- Left: Service accordion (5 cols) -->
+                <div class="col-span-12 lg:col-span-5 fade-in-section">
+                    <!-- Service 1 -->
+                    <div class="border-b border-border-light">
+                        <button class="service-trigger w-full py-5 flex items-center justify-between text-left" data-service="svc-1" aria-expanded="false">
+                            <div>
+                                <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase">Cut & Style Design</h3>
+                                <span class="text-xs text-gold mt-1 inline-block">₩60,000 — ₩90,000</span>
+                            </div>
+                            <span class="service-icon text-muted text-lg transition-transform">+</span>
+                        </button>
+                        <div id="svc-1" class="service-panel">
+                            <p class="text-xs text-muted leading-relaxed pb-5 pr-8">
+                                얼굴형 분석과 개인 스타일 상담을 바탕으로 한 맞춤 컷. 드라이 스타일링과 홈케어 루틴 안내를 포함합니다. 디자이너급 이상 지정 시 ₩90,000.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="border-b border-border-light">
+                        <button class="service-trigger w-full py-5 flex items-center justify-between text-left" data-service="svc-2" aria-expanded="false">
+                            <div>
+                                <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase">Color Design</h3>
+                                <span class="text-xs text-gold mt-1 inline-block">₩120,000 — ₩200,000</span>
+                            </div>
+                            <span class="service-icon text-muted text-lg transition-transform">+</span>
+                        </button>
+                        <div id="svc-2" class="service-panel">
+                            <p class="text-xs text-muted leading-relaxed pb-5 pr-8">
+                                피부톤과 시즌컬러를 분석한 퍼스널 컬러 매칭. 밸리아쥬, 에어터치, 옴브레 등 트렌드 테크닉을 적용합니다. 블리치 포함 시 별도 상담.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="border-b border-border-light">
+                        <button class="service-trigger w-full py-5 flex items-center justify-between text-left" data-service="svc-3" aria-expanded="false">
+                            <div>
+                                <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase">Scalp Treatment</h3>
+                                <span class="text-xs text-gold mt-1 inline-block">₩80,000+</span>
+                            </div>
+                            <span class="service-icon text-muted text-lg transition-transform">+</span>
+                        </button>
+                        <div id="svc-3" class="service-panel">
+                            <p class="text-xs text-muted leading-relaxed pb-5 pr-8">
+                                두피 진단기를 활용한 정밀 분석 후, 개인별 맞춤 트리트먼트를 진행합니다. 탈모 예방, 유수분 밸런스, 각질 케어 등 목적별 프로그램 운영.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="border-b border-border-light">
+                        <button class="service-trigger w-full py-5 flex items-center justify-between text-left" data-service="svc-4" aria-expanded="false">
+                            <div>
+                                <h3 class="text-sm font-semibold text-charcoal tracking-wide uppercase">Perm & Setting</h3>
+                                <span class="text-xs text-gold mt-1 inline-block">₩100,000 — ₩180,000</span>
+                            </div>
+                            <span class="service-icon text-muted text-lg transition-transform">+</span>
+                        </button>
+                        <div id="svc-4" class="service-panel">
+                            <p class="text-xs text-muted leading-relaxed pb-5 pr-8">
+                                디지털 펌, 히피 펌, 볼륨 매직 등 다양한 펌 시술. 모질 진단 후 최적의 약제와 열처리 강도를 결정합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Image collage (7 cols) -->
+                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-in-section">
+                    <div class="col-span-7 aspect-[4/5] overflow-hidden">
+                        <img src="./images/service_cut.jpg" alt="컷 & 스타일 디자인" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="col-span-5 flex flex-col gap-3">
+                        <div class="flex-1 overflow-hidden">
+                            <img src="./images/service_color.jpg" alt="컬러 디자인" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="flex-1 overflow-hidden">
+                            <img src="./images/service_treatment.jpg" alt="두피 트리트먼트" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: DIVIDER + MID CTA | MOVE: M-DIV-GRADIENT-NOISE-LAYER
+         COMPONENT_REF: custom | GRADE: N/A | MODE: fallback | SNIPPET_PATH: N/A | FIDELITY: N/A
+    ============================================================ -->
+    <section class="relative w-full min-h-[55vh] flex items-center justify-center overflow-hidden">
+        <img src="./images/divider.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+        <div class="absolute inset-0 bg-charcoal/75"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-tight fade-in-section">
+                머리카락 한 올까지<br>
+                당신의 이야기입니다
+            </h2>
+            <a href="#booking" class="inline-block mt-8 px-8 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-[0.12em] hover:bg-gold hover:border-gold transition-colors fade-in-section">
+                지금 예약하기
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: TRANSFORMATION (Before/After) | MOVE: M-LAY-EDITORIAL-TYPO (Editorial #2)
+         COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 70%
+    ============================================================ -->
+    <section class="w-full bg-ivory py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="text-center mb-12 fade-in-section">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Transformation</p>
+                <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">변화의 순간</h2>
+                <p class="mt-4 text-warm-gray text-sm max-w-[400px] mx-auto leading-relaxed">
+                    메종 드 쉐르를 만나기 전과 후,<br>
+                    그 차이를 확인하세요.
+                </p>
+            </div>
+
+            <!-- Before/After Grid: Editorial asymmetric -->
+            <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                <!-- Large featured pair (8 cols) -->
+                <div class="col-span-12 md:col-span-8 stagger-item">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="relative aspect-[3/4] overflow-hidden group">
+                            <img src="./images/before_1.jpg" alt="시술 전" class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/60 to-transparent p-4">
+                                <span class="text-xs font-medium tracking-[0.1em] uppercase text-white/90">Before</span>
+                            </div>
+                        </div>
+                        <div class="relative aspect-[3/4] overflow-hidden group">
+                            <img src="./images/after_1.jpg" alt="시술 후" class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/60 to-transparent p-4">
+                                <span class="text-xs font-medium tracking-[0.1em] uppercase text-white/90">After</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-muted mt-3 italic">"처음으로 머리하고 기분이 좋았어요. 진짜 저한테 맞는 스타일이 뭔지 알게 됐어요." — 김유진, 30대</p>
+                </div>
+                <!-- Side pair (4 cols) -->
+                <div class="col-span-12 md:col-span-4 flex flex-col gap-4 stagger-item">
+                    <div class="relative flex-1 overflow-hidden">
+                        <img src="./images/before_2.jpg" alt="컬러 시술 전" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/60 to-transparent p-3">
+                            <span class="text-[10px] font-medium tracking-[0.1em] uppercase text-white/90">Before</span>
+                        </div>
+                    </div>
+                    <div class="relative flex-1 overflow-hidden">
+                        <img src="./images/after_2.jpg" alt="컬러 시술 후" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/60 to-transparent p-3">
+                            <span class="text-[10px] font-medium tracking-[0.1em] uppercase text-white/90">After</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: SPACE (Interior) | MOVE: M-LAY-EDITORIAL-STORY
+         COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 80%
+    ============================================================ -->
+    <section id="space" class="w-full bg-white py-20 md:py-28">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="grid grid-cols-12 gap-4 lg:gap-0 items-start">
+                <!-- Text block (4 cols) -->
+                <div class="col-span-12 lg:col-span-4 lg:pt-16 fade-in-section">
+                    <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Private Space</p>
+                    <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase leading-tight">
+                        당신만의<br>프라이빗 공간
+                    </h2>
+                    <p class="mt-6 text-warm-gray text-sm max-w-[320px] leading-relaxed">
+                        1인 전용 스타일링 부스에서<br>
+                        온전히 나만의 시간을 보내세요.
+                    </p>
+                    <div class="mt-8 space-y-3">
+                        <div class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gold mt-0.5 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span class="text-xs text-warm-gray">개별 프라이빗 스타일링 부스 5실</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gold mt-0.5 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span class="text-xs text-warm-gray">스칸디나비안 미니멀 인테리어</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gold mt-0.5 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span class="text-xs text-warm-gray">전용 주차 2대 (발렛 가능)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gap (1 col) -->
+                <div class="hidden lg:block lg:col-span-1"></div>
+                <!-- Image group (7 cols) -->
+                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-in-section">
+                    <div class="col-span-8 aspect-[16/10] overflow-hidden">
+                        <img src="./images/interior_1.jpg" alt="메종 드 쉐르 살롱 인테리어" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="col-span-4 aspect-[3/4] overflow-hidden mt-8">
+                        <img src="./images/interior_2.jpg" alt="프라이빗 스타일링 부스" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: REVIEWS | MOVE: M-INT-HSCROLL-GALLERY (Key Color Section)
+         COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 80%
+    ============================================================ -->
+    <section class="w-full bg-charcoal py-20 md:py-28" style="min-height: 45vh;">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <div class="text-center mb-12 fade-in-section">
+                <p class="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-3">Client Reviews</p>
+                <h2 class="font-display text-4xl md:text-5xl text-white tracking-tight uppercase">고객이 전하는<br>진짜 이야기</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="review-card bg-white/5 border border-white/10 p-6 stagger-item">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="text-sm text-white/80 leading-relaxed mb-4">
+                        "3년째 이서윤 디자이너님한테만 맡겨요. 제 얼굴형이랑 분위기를 너무 잘 이해하시고, 매번 기대 이상의 결과를 만들어주세요."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                            <span class="text-xs text-gold font-medium">정</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-white font-medium">정수빈</p>
+                            <p class="text-[10px] text-white/40">단골 3년차 · 컷 & 컬러</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card bg-white/5 border border-white/10 p-6 stagger-item">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="text-sm text-white/80 leading-relaxed mb-4">
+                        "두피 상태가 안 좋아서 걱정이 많았는데, 김하은 선생님이 정확히 진단해주시고 한 달 만에 확실히 나아졌어요. 홈케어 제품도 딱 맞게 추천해주셨어요."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                            <span class="text-xs text-gold font-medium">이</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-white font-medium">이현서</p>
+                            <p class="text-[10px] text-white/40">스칼프 트리트먼트 고객</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card bg-white/5 border border-white/10 p-6 stagger-item">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#C4A87C" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <p class="text-sm text-white/80 leading-relaxed mb-4">
+                        "프라이빗 부스에서 시술받으니까 정말 편안했어요. 다른 사람 신경 안 쓰고 디자이너님이랑 천천히 얘기하면서 할 수 있어서 좋았습니다."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                            <span class="text-xs text-gold font-medium">박</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-white font-medium">박서연</p>
+                            <p class="text-[10px] text-white/40">컷 & 펌 고객</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL
+         COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80%
+    ============================================================ -->
+    <section id="booking" class="relative w-full min-h-[65vh] flex items-center justify-center overflow-hidden">
+        <img src="./images/cta.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+        <div class="absolute inset-0 bg-charcoal/70"></div>
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center fade-in-section">
+            <p class="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Book Now</p>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-tight">
+                지금, 당신의<br>변화를 시작하세요
+            </h2>
+            <p class="mt-4 text-white/70 text-sm max-w-[400px] mx-auto leading-relaxed">
+                온라인 예약은 24시간 가능합니다.<br>
+                카카오톡 상담도 환영합니다.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <a href="tel:02-518-9900" class="px-8 py-3.5 bg-gold text-charcoal text-xs font-semibold uppercase tracking-[0.12em] hover:bg-white transition-colors">
+                    온라인 예약
+                </a>
+                <a href="#" class="px-8 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-[0.12em] hover:bg-white hover:text-charcoal transition-colors">
+                    카카오톡 상담
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-charcoal border-t border-white/10">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Brand -->
+                <div class="col-span-12 md:col-span-4">
+                    <span class="font-display text-2xl text-white tracking-wide">MAISON DE CHER</span>
+                    <p class="text-xs text-white/40 mt-3 leading-relaxed">
+                        서울특별시 강남구 압구정로 42길 18, 3층<br>
+                        (신사동, 쉐르빌딩)
+                    </p>
+                </div>
+                <!-- Info -->
+                <div class="col-span-6 md:col-span-2">
+                    <h4 class="text-[10px] font-medium tracking-[0.15em] uppercase text-white/40 mb-3">Hours</h4>
+                    <p class="text-xs text-white/60 leading-relaxed">
+                        화 — 토 10:00 – 20:00<br>
+                        일 11:00 – 18:00<br>
+                        월요일 휴무
+                    </p>
+                </div>
+                <!-- Contact -->
+                <div class="col-span-6 md:col-span-3">
+                    <h4 class="text-[10px] font-medium tracking-[0.15em] uppercase text-white/40 mb-3">Contact</h4>
+                    <p class="text-xs text-white/60 leading-relaxed">
+                        <a href="tel:02-518-9900" class="hover:text-gold">T. 02-518-9900</a><br>
+                        <a href="mailto:hello@maisondecher.kr" class="hover:text-gold">hello@maisondecher.kr</a>
+                    </p>
+                </div>
+                <!-- Social -->
+                <div class="col-span-12 md:col-span-3">
+                    <h4 class="text-[10px] font-medium tracking-[0.15em] uppercase text-white/40 mb-3">Follow</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-white/60 hover:text-gold" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="text-white/60 hover:text-gold" aria-label="카카오톡">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </a>
+                        <a href="#" class="text-white/60 hover:text-gold" aria-label="전화">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3">
+                <p class="text-[10px] text-white/30">&copy; 2026 Maison de Cher. All rights reserved.</p>
+                <p class="text-[10px] text-white/30">주차 안내: 건물 내 전용 주차 2대 (사전 예약제)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         SCRIPTS
+    ============================================================ -->
+    <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.stagger-item').forEach((el, index) => {
+        el.style.transitionDelay = `${(index % 6) * 0.1}s`;
+        observer.observe(el);
+    });
+
+    // Service accordion
+    document.querySelectorAll('.service-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const targetId = trigger.getAttribute('data-service');
+            const panel = document.getElementById(targetId);
+            const icon = trigger.querySelector('.service-icon');
+            const isOpen = panel.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('open'));
+            document.querySelectorAll('.service-icon').forEach(i => i.textContent = '+');
+            document.querySelectorAll('.service-trigger').forEach(t => t.setAttribute('aria-expanded', 'false'));
+
+            if (!isOpen) {
+                panel.classList.add('open');
+                icon.textContent = '−';
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileCloseBtn = document.getElementById('mobile-close-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileNav.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+    mobileCloseBtn.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Reduced motion guard
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.transition = 'none';
+        });
+    }
+    </script>
+
+</body>
+</html>

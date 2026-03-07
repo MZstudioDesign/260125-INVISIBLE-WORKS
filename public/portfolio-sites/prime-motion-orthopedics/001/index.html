@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프라임 모션 정형외과 — 정확한 진단, 빠른 회복</title>
+    <meta name="description" content="프라임 모션 정형외과는 스포츠의학, 관절, 척추, 재활 전문 클리닉입니다. 강남 소재, 첨단 장비와 전문의가 함께합니다." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Pretendard', 'sans-serif'],
+                        body: ['Pretendard', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: { DEFAULT: '#1E56A0', hover: '#164080', dark: '#0F3460' },
+                        surface: '#F8FAFC',
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        :root {
+            --color-bg: #FFFFFF;
+            --color-bg-section: #F8FAFC;
+            --color-text: #111827;
+            --color-text-muted: #6B7280;
+            --color-accent: #1E56A0;
+            --color-accent-hover: #164080;
+            --color-accent-dark: #0F3460;
+            --color-accent-text: #FFFFFF;
+            --font-heading: 'Pretendard', sans-serif;
+            --font-body: 'Pretendard', sans-serif;
+            --font-size-hero: clamp(2.25rem, 5vw, 3.5rem);
+            --font-size-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+            --font-size-h3: clamp(1.125rem, 2vw, 1.375rem);
+            --font-size-body: 1rem;
+            --font-size-small: 0.8125rem;
+            --line-height-body: 1.75;
+            --line-height-heading: 1.2;
+            --letter-spacing-heading: -0.02em;
+            --section-py: 80px;
+            --section-px: 24px;
+            --content-gap: 32px;
+            --card-gap: 24px;
+            --radius-card: 12px;
+            --radius-button: 8px;
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.08);
+            --border-color: #E5E7EB;
+            --max-w-content: 1200px;
+        }
+
+        @media (max-width: 639px) {
+            :root {
+                --font-size-hero: 2rem;
+                --font-size-h2: 1.5rem;
+                --section-py: 56px;
+                --section-px: 20px;
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: var(--line-height-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section,
+            .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Button styles */
+        .btn-primary {
+            display: inline-block;
+            background: var(--color-accent);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: var(--radius-button);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            letter-spacing: 0.01em;
+            transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-primary:active { transform: scale(0.97); }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--color-accent);
+            padding: 14px 28px;
+            border-radius: var(--radius-button);
+            border: 1px solid var(--color-accent);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            letter-spacing: 0.01em;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: var(--color-accent);
+            color: #fff;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-white {
+            display: inline-block;
+            background: #fff;
+            color: var(--color-accent-dark);
+            padding: 14px 28px;
+            border-radius: var(--radius-button);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+            text-decoration: none;
+        }
+        .btn-white:hover {
+            background: #F0F4FF;
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-white:active { transform: scale(0.97); }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION 1: HERO — Full-bleed overlay
+     Snippet: hero-fullbleed-overlay (adapted)
+     ============================================================ -->
+<section class="relative w-full min-h-screen" id="hero">
+    <img src="./images/hero.jpg" alt="프라임 모션 정형외과 시설"
+         class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 md:pb-24">
+        <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-4 font-body">Orthopedic Specialists in Gangnam</p>
+        <h1 class="font-heading text-[clamp(2.25rem,5vw,3.5rem)] font-bold text-white leading-[1.3] max-w-2xl" style="letter-spacing: -0.02em;">
+            정확한 진단,<br>빠른 회복
+        </h1>
+        <p class="text-white/70 mt-5 text-base max-w-md leading-relaxed">
+            관절·척추·스포츠 손상 전문.<br>
+            대학병원 출신 전문의가 첨단 장비로<br>
+            환자 한 분 한 분에게 최적의 치료를 설계합니다.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#booking" class="btn-primary">온라인 예약하기</a>
+            <a href="#treatments" class="btn-secondary" style="color:#fff; border-color: rgba(255,255,255,0.5);">진료과목 보기</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: TREATMENT AREAS — Editorial asymmetric grid
+     Snippet: asymmetric-featured-image5-content7 (adapted)
+     ============================================================ -->
+<section class="w-full bg-white" id="treatments">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <!-- Section Header -->
+        <div class="mb-12 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3 font-body">Treatment Areas</p>
+            <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827] leading-tight" style="letter-spacing:-0.015em;">
+                전문 진료 분야
+            </h2>
+        </div>
+
+        <!-- Editorial Grid: Featured (5col) + Side stack (7col) -->
+        <div class="grid grid-cols-12 gap-6 lg:gap-10">
+            <!-- Left: Featured large card -->
+            <div class="col-span-12 md:col-span-5 fade-in-section">
+                <div class="relative aspect-[3/4] overflow-hidden rounded-xl group">
+                    <img src="./images/sports_medicine.jpg" alt="스포츠의학 진료"
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6 pt-24">
+                        <p class="text-[11px] tracking-[0.15em] uppercase text-white/60 mb-2">Sports Medicine</p>
+                        <h3 class="text-xl font-semibold text-white leading-snug">
+                            스포츠의학 센터
+                        </h3>
+                        <p class="text-white/70 text-sm mt-2 leading-relaxed max-w-xs">
+                            운동선수부터 주말 러너까지,<br>
+                            스포츠 손상의 정확한 진단과<br>
+                            맞춤 재활 프로그램을 제공합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: 3 stacked cards (7 cols) -->
+            <div class="col-span-12 md:col-span-7 flex flex-col gap-6">
+                <!-- Card: Joint Surgery -->
+                <div class="stagger-item flex gap-5 items-start group cursor-pointer" style="transition-delay:0.1s;">
+                    <div class="w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="./images/joint_surgery.jpg" alt="관절 수술"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>
+                    <div class="pt-1">
+                        <p class="text-[11px] tracking-[0.12em] uppercase text-[#6B7280] mb-1">Joint Surgery</p>
+                        <h3 class="text-lg font-semibold text-[#111827] leading-snug">관절 센터</h3>
+                        <p class="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                            무릎·어깨·고관절 인공관절 수술 및<br>
+                            관절경 최소침습 수술 전문.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="border-t border-[#E5E7EB]"></div>
+
+                <!-- Card: Spine Care -->
+                <div class="stagger-item flex gap-5 items-start group cursor-pointer" style="transition-delay:0.2s;">
+                    <div class="w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="./images/spine_care.jpg" alt="척추 진료"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>
+                    <div class="pt-1">
+                        <p class="text-[11px] tracking-[0.12em] uppercase text-[#6B7280] mb-1">Spine Care</p>
+                        <h3 class="text-lg font-semibold text-[#111827] leading-snug">척추 센터</h3>
+                        <p class="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                            디스크·협착증·측만증 비수술 치료부터<br>
+                            척추 내시경 수술까지.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="border-t border-[#E5E7EB]"></div>
+
+                <!-- Card: Rehabilitation -->
+                <div class="stagger-item flex gap-5 items-start group cursor-pointer" style="transition-delay:0.3s;">
+                    <div class="w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="./images/rehabilitation.jpg" alt="재활 치료"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>
+                    <div class="pt-1">
+                        <p class="text-[11px] tracking-[0.12em] uppercase text-[#6B7280] mb-1">Rehabilitation</p>
+                        <h3 class="text-lg font-semibold text-[#111827] leading-snug">재활의학 센터</h3>
+                        <p class="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                            수술 후 재활·도수치료·충격파 치료를 통한<br>
+                            일상 복귀 맞춤 프로그램.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: MEDICAL TEAM — Split editorial (4:1:7)
+     Snippet: split-text4-gap1-image7-editorial (adapted)
+     ============================================================ -->
+<section class="w-full bg-[#F8FAFC]" id="team">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+            <!-- Text: 4 cols with top offset -->
+            <div class="col-span-12 md:col-span-4 md:pt-16">
+                <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">Medical Team</p>
+                <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827] leading-tight" style="letter-spacing:-0.015em;">
+                    신뢰할 수 있는<br>의료진
+                </h2>
+                <div class="h-1 w-12 bg-accent mt-6 mb-6"></div>
+                <p class="text-[#6B7280] text-base leading-relaxed">
+                    서울대·연세대 의과대학 출신,<br>
+                    대학병원 전임의 과정을 마친<br>
+                    정형외과 전문의가 진료합니다.<br>
+                    각 분야 최상위 수련 경력과<br>
+                    논문 실적을 보유하고 있습니다.
+                </p>
+                <a href="#booking" class="inline-flex items-center gap-2 mt-8 text-accent font-semibold hover:text-accent-hover transition-colors">
+                    예약 상담하기 <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+
+            <!-- Gap: 1 col -->
+            <div class="hidden md:block md:col-span-1"></div>
+
+            <!-- Doctor cards: 7 cols -->
+            <div class="col-span-12 md:col-span-7 mt-8 md:mt-0">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <!-- Doctor 1 -->
+                    <div class="stagger-item group" style="transition-delay:0.1s;">
+                        <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                            <img src="./images/doctor_1.jpg" alt="김성훈 원장"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-[#111827] text-base">김성훈 원장</h3>
+                            <p class="text-[#6B7280] text-sm mt-1">정형외과 전문의</p>
+                            <p class="text-[#9CA3AF] text-xs mt-2 leading-relaxed">
+                                서울대 의과대학 졸업<br>
+                                서울아산병원 전임의<br>
+                                대한스포츠의학회 정회원
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 2 -->
+                    <div class="stagger-item group" style="transition-delay:0.2s;">
+                        <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                            <img src="./images/doctor_2.jpg" alt="박지연 원장"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-[#111827] text-base">박지연 원장</h3>
+                            <p class="text-[#6B7280] text-sm mt-1">관절·척추 전문의</p>
+                            <p class="text-[#9CA3AF] text-xs mt-2 leading-relaxed">
+                                연세대 의과대학 졸업<br>
+                                세브란스병원 관절센터<br>
+                                SCI 논문 12편 게재
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 3 -->
+                    <div class="stagger-item group" style="transition-delay:0.3s;">
+                        <div class="aspect-[3/4] overflow-hidden rounded-lg">
+                            <img src="./images/doctor_3.jpg" alt="이준호 원장"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-[#111827] text-base">이준호 원장</h3>
+                            <p class="text-[#6B7280] text-sm mt-1">재활의학과 전문의</p>
+                            <p class="text-[#9CA3AF] text-xs mt-2 leading-relaxed">
+                                고려대 의과대학 졸업<br>
+                                삼성서울병원 재활의학과<br>
+                                대한재활의학회 정회원
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: EQUIPMENT — Full-bleed divider
+     Snippet: cta-footer-fullbleed (adapted as divider)
+     ============================================================ -->
+<section class="relative w-full min-h-[60vh]" id="equipment">
+    <img src="./images/divider_equipment.jpg" alt="첨단 의료 장비"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-[#0F3460]/75"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-20 min-h-[60vh] flex items-center">
+        <div class="grid grid-cols-12 gap-8 md:gap-10 items-center w-full fade-in-section">
+            <!-- Text -->
+            <div class="col-span-12 md:col-span-7 text-center md:text-left">
+                <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-4 font-body">State-of-the-Art Equipment</p>
+                <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-white leading-tight" style="letter-spacing:-0.015em;">
+                    첨단 장비가 만드는<br>정밀한 진료
+                </h2>
+                <p class="text-white/65 mt-4 text-base max-w-md leading-relaxed mx-auto md:mx-0">
+                    3.0T MRI, 관절경 수술 시스템,<br>
+                    체외충격파(ESWT), 초음파 진단기까지.<br>
+                    대학병원급 장비를 원내에서 운용하여<br>
+                    당일 검사·진단이 가능합니다.
+                </p>
+            </div>
+            <!-- Equipment thumbnails -->
+            <div class="col-span-12 md:col-span-5 flex items-center justify-center">
+                <div class="grid grid-cols-2 gap-3 w-full max-w-[320px] md:max-w-none">
+                    <div class="stagger-item aspect-square overflow-hidden rounded-lg" style="transition-delay:0.1s;">
+                        <img src="./images/mri.jpg" alt="3.0T MRI"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item aspect-square overflow-hidden rounded-lg" style="transition-delay:0.2s;">
+                        <img src="./images/arthroscopy.jpg" alt="관절경 시스템"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item aspect-square overflow-hidden rounded-lg" style="transition-delay:0.3s;">
+                        <img src="./images/shockwave.jpg" alt="체외충격파"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item aspect-square overflow-hidden rounded-lg" style="transition-delay:0.4s;">
+                        <img src="./images/consultation.jpg" alt="초음파 진단"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: PROCESS — 5-step horizontal flow
+     Snippet: custom (adapted from numbered-3col-process-steps, no large 01/02 numbers)
+     ============================================================ -->
+<section class="w-full bg-white" id="process">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="text-center mb-14 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">How It Works</p>
+            <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827]" style="letter-spacing:-0.015em;">
+                진료 절차 안내
+            </h2>
+            <p class="text-[#6B7280] mt-3 max-w-lg mx-auto">
+                온라인 예약부터 치료 후 관리까지,<br>
+                체계적인 5단계 진료 프로세스로 운영됩니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
+            <!-- Step 1 -->
+            <div class="stagger-item text-center" style="transition-delay:0.05s;">
+                <div class="w-14 h-14 mx-auto rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-2">온라인 예약</h3>
+                <p class="text-sm text-[#6B7280] leading-relaxed">
+                    홈페이지 또는 전화로<br>
+                    원하시는 일시에 예약
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="stagger-item text-center" style="transition-delay:0.1s;">
+                <div class="w-14 h-14 mx-auto rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-2">초진 상담</h3>
+                <p class="text-sm text-[#6B7280] leading-relaxed">
+                    전문의 1:1 문진을 통한<br>
+                    증상 파악 및 병력 확인
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="stagger-item text-center" style="transition-delay:0.15s;">
+                <div class="w-14 h-14 mx-auto rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-2">정밀 검사</h3>
+                <p class="text-sm text-[#6B7280] leading-relaxed">
+                    MRI·X-ray·초음파 등<br>
+                    원내 당일 영상 검사
+                </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="stagger-item text-center" style="transition-delay:0.2s;">
+                <div class="w-14 h-14 mx-auto rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-2">치료 계획</h3>
+                <p class="text-sm text-[#6B7280] leading-relaxed">
+                    검사 결과 기반 최적의<br>
+                    수술/비수술 치료 설계
+                </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="stagger-item text-center" style="transition-delay:0.25s;">
+                <div class="w-14 h-14 mx-auto rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-2">사후 관리</h3>
+                <p class="text-sm text-[#6B7280] leading-relaxed">
+                    정기 추적 검진 및<br>
+                    재활 프로그램 연계
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12 fade-in-section">
+            <a href="#booking" class="btn-primary">지금 예약하기</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6: FAQ — Full-bleed key-color (40vh+)
+     Snippet: accordion-numbered-facts-5-7 (adapted)
+     ============================================================ -->
+<section class="relative w-full min-h-[50vh]" id="faq" style="min-height: 50vh;">
+    <img src="./images/faq_bg.jpg" alt="병원 복도"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-[#1E56A0]/80"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12">
+            <!-- Left: Title + image -->
+            <div class="col-span-12 md:col-span-5 fade-in-section">
+                <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-3">Patient FAQ</p>
+                <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-white leading-tight" style="letter-spacing:-0.015em;">
+                    자주 묻는<br>질문
+                </h2>
+                <p class="text-white/60 mt-4 text-base leading-relaxed max-w-sm">
+                    진료 전 궁금한 사항을<br>
+                    미리 확인하세요.
+                </p>
+                <div class="grid grid-cols-2 gap-3 mt-8">
+                    <div class="aspect-[4/5] overflow-hidden rounded-lg">
+                        <img src="./images/clinic_interior.jpg" alt="원내 시설"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden rounded-lg">
+                        <img src="./images/consultation.jpg" alt="진료 상담"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Accordion -->
+            <div class="col-span-12 md:col-span-7 md:pt-8">
+                <div class="divide-y divide-white/20">
+                    <!-- FAQ 1 -->
+                    <div class="accordion-item py-5 cursor-pointer group" data-accordion>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-white group-hover:text-white/80 transition-colors">건강보험 적용이 되나요?</span>
+                            <span class="text-white/40 text-lg accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-white/60 mt-3 leading-relaxed">
+                                네, 본원은 건강보험 요양기관으로 지정되어 있습니다. 일반 진료, X-ray, MRI(의사 소견에 따라) 등 대부분의 진료가 보험 적용됩니다. 비급여 항목(체외충격파, 일부 주사치료 등)은 사전에 안내드립니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="accordion-item py-5 cursor-pointer group" data-accordion>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-white group-hover:text-white/80 transition-colors">수술 후 회복 기간은 얼마나 걸리나요?</span>
+                            <span class="text-white/40 text-lg accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-white/60 mt-3 leading-relaxed">
+                                수술 종류에 따라 다릅니다. 관절경 수술은 약 2-4주, 인공관절 수술은 6-8주가 일반적입니다. 척추 내시경 수술의 경우 1-2주 내 일상 복귀가 가능합니다. 담당 전문의가 개인 상태에 맞는 회복 일정을 상세히 안내합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="accordion-item py-5 cursor-pointer group" data-accordion>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-white group-hover:text-white/80 transition-colors">주차 시설이 있나요?</span>
+                            <span class="text-white/40 text-lg accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-white/60 mt-3 leading-relaxed">
+                                건물 지하 1-3층에 전용 주차장이 마련되어 있으며, 진료 시 2시간 무료 주차가 가능합니다. 수술 환자분은 당일 종일 무료 주차를 제공합니다. 발렛파킹 서비스도 이용하실 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="accordion-item py-5 cursor-pointer group" data-accordion>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-white group-hover:text-white/80 transition-colors">응급 진료도 가능한가요?</span>
+                            <span class="text-white/40 text-lg accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-white/60 mt-3 leading-relaxed">
+                                진료 시간 내 응급 외상 및 골절 환자를 우선 접수하고 있습니다. 야간·공휴일 응급 상황 시에는 대표 전화(02-555-7788)로 연락 주시면 당직 의료진 안내를 받으실 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="accordion-item py-5 cursor-pointer group" data-accordion>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-white group-hover:text-white/80 transition-colors">실비보험 청구가 가능한가요?</span>
+                            <span class="text-white/40 text-lg accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-sm text-white/60 mt-3 leading-relaxed">
+                                본원의 모든 진료 및 수술에 대해 실비보험 청구가 가능합니다. 진료 후 제증명 발급 창구에서 진단서, 진료비 세부내역서 등을 바로 발급받으실 수 있으며, 필요 시 보험사 직접 청구 대행도 도와드립니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7: INSURANCE & PATIENT GUIDE — Info cards
+     Snippet: testimonials-section (adapted as info cards)
+     ============================================================ -->
+<section class="w-full bg-white" id="guide">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="text-center mb-12 fade-in-section">
+            <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">Patient Guide</p>
+            <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827]" style="letter-spacing:-0.015em;">
+                내원 안내
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1: Hours -->
+            <div class="stagger-item border border-[#E5E7EB] rounded-xl p-7 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300" style="transition-delay:0.1s;">
+                <div class="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-3">진료시간</h3>
+                <div class="text-sm text-[#6B7280] leading-relaxed space-y-1">
+                    <p>월–금 &nbsp; 09:00 – 18:00</p>
+                    <p>토요일 &nbsp; 09:00 – 13:00</p>
+                    <p>점심시간 &nbsp; 13:00 – 14:00</p>
+                    <p class="text-[#9CA3AF] text-xs mt-2">일요일·공휴일 휴진</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Departments -->
+            <div class="stagger-item border border-[#E5E7EB] rounded-xl p-7 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300" style="transition-delay:0.2s;">
+                <div class="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-3">진료과목</h3>
+                <div class="text-sm text-[#6B7280] leading-relaxed space-y-1">
+                    <p>스포츠의학</p>
+                    <p>관절 센터 (무릎·어깨·고관절)</p>
+                    <p>척추 센터</p>
+                    <p>재활의학과</p>
+                    <p>통증의학과</p>
+                </div>
+            </div>
+
+            <!-- Card 3: First Visit -->
+            <div class="stagger-item border border-[#E5E7EB] rounded-xl p-7 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300" style="transition-delay:0.3s;">
+                <div class="w-11 h-11 rounded-full bg-accent/10 flex items-center justify-center mb-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E56A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h3 class="font-semibold text-[#111827] text-base mb-3">초진 안내</h3>
+                <div class="text-sm text-[#6B7280] leading-relaxed space-y-1">
+                    <p>신분증(건강보험증) 지참</p>
+                    <p>타 병원 진료기록 지참 시 참고</p>
+                    <p>예약 시간 10분 전 내원</p>
+                    <p class="text-[#9CA3AF] text-xs mt-2">초진 소요시간 약 40-60분</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 8: LOCATION — Map & address
+     Snippet: text-only-about-section (adapted as location)
+     ============================================================ -->
+<section class="w-full bg-[#F8FAFC]" id="location">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12 items-start fade-in-section">
+            <!-- Left: Map placeholder -->
+            <div class="col-span-12 md:col-span-7">
+                <div class="aspect-[16/10] bg-[#E5E7EB] rounded-xl overflow-hidden">
+                    <img src="./images/clinic_interior.jpg" alt="프라임 모션 정형외과 외관"
+                         class="w-full h-full object-cover" loading="lazy" />
+                </div>
+            </div>
+
+            <!-- Right: Address info -->
+            <div class="col-span-12 md:col-span-5">
+                <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">Location</p>
+                <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827] leading-tight" style="letter-spacing:-0.015em;">
+                    오시는 길
+                </h2>
+                <div class="h-1 w-12 bg-accent mt-5 mb-6"></div>
+
+                <div class="space-y-5 text-sm text-[#6B7280] leading-relaxed">
+                    <div>
+                        <p class="font-semibold text-[#111827] mb-1">주소</p>
+                        <p>서울특별시 강남구 테헤란로 152<br>프라임타워 8-9층</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-[#111827] mb-1">전화</p>
+                        <p>02-555-7788</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-[#111827] mb-1">교통편</p>
+                        <p>지하철 2호선 역삼역 3번 출구<br>도보 3분</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-[#111827] mb-1">주차</p>
+                        <p>건물 지하 1-3층 전용 주차장<br>진료 시 2시간 무료</p>
+                    </div>
+                </div>
+
+                <a href="#booking" class="btn-primary mt-8 inline-block">오시는 길 안내</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 9: FINAL CTA — Full-bleed
+     Snippet: cta-footer-fullbleed (adapted)
+     ============================================================ -->
+<section class="relative w-full min-h-[60vh]" id="booking">
+    <img src="./images/cta_bg.jpg" alt="프라임 모션 정형외과"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
+        <div class="w-full text-center fade-in-section">
+            <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-4">Book Your Consultation</p>
+            <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold text-white leading-tight" style="letter-spacing:-0.015em;">
+                통증 없는 내일,<br>지금 시작하세요
+            </h2>
+            <p class="text-white/60 mt-4 text-base max-w-md mx-auto leading-relaxed">
+                온라인 예약으로 대기 시간 없이<br>
+                전문의와 1:1 상담을 받아보세요.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="tel:02-555-7788" class="btn-white">전화 예약 02-555-7788</a>
+                <a href="#" class="btn-primary" style="background:#fff; color:#0F3460; font-weight:600;">온라인 예약하기</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="w-full bg-[#0F3460]">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div>
+                <p class="font-heading font-bold text-white text-lg">프라임 모션 정형외과</p>
+                <p class="text-white/40 text-xs mt-2">Prime Motion Orthopedic Clinic</p>
+            </div>
+            <div class="text-sm text-white/50 leading-relaxed">
+                <p>서울특별시 강남구 테헤란로 152 프라임타워 8-9층</p>
+                <p>대표전화 02-555-7788 &nbsp;|&nbsp; FAX 02-555-7789</p>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-white/30">&copy; 2024 프라임 모션 정형외과. All rights reserved.</p>
+            <div class="flex items-center gap-6 text-xs text-white/30">
+                <a href="#" class="hover:text-white/60 transition-colors">개인정보처리방침</a>
+                <a href="#" class="hover:text-white/60 transition-colors">이용약관</a>
+                <a href="#" class="hover:text-white/60 transition-colors">비급여 안내</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS — Intersection Observer + Accordion
+     ============================================================ -->
+<script>
+    // Scroll-triggered animations
+    (function () {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach((el) => fadeObserver.observe(el));
+
+        // Stagger items
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const items = entry.target.closest('section')?.querySelectorAll('.stagger-item') || [];
+                    items.forEach((item, i) => {
+                        setTimeout(() => item.classList.add('visible'), i * 100);
+                    });
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.stagger-item').forEach((el, i) => {
+            if (i % 4 === 0 || el.closest('.grid')?.querySelector('.stagger-item') === el) {
+                staggerObserver.observe(el);
+            }
+        });
+    })();
+
+    // Accordion
+    document.querySelectorAll('[data-accordion]').forEach((item) => {
+        item.addEventListener('click', () => {
+            const content = item.querySelector('.accordion-content');
+            const icon = item.querySelector('.accordion-icon');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+            // Close all
+            document.querySelectorAll('.accordion-content').forEach((c) => { c.style.maxHeight = '0px'; });
+            document.querySelectorAll('.accordion-icon').forEach((i) => { i.textContent = '+'; i.style.transform = 'rotate(0deg)'; });
+
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '\u2212';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

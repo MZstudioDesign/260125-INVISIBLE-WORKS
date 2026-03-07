@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>넥서스 프리시전 — 정밀 가공의 새로운 기준</title>
+  <meta name="description" content="넥서스 프리시전은 CNC 정밀 가공, 표면 처리, 품질 검사 분야에서 ±0.005mm 공차의 정밀도를 제공합니다. 자동차, 반도체, 의료, 항공 산업 파트너." />
+  <link rel="canonical" href="https://nexusprecision.co.kr" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="넥서스 프리시전 — 정밀 가공의 새로운 기준" />
+  <meta property="og:description" content="±0.005mm 공차, 99.7% 품질률. CNC 정밀 가공 파트너." />
+  <meta property="og:image" content="https://nexusprecision.co.kr/images/hero.jpg" />
+  <meta property="og:url" content="https://nexusprecision.co.kr" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="넥서스 프리시전 — 정밀 가공의 새로운 기준" />
+  <meta name="twitter:description" content="±0.005mm 공차, 99.7% 품질률. CNC 정밀 가공 파트너." />
+  <meta name="twitter:image" content="https://nexusprecision.co.kr/images/hero.jpg" />
+
+  <!-- Naver Verification Placeholder -->
+  <meta name="naver-site-verification" content="PLACEHOLDER" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-page': '#0B1120',
+            'bg-surface': '#111827',
+            'bg-card': '#1A2332',
+            'accent': '#22D3EE',
+            'accent-deep': '#0EA5E9',
+            'text-pri': '#F1F5F9',
+            'text-sec': '#94A3B8',
+            'text-mut': '#64748B',
+            'border-def': '#1E293B',
+            'border-str': '#334155',
+          },
+          fontFamily: {
+            ui: ['Rajdhani', 'Pretendard Variable', 'sans-serif'],
+            data: ['JetBrains Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #0B1120;
+      --bg-surface: #111827;
+      --bg-card: #1A2332;
+      --accent-primary: #22D3EE;
+      --accent-secondary: #0EA5E9;
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-default: #1E293B;
+      --border-strong: #334155;
+      --r-sm: 2px;
+      --r-md: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Rajdhani', 'Pretendard Variable', sans-serif; background: var(--bg-page); color: var(--text-primary); }
+
+    /* Skip Link */
+    .skip-link { position: absolute; top: -100%; left: 16px; z-index: 9999; padding: 8px 16px; background: var(--accent-primary); color: var(--bg-page); border-radius: var(--r-sm); }
+    .skip-link:focus { top: 16px; }
+
+    /* Animations */
+    .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in-section.visible { opacity: 1; transform: translateY(0); }
+    .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* Accordion */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
+    .faq-answer.open { max-height: 300px; }
+    .faq-chevron { transition: transform 0.3s ease; }
+    .faq-chevron.rotated { transform: rotate(180deg); }
+
+    /* Blueprint accent line */
+    .accent-line { width: 48px; height: 2px; background: var(--accent-primary); }
+
+    /* Hover card */
+    .card-hover { transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease; }
+    .card-hover:hover { border-color: var(--accent-primary); box-shadow: 0 4px 12px rgba(34,211,238,0.08); transform: translateY(-2px); }
+
+    /* Counter animation */
+    .counter-value { font-family: 'JetBrains Mono', monospace; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-page); }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ManufacturingBusiness",
+    "name": "넥서스 프리시전",
+    "description": "CNC 정밀 가공, 표면 처리, 품질 검사 전문 제조업체",
+    "url": "https://nexusprecision.co.kr",
+    "telephone": "+82-31-497-8200",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "시흥시 공단1대로 237, 시화산업단지 4블록 17동",
+      "addressLocality": "시흥시",
+      "addressRegion": "경기도",
+      "postalCode": "15106",
+      "addressCountry": "KR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "37.3415",
+      "longitude": "126.7350"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "넥서스 프리시전",
+    "url": "https://nexusprecision.co.kr"
+  }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+  <!-- HEADER / NAV -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-bg-page/90 backdrop-blur-sm border-b border-border-def">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16">
+      <a href="#" class="font-ui font-bold text-xl tracking-wide text-text-pri">
+        NEX<span class="text-accent">:</span>PRE
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#capabilities" class="text-text-sec hover:text-accent transition-colors text-sm font-medium tracking-wide">역량</a>
+        <a href="#equipment" class="text-text-sec hover:text-accent transition-colors text-sm font-medium tracking-wide">설비</a>
+        <a href="#process" class="text-text-sec hover:text-accent transition-colors text-sm font-medium tracking-wide">프로세스</a>
+        <a href="#industries" class="text-text-sec hover:text-accent transition-colors text-sm font-medium tracking-wide">산업분야</a>
+        <a href="#contact" class="text-text-sec hover:text-accent transition-colors text-sm font-medium tracking-wide">문의</a>
+        <a href="#contact" class="inline-flex items-center px-5 py-2 bg-accent text-bg-page text-sm font-semibold rounded-[2px] hover:brightness-110 transition-all tracking-wider">견적요청</a>
+      </nav>
+      <button id="mobile-menu-btn" class="md:hidden text-text-pri" aria-label="메뉴 열기">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-bg-surface border-t border-border-def">
+      <div class="px-6 py-4 flex flex-col gap-4">
+        <a href="#capabilities" class="text-text-sec hover:text-accent text-sm font-medium">역량</a>
+        <a href="#equipment" class="text-text-sec hover:text-accent text-sm font-medium">설비</a>
+        <a href="#process" class="text-text-sec hover:text-accent text-sm font-medium">프로세스</a>
+        <a href="#industries" class="text-text-sec hover:text-accent text-sm font-medium">산업분야</a>
+        <a href="#contact" class="text-text-sec hover:text-accent text-sm font-medium">문의</a>
+        <a href="#contact" class="inline-flex items-center justify-center px-5 py-2 bg-accent text-bg-page text-sm font-semibold rounded-[2px]">견적요청</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+    <!-- COMPONENT_REF: hero-split-typography | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/hero-split-typography-reference.html | FIDELITY: 75% -->
+    <section class="relative w-full min-h-screen" aria-label="히어로">
+      <img src="./images/hero.jpg" alt="넥서스 프리시전 CNC 가공 공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(11,17,32,0.92) 0%, rgba(11,17,32,0.70) 45%, rgba(11,17,32,0.50) 100%);"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex items-center pt-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
+          <!-- Left: Typography -->
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-8 h-[1px] bg-accent"></div>
+              <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Precision Manufacturing</span>
+            </div>
+            <h1 class="font-ui font-bold text-text-pri leading-[1.3] mb-6" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+              마이크로 단위에서<br>
+              산업의 기준을 세우다
+            </h1>
+            <p class="text-text-sec text-lg max-w-[480px] leading-relaxed mb-8">
+              ±0.005mm 공차 관리와 24대의 CNC 센터.<br class="hidden sm:block">
+              넥서스 프리시전은 정밀의 언어로 기술을 말합니다.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#contact" class="inline-flex items-center justify-center px-7 py-3.5 bg-accent text-bg-page font-semibold text-sm rounded-[2px] hover:brightness-110 transition-all tracking-wider">
+                견적 문의하기
+              </a>
+              <a href="#capabilities" class="inline-flex items-center justify-center px-7 py-3.5 border border-accent text-accent font-semibold text-sm rounded-[2px] hover:bg-accent hover:text-bg-page transition-all tracking-wider">
+                역량 살펴보기
+              </a>
+            </div>
+          </div>
+          <!-- Right: Stats Panel -->
+          <div class="lg:col-span-5 hidden lg:flex flex-col gap-6">
+            <div class="border border-border-def rounded-[4px] p-6 bg-bg-page/40 backdrop-blur-sm">
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <p class="font-data text-accent text-2xl font-medium">±0.005<span class="text-sm text-text-mut ml-1">mm</span></p>
+                  <p class="text-text-mut text-xs mt-1 tracking-wide">가공 공차</p>
+                </div>
+                <div>
+                  <p class="font-data text-accent text-2xl font-medium">99.7<span class="text-sm text-text-mut ml-1">%</span></p>
+                  <p class="text-text-mut text-xs mt-1 tracking-wide">품질 합격률</p>
+                </div>
+                <div>
+                  <p class="font-data text-accent text-2xl font-medium">3,200<span class="text-sm text-text-mut ml-1">㎡</span></p>
+                  <p class="text-text-mut text-xs mt-1 tracking-wide">생산 시설</p>
+                </div>
+                <div>
+                  <p class="font-data text-accent text-2xl font-medium">24<span class="text-sm text-text-mut ml-1">대</span></p>
+                  <p class="text-text-mut text-xs mt-1 tracking-wide">CNC 센터</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 text-text-mut text-xs">
+              <div class="flex gap-1">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              </div>
+              <span class="font-data">시흥 시화산업단지 · 연중무휴 가동</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CAPABILITIES | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color) -->
+    <!-- COMPONENT_REF: bento-accent-text-image-grid | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-accent-text-image-grid-reference.html | FIDELITY: 75% -->
+    <section id="capabilities" class="relative w-full fade-in-section" style="min-height: 55vh;" aria-label="핵심 역량">
+      <img src="./images/cap_cnc.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(11,17,32,0.88) 0%, rgba(11,17,32,0.80) 40%, rgba(11,17,32,0.85) 100%);"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <!-- Left: Text Block (5 cols) -->
+          <div class="lg:col-span-5">
+            <span class="font-data text-cyan-400 text-xs tracking-[0.15em] uppercase">Core Capabilities</span>
+            <h2 class="font-ui font-bold text-white mt-3 mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+              네 가지 핵심 역량이<br>
+              정밀을 완성합니다
+            </h2>
+            <div class="w-12 h-[2px] bg-cyan-400/50 mb-6"></div>
+            <p class="text-white/80 leading-relaxed max-w-[400px]">
+              CNC 정밀 가공부터 표면 처리, 3차원 품질 검사, 정밀 조립까지. 원스톱 공정 체계가 공차 ±0.005mm의 일관된 품질을 보장합니다.
+            </p>
+          </div>
+          <!-- Right: Capability Cards (7 cols) -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="stagger-item bg-bg-page/60 backdrop-blur-sm border border-white/10 rounded-[4px] p-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><circle cx="12" cy="12" r="3"/><path d="M3 12h3m12 0h3M12 3v3m0 12v3M5.636 5.636l2.121 2.121m8.486 8.486 2.121 2.121M5.636 18.364l2.121-2.121m8.486-8.486 2.121-2.121"/></svg>
+              <h3 class="font-ui font-semibold text-white text-lg mb-2">CNC 정밀 가공</h3>
+              <p class="text-white/60 text-sm leading-relaxed">5축 동시 가공 체계로 복합 형상을 한 번의 셋업으로 완성합니다.</p>
+            </div>
+            <div class="stagger-item bg-bg-page/60 backdrop-blur-sm border border-white/10 rounded-[4px] p-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M12 3v17.25"/><path d="m6 15 6 6 6-6"/><path d="M19 3H5"/></svg>
+              <h3 class="font-ui font-semibold text-white text-lg mb-2">표면 처리</h3>
+              <p class="text-white/60 text-sm leading-relaxed">아노다이징, 도금, 열처리까지 소재별 최적 표면을 구현합니다.</p>
+            </div>
+            <div class="stagger-item bg-bg-page/60 backdrop-blur-sm border border-white/10 rounded-[4px] p-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <h3 class="font-ui font-semibold text-white text-lg mb-2">품질 검사</h3>
+              <p class="text-white/60 text-sm leading-relaxed">3차원 측정기(CMM)와 광학 검사 장비로 전수 검사를 실행합니다.</p>
+            </div>
+            <div class="stagger-item bg-bg-page/60 backdrop-blur-sm border border-white/10 rounded-[4px] p-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+              <h3 class="font-ui font-semibold text-white text-lg mb-2">정밀 조립</h3>
+              <p class="text-white/60 text-sm leading-relaxed">클린룸 환경에서 마이크로 단위 조립과 기능 시험을 수행합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EQUIPMENT & FACILITY | MOVE: M-LAY-EDITORIAL-FEATURE -->
+    <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/asymmetric-featured-image5-content7-reference.html | FIDELITY: 75% -->
+    <section id="equipment" class="w-full bg-bg-page py-20 lg:py-28 fade-in-section" aria-label="설비 및 시설">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-8 h-[1px] bg-accent"></div>
+          <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Equipment & Facility</span>
+        </div>
+        <h2 class="font-ui font-bold text-text-pri mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+          장비가 곧 실력입니다
+        </h2>
+        <div class="accent-line mb-10"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Featured Image (7 cols) -->
+          <div class="lg:col-span-7 stagger-item">
+            <div class="relative overflow-hidden rounded-[4px] border border-border-def">
+              <img src="./images/divider_facility.jpg" alt="넥서스 프리시전 시화산업단지 공장 전경" class="w-full aspect-[16/10] object-cover" loading="lazy" />
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-page/90 to-transparent p-6">
+                <p class="font-data text-accent text-xs tracking-wider">FACILITY SPEC</p>
+                <p class="text-text-pri font-ui font-semibold mt-1">경기도 시흥시 시화산업단지 · <span class="font-data text-accent">3,200㎡</span></p>
+              </div>
+            </div>
+          </div>
+          <!-- Content Cards (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="stagger-item border border-border-def rounded-[4px] p-5 card-hover">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 flex items-center justify-center border border-accent/30 rounded-[2px] shrink-0">
+                  <span class="font-data text-accent text-sm">5X</span>
+                </div>
+                <div>
+                  <h3 class="font-ui font-semibold text-text-pri">5축 CNC 머시닝 센터</h3>
+                  <p class="text-text-sec text-sm mt-1 leading-relaxed">DMG MORI, MAZAK 등 고정밀 장비 24대 보유. 동시 5축 가공으로 복합 형상 원패스 가공.</p>
+                </div>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] p-5 card-hover">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 flex items-center justify-center border border-accent/30 rounded-[2px] shrink-0">
+                  <span class="font-data text-accent text-sm">CMM</span>
+                </div>
+                <div>
+                  <h3 class="font-ui font-semibold text-text-pri">3차원 측정 시스템</h3>
+                  <p class="text-text-sec text-sm mt-1 leading-relaxed">Zeiss CONTURA, 비접촉식 광학 스캐너. 전수 검사 체계로 불량률 0.3% 이하 유지.</p>
+                </div>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] p-5 card-hover">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 flex items-center justify-center border border-accent/30 rounded-[2px] shrink-0">
+                  <span class="font-data text-accent text-sm">ERP</span>
+                </div>
+                <div>
+                  <h3 class="font-ui font-semibold text-text-pri">통합 생산 관리</h3>
+                  <p class="text-text-sec text-sm mt-1 leading-relaxed">자체 ERP + MES 시스템으로 실시간 공정 모니터링과 납기 예측을 운영합니다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] p-5 card-hover">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 flex items-center justify-center border border-accent/30 rounded-[2px] shrink-0">
+                  <span class="font-data text-accent text-sm">24H</span>
+                </div>
+                <div>
+                  <h3 class="font-ui font-semibold text-text-pri">야간 무인 가동</h3>
+                  <p class="text-text-sec text-sm mt-1 leading-relaxed">팔렛 체인저 + APC 자동화 라인으로 24시간 연속 생산 체계를 구축했습니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PROCESS | MOVE: M-LAY-EDITORIAL-STORY -->
+    <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
+    <section id="process" class="w-full bg-bg-surface py-20 lg:py-28 fade-in-section" aria-label="제조 프로세스">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Left Text Block (4 cols) -->
+          <div class="lg:col-span-4 lg:pt-16">
+            <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Manufacturing Process</span>
+            <h2 class="font-ui font-bold text-text-pri mt-3 mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+              설계에서 납품까지,<br>
+              6단계 정밀 공정
+            </h2>
+            <div class="accent-line mb-6"></div>
+            <p class="text-text-sec leading-relaxed max-w-[360px] mb-8">
+              모든 프로젝트는 동일한 품질 기준 아래 체계적으로 관리됩니다. 각 단계마다 검증 게이트를 두어 불량 전파를 원천 차단합니다.
+            </p>
+            <a href="#contact" class="inline-flex items-center text-accent text-sm font-semibold tracking-wider hover:underline">
+              프로젝트 상담 →
+            </a>
+          </div>
+          <!-- Gap (1 col) -->
+          <div class="hidden lg:block lg:col-span-1"></div>
+          <!-- Right Steps (7 cols) -->
+          <div class="lg:col-span-7">
+            <div class="space-y-6">
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">01</span>
+                </div>
+                <div class="border-b border-border-def pb-6 flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">견적 요청 · RFQ</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">도면 또는 3D 모델 접수 후 48시간 내 기술 검토와 견적서를 발송합니다.</p>
+                </div>
+              </div>
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">02</span>
+                </div>
+                <div class="border-b border-border-def pb-6 flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">설계 검토 · DFM</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">제조 가능성 분석과 소재 최적화를 통해 공정 효율을 극대화합니다.</p>
+                </div>
+              </div>
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">03</span>
+                </div>
+                <div class="border-b border-border-def pb-6 flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">시제품 · Prototype</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">소량 시제품 제작으로 치수 정밀도와 기능 적합성을 사전 검증합니다.</p>
+                </div>
+              </div>
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">04</span>
+                </div>
+                <div class="border-b border-border-def pb-6 flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">양산 · Mass Production</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">5축 CNC 24대 풀가동 체계로 월 최대 50,000pcs 생산 역량을 보유합니다.</p>
+                </div>
+              </div>
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">05</span>
+                </div>
+                <div class="border-b border-border-def pb-6 flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">품질 보증 · QA</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">CMM 전수 검사 + SPC 관리로 공정 능력 Cpk 1.67 이상을 유지합니다.</p>
+                </div>
+              </div>
+              <div class="stagger-item flex gap-5 items-start">
+                <div class="shrink-0 w-12 h-12 flex items-center justify-center border border-accent/40 rounded-[2px] bg-bg-card">
+                  <span class="font-data text-accent text-sm font-medium">06</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-ui font-semibold text-text-pri text-lg">출하 · Delivery</h3>
+                  <p class="text-text-sec text-sm mt-2 leading-relaxed">진공 포장 + 충격 방지 패키징으로 정밀 부품의 안전한 납품을 보장합니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: DIVIDER — FACILITY STATS | MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: fullbleed-divider-stats | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero-full-bleed/ | FIDELITY: 80% -->
+    <section class="relative w-full fade-in-section" style="min-height: 50vh;" aria-label="시설 현황">
+      <img src="./images/divider_facility.jpg" alt="넥서스 프리시전 공장 내부 파노라마" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(11,17,32,0.88) 0%, rgba(11,17,32,0.72) 100%);"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 flex flex-col justify-center" style="min-height: 50vh;">
+        <div class="text-center mb-12">
+          <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Factory Overview</span>
+          <h2 class="font-ui font-bold text-white mt-3" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+            숫자로 증명하는 생산 역량
+          </h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="stagger-item">
+            <p class="font-data text-accent text-3xl md:text-4xl font-medium counter-value" data-target="3200">0</p>
+            <p class="text-text-mut text-sm mt-2 font-data">㎡ 생산 시설</p>
+          </div>
+          <div class="stagger-item">
+            <p class="font-data text-accent text-3xl md:text-4xl font-medium counter-value" data-target="24">0</p>
+            <p class="text-text-mut text-sm mt-2 font-data">대 CNC 센터</p>
+          </div>
+          <div class="stagger-item">
+            <p class="font-data text-accent text-3xl md:text-4xl font-medium">±0.005</p>
+            <p class="text-text-mut text-sm mt-2 font-data">mm 가공 공차</p>
+          </div>
+          <div class="stagger-item">
+            <p class="font-data text-accent text-3xl md:text-4xl font-medium counter-value" data-target="99.7">0</p>
+            <p class="text-text-mut text-sm mt-2 font-data">% 품질 합격률</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CLIENT INDUSTRIES | MOVE: M-LAY-ASYM-GRID -->
+    <!-- COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 75% -->
+    <section id="industries" class="w-full bg-bg-page py-20 lg:py-28 fade-in-section" aria-label="산업 분야">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-8 h-[1px] bg-accent"></div>
+          <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Client Industries</span>
+        </div>
+        <h2 class="font-ui font-bold text-text-pri mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+          네 개의 산업이<br>
+          넥서스를 선택합니다
+        </h2>
+        <div class="accent-line mb-10"></div>
+
+        <!-- Asymmetric Grid: 5:7 then 7:5 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+          <!-- Featured Large Card (5 cols) -->
+          <div class="lg:col-span-5 stagger-item">
+            <div class="relative group overflow-hidden rounded-[4px] border border-border-def h-full min-h-[300px] card-hover">
+              <img src="./images/ind_auto.jpg" alt="자동차 부품 정밀 가공" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-page/90 via-bg-page/30 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <span class="font-data text-accent text-xs tracking-wider">AUTOMOTIVE</span>
+                <h3 class="font-ui font-semibold text-white text-xl mt-2">자동차 · Tier-2 공급</h3>
+                <p class="text-text-sec text-sm mt-2 leading-relaxed">현대·기아 2차 협력사로 파워트레인, 변속기 핵심 부품을 공급합니다.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Right Column: 2 Stacked (7 cols) -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="stagger-item relative group overflow-hidden rounded-[4px] border border-border-def min-h-[240px] card-hover">
+              <img src="./images/ind_semi.jpg" alt="반도체 장비 부품" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-page/90 via-bg-page/30 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <span class="font-data text-accent text-xs tracking-wider">SEMICONDUCTOR</span>
+                <h3 class="font-ui font-semibold text-white text-lg mt-2">반도체 장비</h3>
+                <p class="text-text-sec text-sm mt-1">웨이퍼 스테이지, 챔버 부품 등 초정밀 파트 제조.</p>
+              </div>
+            </div>
+            <div class="stagger-item relative group overflow-hidden rounded-[4px] border border-border-def min-h-[240px] card-hover">
+              <img src="./images/ind_medical.jpg" alt="의료기기 부품" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-page/90 via-bg-page/30 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <span class="font-data text-accent text-xs tracking-wider">MEDICAL DEVICE</span>
+                <h3 class="font-ui font-semibold text-white text-lg mt-2">의료기기</h3>
+                <p class="text-text-sec text-sm mt-1">수술 도구, 임플란트 부품 등 생체적합 소재 가공.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Wide Card -->
+        <div class="stagger-item relative group overflow-hidden rounded-[4px] border border-border-def min-h-[200px] card-hover">
+          <img src="./images/ind_aero.jpg" alt="항공우주 부품" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-bg-page/90 via-bg-page/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <span class="font-data text-accent text-xs tracking-wider">AEROSPACE</span>
+                <h3 class="font-ui font-semibold text-white text-xl mt-2">항공우주</h3>
+                <p class="text-text-sec text-sm mt-2 max-w-[500px] leading-relaxed">티타늄·인코넬 등 난삭재 전문 가공. AS9100 품질 기준을 준수하여 항공 부품의 신뢰성을 확보합니다.</p>
+              </div>
+              <a href="#contact" class="inline-flex items-center px-5 py-2.5 bg-accent text-bg-page text-sm font-semibold rounded-[2px] hover:brightness-110 transition-all tracking-wider shrink-0">
+                산업별 상담
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CERTIFICATIONS | MOVE: M-TRUST-AWARDS-CERTS -->
+    <!-- COMPONENT_REF: dark-testimonial-cards-text (cert adapted) | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/testimonials/dark-testimonial-cards-text-reference.html | FIDELITY: 70% -->
+    <section class="w-full bg-bg-surface py-20 lg:py-28 fade-in-section" aria-label="인증 현황">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="text-center mb-12">
+          <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Certifications</span>
+          <h2 class="font-ui font-bold text-text-pri mt-3 mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+            국제 인증이 보증하는 품질
+          </h2>
+          <div class="accent-line mx-auto"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="stagger-item border border-border-def rounded-[4px] p-8 text-center card-hover bg-bg-card">
+            <div class="w-16 h-16 mx-auto flex items-center justify-center border border-accent/30 rounded-[4px] mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="font-ui font-semibold text-text-pri text-lg mb-2">ISO 9001:2015</h3>
+            <p class="text-text-sec text-sm leading-relaxed">품질경영시스템 국제 표준 인증. 전 공정에 걸친 체계적 품질 관리 시스템을 운영합니다.</p>
+          </div>
+          <div class="stagger-item border border-border-def rounded-[4px] p-8 text-center card-hover bg-bg-card">
+            <div class="w-16 h-16 mx-auto flex items-center justify-center border border-accent/30 rounded-[4px] mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><line x1="20" y1="2" x2="22" y2="4"/></svg>
+            </div>
+            <h3 class="font-ui font-semibold text-text-pri text-lg mb-2">ISO 14001:2015</h3>
+            <p class="text-text-sec text-sm leading-relaxed">환경경영시스템 인증. 절삭유 재활용, 분진 저감 등 친환경 제조 공정을 실현합니다.</p>
+          </div>
+          <div class="stagger-item border border-border-def rounded-[4px] p-8 text-center card-hover bg-bg-card">
+            <div class="w-16 h-16 mx-auto flex items-center justify-center border border-accent/30 rounded-[4px] mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+            </div>
+            <h3 class="font-ui font-semibold text-text-pri text-lg mb-2">IATF 16949:2016</h3>
+            <p class="text-text-sec text-sm leading-relaxed">자동차 품질경영시스템 인증. 글로벌 완성차 OEM 공급망에 요구되는 최고 수준의 품질 기준입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FAQ | MOVE: M-INT-HOVER-REVEAL -->
+    <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 75% -->
+    <section class="w-full bg-bg-page py-20 lg:py-28 fade-in-section" aria-label="자주 묻는 질문">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Left: Header (5 cols) -->
+          <div class="lg:col-span-5">
+            <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">FAQ</span>
+            <h2 class="font-ui font-bold text-text-pri mt-3 mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+              자주 묻는 질문
+            </h2>
+            <div class="accent-line mb-6"></div>
+            <p class="text-text-sec leading-relaxed max-w-[360px]">
+              견적, 납기, 소재에 대한 일반적인 문의 사항을 정리했습니다.<br>
+              추가 질문은 언제든 연락 부탁드립니다.
+            </p>
+          </div>
+          <!-- Right: Accordion (7 cols) -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="stagger-item border border-border-def rounded-[4px] overflow-hidden">
+              <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                <span class="font-ui font-semibold text-text-pri">최소 발주 수량(MOQ)이 있나요?</span>
+                <svg class="faq-chevron text-text-mut shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer px-5 pb-0">
+                <p class="text-text-sec text-sm leading-relaxed pb-5">시제품 1개부터 대응합니다. 양산의 경우 품목별로 상이하지만, 일반적으로 100pcs 이상부터 단가 최적화가 가능합니다. 소량 다품종도 유연하게 대응합니다.</p>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] overflow-hidden">
+              <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                <span class="font-ui font-semibold text-text-pri">일반적인 리드타임은 어떻게 되나요?</span>
+                <svg class="faq-chevron text-text-mut shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer px-5 pb-0">
+                <p class="text-text-sec text-sm leading-relaxed pb-5">시제품은 도면 확정 후 5~7 영업일, 양산은 수량에 따라 2~4주가 일반적입니다. 긴급 대응도 가능하며, 사전 협의 시 최대 30% 단축할 수 있습니다.</p>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] overflow-hidden">
+              <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                <span class="font-ui font-semibold text-text-pri">어떤 소재를 가공할 수 있나요?</span>
+                <svg class="faq-chevron text-text-mut shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer px-5 pb-0">
+                <p class="text-text-sec text-sm leading-relaxed pb-5">알루미늄, 스테인리스, 탄소강, 동합금 등 일반 금속부터 티타늄, 인코넬, PEEK 등 난삭재까지 대응합니다. 소재 조달도 직접 수배 가능합니다.</p>
+              </div>
+            </div>
+            <div class="stagger-item border border-border-def rounded-[4px] overflow-hidden">
+              <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-bg-card/50 transition-colors" aria-expanded="false">
+                <span class="font-ui font-semibold text-text-pri">NDA 체결이 가능한가요?</span>
+                <svg class="faq-chevron text-text-mut shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer px-5 pb-0">
+                <p class="text-text-sec text-sm leading-relaxed pb-5">모든 프로젝트에 대해 표준 NDA를 제공합니다. 고객사 양식 기반의 기밀유지계약도 체결 가능하며, 도면 및 기술 정보는 암호화 스토리지에서 관리됩니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT / RFQ | MOVE: M-FOOTER-B2B-DETAILS -->
+    <!-- COMPONENT_REF: text-vision-cta-form | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/text-vision-cta-form-reference.html | FIDELITY: 75% -->
+    <section id="contact" class="w-full bg-bg-surface py-20 lg:py-28 fade-in-section" aria-label="견적 문의">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Left: Contact Info (5 cols) -->
+          <div class="lg:col-span-5">
+            <span class="font-data text-accent text-xs tracking-[0.15em] uppercase">Contact</span>
+            <h2 class="font-ui font-bold text-text-pri mt-3 mb-4" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+              프로젝트를<br>
+              시작하겠습니다
+            </h2>
+            <div class="accent-line mb-8"></div>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div>
+                  <p class="text-text-pri font-semibold text-sm">주소</p>
+                  <p class="text-text-sec text-sm mt-1">경기도 시흥시 공단1대로 237<br>시화산업단지 4블록 17동</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <div>
+                  <p class="text-text-pri font-semibold text-sm">전화</p>
+                  <p class="text-text-sec text-sm mt-1">031-497-8200</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <div>
+                  <p class="text-text-pri font-semibold text-sm">이메일</p>
+                  <p class="text-text-sec text-sm mt-1">rfq@nexusprecision.co.kr</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div>
+                  <p class="text-text-pri font-semibold text-sm">영업시간</p>
+                  <p class="text-text-sec text-sm mt-1">월-금 08:30 – 18:00<br>토 08:30 – 13:00 (격주)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right: RFQ Form (7 cols) -->
+          <div class="lg:col-span-7">
+            <div class="border border-border-def rounded-[4px] p-8 bg-bg-card">
+              <h3 class="font-ui font-semibold text-text-pri text-xl mb-6">견적 요청서</h3>
+              <form onsubmit="event.preventDefault(); alert('견적 요청이 접수되었습니다. 48시간 내 담당자가 연락드리겠습니다.');" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="company" class="block text-text-sec text-sm mb-2 font-medium">회사명 <span class="text-accent">*</span></label>
+                    <input type="text" id="company" required class="w-full bg-bg-surface border border-border-def rounded-[2px] px-4 py-3 text-text-pri text-sm focus:outline-none focus:border-accent transition-colors" placeholder="귀사명을 입력해주세요" />
+                  </div>
+                  <div>
+                    <label for="name" class="block text-text-sec text-sm mb-2 font-medium">담당자명 <span class="text-accent">*</span></label>
+                    <input type="text" id="name" required class="w-full bg-bg-surface border border-border-def rounded-[2px] px-4 py-3 text-text-pri text-sm focus:outline-none focus:border-accent transition-colors" placeholder="성함을 입력해주세요" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="email" class="block text-text-sec text-sm mb-2 font-medium">이메일 <span class="text-accent">*</span></label>
+                    <input type="email" id="email" required class="w-full bg-bg-surface border border-border-def rounded-[2px] px-4 py-3 text-text-pri text-sm focus:outline-none focus:border-accent transition-colors" placeholder="email@company.com" />
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-text-sec text-sm mb-2 font-medium">연락처</label>
+                    <input type="tel" id="phone" class="w-full bg-bg-surface border border-border-def rounded-[2px] px-4 py-3 text-text-pri text-sm focus:outline-none focus:border-accent transition-colors" placeholder="010-0000-0000" />
+                  </div>
+                </div>
+                <div>
+                  <label for="details" class="block text-text-sec text-sm mb-2 font-medium">프로젝트 설명</label>
+                  <textarea id="details" rows="4" class="w-full bg-bg-surface border border-border-def rounded-[2px] px-4 py-3 text-text-pri text-sm focus:outline-none focus:border-accent transition-colors resize-none" placeholder="소재, 수량, 도면 유무, 납기 등을 알려주시면 빠른 회신이 가능합니다."></textarea>
+                </div>
+                <button type="submit" class="w-full px-7 py-3.5 bg-accent text-bg-page font-semibold text-sm rounded-[2px] hover:brightness-110 transition-all tracking-wider">
+                  견적 요청 발송
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 80% -->
+    <section class="relative w-full" style="min-height: 55vh;" aria-label="최종 CTA">
+      <img src="./images/cta_bg.jpg" alt="넥서스 프리시전 야경" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(11,17,32,0.88) 0%, rgba(11,17,32,0.75) 100%);"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 flex flex-col items-center justify-center text-center" style="min-height: 55vh;">
+        <span class="font-data text-accent text-xs tracking-[0.15em] uppercase mb-4">Start Your Project</span>
+        <h2 class="font-ui font-bold text-white mb-6" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+          정밀이 필요한 순간,<br>
+          넥서스가 답합니다
+        </h2>
+        <p class="text-white/70 max-w-[480px] leading-relaxed mb-8">
+          도면 한 장이면 충분합니다.<br class="hidden sm:block">
+          48시간 내 기술 검토와 견적을 받아보세요.
+        </p>
+        <a href="#contact" class="inline-flex items-center px-8 py-4 bg-accent text-bg-page font-semibold rounded-[2px] hover:brightness-110 transition-all tracking-wider">
+          무료 기술 상담 신청
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-bg-page border-t border-border-def py-8">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-text-mut text-xs font-data">© 2026 넥서스 프리시전. All rights reserved.</p>
+      <p class="text-text-mut text-xs font-data">경기도 시흥시 공단1대로 237 · 031-497-8200</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Reduced motion check
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Scroll Reveal (IntersectionObserver)
+    if (!prefersReducedMotion) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-50px' });
+
+      document.querySelectorAll('.fade-in-section').forEach(el => revealObserver.observe(el));
+
+      // Stagger items
+      const staggerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const parent = entry.target.closest('section') || entry.target.parentElement;
+            const siblings = parent.querySelectorAll('.stagger-item');
+            siblings.forEach((item, index) => {
+              item.style.transitionDelay = `${index * 0.1}s`;
+              item.classList.add('visible');
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '-30px' });
+
+      document.querySelectorAll('.stagger-item').forEach((el, i) => {
+        if (i === 0 || el.closest('section') !== document.querySelectorAll('.stagger-item')[i - 1]?.closest('section')) {
+          staggerObserver.observe(el);
+        }
+      });
+    } else {
+      document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => el.classList.add('visible'));
+    }
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const chevron = btn.querySelector('.faq-chevron');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('rotated'));
+        document.querySelectorAll('.faq-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+        // Toggle current
+        if (!isOpen) {
+          answer.classList.add('open');
+          chevron.classList.add('rotated');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Counter Animation
+    if (!prefersReducedMotion) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.dataset.target);
+            const isDecimal = target % 1 !== 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function animate(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = eased * target;
+
+              if (isDecimal) {
+                el.textContent = current.toFixed(1);
+              } else {
+                el.textContent = Math.floor(current).toLocaleString();
+              }
+
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+    } else {
+      document.querySelectorAll('.counter-value').forEach(el => {
+        const target = el.dataset.target;
+        el.textContent = parseFloat(target) % 1 !== 0 ? parseFloat(target).toFixed(1) : parseInt(target).toLocaleString();
+      });
+    }
+  </script>
+</body>
+</html>

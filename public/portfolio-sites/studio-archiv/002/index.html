@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스튜디오 아키브 — 공간에 이야기를 설계하다</title>
+    <meta name="description" content="스튜디오 아키브는 장소의 기억과 사용자의 삶을 연결하는 건축 스튜디오입니다. 주거, 상업, 문화 공간 설계.">
+    <link rel="canonical" href="https://studioarchive.kr">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="스튜디오 아키브 — 공간에 이야기를 설계하다">
+    <meta property="og:description" content="장소의 기억과 사용자의 삶을 연결하는 건축을 합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studioarchive.kr">
+    <meta property="og:image" content="https://studioarchive.kr/images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"Cormorant Garamond"', 'serif'],
+                        'sans': ['"Noto Sans KR"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    colors: {
+                        'page': '#FAFAFA',
+                        'surface': '#FFFFFF',
+                        'card': '#FFFFFF',
+                        'accent': '#1A1A1A',
+                        'txt': '#1A1A1A',
+                        'txt-secondary': '#555555',
+                        'txt-muted': '#999999',
+                        'border-default': '#E0E0E0',
+                        'border-strong': '#1A1A1A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #FAFAFA;
+            --bg-surface: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --accent-primary: #1A1A1A;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --text-muted: #999999;
+            --border-default: #E0E0E0;
+            --border-strong: #1A1A1A;
+            --font-ui: 'Cormorant Garamond', serif;
+            --font-data: 'Noto Sans KR', sans-serif;
+            --content-max-width: 1200px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-page); }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sticky Steps */
+        .step-content {
+            opacity: 0.3;
+            transition: opacity 0.4s ease;
+        }
+        .step-content.active {
+            opacity: 1;
+        }
+
+        /* Utilities */
+        button, a { transition: all 0.2s ease-in-out; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .step-content { opacity: 1; transition: none; }
+        }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ArchitectureFirm",
+        "name": "스튜디오 아키브",
+        "description": "장소의 기억과 사용자의 삶을 연결하는 건축 스튜디오",
+        "url": "https://studioarchive.kr",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "한남대로 42길 18, 3층",
+            "addressLocality": "용산구",
+            "addressRegion": "서울특별시",
+            "postalCode": "04410",
+            "addressCountry": "KR"
+        },
+        "telephone": "+82-2-796-0421"
+    }
+    </script>
+</head>
+
+<body class="font-sans text-txt antialiased overflow-x-hidden">
+
+<!-- Skip Link -->
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-accent">본문 바로가기</a>
+
+<!-- NAV -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-page/90 backdrop-blur-sm border-b border-border-default/50">
+    <nav class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 h-[72px] flex items-center justify-between" aria-label="Main navigation">
+        <a href="#" class="font-serif text-xl font-semibold tracking-tight text-accent">Studio Archive</a>
+        <div class="hidden md:flex gap-8 text-[11px] uppercase tracking-[0.15em] text-txt-muted font-sans">
+            <a href="#philosophy" class="hover:text-accent">Philosophy</a>
+            <a href="#process" class="hover:text-accent">Process</a>
+            <a href="#projects" class="hover:text-accent">Projects</a>
+            <a href="#team" class="hover:text-accent">Team</a>
+            <a href="#contact" class="hover:text-accent">Contact</a>
+        </div>
+        <button class="md:hidden" aria-label="메뉴 열기" id="mobile-menu-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-page border-t border-border-default">
+        <div class="px-6 py-4 space-y-4">
+            <a href="#philosophy" class="block text-sm text-txt-secondary hover:text-accent">Philosophy</a>
+            <a href="#process" class="block text-sm text-txt-secondary hover:text-accent">Process</a>
+            <a href="#projects" class="block text-sm text-txt-secondary hover:text-accent">Projects</a>
+            <a href="#team" class="block text-sm text-txt-secondary hover:text-accent">Team</a>
+            <a href="#contact" class="block text-sm text-txt-secondary hover:text-accent">Contact</a>
+        </div>
+    </div>
+</header>
+
+<main id="main-content">
+
+<!-- ============================================== -->
+<!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+<!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 85% -->
+<!-- ============================================== -->
+<section class="relative w-full min-h-screen" aria-label="Hero">
+    <img src="./images/hero.jpg"
+         alt="Modern architectural interior with concrete walls and natural light"
+         class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-[#1A1A1A]/40 to-[#1A1A1A]/15"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-sans">Architecture Studio, Seoul</p>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.3] max-w-3xl mb-6">
+            빈 공간에서<br>
+            이야기가<br class="hidden sm:block">
+            시작됩니다
+        </h1>
+        <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+            스튜디오 아키브는 장소의 기억과
+            사용자의 삶을 연결하는 건축을 합니다.
+        </p>
+        <div class="flex flex-wrap gap-4">
+            <a href="#projects" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#1A1A1A]">
+                프로젝트 보기
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
+<!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: content-sections/text-only-about-section-reference.html | FIDELITY: 80% -->
+<!-- ============================================== -->
+<section id="philosophy" class="fade-in-section w-full bg-surface" aria-label="Philosophy">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <div class="grid grid-cols-12 gap-8">
+            <div class="col-span-12 lg:col-span-5">
+                <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-4">Philosophy</span>
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-[3.25rem] font-semibold leading-[1.15] text-accent tracking-tight">
+                    우리가 믿는<br>건축
+                </h2>
+            </div>
+            <div class="col-span-12 lg:col-span-6 lg:col-start-7 flex flex-col justify-end">
+                <div class="w-12 h-px bg-border-default mb-8"></div>
+                <p class="text-txt-secondary text-base leading-[1.85] max-w-[480px]">
+                    좋은 건축은 눈에 보이지 않습니다.<br class="hidden sm:block">
+                    그곳에 머무는 사람이 자연스럽게 살아가는 것,<br class="hidden sm:block">
+                    그것이 설계의 완성입니다.
+                </p>
+                <p class="text-txt-muted text-sm leading-relaxed mt-6 max-w-[480px]">
+                    우리는 대지를 읽고, 빛의 방향을 따라가며,
+                    그 안에서 살아갈 사람들의 이야기를 공간으로 번역합니다.
+                    과하지 않되 부족하지 않은 — 그 정확한 지점을 찾는 것이
+                    스튜디오 아키브의 설계 철학입니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: PROCESS | MOVE: M-INT-STICKY-STEPS -->
+<!-- COMPONENT_REF: custom sticky-steps | GRADE: - | MODE: custom -->
+<!-- ============================================== -->
+<section id="process" class="fade-in-section w-full bg-page" aria-label="Process">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-4">Process</span>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold leading-[1.15] text-accent tracking-tight mb-16">
+            설계의 여정
+        </h2>
+
+        <div class="grid grid-cols-12 gap-8 lg:gap-12">
+            <!-- Left: Sticky image -->
+            <div class="col-span-12 lg:col-span-5">
+                <div class="lg:sticky lg:top-[120px]">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img id="process-image" src="./images/program_1.jpg"
+                             alt="Architecture design process" class="w-full h-full object-cover transition-opacity duration-500" loading="lazy" />
+                    </div>
+                    <p class="text-[11px] text-txt-muted mt-3 font-sans tracking-wide">대지를 읽는 것에서 시작해, 공간이 숨 쉬는 순간까지.</p>
+                </div>
+            </div>
+
+            <!-- Right: Steps -->
+            <div class="col-span-12 lg:col-span-6 lg:col-start-7 space-y-0">
+                <div class="step-content border-t border-border-default py-10" data-step="0">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans">01</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">대지 방문</h3>
+                    <p class="text-txt-secondary text-sm leading-relaxed max-w-[400px]">
+                        모든 프로젝트는 대지를 직접 걷는 것에서 시작합니다.
+                        땅의 경사, 빛의 방향, 주변의 소리까지 — 눈에 보이지 않는 것들을 기록합니다.
+                    </p>
+                </div>
+
+                <div class="step-content border-t border-border-default py-10" data-step="1">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans">02</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">콘셉트 설계</h3>
+                    <p class="text-txt-secondary text-sm leading-relaxed max-w-[400px]">
+                        대지의 이야기와 거주자의 삶이 만나는 지점을 찾습니다.
+                        스케치와 다이어그램으로 공간의 뼈대를 구상합니다.
+                    </p>
+                </div>
+
+                <div class="step-content border-t border-border-default py-10" data-step="2">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans">03</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">기본 설계</h3>
+                    <p class="text-txt-secondary text-sm leading-relaxed max-w-[400px]">
+                        콘셉트를 실현 가능한 도면으로 발전시킵니다.
+                        구조, 설비, 마감재를 통합적으로 고려합니다.
+                    </p>
+                </div>
+
+                <div class="step-content border-t border-border-default py-10" data-step="3">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans">04</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">실시 설계</h3>
+                    <p class="text-txt-secondary text-sm leading-relaxed max-w-[400px]">
+                        시공을 위한 상세도면과 시방서를 완성합니다.
+                        1mm의 오차도 허용하지 않는 정밀한 도면 작업입니다.
+                    </p>
+                </div>
+
+                <div class="step-content border-t border-border-default border-b py-10" data-step="4">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans">05</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">감리</h3>
+                    <p class="text-txt-secondary text-sm leading-relaxed max-w-[400px]">
+                        도면이 현장에서 정확히 실현되도록 감독합니다.
+                        완공의 순간까지, 설계 의도를 지켜냅니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: DIVIDER 1 | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- COMPONENT_REF: custom fullbleed divider | GRADE: - | MODE: custom -->
+<!-- ============================================== -->
+<section class="relative w-full min-h-[50vh] flex items-center justify-center" aria-label="Quote divider">
+    <img src="./images/divider.jpg"
+         alt="Architectural detail of concrete building facade" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center">
+        <p class="font-serif text-2xl md:text-3xl lg:text-4xl italic text-white leading-snug tracking-tight">
+            "건축은 빛으로 쓰는 시"
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: SELECTED PROJECTS | MOVE: M-LAY-EDITORIAL-FEATURE -->
+<!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 75% -->
+<!-- ============================================== -->
+<section id="projects" class="fade-in-section w-full bg-surface" aria-label="Selected Projects">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+            <div>
+                <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-4">Selected Projects</span>
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-accent tracking-tight">
+                    선택된 작업들
+                </h2>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed max-w-[360px] mt-4 md:mt-0">
+                주거, 상업, 문화 — 규모와 용도를 넘어<br class="hidden sm:block">
+                각 프로젝트가 품은 이야기를 설계합니다.
+            </p>
+        </div>
+
+        <!-- Staggered Gallery: 5:3:4 -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <!-- Large: 5 cols -->
+            <div class="col-span-12 md:col-span-5 stagger-item group">
+                <div class="aspect-[3/4] overflow-hidden mb-4">
+                    <img src="./images/program_2.jpg"
+                         alt="Hannam Residence exterior with glass facade"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Residential · 2024</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">한남 레지던스</h3>
+                <p class="text-txt-muted text-xs mt-1">서울 용산구 · 298㎡</p>
+            </div>
+
+            <!-- Small: 3 cols -->
+            <div class="col-span-6 md:col-span-3 stagger-item group">
+                <div class="aspect-square overflow-hidden mb-4">
+                    <img src="./images/program_3.jpg"
+                         alt="Seongsu Cafe interior with exposed concrete"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Commercial · 2023</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">성수 카페 리노베이션</h3>
+                <p class="text-txt-muted text-xs mt-1">서울 성동구 · 186㎡</p>
+            </div>
+
+            <!-- Medium: 4 cols, offset -->
+            <div class="col-span-6 md:col-span-4 md:mt-16 stagger-item group">
+                <div class="aspect-[4/5] overflow-hidden mb-4">
+                    <img src="./images/program_4.jpg"
+                         alt="Eulji Art Center gallery space"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Cultural · 2023</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">을지 아트센터</h3>
+                <p class="text-txt-muted text-xs mt-1">서울 중구 · 1,240㎡</p>
+            </div>
+        </div>
+
+        <!-- Second row: 3:4:1:4 -->
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 mt-6">
+            <div class="col-span-6 md:col-span-3 stagger-item group">
+                <div class="aspect-square overflow-hidden mb-4">
+                    <img src="./images/program_5.jpg"
+                         alt="Nonhyeon Office with minimalist interior"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Office · 2024</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">논현 오피스</h3>
+                <p class="text-txt-muted text-xs mt-1">서울 강남구 · 520㎡</p>
+            </div>
+
+            <div class="col-span-6 md:col-span-4 stagger-item group">
+                <div class="aspect-[3/2] overflow-hidden mb-4">
+                    <img src="./images/program_6.jpg"
+                         alt="Yangpyeong Retreat House surrounded by nature"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Residential · 2022</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">양평 리트릿 하우스</h3>
+                <p class="text-txt-muted text-xs mt-1">경기 양평군 · 245㎡</p>
+            </div>
+
+            <div class="hidden md:block md:col-span-1"></div>
+
+            <div class="col-span-12 md:col-span-4 stagger-item group">
+                <div class="aspect-[4/5] overflow-hidden mb-4">
+                    <img src="./images/program_7.jpg"
+                         alt="Pangyo Townhouse complex"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Residential · 2023</span>
+                <h3 class="font-serif text-lg font-semibold text-accent mt-1">판교 타운하우스</h3>
+                <p class="text-txt-muted text-xs mt-1">경기 성남시 · 185㎡ × 6세대</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-16">
+            <a href="#" class="inline-block border border-accent text-accent text-[11px] uppercase tracking-[0.15em] font-sans px-8 py-3.5 hover:bg-accent hover:text-white">
+                전체 프로젝트 보기
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: PROJECT CASE | MOVE: M-LAY-EDITORIAL-STORY -->
+<!-- COMPONENT_REF: custom editorial-story | GRADE: - | MODE: custom -->
+<!-- ============================================== -->
+<section class="fade-in-section w-full bg-page" aria-label="Project Case Study">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8">
+            <!-- Text: 5 cols -->
+            <div class="col-span-12 lg:col-span-5 flex flex-col justify-center">
+                <div class="border-t border-border-default pt-8">
+                    <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-6">Featured Project</span>
+                    <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.15] text-accent tracking-tight mb-6">
+                        양평 리트릿 하우스
+                    </h2>
+                    <p class="text-txt-secondary text-sm leading-[1.85] mb-8 max-w-[400px]">
+                        자연 속 4인 가족의 주말 거처.<br>
+                        대지의 경사를 거스르지 않고,<br class="hidden sm:block">
+                        풍경이 거실로 들어오는 집을 만들었습니다.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="text-txt-muted w-16 uppercase tracking-wider">위치</span>
+                            <span class="text-txt-secondary">경기도 양평군 서종면</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="text-txt-muted w-16 uppercase tracking-wider">면적</span>
+                            <span class="text-txt-secondary">245㎡ (대지 680㎡)</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="text-txt-muted w-16 uppercase tracking-wider">연도</span>
+                            <span class="text-txt-secondary">2022</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="text-txt-muted w-16 uppercase tracking-wider">범위</span>
+                            <span class="text-txt-secondary">설계 · 감리 · 인테리어</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gap: 1 col -->
+            <div class="hidden lg:block lg:col-span-1"></div>
+
+            <!-- Image: 6 cols -->
+            <div class="col-span-12 lg:col-span-6">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="./images/program_8.jpg"
+                         alt="Yangpyeong Retreat House living room with panoramic window and forest view"
+                         class="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <!-- Detail shots -->
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div class="aspect-[3/2] overflow-hidden">
+                        <img src="./images/program_9.jpg"
+                             alt="Interior detail with wooden floor and sunlight"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="aspect-[3/2] overflow-hidden">
+                        <img src="./images/program_10.jpg"
+                             alt="Kitchen design with minimal cabinetry"
+                             class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: DIVIDER 2 | MOVE: M-DIV-FULLBLEED-IMAGE -->
+<!-- COMPONENT_REF: custom fullbleed divider | GRADE: - | MODE: custom -->
+<!-- ============================================== -->
+<section class="relative w-full min-h-[50vh] flex items-center justify-center" aria-label="Quote divider">
+    <img src="./images/divider_2.jpg"
+         alt="Minimalist architectural corridor with natural light"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center">
+        <p class="font-serif text-2xl md:text-3xl lg:text-4xl italic text-white leading-snug tracking-tight">
+            "공간은 그곳에 머무는<br class="hidden sm:block">
+            시간의 형태다"
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: MEDIA & RECOGNITION | MOVE: M-TRUST-AWARDS-CERTS -->
+<!-- COMPONENT_REF: custom awards cards | GRADE: - | MODE: custom -->
+<!-- ============================================== -->
+<section class="fade-in-section w-full bg-surface" aria-label="Media and Awards">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <div class="text-center mb-16">
+            <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-4">Media & Recognition</span>
+            <h2 class="font-serif text-3xl md:text-4xl font-semibold leading-[1.15] text-accent tracking-tight">
+                미디어 & 수상
+            </h2>
+            <p class="text-txt-secondary text-sm mt-4 max-w-[400px] mx-auto leading-relaxed">
+                국내외 건축 매체와 기관이 주목한<br class="hidden sm:block">
+                스튜디오 아키브의 작업들.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 lg:gap-6">
+            <!-- Award 1: Large -->
+            <div class="col-span-12 md:col-span-7 stagger-item border border-border-default p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Award · 2024</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3">대한건축사협회 작품상</h3>
+                    <p class="text-txt-secondary text-sm mt-3 leading-relaxed">한남 레지던스 — 도심 주거 건축 부문 우수상 수상. 좁은 대지에서의 공간 확장 전략과 주변 맥락과의 조화를 높이 평가받았습니다.</p>
+                </div>
+                <span class="text-[10px] text-txt-muted mt-6 uppercase tracking-wider font-sans">KIRA Award for Excellence</span>
+            </div>
+
+            <!-- Award 2: Small -->
+            <div class="col-span-12 md:col-span-5 stagger-item border border-border-default p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Publication · 2023</span>
+                    <h3 class="font-serif text-xl font-semibold text-accent mt-3">ArchDaily Feature</h3>
+                    <p class="text-txt-secondary text-sm mt-3 leading-relaxed">양평 리트릿 하우스가 ArchDaily의 'Best Houses of 2023' 선정. 자연과의 경계를 허무는 설계가 주목받았습니다.</p>
+                </div>
+                <span class="text-[10px] text-txt-muted mt-6 uppercase tracking-wider font-sans">ArchDaily Best Houses 2023</span>
+            </div>
+
+            <!-- Award 3 -->
+            <div class="col-span-12 md:col-span-4 stagger-item border border-border-default p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Media · 2023</span>
+                    <h3 class="font-serif text-lg font-semibold text-accent mt-3">Dezeen Interview</h3>
+                    <p class="text-txt-secondary text-xs mt-2 leading-relaxed">"한국 건축의 새로운 내러티브"라는 제목으로 대표 인터뷰 게재.</p>
+                </div>
+            </div>
+
+            <!-- Award 4 -->
+            <div class="col-span-6 md:col-span-4 stagger-item border border-border-default p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Award · 2022</span>
+                    <h3 class="font-serif text-lg font-semibold text-accent mt-3">서울시 건축상</h3>
+                    <p class="text-txt-secondary text-xs mt-2 leading-relaxed">을지 아트센터 — 공공건축 부문 장려상.</p>
+                </div>
+            </div>
+
+            <!-- Award 5 -->
+            <div class="col-span-6 md:col-span-4 stagger-item border border-border-default p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Publication · 2022</span>
+                    <h3 class="font-serif text-lg font-semibold text-accent mt-3">월간 건축문화</h3>
+                    <p class="text-txt-secondary text-xs mt-2 leading-relaxed">'주목할 젊은 건축가 10팀' 선정.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: TEAM | MOVE: M-LAY-ALTERNATING-ROWS -->
+<!-- COMPONENT_REF: alternating-typo5-img7-order-swap | GRADE: A | MODE: adapted | SNIPPET_PATH: alternating-rows/alternating-typo5-img7-order-swap-reference.html | FIDELITY: 75% -->
+<!-- ============================================== -->
+<section id="team" class="fade-in-section w-full bg-page" aria-label="Team">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
+        <span class="text-[11px] uppercase tracking-[0.2em] text-txt-muted font-sans block mb-4">Team</span>
+        <h2 class="font-serif text-3xl md:text-4xl font-semibold leading-[1.15] text-accent tracking-tight mb-16">
+            사람들
+        </h2>
+
+        <!-- Principal Architect: Text 5 + Image 7 -->
+        <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center mb-16">
+            <div class="col-span-12 md:col-span-5">
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">Principal Architect · KIRA</span>
+                <h3 class="font-serif text-2xl md:text-3xl font-semibold text-accent mt-3 mb-4">이재원</h3>
+                <p class="text-txt-secondary text-sm leading-[1.85] max-w-[320px]">
+                    서울대 건축학과, AA School(런던) 졸업.
+                    15년간 주거와 문화공간을 넘나들며
+                    "살아있는 공간"을 설계해왔습니다.
+                </p>
+                <p class="text-txt-muted text-xs mt-4">KIRA 등록건축사 제 A-4821호</p>
+            </div>
+            <div class="col-span-12 md:col-span-7">
+                <div class="aspect-[4/3] overflow-hidden">
+                    <img src="./images/program_11.jpg"
+                         alt="Architecture team working in studio"
+                         class="w-full h-full object-cover" loading="lazy" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Team members -->
+        <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center">
+            <div class="col-span-12 md:col-span-6 order-2 md:order-1">
+                <div class="aspect-[4/3] overflow-hidden">
+                    <img src="./images/team_1.jpg"
+                         alt="Modern architecture studio workspace"
+                         class="w-full h-full object-cover" loading="lazy" />
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-5 md:col-start-8 order-1 md:order-2">
+                <span class="text-[10px] uppercase tracking-[0.15em] text-txt-muted font-sans">The Team</span>
+                <h3 class="font-serif text-xl md:text-2xl font-semibold text-accent mt-3 mb-4">함께 만드는 사람들</h3>
+                <div class="space-y-4 mt-6">
+                    <div class="border-t border-border-default pt-3">
+                        <p class="text-sm font-medium text-accent">박서연</p>
+                        <p class="text-xs text-txt-muted">Design Director · 홍익대 건축학과, 12년 경력</p>
+                    </div>
+                    <div class="border-t border-border-default pt-3">
+                        <p class="text-sm font-medium text-accent">김태호</p>
+                        <p class="text-xs text-txt-muted">Project Manager · 한양대 건축공학과, 8년 경력</p>
+                    </div>
+                    <div class="border-t border-border-default pt-3">
+                        <p class="text-sm font-medium text-accent">정민지</p>
+                        <p class="text-xs text-txt-muted">Project Manager · 연세대 건축학과, 6년 경력</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- SECTION: CONTACT + CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+<!-- COMPONENT_REF: footer-get-in-touch | GRADE: A | MODE: adapted | SNIPPET_PATH: cta-footer/footer-get-in-touch-reference.html | FIDELITY: 80% -->
+<!-- ============================================== -->
+<section id="contact" class="relative w-full min-h-[70vh] flex items-center" aria-label="Contact">
+    <img src="./images/cta.jpg"
+         alt="Architectural interior with dramatic natural light"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12">
+            <!-- Left: CTA Text -->
+            <div class="col-span-12 lg:col-span-5">
+                <span class="text-[11px] uppercase tracking-[0.2em] text-white/50 font-sans block mb-4">Get in Touch</span>
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white tracking-tight">
+                    프로젝트를<br>시작하세요
+                </h2>
+                <p class="text-white/60 text-sm leading-relaxed mt-6 max-w-[360px]">
+                    새로운 공간에 대한 이야기를 들려주세요.<br class="hidden sm:block">
+                    커피 한 잔과 함께 시작합니다.
+                </p>
+                <div class="mt-10 space-y-3 text-white/50 text-xs font-sans">
+                    <div class="flex items-center gap-3">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>서울 용산구 한남대로 42길 18, 3층</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span>02-796-0421</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span>hello@studioarchive.kr</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="col-span-12 lg:col-span-6 lg:col-start-7">
+                <form class="space-y-5" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-sans block mb-2">이름</label>
+                            <input type="text" id="name" placeholder="홍길동"
+                                   class="w-full bg-transparent border-b border-white/30 text-white text-sm pb-3 placeholder-white/20 focus:outline-none focus:border-white/60" />
+                        </div>
+                        <div>
+                            <label for="email" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-sans block mb-2">이메일</label>
+                            <input type="email" id="email" placeholder="email@example.com"
+                                   class="w-full bg-transparent border-b border-white/30 text-white text-sm pb-3 placeholder-white/20 focus:outline-none focus:border-white/60" />
+                        </div>
+                    </div>
+                    <div>
+                        <label for="project-type" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-sans block mb-2">프로젝트 유형</label>
+                        <select id="project-type" class="w-full bg-transparent border-b border-white/30 text-white/60 text-sm pb-3 focus:outline-none focus:border-white/60">
+                            <option value="" class="text-accent">선택해주세요</option>
+                            <option value="residential" class="text-accent">주거</option>
+                            <option value="commercial" class="text-accent">상업</option>
+                            <option value="cultural" class="text-accent">문화</option>
+                            <option value="renovation" class="text-accent">리노베이션</option>
+                            <option value="other" class="text-accent">기타</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-sans block mb-2">프로젝트 개요</label>
+                        <textarea id="message" rows="4" placeholder="프로젝트에 대해 알려주세요"
+                                  class="w-full bg-transparent border-b border-white/30 text-white text-sm pb-3 placeholder-white/20 focus:outline-none focus:border-white/60 resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="mt-4 bg-white text-accent text-[11px] uppercase tracking-[0.15em] font-sans px-10 py-4 hover:bg-white/90 active:scale-95 transition-all">
+                        프로젝트 문의하기
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="w-full bg-accent">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-sm text-white/50 italic">Studio Archive — 공간에 이야기를 설계하다</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-[10px] text-white/40 hover:text-white uppercase tracking-wider font-sans" aria-label="Instagram">IG</a>
+                <a href="#" class="text-[10px] text-white/40 hover:text-white uppercase tracking-wider font-sans" aria-label="LinkedIn">LI</a>
+                <a href="#" class="text-[10px] text-white/40 hover:text-white uppercase tracking-wider font-sans" aria-label="Behance">BE</a>
+            </div>
+            <div>
+                <span class="text-[10px] text-white/30 font-sans">© 2024 Studio Archive. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</main>
+
+<script>
+    // Intersection Observer for scroll animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.stagger-item').forEach((el, index) => {
+        const parent = el.closest('.grid, .space-y-0');
+        if (parent) {
+            const siblings = Array.from(parent.querySelectorAll(':scope > .stagger-item'));
+            const i = siblings.indexOf(el);
+            el.style.transitionDelay = (i >= 0 ? i : index) * 0.1 + 's';
+        } else {
+            el.style.transitionDelay = index * 0.1 + 's';
+        }
+        observer.observe(el);
+    });
+
+    // Sticky Steps — highlight active step on scroll
+    const stepContents = document.querySelectorAll('.step-content');
+    const processImages = [
+        './images/program_1.jpg',
+        './images/program_13.jpg',
+        './images/program_14.jpg',
+        './images/program_15.jpg',
+        './images/program_16.jpg'
+    ];
+    const processImg = document.getElementById('process-image');
+
+    const stepObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                stepContents.forEach(s => s.classList.remove('active'));
+                entry.target.classList.add('active');
+                const stepIndex = parseInt(entry.target.dataset.step);
+                if (processImg && processImages[stepIndex]) {
+                    processImg.style.opacity = '0';
+                    setTimeout(() => {
+                        processImg.src = processImages[stepIndex];
+                        processImg.style.opacity = '1';
+                    }, 250);
+                }
+            }
+        });
+    }, { threshold: 0.6, rootMargin: '-100px 0px -100px 0px' });
+
+    stepContents.forEach(el => stepObserver.observe(el));
+    if (stepContents.length > 0) stepContents[0].classList.add('active');
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+    }
+
+    // Nav scroll behavior — add border on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('border-b', 'border-border-default');
+        } else {
+            header.classList.remove('border-b', 'border-border-default');
+        }
+    });
+
+    // Reduced motion guard
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            el.classList.add('animate-in');
+            el.style.transition = 'none';
+        });
+        stepContents.forEach(s => s.classList.add('active'));
+    }
+</script>
+
+</body>
+</html>

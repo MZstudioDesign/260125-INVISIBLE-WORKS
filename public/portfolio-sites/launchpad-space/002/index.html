@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>런치패드 스페이스 — 아이디어가 출발하는 공간</title>
+  <meta name="description" content="성수동 스타트업 코워킹 스페이스. 핫데스크부터 프라이빗 오피스까지, 당신의 팀이 성장할 공간을 제공합니다.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="런치패드 스페이스 — 아이디어가 출발하는 공간">
+  <meta property="og:description" content="성수동 스타트업 코워킹 스페이스. 핫데스크부터 프라이빗 오피스까지.">
+  <meta property="og:image" content="./images/hero.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Inter', 'sans-serif'],
+            body: ['Noto Sans KR', 'sans-serif'],
+          },
+          colors: {
+            navy: '#0F172A',
+            'navy-light': '#1E293B',
+            sky: '#38BDF8',
+            'sky-hover': '#0EA5E9',
+            'sky-dark': '#0284C7',
+            surface: '#F8FAFC',
+            'text-primary': '#0F172A',
+            'text-secondary': '#334155',
+            'text-muted': '#64748B',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --color-bg: #F8FAFC;
+      --color-bg-section: #0F172A;
+      --color-text: #0F172A;
+      --color-text-secondary: #334155;
+      --color-text-muted: #64748B;
+      --color-text-on-dark: #F1F5F9;
+      --color-accent: #38BDF8;
+      --color-accent-hover: #0EA5E9;
+      --color-accent-dark: #0284C7;
+      --color-accent-text: #0F172A;
+      --font-heading: 'Inter', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+      --font-size-hero: clamp(2.75rem, 5.5vw, 4.5rem);
+      --font-size-h2: clamp(1.875rem, 3.5vw, 2.75rem);
+      --font-size-h3: clamp(1.125rem, 2vw, 1.5rem);
+      --font-size-body: 1rem;
+      --font-size-small: 0.8125rem;
+      --section-py: 96px;
+      --section-px: 48px;
+      --radius-card: 16px;
+      --radius-button: 12px;
+      --border-color: #E2E8F0;
+      --border-dark: #334155;
+      --max-w-content: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .stagger-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-section, .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      padding: 8px 16px;
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      z-index: 999;
+      font-weight: 600;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      border-radius: var(--radius-button);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3);
+    }
+    .btn-primary:active { transform: scale(0.95); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: transparent;
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      border-radius: var(--radius-button);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+    }
+
+    .btn-on-dark {
+      border-color: #F1F5F9;
+      color: #F1F5F9;
+    }
+    .btn-on-dark:hover {
+      background: #F1F5F9;
+      color: var(--color-bg-section);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">본문으로 건너뛰기</a>
+
+  <!-- HEADER / NAV -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-navy/90 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16">
+      <a href="#" class="font-heading font-800 text-white text-lg tracking-tight">
+        LAUNCHPAD<span class="text-sky">.</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-body text-gray-300">
+        <a href="#spaces" class="hover:text-white transition-colors">공간</a>
+        <a href="#community" class="hover:text-white transition-colors">커뮤니티</a>
+        <a href="#amenities" class="hover:text-white transition-colors">시설</a>
+        <a href="#pricing" class="hover:text-white transition-colors">요금</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      </nav>
+      <a href="#cta-final" class="btn-primary text-sm py-2 px-5">입주 문의</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: HERO — Full-Bleed Overlay (Bottom-Aligned) -->
+    <!-- MOVE: M-HERO-FULLBLEED-OVERLAY -->
+    <!-- COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 90% -->
+    <!-- ============================================================ -->
+    <section class="relative w-full min-h-screen">
+      <img src="./images/hero.jpg" alt="런치패드 스페이스 오픈 라운지" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/40 to-navy/15"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+        <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-body">Seongsu-dong, Seoul</p>
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+          아이디어가<br>현실이 되는<br>그 순간
+        </h1>
+        <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+          런치패드 스페이스에서 당신의 팀이 다음 단계로 나아갑니다.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#pricing" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-navy transition-colors">
+            요금 확인하기
+          </a>
+          <a href="#spaces" class="bg-sky text-navy px-8 py-3 text-sm uppercase tracking-[0.15em] font-medium hover:bg-sky-hover transition-colors">공간 둘러보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: SPACE TYPES — Alternating Rows (Editorial) -->
+    <!-- MOVE: M-LAY-ALTERNATING-ROWS -->
+    <!-- COMPONENT_REF: alternating-product-editorial-dark | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-product-editorial-dark-reference.html | FIDELITY: 75% -->
+    <!-- ============================================================ -->
+    <section id="spaces" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Space Types</p>
+        <h2 class="font-heading font-700 text-text-primary mb-4" style="font-size: var(--font-size-h2);">
+          당신에게 맞는 공간을<br class="hidden sm:block">선택하세요
+        </h2>
+        <p class="text-text-muted font-body max-w-[480px] mb-16 leading-relaxed">
+          자유로운 핫데스크부터 프라이빗 오피스까지,<br class="hidden sm:block">
+          팀 규모와 워크스타일에 딱 맞는 옵션을 제공합니다.
+        </p>
+
+        <!-- Row 1: Image Left (7) + Text Right (5) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20 stagger-item">
+          <div class="lg:col-span-7">
+            <img src="./images/space_hotdesk.jpg" alt="오픈 핫데스크 공간" class="w-full h-[360px] object-cover rounded-2xl" loading="lazy">
+          </div>
+          <div class="lg:col-span-5">
+            <span class="inline-block px-3 py-1 bg-sky/10 text-sky text-xs font-heading font-600 rounded-full mb-4">Hot Desk</span>
+            <h3 class="font-heading font-700 text-xl mb-3">핫데스크</h3>
+            <p class="text-text-secondary font-body leading-relaxed mb-4">
+              매일 다른 자리에서 새로운 영감을 받으세요.<br>
+              자유석 기반의 오픈 워크스페이스입니다.
+            </p>
+            <p class="font-heading font-700 text-2xl text-navy">₩250,000<span class="text-text-muted text-sm font-400">/월</span></p>
+          </div>
+        </div>
+
+        <!-- Row 2: Text Left (5) + Image Right (7) — Reversed -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20 stagger-item">
+          <div class="lg:col-span-5 lg:order-1 order-2">
+            <span class="inline-block px-3 py-1 bg-sky/10 text-sky text-xs font-heading font-600 rounded-full mb-4">Dedicated Desk</span>
+            <h3 class="font-heading font-700 text-xl mb-3">고정석</h3>
+            <p class="text-text-secondary font-body leading-relaxed mb-4">
+              나만의 자리에서 집중하세요.<br>
+              개인 수납공간과 함께 제공됩니다.
+            </p>
+            <p class="font-heading font-700 text-2xl text-navy">₩400,000<span class="text-text-muted text-sm font-400">/월</span></p>
+          </div>
+          <div class="lg:col-span-7 lg:order-2 order-1">
+            <img src="./images/space_dedicated.jpg" alt="고정석 작업 공간" class="w-full h-[360px] object-cover rounded-2xl" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Row 3: Image Left (7) + Text Right (5) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20 stagger-item">
+          <div class="lg:col-span-7">
+            <img src="./images/space_private.jpg" alt="프라이빗 오피스" class="w-full h-[360px] object-cover rounded-2xl" loading="lazy">
+          </div>
+          <div class="lg:col-span-5">
+            <span class="inline-block px-3 py-1 bg-sky/10 text-sky text-xs font-heading font-600 rounded-full mb-4">Private Office</span>
+            <h3 class="font-heading font-700 text-xl mb-3">프라이빗 오피스</h3>
+            <p class="text-text-secondary font-body leading-relaxed mb-4">
+              팀만의 독립된 공간에서 몰입하세요.<br>
+              4인부터 맞춤 구성이 가능합니다.
+            </p>
+            <p class="font-heading font-700 text-2xl text-navy">₩1,600,000<span class="text-text-muted text-sm font-400">/월 (4인 기준)</span></p>
+          </div>
+        </div>
+
+        <!-- Row 4: Text Left (5) + Image Right (7) — Reversed -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center stagger-item">
+          <div class="lg:col-span-5 lg:order-1 order-2">
+            <span class="inline-block px-3 py-1 bg-sky/10 text-sky text-xs font-heading font-600 rounded-full mb-4">Meeting Room</span>
+            <h3 class="font-heading font-700 text-xl mb-3">미팅룸</h3>
+            <p class="text-text-secondary font-body leading-relaxed mb-4">
+              프레젠테이션, 화상회의, 브레인스토밍.<br>
+              시간 단위로 유연하게 이용하세요.
+            </p>
+            <p class="font-heading font-700 text-2xl text-navy">₩30,000<span class="text-text-muted text-sm font-400">/시간</span></p>
+          </div>
+          <div class="lg:col-span-7 lg:order-2 order-1">
+            <img src="./images/space_meeting.jpg" alt="미팅룸 내부" class="w-full h-[360px] object-cover rounded-2xl" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: COMMUNITY — Full-bleed Divider -->
+    <!-- MOVE: M-DIV-FULLBLEED-IMAGE -->
+    <!-- COMPONENT_REF: custom full-bleed | GRADE: — | MODE: fallback -->
+    <!-- ============================================================ -->
+    <section class="fade-in-section relative w-full min-h-[70vh] flex items-center">
+      <img src="./images/community.jpg" alt="런치패드 커뮤니티 네트워킹 이벤트" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-sky-dark/80"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+        <p class="text-white/60 font-heading font-600 text-sm tracking-widest uppercase mb-6">Community</p>
+        <h2 class="text-white font-heading font-700 mb-6" style="font-size: var(--font-size-h2);">
+          혼자 만드는 것보다<br>함께 만드는 것이 빠릅니다
+        </h2>
+        <p class="text-white/80 font-body text-lg max-w-[560px] mx-auto leading-relaxed mb-10">
+          데모데이, 네트워킹 나이트, 멘토 매칭까지.<br class="hidden sm:block">
+          런치패드의 커뮤니티가 당신의 성장을 가속합니다.
+        </p>
+        <div class="flex flex-wrap justify-center gap-8 text-white">
+          <div class="stagger-item">
+            <div class="flex items-center gap-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="font-heading font-700 text-lg">네트워킹 나이트</span>
+            </div>
+            <p class="text-white/60 text-sm">매월 마지막 목요일</p>
+          </div>
+          <div class="stagger-item">
+            <div class="flex items-center gap-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span class="font-heading font-700 text-lg">데모데이</span>
+            </div>
+            <p class="text-white/60 text-sm">분기별 IR 피칭</p>
+          </div>
+          <div class="stagger-item">
+            <div class="flex items-center gap-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span class="font-heading font-700 text-lg">멘토 매칭</span>
+            </div>
+            <p class="text-white/60 text-sm">현업 전문가 1:1</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: ONBOARDING PROCESS — Accordion Numbered Facts -->
+    <!-- MOVE: M-LAY-EDITORIAL-STORY -->
+    <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 75% -->
+    <!-- ============================================================ -->
+    <section id="process" class="fade-in-section w-full bg-navy" style="padding: var(--section-py) 0;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+          <!-- Left: Title + Images (5 cols) -->
+          <div class="lg:col-span-5">
+            <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Onboarding</p>
+            <h2 class="text-white font-heading font-700 mb-6" style="font-size: var(--font-size-h2);">
+              입주까지<br>4단계면 충분합니다
+            </h2>
+            <p class="text-gray-400 font-body leading-relaxed mb-8 max-w-[360px]">
+              복잡한 절차 없이, 빠르게 공간을 시작하세요.<br>
+              최단 3일 내 입주가 가능합니다.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+              <img src="./images/onboarding.jpg" alt="입주 상담 장면" class="w-full h-[180px] object-cover rounded-xl" loading="lazy">
+              <img src="./images/lounge.jpg" alt="라운지 전경" class="w-full h-[180px] object-cover rounded-xl" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Right: Accordion Steps (7 cols) -->
+          <div class="lg:col-span-7 flex flex-col gap-0">
+            <!-- Step 1 -->
+            <div class="border-b border-white/10">
+              <button class="faq-toggle w-full flex items-center justify-between py-6 text-left" aria-expanded="true">
+                <div class="flex items-center gap-5">
+                  <span class="text-sky font-heading font-700 text-2xl">01</span>
+                  <span class="text-white font-heading font-600 text-lg">온라인 투어 신청</span>
+                </div>
+                <svg class="faq-icon text-gray-500 transition-transform duration-300 rotate-45" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              </button>
+              <div class="faq-answer open">
+                <p class="text-gray-400 font-body leading-relaxed pl-14 max-w-[480px]">
+                  웹사이트에서 희망 날짜를 선택하면 커뮤니티 매니저가 맞춤 투어를 안내합니다. 비대면 화상 투어도 가능합니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="border-b border-white/10">
+              <button class="faq-toggle w-full flex items-center justify-between py-6 text-left" aria-expanded="false">
+                <div class="flex items-center gap-5">
+                  <span class="text-sky font-heading font-700 text-2xl">02</span>
+                  <span class="text-white font-heading font-600 text-lg">공간 컨설팅</span>
+                </div>
+                <svg class="faq-icon text-gray-500 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-gray-400 font-body leading-relaxed pl-14 max-w-[480px]">
+                  팀 인원, 업무 스타일, 예산에 맞는 최적의 공간 타입을 제안드립니다. 맞춤 레이아웃 구성도 가능합니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="border-b border-white/10">
+              <button class="faq-toggle w-full flex items-center justify-between py-6 text-left" aria-expanded="false">
+                <div class="flex items-center gap-5">
+                  <span class="text-sky font-heading font-700 text-2xl">03</span>
+                  <span class="text-white font-heading font-600 text-lg">계약 및 세팅</span>
+                </div>
+                <svg class="faq-icon text-gray-500 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-gray-400 font-body leading-relaxed pl-14 max-w-[480px]">
+                  전자계약으로 간편하게 진행됩니다. 네임플레이트, 사물함 키, Wi-Fi 설정까지 입주 전 모두 준비해 드립니다.
+                </p>
+              </div>
+            </div>
+            <!-- Step 4 -->
+            <div>
+              <button class="faq-toggle w-full flex items-center justify-between py-6 text-left" aria-expanded="false">
+                <div class="flex items-center gap-5">
+                  <span class="text-sky font-heading font-700 text-2xl">04</span>
+                  <span class="text-white font-heading font-600 text-lg">입주 & 커뮤니티 온보딩</span>
+                </div>
+                <svg class="faq-icon text-gray-500 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p class="text-gray-400 font-body leading-relaxed pl-14 max-w-[480px]">
+                  입주 첫 날, 커뮤니티 매니저가 시설 안내와 함께 입주 스타트업을 소개합니다. 슬랙 채널에도 초대됩니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: AMENITIES — Asymmetric Impact Cards (3:5:4) -->
+    <!-- MOVE: M-LAY-ASYM-GRID -->
+    <!-- COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 75% -->
+    <!-- ============================================================ -->
+    <section id="amenities" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Amenities</p>
+        <h2 class="font-heading font-700 text-text-primary mb-16" style="font-size: var(--font-size-h2);">
+          일하기 좋은 환경,<br class="hidden sm:block">빠짐없이 갖췄습니다
+        </h2>
+
+        <!-- Row 1: 3:5:4 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-5">
+          <div class="md:col-span-3 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">24/7 출입</h3>
+            <p class="text-text-muted text-sm leading-relaxed">새벽 작업도, 주말 미팅도 자유롭게</p>
+          </div>
+          <div class="md:col-span-5 stagger-item rounded-2xl overflow-hidden relative">
+            <img src="./images/lounge.jpg" alt="런치패드 라운지" class="w-full h-[240px] object-cover" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <p class="absolute bottom-5 left-6 text-white font-heading font-600">커뮤니티 라운지</p>
+          </div>
+          <div class="md:col-span-4 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">기가비트 인터넷</h3>
+            <p class="text-text-muted text-sm leading-relaxed">기업용 전용회선, 끊김 없는 속도</p>
+          </div>
+        </div>
+
+        <!-- Row 2: 5:3:4 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-5">
+          <div class="md:col-span-5 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">무료 커피 & 음료</h3>
+            <p class="text-text-muted text-sm leading-relaxed">스페셜티 원두의 드립 커피와 차를 무제한으로 즐기세요</p>
+          </div>
+          <div class="md:col-span-3 stagger-item rounded-2xl overflow-hidden relative">
+            <img src="./images/phone_booth.jpg" alt="1인 폰부스" class="w-full h-[240px] object-cover" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <p class="absolute bottom-5 left-6 text-white font-heading font-600 text-sm">폰부스</p>
+          </div>
+          <div class="md:col-span-4 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">우편물 수령</h3>
+            <p class="text-text-muted text-sm leading-relaxed">사업자 등록 주소지 제공, 우편물 보관</p>
+          </div>
+        </div>
+
+        <!-- Row 3: 4:4:4 — break with different content types -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <div class="md:col-span-4 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">프린터 & 스캐너</h3>
+            <p class="text-text-muted text-sm leading-relaxed">복합기 무제한 사용</p>
+          </div>
+          <div class="md:col-span-4 stagger-item bg-sky/10 rounded-2xl p-7 flex flex-col items-center justify-center text-center">
+            <span class="text-sky font-heading font-800 text-4xl mb-2">6+</span>
+            <p class="text-navy font-heading font-600">편의시설 카테고리</p>
+            <p class="text-text-muted text-sm mt-1">샤워실, 락커룸, 낮잠방 등</p>
+          </div>
+          <div class="md:col-span-4 stagger-item bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4"><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/><path d="M14 12v.01"/></svg>
+            <h3 class="font-heading font-700 text-lg mb-2">이벤트 스페이스</h3>
+            <p class="text-text-muted text-sm leading-relaxed">최대 80인 수용 가능</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: RESIDENT STARTUPS — Staggered 3col Portfolio -->
+    <!-- MOVE: M-LAY-EDITORIAL-FEATURE -->
+    <!-- COMPONENT_REF: staggered-3col-portfolio-5-4-3 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-3col-portfolio-5-4-3-reference.html | FIDELITY: 75% -->
+    <!-- ============================================================ -->
+    <section class="fade-in-section w-full bg-white" style="padding: var(--section-py) 0;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+          <div>
+            <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Residents</p>
+            <h2 class="font-heading font-700 text-text-primary" style="font-size: var(--font-size-h2);">
+              여기서 시작한 팀들
+            </h2>
+          </div>
+          <p class="text-text-muted font-body max-w-[400px] mt-4 lg:mt-0 leading-relaxed">
+            런치패드에서 성장해 나간 스타트업들의<br>이야기를 만나보세요.
+          </p>
+        </div>
+
+        <!-- Staggered 3-col: 5 + 4 + 3 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Col 1: span-5, no offset -->
+          <div class="md:col-span-5 stagger-item">
+            <div class="rounded-2xl overflow-hidden mb-5">
+              <img src="./images/startup_1.jpg" alt="그린바이트 팀" class="w-full h-[340px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <span class="inline-block px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-heading font-600 rounded-full mb-3">FoodTech</span>
+            <h3 class="font-heading font-700 text-lg mb-2">그린바이트</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              식물성 단백질 밀키트 구독 서비스. 런치패드 입주 8개월 만에 시리즈 A 투자 유치에 성공했습니다.
+            </p>
+          </div>
+
+          <!-- Col 2: span-4, offset top -->
+          <div class="md:col-span-4 md:mt-16 stagger-item">
+            <div class="rounded-2xl overflow-hidden mb-5">
+              <img src="./images/startup_2.jpg" alt="플로우AI 팀" class="w-full h-[340px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-heading font-600 rounded-full mb-3">AI/SaaS</span>
+            <h3 class="font-heading font-700 text-lg mb-2">플로우AI</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              AI 기반 업무 자동화 플랫폼. 데모데이에서 파트너사를 만나 첫 엔터프라이즈 계약을 체결했습니다.
+            </p>
+          </div>
+
+          <!-- Col 3: span-3, larger offset -->
+          <div class="md:col-span-3 md:mt-32 stagger-item">
+            <div class="rounded-2xl overflow-hidden mb-5">
+              <img src="./images/startup_3.jpg" alt="핏커넥트 팀" class="w-full h-[280px] object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+            </div>
+            <span class="inline-block px-3 py-1 bg-orange-50 text-orange-600 text-xs font-heading font-600 rounded-full mb-3">HealthTech</span>
+            <h3 class="font-heading font-700 text-lg mb-2">핏커넥트</h3>
+            <p class="text-text-secondary font-body text-sm leading-relaxed">
+              피트니스 매칭 앱. 멘토 매칭 프로그램을 통해 제품 피봇에 성공했습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 7: PRICING — Dark Background Cards -->
+    <!-- MOVE: M-TRUST-PRICING-TABLE -->
+    <!-- COMPONENT_REF: custom pricing | GRADE: — | MODE: fallback -->
+    <!-- ============================================================ -->
+    <section id="pricing" class="fade-in-section w-full bg-navy" style="padding: var(--section-py) 0;">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="text-center mb-16">
+          <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Pricing</p>
+          <h2 class="text-white font-heading font-700 mb-4" style="font-size: var(--font-size-h2);">
+            투명한 요금,<br class="hidden sm:block">숨겨진 비용 없이
+          </h2>
+          <p class="text-gray-400 font-body max-w-[480px] mx-auto leading-relaxed">
+            모든 요금에는 인터넷, 커피, 커뮤니티 이벤트가 포함됩니다.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Hot Desk -->
+          <div class="stagger-item bg-navy-light rounded-2xl p-7 border border-white/10 hover:border-sky/30 transition-colors">
+            <h3 class="text-white font-heading font-600 text-lg mb-1">핫데스크</h3>
+            <p class="text-gray-500 text-sm mb-6">자유석 · 오픈 공간</p>
+            <p class="text-white font-heading font-800 text-3xl mb-1">₩250,000</p>
+            <p class="text-gray-500 text-sm mb-8">/월 (VAT 별도)</p>
+            <ul class="space-y-3 text-gray-400 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                24/7 출입
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                커뮤니티 이벤트
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                무료 커피 · 음료
+              </li>
+            </ul>
+            <a href="#cta-final" class="btn-secondary btn-on-dark w-full justify-center text-sm py-3">자리 확인하기</a>
+          </div>
+
+          <!-- Dedicated Desk -->
+          <div class="stagger-item bg-navy-light rounded-2xl p-7 border border-white/10 hover:border-sky/30 transition-colors">
+            <h3 class="text-white font-heading font-600 text-lg mb-1">고정석</h3>
+            <p class="text-gray-500 text-sm mb-6">지정석 · 개인 수납</p>
+            <p class="text-white font-heading font-800 text-3xl mb-1">₩400,000</p>
+            <p class="text-gray-500 text-sm mb-8">/월 (VAT 별도)</p>
+            <ul class="space-y-3 text-gray-400 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                핫데스크 포함 혜택 전부
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                개인 락커
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                우편물 수령
+              </li>
+            </ul>
+            <a href="#cta-final" class="btn-secondary btn-on-dark w-full justify-center text-sm py-3">자리 확인하기</a>
+          </div>
+
+          <!-- Private Office — Popular -->
+          <div class="stagger-item bg-sky/10 rounded-2xl p-7 border-2 border-sky relative">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-sky text-navy text-xs font-heading font-700 px-4 py-1 rounded-full">POPULAR</span>
+            <h3 class="text-white font-heading font-600 text-lg mb-1">프라이빗 오피스</h3>
+            <p class="text-gray-400 text-sm mb-6">독립 공간 · 4인 기준</p>
+            <p class="text-sky font-heading font-800 text-3xl mb-1">₩1,600,000</p>
+            <p class="text-gray-400 text-sm mb-8">/월 (VAT 별도)</p>
+            <ul class="space-y-3 text-gray-300 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                고정석 포함 혜택 전부
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                사업자 등록 주소
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                미팅룸 월 10시간 무료
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                멘토 매칭 우선
+              </li>
+            </ul>
+            <a href="#cta-final" class="btn-primary w-full justify-center text-sm py-3">입주 문의하기</a>
+          </div>
+
+          <!-- Meeting Room -->
+          <div class="stagger-item bg-navy-light rounded-2xl p-7 border border-white/10 hover:border-sky/30 transition-colors">
+            <h3 class="text-white font-heading font-600 text-lg mb-1">미팅룸</h3>
+            <p class="text-gray-500 text-sm mb-6">6인실 · 시간 단위</p>
+            <p class="text-white font-heading font-800 text-3xl mb-1">₩30,000</p>
+            <p class="text-gray-500 text-sm mb-8">/시간 (VAT 별도)</p>
+            <ul class="space-y-3 text-gray-400 text-sm mb-8">
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                화이트보드 · 모니터
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                화상회의 장비
+              </li>
+              <li class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                비회원도 이용 가능
+              </li>
+            </ul>
+            <a href="#cta-final" class="btn-secondary btn-on-dark w-full justify-center text-sm py-3">예약하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 8: KEY COLOR CTA — Sky Blue Band -->
+    <!-- MOVE: M-RHYTHM-KEY-COLOR-CTA -->
+    <!-- COMPONENT_REF: custom key color CTA | GRADE: — | MODE: fallback -->
+    <!-- ============================================================ -->
+    <section class="fade-in-section relative w-full min-h-[50vh] flex items-center">
+      <img src="./images/key_color_cta.jpg" alt="런치패드 스페이스 작업 분위기" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-sky-dark/85"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+        <h2 class="text-white font-heading font-700 mb-4" style="font-size: var(--font-size-h2);">
+          지금 빈자리 확인하기
+        </h2>
+        <p class="text-white/80 font-body text-lg max-w-[480px] mx-auto leading-relaxed mb-8">
+          성수동 코워킹 스페이스 런치패드.<br class="hidden sm:block">
+          자리가 나면 빠르게 마감됩니다.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#cta-final" class="btn-primary bg-white text-navy hover:bg-gray-100">
+            무료 투어 신청
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="tel:02-6789-0123" class="btn-secondary btn-on-dark">02-6789-0123</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 9: FAQ — Accordion -->
+    <!-- MOVE: M-INTERACTION-ACCORDION -->
+    <!-- COMPONENT_REF: custom accordion | GRADE: — | MODE: fallback -->
+    <!-- ============================================================ -->
+    <section id="faq" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+      <div class="max-w-[800px] mx-auto px-6 md:px-8 lg:px-12">
+        <div class="text-center mb-16">
+          <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">FAQ</p>
+          <h2 class="font-heading font-700 text-text-primary" style="font-size: var(--font-size-h2);">
+            자주 묻는 질문
+          </h2>
+        </div>
+
+        <div class="space-y-0">
+          <!-- Q1 -->
+          <div class="border-b border-gray-200">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+              <span class="font-heading font-600 text-text-primary">최소 계약 기간은 어떻게 되나요?</span>
+              <svg class="faq-icon text-text-muted transition-transform duration-300 flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p class="text-text-secondary font-body leading-relaxed">핫데스크와 고정석은 최소 1개월, 프라이빗 오피스는 최소 3개월입니다. 장기 계약 시 할인 혜택이 있으며, 6개월 이상 계약 시 1개월 무료 혜택을 드립니다.</p>
+            </div>
+          </div>
+          <!-- Q2 -->
+          <div class="border-b border-gray-200">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+              <span class="font-heading font-600 text-text-primary">24시간 출입이 정말 가능한가요?</span>
+              <svg class="faq-icon text-text-muted transition-transform duration-300 flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p class="text-text-secondary font-body leading-relaxed">네, 모든 멤버에게 개인 출입 카드를 제공하며 365일 24시간 자유롭게 이용 가능합니다. 심야 시간대(22:00~06:00)에도 보안 요원이 상주합니다.</p>
+            </div>
+          </div>
+          <!-- Q3 -->
+          <div class="border-b border-gray-200">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+              <span class="font-heading font-600 text-text-primary">외부 방문객 출입이 가능한가요?</span>
+              <svg class="faq-icon text-text-muted transition-transform duration-300 flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p class="text-text-secondary font-body leading-relaxed">멤버 동반 시 방문객 출입이 가능합니다. 1층 리셉션에서 방문자 등록 후 입장하며, 일일 방문자 패스도 별도 발급 가능합니다.</p>
+            </div>
+          </div>
+          <!-- Q4 -->
+          <div class="border-b border-gray-200">
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+              <span class="font-heading font-600 text-text-primary">주차 지원이 되나요?</span>
+              <svg class="faq-icon text-text-muted transition-transform duration-300 flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p class="text-text-secondary font-body leading-relaxed">건물 내 지하 주차장을 이용할 수 있으며, 프라이빗 오피스 입주사에는 월 1대 무료 주차권을 제공합니다. 추가 주차는 월 ₩100,000입니다.</p>
+            </div>
+          </div>
+          <!-- Q5 -->
+          <div>
+            <button class="faq-toggle w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
+              <span class="font-heading font-600 text-text-primary">사업자 등록 주소로 사용할 수 있나요?</span>
+              <svg class="faq-icon text-text-muted transition-transform duration-300 flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p class="text-text-secondary font-body leading-relaxed">고정석 이상 요금제에서 사업자 등록 주소 사용이 가능합니다. 우편물 수령 및 보관 서비스도 함께 제공됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 10: FOOTER CTA + FOOTER — Dark Minimal -->
+    <!-- MOVE: M-CTA-FULLBLEED-FINAL -->
+    <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 75% -->
+    <!-- ============================================================ -->
+    <section id="cta-final" class="relative w-full min-h-[60vh] flex items-center">
+      <img src="./images/cta_final.jpg" alt="런치패드 스페이스 건물 외관" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-navy/80"></div>
+      <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Left: CTA -->
+          <div class="lg:col-span-7">
+            <h2 class="text-white font-heading font-700 mb-4" style="font-size: var(--font-size-h2);">
+              다음 챕터를 시작할<br>준비가 되셨나요?
+            </h2>
+            <p class="text-gray-400 font-body text-lg leading-relaxed max-w-[480px] mb-8">
+              무료 투어를 신청하시면 커뮤니티 매니저가<br class="hidden sm:block">
+              맞춤 공간 컨설팅을 해 드립니다.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="mailto:hello@launchpad.space" class="btn-primary">
+                무료 투어 신청하기
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+              <a href="tel:02-6789-0123" class="btn-secondary btn-on-dark">전화 문의</a>
+            </div>
+          </div>
+          <!-- Right: Contact Info -->
+          <div class="lg:col-span-5">
+            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+              <h3 class="text-white font-heading font-600 text-lg mb-6">Contact</h3>
+              <div class="space-y-4 text-gray-400 font-body text-sm">
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>서울특별시 성동구 성수이로 77<br>런치패드빌딩 2-5층</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>02-6789-0123</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <span>hello@launchpad.space</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                  <span>커뮤니티 매니저 김서연</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-navy border-t border-white/10">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <p class="font-heading font-800 text-white text-lg mb-2">LAUNCHPAD<span class="text-sky">.</span></p>
+          <p class="text-gray-500 text-sm font-body">© 2026 런치패드 스페이스. All rights reserved.</p>
+        </div>
+        <div class="flex items-center gap-6 text-gray-500 text-sm font-body">
+          <a href="#" class="hover:text-white transition-colors">이용약관</a>
+          <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+          <a href="#" class="hover:text-white transition-colors">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CoworkingSpace",
+    "name": "런치패드 스페이스",
+    "description": "성수동 스타트업 코워킹 스페이스. 핫데스크부터 프라이빗 오피스까지.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "성수이로 77 런치패드빌딩 2-5층",
+      "addressLocality": "성동구",
+      "addressRegion": "서울특별시",
+      "postalCode": "04790",
+      "addressCountry": "KR"
+    },
+    "telephone": "02-6789-0123",
+    "email": "hello@launchpad.space",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  }
+  </script>
+
+  <!-- Scroll Animation JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (motionOk) {
+        // Fade-in sections
+        const sectionObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              sectionObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        document.querySelectorAll('.fade-in-section').forEach(el => sectionObserver.observe(el));
+
+        // Stagger items
+        const staggerObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const items = entry.target.closest('section') ?
+                entry.target.closest('section').querySelectorAll('.stagger-item') : [entry.target];
+              const parent = entry.target.parentElement;
+              const siblings = parent ? Array.from(parent.querySelectorAll('.stagger-item')) : [entry.target];
+              const idx = siblings.indexOf(entry.target);
+              entry.target.style.transitionDelay = `${idx * 0.1}s`;
+              entry.target.classList.add('visible');
+              staggerObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '-30px' });
+
+        document.querySelectorAll('.stagger-item').forEach(el => staggerObserver.observe(el));
+      }
+
+      // FAQ Accordion
+      document.querySelectorAll('.faq-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const answer = btn.nextElementSibling;
+          const icon = btn.querySelector('.faq-icon');
+          const isOpen = answer.classList.contains('open');
+
+          // Close all others in same section
+          const section = btn.closest('section') || btn.closest('div');
+          if (section) {
+            section.querySelectorAll('.faq-answer.open').forEach(a => {
+              a.classList.remove('open');
+              const otherIcon = a.previousElementSibling.querySelector('.faq-icon');
+              if (otherIcon) otherIcon.classList.remove('rotate-45');
+              a.previousElementSibling.setAttribute('aria-expanded', 'false');
+            });
+          }
+
+          if (!isOpen) {
+            answer.classList.add('open');
+            if (icon) icon.classList.add('rotate-45');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

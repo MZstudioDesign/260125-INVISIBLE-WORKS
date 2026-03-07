@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소무 다이닝 — 계절이 빚은 한 접시의 완성</title>
+    <meta name="description" content="소무 다이닝. 청담동 오마카세 파인다이닝. 제철 식재료로 완성하는 8코스 카이세키. 예약 문의 02-518-0902">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="소무 다이닝 — 계절이 빚은 한 접시의 완성">
+    <meta property="og:description" content="청담동 오마카세 파인다이닝. 제철 식재료로 완성하는 8코스 카이세키.">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'Georgia', 'serif'],
+                        'sans': ['"Noto Sans KR"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'navy': {
+                            900: '#0A0F1E',
+                            800: '#111827',
+                            700: '#1A2236',
+                            600: '#243049',
+                        },
+                        'copper': {
+                            DEFAULT: '#B87333',
+                            dark: '#8B5E3C',
+                            light: '#D4956A',
+                        },
+                        'ivory': '#F0EDE8',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-page: #0A0F1E;
+            --bg-surface: #111827;
+            --bg-card: #1A2236;
+            --accent-primary: #B87333;
+            --accent-secondary: #8B5E3C;
+            --text-primary: #F0EDE8;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --font-ui: 'Playfair Display', Georgia, serif;
+            --font-data: 'Noto Sans KR', system-ui, sans-serif;
+            --content-max-width: 1200px;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth transitions */
+        button, a { transition: all 0.2s ease-in-out; }
+        img { transition: transform 0.6s ease-out; }
+
+        /* Letter spacing utilities */
+        .tracking-editorial { letter-spacing: 0.12em; }
+        .tracking-wide-ed { letter-spacing: 0.2em; }
+
+        /* Copper line accent */
+        .copper-line {
+            width: 48px;
+            height: 1px;
+            background: var(--accent-primary);
+        }
+
+        /* Mobile nav */
+        .mobile-nav { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-nav.open { transform: translateX(0); }
+
+        /* Horizontal scroll */
+        .scroll-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-item { scroll-snap-align: start; }
+    </style>
+</head>
+<body class="bg-navy-900 text-ivory font-sans antialiased overflow-x-hidden">
+
+    <!-- SKIP LINK -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-copper focus:text-white focus:px-4 focus:py-2">
+        본문 바로가기
+    </a>
+
+    <!-- ==========================================
+         HEADER / NAVIGATION
+    =========================================== -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+            <nav class="flex items-center justify-between py-5 border-b border-white/10" aria-label="Main navigation">
+                <a href="#" class="font-serif text-xl tracking-wide text-ivory">소무</a>
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#counter" class="text-xs uppercase tracking-editorial text-ivory/60 hover:text-copper">카운터</a>
+                    <a href="#craft" class="text-xs uppercase tracking-editorial text-ivory/60 hover:text-copper">장인정신</a>
+                    <a href="#seasonal" class="text-xs uppercase tracking-editorial text-ivory/60 hover:text-copper">코스</a>
+                    <a href="#private" class="text-xs uppercase tracking-editorial text-ivory/60 hover:text-copper">프라이빗</a>
+                    <a href="#reservation" class="px-5 py-2 border border-copper text-copper text-xs uppercase tracking-editorial hover:bg-copper hover:text-white">
+                        예약하기
+                    </a>
+                </div>
+                <button id="mobile-toggle" class="md:hidden text-ivory" aria-label="메뉴 열기">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 bottom-0 w-72 bg-navy-800 z-50 p-8 flex flex-col" aria-hidden="true">
+        <button id="mobile-close" class="self-end text-ivory mb-12" aria-label="메뉴 닫기">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <a href="#counter" class="text-sm uppercase tracking-editorial text-ivory/70 py-3 border-b border-white/10 hover:text-copper">카운터</a>
+        <a href="#craft" class="text-sm uppercase tracking-editorial text-ivory/70 py-3 border-b border-white/10 hover:text-copper">장인정신</a>
+        <a href="#seasonal" class="text-sm uppercase tracking-editorial text-ivory/70 py-3 border-b border-white/10 hover:text-copper">코스</a>
+        <a href="#private" class="text-sm uppercase tracking-editorial text-ivory/70 py-3 border-b border-white/10 hover:text-copper">프라이빗</a>
+        <a href="#reservation" class="mt-8 px-6 py-3 border border-copper text-copper text-sm uppercase tracking-editorial text-center hover:bg-copper hover:text-white">예약하기</a>
+    </div>
+
+    <main id="main-content">
+
+        <!-- ==========================================
+             SECTION 1: HERO — Full-bleed Overlay
+             MOVE: M-HERO-FULLBLEED-OVERLAY
+             COMPONENT_REF: hero-fullbleed-overlay | GRADE: A | MODE: adapted | FIDELITY: 85%
+        =========================================== -->
+        <section class="relative w-full min-h-screen">
+            <img src="./images/hero.jpg" alt="소무 다이닝 오마카세 카운터" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0F1E]/85 via-[#0A0F1E]/40 to-[#0A0F1E]/15"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-sans">Omakase Fine Dining · Cheongdam</p>
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] max-w-3xl mb-6">
+                    계절이 빚은<br>
+                    <span class="italic text-copper">한 접시의</span><br>
+                    완성
+                </h1>
+                <p class="text-white/70 max-w-[500px] leading-relaxed mb-8">
+                    히노키 카운터 너머,
+                    셰프의 손끝에서 계절이 피어납니다.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#reservation" class="border border-white/80 text-white px-8 py-3 text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-[#0A0F1E]">
+                        예약 문의하기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 2: COUNTER EXPERIENCE — Alternating Editorial
+             MOVE: M-LAY-ALTERNATING-ROWS (adapted to dark editorial)
+             COMPONENT_REF: alternating-product-editorial-dark | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-product-editorial-dark-reference.html | FIDELITY: 72%
+        =========================================== -->
+        <section id="counter" class="fade-in-section w-full bg-navy-800 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <!-- Section Header -->
+                <div class="mb-16 md:mb-20">
+                    <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">The Counter</p>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl italic text-ivory leading-tight">
+                        카운터에 앉는 순간,<br class="hidden sm:block">
+                        식사가 시작됩니다
+                    </h2>
+                </div>
+
+                <!-- Row 1: Image Left (7col) + Text Right (5col) -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-8 items-center mb-16 md:mb-24">
+                    <div class="col-span-12 md:col-span-7">
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img src="./images/interior_1.jpg" alt="소무 다이닝 히노키 카운터 전경" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 md:pl-4">
+                        <div class="copper-line mb-6"></div>
+                        <h3 class="font-serif text-xl md:text-2xl text-ivory mb-4">히노키 카운터 12석</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            200년 수령의 히노키 원목으로 제작한 카운터.<br>
+                            셰프와 게스트 사이, 가장 완벽한 거리에서<br>
+                            요리의 모든 순간을 함께합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 2: Text Left (4col) + Gap (1col) + Image Right (7col) -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-8 items-center">
+                    <div class="col-span-12 md:col-span-4 order-2 md:order-1">
+                        <div class="copper-line mb-6"></div>
+                        <h3 class="font-serif text-xl md:text-2xl text-ivory mb-4">프라이빗 룸 2실</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            4인, 6인 독립 공간.<br>
+                            카운터의 라이브 감동은 유지하되,<br>
+                            조용한 대화가 필요한 자리를 위해.
+                        </p>
+                        <a href="#reservation" class="inline-block mt-6 px-6 py-2.5 border border-copper text-copper text-xs uppercase tracking-editorial hover:bg-copper hover:text-white">
+                            예약 문의
+                        </a>
+                    </div>
+                    <div class="hidden md:block md:col-span-1 order-2"></div>
+                    <div class="col-span-12 md:col-span-7 order-1 md:order-3">
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img src="./images/private_room.jpg" alt="소무 다이닝 프라이빗 룸" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 3: CRAFT PROCESS — Bento Checkerboard (Image + Quote)
+             MOVE: M-LAY-EDITORIAL-MOSAIC
+             COMPONENT_REF: bento-checkerboard-image-quote-4col | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-checkerboard-image-quote-4col-reference.html | FIDELITY: 70%
+        =========================================== -->
+        <section id="craft" class="fade-in-section w-full bg-navy-900 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <div class="mb-16">
+                    <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">Craftsmanship</p>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl italic text-ivory">장인의 손끝에서</h2>
+                </div>
+
+                <!-- Row 1: 3 images + 1 quote -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+                    <div class="stagger-item relative aspect-square overflow-hidden">
+                        <img src="./images/course_1.jpg" alt="카이세키 선어 손질" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item bg-navy-700 aspect-square flex items-center justify-center p-6 border border-white/5">
+                        <div class="text-center">
+                            <span class="font-serif text-2xl italic text-copper">&ldquo;</span>
+                            <p class="text-ivory/60 text-xs leading-relaxed mt-1 max-w-[160px]">
+                                좋은 재료는 손을 덜 타야 한다.<br>
+                                최소한의 개입이<br>
+                                최대의 맛을 만든다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stagger-item relative aspect-square overflow-hidden">
+                        <img src="./images/course_2.jpg" alt="제철 채소 플레이팅" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item relative aspect-square overflow-hidden">
+                        <img src="./images/chef.jpg" alt="소무 다이닝 헤드셰프" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                </div>
+
+                <!-- Row 2: 1 quote + 2 images + 1 quote -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4 mt-3 lg:mt-4">
+                    <div class="stagger-item bg-navy-700 aspect-square flex items-center justify-center p-6 border border-white/5">
+                        <div class="text-center">
+                            <p class="text-ivory/50 text-xs leading-relaxed max-w-[160px]">
+                                매일 새벽, 노량진과 제주에서<br>
+                                직송되는 식재료.<br>
+                                그날의 바다가 코스를 결정합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stagger-item relative aspect-square overflow-hidden">
+                        <img src="./images/course_3.jpg" alt="오마카세 전채 요리" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item relative aspect-square overflow-hidden">
+                        <img src="./images/course_4.jpg" alt="카이세키 메인 요리" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div class="stagger-item bg-navy-700 aspect-square flex items-center justify-center p-6 border border-white/5">
+                        <div class="text-center">
+                            <span class="font-serif text-2xl italic text-copper">&ldquo;</span>
+                            <p class="text-ivory/60 text-xs leading-relaxed mt-1 max-w-[160px]">
+                                긴자에서 10년,<br>
+                                교토에서 5년.<br>
+                                그 시간이 지금<br>
+                                이 카운터 위에 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chef credit -->
+                <div class="mt-10 flex items-center gap-4">
+                    <div class="copper-line"></div>
+                    <div>
+                        <p class="font-serif text-lg italic text-copper">이준혁</p>
+                        <p class="text-ivory/40 text-xs tracking-editorial uppercase mt-1">Head Chef · Ginza Suzuki 출신</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 4: DIVIDER — Full-bleed Quote
+             MOVE: M-DIV-FULLBLEED-IMAGE
+        =========================================== -->
+        <!-- SECTION: DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | SNIPPET_PATH: na | FIDELITY: n/a -->
+        <section class="relative w-full min-h-[50vh] flex items-center justify-center">
+            <img src="./images/divider.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-black/65"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
+                <span class="font-serif text-4xl italic text-copper">&ldquo;</span>
+                <p class="font-serif text-2xl md:text-3xl lg:text-4xl italic text-ivory/90 leading-relaxed mt-2 max-w-xl mx-auto">
+                    一期一会
+                </p>
+                <p class="text-ivory/50 text-sm mt-4">한 번의 만남, 한 번의 식사</p>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 5: SEASONAL MENU — Staggered Gallery
+             MOVE: M-LAY-ASYM-GRID (staggered)
+             COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 72%
+        =========================================== -->
+        <section id="seasonal" class="fade-in-section w-full bg-navy-900 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <div class="mb-16">
+                    <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">Seasonal Omakase</p>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl italic text-ivory">겨울, 바다의 절정</h2>
+                    <p class="text-ivory/40 text-sm mt-4 max-w-md">
+                        2월의 코스는 방어, 대게, 성게로 시작하여<br>
+                        매화와 유자로 마무리됩니다.
+                    </p>
+                </div>
+
+                <!-- Staggered gallery: 5:3:4 ratio with offsets -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <!-- Large card: col-span-5 -->
+                    <div class="stagger-item col-span-12 md:col-span-5">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/course_1.jpg" alt="선어 사시미 코스" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                        <p class="text-xs uppercase tracking-editorial text-copper">01</p>
+                        <h3 class="font-serif text-lg text-ivory mt-1">선어 — 사키즈케</h3>
+                        <p class="text-ivory/40 text-sm mt-2">그날 새벽 노량진에서 직송된 최상급 선어</p>
+                    </div>
+
+                    <!-- Medium card: col-span-3 with mt-16 offset -->
+                    <div class="stagger-item col-span-6 md:col-span-3 md:mt-16">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/course_3.jpg" alt="야키모노 숯불 구이" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                        <p class="text-xs uppercase tracking-editorial text-copper">02</p>
+                        <h3 class="font-serif text-lg text-ivory mt-1">야키모노</h3>
+                        <p class="text-ivory/40 text-sm mt-2">비장탄 숯불 위 겨울 방어</p>
+                    </div>
+
+                    <!-- Small card: col-span-4 with mt-8 offset -->
+                    <div class="stagger-item col-span-6 md:col-span-4 md:mt-8">
+                        <div class="aspect-[3/4] overflow-hidden mb-4">
+                            <img src="./images/course_5.jpg" alt="디저트 매화 모치" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                        <p class="text-xs uppercase tracking-editorial text-copper">03</p>
+                        <h3 class="font-serif text-lg text-ivory mt-1">미즈가시 — 디저트</h3>
+                        <p class="text-ivory/40 text-sm mt-2">매화향 유자 모치와 말차</p>
+                    </div>
+                </div>
+
+                <!-- Course info bar -->
+                <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                    <div>
+                        <p class="font-serif text-xl text-ivory">8코스 오마카세</p>
+                        <p class="text-ivory/40 text-sm mt-1">계절에 따라 코스 구성이 변경됩니다</p>
+                    </div>
+                    <div class="flex gap-8">
+                        <div>
+                            <p class="text-xs uppercase tracking-editorial text-copper">Lunch</p>
+                            <p class="font-serif text-lg text-ivory mt-1">₩150,000</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-editorial text-copper">Dinner</p>
+                            <p class="font-serif text-lg text-ivory mt-1">₩250,000</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 6: PRIVATE DINING — Split Offset Layout
+             MOVE: M-LAY-EDITORIAL-STORY
+             COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text5-gap1-image6-offset-reference.html | FIDELITY: 75%
+        =========================================== -->
+        <section id="private" class="fade-in-section w-full bg-navy-800 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
+                    <!-- Text: 5col -->
+                    <div class="col-span-12 md:col-span-5 md:pt-12">
+                        <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">Private Rooms</p>
+                        <h2 class="font-serif text-3xl md:text-4xl italic text-ivory leading-tight mb-6">
+                            조용한 대화가<br>
+                            필요한 자리
+                        </h2>
+                        <p class="text-ivory/50 text-sm leading-relaxed mb-8">
+                            프라이빗 룸은 카운터의 감동을 그대로 옮겨 놓은 독립 공간입니다.
+                            전담 소믈리에가 배석하며, 코스에 맞춘 사케 페어링을 제안합니다.
+                        </p>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-copper flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                                <p class="text-ivory/60 text-sm">소나무 — 4인 룸 (접대, 비즈니스)</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-4 h-4 text-copper flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                                <p class="text-ivory/60 text-sm">매화 — 6인 룸 (기념일, 가족 모임)</p>
+                            </div>
+                        </div>
+
+                        <a href="#reservation" class="inline-block px-6 py-2.5 border border-copper text-copper text-xs uppercase tracking-editorial hover:bg-copper hover:text-white">
+                            프라이빗 룸 예약
+                        </a>
+                    </div>
+
+                    <!-- Gap: 1col -->
+                    <div class="hidden md:block md:col-span-1"></div>
+
+                    <!-- Image: 6col -->
+                    <div class="col-span-12 md:col-span-6">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="./images/interior_2.jpg" alt="소무 다이닝 프라이빗 룸 인테리어" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 7: KAISEKI PHILOSOPHY — Key Color Full-bleed
+             MOVE: M-DIV-FULLBLEED-IMAGE (Key Color)
+        =========================================== -->
+        <!-- SECTION: KAISEKI PHILOSOPHY | MOVE: M-DIV-FULLBLEED-IMAGE (KEY COLOR) -->
+        <!-- COMPONENT_REF: custom-key-color | GRADE: n/a | MODE: fallback | SNIPPET_PATH: na | FIDELITY: n/a -->
+        <section class="relative w-full min-h-[50vh] flex items-center">
+            <img src="./images/seasonal.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0" style="background: rgba(184,115,51,0.75);"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20">
+                <div class="max-w-lg">
+                    <p class="text-xs uppercase tracking-wide-ed text-white/70 mb-4">Kaiseki Philosophy</p>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl italic text-white leading-tight mb-6">
+                        카이세키,<br>
+                        계절을 담는 그릇
+                    </h2>
+                    <p class="text-white/80 text-sm leading-relaxed max-w-md">
+                        카이세키懐石는 차를 마시기 전 따뜻한 돌을 품에 안고 배고픔을 달래던 선종의 수행에서 비롯되었습니다.
+                        소무 다이닝은 이 절제의 정신을 계승합니다.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10">
+                        <div>
+                            <p class="font-serif text-2xl text-white">15</p>
+                            <p class="text-white/60 text-xs mt-1">산지 직거래 농장</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl text-white">365</p>
+                            <p class="text-white/60 text-xs mt-1">매일 다른 코스</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl text-white">200</p>
+                            <p class="text-white/60 text-xs mt-1">수령 히노키 원목</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl text-white">12</p>
+                            <p class="text-white/60 text-xs mt-1">카운터 좌석</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 8: SAKE CURATION — Horizontal Scroll Gallery
+             MOVE: M-INT-HOVER-REVEAL (adapted to card hover)
+             COMPONENT_REF: custom-sake-gallery | GRADE: n/a | MODE: fallback | SNIPPET_PATH: na | FIDELITY: n/a
+        =========================================== -->
+        <section class="fade-in-section w-full bg-navy-900 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
+                    <div>
+                        <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">Sake Curation</p>
+                        <h2 class="font-serif text-3xl md:text-4xl italic text-ivory">사케 컬렉션</h2>
+                    </div>
+                    <p class="text-ivory/40 text-sm mt-4 sm:mt-0 max-w-xs text-right">
+                        전국 40여 양조장에서 엄선한<br>
+                        프리미엄 사케와 와인
+                    </p>
+                </div>
+
+                <!-- Sake cards: asymmetric grid (not horizontal scroll, for variation from 001) -->
+                <div class="grid grid-cols-12 gap-4 lg:gap-6">
+                    <div class="stagger-item col-span-12 sm:col-span-6 md:col-span-5 group">
+                        <div class="aspect-[3/4] overflow-hidden relative">
+                            <img src="./images/sake_1.jpg" alt="다사이 이와이 쥰마이 다이긴조" class="w-full h-full object-cover group-hover:scale-105" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <p class="text-xs uppercase tracking-editorial text-copper">Junmai Daiginjo</p>
+                                <h3 class="font-serif text-xl text-ivory mt-1">다사이 이와이</h3>
+                                <p class="text-ivory/50 text-sm mt-2">야마구치현 · 정미율 23%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stagger-item col-span-6 md:col-span-3 md:mt-12 group">
+                        <div class="aspect-[3/4] overflow-hidden relative">
+                            <img src="./images/sake_2.jpg" alt="죠유센 준마이" class="w-full h-full object-cover group-hover:scale-105" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <p class="text-xs uppercase tracking-editorial text-copper">Junmai</p>
+                                <h3 class="font-serif text-lg text-ivory mt-1">죠유센</h3>
+                                <p class="text-ivory/50 text-xs mt-2">아키타현</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stagger-item col-span-6 md:col-span-4 md:mt-6 group">
+                        <div class="aspect-[3/4] overflow-hidden relative">
+                            <img src="./images/sake_3.jpg" alt="쿠보타 만쥬 쥰마이 다이긴조" class="w-full h-full object-cover group-hover:scale-105" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                <p class="text-xs uppercase tracking-editorial text-copper">Junmai Daiginjo</p>
+                                <h3 class="font-serif text-lg text-ivory mt-1">쿠보타 만쥬</h3>
+                                <p class="text-ivory/50 text-xs mt-2">니가타현 · 정미율 28%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 9: RESERVATION — Info Grid
+             MOVE: Regular section (info)
+             COMPONENT_REF: custom-info-grid | GRADE: n/a | MODE: fallback | SNIPPET_PATH: na | FIDELITY: n/a
+        =========================================== -->
+        <section id="reservation" class="fade-in-section w-full bg-navy-800 py-20 md:py-28">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+
+                <div class="text-center mb-16">
+                    <p class="text-xs uppercase tracking-wide-ed text-copper mb-4">Reservation</p>
+                    <h2 class="font-serif text-3xl md:text-4xl italic text-ivory">예약 안내</h2>
+                    <p class="text-ivory/40 text-sm mt-4 max-w-md mx-auto">
+                        소무 다이닝은 완전 예약제로 운영됩니다.<br>
+                        최소 3일 전 예약을 권장합니다.
+                    </p>
+                </div>
+
+                <!-- Info Cards: 2x2 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                    <div class="stagger-item p-8 border border-white/10 hover:border-copper/30 transition-colors">
+                        <svg class="w-5 h-5 text-copper mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <h3 class="font-serif text-lg text-ivory mb-2">오시는 길</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            서울 강남구 청담동 89-12<br>
+                            청담빌딩 B1<br>
+                            <span class="text-ivory/30 text-xs">압구정로데오역 3번 출구 도보 5분</span>
+                        </p>
+                    </div>
+                    <div class="stagger-item p-8 border border-white/10 hover:border-copper/30 transition-colors">
+                        <svg class="w-5 h-5 text-copper mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <h3 class="font-serif text-lg text-ivory mb-2">영업 시간</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            런치 12:00 — 14:30 (L.O 13:30)<br>
+                            디너 18:00 — 22:00 (L.O 20:30)<br>
+                            <span class="text-ivory/30 text-xs">매주 일·월 정기 휴무</span>
+                        </p>
+                    </div>
+                    <div class="stagger-item p-8 border border-white/10 hover:border-copper/30 transition-colors">
+                        <svg class="w-5 h-5 text-copper mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <h3 class="font-serif text-lg text-ivory mb-2">예약 전화</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            02-518-0902<br>
+                            <span class="text-ivory/30 text-xs">예약 접수 10:00 — 18:00</span>
+                        </p>
+                    </div>
+                    <div class="stagger-item p-8 border border-white/10 hover:border-copper/30 transition-colors">
+                        <svg class="w-5 h-5 text-copper mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                        <h3 class="font-serif text-lg text-ivory mb-2">좌석</h3>
+                        <p class="text-ivory/50 text-sm leading-relaxed">
+                            카운터 12석<br>
+                            프라이빗 룸 2실 (4인 / 6인)<br>
+                            <span class="text-ivory/30 text-xs">발렛 파킹 가능</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             SECTION 10: FOOTER CTA — Full-bleed Final
+             MOVE: M-CTA-FULLBLEED-FINAL
+             COMPONENT_REF: footer-get-in-touch | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/footer-get-in-touch-reference.html | FIDELITY: 70%
+        =========================================== -->
+        <!-- SECTION: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+        <section class="relative w-full min-h-[60vh] flex items-center justify-center">
+            <img src="./images/cta.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
+                <p class="text-xs uppercase tracking-wide-ed text-copper mb-6">Reserve Your Seat</p>
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl italic text-ivory leading-tight">
+                    카운터에서<br>
+                    뵙겠습니다
+                </h2>
+                <p class="text-ivory/50 text-sm mt-6 max-w-sm mx-auto">
+                    오늘의 바다, 오늘의 계절을<br>
+                    셰프의 손끝에서 만나보세요.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+                    <a href="tel:02-518-0902" class="inline-block px-8 py-3.5 bg-copper text-white text-xs uppercase tracking-editorial font-medium hover:bg-copper-light">
+                        02-518-0902
+                    </a>
+                    <a href="#reservation" class="inline-block px-8 py-3.5 border border-ivory/30 text-ivory text-xs uppercase tracking-editorial hover:border-copper hover:text-copper">
+                        예약 안내 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+    <footer class="w-full bg-navy-900 border-t border-white/10">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-12">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                <div>
+                    <p class="font-serif text-xl text-ivory">소무 다이닝</p>
+                    <p class="text-ivory/30 text-xs mt-2">서울 강남구 청담동 89-12 청담빌딩 B1</p>
+                    <p class="text-ivory/30 text-xs mt-1">02-518-0902 · info@somu-dining.kr</p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-ivory/30 hover:text-copper text-xs uppercase tracking-editorial" aria-label="Instagram">Instagram</a>
+                    <a href="#" class="text-ivory/30 hover:text-copper text-xs uppercase tracking-editorial" aria-label="Naver Blog">Blog</a>
+                    <a href="#" class="text-ivory/30 hover:text-copper text-xs uppercase tracking-editorial" aria-label="KakaoTalk">Kakao</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/5">
+                <p class="text-ivory/20 text-xs">&copy; 2026 소무 다이닝. All rights reserved. 본 사이트는 포트폴리오 목적으로 제작되었으며, 실제 업체와 무관합니다.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ==========================================
+         SCRIPTS
+    =========================================== -->
+    <script>
+        // Intersection Observer — Scroll Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stagger-item').forEach((el, index) => {
+            el.style.transitionDelay = `${(index % 8) * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Reduced Motion Guard
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+                el.style.transition = 'none';
+                el.classList.add('animate-in');
+            });
+        }
+
+        // Header Scroll Behavior
+        const header = document.getElementById('site-header');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                header.style.background = 'rgba(10,15,30,0.95)';
+                header.style.backdropFilter = 'blur(8px)';
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Mobile Nav Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileClose = document.getElementById('mobile-close');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileNav.classList.add('open');
+            mobileNav.setAttribute('aria-hidden', 'false');
+        });
+        mobileClose.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+            mobileNav.setAttribute('aria-hidden', 'true');
+        });
+
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                mobileNav.setAttribute('aria-hidden', 'true');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

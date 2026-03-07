@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>넥서스 프리시전 — 소재에서 완제품까지, 정밀의 모든 것</title>
+    <meta name="description" content="넥서스 프리시전은 CNC 정밀 가공, 표면 처리, 품질 검사까지 원스톱 제조 솔루션을 제공합니다. ±0.005mm 공차, 99.7% 품질률.">
+    <meta property="og:title" content="넥서스 프리시전 — 정밀 제조의 새로운 기준">
+    <meta property="og:description" content="CNC 정밀 가공 전문 기업. 자동차, 반도체, 의료기기, 항공우주 분야 Tier-2 파트너.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nexusprecision.co.kr">
+    <meta property="og:image" content="./images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://nexusprecision.co.kr">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --color-bg: #0D1B2A;
+            --color-bg-section: #132438;
+            --color-text: #E8ECF1;
+            --color-text-muted: #8899AA;
+            --color-accent: #D4783E;
+            --color-accent-hover: #E08A50;
+            --color-accent-dark: #B8622E;
+            --color-accent-text: #0D1B2A;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Noto Sans KR', sans-serif;
+            --font-size-hero: clamp(2.75rem, 5.5vw, 4.5rem);
+            --font-size-h2: clamp(1.75rem, 3.5vw, 2.75rem);
+            --font-size-h3: clamp(1.125rem, 2vw, 1.375rem);
+            --font-size-body: 1rem;
+            --font-size-small: 0.8125rem;
+            --line-height-body: 1.75;
+            --line-height-heading: 1.1;
+            --letter-spacing-heading: -0.03em;
+            --radius-card: 6px;
+            --radius-button: 2px;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.35);
+            --max-w-content: 1200px;
+            --section-py: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: var(--font-size-body);
+            line-height: var(--line-height-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            line-height: var(--line-height-heading);
+            letter-spacing: var(--letter-spacing-heading);
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-accent-text);
+            padding: 14px 36px;
+            border-radius: var(--radius-button);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.03em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-primary:active { transform: scale(0.95); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            padding: 14px 36px;
+            border-radius: var(--radius-button);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.03em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: var(--color-accent);
+            color: var(--color-accent-text);
+        }
+
+        /* Scroll animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section, .stagger-item {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Horizontal scroll gallery */
+        .hscroll-gallery {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 16px;
+        }
+        .hscroll-gallery::-webkit-scrollbar { display: none; }
+        .hscroll-gallery > * {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* Card hover */
+        .card-hover {
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+        .card-hover:hover {
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Process line */
+        .process-line {
+            background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 639px) {
+            :root {
+                --font-size-hero: 2.25rem;
+                --font-size-h2: 1.5rem;
+                --section-py: 64px;
+            }
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            padding: 12px 24px;
+            background: var(--color-accent);
+            color: var(--color-accent-text);
+            z-index: 100;
+            font-weight: 600;
+        }
+        .skip-link:focus { top: 0; }
+    </style>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ManufacturingBusiness",
+        "name": "넥서스 프리시전",
+        "description": "CNC 정밀 가공 전문 제조 기업. 자동차, 반도체 장비, 의료기기, 항공우주 부품 제작.",
+        "url": "https://nexusprecision.co.kr",
+        "telephone": "+82-31-498-7200",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "시흥시 시화산단 7라 316",
+            "addressLocality": "시흥시",
+            "addressRegion": "경기도",
+            "postalCode": "15106",
+            "addressCountry": "KR"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">본문으로 바로가기</a>
+
+    <!-- HEADER / NAV -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="site-header">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-12 flex items-center justify-between h-16 lg:h-20">
+            <a href="#" class="flex items-center gap-2" aria-label="넥서스 프리시전 홈">
+                <span style="font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; color: var(--color-text); letter-spacing: -0.04em;">NEXUS<span style="color: var(--color-accent);">PRE</span></span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-8" aria-label="메인 네비게이션">
+                <a href="#capabilities" class="text-sm text-[#8899AA] hover:text-[#E8ECF1] transition-colors">역량</a>
+                <a href="#materials" class="text-sm text-[#8899AA] hover:text-[#E8ECF1] transition-colors">소재</a>
+                <a href="#equipment" class="text-sm text-[#8899AA] hover:text-[#E8ECF1] transition-colors">설비</a>
+                <a href="#process" class="text-sm text-[#8899AA] hover:text-[#E8ECF1] transition-colors">공정</a>
+                <a href="#certifications" class="text-sm text-[#8899AA] hover:text-[#E8ECF1] transition-colors">인증</a>
+                <a href="#contact" class="btn-primary text-sm" style="padding: 10px 24px;">견적 문의</a>
+            </nav>
+            <button class="lg:hidden" id="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8ECF1" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed inset-y-0 right-0 w-72 bg-[#0D1B2A] border-l border-[rgba(255,255,255,0.06)] z-50 p-8 lg:hidden" id="mobile-menu" aria-label="모바일 메뉴">
+            <button class="absolute top-5 right-5" id="menu-close" aria-label="메뉴 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8ECF1" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <nav class="flex flex-col gap-6 mt-12">
+                <a href="#capabilities" class="text-lg text-[#8899AA] hover:text-[#E8ECF1]" onclick="closeMobileMenu()">역량</a>
+                <a href="#materials" class="text-lg text-[#8899AA] hover:text-[#E8ECF1]" onclick="closeMobileMenu()">소재</a>
+                <a href="#equipment" class="text-lg text-[#8899AA] hover:text-[#E8ECF1]" onclick="closeMobileMenu()">설비</a>
+                <a href="#process" class="text-lg text-[#8899AA] hover:text-[#E8ECF1]" onclick="closeMobileMenu()">공정</a>
+                <a href="#certifications" class="text-lg text-[#8899AA] hover:text-[#E8ECF1]" onclick="closeMobileMenu()">인증</a>
+                <a href="#contact" class="btn-primary text-center mt-4" onclick="closeMobileMenu()">견적 문의</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
+        <!-- COMPONENT_REF: hero-center-aligned | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero/ | FIDELITY: 80% -->
+        <section class="relative w-full min-h-screen flex items-center justify-center" aria-label="히어로">
+            <img src="./images/hero.jpg" alt="CNC 정밀 가공 머시닝 센터" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(13,27,42,0.4) 0%, rgba(13,27,42,0.75) 50%, rgba(13,27,42,0.92) 100%);"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center py-32">
+                <p class="text-sm tracking-[0.2em] uppercase mb-6" style="color: var(--color-accent); font-family: var(--font-heading);">Precision Manufacturing Partner</p>
+                <h1 style="font-size: var(--font-size-hero); font-weight: 700; letter-spacing: -0.04em; line-height: 1.3; color: var(--color-text);">
+                    소재가 완제품이 되는<br>가장 정밀한 여정
+                </h1>
+                <p class="mt-6 text-lg max-w-[520px] mx-auto" style="color: var(--color-text-muted); line-height: 1.75;">
+                    알루미늄, 스테인리스, 티타늄 원소재부터<br class="hidden sm:block">
+                    ±0.005mm 정밀 가공까지. 넥서스 프리시전이<br class="hidden sm:block">
+                    연결합니다.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+                    <a href="#contact" class="btn-primary">
+                        견적 요청하기
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                    <a href="#capabilities" class="btn-secondary">역량 살펴보기</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CAPABILITIES | MOVE: M-LAY-EDITORIAL-FEATURE -->
+        <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
+        <section id="capabilities" class="fade-in-section w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;" aria-label="가공 역량">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+                    <!-- Left: Featured Image + secondary image (7 cols) -->
+                    <div class="lg:col-span-7 flex flex-col gap-5">
+                        <div class="relative flex-1">
+                            <img src="./images/cap_cnc.jpg" alt="5축 CNC 머시닝 센터 가공 장면" class="w-full h-full object-cover rounded-[6px]" loading="lazy">
+                            <div class="absolute bottom-4 left-4 bg-[#0D1B2A]/90 px-4 py-2 rounded-[2px]">
+                                <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Core Capability</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-5">
+                            <div class="p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <p class="text-2xl font-bold" style="color: var(--color-accent); font-family: var(--font-heading);">±0.005mm</p>
+                                <p class="text-sm mt-1" style="color: var(--color-text-muted);">공차 관리 정밀도</p>
+                            </div>
+                            <div class="p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <p class="text-2xl font-bold" style="color: var(--color-accent); font-family: var(--font-heading);">99.7%</p>
+                                <p class="text-sm mt-1" style="color: var(--color-text-muted);">양품률 달성</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right: Content (5 cols) -->
+                    <div class="lg:col-span-5 flex flex-col gap-8 lg:pt-8">
+                        <div>
+                            <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">What We Do</p>
+                            <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                                4가지 핵심 역량으로<br>완성하는 정밀 부품
+                            </h2>
+                            <p class="mt-4 max-w-[400px]" style="color: var(--color-text-muted);">
+                                단순 가공을 넘어, 소재 선정부터 최종 검사까지<br class="hidden sm:block">
+                                전 공정을 책임집니다.
+                            </p>
+                        </div>
+                        <!-- Capability cards -->
+                        <div class="flex flex-col gap-4">
+                            <div class="stagger-item card-hover p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0" style="background: var(--color-accent);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-base font-bold" style="color: var(--color-text);">CNC 정밀 가공</h3>
+                                        <p class="text-sm mt-1" style="color: var(--color-text-muted);">3축·5축 동시 가공. 복잡 형상 일체형 절삭.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stagger-item card-hover p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0" style="background: var(--color-accent);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-base font-bold" style="color: var(--color-text);">표면 처리</h3>
+                                        <p class="text-sm mt-1" style="color: var(--color-text-muted);">아노다이징, 도금, 열처리. 부식·마모 방지 표면 완성.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stagger-item card-hover p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0" style="background: var(--color-accent);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-base font-bold" style="color: var(--color-text);">품질 검사</h3>
+                                        <p class="text-sm mt-1" style="color: var(--color-text-muted);">CMM 3차원 측정. 전수검사 및 SPC 공정 관리.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stagger-item card-hover p-5 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0" style="background: var(--color-accent);">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-base font-bold" style="color: var(--color-text);">정밀 조립</h3>
+                                        <p class="text-sm mt-1" style="color: var(--color-text-muted);">클린룸 조립 환경. 반도체·의료기기 요구 충족.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERIALS EXPERTISE (KEY COLOR) | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
+        <!-- COMPONENT_REF: bento-accent-text-image-grid | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/ | FIDELITY: 70% -->
+        <section id="materials" class="relative w-full" style="min-height: 55vh;" aria-label="소재 전문성">
+            <img src="./images/cap_surface.jpg" alt="금속 소재 표면 가공" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(212,120,62,0.75) 0%, rgba(184,98,46,0.65) 40%, rgba(13,27,42,0.85) 100%);"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12" style="padding: var(--section-py) 0;">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="lg:col-span-5">
+                        <p class="text-sm tracking-[0.15em] uppercase mb-4" style="color: rgba(255,255,255,0.7); font-family: var(--font-heading);">Material Expertise</p>
+                        <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: #fff;">
+                            소재를 이해하는 것이<br>정밀의 시작입니다
+                        </h2>
+                        <p class="mt-5 max-w-[380px]" style="color: rgba(255,255,255,0.8); line-height: 1.75;">
+                            각 소재의 물성과 가공 특성을 숙지한 엔지니어가<br class="hidden sm:block">
+                            최적의 공정 조건을 설계합니다.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div class="stagger-item text-center p-5 rounded-[6px]" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);">
+                                <p class="text-2xl font-bold text-white" style="font-family: var(--font-heading);">AL</p>
+                                <p class="text-xs mt-2 text-white/70">알루미늄 합금</p>
+                                <p class="text-xs mt-1 text-white/50">6061 · 7075 · 5052</p>
+                            </div>
+                            <div class="stagger-item text-center p-5 rounded-[6px]" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);">
+                                <p class="text-2xl font-bold text-white" style="font-family: var(--font-heading);">SUS</p>
+                                <p class="text-xs mt-2 text-white/70">스테인리스강</p>
+                                <p class="text-xs mt-1 text-white/50">304 · 316L · 17-4PH</p>
+                            </div>
+                            <div class="stagger-item text-center p-5 rounded-[6px]" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);">
+                                <p class="text-2xl font-bold text-white" style="font-family: var(--font-heading);">Ti</p>
+                                <p class="text-xs mt-2 text-white/70">티타늄 합금</p>
+                                <p class="text-xs mt-1 text-white/50">Grade 2 · Grade 5</p>
+                            </div>
+                            <div class="stagger-item text-center p-5 rounded-[6px]" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);">
+                                <p class="text-2xl font-bold text-white" style="font-family: var(--font-heading);">ENG</p>
+                                <p class="text-xs mt-2 text-white/70">엔지니어링 플라스틱</p>
+                                <p class="text-xs mt-1 text-white/50">PEEK · POM · MC Nylon</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: EQUIPMENT | MOVE: M-INT-HSCROLL-GALLERY -->
+        <!-- COMPONENT_REF: scroll-x-carousel (adapted HTML) | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/ | FIDELITY: 70% -->
+        <section id="equipment" class="fade-in-section w-full" style="background: var(--color-bg); padding: var(--section-py) 0;" aria-label="설비 현황">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-10">
+                <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">Equipment & Facility</p>
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                    <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                        3,200㎡ 시설에<br>24대의 정밀 장비
+                    </h2>
+                    <p class="max-w-[360px]" style="color: var(--color-text-muted);">
+                        경기도 시흥 시화산업단지에 위치한 전용 공장.<br class="hidden sm:block">
+                        24시간 무인 운전 체제를 갖추고 있습니다.
+                    </p>
+                </div>
+            </div>
+            <!-- Horizontal scroll gallery -->
+            <div class="hscroll-gallery pl-6 lg:pl-[calc((100vw-1200px)/2+48px)]">
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/cap_cnc.jpg" alt="5축 동시 가공 머시닝센터" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">5축 머시닝센터</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">DMG MORI DMU 50 외 8대 운영</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/cap_quality.jpg" alt="CMM 3차원 측정기" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">CMM 측정실</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">Zeiss CONTURA 외 3대. ±0.001mm 측정 정밀도</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/cap_assembly.jpg" alt="정밀 조립 클린룸" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">클린룸 조립실</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">Class 1000 클린룸. 반도체·의료 부품 조립</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/divider_facility.jpg" alt="공장 전경 파노라마" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">자동화 라인</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">로봇 로딩 + APC 시스템. 24hr 무인 가동</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/cap_surface.jpg" alt="표면 처리 설비" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">표면 처리 설비</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">양극산화·무전해 도금·열처리로 일괄 후처리</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/process_bg.jpg" alt="원자재 입고 검사" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">원자재 입고 검사</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">Mill Certificate 확인 + 경도·성분 자체 분석</p>
+                </div>
+                <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
+                    <img src="./images/cert_bg.jpg" alt="출하 검사실" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">출하 검사실</h3>
+                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">비전 검사 + 전수 치수 측정 후 포장 출하</p>
+                </div>
+                <!-- Spacer for last card visibility -->
+                <div class="w-12 flex-shrink-0"></div>
+            </div>
+        </section>
+
+        <!-- SECTION: PROCESS | MOVE: M-LAY-ALTERNATING-ROWS -->
+        <!-- COMPONENT_REF: alternating-text5-img7-cta-banner | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/ | FIDELITY: 75% -->
+        <section id="process" class="fade-in-section w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;" aria-label="제조 공정">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-16">
+                    <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">Manufacturing Process</p>
+                    <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                        견적부터 납품까지,<br>투명한 6단계 공정
+                    </h2>
+                </div>
+
+                <div class="flex flex-col gap-16 lg:gap-20 relative">
+                    <!-- Process vertical line (desktop) -->
+                    <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px process-line opacity-20" style="transform: translateX(-50%);"></div>
+
+                    <!-- Step 1 — Text Left, Image Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5 lg:text-right order-2 lg:order-1">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 01</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">RFQ 접수 및 도면 검토</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                고객 도면과 사양서를 접수하고,<br class="hidden sm:block">
+                                가공 가능성과 소재를 검토합니다.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center order-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 order-1 lg:order-3">
+                            <img src="./images/contact_bg.jpg" alt="도면 검토 회의" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 2 — Image Left, Text Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5">
+                            <img src="./images/cap_cnc.jpg" alt="설계 리뷰 및 시뮬레이션" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 02</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">설계 검토 및 DFM</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                가공성 분석(DFM)을 통해 최적 공정을<br class="hidden sm:block">
+                                설계하고 견적을 확정합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 — Text Left, Image Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5 lg:text-right order-2 lg:order-1">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 03</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">시제품 제작</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                샘플 가공 후 치수 측정 보고서와 함께<br class="hidden sm:block">
+                                고객 승인을 받습니다.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center order-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 order-1 lg:order-3">
+                            <img src="./images/cap_quality.jpg" alt="시제품 검사 및 측정" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 4 — Image Left, Text Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5">
+                            <img src="./images/divider_facility.jpg" alt="양산 가공 라인" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 04</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">양산 가공</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                승인된 공정 조건으로 양산에 돌입합니다.<br class="hidden sm:block">
+                                공정 중 SPC 실시간 모니터링.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 — Text Left, Image Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5 lg:text-right order-2 lg:order-1">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 05</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">전수 품질 검사</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                CMM 3차원 측정 및 비전 검사로<br class="hidden sm:block">
+                                99.7% 양품률을 보증합니다.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center order-2">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 order-1 lg:order-3">
+                            <img src="./images/cert_bg.jpg" alt="품질 검사 장면" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- Step 6 — Image Left, Text Right -->
+                    <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+                        <div class="lg:col-span-5">
+                            <img src="./images/ind_auto.jpg" alt="완제품 포장 및 출하" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                        </div>
+                        <div class="lg:col-span-2 hidden lg:flex justify-center">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <span class="text-xs tracking-[0.2em] uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Step 06</span>
+                            <h3 class="text-xl font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">포장 및 납품</h3>
+                            <p class="mt-3" style="color: var(--color-text-muted);">
+                                정전기 방지 포장 후 납기일 준수율<br class="hidden sm:block">
+                                98.5% 이상으로 출하합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: EQUIPMENT DIVIDER (FULL-BLEED) | MOVE: M-DIV-FULLBLEED-IMAGE -->
+        <!-- COMPONENT_REF: fullbleed-divider-stats | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/divider/ | FIDELITY: 85% -->
+        <section class="relative w-full" style="min-height: 50vh;" aria-label="설비 현황 요약">
+            <img src="./images/divider_facility.jpg" alt="공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex flex-col justify-center" style="min-height: 50vh; padding: 60px 0;">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="stagger-item">
+                        <p class="text-3xl lg:text-4xl font-bold" style="font-family: var(--font-heading); color: var(--color-accent);">3,200</p>
+                        <p class="text-sm mt-2" style="color: var(--color-text-muted);">㎡ 전용 공장 면적</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="text-3xl lg:text-4xl font-bold" style="font-family: var(--font-heading); color: var(--color-accent);">24</p>
+                        <p class="text-sm mt-2" style="color: var(--color-text-muted);">CNC 머시닝 센터</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="text-3xl lg:text-4xl font-bold" style="font-family: var(--font-heading); color: var(--color-accent);">±0.005</p>
+                        <p class="text-sm mt-2" style="color: var(--color-text-muted);">mm 가공 공차</p>
+                    </div>
+                    <div class="stagger-item">
+                        <p class="text-3xl lg:text-4xl font-bold" style="font-family: var(--font-heading); color: var(--color-accent);">99.7</p>
+                        <p class="text-sm mt-2" style="color: var(--color-text-muted);">% 양품률</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CLIENT INDUSTRIES | MOVE: M-LAY-EDITORIAL-FEATURE -->
+        <!-- COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
+        <section class="fade-in-section w-full" style="background: var(--color-bg); padding: var(--section-py) 0;" aria-label="주요 납품 산업">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="mb-12">
+                    <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">Client Industries</p>
+                    <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                        4대 핵심 산업군의<br>정밀 부품을 공급합니다
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6">
+                    <!-- Automotive — Large card (5 cols) -->
+                    <div class="stagger-item lg:col-span-5 card-hover rounded-[6px] border overflow-hidden" style="border-color: var(--border-color);">
+                        <img src="./images/ind_auto.jpg" alt="자동차 부품" class="w-full aspect-[4/3] object-cover" loading="lazy">
+                        <div class="p-6" style="background: #1A2E4A;">
+                            <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Automotive</span>
+                            <h3 class="text-lg font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">자동차 부품</h3>
+                            <p class="text-sm mt-2" style="color: var(--color-text-muted);">현대자동차 Tier-2 협력사. 엔진·변속기·서스펜션 정밀 부품 양산 공급.</p>
+                        </div>
+                    </div>
+                    <!-- Right column: 3 smaller cards (7 cols) -->
+                    <div class="lg:col-span-7 flex flex-col gap-6">
+                        <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
+                            <img src="./images/ind_semi.jpg" alt="반도체 장비 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <div class="sm:col-span-7 p-5 flex flex-col justify-center">
+                                <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Semiconductor</span>
+                                <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">반도체 장비</h3>
+                                <p class="text-sm mt-1" style="color: var(--color-text-muted);">CVD/PVD 챔버 부품. 초고진공 환경 대응 정밀 가공.</p>
+                            </div>
+                        </div>
+                        <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
+                            <img src="./images/ind_medical.jpg" alt="의료기기 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <div class="sm:col-span-7 p-5 flex flex-col justify-center">
+                                <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Medical</span>
+                                <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">의료기기</h3>
+                                <p class="text-sm mt-1" style="color: var(--color-text-muted);">수술 도구·임플란트 가이드. 티타늄·SUS 316L 가공 특화.</p>
+                            </div>
+                        </div>
+                        <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
+                            <img src="./images/ind_aero.jpg" alt="항공우주 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <div class="sm:col-span-7 p-5 flex flex-col justify-center">
+                                <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Aerospace</span>
+                                <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">항공우주</h3>
+                                <p class="text-sm mt-1" style="color: var(--color-text-muted);">인코넬·티타늄 난삭재 가공. AS9100 기준 품질 관리.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CERTIFICATIONS | MOVE: M-TRUST-AWARDS-CERTS -->
+        <!-- COMPONENT_REF: dark-testimonial-cards-text (adapted as cert cards) | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/ | FIDELITY: 70% -->
+        <section id="certifications" class="fade-in-section w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;" aria-label="인증 현황">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="text-center mb-12">
+                    <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">Certifications</p>
+                    <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                        국제 인증이 증명하는<br>품질 관리 체계
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="stagger-item card-hover p-8 rounded-[6px] border text-center" style="border-color: var(--color-accent); border-width: 1px; background: #1A2E4A;">
+                        <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-5" style="background: rgba(212,120,62,0.15);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold" style="color: var(--color-text); font-family: var(--font-heading);">ISO 9001</h3>
+                        <p class="text-sm mt-3" style="color: var(--color-text-muted);">품질경영시스템 국제 인증.<br>전 공정 품질 관리 프로세스 수립.</p>
+                    </div>
+                    <div class="stagger-item card-hover p-8 rounded-[6px] border text-center" style="border-color: var(--color-accent); border-width: 1px; background: #1A2E4A;">
+                        <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-5" style="background: rgba(212,120,62,0.15);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M6.36 17.4 4 17l-2-4 3-1 2.74-4.24a1 1 0 0 1 .92-.51L12 7l3.34.25a1 1 0 0 1 .92.51L19 12l3 1-2 4-2.36.4"/><path d="M9 17h6"/><path d="m12 12-4 5h8Z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold" style="color: var(--color-text); font-family: var(--font-heading);">ISO 14001</h3>
+                        <p class="text-sm mt-3" style="color: var(--color-text-muted);">환경경영시스템 인증.<br>폐수·절삭유 처리 환경 기준 충족.</p>
+                    </div>
+                    <div class="stagger-item card-hover p-8 rounded-[6px] border text-center" style="border-color: var(--color-accent); border-width: 1px; background: #1A2E4A;">
+                        <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-5" style="background: rgba(212,120,62,0.15);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.41 6.41 2.83 2.83"/><path d="M2 12h4"/><path d="m17.66 6.41-2.83 2.83"/><path d="M22 12h-4"/><circle cx="12" cy="12" r="4"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold" style="color: var(--color-text); font-family: var(--font-heading);">IATF 16949</h3>
+                        <p class="text-sm mt-3" style="color: var(--color-text-muted);">자동차 품질경영 국제 인증.<br>Tier-2 납품 필수 자격 보유.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FAQ | MOVE: M-INT-HOVER-REVEAL (Accordion) -->
+        <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 75% -->
+        <section class="fade-in-section w-full" style="background: var(--color-bg); padding: var(--section-py) 0;" aria-label="자주 묻는 질문">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+                    <!-- Left: Header (5 cols) -->
+                    <div class="lg:col-span-5">
+                        <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">FAQ</p>
+                        <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                            자주 묻는 질문
+                        </h2>
+                        <p class="mt-4 max-w-[360px]" style="color: var(--color-text-muted);">
+                            견적 요청 전 궁금한 사항을<br class="hidden sm:block">
+                            확인하실 수 있습니다.
+                        </p>
+                        <a href="#contact" class="btn-primary mt-8 inline-flex">
+                            직접 문의하기
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    <!-- Right: Accordion (7 cols) -->
+                    <div class="lg:col-span-7">
+                        <div class="flex flex-col divide-y" style="border-color: var(--border-color);">
+                            <div class="accordion-item" style="border-color: var(--border-color);">
+                                <button class="w-full flex items-center justify-between py-5 text-left" onclick="toggleAccordion(this)" aria-expanded="false">
+                                    <span class="text-base font-semibold pr-4" style="color: var(--color-text);">최소 주문 수량(MOQ)이 있나요?</span>
+                                    <svg class="accordion-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <p class="pb-5 pr-8" style="color: var(--color-text-muted);">시제품은 1개부터 가능합니다. 양산은 소재·공정에 따라 다르지만, 일반적으로 50개 이상부터 수주합니다. 소량 정밀 가공도 협의 가능하니 편하게 문의해주세요.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color: var(--border-color);">
+                                <button class="w-full flex items-center justify-between py-5 text-left" onclick="toggleAccordion(this)" aria-expanded="false">
+                                    <span class="text-base font-semibold pr-4" style="color: var(--color-text);">납기는 보통 얼마나 걸리나요?</span>
+                                    <svg class="accordion-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <p class="pb-5 pr-8" style="color: var(--color-text-muted);">시제품은 접수 후 5~7 영업일, 양산은 수량·난이도에 따라 2~4주가 일반적입니다. 긴급 건은 별도 협의로 단축 가능합니다.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color: var(--border-color);">
+                                <button class="w-full flex items-center justify-between py-5 text-left" onclick="toggleAccordion(this)" aria-expanded="false">
+                                    <span class="text-base font-semibold pr-4" style="color: var(--color-text);">소재 조달도 직접 해주시나요?</span>
+                                    <svg class="accordion-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <p class="pb-5 pr-8" style="color: var(--color-text-muted);">네, 국내외 소재 업체 네트워크를 통해 알루미늄·스테인리스·티타늄 등 주요 소재를 직접 조달합니다. Mill Certificate 포함 납품되며, 고객 지급 소재도 가능합니다.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color: var(--border-color);">
+                                <button class="w-full flex items-center justify-between py-5 text-left" onclick="toggleAccordion(this)" aria-expanded="false">
+                                    <span class="text-base font-semibold pr-4" style="color: var(--color-text);">NDA(비밀유지계약) 체결이 가능한가요?</span>
+                                    <svg class="accordion-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <p class="pb-5 pr-8" style="color: var(--color-text-muted);">물론입니다. 반도체·의료·항공 분야 고객과 NDA를 일상적으로 체결하고 있습니다. 도면·사양 정보의 보안은 저희의 기본 원칙입니다.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color: var(--border-color);">
+                                <button class="w-full flex items-center justify-between py-5 text-left" onclick="toggleAccordion(this)" aria-expanded="false">
+                                    <span class="text-base font-semibold pr-4" style="color: var(--color-text);">견적은 어떻게 요청하나요?</span>
+                                    <svg class="accordion-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div class="accordion-content">
+                                    <p class="pb-5 pr-8" style="color: var(--color-text-muted);">아래 문의 양식 또는 이메일(rfq@nexuspre.co.kr)로 2D/3D 도면과 수량·납기를 보내주시면, 영업일 기준 24시간 내에 견적을 회신드립니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CONTACT / RFQ | MOVE: M-FOOTER-B2B-DETAILS -->
+        <!-- COMPONENT_REF: text-vision-cta-form | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 75% -->
+        <section id="contact" class="fade-in-section w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;" aria-label="견적 문의">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+                    <!-- Left: Contact Info (5 cols) -->
+                    <div class="lg:col-span-5">
+                        <p class="text-sm tracking-[0.15em] uppercase mb-3" style="color: var(--color-accent); font-family: var(--font-heading);">Contact & RFQ</p>
+                        <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                            프로젝트를<br>시작하세요
+                        </h2>
+                        <p class="mt-4 max-w-[360px]" style="color: var(--color-text-muted);">
+                            도면과 사양만 보내주세요.<br class="hidden sm:block">
+                            24시간 내 견적을 회신합니다.
+                        </p>
+                        <div class="flex flex-col gap-5 mt-8">
+                            <div class="flex items-start gap-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <div>
+                                    <p class="text-sm font-semibold" style="color: var(--color-text);">찾아오시는 길</p>
+                                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">경기도 시흥시 시화산단 7라 316<br>넥서스 프리시전 본사</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <div>
+                                    <p class="text-sm font-semibold" style="color: var(--color-text);">기술 문의</p>
+                                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">031-498-7200</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                <div>
+                                    <p class="text-sm font-semibold" style="color: var(--color-text);">이메일</p>
+                                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">rfq@nexuspre.co.kr</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4783E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <div>
+                                    <p class="text-sm font-semibold" style="color: var(--color-text);">운영 시간</p>
+                                    <p class="text-sm mt-1" style="color: var(--color-text-muted);">월-금 08:30~18:00<br>토·일·공휴일 휴무</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right: RFQ Form (7 cols) -->
+                    <div class="lg:col-span-7">
+                        <form class="p-6 lg:p-8 rounded-[6px] border" style="background: #1A2E4A; border-color: var(--border-color);" onsubmit="event.preventDefault(); alert('견적 요청이 접수되었습니다. 24시간 내 회신드리겠습니다.'); this.reset();">
+                            <h3 class="text-lg font-bold mb-6" style="color: var(--color-text); font-family: var(--font-heading);">견적 요청</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-sm font-medium mb-1.5 block" style="color: var(--color-text-muted);">회사명 *</label>
+                                    <input type="text" required placeholder="회사명을 입력하세요" class="w-full px-4 py-3 rounded-[4px] text-sm border outline-none transition-colors focus:border-[#D4783E]" style="background: var(--color-bg-section); border-color: var(--border-color); color: var(--color-text);">
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium mb-1.5 block" style="color: var(--color-text-muted);">담당자명 *</label>
+                                    <input type="text" required placeholder="담당자 성함" class="w-full px-4 py-3 rounded-[4px] text-sm border outline-none transition-colors focus:border-[#D4783E]" style="background: var(--color-bg-section); border-color: var(--border-color); color: var(--color-text);">
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium mb-1.5 block" style="color: var(--color-text-muted);">연락처 *</label>
+                                    <input type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-[4px] text-sm border outline-none transition-colors focus:border-[#D4783E]" style="background: var(--color-bg-section); border-color: var(--border-color); color: var(--color-text);">
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium mb-1.5 block" style="color: var(--color-text-muted);">이메일 *</label>
+                                    <input type="email" required placeholder="email@company.com" class="w-full px-4 py-3 rounded-[4px] text-sm border outline-none transition-colors focus:border-[#D4783E]" style="background: var(--color-bg-section); border-color: var(--border-color); color: var(--color-text);">
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="text-sm font-medium mb-1.5 block" style="color: var(--color-text-muted);">문의 내용</label>
+                                <textarea rows="4" placeholder="가공 부품, 수량, 소재, 희망 납기 등을 기재해주세요." class="w-full px-4 py-3 rounded-[4px] text-sm border outline-none transition-colors resize-none focus:border-[#D4783E]" style="background: var(--color-bg-section); border-color: var(--border-color); color: var(--color-text);"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full mt-6 justify-center">
+                                견적 요청 보내기
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
+        <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80% -->
+        <section class="relative w-full" style="min-height: 55vh;" aria-label="최종 CTA">
+            <img src="./images/cta_bg.jpg" alt="야간 공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <div class="absolute inset-0 bg-black/80"></div>
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex flex-col items-center justify-center text-center" style="min-height: 55vh; padding: 60px 0;">
+                <p class="text-sm tracking-[0.2em] uppercase mb-4" style="color: var(--color-accent); font-family: var(--font-heading);">Start Your Project</p>
+                <h2 style="font-size: var(--font-size-h2); font-weight: 600; color: var(--color-text);">
+                    다음 프로젝트,<br>넥서스 프리시전과 함께 하세요
+                </h2>
+                <p class="mt-4 max-w-[440px]" style="color: var(--color-text-muted);">
+                    도면 한 장이면 충분합니다.<br class="hidden sm:block">
+                    24시간 내 견적, 5일 내 시제품을 약속합니다.
+                </p>
+                <a href="#contact" class="btn-primary mt-8">
+                    무료 견적 받기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t" style="background: var(--color-bg); border-color: var(--border-color);">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-10">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <span style="font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem; color: var(--color-text); letter-spacing: -0.04em;">NEXUS<span style="color: var(--color-accent);">PRE</span></span>
+                    <p class="text-xs mt-2" style="color: var(--color-text-muted);">넥서스 프리시전 (주) | 대표이사 박정호<br>경기도 시흥시 시화산단 7라 316 | 사업자등록번호 124-86-57890</p>
+                </div>
+                <div class="flex flex-col items-start md:items-end gap-1">
+                    <p class="text-xs" style="color: var(--color-text-muted);">031-498-7200 | rfq@nexuspre.co.kr</p>
+                    <p class="text-xs" style="color: #5C6F82;">&copy; 2026 Nexus Precision. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS: Scroll Animations + Mobile Menu + Accordion + Header -->
+    <script>
+        // Reduced motion check
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // IntersectionObserver for fade-in sections
+        if (!prefersReducedMotion) {
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '-50px' });
+
+            document.querySelectorAll('.fade-in-section').forEach(el => fadeObserver.observe(el));
+
+            // Stagger items
+            const staggerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const parent = entry.target.closest('section') || entry.target.parentElement;
+                        const items = parent.querySelectorAll('.stagger-item:not(.visible)');
+                        items.forEach((item, i) => {
+                            item.style.transitionDelay = `${i * 0.1}s`;
+                            item.classList.add('visible');
+                        });
+                        staggerObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '-30px' });
+
+            document.querySelectorAll('.stagger-item').forEach(el => staggerObserver.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => el.classList.add('visible'));
+        }
+
+        // Header scroll behavior
+        const header = document.getElementById('site-header');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 80) {
+                header.style.background = 'rgba(13,27,42,0.95)';
+                header.style.backdropFilter = 'blur(8px)';
+                header.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.borderBottom = 'none';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuClose = document.getElementById('menu-close');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            menuToggle.setAttribute('aria-expanded', 'true');
+        });
+        menuClose.addEventListener('click', closeMobileMenu);
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        // Accordion
+        function toggleAccordion(btn) {
+            const item = btn.parentElement;
+            const wasActive = item.classList.contains('active');
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('button').setAttribute('aria-expanded', 'false');
+            });
+            // Toggle clicked
+            if (!wasActive) {
+                item.classList.add('active');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
