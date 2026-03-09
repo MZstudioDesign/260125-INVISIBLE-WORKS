@@ -68,11 +68,9 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+    google: 'GPHCq93zC9uQKk5bUse3J1xEt-rnyRIEBqmv1rxkQJw',
     other: {
-      ...(process.env.NEXT_PUBLIC_NAVER_VERIFICATION
-        ? { 'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION }
-        : {}),
+      'naver-site-verification': '595d48ed0358b7d6cb953d97a68ab03fe038df93',
     },
   },
 };
