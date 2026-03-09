@@ -151,7 +151,49 @@
       .faq-answer { transition: none; }
       html { scroll-behavior: auto; }
     }
-  </style>
+  
+
+/* === Korean Mobile Typography Fix === */
+html, body {
+  overflow-x: hidden;
+}
+html {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  body {
+    line-height: 1.75;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+    line-height: 1.3 !important;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.35 !important;
+  }
+  .flex, [class*="flex"], .grid, [class*="grid"] {
+    min-width: 0;
+  }
+  .grid > *, .flex > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* === End Korean Mobile Typography Fix === */
+
+</style>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -215,7 +257,7 @@
      SECTION 1: HERO — Full-bleed + Navy Overlay
 ============================== -->
 <section class="relative w-full min-h-screen flex items-end" aria-label="Hero">
-  <img src="./images/hero.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
+  <img src="./images/hero.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
   <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/60 to-navy/30"></div>
   <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 pb-20 lg:pb-28 w-full">
     <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-4 font-body">Tax Strategy Firm</p>
@@ -250,7 +292,7 @@
       <!-- Large featured card -->
       <div class="lg:col-span-7 fade-up">
         <div class="relative rounded-xl overflow-hidden h-[420px] group card-hover border border-gray-100">
-          <img src="./images/card_consulting.webp" alt="법인세 전략 컨설팅" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <img src="./images/card_consulting.png" alt="법인세 전략 컨설팅" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/30 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-8">
             <div class="flex items-center gap-2 mb-3">
@@ -426,7 +468,7 @@
       <div class="lg:col-span-7 grid grid-cols-2 gap-5">
         <div class="rounded-xl overflow-hidden card-hover stagger-child">
           <div class="aspect-[3/4] overflow-hidden">
-            <img src="./images/profile_1.webp" alt="김정현 대표 세무사" class="w-full h-full object-cover" loading="lazy">
+            <img src="./images/profile_1.png" alt="김정현 대표 세무사" class="w-full h-full object-cover" loading="lazy">
           </div>
           <div class="bg-white p-5">
             <h3 class="font-semibold text-base">김정현</h3>
@@ -436,7 +478,7 @@
         </div>
         <div class="rounded-xl overflow-hidden card-hover stagger-child mt-8 lg:mt-12">
           <div class="aspect-[3/4] overflow-hidden">
-            <img src="./images/profile_2.webp" alt="박서영 세무사" class="w-full h-full object-cover" loading="lazy">
+            <img src="./images/profile_2.png" alt="박서영 세무사" class="w-full h-full object-cover" loading="lazy">
           </div>
           <div class="bg-white p-5">
             <h3 class="font-semibold text-base">박서영</h3>
@@ -446,7 +488,7 @@
         </div>
         <div class="rounded-xl overflow-hidden card-hover stagger-child">
           <div class="aspect-[3/4] overflow-hidden">
-            <img src="./images/profile_3.webp" alt="이현우 공인회계사" class="w-full h-full object-cover" loading="lazy">
+            <img src="./images/profile_3.png" alt="이현우 공인회계사" class="w-full h-full object-cover" loading="lazy">
           </div>
           <div class="bg-white p-5">
             <h3 class="font-semibold text-base">이현우</h3>
@@ -456,7 +498,7 @@
         </div>
         <div class="rounded-xl overflow-hidden card-hover stagger-child mt-8 lg:mt-12">
           <div class="aspect-[3/4] overflow-hidden">
-            <img src="./images/profile_4.webp" alt="최은지 세무사" class="w-full h-full object-cover" loading="lazy">
+            <img src="./images/profile_4.png" alt="최은지 세무사" class="w-full h-full object-cover" loading="lazy">
           </div>
           <div class="bg-white p-5">
             <h3 class="font-semibold text-base">최은지</h3>
@@ -473,7 +515,7 @@
      SECTION 5: DIVIDER — Full-bleed Quote
 ============================== -->
 <section class="relative min-h-[50vh] flex items-center justify-center" aria-label="Philosophy">
-  <img src="./images/divider.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <img src="./images/divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
   <div class="absolute inset-0 bg-navy/75"></div>
   <div class="relative text-center max-w-2xl mx-auto px-6 fade-up">
     <svg class="w-8 h-8 text-white/30 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z"/></svg>
@@ -500,7 +542,7 @@
     <!-- Asymmetric grid: 7+5 then 5+7 -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
       <div class="md:col-span-7 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
-        <img src="./images/card_startup.webp" alt="Tech Startup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <img src="./images/card_startup.png" alt="Tech Startup" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-7">
           <h3 class="text-xl font-semibold text-white mb-1">IT · 테크 스타트업</h3>
@@ -508,7 +550,7 @@
         </div>
       </div>
       <div class="md:col-span-5 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
-        <img src="./images/card_office.webp" alt="E-commerce" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <img src="./images/card_office.png" alt="E-commerce" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-7">
           <h3 class="text-xl font-semibold text-white mb-1">이커머스</h3>
@@ -518,7 +560,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
       <div class="md:col-span-5 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
-        <img src="./images/card_documents.webp" alt="Manufacturing" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <img src="./images/card_documents.png" alt="Manufacturing" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-7">
           <h3 class="text-xl font-semibold text-white mb-1">제조업</h3>
@@ -526,7 +568,7 @@
         </div>
       </div>
       <div class="md:col-span-7 rounded-xl overflow-hidden relative h-[280px] group card-hover stagger-child">
-        <img src="./images/card_meeting.webp" alt="Professional Services" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        <img src="./images/card_meeting.png" alt="Professional Services" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-7">
           <h3 class="text-xl font-semibold text-white mb-1">전문직 서비스</h3>
@@ -657,7 +699,7 @@
      SECTION 9: FINAL CTA — Full-bleed + Navy Overlay
 ============================== -->
 <section id="contact" class="relative min-h-[60vh] flex items-center" aria-label="Contact CTA">
-  <img src="./images/cta.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <img src="./images/cta.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
   <div class="absolute inset-0 bg-navy/80"></div>
   <div class="relative max-w-[800px] mx-auto px-6 lg:px-12 text-center py-24 fade-up">
     <p class="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">Free Consultation</p>

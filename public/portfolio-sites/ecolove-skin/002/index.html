@@ -159,7 +159,49 @@
         .skip-link:focus {
             left: 0;
         }
-    </style>
+    
+
+/* === Korean Mobile Typography Fix === */
+html, body {
+  overflow-x: hidden;
+}
+html {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  body {
+    line-height: 1.75;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+    line-height: 1.3 !important;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.35 !important;
+  }
+  .flex, [class*="flex"], .grid, [class*="grid"] {
+    min-width: 0;
+  }
+  .grid > *, .flex > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* === End Korean Mobile Typography Fix === */
+
+</style>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -215,7 +257,7 @@
 <!-- SECTION 1: HERO — M-HERO-FULLBLEED-OVERLAY -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-screen" aria-label="Hero">
-    <img src="./images/hero.webp" alt="제주 자연에서 영감을 받은 에코라브 스킨 제품" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
+    <img src="./images/hero.png" alt="제주 자연에서 영감을 받은 에코라브 스킨 제품" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high" />
     <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/85 via-[#1A1A18]/40 to-[#1A1A18]/15"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col justify-end pb-20 lg:pb-24">
         <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-4 font-sans">ECOLOVE SKIN · JEJU BOTANICAL</p>
@@ -251,7 +293,7 @@
             <!-- Large Image (col-7) -->
             <div class="lg:col-span-7">
                 <div class="aspect-[16/10] overflow-hidden">
-                    <img src="./images/founder.webp" alt="에코라브 스킨 김소연 대표" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/founder.png" alt="에코라브 스킨 김소연 대표" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
             </div>
             <!-- Text + Small Image Stack (col-5) -->
@@ -270,7 +312,7 @@
                     </a>
                 </div>
                 <div class="aspect-[16/9] overflow-hidden">
-                    <img src="./images/jeju_farm.webp" alt="제주 서귀포 보태니컬 농원 전경" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/jeju_farm.png" alt="제주 서귀포 보태니컬 농원 전경" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
             </div>
         </div>
@@ -364,10 +406,10 @@
         <!-- Process images -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
             <div class="stagger-item aspect-[16/9] overflow-hidden">
-                <img src="./images/process_harvest.webp" alt="제주 보태니컬 농원 원료 수확 과정" class="w-full h-full object-cover" loading="lazy">
+                <img src="./images/process_harvest.png" alt="제주 보태니컬 농원 원료 수확 과정" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="stagger-item aspect-[16/9] overflow-hidden">
-                <img src="./images/process_lab.webp" alt="에코라브 스킨 자체 연구소 추출 과정" class="w-full h-full object-cover" loading="lazy">
+                <img src="./images/process_lab.png" alt="에코라브 스킨 자체 연구소 추출 과정" class="w-full h-full object-cover" loading="lazy">
             </div>
         </div>
     </div>
@@ -400,7 +442,7 @@
             <!-- Product 1: Cleanser -->
             <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
                 <div class="aspect-[3/4] overflow-hidden">
-                    <img src="./images/product_cleanser.webp" alt="에코라브 보태니컬 클렌저" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/product_cleanser.png" alt="에코라브 보태니컬 클렌저" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
                 <div class="p-6">
                     <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Cleanser</p>
@@ -415,7 +457,7 @@
             <!-- Product 2: Serum -->
             <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
                 <div class="aspect-[3/4] overflow-hidden">
-                    <img src="./images/product_serum.webp" alt="에코라브 세이지 리페어 세럼" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/product_serum.png" alt="에코라브 세이지 리페어 세럼" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
                 <div class="p-6">
                     <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Serum</p>
@@ -430,7 +472,7 @@
             <!-- Product 3: Cream -->
             <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
                 <div class="aspect-[3/4] overflow-hidden">
-                    <img src="./images/product_cream.webp" alt="에코라브 에버그린 크림" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/product_cream.png" alt="에코라브 에버그린 크림" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
                 <div class="p-6">
                     <p class="text-xs tracking-[0.1em] uppercase text-warm-muted mb-2">Cream</p>
@@ -445,7 +487,7 @@
             <!-- Product 4: Special Set -->
             <div class="hscroll-item stagger-item flex-none w-[280px] md:w-[300px] bg-white group">
                 <div class="aspect-[3/4] overflow-hidden">
-                    <img src="./images/product_set.webp" alt="에코라브 제주 컬렉션 스페셜 세트" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <img src="./images/product_set.png" alt="에코라브 제주 컬렉션 스페셜 세트" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                 </div>
                 <div class="p-6">
                     <p class="text-xs tracking-[0.1em] uppercase text-forest-light mb-2">Best Value</p>
@@ -466,7 +508,7 @@
 <!-- COMPONENT_REF: text-parallax-content (adapted) | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/image-title-text/ | FIDELITY: 75% -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-[60vh] flex items-center justify-center" aria-label="성분 인증">
-    <img src="./images/nature_divider.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <img src="./images/nature_divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0 bg-[#3D5A3E]/75"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
         <h2 class="font-serif text-white leading-[1.35] mb-6" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
@@ -521,7 +563,7 @@
         <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
             <div class="lg:col-span-7">
                 <div class="aspect-[16/10] overflow-hidden">
-                    <img src="./images/sustainability_1.webp" alt="에코라브 스킨 재활용 가능 패키징" class="w-full h-full object-cover" loading="lazy">
+                    <img src="./images/sustainability_1.png" alt="에코라브 스킨 재활용 가능 패키징" class="w-full h-full object-cover" loading="lazy">
                 </div>
             </div>
             <div class="lg:col-span-5">
@@ -556,7 +598,7 @@
             </div>
             <div class="lg:col-span-7 order-1 lg:order-2">
                 <div class="aspect-[16/10] overflow-hidden">
-                    <img src="./images/sustainability_2.webp" alt="에코라브 FSC 인증 친환경 포장재" class="w-full h-full object-cover" loading="lazy">
+                    <img src="./images/sustainability_2.png" alt="에코라브 FSC 인증 친환경 포장재" class="w-full h-full object-cover" loading="lazy">
                 </div>
             </div>
         </div>
@@ -565,7 +607,7 @@
         <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div class="lg:col-span-7">
                 <div class="aspect-[16/10] overflow-hidden">
-                    <img src="./images/sustainability_3.webp" alt="에코라브 탄소중립 배송 프로그램" class="w-full h-full object-cover" loading="lazy">
+                    <img src="./images/sustainability_3.png" alt="에코라브 탄소중립 배송 프로그램" class="w-full h-full object-cover" loading="lazy">
                 </div>
             </div>
             <div class="lg:col-span-5">
@@ -605,7 +647,7 @@
                 피부결이 눈에 띄게 달라졌습니다.
             </p>
             <div class="flex items-center justify-center gap-3">
-                <img src="./images/review_1.webp" alt="리뷰어 이정은" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                <img src="./images/review_1.png" alt="리뷰어 이정은" class="w-10 h-10 rounded-full object-cover" loading="lazy">
                 <div class="text-left">
                     <p class="text-sm font-medium text-deep">이정은</p>
                     <p class="text-xs text-warm-muted">민감성 · 세럼 3개월 사용</p>
@@ -627,7 +669,7 @@
                     남자라 스킨케어에 관심 없었는데, 여자친구 권유로 세트 써봤습니다. 세안 후 당김이 없고 다음 날 피부가 촉촉해요. 이제 직접 재구매합니다.
                 </p>
                 <div class="flex items-center gap-3">
-                    <img src="./images/review_2.webp" alt="리뷰어 박준혁" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    <img src="./images/review_2.png" alt="리뷰어 박준혁" class="w-10 h-10 rounded-full object-cover" loading="lazy">
                     <div>
                         <p class="text-sm font-medium text-deep">박준혁</p>
                         <p class="text-xs text-warm-muted">복합성 · 세트 2개월 사용</p>
@@ -646,7 +688,7 @@
                     임신 중 화장품을 다 바꿨는데, 에코라브는 EWG 그린 등급이라 안심하고 씁니다. 크림 텍스처가 가볍고 흡수가 빨라서 여름에도 좋아요.
                 </p>
                 <div class="flex items-center gap-3">
-                    <img src="./images/review_3.webp" alt="리뷰어 한수진" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    <img src="./images/review_3.png" alt="리뷰어 한수진" class="w-10 h-10 rounded-full object-cover" loading="lazy">
                     <div>
                         <p class="text-sm font-medium text-deep">한수진</p>
                         <p class="text-xs text-warm-muted">건성 · 크림 4개월 사용</p>
@@ -662,7 +704,7 @@
 <!-- COMPONENT_REF: dark-testimonial-cards-text (adapted) | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 75% -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-[50vh] flex items-center" aria-label="인증 및 신뢰">
-    <img src="./images/trust_bg.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <img src="./images/trust_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0 bg-[#3D5A3E]/80"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
         <div class="text-center mb-12">
@@ -704,7 +746,7 @@
 
         <!-- Panoramic ingredient image -->
         <div class="mt-12 aspect-[21/6] overflow-hidden">
-            <img src="./images/ingredient_panoramic.webp" alt="에코라브 스킨 핵심 보태니컬 원료" class="w-full h-full object-cover" loading="lazy">
+            <img src="./images/ingredient_panoramic.png" alt="에코라브 스킨 핵심 보태니컬 원료" class="w-full h-full object-cover" loading="lazy">
         </div>
     </div>
 </section>
@@ -799,7 +841,7 @@
 <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80% -->
 <!-- ============================================================ -->
 <section id="cta-final" class="relative w-full min-h-[60vh] flex items-center justify-center" aria-label="구매하기">
-    <img src="./images/cta_bg.webp" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
+    <img src="./images/cta_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
         <p class="text-xs font-medium tracking-[0.15em] uppercase text-white/50 mb-4">ECOLOVE SKIN</p>

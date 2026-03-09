@@ -205,7 +205,49 @@
             font-weight: 600;
         }
         .skip-link:focus { top: 0; }
-    </style>
+    
+
+/* === Korean Mobile Typography Fix === */
+html, body {
+  overflow-x: hidden;
+}
+html {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  body {
+    line-height: 1.75;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+    line-height: 1.3 !important;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.35 !important;
+  }
+  .flex, [class*="flex"], .grid, [class*="grid"] {
+    min-width: 0;
+  }
+  .grid > *, .flex > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* === End Korean Mobile Typography Fix === */
+
+</style>
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
@@ -271,7 +313,7 @@
         <!-- SECTION: HERO | MOVE: M-HERO-FULLBLEED-OVERLAY -->
         <!-- COMPONENT_REF: hero-center-aligned | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/hero/ | FIDELITY: 80% -->
         <section class="relative w-full min-h-screen flex items-center justify-center" aria-label="히어로">
-            <img src="./images/hero.webp" alt="CNC 정밀 가공 머시닝 센터" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
+            <img src="./images/hero.png" alt="CNC 정밀 가공 머시닝 센터" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
             <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(13,27,42,0.4) 0%, rgba(13,27,42,0.75) 50%, rgba(13,27,42,0.92) 100%);"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 text-center py-32">
                 <p class="text-sm tracking-[0.2em] uppercase mb-6" style="color: var(--color-accent); font-family: var(--font-heading);">Precision Manufacturing Partner</p>
@@ -301,7 +343,7 @@
                     <!-- Left: Featured Image + secondary image (7 cols) -->
                     <div class="lg:col-span-7 flex flex-col gap-5">
                         <div class="relative flex-1">
-                            <img src="./images/cap_cnc.webp" alt="5축 CNC 머시닝 센터 가공 장면" class="w-full h-full object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/cap_cnc.png" alt="5축 CNC 머시닝 센터 가공 장면" class="w-full h-full object-cover rounded-[6px]" loading="lazy">
                             <div class="absolute bottom-4 left-4 bg-[#0D1B2A]/90 px-4 py-2 rounded-[2px]">
                                 <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Core Capability</span>
                             </div>
@@ -384,7 +426,7 @@
         <!-- SECTION: MATERIALS EXPERTISE (KEY COLOR) | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
         <!-- COMPONENT_REF: bento-accent-text-image-grid | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/ | FIDELITY: 70% -->
         <section id="materials" class="relative w-full" style="min-height: 55vh;" aria-label="소재 전문성">
-            <img src="./images/cap_surface.webp" alt="금속 소재 표면 가공" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <img src="./images/cap_surface.png" alt="금속 소재 표면 가공" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(212,120,62,0.75) 0%, rgba(184,98,46,0.65) 40%, rgba(13,27,42,0.85) 100%);"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12" style="padding: var(--section-py) 0;">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -444,37 +486,37 @@
             <!-- Horizontal scroll gallery -->
             <div class="hscroll-gallery pl-6 lg:pl-[calc((100vw-1200px)/2+48px)]">
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/cap_cnc.webp" alt="5축 동시 가공 머시닝센터" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/cap_cnc.png" alt="5축 동시 가공 머시닝센터" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">5축 머시닝센터</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">DMG MORI DMU 50 외 8대 운영</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/cap_quality.webp" alt="CMM 3차원 측정기" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/cap_quality.png" alt="CMM 3차원 측정기" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">CMM 측정실</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">Zeiss CONTURA 외 3대. ±0.001mm 측정 정밀도</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/cap_assembly.webp" alt="정밀 조립 클린룸" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/cap_assembly.png" alt="정밀 조립 클린룸" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">클린룸 조립실</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">Class 1000 클린룸. 반도체·의료 부품 조립</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/divider_facility.webp" alt="공장 전경 파노라마" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/divider_facility.png" alt="공장 전경 파노라마" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">자동화 라인</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">로봇 로딩 + APC 시스템. 24hr 무인 가동</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/cap_surface.webp" alt="표면 처리 설비" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/cap_surface.png" alt="표면 처리 설비" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">표면 처리 설비</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">양극산화·무전해 도금·열처리로 일괄 후처리</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/process_bg.webp" alt="원자재 입고 검사" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/process_bg.png" alt="원자재 입고 검사" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">원자재 입고 검사</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">Mill Certificate 확인 + 경도·성분 자체 분석</p>
                 </div>
                 <div class="stagger-item w-[320px] sm:w-[380px] flex-shrink-0">
-                    <img src="./images/cert_bg.webp" alt="출하 검사실" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
+                    <img src="./images/cert_bg.png" alt="출하 검사실" class="w-full aspect-[3/2] object-cover rounded-[6px]" loading="lazy">
                     <h3 class="mt-4 text-base font-bold" style="color: var(--color-text); font-family: var(--font-heading);">출하 검사실</h3>
                     <p class="text-sm mt-1" style="color: var(--color-text-muted);">비전 검사 + 전수 치수 측정 후 포장 출하</p>
                 </div>
@@ -514,14 +556,14 @@
                             </div>
                         </div>
                         <div class="lg:col-span-5 order-1 lg:order-3">
-                            <img src="./images/contact_bg.webp" alt="도면 검토 회의" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/contact_bg.png" alt="도면 검토 회의" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Step 2 — Image Left, Text Right -->
                     <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                         <div class="lg:col-span-5">
-                            <img src="./images/cap_cnc.webp" alt="설계 리뷰 및 시뮬레이션" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/cap_cnc.png" alt="설계 리뷰 및 시뮬레이션" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                         <div class="lg:col-span-2 hidden lg:flex justify-center">
                             <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
@@ -554,14 +596,14 @@
                             </div>
                         </div>
                         <div class="lg:col-span-5 order-1 lg:order-3">
-                            <img src="./images/cap_quality.webp" alt="시제품 검사 및 측정" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/cap_quality.png" alt="시제품 검사 및 측정" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Step 4 — Image Left, Text Right -->
                     <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                         <div class="lg:col-span-5">
-                            <img src="./images/divider_facility.webp" alt="양산 가공 라인" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/divider_facility.png" alt="양산 가공 라인" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                         <div class="lg:col-span-2 hidden lg:flex justify-center">
                             <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
@@ -594,14 +636,14 @@
                             </div>
                         </div>
                         <div class="lg:col-span-5 order-1 lg:order-3">
-                            <img src="./images/cert_bg.webp" alt="품질 검사 장면" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/cert_bg.png" alt="품질 검사 장면" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Step 6 — Image Left, Text Right -->
                     <div class="stagger-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                         <div class="lg:col-span-5">
-                            <img src="./images/ind_auto.webp" alt="완제품 포장 및 출하" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
+                            <img src="./images/ind_auto.png" alt="완제품 포장 및 출하" class="w-full aspect-[16/10] object-cover rounded-[6px]" loading="lazy">
                         </div>
                         <div class="lg:col-span-2 hidden lg:flex justify-center">
                             <div class="w-10 h-10 rounded-full flex items-center justify-center relative z-10" style="background: var(--color-accent);">
@@ -624,7 +666,7 @@
         <!-- SECTION: EQUIPMENT DIVIDER (FULL-BLEED) | MOVE: M-DIV-FULLBLEED-IMAGE -->
         <!-- COMPONENT_REF: fullbleed-divider-stats | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/divider/ | FIDELITY: 85% -->
         <section class="relative w-full" style="min-height: 50vh;" aria-label="설비 현황 요약">
-            <img src="./images/divider_facility.webp" alt="공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <img src="./images/divider_facility.png" alt="공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex flex-col justify-center" style="min-height: 50vh; padding: 60px 0;">
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
@@ -661,7 +703,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6">
                     <!-- Automotive — Large card (5 cols) -->
                     <div class="stagger-item lg:col-span-5 card-hover rounded-[6px] border overflow-hidden" style="border-color: var(--border-color);">
-                        <img src="./images/ind_auto.webp" alt="자동차 부품" class="w-full aspect-[4/3] object-cover" loading="lazy">
+                        <img src="./images/ind_auto.png" alt="자동차 부품" class="w-full aspect-[4/3] object-cover" loading="lazy">
                         <div class="p-6" style="background: #1A2E4A;">
                             <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Automotive</span>
                             <h3 class="text-lg font-bold mt-2" style="color: var(--color-text); font-family: var(--font-heading);">자동차 부품</h3>
@@ -671,7 +713,7 @@
                     <!-- Right column: 3 smaller cards (7 cols) -->
                     <div class="lg:col-span-7 flex flex-col gap-6">
                         <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
-                            <img src="./images/ind_semi.webp" alt="반도체 장비 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <img src="./images/ind_semi.png" alt="반도체 장비 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
                             <div class="sm:col-span-7 p-5 flex flex-col justify-center">
                                 <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Semiconductor</span>
                                 <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">반도체 장비</h3>
@@ -679,7 +721,7 @@
                             </div>
                         </div>
                         <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
-                            <img src="./images/ind_medical.webp" alt="의료기기 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <img src="./images/ind_medical.png" alt="의료기기 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
                             <div class="sm:col-span-7 p-5 flex flex-col justify-center">
                                 <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Medical</span>
                                 <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">의료기기</h3>
@@ -687,7 +729,7 @@
                             </div>
                         </div>
                         <div class="stagger-item card-hover rounded-[6px] border overflow-hidden grid grid-cols-1 sm:grid-cols-12" style="border-color: var(--border-color); background: #1A2E4A;">
-                            <img src="./images/ind_aero.webp" alt="항공우주 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
+                            <img src="./images/ind_aero.png" alt="항공우주 부품" class="sm:col-span-5 w-full h-full object-cover aspect-[3/2] sm:aspect-auto" loading="lazy">
                             <div class="sm:col-span-7 p-5 flex flex-col justify-center">
                                 <span class="text-xs tracking-wider uppercase" style="color: var(--color-accent); font-family: var(--font-heading);">Aerospace</span>
                                 <h3 class="text-base font-bold mt-1" style="color: var(--color-text); font-family: var(--font-heading);">항공우주</h3>
@@ -894,7 +936,7 @@
         <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
         <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 80% -->
         <section class="relative w-full" style="min-height: 55vh;" aria-label="최종 CTA">
-            <img src="./images/cta_bg.webp" alt="야간 공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <img src="./images/cta_bg.png" alt="야간 공장 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-black/80"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex flex-col items-center justify-center text-center" style="min-height: 55vh; padding: 60px 0;">
                 <p class="text-sm tracking-[0.2em] uppercase mb-4" style="color: var(--color-accent); font-family: var(--font-heading);">Start Your Project</p>

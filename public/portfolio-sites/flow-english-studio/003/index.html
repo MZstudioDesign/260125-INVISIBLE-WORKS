@@ -102,7 +102,49 @@
       }
     }
         }
-    </style>
+    
+
+/* === Korean Mobile Typography Fix === */
+html, body {
+  overflow-x: hidden;
+}
+html {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  body {
+    line-height: 1.75;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+    line-height: 1.3 !important;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.35 !important;
+  }
+  .flex, [class*="flex"], .grid, [class*="grid"] {
+    min-width: 0;
+  }
+  .grid > *, .flex > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* === End Korean Mobile Typography Fix === */
+
+</style>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -161,7 +203,7 @@
 <!-- COMPONENT_REF: hero-center-aligned | GRADE: A | MODE: adapted | FIDELITY: 75% -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-screen" aria-label="Hero">
-    <img src="./images/hero.webp"
+    <img src="./images/hero.png"
          alt="Students engaged in warm classroom conversation" class="absolute inset-0 w-full h-full object-cover" loading="eager" fetchpriority="high">
     <div class="absolute inset-0" style="background: rgba(247,245,240,0.78);"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex flex-col items-center justify-center text-center pt-16">
@@ -207,7 +249,7 @@
             <!-- Card 1: Large (col-span-5) -->
             <div class="col-span-12 md:col-span-5 stagger-item">
                 <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-5 group cursor-pointer">
-                    <img src="./images/program_1.webp"
+                    <img src="./images/program_1.png"
                          alt="Student presenting a speech in English class" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
                 <span class="text-accent text-[11px] tracking-[0.15em] uppercase font-sans font-medium">12 months</span>
@@ -220,7 +262,7 @@
             <!-- Card 2: Small (col-span-3) -->
             <div class="col-span-6 md:col-span-3 stagger-item">
                 <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-4 group cursor-pointer">
-                    <img src="./images/program_2.webp"
+                    <img src="./images/program_2.png"
                          alt="Student reading an English book in a cozy corner" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
                 <span class="text-accent text-[11px] tracking-[0.15em] uppercase font-sans font-medium">6 months</span>
@@ -233,7 +275,7 @@
             <!-- Card 3: Medium (col-span-4) -->
             <div class="col-span-6 md:col-span-4 stagger-item">
                 <div class="relative aspect-[3/4] overflow-hidden rounded-lg mb-4 group cursor-pointer">
-                    <img src="./images/program_3.webp"
+                    <img src="./images/program_3.png"
                          alt="Student writing an essay with focus and confidence" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
                 <span class="text-accent text-[11px] tracking-[0.15em] uppercase font-sans font-medium">3 months</span>
@@ -251,7 +293,7 @@
 <!-- COMPONENT_REF: Pattern_02.5 | MODE: direct | FIDELITY: 100% -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-[50vh] flex items-center" aria-label="Divider">
-    <img src="./images/divider.webp"
+    <img src="./images/divider.png"
          alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0" style="background: rgba(91,123,94,0.78);"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full fade-left">
@@ -301,7 +343,7 @@
             <!-- Featured: Junior Speaking (col-span-5) with image -->
             <div class="col-span-12 sm:col-span-6 lg:col-span-5 stagger-item">
                 <div class="relative rounded-lg overflow-hidden h-full min-h-[280px]">
-                    <img src="./images/program_4.webp"
+                    <img src="./images/program_4.png"
                          alt="Middle school students in English discussion group" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
                     <div class="relative h-full flex flex-col justify-end p-7">
@@ -396,7 +438,7 @@
     <div class="hscroll-gallery pl-6 md:pl-8 lg:pl-[max(calc((100vw-1200px)/2+48px),48px)]">
         <div class="w-[320px] md:w-[380px] stagger-item">
             <div class="aspect-[4/3] rounded-lg overflow-hidden mb-3">
-                <img src="./images/program_5.webp"
+                <img src="./images/program_5.png"
                      alt="Cozy reading corner with warm lighting and book shelves" class="w-full h-full object-cover img-hover" loading="lazy">
             </div>
             <h3 class="font-sans text-sm font-semibold text-text-primary">영어 서재</h3>
@@ -404,7 +446,7 @@
         </div>
         <div class="w-[320px] md:w-[380px] stagger-item">
             <div class="aspect-[4/3] rounded-lg overflow-hidden mb-3">
-                <img src="./images/program_6.webp"
+                <img src="./images/program_6.png"
                      alt="Small discussion table for group conversations" class="w-full h-full object-cover img-hover" loading="lazy">
             </div>
             <h3 class="font-sans text-sm font-semibold text-text-primary">토론 라운지</h3>
@@ -412,7 +454,7 @@
         </div>
         <div class="w-[320px] md:w-[380px] stagger-item">
             <div class="aspect-[4/3] rounded-lg overflow-hidden mb-3">
-                <img src="./images/program_7.webp"
+                <img src="./images/program_7.png"
                      alt="Bright and modern classroom with warm natural light" class="w-full h-full object-cover img-hover" loading="lazy">
             </div>
             <h3 class="font-sans text-sm font-semibold text-text-primary">수업 교실</h3>
@@ -420,7 +462,7 @@
         </div>
         <div class="w-[320px] md:w-[380px] stagger-item">
             <div class="aspect-[4/3] rounded-lg overflow-hidden mb-3">
-                <img src="./images/program_8.webp"
+                <img src="./images/program_8.png"
                      alt="Creative activity zone with presentation tools" class="w-full h-full object-cover img-hover" loading="lazy">
             </div>
             <h3 class="font-sans text-sm font-semibold text-text-primary">프레젠테이션 존</h3>
@@ -461,7 +503,7 @@
             </div>
             <div class="col-span-12 md:col-span-7">
                 <div class="aspect-[4/3] bg-bg-card overflow-hidden rounded-lg">
-                    <img src="./images/program_9.webp"
+                    <img src="./images/program_9.png"
                          alt="Sarah Mitchell, Lead English instructor" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
             </div>
@@ -471,7 +513,7 @@
         <div class="stagger-item grid grid-cols-12 gap-4 lg:gap-8 items-center mb-16">
             <div class="col-span-12 md:col-span-6 order-2 md:order-1">
                 <div class="aspect-[4/3] bg-bg-card overflow-hidden rounded-lg">
-                    <img src="./images/team_1.webp"
+                    <img src="./images/team_1.png"
                          alt="김동현 선생님, Bilingual instructor" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
             </div>
@@ -501,7 +543,7 @@
             </div>
             <div class="col-span-12 md:col-span-7">
                 <div class="aspect-[4/3] bg-bg-card overflow-hidden rounded-lg">
-                    <img src="./images/program_10.webp"
+                    <img src="./images/program_10.png"
                          alt="Emily Dawson, Creative Writing instructor" class="w-full h-full object-cover img-hover" loading="lazy">
                 </div>
             </div>
@@ -514,7 +556,7 @@
 <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | FIDELITY: 75% -->
 <!-- ============================================================ -->
 <section class="relative w-full min-h-[55vh] flex items-center" aria-label="Parent testimonials">
-    <img src="./images/program_11.webp"
+    <img src="./images/program_11.png"
          alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0" style="background: rgba(91,123,94,0.82);"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
@@ -607,7 +649,7 @@
                     더 자세한 내용은 전화 상담을 통해 안내드립니다.
                 </p>
                 <div class="hidden lg:block aspect-[4/5] rounded-lg overflow-hidden max-w-[320px]">
-                    <img src="./images/program_12.webp"
+                    <img src="./images/program_12.png"
                          alt="Student studying in a warm, cozy environment" class="w-full h-full object-cover" loading="lazy">
                 </div>
             </div>
@@ -698,7 +740,7 @@
 <!-- COMPONENT_REF: footer-minimal-cta | GRADE: A | MODE: adapted | FIDELITY: 75% -->
 <!-- ============================================================ -->
 <section id="contact" class="relative w-full min-h-[60vh] flex items-center" aria-label="Contact CTA">
-    <img src="./images/cta.webp"
+    <img src="./images/cta.png"
          alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation">
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 w-full text-center">
