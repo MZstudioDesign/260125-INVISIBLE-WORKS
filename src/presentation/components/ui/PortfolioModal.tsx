@@ -217,7 +217,7 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
 
               {/* iframe Area */}
               <div className="flex-1 min-h-0 flex items-stretch justify-center overflow-hidden bg-[#e8f0f6]/50 p-2 md:p-4">
-                <motion.div
+                <div
                   className={cn(
                     'w-full h-full overflow-hidden',
                     'bg-white shadow-[0_8px_32px_rgba(0,0,0,0.12)]',
@@ -226,8 +226,6 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
                     viewport === 'tablet' && 'rounded-xl border border-[#7fa8c9]/10 max-w-[768px] box-content mx-auto',
                     viewport === 'mobile' && 'rounded-2xl border-2 border-[#1a1a1a]/10 max-w-[390px] box-content mx-auto'
                   )}
-                  layout
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                 >
                   <AnimatePresence mode="wait">
                     <motion.iframe
@@ -242,7 +240,7 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
                       transition={{ duration: 0.3 }}
                     />
                   </AnimatePresence>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
