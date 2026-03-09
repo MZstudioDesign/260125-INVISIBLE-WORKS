@@ -13,8 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/design-system',
     '/privacy',
     '/terms',
-    '/tools/business-card',
-    '/tools/quote',
   ];
 
   // Generate sitemap entries for each locale and page

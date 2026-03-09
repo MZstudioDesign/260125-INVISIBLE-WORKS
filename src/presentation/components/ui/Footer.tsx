@@ -120,7 +120,7 @@ export function Footer({ className = '', locale = 'ko' }: FooterProps) {
           >
             {/* Logo */}
             <Image
-              src="/user_source/logo/logo-white.png"
+              src="/user_source/logo/logo-white.webp"
               alt="Invisible Works"
               width={280}
               height={70}

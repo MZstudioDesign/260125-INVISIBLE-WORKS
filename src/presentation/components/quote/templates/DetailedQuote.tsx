@@ -224,7 +224,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
         }}
       >
         <img
-          src="/user_source/logo/logo-horizontal-black.png"
+          src="/user_source/logo/logo-horizontal-black.webp"
           alt="Invisible Works"
           style={{
             height: '100px',

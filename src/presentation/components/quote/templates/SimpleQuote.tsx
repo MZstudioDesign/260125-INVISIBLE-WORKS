@@ -106,7 +106,7 @@ export function SimpleQuote({ data, pageNumber = 1 }: TemplateProps) {
         {/* 좌측: 로고 */}
         <div style={{ height: '48px' }}>
           <img
-            src="/user_source/logo/logo-black.png"
+            src="/user_source/logo/logo-black.webp"
             alt="Invisible Works"
             style={{
               height: '48px',

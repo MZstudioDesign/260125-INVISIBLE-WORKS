@@ -69,7 +69,7 @@ export function Navigation({ logo, items, cta, className }: NavigationProps) {
             <a href="/" className="flex items-center gap-2">
               {logo || (
                 <Image
-                  src="/user_source/logo/logo-horizontal-black.png"
+                  src="/user_source/logo/logo-horizontal-black.webp"
                   alt="Invisible Works"
                   width={160}
                   height={24}
