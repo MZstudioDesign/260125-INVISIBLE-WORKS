@@ -117,7 +117,16 @@
         .editorial-uppercase { text-transform: uppercase; letter-spacing: 0.15em; }
     
 
+
+
+
+
+
+
 /* === Korean Mobile Typography Fix === */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 html, body {
   overflow-x: hidden;
 }
@@ -127,6 +136,9 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+main, section {
+  overflow-x: clip;
 }
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
