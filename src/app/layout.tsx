@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/presentation/components/common/JsonLd';
+import { GoogleAnalytics } from '@/presentation/components/common/GoogleAnalytics';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -65,13 +67,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // Search engine verification tags
-  // Add your verification codes here after registering with each service
   verification: {
-    // google: 'YOUR_GOOGLE_VERIFICATION_CODE',
-    // other: {
-    //   'naver-site-verification': 'YOUR_NAVER_VERIFICATION_CODE',
-    // },
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+    other: {
+      ...(process.env.NEXT_PUBLIC_NAVER_VERIFICATION
+        ? { 'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION }
+        : {}),
+    },
   },
 };
 
@@ -109,6 +111,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
         {children}
       </body>
     </html>
