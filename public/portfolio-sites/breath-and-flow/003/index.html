@@ -96,12 +96,12 @@
         }
 
         /* Scroll Animations */
-        .fade-in-section {
+        .fade-up {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
-        .fade-in-section.is-visible {
+        .fade-up.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -116,17 +116,11 @@
         }
 
         /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section,
-            .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            * {
-                transition-duration: 0.01ms !important;
-                animation-duration: 0.01ms !important;
-            }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
 
         /* Sensory section — normal grid layout */
@@ -261,7 +255,7 @@
         ========================================= -->
         <section id="sensory" class="w-full bg-page py-20 lg:py-32">
             <div class="max-w-content mx-auto px-6 lg:px-12 w-full">
-                <div class="fade-in-section mb-16">
+                <div class="fade-up mb-16">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Sensory Experience</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight mb-4">
                         오감이 깨어나는<br>수련의 시간
@@ -274,14 +268,14 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                     <!-- Left: Image -->
-                    <div class="lg:col-span-6 fade-in-section">
+                    <div class="lg:col-span-6 fade-left">
                         <div class="rounded-2xl overflow-hidden">
                             <img src="images/sensory-meditation.png" alt="명상 중인 수련자의 모습, 자연광이 부드럽게 비치는 요가 스튜디오" class="w-full h-[300px] lg:h-[540px] object-cover" loading="lazy">
                         </div>
                     </div>
                     <!-- Right: Sensory Items -->
                     <div class="lg:col-span-5 lg:col-start-8 flex flex-col">
-                        <div class="sensory-item stagger-item fade-in-section">
+                        <div class="sensory-item stagger-item fade-right">
                             <div class="flex items-center gap-3 mb-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <h3 class="font-heading text-xl text-text-primary">시각 — 빛의 흐름</h3>
@@ -291,7 +285,7 @@
                                 시선이 머무는 곳마다 자연의 결이 느껴지도록 설계된 공간입니다.
                             </p>
                         </div>
-                        <div class="sensory-item stagger-item fade-in-section">
+                        <div class="sensory-item stagger-item scale-in">
                             <div class="flex items-center gap-3 mb-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                                 <h3 class="font-heading text-xl text-text-primary">청각 — 고요의 소리</h3>
@@ -301,7 +295,7 @@
                                 외부 소음을 차단하는 이중 창과 흡음재가 온전한 집중을 돕습니다.
                             </p>
                         </div>
-                        <div class="sensory-item stagger-item fade-in-section">
+                        <div class="sensory-item stagger-item fade-up">
                             <div class="flex items-center gap-3 mb-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 13"/></svg>
                                 <h3 class="font-heading text-xl text-text-primary">촉각 — 땅의 온기</h3>
@@ -311,7 +305,7 @@
                                 요가 매트 없이도 서고 싶은 바닥, 온돌 난방으로 데워진 겨울의 따뜻함.
                             </p>
                         </div>
-                        <div class="sensory-item stagger-item fade-in-section">
+                        <div class="sensory-item stagger-item fade-up">
                             <div class="flex items-center gap-3 mb-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
                                 <h3 class="font-heading text-xl text-text-primary">후각 — 숲의 향기</h3>
@@ -332,7 +326,7 @@
         ========================================= -->
         <section id="teachers" class="w-full bg-surface py-20 lg:py-32">
             <div class="max-w-content mx-auto px-6 lg:px-12">
-                <div class="fade-in-section mb-16 text-center">
+                <div class="fade-left mb-16 text-center">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Our Teachers</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight mb-4">
                         수련을 이끄는 사람들
@@ -396,7 +390,7 @@
             <img src="images/studio-divider.png" alt="브레스앤플로우 요가 스튜디오 내부, 원목 바닥과 대형 창문" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-white/70"></div>
             <div class="relative max-w-content mx-auto px-6 lg:px-12 py-20">
-                <div class="fade-in-section max-w-[560px]">
+                <div class="fade-right max-w-[560px]">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Studio Space</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight mb-4">
                         빛이 머무는 공간
@@ -426,7 +420,7 @@
         ========================================= -->
         <section id="programs" class="w-full bg-page py-20 lg:py-32">
             <div class="max-w-content mx-auto px-6 lg:px-12">
-                <div class="fade-in-section mb-16">
+                <div class="scale-in mb-16">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Programs</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight mb-4">
                         나에게 맞는<br>수련을 찾다
@@ -539,7 +533,7 @@
         ========================================= -->
         <section class="w-full bg-accent min-h-[50vh] py-20 lg:py-28">
             <div class="max-w-content mx-auto px-6 lg:px-12">
-                <div class="fade-in-section mb-14 text-center">
+                <div class="fade-up mb-14 text-center">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-white/70 mb-4">Testimonials</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-white leading-[1.3] tracking-tight">
                         수련생들의 이야기
@@ -626,7 +620,7 @@
         ========================================= -->
         <section class="w-full bg-page py-20 lg:py-32">
             <div class="max-w-content mx-auto px-6 lg:px-12">
-                <div class="fade-in-section mb-16">
+                <div class="fade-up mb-16">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Workshops & Retreats</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight">
                         일상 너머의 수련
@@ -704,7 +698,7 @@
         ========================================= -->
         <section id="schedule" class="w-full bg-surface py-20 lg:py-32">
             <div class="max-w-content mx-auto px-6 lg:px-12">
-                <div class="fade-in-section mb-16 text-center">
+                <div class="fade-left mb-16 text-center">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-accent mb-4">Schedule & Pricing</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-text-primary leading-[1.3] tracking-tight mb-4">
                         일정과 요금
@@ -716,7 +710,7 @@
                 </div>
 
                 <!-- Weekly Schedule Preview -->
-                <div class="fade-in-section bg-card rounded-2xl p-6 lg:p-8 mb-12 overflow-x-auto">
+                <div class="fade-right bg-card rounded-2xl p-6 lg:p-8 mb-12 overflow-x-auto">
                     <h3 class="font-heading text-lg text-text-primary mb-6">주간 시간표</h3>
                     <table class="w-full min-w-[640px] text-sm font-body">
                         <thead>
@@ -866,7 +860,7 @@
             <img src="images/cta-peaceful.png" alt="평화로운 요가 수련 장면" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-black/60"></div>
             <div class="relative max-w-content mx-auto px-6 lg:px-12 py-20 text-center w-full">
-                <div class="fade-in-section">
+                <div class="scale-in">
                     <p class="text-xs font-body font-medium tracking-[0.2em] uppercase text-white/60 mb-4">Begin Your Practice</p>
                     <h2 class="font-heading text-[1.75rem] lg:text-[2.25rem] text-white leading-[1.3] tracking-tight mb-4">
                         첫 호흡을<br>시작하세요
@@ -950,19 +944,22 @@
             const fadeObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        entry.target.classList.add('visible');
                         fadeObserver.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1, rootMargin: '-50px 0px' });
 
-            document.querySelectorAll('.fade-in-section').forEach(el => fadeObserver.observe(el));
+            document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+            document.querySelectorAll('.fade-left').forEach(el => fadeObserver.observe(el));
+            document.querySelectorAll('.fade-right').forEach(el => fadeObserver.observe(el));
+            document.querySelectorAll('.scale-in').forEach(el => fadeObserver.observe(el));
 
             // Stagger items
             const staggerObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        entry.target.classList.add('visible');
                         staggerObserver.unobserve(entry.target);
                     }
                 });
@@ -970,8 +967,8 @@
 
             document.querySelectorAll('.stagger-item').forEach(el => staggerObserver.observe(el));
         } else {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-                el.classList.add('is-visible');
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+                el.classList.add('visible');
             });
         }
 
@@ -1028,5 +1025,35 @@
         });
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

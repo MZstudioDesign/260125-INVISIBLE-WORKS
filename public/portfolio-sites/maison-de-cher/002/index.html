@@ -61,26 +61,17 @@
             background-color: var(--bg-page);
             color: var(--text-primary);
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
         button, a { transition: all 0.2s ease-in-out; }
 
         /* Sticky steps */
@@ -198,7 +189,7 @@
     ============================================================ -->
     <section id="process" class="w-full bg-white py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-16 fade-in-section">
+            <div class="text-center mb-16 fade-up">
                 <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Consultation Process</p>
                 <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">쉐르만의 4단계 컨설팅</h2>
                 <p class="mt-4 text-warm-gray text-sm max-w-[400px] mx-auto leading-relaxed">
@@ -258,7 +249,7 @@
     ============================================================ -->
     <section id="stylists" class="w-full bg-ivory py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="mb-12 fade-in-section">
+            <div class="mb-12 fade-left">
                 <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Our Designers</p>
                 <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">디자이너를<br>소개합니다</h2>
                 <p class="mt-4 text-warm-gray text-sm max-w-[400px] leading-relaxed">
@@ -312,7 +303,7 @@
     ============================================================ -->
     <section id="services" class="w-full bg-white py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="mb-12 fade-in-section">
+            <div class="mb-12 fade-right">
                 <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Services</p>
                 <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">맞춤 서비스</h2>
                 <p class="mt-4 text-warm-gray text-sm max-w-[400px] leading-relaxed">
@@ -323,7 +314,7 @@
 
             <div class="grid grid-cols-12 gap-6 lg:gap-8">
                 <!-- Left: Service accordion (5 cols) -->
-                <div class="col-span-12 lg:col-span-5 fade-in-section">
+                <div class="col-span-12 lg:col-span-5 scale-in">
                     <!-- Service 1 -->
                     <div class="border-b border-border-light">
                         <button class="service-trigger w-full py-5 flex items-center justify-between text-left" data-service="svc-1" aria-expanded="false">
@@ -387,7 +378,7 @@
                 </div>
 
                 <!-- Right: Image collage (7 cols) -->
-                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-in-section">
+                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-up">
                     <div class="col-span-7 aspect-[4/5] overflow-hidden">
                         <img src="./images/service_cut.png" alt="컷 & 스타일 디자인" class="w-full h-full object-cover" loading="lazy">
                     </div>
@@ -412,11 +403,11 @@
         <img src="./images/divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-charcoal/75"></div>
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
-            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-tight fade-in-section">
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-tight fade-up">
                 머리카락 한 올까지<br>
                 당신의 이야기입니다
             </h2>
-            <a href="#booking" class="inline-block mt-8 px-8 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-[0.12em] hover:bg-gold hover:border-gold transition-colors fade-in-section">
+            <a href="#booking" class="inline-block mt-8 px-8 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-[0.12em] hover:bg-gold hover:border-gold transition-colors fade-left">
                 지금 예약하기
             </a>
         </div>
@@ -428,7 +419,7 @@
     ============================================================ -->
     <section class="w-full bg-ivory py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-12 fade-in-section">
+            <div class="text-center mb-12 fade-right">
                 <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Transformation</p>
                 <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase">변화의 순간</h2>
                 <p class="mt-4 text-warm-gray text-sm max-w-[400px] mx-auto leading-relaxed">
@@ -484,7 +475,7 @@
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <div class="grid grid-cols-12 gap-4 lg:gap-0 items-start">
                 <!-- Text block (4 cols) -->
-                <div class="col-span-12 lg:col-span-4 lg:pt-16 fade-in-section">
+                <div class="col-span-12 lg:col-span-4 lg:pt-16 scale-in">
                     <p class="text-xs font-medium tracking-[0.15em] uppercase text-muted mb-3">Private Space</p>
                     <h2 class="font-display text-4xl md:text-5xl text-charcoal tracking-tight uppercase leading-tight">
                         당신만의<br>프라이빗 공간
@@ -511,7 +502,7 @@
                 <!-- Gap (1 col) -->
                 <div class="hidden lg:block lg:col-span-1"></div>
                 <!-- Image group (7 cols) -->
-                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-in-section">
+                <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3 fade-up">
                     <div class="col-span-8 aspect-[16/10] overflow-hidden">
                         <img src="./images/interior_1.png" alt="메종 드 쉐르 살롱 인테리어" class="w-full h-full object-cover" loading="lazy">
                     </div>
@@ -529,7 +520,7 @@
     ============================================================ -->
     <section class="w-full bg-charcoal py-20 md:py-28" style="min-height: 45vh;">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-12 fade-in-section">
+            <div class="text-center mb-12 fade-up">
                 <p class="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-3">Client Reviews</p>
                 <h2 class="font-display text-4xl md:text-5xl text-white tracking-tight uppercase">고객이 전하는<br>진짜 이야기</h2>
             </div>
@@ -614,7 +605,7 @@
     <section id="booking" class="relative w-full min-h-[65vh] flex items-center justify-center overflow-hidden">
         <img src="./images/cta.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-charcoal/70"></div>
-        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center fade-in-section">
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center fade-left">
             <p class="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Book Now</p>
             <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-tight">
                 지금, 당신의<br>변화를 시작하세요
@@ -693,16 +684,19 @@
     ============================================================ -->
     <script>
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
         el.style.transitionDelay = `${(index % 6) * 0.1}s`;
         observer.observe(el);
@@ -751,7 +745,7 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
             el.style.transition = 'none';
@@ -759,5 +753,35 @@
     }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

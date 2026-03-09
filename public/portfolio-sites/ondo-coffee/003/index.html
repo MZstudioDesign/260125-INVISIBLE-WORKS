@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>온도 커피 Ondo Coffee — 연남동 스페셜티 커피</title>
+  <meta name="description" content="연남동 골목의 스페셜티 커피 전문점. 매일 아침 소량 로스팅한 싱글오리진 원두로 한 잔의 온도를 전합니다." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg: #1A1816;
+      --color-bg-section: #242220;
+      --color-text: #F5EDE3;
+      --color-text-muted: #B8A99A;
+      --color-accent: #D4A574;
+      --color-accent-hover: #C4935E;
+      --color-accent-dark: #A0674B;
+      --color-accent-text: #1A1816;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Nanum Gothic', sans-serif;
+      --font-size-hero: 3.5rem;
+      --font-size-h2: 2.25rem;
+      --font-size-h3: 1.5rem;
+      --font-size-body: 1rem;
+      --font-size-small: 0.875rem;
+      --section-py: 96px;
+      --section-px: 48px;
+    }
+    @media (max-width: 639px) {
+      :root {
+        --font-size-hero: 2.25rem;
+        --font-size-h2: 1.75rem;
+        --font-size-h3: 1.25rem;
+        --section-py: 64px;
+        --section-px: 24px;
+      }
+    }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.95); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
+    /* Gallery hover zoom */
+    .gallery-zoom { overflow: hidden; }
+    .gallery-zoom img { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.6s ease; }
+    .gallery-zoom:hover img { transform: scale(1.08); filter: brightness(1.1); }
+    /* Bento card hover */
+    .bento-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease; }
+    .bento-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    /* Thin gold line */
+    .gold-line { width: 48px; height: 1px; background: linear-gradient(90deg, var(--color-accent), transparent); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 flex items-center justify-between h-16 md:h-20">
+    <a href="#" class="text-white font-bold text-lg tracking-wide" style="font-family: var(--font-heading); font-size: 1.375rem;">온도 커피</a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#about" class="text-white/70 hover:text-[#D4A574] text-sm tracking-wide transition-colors" style="font-family: var(--font-body);">소개</a>
+      <a href="#menu" class="text-white/70 hover:text-[#D4A574] text-sm tracking-wide transition-colors" style="font-family: var(--font-body);">메뉴</a>
+      <a href="#space" class="text-white/70 hover:text-[#D4A574] text-sm tracking-wide transition-colors" style="font-family: var(--font-body);">공간</a>
+      <a href="#gallery" class="text-white/70 hover:text-[#D4A574] text-sm tracking-wide transition-colors" style="font-family: var(--font-body);">갤러리</a>
+      <a href="#visit" class="text-white/70 hover:text-[#D4A574] text-sm tracking-wide transition-colors" style="font-family: var(--font-body);">오시는 길</a>
+    </nav>
+    <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="메뉴 열기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden" style="background: rgba(26,24,22,0.95); backdrop-filter: blur(12px);">
+    <div class="px-6 py-6 flex flex-col gap-4">
+      <a href="#about" class="text-white/70 hover:text-[#D4A574] text-base transition-colors">소개</a>
+      <a href="#menu" class="text-white/70 hover:text-[#D4A574] text-base transition-colors">메뉴</a>
+      <a href="#space" class="text-white/70 hover:text-[#D4A574] text-base transition-colors">공간</a>
+      <a href="#gallery" class="text-white/70 hover:text-[#D4A574] text-base transition-colors">갤러리</a>
+      <a href="#visit" class="text-white/70 hover:text-[#D4A574] text-base transition-colors">오시는 길</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- SECTION 01: HERO | FULL-BLEED OVERLAY — DARK DRAMATIC -->
+<section class="relative w-full min-h-screen">
+  <img src="./images/hero.png" alt="온도 커피 매장 내부" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+  <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-[#1A1816]"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-screen flex items-end pb-24 md:pb-32">
+    <div class="max-w-xl">
+      <div class="gold-line mb-6"></div>
+      <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-5" style="font-family: var(--font-body);">Specialty Coffee in Yeonnam-dong</p>
+      <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-light mb-6" style="font-size: var(--font-size-hero); line-height: 1.1; font-family: var(--font-heading);">한 잔의 온도가<br>하루를 데웁니다</h1>
+      <p class="text-white/50 text-lg mb-10" style="font-family: var(--font-body);">연남동 골목, 매일 아침 원두를 볶습니다</p>
+      <a href="#menu" class="inline-block px-8 py-3 border border-[#D4A574] text-[#D4A574] text-xs tracking-[0.15em] uppercase hover:bg-[#D4A574] hover:text-[#1A1816] transition-all duration-300">메뉴 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02: BRAND STORY — CENTERED EDITORIAL -->
+<section id="about" class="w-full" style="background: var(--color-bg); padding: var(--section-py) 0;">
+  <div class="max-w-[800px] mx-auto px-6 md:px-8 lg:px-12 text-center fade-up">
+    <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-6" style="font-family: var(--font-body);">About Ondo</p>
+    <h2 class="text-3xl md:text-4xl font-light mb-8" style="font-size: var(--font-size-h2); color: var(--color-text);">좋은 원두는<br>좋은 사람에게서 옵니다</h2>
+    <div class="gold-line mx-auto mb-8"></div>
+    <p class="text-base md:text-lg leading-relaxed" style="color: var(--color-text-muted); line-height: 1.9;">에티오피아 예가체프 농장에서 직접 가져온 생두.<br>72시간 저온 숙성을 거쳐, 매일 아침 소량만 로스팅합니다.<br>한 잔에 담기는 건 커피가 아니라, 기다림의 온도입니다.</p>
+  </div>
+</section>
+
+<!-- SECTION 03: SIGNATURE DRINKS — BENTO MOSAIC GRID (VARIANT 003 DIFFERENTIATION) -->
+<section id="menu" class="w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="mb-12 fade-up">
+      <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Signature</p>
+      <h2 class="text-3xl md:text-4xl font-light" style="font-size: var(--font-size-h2);">매일 고르고,<br>매일 내립니다</h2>
+    </div>
+    <!-- Bento Mosaic Grid -->
+    <div class="grid grid-cols-12 gap-4 auto-rows-[200px] md:auto-rows-[220px]">
+      <!-- Featured drink — spans 2 cols, 2 rows -->
+      <div class="col-span-12 md:col-span-7 row-span-2 relative overflow-hidden rounded-lg bento-card stagger-item" style="transition-delay: 0s;">
+        <img src="./images/menu_main.png" alt="온도 드립 커피" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
+          <h3 class="text-white text-2xl font-light mb-2" style="font-family: var(--font-heading);">온도 드립</h3>
+          <p class="text-white/60 text-sm mb-3">에티오피아 예가체프 싱글오리진</p>
+          <span class="text-[#D4A574] text-lg font-semibold">6,500원</span>
+        </div>
+      </div>
+      <!-- Latte — top right -->
+      <div class="col-span-6 md:col-span-5 relative overflow-hidden rounded-lg bento-card stagger-item" style="transition-delay: 0.1s;">
+        <img src="./images/menu_latte.png" alt="카라멜 라떼" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-5">
+          <h3 class="text-white text-lg font-light mb-1" style="font-family: var(--font-heading);">카라멜 라떼</h3>
+          <p class="text-white/50 text-xs mb-1">수제 카라멜 시럽과 유기농 우유</p>
+          <span class="text-[#D4A574] text-sm font-semibold">6,000원</span>
+        </div>
+      </div>
+      <!-- Cold brew — bottom center -->
+      <div class="col-span-6 md:col-span-3 relative overflow-hidden rounded-lg bento-card stagger-item" style="transition-delay: 0.2s;">
+        <img src="./images/menu_drip.png" alt="콜드브루" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-5">
+          <h3 class="text-white text-base font-light mb-1" style="font-family: var(--font-heading);">콜드브루</h3>
+          <p class="text-white/50 text-xs">18시간 저온 추출</p>
+          <span class="text-[#D4A574] text-sm font-semibold mt-1 inline-block">5,500원</span>
+        </div>
+      </div>
+      <!-- Dessert — bottom right -->
+      <div class="col-span-12 md:col-span-2 relative overflow-hidden rounded-lg bento-card stagger-item" style="transition-delay: 0.3s;">
+        <img src="./images/menu_dessert.png" alt="당근 케이크" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-4">
+          <h3 class="text-white text-base font-light mb-1" style="font-family: var(--font-heading);">당근 케이크</h3>
+          <span class="text-[#D4A574] text-sm font-semibold">5,000원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04: DIVIDER — FULL-BLEED IMAGE + AMBER OVERLAY (VARIANT 003 DIFFERENTIATION) -->
+<section class="relative w-full min-h-[50vh]">
+  <img src="./images/divider_coffee.png" alt="커피 원두 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(160,103,75,0.8), rgba(212,165,116,0.6));"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex items-center justify-center">
+    <div class="text-center scale-in">
+      <div class="gold-line mx-auto mb-6" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); width: 80px;"></div>
+      <p class="text-white text-2xl md:text-3xl lg:text-4xl font-light italic" style="font-family: var(--font-heading);">원두 한 알에서 시작되는 이야기</p>
+      <div class="gold-line mx-auto mt-6" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); width: 80px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05: INTERIOR / SPACE — FULL-WIDTH EDITORIAL WITH TEXT OVERLAY (VARIANT 003 DIFFERENTIATION) -->
+<section id="space" class="w-full relative">
+  <!-- Full-width image background -->
+  <div class="relative w-full min-h-[70vh] md:min-h-[80vh]">
+    <img src="./images/interior_main.png" alt="온도 커피 매장 내부" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-r from-[#1A1816]/90 via-[#1A1816]/60 to-transparent"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[70vh] md:min-h-[80vh] flex items-center">
+      <div class="max-w-md fade-left">
+        <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Space</p>
+        <h2 class="text-white text-3xl md:text-4xl font-light mb-6" style="font-size: var(--font-size-h2);">빈 자리가 있으면<br>앉아도 됩니다</h2>
+        <div class="gold-line mb-6"></div>
+        <p class="text-white/60 text-base leading-relaxed" style="line-height: 1.9;">6평 남짓한 공간에 테이블 다섯.<br>나무 의자와 창가 자리, 그리고 바 카운터.<br>오래 앉아도 눈치 주지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Detail image strip -->
+  <div class="w-full" style="background: var(--color-bg); padding: 32px 0;">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 fade-up">
+      <div class="overflow-hidden rounded-lg">
+        <img src="./images/interior_detail.png" alt="바 카운터 디테일" class="w-full aspect-[21/9] object-cover" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06: BARISTA — OFFSET WITH DARK CARD (VARIANT 003 DIFFERENTIATION) -->
+<section class="w-full" style="background: var(--color-bg); padding: var(--section-py) 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-start">
+      <!-- Image — left -->
+      <div class="col-span-12 md:col-span-6 fade-left">
+        <div class="overflow-hidden rounded-lg">
+          <img src="./images/barista.png" alt="바리스타 김도윤" class="w-full aspect-[3/4] object-cover" loading="lazy" />
+        </div>
+      </div>
+      <!-- Dark card — right with offset -->
+      <div class="col-span-12 md:col-span-5 md:col-start-8 md:mt-20 fade-right">
+        <div class="rounded-lg p-8 md:p-10" style="background: var(--color-bg-section); border: 1px solid rgba(212,165,116,0.1);">
+          <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Barista</p>
+          <h2 class="text-2xl md:text-3xl font-light mb-6" style="font-size: var(--font-size-h2); color: var(--color-text);">커피를 내리는 사람,<br>김도윤</h2>
+          <div class="gold-line mb-6"></div>
+          <p class="text-base leading-relaxed mb-6" style="color: var(--color-text-muted); line-height: 1.9;">SCA 바리스타 자격, 스페셜티 커피 8년.<br>에티오피아와 콜롬비아 농장을 직접 다녀왔습니다.</p>
+          <p class="text-lg italic" style="color: var(--color-accent); font-family: var(--font-heading);">"잘 볶은 원두는 물만 부어도 맛있어요."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07: SEASONAL SPECIAL — DARK AMBER/SIENNA BAND (VARIANT 003 DIFFERENTIATION) -->
+<section class="relative w-full" style="background: linear-gradient(135deg, #A0674B, #D4A574); padding: var(--section-py) 0;">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 30% 50%, rgba(26,24,22,0.3), transparent 70%);"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center">
+      <!-- Text — left -->
+      <div class="col-span-12 md:col-span-5 fade-left">
+        <p class="text-white/50 text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">This Season</p>
+        <h2 class="text-white text-3xl md:text-4xl font-light mb-6" style="font-size: var(--font-size-h2);">봄이 오면<br>잔에도 봄이 옵니다</h2>
+        <div style="width: 48px; height: 1px; background: rgba(255,255,255,0.4);" class="mb-6"></div>
+        <p class="text-white/70 text-base leading-relaxed mb-8" style="line-height: 1.9;">3월 한정 — 벚꽃 콜드브루<br>국내산 벚꽃 시럽에 콜드브루를 부었습니다.<br>은은한 꽃향이 입안에 머무릅니다.</p>
+        <a href="#" class="inline-block px-6 py-3 bg-[#1A1816] text-[#D4A574] text-xs tracking-[0.15em] uppercase hover:bg-[#242220] transition-all duration-300 font-medium">시즌 메뉴 보기</a>
+      </div>
+      <!-- Image — right -->
+      <div class="col-span-12 md:col-span-7 fade-right">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/seasonal.png" alt="벚꽃 콜드브루" class="w-full aspect-[16/9] object-cover" loading="lazy" />
+          </div>
+          <div class="overflow-hidden rounded-lg">
+            <img src="./images/seasonal_drink.png" alt="시즌 음료 클로즈업" class="w-full aspect-[1/1] object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 08: GALLERY — 2x2 GRID WITH HOVER ZOOM (VARIANT 003 DIFFERENTIATION) -->
+<section id="gallery" class="w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="text-center mb-12 fade-up">
+      <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Daily Moments</p>
+      <h2 class="text-3xl md:text-4xl font-light" style="font-size: var(--font-size-h2);">온도의 하루</h2>
+    </div>
+    <!-- 2x2 Grid with hover zoom -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="gallery-zoom rounded-lg stagger-item" style="transition-delay: 0s;">
+        <img src="./images/gallery_1.png" alt="커피 추출 과정" class="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />
+      </div>
+      <div class="gallery-zoom rounded-lg stagger-item" style="transition-delay: 0.1s;">
+        <img src="./images/gallery_2.png" alt="라떼 아트" class="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />
+      </div>
+      <div class="gallery-zoom rounded-lg stagger-item" style="transition-delay: 0.2s;">
+        <img src="./images/gallery_3.png" alt="원두 로스팅" class="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />
+      </div>
+      <div class="gallery-zoom rounded-lg stagger-item" style="transition-delay: 0.3s;">
+        <img src="./images/gallery_4.png" alt="카페 일상" class="w-full aspect-[4/3] object-cover rounded-lg" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 09: REVIEWS — DARK CARDS -->
+<section class="w-full" style="background: var(--color-bg); padding: var(--section-py) 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="text-center mb-12 fade-up">
+      <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Reviews</p>
+      <h2 class="text-3xl md:text-4xl font-light" style="font-size: var(--font-size-h2);">단골들이<br>전하는 이야기</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="rounded-lg p-8 stagger-item" style="background: var(--color-bg-section); border: 1px solid rgba(212,165,116,0.08); transition-delay: 0s;">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-base mb-6" style="color: var(--color-text-muted); line-height: 1.8;">"매일 출근길에 들러요. 드립 한 잔이면 아침이 됩니다."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(212,165,116,0.15); color: #D4A574;">김</div>
+          <div>
+            <p class="text-sm font-medium" style="color: var(--color-text);">김서연</p>
+            <p class="text-xs" style="color: var(--color-text-muted);">연남동 주민, 3년 단골</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-lg p-8 stagger-item" style="background: var(--color-bg-section); border: 1px solid rgba(212,165,116,0.08); transition-delay: 0.15s;">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-base mb-6" style="color: var(--color-text-muted); line-height: 1.8;">"커피 맛도 좋지만 분위기가 좋아서 자주 와요. 노트북 작업하기 딱 좋습니다."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(212,165,116,0.15); color: #D4A574;">박</div>
+          <div>
+            <p class="text-sm font-medium" style="color: var(--color-text);">박준호</p>
+            <p class="text-xs" style="color: var(--color-text-muted);">프리랜서 디자이너</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-lg p-8 stagger-item" style="background: var(--color-bg-section); border: 1px solid rgba(212,165,116,0.08); transition-delay: 0.3s;">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#D4A574" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-base mb-6" style="color: var(--color-text-muted); line-height: 1.8;">"당근 케이크 진짜 맛있어요. 친구들한테 항상 여기 추천합니다."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style="background: rgba(212,165,116,0.15); color: #D4A574;">이</div>
+          <div>
+            <p class="text-sm font-medium" style="color: var(--color-text);">이하은</p>
+            <p class="text-xs" style="color: var(--color-text-muted);">대학생</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: LOCATION -->
+<section id="visit" class="w-full" style="background: var(--color-bg-section); padding: var(--section-py) 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-12 gap-8 items-start">
+      <div class="col-span-12 md:col-span-5 fade-left">
+        <p class="text-[#D4A574] text-xs tracking-[0.3em] uppercase mb-4" style="font-family: var(--font-body);">Visit</p>
+        <h2 class="text-3xl md:text-4xl font-light mb-8" style="font-size: var(--font-size-h2);">오시는 길</h2>
+      </div>
+      <div class="col-span-12 md:col-span-7 fade-right">
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <p class="text-sm font-medium mb-1" style="color: var(--color-text);">주소</p>
+              <p style="color: var(--color-text-muted);">서울시 마포구 성미산로29길 12, 1층</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <p class="text-sm font-medium mb-1" style="color: var(--color-text);">영업시간</p>
+              <p style="color: var(--color-text-muted);">매일 09:00 - 21:00 (월요일 휴무)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <p class="text-sm font-medium mb-1" style="color: var(--color-text);">전화</p>
+              <p style="color: var(--color-text-muted);">02-336-0912</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <div>
+              <p class="text-sm font-medium mb-1" style="color: var(--color-text);">교통편</p>
+              <p style="color: var(--color-text-muted);">연남역 3번 출구에서 도보 4분</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: CTA — FULL-BLEED DARK OVERLAY -->
+<section class="relative w-full min-h-[60vh]">
+  <img src="./images/cta.png" alt="온도 커피 분위기" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+  <div class="absolute inset-0 bg-black/80"></div>
+  <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center justify-center">
+    <div class="text-center scale-in">
+      <div class="gold-line mx-auto mb-8" style="background: linear-gradient(90deg, transparent, var(--color-accent), transparent); width: 80px;"></div>
+      <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-light mb-6" style="font-family: var(--font-heading);">내일 아침,<br>온도에서</h2>
+      <p class="text-white/50 text-lg mb-10">따뜻한 한 잔이 기다리고 있습니다</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="inline-block px-8 py-3 border border-[#D4A574] text-[#D4A574] text-xs tracking-[0.15em] uppercase hover:bg-[#D4A574] hover:text-[#1A1816] transition-all duration-300">인스타그램 보기</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER — DARK THEME -->
+<footer class="w-full" style="background: var(--color-bg-section); padding: 48px 0;">
+  <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div>
+        <p class="text-lg font-light mb-2" style="font-family: var(--font-heading); color: var(--color-text);">온도 커피 Ondo Coffee</p>
+        <p class="text-sm" style="color: var(--color-text-muted);">서울시 마포구 성미산로29길 12 · 02-336-0912</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="text-[#D4A574] hover:text-[#C4935E] transition-colors" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <span class="text-xs" style="color: var(--color-text-muted);">@ondo_coffee_ynm</span>
+      </div>
+    </div>
+    <div class="mt-8 pt-6" style="border-top: 1px solid rgba(212,165,116,0.1);">
+      <p class="text-xs text-center" style="color: var(--color-text-muted);">© 2025 Ondo Coffee. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in').forEach(function(el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // Header scroll behavior — dark theme
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(26,24,22,0.95)';
+      header.style.backdropFilter = 'blur(12px)';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = 'none';
+    }
+  });
+
+  // Mobile menu toggle
+  var menuBtn = document.getElementById('mobile-menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', function() {
+    mobileMenu.classList.toggle('hidden');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+})();
+</script>
+
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
+</body>
+</html>

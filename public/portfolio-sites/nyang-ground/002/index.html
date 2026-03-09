@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>냥그라운드 Nyang Ground | 고양이 카페</title>
+  <meta name="description" content="서울 합정동 고양이 카페 냥그라운드. 고양이와 함께하는 따뜻한 시간." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard+Variable:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-bg: #FAF6EE;
+      --color-bg-section: #F0EAE0;
+      --color-text: #3D3228;
+      --color-text-muted: #7A6E5E;
+      --color-accent: #B8845D;
+      --color-accent-hover: #A5724B;
+      --color-accent-dark: #8B6E4E;
+      --color-accent-text: #FFFFFF;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Pretendard Variable', 'Pretendard', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      line-height: 1.2;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 4px; }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .scale-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Stagger children */
+    .stagger-children > * { transition-delay: calc(var(--i, 0) * 0.12s); }
+
+    /* Hero parallax */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('./images/hero.png');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.1);
+      transition: transform 0.3s ease-out;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(250, 246, 238, 0.15) 0%,
+        rgba(184, 132, 93, 0.35) 40%,
+        rgba(139, 110, 78, 0.65) 100%
+      );
+    }
+
+    /* Full-bleed sections */
+    .full-bleed {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    /* Editorial divider */
+    .editorial-divider {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+    .editorial-divider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .editorial-divider .overlay-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(61,50,40,0.3) 0%, rgba(61,50,40,0.6) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Cat profile card */
+    .cat-card {
+      background: var(--color-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(61, 50, 40, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .cat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(61, 50, 40, 0.15);
+    }
+
+    /* Menu card */
+    .menu-card {
+      background: var(--color-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 16px rgba(61, 50, 40, 0.06);
+      transition: transform 0.3s ease;
+    }
+    .menu-card:hover { transform: translateY(-4px); }
+
+    /* Accent button */
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .btn-accent:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+    }
+
+    /* Section label */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    /* Review card */
+    .review-card {
+      background: var(--color-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(61, 50, 40, 0.06);
+      border-left: 4px solid var(--color-accent);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(61, 50, 40, 0.95);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-menu.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      color: var(--color-bg);
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--color-accent); }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+    }
+    .gallery-grid img:hover { transform: scale(1.04); }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Rules list */
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(61, 50, 40, 0.1);
+    }
+    .rule-item:last-child { border-bottom: none; }
+    .rule-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(250, 246, 238, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(61, 50, 40, 0.08);
+    }
+
+    /* Star rating */
+    .star { color: var(--color-accent); }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FAF6EE',
+            'bg-section': '#F0EAE0',
+            text: '#3D3228',
+            'text-muted': '#7A6E5E',
+            accent: '#B8845D',
+            'accent-hover': '#A5724B',
+            'accent-dark': '#8B6E4E',
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Pretendard Variable', 'Pretendard', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="header">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#hero" class="font-heading text-xl font-bold tracking-tight" style="color: var(--color-accent);">
+        냥그라운드
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#about" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">소개</a>
+        <a href="#cats" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">고양이</a>
+        <a href="#menu" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">메뉴</a>
+        <a href="#play" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">놀이공간</a>
+        <a href="#gallery" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">갤러리</a>
+        <a href="#location" class="text-sm font-medium hover:text-accent transition-colors" style="color: var(--color-text-muted);">오시는 길</a>
+        <a href="#contact" class="btn-accent text-sm" style="padding: 0.5rem 1.25rem;">예약하기</a>
+      </nav>
+      <button class="md:hidden" id="menuBtn" aria-label="메뉴 열기" style="color: var(--color-text);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button id="closeMenu" class="absolute top-6 right-6" style="color: var(--color-bg);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="#about">소개</a>
+    <a href="#cats">고양이</a>
+    <a href="#menu">메뉴</a>
+    <a href="#play">놀이공간</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#location">오시는 길</a>
+    <a href="#contact">예약하기</a>
+  </div>
+
+
+  <!-- ========== §1 HERO — Full-bleed with warm gradient overlay ========== -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="relative z-10 text-center px-4">
+      <p class="text-white/80 text-sm tracking-[0.25em] uppercase mb-4 fade-up" style="font-family: var(--font-body);">Seoul Hapjeong &middot; Cat Cafe</p>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 fade-up" style="transition-delay: 0.1s;">
+        고양이와 함께하는<br/>따뜻한 시간
+      </h1>
+      <p class="text-white/90 text-lg md:text-xl max-w-xl mx-auto mb-10 fade-up" style="transition-delay: 0.2s; font-family: var(--font-body);">
+        냥그라운드에서 사랑스러운 고양이 친구들과<br class="hidden md:block"/>특별한 힐링 타임을 보내세요
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="transition-delay: 0.3s;">
+        <a href="#contact" class="btn-accent text-base">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          지금 예약하기
+        </a>
+        <a href="#about" class="btn-outline text-base" style="border-color: white; color: white;">
+          더 알아보기
+        </a>
+      </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60">
+      <span class="text-xs tracking-widest uppercase">Scroll</span>
+      <div class="w-px h-8 bg-white/40 animate-pulse"></div>
+    </div>
+  </section>
+
+
+  <!-- ========== §2 ABOUT ========== -->
+  <section id="about" class="py-24 md:py-32 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <!-- Image -->
+        <div class="fade-left">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+            <img src="./images/cat_main.png" alt="냥그라운드 고양이들" class="w-full aspect-[4/5] object-cover" loading="lazy" />
+            <div class="absolute bottom-0 left-0 right-0 p-6" style="background: linear-gradient(transparent, rgba(61,50,40,0.7));">
+              <p class="text-white text-sm font-medium">냥그라운드의 행복한 주민들</p>
+            </div>
+          </div>
+        </div>
+        <!-- Text -->
+        <div class="fade-right">
+          <div class="section-label">About Us</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--color-text);">
+            모든 냥이는<br/>가족입니다
+          </h2>
+          <p class="text-lg mb-6" style="color: var(--color-text-muted);">
+            냥그라운드는 단순한 고양이 카페가 아닙니다. 우리는 모든 고양이가 사랑받고 존중받는 환경을 만들기 위해 노력합니다.
+          </p>
+          <p class="text-lg mb-8" style="color: var(--color-text-muted);">
+            동물행동학을 전공한 전문 스태프가 상주하며, 고양이들의 건강과 행복을 최우선으로 관리합니다. 방문하시는 모든 분들이 고양이와의 진정한 교감을 경험하실 수 있도록 최적의 환경을 제공합니다.
+          </p>
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <p class="text-3xl font-bold font-heading" style="color: var(--color-accent);">8+</p>
+              <p class="text-sm mt-1" style="color: var(--color-text-muted);">상주 고양이</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold font-heading" style="color: var(--color-accent);">3년</p>
+              <p class="text-sm mt-1" style="color: var(--color-text-muted);">운영 경력</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold font-heading" style="color: var(--color-accent);">4.9</p>
+              <p class="text-sm mt-1" style="color: var(--color-text-muted);">평균 평점</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== Editorial Divider 1 — Full-bleed overlay ========== -->
+  <div class="full-bleed editorial-divider fade-up">
+    <img src="./images/divider_cats.png" alt="고양이들이 놀고 있는 모습" loading="lazy" />
+    <div class="overlay-text">
+      <p class="text-sm tracking-[0.2em] uppercase mb-3 opacity-80">Our Family</p>
+      <h3 class="text-3xl md:text-5xl font-heading font-bold">"고양이는 우리의 가족입니다"</h3>
+    </div>
+  </div>
+
+
+  <!-- ========== §3 OUR CATS — Alternating rows ========== -->
+  <section id="cats" class="py-24 md:py-32 px-4" style="background: var(--color-bg-section);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <div class="section-label justify-center">Our Cats</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">냥그라운드의 식구들</h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-muted);">
+          저마다 개성이 뚜렷한 사랑스러운 고양이 친구들을 소개합니다
+        </p>
+      </div>
+
+      <!-- Cat 1: Image left, text right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16 fade-up">
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <img src="./images/cat_1.png" alt="치즈" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+        </div>
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background: var(--color-accent); color: var(--color-accent-text);">
+            #001
+          </span>
+          <h3 class="text-3xl font-bold mb-2">치즈</h3>
+          <p class="text-sm mb-3 font-medium" style="color: var(--color-accent);">치즈태비 &middot; 3살 &middot; 수컷</p>
+          <p class="text-base" style="color: var(--color-text-muted);">
+            사람을 너무 좋아하는 냥그라운드의 인기 스타. 무릎 위에 올라오는 것을 가장 좋아하고, 처음 오시는 손님에게도 먼저 다가가는 사교적인 성격입니다. 간식 시간이 되면 제일 먼저 달려옵니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cat 2: Text left, image right (alternating) -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16 fade-up">
+        <div class="order-2 md:order-1">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background: var(--color-accent); color: var(--color-accent-text);">
+            #002
+          </span>
+          <h3 class="text-3xl font-bold mb-2">턱시</h3>
+          <p class="text-sm mb-3 font-medium" style="color: var(--color-accent);">턱시도 &middot; 2살 &middot; 암컷</p>
+          <p class="text-base" style="color: var(--color-text-muted);">
+            우아하고 도도한 성격의 턱시도 고양이. 높은 곳에서 내려다보는 것을 좋아하며, 마음에 드는 사람에게만 다가가는 까탈스러운 매력의 소유자입니다. 장난감 낚싯대에는 약합니다.
+          </p>
+        </div>
+        <div class="order-1 md:order-2 rounded-2xl overflow-hidden shadow-lg">
+          <img src="./images/cat_2.png" alt="턱시" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Cat 3: Image left, text right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16 fade-up">
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+          <img src="./images/cat_3.png" alt="뭉치" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+        </div>
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background: var(--color-accent); color: var(--color-accent-text);">
+            #003
+          </span>
+          <h3 class="text-3xl font-bold mb-2">뭉치</h3>
+          <p class="text-sm mb-3 font-medium" style="color: var(--color-accent);">러시안블루 &middot; 4살 &middot; 수컷</p>
+          <p class="text-base" style="color: var(--color-text-muted);">
+            조용하고 차분한 성격의 러시안블루. 해먹에서 낮잠 자는 것이 취미이며, 부드러운 털을 만져주면 그르릉 소리를 냅니다. 느긋한 성격으로 카페의 힐링 담당입니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cat 4: Text left, image right (alternating) -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center fade-up">
+        <div class="order-2 md:order-1">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background: var(--color-accent); color: var(--color-accent-text);">
+            #004
+          </span>
+          <h3 class="text-3xl font-bold mb-2">얼룩이</h3>
+          <p class="text-sm mb-3 font-medium" style="color: var(--color-accent);">삼색이 &middot; 1살 &middot; 암컷</p>
+          <p class="text-base" style="color: var(--color-text-muted);">
+            막내답게 호기심 가득하고 장난기 넘치는 삼색 고양이. 캣터널을 쏜살같이 돌아다니며 에너지가 넘칩니다. 작은 장난감 쥐를 물고 다니는 모습이 귀여워 팬이 많습니다.
+          </p>
+        </div>
+        <div class="order-1 md:order-2 rounded-2xl overflow-hidden shadow-lg">
+          <img src="./images/cat_1.png" alt="얼룩이" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §4 EDITORIAL DIVIDER 2 — Full-bleed overlay ========== -->
+  <div class="full-bleed editorial-divider fade-up" style="height: 300px;">
+    <img src="./images/interior_main.png" alt="냥그라운드 인테리어" loading="lazy" />
+    <div class="overlay-text">
+      <p class="text-sm tracking-[0.2em] uppercase mb-3 opacity-80">Warm Space</p>
+      <h3 class="text-3xl md:text-4xl font-heading font-bold">"따뜻한 공간, 행복한 시간"</h3>
+    </div>
+  </div>
+
+
+  <!-- ========== §5 CAT MENU — Split layout (text left, images right) ========== -->
+  <section id="menu" class="py-24 md:py-32 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+        <!-- Left: Text content -->
+        <div class="fade-left">
+          <div class="section-label">Cat Menu</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">특별한 메뉴</h2>
+          <p class="text-lg mb-10" style="color: var(--color-text-muted);">
+            고양이를 테마로 한 귀여운 음료와 디저트를 즐겨보세요. 모든 메뉴는 매일 신선한 재료로 직접 만듭니다.
+          </p>
+
+          <div class="space-y-6">
+            <!-- Menu item 1 -->
+            <div class="menu-card">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">냥그라운드 라떼</h3>
+                <span class="font-heading font-bold text-lg" style="color: var(--color-accent);">6,500원</span>
+              </div>
+              <p class="text-sm" style="color: var(--color-text-muted);">
+                시그니처 라떼 위에 귀여운 고양이 라떼아트를 올린 냥그라운드만의 특별한 음료
+              </p>
+            </div>
+
+            <!-- Menu item 2 -->
+            <div class="menu-card">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">고양이발 쿠키</h3>
+                <span class="font-heading font-bold text-lg" style="color: var(--color-accent);">4,500원</span>
+              </div>
+              <p class="text-sm" style="color: var(--color-text-muted);">
+                고양이 발바닥 모양의 수제 버터 쿠키. 바삭하면서도 부드러운 식감이 일품
+              </p>
+            </div>
+
+            <!-- Menu item 3 -->
+            <div class="menu-card">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">냥 스무디</h3>
+                <span class="font-heading font-bold text-lg" style="color: var(--color-accent);">7,000원</span>
+              </div>
+              <p class="text-sm" style="color: var(--color-text-muted);">
+                제철 과일로 만든 건강한 스무디. 딸기, 망고, 블루베리 중 선택 가능
+              </p>
+            </div>
+          </div>
+
+          <p class="text-xs mt-6" style="color: var(--color-text-muted);">
+            * 입장료 10,000원 (음료 1잔 포함, 1시간 기준)
+          </p>
+        </div>
+
+        <!-- Right: Images stacked -->
+        <div class="fade-right space-y-6">
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img src="./images/menu_main.png" alt="냥그라운드 시그니처 메뉴" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img src="./images/menu_drink.png" alt="냥그라운드 음료" class="w-full aspect-[3/2] object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §6 PLAY SPACE — Full-bleed with overlay ========== -->
+  <section id="play" class="full-bleed relative" style="min-height: 600px;">
+    <img src="./images/interior_play.png" alt="냥그라운드 놀이 공간" class="w-full h-full object-cover absolute inset-0" style="min-height: 600px;" loading="lazy" />
+    <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(61,50,40,0.85) 0%, rgba(61,50,40,0.5) 50%, transparent 100%);"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-24 md:py-32 flex items-center" style="min-height: 600px;">
+      <div class="max-w-lg fade-left">
+        <div class="section-label" style="color: rgba(255,255,255,0.7);">
+          <span style="color: rgba(255,255,255,0.7);">Play Space</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">냥이들의 놀이터</h2>
+        <p class="text-lg text-white/80 mb-8">
+          고양이들의 본능을 자극하는 다양한 놀이 시설을 갖추고 있습니다. 자유롭게 뛰어놀고 탐험하는 고양이들의 모습을 가까이서 만나보세요.
+        </p>
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center gap-3 text-white/90">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            3층 높이 대형 캣타워
+          </li>
+          <li class="flex items-center gap-3 text-white/90">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            다양한 캣터널 코스
+          </li>
+          <li class="flex items-center gap-3 text-white/90">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            편안한 해먹 & 쿠션 존
+          </li>
+        </ul>
+        <a href="#contact" class="btn-accent">방문 예약하기</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §7 STAFF ========== -->
+  <section class="py-24 md:py-32 px-4" style="background: var(--color-bg-section);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div class="fade-up">
+          <div class="section-label">Our Staff</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">전문 케어</h2>
+          <div class="flex items-start gap-6 mb-6">
+            <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-lg" style="border: 3px solid var(--color-accent);">
+              <img src="./images/staff.png" alt="이수진 매니저" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold mb-1">이수진</h3>
+              <p class="text-sm font-medium mb-3" style="color: var(--color-accent);">동물행동학 전공 &middot; 매니저</p>
+            </div>
+          </div>
+          <p class="text-lg mb-4" style="color: var(--color-text-muted);">
+            동물행동학을 전공한 이수진 매니저가 모든 고양이의 건강과 행동을 세심하게 관리합니다.
+          </p>
+          <p class="text-lg" style="color: var(--color-text-muted);">
+            정기적인 건강검진과 예방접종은 물론, 각 고양이의 성격과 기분에 맞는 최적의 환경을 제공합니다. 방문객분들에게 올바른 교감 방법도 안내해 드립니다.
+          </p>
+        </div>
+        <div class="fade-right">
+          <div class="rounded-2xl overflow-hidden shadow-2xl">
+            <img src="./images/interior_main.png" alt="냥그라운드 케어 공간" class="w-full aspect-[4/5] object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §8 GALLERY — 4-column even grid ========== -->
+  <section id="gallery" class="py-24 md:py-32 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <div class="section-label justify-center">Gallery</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">냥그라운드 갤러리</h2>
+        <p class="text-lg" style="color: var(--color-text-muted);">일상 속 행복한 순간들</p>
+      </div>
+      <div class="gallery-grid scale-in">
+        <img src="./images/gallery_1.png" alt="갤러리 1" loading="lazy" />
+        <img src="./images/gallery_2.png" alt="갤러리 2" loading="lazy" />
+        <img src="./images/gallery_3.png" alt="갤러리 3" loading="lazy" />
+        <img src="./images/gallery_4.png" alt="갤러리 4" loading="lazy" />
+      </div>
+      <div class="text-center mt-10 fade-up">
+        <a href="https://instagram.com/nyangground_hj" target="_blank" rel="noopener noreferrer" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @nyangground_hj
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §9 REVIEWS ========== -->
+  <section class="py-24 md:py-32 px-4" style="background: var(--color-bg-section);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <div class="section-label justify-center">Reviews</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">방문 후기</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 stagger-children">
+        <!-- Review 1 -->
+        <div class="review-card fade-up" style="--i: 0;">
+          <div class="flex gap-1 mb-3">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="mb-4" style="color: var(--color-text-muted);">
+            "고양이들이 정말 건강하고 사람을 좋아해서 놀랐어요. 치즈가 무릎에 올라와서 잠든 게 너무 귀여웠습니다. 음료도 맛있고 공간도 깔끔해요!"
+          </p>
+          <div class="flex items-center gap-3 pt-3" style="border-top: 1px solid rgba(61,50,40,0.1);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: var(--color-accent); color: var(--color-accent-text);">김</div>
+            <div>
+              <p class="font-medium text-sm">김서연</p>
+              <p class="text-xs" style="color: var(--color-text-muted);">2025.12</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card fade-up" style="--i: 1;">
+          <div class="flex gap-1 mb-3">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="mb-4" style="color: var(--color-text-muted);">
+            "다른 고양이 카페와는 확실히 다릅니다. 스태프분이 고양이를 대하는 방법을 친절하게 알려주시고, 고양이들도 스트레스 없이 편안해 보였어요."
+          </p>
+          <div class="flex items-center gap-3 pt-3" style="border-top: 1px solid rgba(61,50,40,0.1);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: var(--color-accent); color: var(--color-accent-text);">박</div>
+            <div>
+              <p class="font-medium text-sm">박지훈</p>
+              <p class="text-xs" style="color: var(--color-text-muted);">2025.11</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card fade-up" style="--i: 2;">
+          <div class="flex gap-1 mb-3">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="mb-4" style="color: var(--color-text-muted);">
+            "아이와 함께 방문했는데 직원분이 고양이 만지는 법을 자세히 알려주셔서 안심하고 체험할 수 있었어요. 고양이발 쿠키 강추합니다!"
+          </p>
+          <div class="flex items-center gap-3 pt-3" style="border-top: 1px solid rgba(61,50,40,0.1);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: var(--color-accent); color: var(--color-accent-text);">이</div>
+            <div>
+              <p class="font-medium text-sm">이민아</p>
+              <p class="text-xs" style="color: var(--color-text-muted);">2025.10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §10 LOCATION & RULES ========== -->
+  <section id="location" class="py-24 md:py-32 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <div class="section-label justify-center">Visit Us</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">오시는 길 & 이용안내</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+        <!-- Location info -->
+        <div class="fade-left">
+          <h3 class="text-2xl font-bold mb-6">찾아오시는 방법</h3>
+          <div class="space-y-4 mb-8">
+            <div class="flex items-start gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1" style="color: var(--color-accent);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <p class="font-medium">주소</p>
+                <p style="color: var(--color-text-muted);">서울시 마포구 양화로6길 45, 2층 (합정동)</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1" style="color: var(--color-accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <p class="font-medium">영업시간</p>
+                <p style="color: var(--color-text-muted);">매일 11:00 - 21:00</p>
+                <p class="text-sm" style="color: var(--color-accent);">매주 화요일 휴무</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1" style="color: var(--color-accent);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <p class="font-medium">전화</p>
+                <p style="color: var(--color-text-muted);">02-338-2747</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1" style="color: var(--color-accent);"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <div>
+                <p class="font-medium">인스타그램</p>
+                <a href="https://instagram.com/nyangground_hj" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent);">@nyangground_hj</a>
+              </div>
+            </div>
+          </div>
+          <!-- Map placeholder -->
+          <div class="rounded-2xl overflow-hidden shadow-lg" style="background: var(--color-bg-section); height: 240px; display: flex; align-items: center; justify-content: center;">
+            <div class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-2" style="color: var(--color-accent);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <p class="text-sm" style="color: var(--color-text-muted);">합정역 3번 출구 도보 5분</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rules -->
+        <div class="fade-right">
+          <h3 class="text-2xl font-bold mb-6">이용 규칙</h3>
+          <div>
+            <div class="rule-item">
+              <div class="rule-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </div>
+              <div>
+                <p class="font-medium">입장료 안내</p>
+                <p class="text-sm" style="color: var(--color-text-muted);">10,000원 (음료 1잔 포함, 1시간 기준) / 추가 30분당 3,000원</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div>
+                <p class="font-medium">고양이를 존중해 주세요</p>
+                <p class="text-sm" style="color: var(--color-text-muted);">잠자는 고양이를 깨우거나 억지로 안는 행동은 삼가주세요</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div>
+                <p class="font-medium">사진 촬영</p>
+                <p class="text-sm" style="color: var(--color-text-muted);">플래시 사용은 금지입니다. 자연광에서 예쁜 사진을 찍어주세요</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <p class="font-medium">인원 제한</p>
+                <p class="text-sm" style="color: var(--color-text-muted);">쾌적한 환경을 위해 동시 입장 인원은 15명으로 제한됩니다</p>
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+              </div>
+              <div>
+                <p class="font-medium">손 세정</p>
+                <p class="text-sm" style="color: var(--color-text-muted);">입장 전 손 세정제를 사용해 주시고, 양말 착용을 권장합니다</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== §11 CTA — Full-bleed with overlay ========== -->
+  <section id="contact" class="full-bleed relative" style="min-height: 500px;">
+    <img src="./images/cta.png" alt="냥그라운드 방문" class="w-full h-full object-cover absolute inset-0" style="min-height: 500px;" loading="lazy" />
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(139,110,78,0.7) 0%, rgba(61,50,40,0.85) 100%);"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-24 md:py-32" style="min-height: 500px;">
+      <div class="fade-up">
+        <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          오늘, 냥그라운드에서<br/>만나요
+        </h2>
+        <p class="text-lg text-white/80 max-w-xl mx-auto mb-10">
+          사랑스러운 고양이 친구들이 여러분을 기다리고 있습니다.<br/>지금 바로 방문을 예약하세요.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="tel:02-338-2747" class="btn-accent text-base">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            전화 예약 02-338-2747
+          </a>
+          <a href="https://instagram.com/nyangground_hj" target="_blank" rel="noopener noreferrer" class="btn-outline text-base" style="border-color: white; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram DM
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-12 px-4" style="background: var(--color-text); color: rgba(250,246,238,0.7);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h4 class="font-heading text-xl font-bold mb-3" style="color: var(--color-bg);">냥그라운드</h4>
+          <p class="text-sm" style="color: rgba(250,246,238,0.6);">Nyang Ground Cat Cafe</p>
+          <p class="text-sm mt-2" style="color: rgba(250,246,238,0.5);">고양이와 사람이 함께 행복한 공간</p>
+        </div>
+        <div>
+          <h5 class="font-medium mb-3 text-sm" style="color: var(--color-bg);">영업 정보</h5>
+          <p class="text-sm mb-1">매일 11:00 - 21:00</p>
+          <p class="text-sm" style="color: var(--color-accent);">매주 화요일 휴무</p>
+        </div>
+        <div>
+          <h5 class="font-medium mb-3 text-sm" style="color: var(--color-bg);">연락처</h5>
+          <p class="text-sm mb-1">서울시 마포구 양화로6길 45, 2층</p>
+          <p class="text-sm mb-1">02-338-2747</p>
+          <a href="https://instagram.com/nyangground_hj" target="_blank" rel="noopener noreferrer" class="text-sm" style="color: var(--color-accent);">@nyangground_hj</a>
+        </div>
+      </div>
+      <div class="border-t pt-6 text-center text-xs" style="border-color: rgba(250,246,238,0.1); color: rgba(250,246,238,0.4);">
+        &copy; 2026 냥그라운드 Nyang Ground. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
+
+    // IntersectionObserver for animations
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReducedMotion) {
+      const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+      animatedEls.forEach(el => observer.observe(el));
+    }
+
+    // Hero parallax
+    const heroBg = document.getElementById('heroBg');
+    if (!prefersReducedMotion && heroBg) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+          heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+        }
+      }, { passive: true });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
+</body>
+</html>

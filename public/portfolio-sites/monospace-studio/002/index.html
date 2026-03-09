@@ -77,12 +77,8 @@
     }
 
     /* Scroll Animation */
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity var(--transition-slow), transform var(--transition-slow);
-    }
-    .fade-in-section.is-visible {
+    
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -103,7 +99,7 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .fade-in-section, .stagger-item {
+      .fade-up, .stagger-item {
         opacity: 1;
         transform: none;
       }
@@ -227,7 +223,7 @@
          SECTION 2: SELECTED WORK | MOVE: M-INT-HSCROLL-GALLERY
          COMPONENT_REF: custom horizontal scroll | GRADE: custom | MODE: custom
          ============================================================ -->
-    <section id="work" class="w-full bg-page py-24 lg:py-32 fade-in-section" aria-label="Selected Work">
+    <section id="work" class="w-full bg-page py-24 lg:py-32 fade-up" aria-label="Selected Work">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
         <!-- Section header -->
         <div class="flex items-end justify-between mb-12">
@@ -300,7 +296,7 @@
          SECTION 3: SERVICES | MOVE: M-LAY-EDITORIAL-MOSAIC
          COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | FIDELITY: 75%
          ============================================================ -->
-    <section id="services" class="w-full bg-surface py-24 lg:py-32 fade-in-section" aria-label="Services">
+    <section id="services" class="w-full bg-surface py-24 lg:py-32 fade-left" aria-label="Services">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
         <p class="font-mono text-xs tracking-[0.15em] uppercase text-gray-500 mb-3">Services</p>
         <h2 class="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
@@ -367,7 +363,7 @@
          SECTION 4: PHILOSOPHY DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE
          Full-bleed background image + overlay
          ============================================================ -->
-    <section class="relative w-full min-h-[60vh] flex items-center fade-in-section" aria-label="Philosophy">
+    <section class="relative w-full min-h-[60vh] flex items-center scale-in" aria-label="Philosophy">
       <img src="./images/divider_philosophy.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div class="absolute inset-0 bg-black/70"></div>
       <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 py-24">
@@ -388,7 +384,7 @@
          SECTION 5: PROCESS | MOVE: M-LAY-EDITORIAL-STORY
          COMPONENT_REF: staggered-lookbook-dark-offset-mt12 | GRADE: A | MODE: adapted | FIDELITY: 80%
          ============================================================ -->
-    <section id="process" class="w-full bg-page py-24 lg:py-32 fade-in-section" aria-label="Process">
+    <section id="process" class="w-full bg-page py-24 lg:py-32 scale-in" aria-label="Process">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
         <p class="font-mono text-xs tracking-[0.15em] uppercase text-gray-500 mb-3">Process</p>
         <h2 class="text-4xl lg:text-5xl font-bold tracking-tight mb-16">
@@ -449,7 +445,7 @@
          SECTION 6: TOOLS & APPROACH | MOVE: M-LAY-EDITORIAL-TYPO
          Marquee band + grid
          ============================================================ -->
-    <section class="w-full bg-surface py-20 overflow-hidden fade-in-section" aria-label="Tools and Approach">
+    <section class="w-full bg-surface py-20 overflow-hidden fade-up" aria-label="Tools and Approach">
       <!-- Marquee band -->
       <div class="w-full overflow-hidden mb-16">
         <div class="marquee-track flex gap-16 whitespace-nowrap">
@@ -500,7 +496,7 @@
          SECTION 7: TEAM | MOVE: M-LAY-OFFSET-OVERLAP
          COMPONENT_REF: staggered-team-3col-zigzag-offset | GRADE: A | MODE: adapted | FIDELITY: 75%
          ============================================================ -->
-    <section id="team" class="w-full bg-page py-24 lg:py-32 fade-in-section" aria-label="Team">
+    <section id="team" class="w-full bg-page py-24 lg:py-32 fade-up" aria-label="Team">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
         <p class="font-mono text-xs tracking-[0.15em] uppercase text-gray-500 mb-3">Team</p>
         <h2 class="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
@@ -549,7 +545,7 @@
          SECTION 8: CLIENT INDUSTRIES | MOVE: M-DIV-FULLBLEED-COLORBLOCK
          Full-bleed WHITE section (inverted for dark theme)
          ============================================================ -->
-    <section class="relative w-full fade-in-section" aria-label="Client Industries">
+    <section class="relative w-full fade-left" aria-label="Client Industries">
       <img src="./images/divider_industries.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div class="absolute inset-0 bg-white/85"></div>
       <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
@@ -587,7 +583,7 @@
          SECTION 9: TESTIMONIALS | MOVE: M-TRUST-AWARDS-CERTS
          COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | FIDELITY: 80%
          ============================================================ -->
-    <section class="w-full bg-page py-24 lg:py-32 fade-in-section" aria-label="Testimonials">
+    <section class="w-full bg-page py-24 lg:py-32 fade-right" aria-label="Testimonials">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
         <p class="font-mono text-xs tracking-[0.15em] uppercase text-gray-500 mb-3">Testimonials</p>
         <h2 class="text-4xl lg:text-5xl font-bold tracking-tight mb-16">
@@ -745,16 +741,19 @@
        ============================================================ -->
   <script>
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          entry.target.classList.add('visible');
         }
       });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
     // Stagger items with parent-scoped delay
     document.querySelectorAll('.stagger-item').forEach((el, globalIndex) => {
@@ -782,5 +781,35 @@
       });
     }
   </script>
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

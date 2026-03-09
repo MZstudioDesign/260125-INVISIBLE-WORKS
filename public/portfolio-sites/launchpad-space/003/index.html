@@ -63,26 +63,17 @@
         }
 
         body { background-color: var(--bg-page); }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Accordion */
         .accordion-content {
@@ -114,13 +105,11 @@
         button, a { transition: all 0.2s ease-in-out; }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .accordion-content { transition: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
 
         /* Skip link */
@@ -179,7 +168,7 @@
     <section class="w-full bg-bg-page py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <!-- Section Header -->
-            <div class="mb-16 fade-in-section">
+            <div class="mb-16 fade-up">
                 <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">Member Stories</p>
                 <h2 class="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-text-primary leading-tight tracking-tight">
                     이곳에서 시작된<br>세 가지 이야기
@@ -187,7 +176,7 @@
             </div>
 
             <!-- Story 1: text 4 + gap 1 + image 7 -->
-            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start mb-20 fade-in-section">
+            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start mb-20 fade-left">
                 <div class="col-span-12 md:col-span-4 md:pt-16">
                     <p class="font-heading text-xs tracking-[0.15em] uppercase text-accent mb-3">6 Months In</p>
                     <h3 class="font-heading text-xl md:text-2xl font-semibold text-text-primary leading-snug mb-4">
@@ -206,7 +195,7 @@
             </div>
 
             <!-- Story 2: image 7 + gap 1 + text 4 (reversed) -->
-            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start mb-20 fade-in-section">
+            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start mb-20 fade-right">
                 <div class="col-span-12 md:col-span-7 order-2 md:order-1">
                     <div class="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-xl">
                         <img src="./images/member_2.png" alt="테이블에서 협업 중인 5인 팀" class="w-full h-full object-cover" loading="lazy">
@@ -225,7 +214,7 @@
             </div>
 
             <!-- Story 3: text 4 + gap 1 + image 7 -->
-            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start scale-in">
                 <div class="col-span-12 md:col-span-4 md:pt-16">
                     <p class="font-heading text-xs tracking-[0.15em] uppercase text-accent mb-3">Pivot & Launch</p>
                     <h3 class="font-heading text-xl md:text-2xl font-semibold text-text-primary leading-snug mb-4">
@@ -251,7 +240,7 @@
     ============================================================ -->
     <section id="spaces" class="w-full bg-bg-surface py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 fade-in-section">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 fade-up">
                 <div>
                     <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">Our Spaces</p>
                     <h2 class="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-text-primary leading-tight tracking-tight">
@@ -329,7 +318,7 @@
     <section class="relative w-full min-h-[50vh] flex items-center justify-center">
         <img src="./images/divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-black/60"></div>
-        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center fade-in-section">
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center fade-up">
             <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
                 좋은 공간은<br>좋은 습관을 만든다
             </h2>
@@ -342,7 +331,7 @@
     ============================================================ -->
     <section class="w-full bg-bg-page py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="mb-14 fade-in-section">
+            <div class="mb-14 fade-left">
                 <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">Amenities</p>
                 <h2 class="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-text-primary leading-tight tracking-tight">
                     일에만 집중할 수 있도록
@@ -354,7 +343,7 @@
             </div>
 
             <!-- Row 1: 7 + 5 -->
-            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 fade-in-section">
+            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 fade-right">
                 <div class="col-span-12 md:col-span-7 stagger-item">
                     <div class="relative aspect-[4/3] overflow-hidden rounded-xl">
                         <img src="./images/amenity_lounge.png" alt="편안한 라운지 공간" class="w-full h-full object-cover" loading="lazy">
@@ -370,7 +359,7 @@
             </div>
 
             <!-- Row 2: 4 + 4 + 4 -->
-            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 fade-in-section">
+            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 scale-in">
                 <div class="col-span-12 md:col-span-4 stagger-item">
                     <div class="aspect-[4/3] bg-bg-card border border-border-default rounded-xl p-6 flex flex-col justify-between">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -396,7 +385,7 @@
             </div>
 
             <!-- Row 3: info list -->
-            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 fade-in-section">
+            <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-4 lg:mb-5 fade-up">
                 <div class="col-span-12 md:col-span-8 stagger-item">
                     <div class="h-full bg-bg-surface rounded-xl p-6 flex flex-col justify-between">
                         <div class="flex gap-4">
@@ -425,7 +414,7 @@
             </div>
 
             <!-- Row 3: simple icon row -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5 fade-in-section">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5 fade-up">
                 <div class="bg-bg-card border border-border-default rounded-xl p-5 text-center stagger-item">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-accent mb-2"><path d="M3 7V5c0-1.1.9-2 2-2h2"/><path d="M17 3h2c1.1 0 2 .9 2 2v2"/><path d="M21 17v2c0 1.1-.9 2-2 2h-2"/><path d="M7 21H5c-1.1 0-2-.9-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
                     <p class="text-text-primary font-heading font-medium text-sm">샤워실</p>
@@ -452,7 +441,7 @@
     ============================================================ -->
     <section class="w-full bg-bg-surface py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="mb-16 fade-in-section">
+            <div class="mb-16 fade-left">
                 <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">Community</p>
                 <h2 class="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-text-primary leading-tight tracking-tight">
                     혼자 가면 빠르고<br>함께 가면 멀리
@@ -464,7 +453,7 @@
             </div>
 
             <!-- Staggered 3-col community events -->
-            <div class="grid grid-cols-12 gap-6 lg:gap-8 mb-12 fade-in-section">
+            <div class="grid grid-cols-12 gap-6 lg:gap-8 mb-12 fade-right">
                 <!-- Event 1: no offset -->
                 <div class="col-span-6 md:col-span-4 stagger-item">
                     <div class="relative aspect-[3/4] overflow-hidden rounded-xl mb-4">
@@ -502,7 +491,7 @@
     ============================================================ -->
     <section id="pricing" class="w-full bg-bg-page py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-14 fade-in-section">
+            <div class="text-center mb-14 scale-in">
                 <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">Pricing</p>
                 <h2 class="font-heading text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-text-primary leading-tight tracking-tight">
                     성장 단계에 맞는<br>합리적인 플랜
@@ -512,7 +501,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 fade-in-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 fade-up">
                 <!-- Hot Desk -->
                 <div class="bg-bg-card border border-border-default rounded-xl p-6 flex flex-col stagger-item hover:shadow-[0_4px_12px_rgba(28,25,23,0.06)] hover:-translate-y-0.5 transition-all">
                     <p class="font-heading text-xs tracking-[0.15em] uppercase text-text-muted mb-2">Hot Desk</p>
@@ -636,7 +625,7 @@
     <section class="relative w-full min-h-[50vh] flex items-center justify-center">
         <img src="./images/key_color_cta.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-accent/85"></div>
-        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center fade-in-section">
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center fade-up">
             <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
                 지금, 당신의 자리가<br>비어 있습니다
             </h2>
@@ -658,7 +647,7 @@
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <div class="grid grid-cols-12 gap-8 lg:gap-16">
                 <!-- Left: sticky header -->
-                <div class="col-span-12 md:col-span-4 fade-in-section">
+                <div class="col-span-12 md:col-span-4 fade-left">
                     <div class="md:sticky md:top-24">
                         <p class="font-heading text-xs tracking-[0.2em] uppercase text-accent mb-3">FAQ</p>
                         <h2 class="font-heading text-3xl md:text-4xl font-bold text-text-primary leading-tight tracking-tight">
@@ -675,7 +664,7 @@
                 </div>
                 <!-- Right: accordion -->
                 <div class="col-span-12 md:col-span-8">
-                    <div class="space-y-0 fade-in-section">
+                    <div class="space-y-0 fade-right">
                         <div class="border-b border-border-default">
                             <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left" data-accordion="faq-1" aria-expanded="false">
                                 <span class="font-heading font-semibold text-text-primary text-base pr-4">최소 계약 기간이 있나요?</span>
@@ -737,7 +726,7 @@
         <img src="./images/cta_final.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-black/65"></div>
         <div class="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24">
-            <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center fade-in-section">
+            <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center scale-in">
                 <div class="col-span-12 md:col-span-7">
                     <p class="font-heading text-xs tracking-[0.2em] uppercase text-white/50 mb-4">Get in Touch</p>
                     <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
@@ -835,21 +824,29 @@
 
     <!-- Scroll Animation JS -->
     <script>
-        // IntersectionObserver for fade-in and stagger
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOpts);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
+    });
 
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
             const parent = el.closest('.grid, .hscroll-gallery, .space-y-0');
@@ -886,7 +883,7 @@
 
         // Reduced motion guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            document.querySelectorAll('.fade-up, .stagger-item').forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
                 el.style.transition = 'none';
@@ -894,5 +891,35 @@
         }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

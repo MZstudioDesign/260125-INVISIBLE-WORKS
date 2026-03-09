@@ -87,32 +87,21 @@
       letter-spacing: -0.03em;
       line-height: 1.15;
     }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .stagger-item {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .stagger-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section, .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
     }
 
@@ -246,7 +235,7 @@
     <!-- MOVE: M-LAY-ALTERNATING-ROWS -->
     <!-- COMPONENT_REF: alternating-product-editorial-dark | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-product-editorial-dark-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section id="spaces" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+    <section id="spaces" class="fade-up w-full bg-surface" style="padding: var(--section-py) 0;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Space Types</p>
         <h2 class="font-heading font-700 text-text-primary mb-4" style="font-size: var(--font-size-h2);">
@@ -328,7 +317,7 @@
     <!-- MOVE: M-DIV-FULLBLEED-IMAGE -->
     <!-- COMPONENT_REF: custom full-bleed | GRADE: — | MODE: fallback -->
     <!-- ============================================================ -->
-    <section class="fade-in-section relative w-full min-h-[70vh] flex items-center">
+    <section class="scale-in relative w-full min-h-[70vh] flex items-center">
       <img src="./images/community.png" alt="런치패드 커뮤니티 네트워킹 이벤트" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
       <div class="absolute inset-0 bg-sky-dark/80"></div>
       <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
@@ -371,7 +360,7 @@
     <!-- MOVE: M-LAY-EDITORIAL-STORY -->
     <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section id="process" class="fade-in-section w-full bg-navy" style="padding: var(--section-py) 0;">
+    <section id="process" class="fade-right w-full bg-navy" style="padding: var(--section-py) 0;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
@@ -464,7 +453,7 @@
     <!-- MOVE: M-LAY-ASYM-GRID -->
     <!-- COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section id="amenities" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+    <section id="amenities" class="scale-in w-full bg-surface" style="padding: var(--section-py) 0;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Amenities</p>
         <h2 class="font-heading font-700 text-text-primary mb-16" style="font-size: var(--font-size-h2);">
@@ -535,7 +524,7 @@
     <!-- MOVE: M-LAY-EDITORIAL-FEATURE -->
     <!-- COMPONENT_REF: staggered-3col-portfolio-5-4-3 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-3col-portfolio-5-4-3-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-white" style="padding: var(--section-py) 0;">
+    <section class="fade-up w-full bg-white" style="padding: var(--section-py) 0;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
           <div>
@@ -595,7 +584,7 @@
     <!-- MOVE: M-TRUST-PRICING-TABLE -->
     <!-- COMPONENT_REF: custom pricing | GRADE: — | MODE: fallback -->
     <!-- ============================================================ -->
-    <section id="pricing" class="fade-in-section w-full bg-navy" style="padding: var(--section-py) 0;">
+    <section id="pricing" class="fade-up w-full bg-navy" style="padding: var(--section-py) 0;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="text-center mb-16">
           <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">Pricing</p>
@@ -713,7 +702,7 @@
     <!-- MOVE: M-RHYTHM-KEY-COLOR-CTA -->
     <!-- COMPONENT_REF: custom key color CTA | GRADE: — | MODE: fallback -->
     <!-- ============================================================ -->
-    <section class="fade-in-section relative w-full min-h-[50vh] flex items-center">
+    <section class="scale-in relative w-full min-h-[50vh] flex items-center">
       <img src="./images/key_color_cta.png" alt="런치패드 스페이스 작업 분위기" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
       <div class="absolute inset-0 bg-sky-dark/85"></div>
       <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
@@ -739,7 +728,7 @@
     <!-- MOVE: M-INTERACTION-ACCORDION -->
     <!-- COMPONENT_REF: custom accordion | GRADE: — | MODE: fallback -->
     <!-- ============================================================ -->
-    <section id="faq" class="fade-in-section w-full bg-surface" style="padding: var(--section-py) 0;">
+    <section id="faq" class="fade-right w-full bg-surface" style="padding: var(--section-py) 0;">
       <div class="max-w-[800px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="text-center mb-16">
           <p class="text-sky font-heading font-600 text-sm tracking-widest uppercase mb-4">FAQ</p>
@@ -917,9 +906,12 @@
               sectionObserver.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1, rootMargin: '-50px' });
+        }, { threshold: 0.1, rootMargin: '-20px' });
 
-        document.querySelectorAll('.fade-in-section').forEach(el => sectionObserver.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => sectionObserver.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => sectionObserver.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => sectionObserver.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => sectionObserver.observe(el));
 
         // Stagger items
         const staggerObserver = new IntersectionObserver((entries) => {
@@ -968,5 +960,35 @@
     });
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

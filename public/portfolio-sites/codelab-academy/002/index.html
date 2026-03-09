@@ -67,14 +67,22 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg-page); color: var(--text-primary); font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
-    .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-    .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-    .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
-
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
     }
 
     .glow-text { text-shadow: 0 0 20px rgba(50,215,75,0.4); }
@@ -194,7 +202,7 @@
 <!-- SECTION 2: OUTCOMES | MOVE: M-TRUST-STAT-BAND + M-RHYTHM-KEYCOLOR -->
 <!-- COMPONENT_REF: bento-intro5-stats-grid7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-intro5-stats-grid7-reference.html | FIDELITY: 70% -->
 <!-- ============================================================ -->
-<section id="outcomes" class="fade-in-section relative w-full min-h-[50vh]">
+<section id="outcomes" class="scale-in relative w-full min-h-[50vh]">
   <img src="./images/outcomes_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
   <div class="absolute inset-0" style="background: rgba(40,167,69,0.80);"></div>
   <div class="relative max-w-[1280px] mx-auto px-6 py-20 lg:py-28">
@@ -243,7 +251,7 @@
 <!-- SECTION 3: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
 <!-- COMPONENT_REF: (custom timeline) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
 <!-- ============================================================ -->
-<section id="process" class="fade-in-section w-full bg-page py-20 lg:py-28">
+<section id="process" class="fade-left w-full bg-page py-20 lg:py-28">
   <div class="max-w-[1280px] mx-auto px-6">
     <div class="mb-12 lg:mb-16">
       <span class="code-label mb-3 block">// LEARNING JOURNEY</span>
@@ -357,7 +365,7 @@
 <!-- SECTION 4: INSTRUCTORS | MOVE: M-LAY-EDITORIAL-STORY -->
 <!-- COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text5-gap1-image6-offset-reference.html | FIDELITY: 75% -->
 <!-- ============================================================ -->
-<section id="instructors" class="fade-in-section w-full bg-surface py-20 lg:py-28">
+<section id="instructors" class="fade-right w-full bg-surface py-20 lg:py-28">
   <div class="max-w-[1280px] mx-auto px-6">
     <div class="mb-12 lg:mb-16">
       <span class="code-label mb-3 block">// MEET OUR MENTORS</span>
@@ -420,7 +428,7 @@
 <!-- SECTION 5: LEARNING SPACE | MOVE: M-DIV-PARALLAX-LIGHT -->
 <!-- COMPONENT_REF: (custom parallax divider) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
 <!-- ============================================================ -->
-<section class="fade-in-section relative w-full min-h-[60vh]">
+<section class="scale-in relative w-full min-h-[60vh]">
   <div class="absolute inset-0 parallax-bg" style="background-image: url('./images/culture_divider.png');" role="img" aria-label="코드랩 아카데미 학습 공간 전경"></div>
   <div class="absolute inset-0 bg-black/70"></div>
   <div class="relative max-w-[1280px] mx-auto px-6 py-20 lg:py-28 min-h-[60vh] flex flex-col justify-center items-center text-center">
@@ -439,7 +447,7 @@
 <!-- SECTION 6: CURRICULUM | MOVE: M-LAY-EDITORIAL-MOSAIC -->
 <!-- COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-mosaic-mixed-colspan-rowspan-reference.html | FIDELITY: 70% -->
 <!-- ============================================================ -->
-<section id="curriculum" class="fade-in-section w-full bg-page py-20 lg:py-28">
+<section id="curriculum" class="fade-up w-full bg-page py-20 lg:py-28">
   <div class="max-w-[1280px] mx-auto px-6">
     <div class="mb-12 lg:mb-16">
       <span class="code-label mb-3 block">// CURRICULUM TRACKS</span>
@@ -565,7 +573,7 @@
 <!-- SECTION 7: TESTIMONIALS | MOVE: M-INT-HSCROLL-GALLERY -->
 <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 70% -->
 <!-- ============================================================ -->
-<section class="fade-in-section w-full bg-surface py-20 lg:py-28">
+<section class="fade-up w-full bg-surface py-20 lg:py-28">
   <div class="max-w-[1280px] mx-auto px-6">
     <div class="flex items-end justify-between mb-10 lg:mb-14">
       <div>
@@ -660,7 +668,7 @@
 <!-- SECTION 8: FAQ | MOVE: M-INTERACTION-ACCORDION -->
 <!-- COMPONENT_REF: (custom accordion) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
 <!-- ============================================================ -->
-<section id="faq" class="fade-in-section w-full bg-page py-20 lg:py-28">
+<section id="faq" class="fade-left w-full bg-page py-20 lg:py-28">
   <div class="max-w-[840px] mx-auto px-6">
     <div class="mb-12 lg:mb-16 text-center">
       <span class="code-label mb-3 block">// FAQ</span>
@@ -742,7 +750,7 @@
 <!-- SECTION 9: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL -->
 <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 70% -->
 <!-- ============================================================ -->
-<section id="cta" class="fade-in-section relative w-full min-h-[60vh]">
+<section id="cta" class="scale-in relative w-full min-h-[60vh]">
   <img src="./images/cta_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
   <div class="absolute inset-0 bg-black/75"></div>
   <div class="relative max-w-[1280px] mx-auto px-6 py-24 lg:py-32 min-h-[60vh] flex flex-col justify-center items-center text-center">
@@ -797,29 +805,32 @@
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
+          entry.target.classList.add('visible');
           var items = entry.target.querySelectorAll('.stagger-item');
           items.forEach(function(item, i) {
             item.style.transitionDelay = (i * 0.1) + 's';
-            item.classList.add('animate-in');
+            item.classList.add('visible');
           });
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '-50px' });
+    }, { threshold: 0.1, rootMargin: '-20px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(function(s) { observer.observe(s); });
+    document.querySelectorAll('.fade-up').forEach(function(s) { observer.observe(s); });
+    document.querySelectorAll('.fade-left').forEach(function(s) { observer.observe(s); });
+    document.querySelectorAll('.fade-right').forEach(function(s) { observer.observe(s); });
+    document.querySelectorAll('.scale-in').forEach(function(s) { observer.observe(s); });
 
     var soloObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('animate-in'); soloObserver.unobserve(entry.target); }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); soloObserver.unobserve(entry.target); }
       });
     }, { threshold: 0.1, rootMargin: '-30px' });
     document.querySelectorAll('.stagger-item').forEach(function(item) {
-      if (!item.closest('.fade-in-section')) soloObserver.observe(item);
+      if (!item.closest('.fade-up')) soloObserver.observe(item);
     });
   } else {
-    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(function(el) { el.classList.add('animate-in'); });
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(function(el) { el.classList.add('visible'); });
   }
 
   // Counter
@@ -838,7 +849,7 @@
   }
   var cObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) { if (e.isIntersecting) { animateCounter(e.target); cObs.unobserve(e.target); } });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.05 });
   document.querySelectorAll('.counter-value').forEach(function(el) { cObs.observe(el); });
 
   // FAQ
@@ -868,5 +879,35 @@
 })();
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

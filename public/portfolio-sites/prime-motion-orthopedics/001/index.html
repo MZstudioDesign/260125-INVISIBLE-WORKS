@@ -73,35 +73,23 @@
             line-height: var(--line-height-body);
             -webkit-font-smoothing: antialiased;
         }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .stagger-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section,
-            .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         /* Button styles */
         .btn-primary {
@@ -204,7 +192,7 @@
 <section class="w-full bg-white" id="treatments">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
         <!-- Section Header -->
-        <div class="mb-12 fade-in-section">
+        <div class="mb-12 fade-up">
             <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3 font-body">Treatment Areas</p>
             <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827] leading-tight" style="letter-spacing:-0.015em;">
                 전문 진료 분야
@@ -214,7 +202,7 @@
         <!-- Editorial Grid: Featured (5col) + Side stack (7col) -->
         <div class="grid grid-cols-12 gap-6 lg:gap-10">
             <!-- Left: Featured large card -->
-            <div class="col-span-12 md:col-span-5 fade-in-section">
+            <div class="col-span-12 md:col-span-5 fade-left">
                 <div class="relative aspect-[3/4] overflow-hidden rounded-xl group">
                     <img src="./images/sports_medicine.png" alt="스포츠의학 진료"
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
@@ -299,7 +287,7 @@
      ============================================================ -->
 <section class="w-full bg-[#F8FAFC]" id="team">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-right">
             <!-- Text: 4 cols with top offset -->
             <div class="col-span-12 md:col-span-4 md:pt-16">
                 <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">Medical Team</p>
@@ -391,7 +379,7 @@
          class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
     <div class="absolute inset-0 bg-[#0F3460]/75"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-20 min-h-[60vh] flex items-center">
-        <div class="grid grid-cols-12 gap-8 md:gap-10 items-center w-full fade-in-section">
+        <div class="grid grid-cols-12 gap-8 md:gap-10 items-center w-full scale-in">
             <!-- Text -->
             <div class="col-span-12 md:col-span-7 text-center md:text-left">
                 <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-4 font-body">State-of-the-Art Equipment</p>
@@ -437,7 +425,7 @@
      ============================================================ -->
 <section class="w-full bg-white" id="process">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
-        <div class="text-center mb-14 fade-in-section">
+        <div class="text-center mb-14 fade-up">
             <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">How It Works</p>
             <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827]" style="letter-spacing:-0.015em;">
                 진료 절차 안내
@@ -510,7 +498,7 @@
             </div>
         </div>
 
-        <div class="text-center mt-12 fade-in-section">
+        <div class="text-center mt-12 fade-up">
             <a href="#booking" class="btn-primary">지금 예약하기</a>
         </div>
     </div>
@@ -528,7 +516,7 @@
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
         <div class="grid grid-cols-12 gap-8 lg:gap-12">
             <!-- Left: Title + image -->
-            <div class="col-span-12 md:col-span-5 fade-in-section">
+            <div class="col-span-12 md:col-span-5 fade-left">
                 <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-3">Patient FAQ</p>
                 <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold text-white leading-tight" style="letter-spacing:-0.015em;">
                     자주 묻는<br>질문
@@ -629,7 +617,7 @@
      ============================================================ -->
 <section class="w-full bg-white" id="guide">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
-        <div class="text-center mb-12 fade-in-section">
+        <div class="text-center mb-12 fade-right">
             <p class="text-xs uppercase tracking-[0.2em] text-[#6B7280] mb-3">Patient Guide</p>
             <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#111827]" style="letter-spacing:-0.015em;">
                 내원 안내
@@ -690,7 +678,7 @@
      ============================================================ -->
 <section class="w-full bg-[#F8FAFC]" id="location">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
-        <div class="grid grid-cols-12 gap-8 lg:gap-12 items-start fade-in-section">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12 items-start scale-in">
             <!-- Left: Map placeholder -->
             <div class="col-span-12 md:col-span-7">
                 <div class="aspect-[16/10] bg-[#E5E7EB] rounded-xl overflow-hidden">
@@ -742,7 +730,7 @@
          class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
-        <div class="w-full text-center fade-in-section">
+        <div class="w-full text-center fade-up">
             <p class="text-xs uppercase tracking-[0.25em] text-white/50 mb-4">Book Your Consultation</p>
             <h2 class="font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold text-white leading-tight" style="letter-spacing:-0.015em;">
                 통증 없는 내일,<br>지금 시작하세요
@@ -807,7 +795,10 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach((el) => fadeObserver.observe(el));
+        document.querySelectorAll('.fade-up').forEach((el) => fadeObserver.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => fadeObserver.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => fadeObserver.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => fadeObserver.observe(el));
 
         // Stagger items
         const staggerObserver = new IntersectionObserver((entries) => {
@@ -849,5 +840,35 @@
     });
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

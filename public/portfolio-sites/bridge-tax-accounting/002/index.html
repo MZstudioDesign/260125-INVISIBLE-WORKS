@@ -70,26 +70,17 @@
         }
 
         html { scroll-behavior: smooth; }
-
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         button, a { transition: all 0.2s ease; }
 
@@ -113,13 +104,11 @@
             transform: rotate(45deg);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .faq-answer { transition: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
             .faq-icon { transition: none; }
             html { scroll-behavior: auto; }
         }
@@ -228,7 +217,7 @@
 
         <!-- SECTION 2: MID CTA BAND -->
         <!-- COMPONENT_REF: custom inline CTA | GRADE: - | MODE: custom -->
-        <section class="w-full bg-slate-accent fade-in-section" aria-label="상담 문의 안내">
+        <section class="w-full bg-slate-accent fade-up" aria-label="상담 문의 안내">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-5">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                     <p class="text-white/80 text-sm">
@@ -245,7 +234,7 @@
 
         <!-- SECTION 3: SERVICES | MOVE: M-LAY-EDITORIAL-MOSAIC (accordion-collage) -->
         <!-- COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-image-collage-5-7-reference.html | FIDELITY: 75% -->
-        <section id="services" class="w-full bg-white py-20 lg:py-28 fade-in-section" aria-label="서비스 소개">
+        <section id="services" class="w-full bg-white py-20 lg:py-28 fade-left" aria-label="서비스 소개">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="mb-12">
                     <p class="text-xs uppercase tracking-[0.15em] text-slate-400 mb-3 font-medium">Services</p>
@@ -342,7 +331,7 @@
 
         <!-- SECTION 4: EXPERTISE / TRACK RECORD | MOVE: M-TRUST-STAT-BAND (bento-intro5-stats-grid7) -->
         <!-- COMPONENT_REF: bento-intro5-stats-grid7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-intro5-stats-grid7-reference.html | FIDELITY: 75% -->
-        <section id="expertise" class="w-full bg-slate-accent py-20 lg:py-28 fade-in-section" aria-label="전문성과 실적" style="min-height: 50vh;">
+        <section id="expertise" class="w-full bg-slate-accent py-20 lg:py-28 fade-right" aria-label="전문성과 실적" style="min-height: 50vh;">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-12 gap-6 lg:gap-8">
                     <!-- Left: Intro (5 col) -->
@@ -394,7 +383,7 @@
 
         <!-- SECTION 5: TEAM | MOVE: M-LAY-EDITORIAL-STORY -->
         <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 70% -->
-        <section class="w-full bg-white py-20 lg:py-28 fade-in-section" aria-label="팀 소개">
+        <section class="w-full bg-white py-20 lg:py-28 scale-in" aria-label="팀 소개">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
                     <!-- Left: Text (4 col) -->
@@ -450,7 +439,7 @@
 
         <!-- SECTION 6: DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
         <!-- COMPONENT_REF: custom fullbleed-quote | GRADE: - | MODE: custom -->
-        <section class="relative w-full min-h-[50vh] flex items-center fade-in-section" aria-label="브릿지 세무회계 비전">
+        <section class="relative w-full min-h-[50vh] flex items-center scale-in" aria-label="브릿지 세무회계 비전">
             <img src="./images/divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" role="presentation" width="1920" height="800">
             <div class="absolute inset-0 bg-slate-accent/75"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
@@ -465,7 +454,7 @@
 
         <!-- SECTION 7: CLIENT INDUSTRY FOCUS | MOVE: M-LAY-ALTERNATING-ROWS -->
         <!-- COMPONENT_REF: alternating-img7-text5-order-swap | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-img7-text5-order-swap-reference.html | FIDELITY: 75% -->
-        <section id="clients" class="w-full bg-warm-bg py-20 lg:py-28 fade-in-section" aria-label="산업별 전문 서비스">
+        <section id="clients" class="w-full bg-warm-bg py-20 lg:py-28 fade-up" aria-label="산업별 전문 서비스">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="mb-14 text-center">
                     <p class="text-xs uppercase tracking-[0.15em] text-slate-400 mb-3 font-medium">Industry Focus</p>
@@ -526,7 +515,7 @@
 
         <!-- SECTION 8: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
         <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 75% -->
-        <section id="process" class="w-full bg-white py-20 lg:py-28 fade-in-section" aria-label="업무 프로세스">
+        <section id="process" class="w-full bg-white py-20 lg:py-28 fade-left" aria-label="업무 프로세스">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="text-center mb-14">
                     <p class="text-xs uppercase tracking-[0.15em] text-slate-400 mb-3 font-medium">Process</p>
@@ -582,7 +571,7 @@
 
         <!-- SECTION 9: FAQ | MOVE: Custom Accordion -->
         <!-- COMPONENT_REF: custom accordion | GRADE: - | MODE: custom -->
-        <section id="faq" class="w-full bg-warm-bg py-20 lg:py-28 fade-in-section" aria-label="자주 묻는 질문">
+        <section id="faq" class="w-full bg-warm-bg py-20 lg:py-28 fade-right" aria-label="자주 묻는 질문">
             <div class="max-w-[800px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="text-center mb-14">
                     <p class="text-xs uppercase tracking-[0.15em] text-slate-400 mb-3 font-medium">FAQ</p>
@@ -642,7 +631,7 @@
 
         <!-- SECTION 10: TESTIMONIALS (dark cards) -->
         <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 70% -->
-        <section class="w-full bg-slate-dark py-20 lg:py-28 fade-in-section" aria-label="고객 후기">
+        <section class="w-full bg-slate-dark py-20 lg:py-28 scale-in" aria-label="고객 후기">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="text-center mb-14">
                     <p class="text-xs uppercase tracking-[0.15em] text-white/40 mb-3 font-medium">Testimonials</p>
@@ -794,7 +783,7 @@
 
         // Intersection Observer for scroll animations
         if (!prefersReducedMotion) {
-            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -803,7 +792,10 @@
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+            document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+            document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
             document.querySelectorAll('.stagger-item').forEach((el, index) => {
                 const parent = el.closest('.grid, .space-y-0');
@@ -817,7 +809,7 @@
                 observer.observe(el);
             });
         } else {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
                 el.classList.add('visible');
                 el.style.transition = 'none';
             });
@@ -852,7 +844,7 @@
                     counterObserver.unobserve(el);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
 
@@ -932,5 +924,35 @@
     })();
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

@@ -63,35 +63,24 @@
             --font-data: 'IBM Plex Mono', monospace;
             --font-body: 'Pretendard', 'Inter Tight', sans-serif;
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .counter-animate { animation: none !important; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
 
         /* Smooth transitions */
@@ -184,7 +173,7 @@
         </section>
 
         <!-- SECTION: IMPACT NUMBERS | MOVE: M-TRUST-STAT-BAND -->
-        <section class="w-full bg-dark border-t border-white/10 py-16 lg:py-20 fade-in-section" aria-label="임팩트 지표">
+        <section class="w-full bg-dark border-t border-white/10 py-16 lg:py-20 fade-up" aria-label="임팩트 지표">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
                     <div>
@@ -227,7 +216,7 @@
         </section>
 
         <!-- SECTION: SELECTED WORK (CASE STUDIES) | MOVE: M-INT-STICKY-STEPS -->
-        <section id="work" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="주요 프로젝트">
+        <section id="work" class="w-full bg-page py-20 lg:py-28 fade-left" aria-label="주요 프로젝트">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="mb-16">
                     <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Selected Work</p>
@@ -339,7 +328,7 @@
                  class="absolute inset-0 w-full h-full object-cover"
                  loading="lazy" />
             <div class="absolute inset-0 bg-black/70"></div>
-            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 text-center w-full fade-in-section">
+            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 text-center w-full fade-right">
                 <blockquote>
                     <p class="font-ui text-2xl md:text-3xl lg:text-[40px] font-semibold text-white leading-[1.3] tracking-tight italic max-w-[700px] mx-auto">
                         "좋은 디자인은<br class="hidden sm:block">눈에 보이지 않습니다"
@@ -353,7 +342,7 @@
 
         <!-- SECTION: SERVICES | MOVE: M-LAY-EDITORIAL-FEATURE -->
         <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-featured-image5-content7-reference.html | FIDELITY: 75% -->
-        <section id="services" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="서비스 영역">
+        <section id="services" class="w-full bg-page py-20 lg:py-28 scale-in" aria-label="서비스 영역">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="mb-16">
                     <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Services</p>
@@ -448,7 +437,7 @@
 
         <!-- SECTION: PROCESS | MOVE: M-LAY-EDITORIAL-STORY -->
         <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
-        <section id="process" class="w-full bg-dark py-20 lg:py-28 fade-in-section" aria-label="디자인 프로세스">
+        <section id="process" class="w-full bg-dark py-20 lg:py-28 fade-up" aria-label="디자인 프로세스">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="mb-16">
                     <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Process</p>
@@ -528,7 +517,7 @@
 
         <!-- SECTION: TEAM | MOVE: M-LAY-ALTERNATING-ROWS -->
         <!-- COMPONENT_REF: alternating-text5-gap1-img6-reversed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/alternating-text5-gap1-img6-reversed-reference.html | FIDELITY: 70% -->
-        <section id="team" class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="팀 소개">
+        <section id="team" class="w-full bg-page py-20 lg:py-28 fade-up" aria-label="팀 소개">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="mb-16">
                     <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Team</p>
@@ -592,7 +581,7 @@
         </section>
 
         <!-- SECTION: CLIENT INDUSTRIES | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
-        <section class="relative w-full py-20 lg:py-28 fade-in-section" aria-label="클라이언트 산업">
+        <section class="relative w-full py-20 lg:py-28 fade-left" aria-label="클라이언트 산업">
             <img src="./images/industries_bg.png"
                  alt=""
                  class="absolute inset-0 w-full h-full object-cover"
@@ -656,7 +645,7 @@
 
         <!-- SECTION: TESTIMONIALS (on light bg) -->
         <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
-        <section class="w-full bg-page py-20 lg:py-28 fade-in-section" aria-label="클라이언트 후기">
+        <section class="w-full bg-page py-20 lg:py-28 fade-right" aria-label="클라이언트 후기">
             <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
                 <div class="mb-16">
                     <p class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8A8A] mb-3">Testimonials</p>
@@ -722,7 +711,7 @@
                  class="absolute inset-0 w-full h-full object-cover"
                  loading="lazy" />
             <div class="absolute inset-0 bg-black/75"></div>
-            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 w-full fade-in-section">
+            <div class="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-20 w-full scale-in">
                 <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center">
                     <div class="col-span-12 lg:col-span-6">
                         <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-4">Get in Touch</p>
@@ -826,16 +815,19 @@
     <!-- JavaScript -->
     <script>
         // Intersection Observer for scroll animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
             const parent = el.closest('.grid, .space-y-12, .space-y-8');
             if (parent) {
@@ -850,8 +842,8 @@
 
         // Reduced motion guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-                el.classList.add('animate-in');
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+                el.classList.add('visible');
                 el.style.transition = 'none';
             });
         }
@@ -875,7 +867,7 @@
                     counterObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
@@ -889,5 +881,35 @@
         }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

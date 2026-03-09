@@ -148,7 +148,8 @@
     "production": "影視",
     "tech": "科技",
     "veterinary": "寵物醫院",
-    "fnb": "餐飲"
+    "restaurant": "餐廳",
+    "cafe": "咖啡廳"
   },
   "PortfolioModal": {
     "designLabel": "設計 {number}"

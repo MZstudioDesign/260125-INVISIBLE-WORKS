@@ -56,26 +56,17 @@
             --font-ui: 'Playfair Display', Georgia, serif;
             --font-data: 'Noto Sans KR', system-ui, sans-serif;
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Accordion */
         .accordion-content {
@@ -107,13 +98,11 @@
         button, a { transition: all 0.2s ease-in-out; }
         img { transition: transform 0.5s ease; }
 
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            img { transition: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
     </style>
 </head>
@@ -192,7 +181,7 @@
         <!-- ============================================== -->
         <section class="w-full bg-white py-20 lg:py-28" id="services" aria-label="Service Menu">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-                <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-in-section">
+                <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-up">
                     <!-- Left: Image collage (5 cols) -->
                     <div class="col-span-12 md:col-span-5 relative">
                         <div class="hidden lg:block absolute -left-2 top-0 bottom-0 z-10">
@@ -315,7 +304,7 @@
         <!-- ============================================== -->
         <section class="w-full bg-bg-surface py-20 lg:py-28" id="artist" aria-label="Artist Profile">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-                <div class="grid grid-cols-12 gap-6 lg:gap-0 fade-in-section">
+                <div class="grid grid-cols-12 gap-6 lg:gap-0 fade-left">
                     <!-- Left: Text (4 cols) -->
                     <div class="col-span-12 lg:col-span-4 pt-0 lg:pt-16">
                         <span class="text-xs uppercase tracking-[0.2em] text-text-muted font-sans">Head Designer</span>
@@ -370,7 +359,7 @@
         <section class="relative w-full min-h-[50vh] flex items-center" aria-label="Gallery Divider">
             <img src="./images/gallery_divider.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-black/60"></div>
-            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full fade-in-section">
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full fade-right">
                 <span class="font-serif italic text-white/60 text-sm">Our Philosophy</span>
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-4 mb-6">
                     트렌드를 따르지 않습니다,<br class="hidden sm:block">
@@ -389,7 +378,7 @@
         <!-- ============================================== -->
         <section class="w-full bg-white py-20 lg:py-28" id="portfolio" aria-label="Art Portfolio">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-                <div class="text-center mb-14 fade-in-section">
+                <div class="text-center mb-14 scale-in">
                     <span class="text-xs uppercase tracking-[0.2em] text-text-muted font-sans">Portfolio</span>
                     <h2 class="font-serif text-3xl md:text-4xl font-bold text-text-primary mt-3">
                         시즌 컬렉션
@@ -401,7 +390,7 @@
                 </div>
 
                 <!-- Row 1: text(4) + image(5) + image(3) -->
-                <div class="grid grid-cols-12 gap-3 lg:gap-4 mb-3 lg:mb-4 fade-in-section">
+                <div class="grid grid-cols-12 gap-3 lg:gap-4 mb-3 lg:mb-4 fade-up">
                     <div class="col-span-12 md:col-span-4">
                         <div class="aspect-[4/3] bg-bg-surface border border-border-default p-6 flex flex-col justify-end stagger-item">
                             <span class="text-xs uppercase tracking-[0.15em] text-accent font-medium mb-2">S/S 2026</span>
@@ -421,7 +410,7 @@
                 </div>
 
                 <!-- Row 2: image(3) + accent block(5) + image(4) -->
-                <div class="grid grid-cols-12 gap-3 lg:gap-4 mb-3 lg:mb-4 fade-in-section">
+                <div class="grid grid-cols-12 gap-3 lg:gap-4 mb-3 lg:mb-4 fade-up">
                     <div class="col-span-5 md:col-span-3 stagger-item">
                         <div class="relative aspect-square overflow-hidden">
                             <img src="./images/portfolio_3.png" alt="웨딩 네일 — 크리스탈 포인트" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
@@ -441,7 +430,7 @@
                 </div>
 
                 <!-- Row 3: image(5) + text(4) + image(3) -->
-                <div class="grid grid-cols-12 gap-3 lg:gap-4 fade-in-section">
+                <div class="grid grid-cols-12 gap-3 lg:gap-4 fade-left">
                     <div class="col-span-7 md:col-span-5 stagger-item">
                         <div class="relative aspect-[5/3] overflow-hidden">
                             <img src="./images/portfolio_5.png" alt="가을 시즌 네일 — 버건디 마블링" class="w-full h-full object-cover hover:scale-105" loading="lazy" />
@@ -477,7 +466,7 @@
         <section class="relative w-full min-h-[50vh] flex items-center" aria-label="Key Color Band">
             <img src="./images/key_color.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0" style="background-color: rgba(184, 137, 154, 0.75);"></div>
-            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full fade-in-section">
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full fade-right">
                 <span class="font-serif italic text-white/70 text-sm">Seasonal Collection</span>
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
                     이번 시즌,<br class="hidden sm:block">
@@ -500,7 +489,7 @@
         <!-- ============================================== -->
         <section class="w-full bg-white py-20 lg:py-28" aria-label="Process">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-                <div class="text-center mb-14 fade-in-section">
+                <div class="text-center mb-14 scale-in">
                     <span class="text-xs uppercase tracking-[0.2em] text-text-muted font-sans">Process</span>
                     <h2 class="font-serif text-3xl md:text-4xl font-bold text-text-primary mt-3">
                         아뜰리에의 과정
@@ -594,7 +583,7 @@
         <!-- ============================================== -->
         <section class="w-full bg-bg-surface py-20 lg:py-28" id="booking" aria-label="Booking Information">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-                <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-in-section">
+                <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-up">
                     <!-- Left: Interior image (5 cols) -->
                     <div class="col-span-12 md:col-span-5">
                         <div class="relative aspect-[4/5] overflow-hidden stagger-item">
@@ -665,7 +654,7 @@
         <section class="relative w-full min-h-[60vh] flex items-center" id="final-cta" aria-label="Final CTA">
             <img src="./images/cta.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-black/65"></div>
-            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full fade-in-section">
+            <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full fade-up">
                 <span class="font-serif italic text-white/60 text-sm">Book Your Session</span>
                 <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mt-4 mb-6">
                     당신만의 아뜰리에에<br class="hidden sm:block">
@@ -713,16 +702,19 @@
     <!-- ============================================== -->
     <script>
         // Intersection Observer — Scroll Animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
             const parent = el.closest('.grid, .space-y-12, .space-y-0, .space-y-6');
             if (parent) {
@@ -778,7 +770,7 @@
 
         // Reduced Motion Guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
                 el.style.transition = 'none';
@@ -786,5 +778,35 @@
         }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

@@ -60,24 +60,17 @@
         body { background: var(--bg-page); color: var(--text-primary); }
 
         /* Scroll animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Accordion */
         .accordion-content {
@@ -232,7 +225,7 @@
      MOVE: M-DIV-FULLBLEED-IMAGE (Key Color)
      COMPONENT_REF: custom-key-color-origin | GRADE: n/a | MODE: fallback
      ============================================ -->
-<section id="origin" class="fade-in-section relative w-full min-h-[55vh] flex items-center" aria-label="식재료의 근원">
+<section id="origin" class="scale-in relative w-full min-h-[55vh] flex items-center" aria-label="식재료의 근원">
     <img src="./images/seasonal.png" alt="제철 식재료 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1200" height="675">
     <div class="absolute inset-0" style="background: rgba(91,123,93,0.78);"></div>
 
@@ -281,7 +274,7 @@
      MOVE: M-LAY-EDITORIAL-FEATURE (Accordion Collage)
      COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-image-collage-5-7-reference.html | FIDELITY: 72%
      ============================================ -->
-<section id="journey" class="fade-in-section w-full bg-surface py-20 md:py-28" aria-label="오마카세 코스 여정">
+<section id="journey" class="fade-left w-full bg-surface py-20 md:py-28" aria-label="오마카세 코스 여정">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-jade text-xs tracking-[0.15em] uppercase block mb-4">Omakase Journey</span>
         <h2 class="font-serif text-3xl md:text-4xl text-parchment mb-12">여덟 접시의 여정</h2>
@@ -406,7 +399,7 @@
      MOVE: M-DIV-FULLBLEED-IMAGE
      COMPONENT_REF: custom | GRADE: n/a | MODE: fallback
      ============================================ -->
-<section class="fade-in-section relative w-full min-h-[50vh] flex items-center" aria-label="철학 인용">
+<section class="scale-in relative w-full min-h-[50vh] flex items-center" aria-label="철학 인용">
     <img src="./images/divider.png" alt="오마카세 카운터 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="900">
     <div class="absolute inset-0 bg-black/65"></div>
 
@@ -426,7 +419,7 @@
      MOVE: M-LAY-EDITORIAL-MOSAIC
      COMPONENT_REF: bento-accent-text-image-grid | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-accent-text-image-grid-reference.html | FIDELITY: 70%
      ============================================ -->
-<section id="seasonal" class="fade-in-section w-full bg-page py-20 md:py-28" aria-label="계절 캘린더">
+<section id="seasonal" class="scale-in w-full bg-page py-20 md:py-28" aria-label="계절 캘린더">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-jade text-xs tracking-[0.15em] uppercase block mb-4">Seasonal Calendar</span>
         <h2 class="font-serif text-3xl md:text-4xl text-parchment mb-12">사계, 네 번의 코스</h2>
@@ -502,7 +495,7 @@
      MOVE: M-LAY-ASYM-GRID (Staggered offset)
      COMPONENT_REF: staggered-typo-offset-asymmetric-images | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-typo-offset-asymmetric-images-reference.html | FIDELITY: 72%
      ============================================ -->
-<section id="space" class="fade-in-section w-full bg-surface py-20 md:py-28" aria-label="공간">
+<section id="space" class="fade-up w-full bg-surface py-20 md:py-28" aria-label="공간">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-6 lg:gap-10">
             <!-- Left: Typography block (4 cols) -->
@@ -557,7 +550,7 @@
      MOVE: M-LAY-EDITORIAL-STORY
      COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 70%
      ============================================ -->
-<section class="fade-in-section w-full bg-page py-20 md:py-28" aria-label="셰프 소개">
+<section class="fade-up w-full bg-page py-20 md:py-28" aria-label="셰프 소개">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-0 lg:gap-0">
             <!-- Text block: 4 cols -->
@@ -603,7 +596,7 @@
      MOVE: M-INT-HSCROLL-GALLERY
      COMPONENT_REF: custom-hscroll-sake | GRADE: n/a | MODE: fallback
      ============================================ -->
-<section class="fade-in-section w-full bg-surface py-20 md:py-28" aria-label="사케 페어링">
+<section class="fade-left w-full bg-surface py-20 md:py-28" aria-label="사케 페어링">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-8">
         <span class="text-jade text-xs tracking-[0.15em] uppercase block mb-4">Sake & Pairing</span>
         <h2 class="font-serif text-3xl md:text-4xl text-parchment">한 잔의 완성</h2>
@@ -661,7 +654,7 @@
      MOVE: M-LAY-SPLIT-PROOF (Info grid)
      COMPONENT_REF: custom-info-grid | GRADE: n/a | MODE: fallback
      ============================================ -->
-<section id="reservation" class="fade-in-section w-full bg-page py-20 md:py-28" aria-label="예약 정보">
+<section id="reservation" class="fade-right w-full bg-page py-20 md:py-28" aria-label="예약 정보">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-jade text-xs tracking-[0.15em] uppercase block mb-4">Reservation</span>
         <h2 class="font-serif text-3xl md:text-4xl text-parchment mb-12">예약 안내</h2>
@@ -722,7 +715,7 @@
      MOVE: M-CTA-FULLBLEED-FINAL
      COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 72%
      ============================================ -->
-<section class="fade-in-section relative w-full min-h-[60vh] flex items-center" aria-label="최종 예약 CTA">
+<section class="scale-in relative w-full min-h-[60vh] flex items-center" aria-label="최종 예약 CTA">
     <img src="./images/cta.png" alt="소무 다이닝 플레이팅 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="900">
     <div class="absolute inset-0 bg-black/75"></div>
 
@@ -773,16 +766,19 @@
      ============================================ -->
 <script>
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
         el.style.transitionDelay = `${(index % 8) * 0.1}s`;
         observer.observe(el);
@@ -819,7 +815,7 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
             el.style.transition = 'none';
@@ -827,5 +823,35 @@
     }
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

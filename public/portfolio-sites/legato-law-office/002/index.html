@@ -53,18 +53,17 @@
 
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-page); color: var(--text-primary); font-family: var(--font-ui); }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-        .stagger-item {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Counter Animation */
         .counter-value { font-variant-numeric: tabular-nums; }
@@ -81,9 +80,11 @@
         .sticky-label { position: sticky; top: 100px; }
 
         /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
-            .hscroll-container { scroll-behavior: auto; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
 
         button, a { transition: all 0.2s ease-in-out; }
@@ -153,7 +154,7 @@
         <!-- SECTION 2: WHY US | MOVE: M-LAY-EDITORIAL-FEATURE -->
         <!-- COMPONENT_REF: split-text5-gap1-image6-offset | GRADE: A | MODE: adapted | FIDELITY: 80% -->
         <!-- ============================================== -->
-        <section id="why" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+        <section id="why" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-up">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-12 gap-6 lg:gap-10 items-start">
                     <!-- Text: 5 cols, offset down -->
@@ -218,7 +219,7 @@
         <!-- SECTION 3: ATTORNEYS | MOVE: M-INT-HSCROLL-GALLERY -->
         <!-- COMPONENT_REF: scroll-x-carousel | GRADE: B | MODE: adapted | FIDELITY: 75% -->
         <!-- ============================================== -->
-        <section id="attorneys" class="w-full bg-bg-page py-24 lg:py-[100px] fade-in-section">
+        <section id="attorneys" class="w-full bg-bg-page py-24 lg:py-[100px] fade-left">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-10">
                 <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">OUR ATTORNEYS</p>
                 <div class="flex items-end justify-between">
@@ -313,7 +314,7 @@
         <!-- SECTION 4: PRACTICE AREAS | MOVE: M-LAY-ASYM-GRID -->
         <!-- COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | FIDELITY: 80% -->
         <!-- ============================================== -->
-        <section id="practice" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+        <section id="practice" class="w-full bg-bg-surface py-24 lg:py-[100px] fade-right">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="text-center mb-14">
                     <p class="text-[12px] tracking-[0.2em] uppercase text-accent mb-3">PRACTICE AREAS</p>
@@ -368,7 +369,7 @@
         <!-- SECTION 5: TESTIMONIALS | MOVE: M-DIV-FULLBLEED-IMAGE -->
         <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | FIDELITY: 85% -->
         <!-- ============================================== -->
-        <section class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+        <section class="relative w-full min-h-[60vh] flex items-center scale-in">
             <img src="./images/conference_room.png" alt="법률 상담실" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-black/75"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
@@ -413,7 +414,7 @@
         <!-- SECTION 6: CASE RESULTS | MOVE: M-TRUST-STAT-BAND (KEY COLOR) -->
         <!-- COMPONENT_REF: number-ticker | GRADE: B | MODE: adapted | FIDELITY: 75% -->
         <!-- ============================================== -->
-        <section id="results" class="relative w-full min-h-[50vh] flex items-center fade-in-section">
+        <section id="results" class="relative w-full min-h-[50vh] flex items-center scale-in">
             <img src="./images/courthouse_modern.png" alt="법원 건물 외관" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0" style="background: rgba(11,18,34,0.88);"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 w-full">
@@ -456,7 +457,7 @@
         <!-- SECTION 7: PROCESS | MOVE: M-INT-STICKY-STEPS -->
         <!-- COMPONENT_REF: feature-showcase | GRADE: A | MODE: adapted | FIDELITY: 70% -->
         <!-- ============================================== -->
-        <section class="w-full bg-bg-page py-24 lg:py-[100px] fade-in-section">
+        <section class="w-full bg-bg-page py-24 lg:py-[100px] fade-up">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                     <!-- Left: Sticky Label -->
@@ -527,7 +528,7 @@
         <!-- ============================================== -->
         <!-- SECTION 8: OFFICE DIVIDER | MOVE: M-DIV-PARALLAX-LIGHT -->
         <!-- ============================================== -->
-        <section class="relative w-full min-h-[50vh] flex items-center fade-in-section">
+        <section class="relative w-full min-h-[50vh] flex items-center scale-in">
             <img src="./images/law_books.png" alt="법률 서적 서가" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center">
@@ -542,7 +543,7 @@
         <!-- SECTION 9: FAQ | MOVE: M-LAY-SPLIT-PROOF -->
         <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | FIDELITY: 80% -->
         <!-- ============================================== -->
-        <section class="w-full bg-bg-surface py-24 lg:py-[100px] fade-in-section">
+        <section class="w-full bg-bg-surface py-24 lg:py-[100px] fade-right">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-12 gap-8 lg:gap-12">
                     <!-- Left: Title -->
@@ -612,7 +613,7 @@
         <!-- SECTION 10: FOOTER CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
         <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | FIDELITY: 85% -->
         <!-- ============================================== -->
-        <section id="contact" class="relative w-full min-h-[60vh] flex items-center fade-in-section">
+        <section id="contact" class="relative w-full min-h-[60vh] flex items-center scale-in">
             <img src="./images/building_exterior.png" alt="사무실 건물 외관" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div class="absolute inset-0 bg-black/75"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 text-center w-full">
@@ -690,14 +691,17 @@
     <!-- SCRIPTS -->
     <script>
         // Intersection Observer — Scroll Animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('animate-in');
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
             const parent = el.closest('.grid, .space-y-0, .hscroll-container, .divide-y');
             if (parent) {
@@ -733,7 +737,7 @@
                     counterObserver.unobserve(el);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
 
@@ -778,12 +782,42 @@
 
         // Reduced Motion Guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-                el.classList.add('animate-in');
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+                el.classList.add('visible');
                 el.style.transition = 'none';
             });
         }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

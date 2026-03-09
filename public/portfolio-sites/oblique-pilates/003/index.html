@@ -90,20 +90,17 @@
     .slide img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Scroll animations */
-    .fade-in-section {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in-section.visible {
-      opacity: 1; transform: translateY(0);
-    }
-    .stagger-item {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-    .stagger-item.visible {
-      opacity: 1; transform: translateY(0);
-    }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
     /* Accordion */
     .accordion-content {
@@ -145,9 +142,11 @@
       border-radius: 12px; padding: 32px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
-      .slide { transition: none; }
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
       .accordion-content { transition: none; }
     }
   </style>
@@ -223,7 +222,7 @@
 
 <!-- SECTION: ABOUT / PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
 <!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 75% -->
-<section class="fade-in-section w-full bg-page py-24 md:py-32">
+<section class="fade-up w-full bg-page py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="max-w-3xl mx-auto text-center">
       <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-6">Our Philosophy</p>
@@ -246,7 +245,7 @@
 
 <!-- SECTION: PROGRAMS | MOVE: M-INT-HOVER-REVEAL (Accordion Collage) -->
 <!-- COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-image-collage-5-7-reference.html | FIDELITY: 75% -->
-<section id="programs" class="fade-in-section w-full bg-surface py-24 md:py-32">
+<section id="programs" class="fade-left w-full bg-surface py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="grid grid-cols-12 gap-8 lg:gap-12">
       <!-- Left: Image Collage (5 cols) -->
@@ -364,7 +363,7 @@
 
 <!-- SECTION: STUDIO GALLERY | MOVE: M-LAY-EDITORIAL-FEATURE (Staggered Gallery) -->
 <!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-bold-typo-gallery-5-3-4-mt16-reference.html | FIDELITY: 70% -->
-<section class="fade-in-section w-full bg-page py-24 md:py-32">
+<section class="fade-right w-full bg-page py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
       <div>
@@ -410,7 +409,7 @@
 
 <!-- SECTION: TRANSFORMATION (Divider) | MOVE: M-DIV-FULLBLEED-COLORBLOCK -->
 <!-- COMPONENT_REF: custom-key-color-process | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
-<section class="fade-in-section relative w-full min-h-[55vh] flex items-center">
+<section class="scale-in relative w-full min-h-[55vh] flex items-center">
   <img src="./images/transformation-bg.png" alt="" class="absolute inset-0 w-full h-full object-cover img-warm" loading="lazy" />
   <div class="absolute inset-0 bg-stone-900/80"></div>
   <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 w-full">
@@ -445,7 +444,7 @@
 
 <!-- SECTION: INSTRUCTOR | MOVE: M-LAY-EDITORIAL-STORY -->
 <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75% -->
-<section class="fade-in-section w-full bg-page py-24 md:py-32">
+<section class="fade-up w-full bg-page py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="grid grid-cols-12 gap-6 lg:gap-0">
       <!-- Text Block (4 cols) -->
@@ -486,7 +485,7 @@
 
 <!-- SECTION: TESTIMONIALS | MOVE: M-TRUST-AWARDS-CERTS -->
 <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
-<section class="fade-in-section w-full bg-warm-charcoal py-24 md:py-32">
+<section class="fade-up w-full bg-warm-charcoal py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
       <div>
@@ -534,7 +533,7 @@
 
 <!-- SECTION: COMMUNITY / BENTO | MOVE: M-LAY-ASYM-GRID (Bento Mosaic) -->
 <!-- COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-mosaic-mixed-colspan-rowspan-reference.html | FIDELITY: 70% -->
-<section class="fade-in-section w-full bg-surface py-24 md:py-32">
+<section class="fade-left w-full bg-surface py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="text-center mb-12">
       <p class="text-taupe font-body text-xs uppercase tracking-[0.2em] mb-4">Why Oblique</p>
@@ -595,7 +594,7 @@
 
 <!-- SECTION: FAQ | MOVE: INTERACTION -->
 <!-- COMPONENT_REF: custom-faq-accordion | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
-<section class="fade-in-section w-full bg-page py-24 md:py-32">
+<section class="fade-right w-full bg-page py-24 md:py-32">
   <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
     <div class="grid grid-cols-12 gap-8 lg:gap-12">
       <!-- Left: Title (4 cols) -->
@@ -680,7 +679,7 @@
 
 <!-- SECTION: FINAL CTA + FOOTER | MOVE: M-CTA-FULLBLEED-FINAL -->
 <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 70% -->
-<section id="contact" class="fade-in-section relative w-full min-h-[60vh] flex items-center">
+<section id="contact" class="scale-in relative w-full min-h-[60vh] flex items-center">
   <img src="./images/cta-bg.png" alt="" class="absolute inset-0 w-full h-full object-cover img-warm" loading="lazy" />
   <div class="absolute inset-0 bg-black/65"></div>
   <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28 w-full">
@@ -819,11 +818,14 @@
           fadeObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '-50px' });
+    }, { threshold: 0.1, rootMargin: '-20px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(function(el) {
+    document.querySelectorAll('.fade-up').forEach(function(el) {
       fadeObserver.observe(el);
     });
+    document.querySelectorAll('.fade-left').forEach(function(s) { fadeObserver.observe(s); });
+    document.querySelectorAll('.fade-right').forEach(function(s) { fadeObserver.observe(s); });
+    document.querySelectorAll('.scale-in').forEach(function(s) { fadeObserver.observe(s); });
 
     var staggerObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -838,13 +840,13 @@
       });
     }, { threshold: 0.1, rootMargin: '-30px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(function(section) {
+    document.querySelectorAll('.fade-up').forEach(function(section) {
       if (section.querySelector('.stagger-item')) {
         staggerObserver.observe(section);
       }
     });
   } else {
-    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(function(el) {
+    document.querySelectorAll('.fade-up, .stagger-item').forEach(function(el) {
       el.classList.add('visible');
     });
   }
@@ -897,5 +899,35 @@
 })();
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

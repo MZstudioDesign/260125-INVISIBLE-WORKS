@@ -62,26 +62,17 @@
             --border-strong: #c9a227;
             --content-max-width: 1200px;
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Film grain texture */
         .film-grain::after {
@@ -119,13 +110,11 @@
         }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .marquee-track { animation: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
             img { transition: none; }
         }
 
@@ -239,7 +228,7 @@
      MOVE: M-LAY-EDITORIAL-MOSAIC
      COMPONENT_REF: staggered-offset-images-numbered-5-2-5 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-offset-images-numbered-5-2-5-reference.html | FIDELITY: 75%
 ============================================================ -->
-<section class="w-full bg-page py-24 md:py-32 fade-in-section" aria-label="Selected Work">
+<section class="w-full bg-page py-24 md:py-32 fade-up" aria-label="Selected Work">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section header -->
         <div class="flex items-baseline justify-between mb-16">
@@ -276,7 +265,7 @@
         </div>
 
         <!-- Big word -->
-        <div class="mb-12 fade-in-section">
+        <div class="mb-12 fade-left">
             <h3 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-txt/5 leading-none select-none" aria-hidden="true">Works.</h3>
         </div>
 
@@ -335,7 +324,7 @@
      MOVE: M-LAY-EDITORIAL-MOSAIC
      COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/bento-mosaic/bento-mosaic-mixed-colspan-rowspan-reference.html | FIDELITY: 75%
 ============================================================ -->
-<section class="w-full bg-surface py-24 md:py-32 fade-in-section" aria-label="Services">
+<section class="w-full bg-surface py-24 md:py-32 fade-right" aria-label="Services">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-amber-accent text-xs uppercase tracking-[0.2em] block mb-3">Services</span>
         <h2 class="font-serif text-3xl md:text-5xl text-txt font-semibold mb-16">우리가 만드는 영상</h2>
@@ -419,7 +408,7 @@
      SECTION 4: BTS DIVIDER — Full-bleed Behind-the-Scenes
      MOVE: M-DIV-FULLBLEED-IMAGE
 ============================================================ -->
-<section class="relative w-full min-h-[50vh] film-grain fade-in-section" aria-label="Behind the Scenes">
+<section class="relative w-full min-h-[50vh] film-grain scale-in" aria-label="Behind the Scenes">
     <img src="./images/divider_bts.png" alt="Behind the scenes on a film production set" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
     <div class="absolute inset-0 bg-[#0c0c0c]/65"></div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex items-center">
@@ -439,7 +428,7 @@
      MOVE: M-LAY-EDITORIAL-STORY
      COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 75%
 ============================================================ -->
-<section class="w-full bg-page py-24 md:py-32 fade-in-section" aria-label="Team">
+<section class="w-full bg-page py-24 md:py-32 fade-up" aria-label="Team">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-amber-accent text-xs uppercase tracking-[0.2em] block mb-3">The Crew</span>
         <h2 class="font-serif text-3xl md:text-5xl text-txt font-semibold mb-16">장면을 만드는 사람들</h2>
@@ -492,7 +481,7 @@
      SECTION 6: EQUIPMENT / STUDIO — Full-bleed
      MOVE: M-DIV-FULLBLEED-IMAGE
 ============================================================ -->
-<section class="relative w-full min-h-[60vh] film-grain fade-in-section" aria-label="Studio & Equipment">
+<section class="relative w-full min-h-[60vh] film-grain scale-in" aria-label="Studio & Equipment">
     <img src="./images/divider_studio.png" alt="Professional video production studio with RED cameras" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
     <div class="absolute inset-0 bg-[#0c0c0c]/70"></div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
@@ -540,7 +529,7 @@
      MOVE: M-LAY-EDITORIAL-FEATURE
      COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 75%
 ============================================================ -->
-<section class="w-full bg-surface py-24 md:py-32 fade-in-section" aria-label="Process">
+<section class="w-full bg-surface py-24 md:py-32 fade-left" aria-label="Process">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-8 lg:gap-16">
             <!-- Left heading -->
@@ -660,7 +649,7 @@
      MOVE: M-TRUST-LOGO-WALL
      COMPONENT_REF: marquee | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/etc/marquee-reference.html | FIDELITY: 70%
 ============================================================ -->
-<section class="w-full bg-page py-16 overflow-hidden fade-in-section" aria-label="Client Brands">
+<section class="w-full bg-page py-16 overflow-hidden fade-right" aria-label="Client Brands">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-8">
         <span class="text-amber-accent text-xs uppercase tracking-[0.2em] block mb-3">Trusted By</span>
         <h2 class="font-serif text-2xl md:text-3xl text-txt font-semibold">함께한 브랜드</h2>
@@ -705,7 +694,7 @@
      MOVE: M-LAY-ASYM-GRID (on key color)
      COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-3col-category-4-5-3-reference.html | FIDELITY: 70%
 ============================================================ -->
-<section class="w-full bg-amber-accent py-24 md:py-32 min-h-[45vh] fade-in-section" aria-label="Pricing Guide">
+<section class="w-full bg-amber-accent py-24 md:py-32 min-h-[45vh] scale-in" aria-label="Pricing Guide">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <span class="text-page/60 text-xs uppercase tracking-[0.2em] block mb-3">Pricing Guide</span>
         <h2 class="font-serif text-3xl md:text-5xl text-page font-semibold mb-4">투명한 프로젝트 가이드</h2>
@@ -798,7 +787,7 @@
      MOVE: M-CTA-FULLBLEED-FINAL + M-FOOTER-B2B-DETAILS
      COMPONENT_REF: cta-consulting-fullwidth | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-consulting-fullwidth-reference.html | FIDELITY: 75%
 ============================================================ -->
-<section id="contact" class="relative w-full min-h-[60vh] film-grain fade-in-section" aria-label="Contact">
+<section id="contact" class="relative w-full min-h-[60vh] film-grain scale-in" aria-label="Contact">
     <img src="./images/cta_final.png" alt="Dramatic film production scene with warm lighting" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="1080">
     <div class="absolute inset-0 bg-[#0c0c0c]/80"></div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
@@ -938,16 +927,19 @@
     lucide.createIcons();
 
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
         const parent = el.closest('.grid, .space-y-0');
         if (parent) {
@@ -983,7 +975,7 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
             el.style.transition = 'none';
@@ -993,5 +985,35 @@
     }
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

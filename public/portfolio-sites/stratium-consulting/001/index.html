@@ -49,35 +49,24 @@
 
         html { scroll-behavior: smooth; }
         body { font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         /* Transitions */
         button, a { transition: all 0.2s ease-in-out; }
@@ -173,7 +162,7 @@
         <!-- SECTION 2: SERVICE PILLARS | MOVE: M-LAY-EDITORIAL-FEATURE -->
         <!-- COMPONENT_REF: feature-section-with-hover-effects | GRADE: B | MODE: adapted | SNIPPET_PATH: etc/feature-section-with-hover-effects-reference.html | FIDELITY: 75% -->
         <!-- ============================================================ -->
-        <section id="services" class="fade-in-section w-full py-24 md:py-32 bg-white" aria-label="서비스">
+        <section id="services" class="fade-up w-full py-24 md:py-32 bg-white" aria-label="서비스">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <!-- Section Header -->
                 <div class="mb-16">
@@ -240,7 +229,7 @@
         <section id="results" class="relative w-full min-h-[50vh] bg-navy" aria-label="성과">
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(27,58,92,0.5),transparent_70%)]"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
-                <div class="fade-in-section text-center mb-16">
+                <div class="fade-left text-center mb-16">
                     <p class="text-white/40 text-xs uppercase tracking-[0.2em] mb-4 font-sans">Our Impact</p>
                     <h2 class="font-serif text-3xl md:text-4xl lg:text-[40px] font-semibold text-white leading-[1.25]">
                         데이터가 증명하는<br>결과
@@ -266,7 +255,7 @@
                     </div>
                 </div>
 
-                <p class="fade-in-section text-center text-white/30 text-sm mt-16 font-sans">숫자 뒤에는 전략이 있습니다.</p>
+                <p class="fade-right text-center text-white/30 text-sm mt-16 font-sans">숫자 뒤에는 전략이 있습니다.</p>
             </div>
         </section>
 
@@ -274,7 +263,7 @@
         <!-- SECTION 4: CASE STUDIES | MOVE: M-LAY-EDITORIAL-STORY -->
         <!-- COMPONENT_REF: content-card | GRADE: A | MODE: adapted | SNIPPET_PATH: image-summary-text/content-card-reference.html | FIDELITY: 75% -->
         <!-- ============================================================ -->
-        <section id="cases" class="fade-in-section w-full py-24 md:py-32 bg-white" aria-label="사례">
+        <section id="cases" class="scale-in w-full py-24 md:py-32 bg-white" aria-label="사례">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="mb-16">
                     <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-sans">Case Studies</p>
@@ -353,7 +342,7 @@
         <!-- SECTION 5: LEADERSHIP | MOVE: M-LAY-ASYM-GRID -->
         <!-- COMPONENT_REF: content-card | GRADE: A | MODE: adapted | SNIPPET_PATH: image-summary-text/content-card-reference.html | FIDELITY: 70% -->
         <!-- ============================================================ -->
-        <section id="leadership" class="fade-in-section w-full py-24 md:py-32 bg-surface" aria-label="리더십">
+        <section id="leadership" class="fade-up w-full py-24 md:py-32 bg-surface" aria-label="리더십">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="mb-16">
                     <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-sans">Leadership</p>
@@ -401,7 +390,7 @@
             <img src="./images/divider_process.png" alt="전략 컨설팅 미팅 장면" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-navy/85"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32">
-                <div class="fade-in-section text-center mb-16">
+                <div class="fade-up text-center mb-16">
                     <p class="text-white/40 text-xs uppercase tracking-[0.2em] mb-4 font-sans">Our Process</p>
                     <h2 class="font-serif text-3xl md:text-4xl lg:text-[40px] font-semibold text-white leading-[1.25]">성장까지의 여정</h2>
                 </div>
@@ -444,7 +433,7 @@
                     </div>
                 </div>
 
-                <div class="fade-in-section mt-16 text-center">
+                <div class="fade-left mt-16 text-center">
                     <a href="#contact" class="inline-flex items-center justify-center bg-white text-navy text-sm font-medium px-8 py-4 rounded hover:bg-gray-100 active:scale-95">
                         프로세스 상담 받기
                     </a>
@@ -456,7 +445,7 @@
         <!-- SECTION 7: CLIENT INDUSTRIES | MOVE: M-TRUST-LOGO-WALL -->
         <!-- COMPONENT_REF: infinite-slider | GRADE: B | MODE: fallback | SNIPPET_PATH: logo/infinite-slider-reference.html | FIDELITY: n/a -->
         <!-- ============================================================ -->
-        <section class="fade-in-section w-full py-24 md:py-32 bg-white" aria-label="산업군">
+        <section class="fade-right w-full py-24 md:py-32 bg-white" aria-label="산업군">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="text-center mb-16">
                     <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-sans">Industries We Serve</p>
@@ -509,7 +498,7 @@
         <!-- SECTION 8: CONTACT | MOVE: M-LAY-SPLIT-PROOF -->
         <!-- COMPONENT_REF: footer-column | GRADE: A | MODE: adapted | SNIPPET_PATH: cta-footer/footer-column-reference.html | FIDELITY: 70% -->
         <!-- ============================================================ -->
-        <section id="contact" class="fade-in-section w-full py-24 md:py-32 bg-surface" aria-label="문의">
+        <section id="contact" class="scale-in w-full py-24 md:py-32 bg-surface" aria-label="문의">
             <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                     <!-- Left: Info -->
@@ -619,11 +608,11 @@
             <img src="./images/cta_footer.png" alt="야경이 보이는 고층 빌딩 전경" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-black/75"></div>
             <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 min-h-[60vh] flex flex-col items-center justify-center text-center">
-                <p class="fade-in-section text-white/40 text-xs uppercase tracking-[0.2em] mb-6 font-sans">Next Step</p>
-                <h2 class="fade-in-section font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.25] mb-8">
+                <p class="fade-up text-white/40 text-xs uppercase tracking-[0.2em] mb-6 font-sans">Next Step</p>
+                <h2 class="fade-up font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.25] mb-8">
                     다음 성장 전략,<br>함께 설계합니다
                 </h2>
-                <a href="#contact" class="fade-in-section inline-flex items-center justify-center bg-white text-navy text-sm font-medium px-10 py-4 rounded hover:bg-gray-100 active:scale-95">
+                <a href="#contact" class="fade-left inline-flex items-center justify-center bg-white text-navy text-sm font-medium px-10 py-4 rounded hover:bg-gray-100 active:scale-95">
                     전략 상담 예약하기
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -650,28 +639,39 @@
     <!-- JAVASCRIPT: Scroll Animations + Counter + Mobile Menu -->
     <!-- ============================================================ -->
     <script>
-        // IntersectionObserver — Fade-in sections
-        const observerOptions = { threshold: 0.1, rootMargin: '-50px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOpts);
 
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
+    });
 
         // Stagger animation
         const staggerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const parent = entry.target.closest('section') || entry.target.parentElement;
-                    const items = parent.querySelectorAll('.stagger-item:not(.animate-in)');
+                    const items = parent.querySelectorAll('.stagger-item:not(.visible)');
                     items.forEach((item, index) => {
                         item.style.transitionDelay = `${index * 0.1}s`;
-                        item.classList.add('animate-in');
+                        item.classList.add('visible');
                     });
                     staggerObserver.unobserve(entry.target);
                 }
@@ -708,7 +708,7 @@
                     counterObserver.unobserve(el);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
 
@@ -750,5 +750,35 @@
         });
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

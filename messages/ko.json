@@ -148,7 +148,8 @@
     "production": "영상",
     "tech": "테크",
     "veterinary": "동물병원",
-    "fnb": "식음료"
+    "restaurant": "레스토랑",
+    "cafe": "카페"
   },
   "PortfolioModal": {
     "designLabel": "Design {number}"

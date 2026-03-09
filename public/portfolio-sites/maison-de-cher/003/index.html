@@ -71,33 +71,22 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-data); background: var(--bg-page); color: var(--text-primary); }
     h1, h2, h3 { font-family: var(--font-ui); }
-
-    /* Scroll Animations */
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .stagger-item {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-    .stagger-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
     /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section, .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
     }
 
@@ -195,7 +184,7 @@
 
     <!-- SECTION: PHILOSOPHY | MOVE: M-TRUST-STAT-BAND (Key Color Section) -->
     <!-- COMPONENT_REF: custom key-color | GRADE: N/A | MODE: fallback | SNIPPET_PATH: N/A | FIDELITY: N/A -->
-    <section id="philosophy" class="fade-in-section w-full bg-olive" style="min-height: 45vh;">
+    <section id="philosophy" class="fade-up w-full bg-olive" style="min-height: 45vh;">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
           <div class="lg:col-span-5">
@@ -232,7 +221,7 @@
 
     <!-- SECTION: STYLIST TEAM | MOVE: M-LAY-EDITORIAL-STORY -->
     <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 80% -->
-    <section class="fade-in-section w-full bg-cream py-20 md:py-28">
+    <section class="fade-left w-full bg-cream py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
           <!-- Image side (7 cols) -->
@@ -289,7 +278,7 @@
 
     <!-- SECTION: SERVICES | MOVE: M-INT-HOVER-REVEAL -->
     <!-- COMPONENT_REF: feature-showcase | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 75% -->
-    <section id="services" class="fade-in-section w-full bg-linen py-20 md:py-28">
+    <section id="services" class="fade-right w-full bg-linen py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="text-center mb-14">
           <p class="text-xs tracking-[0.2em] uppercase text-blush mb-4 font-data">Services</p>
@@ -346,7 +335,7 @@
 
     <!-- SECTION: COLLECTION | MOVE: M-LAY-EDITORIAL-FEATURE (Editorial #1) -->
     <!-- COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/ | FIDELITY: 75% -->
-    <section id="collection" class="fade-in-section w-full bg-cream py-20 md:py-28">
+    <section id="collection" class="scale-in w-full bg-cream py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-14">
           <p class="text-xs tracking-[0.2em] uppercase text-blush mb-4 font-data">Season Collection</p>
@@ -397,7 +386,7 @@
 
     <!-- SECTION: TRANSFORMATION | MOVE: M-LAY-OFFSET-OVERLAP (Editorial #2) -->
     <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
-    <section class="fade-in-section w-full bg-cream py-20 md:py-28">
+    <section class="fade-up w-full bg-cream py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-14">
           <p class="text-xs tracking-[0.2em] uppercase text-blush mb-4 font-data">Before & After</p>
@@ -457,7 +446,7 @@
 
     <!-- SECTION: INTERIOR | MOVE: M-LAY-ALTERNATING-ROWS -->
     <!-- COMPONENT_REF: alternating-img7-text5-order-swap | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/ | FIDELITY: 75% -->
-    <section id="interior" class="fade-in-section w-full bg-linen py-20 md:py-28">
+    <section id="interior" class="fade-up w-full bg-linen py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-14">
           <p class="text-xs tracking-[0.2em] uppercase text-blush mb-4 font-data">Our Space</p>
@@ -503,7 +492,7 @@
 
     <!-- SECTION: REVIEWS | MOVE: M-INT-HSCROLL-GALLERY -->
     <!-- COMPONENT_REF: custom horizontal scroll | GRADE: N/A | MODE: fallback | SNIPPET_PATH: N/A | FIDELITY: N/A -->
-    <section class="fade-in-section w-full bg-cream py-20 md:py-28">
+    <section class="fade-left w-full bg-cream py-20 md:py-28">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-14">
           <p class="text-xs tracking-[0.2em] uppercase text-blush mb-4 font-data">Reviews</p>
@@ -684,18 +673,29 @@
 
   <!-- JS: Scroll Animations + Mobile Nav -->
   <script>
-    // IntersectionObserver for fade-in sections
-    const observerOptions = { threshold: 0.1, rootMargin: '-50px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          animObserver.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, observerOpts);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
+    });
 
     // Stagger items
     const staggerObserver = new IntersectionObserver((entries) => {
@@ -752,5 +752,35 @@
     });
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

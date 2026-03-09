@@ -148,7 +148,8 @@
     "production": "影视",
     "tech": "科技",
     "veterinary": "宠物医院",
-    "fnb": "餐饮"
+    "restaurant": "餐厅",
+    "cafe": "咖啡厅"
   },
   "PortfolioModal": {
     "designLabel": "设计 {number}"

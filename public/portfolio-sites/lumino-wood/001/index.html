@@ -75,12 +75,12 @@
       background: var(--bg-page);
     }
 
-    .fade-in-section {
+    .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .fade-in-section.is-visible {
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -117,14 +117,11 @@
       color: #fff;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
-      html { scroll-behavior: auto; }
+    }
     }
   </style>
 
@@ -190,7 +187,7 @@
 
   <!-- SECTION 2: COLLECTION | MOVE: M-LAY-ASYM-GRID -->
   <!-- COMPONENT_REF: asymmetric-mosaic-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
-  <section id="collection" class="fade-in-section w-full py-20 md:py-28 bg-page">
+  <section id="collection" class="fade-up w-full py-20 md:py-28 bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="mb-16">
         <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">Collection</p>
@@ -272,7 +269,7 @@
 
   <!-- SECTION 3: MATERIAL PHILOSOPHY | MOVE: M-LAY-EDITORIAL-STORY -->
   <!-- COMPONENT_REF: split-image7-gap1-text4-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 80% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+  <section class="fade-left w-full py-20 md:py-28 bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
         <!-- Image: col-span-7 -->
@@ -326,7 +323,7 @@
 
   <!-- SECTION 4: CRAFTSMAN STORY | MOVE: M-LAY-EDITORIAL-FEATURE -->
   <!-- COMPONENT_REF: split-text5-gap1-image6-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 75% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-page">
+  <section class="fade-right w-full py-20 md:py-28 bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8 items-center">
         <!-- Text: col-span-5 -->
@@ -379,7 +376,7 @@
 
   <!-- SECTION 5: WORKSHOP DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
   <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 75% -->
-  <section class="fade-in-section relative w-full min-h-[50vh] flex items-center">
+  <section class="scale-in relative w-full min-h-[50vh] flex items-center">
     <img
       src="./images/workshop-divider.png"
       alt="루미노 우드 공방 내부, 목재 대패밥과 공구들"
@@ -405,7 +402,7 @@
 
   <!-- SECTION 6: CUSTOM ORDER PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
   <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/ | FIDELITY: 70% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+  <section class="fade-up w-full py-20 md:py-28 bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="text-center mb-16">
         <p class="text-text-muted text-xs tracking-[0.2em] uppercase mb-4 font-sans">Custom Order Process</p>
@@ -490,7 +487,7 @@
 
   <!-- SECTION 7: SHOWROOM | MOVE: M-LAY-STAGGERED-GALLERY -->
   <!-- COMPONENT_REF: staggered-gallery-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/ | FIDELITY: 75% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-page">
+  <section class="fade-up w-full py-20 md:py-28 bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
         <!-- Image side -->
@@ -559,7 +556,7 @@
 
   <!-- SECTION 8: TESTIMONIALS KEY COLOR | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color 40vh+) -->
   <!-- COMPONENT_REF: custom-key-color-testimonial | GRADE: n/a | MODE: custom | SNIPPET_PATH: na | FIDELITY: n/a -->
-  <section class="fade-in-section relative w-full" style="min-height: 50vh;">
+  <section class="fade-left relative w-full" style="min-height: 50vh;">
     <img
       src="./images/testimonial-bg.png"
       alt="따뜻한 톤의 원목 가구 배경"
@@ -636,7 +633,7 @@
 
   <!-- SECTION 9: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
   <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/ | FIDELITY: 75% -->
-  <section id="inquiry" class="fade-in-section relative w-full min-h-[60vh] flex items-center">
+  <section id="inquiry" class="scale-in relative w-full min-h-[60vh] flex items-center">
     <img
       src="./images/cta-bg.png"
       alt="루미노 우드 완성된 다이닝 세트"
@@ -697,15 +694,18 @@
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add('visible');
               observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
       );
 
-      document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+      document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
       const staggerObserver = new IntersectionObserver(
         (entries) => {
@@ -715,7 +715,7 @@
               const siblings = parent ? Array.from(parent.querySelectorAll('.stagger-item')) : [];
               const idx = siblings.indexOf(entry.target);
               entry.target.style.transitionDelay = (idx >= 0 ? idx : 0) * 0.1 + 's';
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add('visible');
               staggerObserver.unobserve(entry.target);
             }
           });
@@ -727,5 +727,35 @@
     })();
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

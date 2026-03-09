@@ -57,26 +57,17 @@
 
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-ui); color: var(--text-primary); line-height: var(--lh-body); }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Hover transitions */
         a, button { transition: all 0.2s ease-in-out; }
@@ -98,13 +89,11 @@
         }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .faq-content { transition: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
             .faq-icon { transition: none; }
             html { scroll-behavior: auto; }
         }
@@ -139,7 +128,7 @@
     <section class="w-full bg-page py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <!-- Editorial Story: Text 4 + Gap 1 + Image 7 -->
-            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+            <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-up">
                 <div class="col-span-12 md:col-span-4 md:pt-16">
                     <p class="text-xs uppercase tracking-[0.25em] text-txt-muted mb-4">Programs</p>
                     <h2 class="text-3xl lg:text-4xl font-bold leading-tight text-txt" style="letter-spacing: -0.01em;">
@@ -197,7 +186,7 @@
     <!-- COMPONENT_REF: staggered-team-3col-zigzag-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-team-3col-zigzag-offset-reference.html | FIDELITY: 80% -->
     <section class="w-full bg-surface py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-16 fade-in-section">
+            <div class="text-center mb-16 fade-left">
                 <p class="text-xs uppercase tracking-[0.25em] text-txt-muted mb-4">Instructors</p>
                 <h2 class="text-3xl lg:text-4xl font-bold text-txt" style="letter-spacing: -0.01em;">
                     움직임을 읽는 사람들
@@ -254,7 +243,7 @@
     <section class="relative w-full min-h-[60vh]">
         <img src="./images/studio-divider.png" alt="오블리크 필라테스 스튜디오 인테리어" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-black/65"></div>
-        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center fade-in-section">
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center scale-in">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="letter-spacing: -0.01em;">
                 공간이 움직임을<br>완성합니다
             </h2>
@@ -271,7 +260,7 @@
         <img src="./images/process-bg.png" alt="필라테스 수업 장면" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-black/80"></div>
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-            <div class="text-center mb-16 fade-in-section">
+            <div class="text-center mb-16 scale-in">
                 <p class="text-xs uppercase tracking-[0.25em] text-white/40 mb-4">Process</p>
                 <h2 class="text-3xl lg:text-4xl font-bold text-white" style="letter-spacing: -0.01em;">
                     처음부터 끝까지,<br>당신의 속도로
@@ -330,7 +319,7 @@
     <!-- COMPONENT_REF: testimonials-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/testimonials/testimonials-section-reference.html | FIDELITY: 75% -->
     <section class="w-full bg-page py-20 md:py-28">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-16 fade-in-section">
+            <div class="text-center mb-16 fade-up">
                 <p class="text-xs uppercase tracking-[0.25em] text-txt-muted mb-4">Reviews</p>
                 <h2 class="text-3xl lg:text-4xl font-bold text-txt" style="letter-spacing: -0.01em;">
                     몸이 달라지면<br>일상이 달라집니다
@@ -400,14 +389,14 @@
     <!-- COMPONENT_REF: custom-faq-accordion | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a -->
     <section class="w-full bg-surface py-20 md:py-28">
         <div class="max-w-[720px] mx-auto px-6 md:px-8 lg:px-12">
-            <div class="text-center mb-16 fade-in-section">
+            <div class="text-center mb-16 fade-up">
                 <p class="text-xs uppercase tracking-[0.25em] text-txt-muted mb-4">FAQ</p>
                 <h2 class="text-3xl lg:text-4xl font-bold text-txt" style="letter-spacing: -0.01em;">
                     자주 묻는 질문
                 </h2>
             </div>
 
-            <div class="space-y-0 fade-in-section">
+            <div class="space-y-0 fade-left">
                 <div class="faq-item border-t border-border-light" data-faq>
                     <button class="w-full flex items-center justify-between py-5 text-left" aria-expanded="false">
                         <span class="text-base font-semibold text-txt pr-4">필라테스를 처음 해보는데 괜찮을까요?</span>
@@ -463,7 +452,7 @@
     <section id="contact" class="relative w-full min-h-[60vh]">
         <img src="./images/cta.png" alt="오블리크 필라테스 스튜디오" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
         <div class="absolute inset-0 bg-black/75"></div>
-        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 flex flex-col items-center text-center fade-in-section">
+        <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 flex flex-col items-center text-center fade-right">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="letter-spacing: -0.01em;">
                 당신의 첫 번째 움직임이<br>시작되는 곳
             </h2>
@@ -504,23 +493,28 @@
     </footer>
 
     <script>
-    // IntersectionObserver for scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOpts);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-
-    // Observe fade-in sections
-    document.querySelectorAll('.fade-in-section').forEach(el => {
-        observer.observe(el);
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
     });
 
     // Observe stagger items with delay
@@ -558,12 +552,42 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transition = 'none';
         });
     }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

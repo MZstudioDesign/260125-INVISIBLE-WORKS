@@ -73,34 +73,23 @@
         h1, h2, h3 {
             font-family: var(--font-heading);
         }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(22px);
-            transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         button, a { transition: all 0.2s ease; }
 
@@ -250,7 +239,7 @@
      MOVE: M-DIV-FULLBLEED-IMAGE
      COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | FIDELITY: 70%
      ============================================ -->
-<section class="relative w-full min-h-[60vh] fade-in-section" aria-label="Facility">
+<section class="relative w-full min-h-[60vh] scale-in" aria-label="Facility">
     <img src="./images/facility_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" aria-hidden="true">
     <div class="absolute inset-0 bg-black/70"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center py-20">
@@ -290,7 +279,7 @@
      MOVE: M-LAY-EDITORIAL-MOSAIC
      COMPONENT_REF: bento-mosaic-mixed-colspan-rowspan | GRADE: A | MODE: adapted | FIDELITY: 68%
      ============================================ -->
-<section id="clinics" class="w-full py-20 md:py-24 bg-white fade-in-section" aria-label="Specialist Clinics">
+<section id="clinics" class="w-full py-20 md:py-24 bg-white fade-left" aria-label="Specialist Clinics">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-12">
             <p class="text-xs uppercase tracking-[0.25em] text-accent font-medium mb-3">Specialist Centers</p>
@@ -364,7 +353,7 @@
      MOVE: M-LAY-ALTERNATING-ROWS
      COMPONENT_REF: alternating-img7-text5-order-swap | GRADE: A | MODE: adapted | FIDELITY: 70%
      ============================================ -->
-<section id="doctors" class="w-full py-20 md:py-24 bg-surface fade-in-section" aria-label="Medical Team">
+<section id="doctors" class="w-full py-20 md:py-24 bg-surface fade-right" aria-label="Medical Team">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="mb-14">
             <p class="text-xs uppercase tracking-[0.25em] text-accent font-medium mb-3">Our Specialists</p>
@@ -459,7 +448,7 @@
      MOVE: M-LAY-TIMELINE-STEPPER
      COMPONENT_REF: timeline (adapted) | GRADE: B | MODE: adapted | FIDELITY: 65%
      ============================================ -->
-<section id="recovery" class="w-full py-20 md:py-24 bg-white fade-in-section" aria-label="Recovery Journey">
+<section id="recovery" class="w-full py-20 md:py-24 bg-white scale-in" aria-label="Recovery Journey">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="text-center mb-16">
             <p class="text-xs uppercase tracking-[0.25em] text-accent font-medium mb-3">Recovery Journey</p>
@@ -553,7 +542,7 @@
      MOVE: M-DIV-FULLBLEED-COLORBLOCK
      COMPONENT_REF: accordion-image-collage-5-7 | GRADE: A | MODE: adapted | FIDELITY: 68%
      ============================================ -->
-<section id="guide" class="relative w-full fade-in-section bg-[#063F4A]" aria-label="Patient Guide">
+<section id="guide" class="relative w-full fade-up bg-[#063F4A]" aria-label="Patient Guide">
     <img src="./images/guide_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" aria-hidden="true">
     <div class="absolute inset-0 bg-black/85"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-24">
@@ -657,7 +646,7 @@
      MOVE: M-INT-HSCROLL-GALLERY
      COMPONENT_REF: scroll-x-carousel | GRADE: B | MODE: adapted | FIDELITY: 62%
      ============================================ -->
-<section class="w-full py-20 md:py-24 bg-white fade-in-section" aria-label="Testimonials">
+<section class="w-full py-20 md:py-24 bg-white fade-up" aria-label="Testimonials">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="flex items-end justify-between mb-10">
             <div>
@@ -756,7 +745,7 @@
      SECTION 8: LOCATION
      COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | FIDELITY: 58%
      ============================================ -->
-<section class="w-full py-20 md:py-24 bg-surface fade-in-section" aria-label="Location">
+<section class="w-full py-20 md:py-24 bg-surface fade-left" aria-label="Location">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center">
             <div class="col-span-12 md:col-span-5">
@@ -800,7 +789,7 @@
      MOVE: M-CTA-FULLBLEED-FINAL
      COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | FIDELITY: 72%
      ============================================ -->
-<section id="booking" class="relative w-full min-h-[60vh] fade-in-section" aria-label="Booking CTA">
+<section id="booking" class="relative w-full min-h-[60vh] scale-in" aria-label="Booking CTA">
     <img src="./images/cta_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" aria-hidden="true">
     <div class="absolute inset-0 bg-[#063F4A]/75"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center py-20">
@@ -874,16 +863,19 @@
      ============================================ -->
 <script>
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
         const parent = el.closest('.grid, .space-y-12, .space-y-16, .hscroll-container');
         if (parent) {
@@ -898,8 +890,8 @@
 
     // Reduced motion support
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transition = 'none';
         });
     }
@@ -942,5 +934,35 @@
     }
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

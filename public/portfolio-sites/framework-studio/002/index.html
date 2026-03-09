@@ -54,18 +54,17 @@
 
         html { scroll-behavior: smooth; }
         body { background: var(--bg-page); color: var(--text-primary); font-family: var(--font-data); }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-        .stagger-item {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Transitions */
         a, button { transition: all 0.2s ease-in-out; }
@@ -143,7 +142,7 @@
          SECTION 2: SELECTED WORK — Video List Menu + Side Image
          MOVE: M-INT-HOVER-REVEAL | COMPONENT_REF: video-list-menu | GRADE: A | MODE: adapted | FIDELITY: 80%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-page" id="work">
+    <section class="fade-up w-full bg-page" id="work">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 min-h-[500px]">
                 <!-- Left: Video list -->
@@ -201,7 +200,7 @@
          SECTION 3: PORTFOLIO GALLERY — Staggered Bold Typo Gallery
          MOVE: M-LAY-EDITORIAL-MOSAIC | COMPONENT_REF: staggered-bold-typo-gallery-5-3-4-mt16 | GRADE: A | MODE: adapted | FIDELITY: 75%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-page py-24 md:py-32">
+    <section class="fade-left w-full bg-page py-24 md:py-32">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <!-- Large Display Type -->
             <h2 class="text-6xl md:text-8xl lg:text-[120px] font-normal leading-[0.9] tracking-tight text-accent/20 mb-12" style="font-family: var(--font-ui);">
@@ -244,7 +243,7 @@
         <img src="./images/divider_bts.png" alt="Behind the scenes of a film production set" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div class="absolute inset-0 bg-[#0a0d12]/70"></div>
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center justify-center text-center">
-            <div class="fade-in-section">
+            <div class="fade-right">
                 <p class="eyebrow mb-4 text-accent">Behind Every Frame</p>
                 <h2 class="text-3xl md:text-5xl font-normal" style="font-family: var(--font-ui);">
                     완벽한 한 컷 뒤에는<br>수백 번의 설계가 있습니다
@@ -257,7 +256,7 @@
          SECTION 5: SERVICES — Alternating Product Editorial Dark
          MOVE: M-LAY-ALTERNATING-ROWS | COMPONENT_REF: alternating-product-editorial-dark | GRADE: A | MODE: adapted | FIDELITY: 80%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-page py-24 md:py-32" id="services">
+    <section class="scale-in w-full bg-page py-24 md:py-32" id="services">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <p class="eyebrow mb-4">Our Services</p>
             <h2 class="text-3xl md:text-4xl font-normal mb-16" style="font-family: var(--font-ui);">
@@ -337,7 +336,7 @@
          SECTION 6: PROCESS — Numbered Serif Accordion
          MOVE: M-LAY-EDITORIAL-FEATURE | COMPONENT_REF: numbered-serif-accordion-01-06 | GRADE: A | MODE: adapted | FIDELITY: 75%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-surface py-24 md:py-32">
+    <section class="fade-up w-full bg-surface py-24 md:py-32">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <!-- Left: Large Serif Heading -->
@@ -449,7 +448,7 @@
         <img src="./images/divider_studio.png" alt="Professional video production studio with cinema cameras and lighting equipment" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div class="absolute inset-0 bg-[#0a0d12]/65"></div>
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
-            <div class="fade-in-section grid grid-cols-1 md:grid-cols-2 gap-12 w-full py-20">
+            <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-12 w-full py-20">
                 <div>
                     <p class="eyebrow mb-4 text-accent">Our Studio</p>
                     <h2 class="text-3xl md:text-4xl font-normal" style="font-family: var(--font-ui);">
@@ -482,7 +481,7 @@
          SECTION 8: TEAM — Editorial Story (Text Left + Image Right)
          MOVE: M-LAY-EDITORIAL-STORY | COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | FIDELITY: 75%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-page py-24 md:py-32" id="team">
+    <section class="fade-left w-full bg-page py-24 md:py-32" id="team">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <p class="eyebrow mb-4">The Team</p>
             <h2 class="text-3xl md:text-4xl font-normal mb-16" style="font-family: var(--font-ui);">
@@ -532,7 +531,7 @@
          SECTION 9: CLIENT BRANDS — Marquee
          MOVE: M-TRUST-LOGO-WALL | COMPONENT_REF: marquee | GRADE: A | MODE: adapted | FIDELITY: 70%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-surface py-16 border-y border-border-def overflow-hidden">
+    <section class="fade-right w-full bg-surface py-16 border-y border-border-def overflow-hidden">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 mb-8">
             <p class="eyebrow">Trusted By</p>
         </div>
@@ -570,7 +569,7 @@
          SECTION 10: PRICING — Key Color Band (40vh+)
          MOVE: M-LAY-ASYM-GRID (on accent band)
     ============================================================ -->
-    <section class="fade-in-section w-full bg-accent min-h-[45vh] py-24 md:py-32">
+    <section class="scale-in w-full bg-accent min-h-[45vh] py-24 md:py-32">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
             <p class="eyebrow mb-4 text-white/60">Pricing Guide</p>
             <h2 class="text-3xl md:text-4xl font-normal text-white mb-16" style="font-family: var(--font-ui);">
@@ -645,7 +644,7 @@
         <img src="./images/cta_final.png" alt="Dramatic cinematic film set with moody lighting" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div class="absolute inset-0 bg-[#0a0d12]/90"></div>
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] py-24 flex items-center justify-center">
-            <div class="fade-in-section text-center max-w-[600px]">
+            <div class="fade-up text-center max-w-[600px]">
                 <p class="eyebrow mb-4 text-accent">Start Your Project</p>
                 <h2 class="text-4xl md:text-5xl font-normal mb-6" style="font-family: var(--font-ui);">
                     당신의 이야기를<br>
@@ -726,16 +725,19 @@
     ============================================================ -->
     <script>
         // Intersection Observer — Scroll Reveal
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+        document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
             el.style.transitionDelay = `${(index % 8) * 0.1}s`;
             observer.observe(el);
@@ -774,14 +776,44 @@
 
         // Reduced motion guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
                 el.style.transition = 'none';
-                el.classList.add('animate-in');
+                el.classList.add('visible');
             });
             const marquee = document.querySelector('.marquee-track');
             if (marquee) marquee.style.animation = 'none';
         }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

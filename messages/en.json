@@ -148,7 +148,8 @@
     "production": "Production",
     "tech": "Tech",
     "veterinary": "Veterinary",
-    "fnb": "F&B"
+    "restaurant": "Restaurant",
+    "cafe": "Cafe"
   },
   "PortfolioModal": {
     "designLabel": "Design {number}"

@@ -59,12 +59,12 @@
     body { font-family: var(--font-data); color: var(--text-primary); line-height: 1.7; }
 
     /* Scroll animations */
-    .fade-in-section {
+    .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .fade-in-section.is-visible {
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -119,14 +119,11 @@
     }
 
     /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
-      .faq-answer { transition: none; }
+    }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -168,7 +165,7 @@
 
   <!-- SECTION: TREATMENT MENU | MOVE: M-LAY-ASYM-GRID -->
   <!-- COMPONENT_REF: asymmetric-3col-category-4-5-3 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-3col-category-4-5-3-reference.html | FIDELITY: 75% -->
-  <section id="treatments" class="fade-in-section w-full py-20 md:py-28 bg-white">
+  <section id="treatments" class="fade-up w-full py-20 md:py-28 bg-white">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Section Header -->
       <div class="text-center mb-16">
@@ -250,7 +247,7 @@
 
   <!-- SECTION: DOCTOR PROFILE | MOVE: M-LAY-EDITORIAL-STORY -->
   <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 80% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+  <section class="fade-left w-full py-20 md:py-28 bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
         <!-- Text Block: col-span-4 -->
@@ -305,7 +302,7 @@
 
   <!-- SECTION: PHILOSOPHY DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
   <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
-  <section class="fade-in-section relative w-full min-h-[50vh] flex items-center">
+  <section class="scale-in relative w-full min-h-[50vh] flex items-center">
     <img
       src="./images/divider.png"
       alt="자연스러운 피부 케어 이미지"
@@ -338,7 +335,7 @@
 
   <!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
   <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 70% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-white">
+  <section class="scale-in w-full py-20 md:py-28 bg-white">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Section Header -->
       <div class="text-center mb-16">
@@ -424,7 +421,7 @@
 
   <!-- SECTION: CLINIC INTERIOR | MOVE: M-INT-HSCROLL-GALLERY (staggered) -->
   <!-- COMPONENT_REF: staggered-hotel-gallery-5-3-3-mt24 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-hotel-gallery-5-3-3-mt24-reference.html | FIDELITY: 75% -->
-  <section class="fade-in-section w-full py-20 md:py-28 bg-surface">
+  <section class="fade-up w-full py-20 md:py-28 bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Section Header -->
       <div class="mb-16">
@@ -482,7 +479,7 @@
 
   <!-- SECTION: SKINCARE KEY COLOR | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color 40vh+) -->
   <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: custom | SNIPPET_PATH: na | FIDELITY: n/a -->
-  <section class="fade-in-section relative w-full" style="min-height: 50vh;">
+  <section class="fade-up relative w-full" style="min-height: 50vh;">
     <img
       src="./images/keycolor_bg.png"
       alt="스킨케어 제품 이미지"
@@ -529,7 +526,7 @@
 
   <!-- SECTION: FAQ | MOVE: M-TRUST-AWARDS-CERTS (adapted to FAQ) -->
   <!-- COMPONENT_REF: fluid-dropdown | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/etc/fluid-dropdown-reference.html | FIDELITY: 70% -->
-  <section id="booking" class="fade-in-section w-full py-20 md:py-28 bg-white">
+  <section id="booking" class="fade-left w-full py-20 md:py-28 bg-white">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-12 gap-8 lg:gap-12">
         <!-- FAQ Side -->
@@ -681,7 +678,7 @@
 
   <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
   <!-- COMPONENT_REF: cta-footer-dark-minimal | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-dark-minimal-reference.html | FIDELITY: 75% -->
-  <section class="fade-in-section relative w-full min-h-[60vh] flex items-center">
+  <section class="scale-in relative w-full min-h-[60vh] flex items-center">
     <img
       src="./images/cta_bg.png"
       alt="루메르 클리닉 시술 공간"
@@ -728,23 +725,29 @@
 
   <!-- JavaScript: Scroll Animations + FAQ -->
   <script>
-    // IntersectionObserver for fade-in sections
-    (function() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOpts);
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-      );
-
-      document.querySelectorAll('.fade-in-section').forEach((el) => observer.observe(el));
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
+    });
 
       // Stagger items
       const staggerObserver = new IntersectionObserver(
@@ -755,7 +758,7 @@
               const siblings = parent ? Array.from(parent.querySelectorAll('.stagger-item')) : [];
               const idx = siblings.indexOf(entry.target);
               entry.target.style.transitionDelay = (idx >= 0 ? idx : 0) * 0.1 + 's';
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add('visible');
               staggerObserver.unobserve(entry.target);
             }
           });
@@ -787,5 +790,35 @@
     });
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

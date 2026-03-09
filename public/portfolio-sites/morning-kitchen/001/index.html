@@ -91,26 +91,17 @@
             background: var(--color-bg);
             line-height: var(--line-height-body);
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Hover transitions */
         a, button {
@@ -118,14 +109,11 @@
         }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section,
-            .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         /* Decorative line */
         .deco-line {
@@ -185,7 +173,7 @@
     <!-- SECTION: BRAND STORY | MOVE: M-LAY-EDITORIAL-TYPO -->
     <!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-cream">
+    <section class="fade-up w-full bg-cream">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="text-center max-w-2xl mx-auto">
                 <p class="text-[11px] uppercase tracking-[0.2em] text-latte mb-4 font-body">Our Philosophy</p>
@@ -207,7 +195,7 @@
     <!-- SECTION: SIGNATURE MENU | MOVE: M-LAY-EDITORIAL-FEATURE (Editorial #1) -->
     <!-- COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-featured-image5-content7-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section id="menu" class="fade-in-section w-full bg-cream-dark">
+    <section id="menu" class="fade-left w-full bg-cream-dark">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-12 gap-6 lg:gap-10">
                 <!-- Left: Large featured dish image (5 cols) -->
@@ -301,7 +289,7 @@
     <!-- SECTION: FOOD DIVIDER | MOVE: M-DIV-FULLBLEED-IMAGE -->
     <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | FIDELITY: n/a -->
     <!-- ============================================================ -->
-    <section class="fade-in-section relative w-full min-h-[50vh]">
+    <section class="scale-in relative w-full min-h-[50vh]">
         <img src="./images/divider_food.png"
              alt="따뜻한 라떼 한 잔과 함께하는 브런치"
              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -322,7 +310,7 @@
     <!-- SECTION: SPACE / INTERIOR | MOVE: M-LAY-EDITORIAL-STORY (Editorial #2) -->
     <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 80% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-cream">
+    <section class="scale-in w-full bg-cream">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
                 <!-- Text block: 4 cols, offset -->
@@ -370,7 +358,7 @@
     <!-- SECTION: CHEF STORY | MOVE: M-LAY-OFFSET-OVERLAP -->
     <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | FIDELITY: n/a -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-cream-dark">
+    <section class="fade-up w-full bg-cream-dark">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start">
                 <!-- Image: 7 cols (reversed from previous section) -->
@@ -411,7 +399,7 @@
     <!-- SECTION: SEASONAL SPECIAL | MOVE: M-DIV-FULLBLEED-COLORBLOCK (Key Color, 40vh+) -->
     <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | FIDELITY: n/a -->
     <!-- ============================================================ -->
-    <section class="fade-in-section relative w-full min-h-[50vh]">
+    <section class="scale-in relative w-full min-h-[50vh]">
         <img src="./images/seasonal.png"
              alt="제철 딸기를 활용한 겨울 한정 디저트"
              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -447,7 +435,7 @@
     <!-- SECTION: GALLERY | MOVE: M-INT-HSCROLL-GALLERY -->
     <!-- COMPONENT_REF: staggered-hotel-gallery-5-3-3-mt24 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-hotel-gallery-5-3-3-mt24-reference.html | FIDELITY: 70% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-cream">
+    <section class="fade-left w-full bg-cream">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="text-center mb-12">
                 <p class="text-[11px] uppercase tracking-[0.2em] text-latte mb-3">Daily Moments</p>
@@ -488,7 +476,7 @@
     <!-- SECTION: REVIEWS | MOVE: M-TRUST (Testimonials) -->
     <!-- COMPONENT_REF: testimonials-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/testimonials/testimonials-section-reference.html | FIDELITY: 70% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section w-full bg-cream-dark">
+    <section class="fade-right w-full bg-cream-dark">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="text-center mb-12">
                 <p class="text-[11px] uppercase tracking-[0.2em] text-latte mb-3">Reviews</p>
@@ -572,7 +560,7 @@
     <!-- SECTION: LOCATION & HOURS | MOVE: Custom Info -->
     <!-- COMPONENT_REF: custom | GRADE: n/a | MODE: fallback | FIDELITY: n/a -->
     <!-- ============================================================ -->
-    <section id="location" class="fade-in-section w-full bg-cream">
+    <section id="location" class="scale-in w-full bg-cream">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-12 gap-8 lg:gap-12">
                 <!-- Left: Info -->
@@ -651,7 +639,7 @@
     <!-- SECTION: FINAL CTA | MOVE: M-CTA-FULLBLEED-FINAL -->
     <!-- COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/cta-footer/cta-footer-fullbleed-reference.html | FIDELITY: 75% -->
     <!-- ============================================================ -->
-    <section class="fade-in-section relative w-full min-h-[60vh]">
+    <section class="scale-in relative w-full min-h-[60vh]">
         <img src="./images/cta.png"
              alt="아침 빛이 들어오는 카페 창가 자리"
              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -713,24 +701,29 @@
     <!-- SCRIPTS -->
     <!-- ============================================================ -->
     <script>
-        // IntersectionObserver for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    // IntersectionObserver — Enhanced animations
+    var animSel = '.fade-up,.fade-left,.fade-right,.stagger-item,.scale-in';
+    var observerOpts = { threshold: 0.05, rootMargin: '0px 0px -20px 0px' };
+    var animObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOpts);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in sections
-        document.querySelectorAll('.fade-in-section').forEach(el => {
-            observer.observe(el);
-        });
+    document.querySelectorAll(animSel).forEach(function(el, i) {
+      if (el.classList.contains('stagger-item')) {
+        var parent = el.closest('.grid') || el.closest('[class*="flex"]') || el.parentElement;
+        if (parent) {
+          var siblings = Array.from(parent.children).filter(function(c) { return c.classList.contains('stagger-item'); });
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx : i) * 0.12 + 's';
+        }
+      }
+      animObserver.observe(el);
+    });
 
         // Observe stagger items with delay
         document.querySelectorAll('.stagger-item').forEach((el, index) => {
@@ -747,8 +740,8 @@
 
         // Reduced motion guard
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-                el.classList.add('animate-in');
+            document.querySelectorAll('.fade-up, .stagger-item').forEach(el => {
+                el.classList.add('visible');
                 el.style.transition = 'none';
             });
         }
@@ -767,5 +760,35 @@
         });
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

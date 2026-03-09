@@ -71,12 +71,12 @@
     }
 
     /* Scroll animation */
-    .fade-in-section {
+    .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .fade-in-section.is-visible {
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -91,12 +91,9 @@
     }
 
     /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
     }
 
@@ -240,7 +237,7 @@
 </section>
 
 <!-- SECTION: MATERIALS | MOVE: M-DIV-FULLBLEED-COLORBLOCK (KEY COLOR 40vh+) -->
-<section class="fade-in-section w-full bg-charcoal py-20 lg:py-28">
+<section class="fade-up w-full bg-charcoal py-20 lg:py-28">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="grid grid-cols-12 gap-6 lg:gap-10">
       <div class="col-span-12 lg:col-span-5">
@@ -280,7 +277,7 @@
 
 <!-- SECTION: SELECTED PROJECTS | MOVE: M-LAY-EDITORIAL-FEATURE -->
 <!-- COMPONENT_REF: staggered-lookbook-4col-offset-mt12-mt16 | GRADE: A | MODE: adapted | SNIPPET_PATH: staggered-gallery/staggered-lookbook-4col-offset-mt12-mt16-reference.html | FIDELITY: 75% -->
-<section id="projects" class="fade-in-section w-full py-20 lg:py-28 bg-page">
+<section id="projects" class="fade-left w-full py-20 lg:py-28 bg-page">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="flex items-end justify-between mb-12 lg:mb-16 border-b border-border pb-6">
       <div>
@@ -365,7 +362,7 @@
 
 <!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-STORY -->
 <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: split-layout/split-text4-gap1-image7-editorial-reference.html | FIDELITY: 80% -->
-<section id="philosophy" class="fade-in-section w-full py-20 lg:py-28 bg-surface">
+<section id="philosophy" class="fade-right w-full py-20 lg:py-28 bg-surface">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="grid grid-cols-12 gap-6 lg:gap-0">
       <!-- Text: col-span-4 -->
@@ -401,7 +398,7 @@
 
 <!-- SECTION: PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
 <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: numbered-sections/numbered-3col-process-steps-reference.html | FIDELITY: 75% -->
-<section id="process" class="fade-in-section w-full py-20 lg:py-28 bg-page">
+<section id="process" class="scale-in w-full py-20 lg:py-28 bg-page">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="border-b border-border pb-6 mb-12 lg:mb-16">
       <p class="font-body text-xs tracking-[0.3em] uppercase text-text-mut mb-3">Design Process</p>
@@ -440,7 +437,7 @@
 
 <!-- SECTION: PROJECT CASE | MOVE: M-LAY-EDITORIAL-STORY -->
 <!-- COMPONENT_REF: multi-project-header-meta4-desc7-pair | GRADE: A | MODE: adapted | SNIPPET_PATH: multi-section-editorial/multi-project-header-meta4-desc7-pair-reference.html | FIDELITY: 75% -->
-<section class="fade-in-section w-full py-20 lg:py-28 bg-surface">
+<section class="fade-up w-full py-20 lg:py-28 bg-surface">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="border-b border-border pb-6 mb-12">
       <p class="font-body text-xs tracking-[0.3em] uppercase text-text-mut mb-3">Case Study</p>
@@ -515,7 +512,7 @@
 
 <!-- SECTION: AWARDS | MOVE: M-TRUST-AWARDS-CERTS -->
 <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 70% -->
-<section class="fade-in-section w-full py-20 lg:py-28 bg-page">
+<section class="fade-up w-full py-20 lg:py-28 bg-page">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="border-b border-border pb-6 mb-12 lg:mb-16">
       <p class="font-body text-xs tracking-[0.3em] uppercase text-text-mut mb-3">Recognition</p>
@@ -554,7 +551,7 @@
 
 <!-- SECTION: TEAM | MOVE: M-LAY-ASYM-GRID -->
 <!-- COMPONENT_REF: staggered-team-3col-zigzag-offset | GRADE: A | MODE: adapted | SNIPPET_PATH: staggered-gallery/staggered-team-3col-zigzag-offset-reference.html | FIDELITY: 70% -->
-<section id="team" class="fade-in-section w-full py-20 lg:py-28 bg-surface">
+<section id="team" class="fade-left w-full py-20 lg:py-28 bg-surface">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
     <div class="grid grid-cols-12 gap-6 lg:gap-10">
       <div class="col-span-12 lg:col-span-5">
@@ -713,13 +710,16 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '-50px 0px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
     // Stagger items
     const staggerObserver = new IntersectionObserver((entries) => {
@@ -729,7 +729,7 @@
           const items = parent.querySelectorAll('.stagger-item');
           items.forEach((item, i) => {
             item.style.transitionDelay = `${i * 0.1}s`;
-            item.classList.add('is-visible');
+            item.classList.add('visible');
           });
           staggerObserver.unobserve(entry.target);
         }
@@ -742,8 +742,8 @@
       }
     });
   } else {
-    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-      el.classList.add('is-visible');
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+      el.classList.add('visible');
     });
   }
 
@@ -791,5 +791,35 @@
   });
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

@@ -60,16 +60,17 @@
         body { background: var(--bg-page); color: var(--text-primary); }
 
         /* Scroll animations */
-        .fade-in-section {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-        .stagger-item {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Hover transitions */
         a, button { transition: all 0.2s ease-in-out; }
@@ -84,9 +85,11 @@
         .skip-link:focus { top: 0; }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
-            .img-hover:hover { transform: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
             html { scroll-behavior: auto; }
         }
     </style>
@@ -201,7 +204,7 @@
 <section id="portfolio" class="w-full bg-page py-24 lg:py-32" aria-label="아트 포트폴리오">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section Header -->
-        <div class="mb-16 fade-in-section">
+        <div class="mb-16 fade-up">
             <p class="text-accent text-xs uppercase tracking-[0.2em] mb-3 font-body">Art Portfolio</p>
             <div class="w-12 h-px bg-accent mb-6"></div>
             <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-txt leading-[1.1]">
@@ -210,7 +213,7 @@
         </div>
 
         <!-- Staggered Gallery (Dark Lookbook) -->
-        <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-5 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-5 mb-5 fade-left">
             <div class="hidden md:block md:col-span-3">
                 <p class="text-txt-muted text-xs tracking-wider uppercase mt-4 font-body">Spring<br>Collection 2025</p>
             </div>
@@ -221,7 +224,7 @@
             </div>
             <div class="col-span-12 md:col-span-3"></div>
         </div>
-        <div class="grid grid-cols-12 gap-4 lg:gap-5 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-5 fade-right">
             <div class="col-span-6 md:col-span-4 stagger-item">
                 <div class="relative aspect-[3/4] overflow-hidden rounded-sm">
                     <img src="./images/portfolio_2.png" alt="미니멀 프렌치 라인 네일" class="w-full h-full object-cover img-hover" loading="lazy" width="400" height="530">
@@ -249,7 +252,7 @@
 <section id="services" class="w-full bg-surface py-24 lg:py-32" aria-label="서비스 메뉴">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section Header -->
-        <div class="mb-16 fade-in-section">
+        <div class="mb-16 scale-in">
             <p class="text-accent text-xs uppercase tracking-[0.2em] mb-3 font-body">Service Menu</p>
             <div class="w-12 h-px bg-accent mb-6"></div>
             <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-txt leading-[1.1]">
@@ -258,7 +261,7 @@
         </div>
 
         <!-- Bento Grid: accent text block (4col) + 3 tiles (8col) -->
-        <div class="grid grid-cols-12 gap-4 lg:gap-5 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-5 fade-up">
             <!-- Accent Text Block (rowspan-2 effect) -->
             <div class="col-span-12 md:col-span-4 md:row-span-2 bg-card rounded-sm p-8 lg:p-10 flex flex-col justify-between min-h-[320px] border border-white/5 stagger-item">
                 <div>
@@ -320,7 +323,7 @@
      ============================================ -->
 <section id="artist" class="w-full bg-page py-24 lg:py-32" aria-label="아티스트 프로필">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-12 gap-6 fade-in-section">
+        <div class="grid grid-cols-12 gap-6 fade-up">
             <!-- Text: 5 col -->
             <div class="col-span-12 lg:col-span-5 lg:pt-16">
                 <p class="text-accent text-xs uppercase tracking-[0.2em] mb-3 font-body">Head Designer</p>
@@ -377,7 +380,7 @@
      MOVE: M-DIV-FULLBLEED-IMAGE
      COMPONENT_REF: cta-footer-fullbleed | GRADE: A | MODE: adapted | FIDELITY: 70%
      ============================================ -->
-<section class="relative w-full min-h-[50vh] flex items-center fade-in-section" aria-label="갤러리 디바이더">
+<section class="relative w-full min-h-[50vh] flex items-center scale-in" aria-label="갤러리 디바이더">
     <img src="./images/gallery_divider.png" alt="네일 아트 클로즈업" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="800">
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full">
@@ -396,7 +399,7 @@
      MOVE: M-LAY-EDITORIAL-TYPO
      COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | FIDELITY: 75%
      ============================================ -->
-<section class="w-full bg-page py-24 lg:py-32 fade-in-section" aria-label="아뜰리에 철학">
+<section class="w-full bg-page py-24 lg:py-32 fade-right" aria-label="아뜰리에 철학">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="max-w-[800px] mx-auto text-center">
             <div class="w-12 h-px bg-accent mx-auto mb-8"></div>
@@ -416,7 +419,7 @@
      MOVE: M-DIV-FULLBLEED-COLORBLOCK
      COMPONENT_REF: custom full-bleed | GRADE: n/a | MODE: fallback
      ============================================ -->
-<section class="relative w-full min-h-[50vh] flex items-center fade-in-section" aria-label="키 컬러 밴드">
+<section class="relative w-full min-h-[50vh] flex items-center scale-in" aria-label="키 컬러 밴드">
     <img src="./images/key_color.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1600" height="800">
     <div class="absolute inset-0" style="background: rgba(212,160,160,0.75);"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 text-center w-full">
@@ -441,7 +444,7 @@
      ============================================ -->
 <section id="booking" class="w-full bg-page py-24 lg:py-32" aria-label="예약 정보">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-up">
             <!-- Image: 5 col -->
             <div class="col-span-12 lg:col-span-5">
                 <div class="relative aspect-[4/5] overflow-hidden rounded-sm">
@@ -576,17 +579,20 @@
     });
 
     // Intersection Observer for scroll animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
     // Observe fade-in sections
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
     // Observe stagger items with delay
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
@@ -603,12 +609,42 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transitionDelay = '0s';
         });
     }
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

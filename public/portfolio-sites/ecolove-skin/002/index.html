@@ -74,26 +74,17 @@
             color: var(--text-primary);
             font-family: var(--font-data);
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Parallax */
         .parallax-bg {
@@ -124,16 +115,11 @@
         }
 
         /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section,
-            .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .parallax-bg {
-                background-attachment: scroll;
-            }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
 
         /* Button Transitions */
@@ -255,7 +241,7 @@
 <!-- SECTION 2: FOUNDER STORY — M-LAY-EDITORIAL-FEATURE -->
 <!-- COMPONENT_REF: asymmetric-blog-large7-small5-stack | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
 <!-- ============================================================ -->
-<section id="story" class="fade-in-section w-full bg-surface" aria-label="창업자 스토리">
+<section id="story" class="fade-up w-full bg-surface" aria-label="창업자 스토리">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">OUR STORY</p>
         <h2 class="font-serif text-deep leading-[1.35] mb-12" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
@@ -295,7 +281,7 @@
 <!-- SECTION 3: INGREDIENT PROCESS — M-LAY-TIMELINE-STEPPER -->
 <!-- COMPONENT_REF: numbered-3col-process-steps | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/numbered-sections/ | FIDELITY: 75% -->
 <!-- ============================================================ -->
-<section class="fade-in-section w-full bg-page" aria-label="원료의 여정">
+<section class="fade-left w-full bg-page" aria-label="원료의 여정">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <div class="max-w-[480px] mb-16">
             <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">INGREDIENT JOURNEY</p>
@@ -391,7 +377,7 @@
 <!-- SECTION 4: PRODUCT LINEUP — M-INT-HSCROLL-GALLERY -->
 <!-- COMPONENT_REF: card-carousel (adapted to hscroll) | GRADE: B | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/image-title-text/ | FIDELITY: 70% -->
 <!-- ============================================================ -->
-<section id="products" class="fade-in-section w-full bg-surface" aria-label="제품 라인업">
+<section id="products" class="fade-right w-full bg-surface" aria-label="제품 라인업">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <div class="flex items-end justify-between mb-12">
             <div>
@@ -522,7 +508,7 @@
 <!-- SECTION 6: SUSTAINABILITY — M-LAY-ALTERNATING-ROWS -->
 <!-- COMPONENT_REF: alternating-brand-showcase-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/alternating-rows/ | FIDELITY: 80% -->
 <!-- ============================================================ -->
-<section id="sustainability" class="fade-in-section w-full bg-page" aria-label="지속가능성">
+<section id="sustainability" class="scale-in w-full bg-page" aria-label="지속가능성">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <div class="max-w-[480px] mb-16">
             <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3">FOR THE EARTH</p>
@@ -603,7 +589,7 @@
 <!-- SECTION 7: REVIEWS — M-LAY-EDITORIAL-TYPO -->
 <!-- COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 80% -->
 <!-- ============================================================ -->
-<section class="fade-in-section w-full bg-surface" aria-label="고객 리뷰">
+<section class="fade-up w-full bg-surface" aria-label="고객 리뷰">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <p class="text-xs font-medium tracking-[0.15em] uppercase text-warm-muted mb-3 text-center">REAL VOICES</p>
         <h2 class="font-serif text-deep leading-[1.35] mb-16 text-center" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
@@ -727,7 +713,7 @@
 <!-- SECTION 9: PURCHASE FAQ — Accordion (Sticky-style) -->
 <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 80% -->
 <!-- ============================================================ -->
-<section id="faq" class="fade-in-section w-full bg-page" aria-label="자주 묻는 질문">
+<section id="faq" class="fade-up w-full bg-page" aria-label="자주 묻는 질문">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 lg:py-32">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             <!-- Left sticky header (col-5) -->
@@ -906,12 +892,15 @@
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
     // Stagger animation
     const staggerObserver = new IntersectionObserver((entries) => {
@@ -920,25 +909,25 @@
                 const items = entry.target.querySelectorAll('.stagger-item');
                 items.forEach((item, i) => {
                     item.style.transitionDelay = `${i * 0.1}s`;
-                    item.classList.add('animate-in');
+                    item.classList.add('visible');
                 });
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
-    document.querySelectorAll('.fade-in-section').forEach(el => staggerObserver.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => staggerObserver.observe(el));
 
     // Also observe standalone stagger items
     document.querySelectorAll('.stagger-item').forEach(el => {
-        if (!el.closest('.fade-in-section')) {
+        if (!el.closest('.fade-up')) {
             observer.observe(el);
         }
     });
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transition = 'none';
         });
     }
@@ -1006,5 +995,35 @@
     });
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

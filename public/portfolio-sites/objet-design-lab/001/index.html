@@ -73,38 +73,27 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
-
-        /* Scroll Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* Hover */
         button, a { transition: all 0.2s ease-in-out; }
 
         /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         /* Skip Link */
         .skip-link {
@@ -184,7 +173,7 @@
 <section id="portfolio" class="w-full py-24 md:py-32 bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section header -->
-        <div class="mb-16 fade-in-section">
+        <div class="mb-16 fade-up">
             <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Portfolio</p>
             <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
                 우리가 만든<br>공간의 기록
@@ -195,7 +184,7 @@
         </div>
 
         <!-- Row 1: Asymmetric gallery -->
-        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-left">
             <!-- Large image: 5 cols -->
             <div class="col-span-12 md:col-span-5 stagger-item">
                 <div class="aspect-[3/4] overflow-hidden rounded-sm">
@@ -222,7 +211,7 @@
         </div>
 
         <!-- Row 2: Staggered -->
-        <div class="grid grid-cols-12 gap-4 lg:gap-6 mt-6 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 mt-6 fade-right">
             <div class="hidden md:block md:col-span-2"></div>
             <div class="col-span-6 md:col-span-4 stagger-item">
                 <div class="aspect-[4/5] overflow-hidden rounded-sm">
@@ -252,7 +241,7 @@
 <!-- ============================================================ -->
 <section class="w-full py-24 md:py-32 bg-bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start scale-in">
             <!-- Text block: 4 cols, offset -->
             <div class="col-span-12 md:col-span-4 md:pt-16">
                 <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Before & After</p>
@@ -310,7 +299,7 @@
 <!-- ============================================================ -->
 <section class="w-full py-24 md:py-32 bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-up">
             <!-- Large image first on this row (reversed editorial story) -->
             <div class="col-span-12 md:col-span-7">
                 <div class="relative aspect-[4/3] overflow-hidden rounded-sm">
@@ -356,7 +345,7 @@
     <img src="./images/divider.png" alt="빛이 공간을 완성하는 순간" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[50vh] flex flex-col justify-center items-center text-center">
-        <h2 class="text-3xl md:text-[40px] font-semibold text-white leading-tight tracking-tight fade-in-section">
+        <h2 class="text-3xl md:text-[40px] font-semibold text-white leading-tight tracking-tight fade-up">
             빛이 공간을<br>완성하는 순간
         </h2>
     </div>
@@ -369,7 +358,7 @@
 <section id="services" class="w-full py-24 md:py-32 bg-bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section header -->
-        <div class="mb-16 fade-in-section">
+        <div class="mb-16 fade-left">
             <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Services</p>
             <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
                 프로젝트에 맞는<br>정확한 설계
@@ -380,7 +369,7 @@
         </div>
 
         <!-- Asymmetric Cards: 3:5:4 grid -->
-        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-in-section">
+        <div class="grid grid-cols-12 gap-4 lg:gap-6 fade-right">
             <!-- Card 1: Residential — 5 cols -->
             <div class="col-span-12 md:col-span-5 stagger-item">
                 <div class="bg-bg-card border border-border-default rounded-lg p-8 h-full hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow duration-300">
@@ -427,7 +416,7 @@
             </div>
         </div>
 
-        <div class="mt-12 text-center fade-in-section">
+        <div class="mt-12 text-center scale-in">
             <a href="#contact" class="inline-block bg-accent text-white px-8 py-3.5 text-sm tracking-wide rounded hover:brightness-110 active:scale-95">견적 문의하기</a>
         </div>
     </div>
@@ -440,7 +429,7 @@
 <section id="team" class="w-full py-24 md:py-32 bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section header -->
-        <div class="mb-16 text-center fade-in-section">
+        <div class="mb-16 text-center fade-up">
             <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Team</p>
             <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
                 공간을 읽는 사람들
@@ -452,7 +441,7 @@
         </div>
 
         <!-- Team grid: staggered zigzag -->
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 fade-up">
             <!-- Member 1: no offset -->
             <div class="col-span-6 md:col-span-3 stagger-item">
                 <div class="aspect-[3/4] overflow-hidden rounded-sm mb-4">
@@ -496,7 +485,7 @@
 <section id="process" class="w-full py-24 md:py-32 bg-bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section header -->
-        <div class="mb-16 fade-in-section">
+        <div class="mb-16 fade-left">
             <p class="text-xs uppercase tracking-[0.2em] text-accent mb-3">Process</p>
             <h2 class="text-3xl md:text-[40px] font-semibold leading-tight tracking-tight">
                 상담에서 스타일링까지<br>6단계 프로세스
@@ -507,7 +496,7 @@
         </div>
 
         <!-- Process steps: 3-column grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 fade-in-section">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 fade-right">
             <!-- Step 1 -->
             <div class="stagger-item">
                 <div class="flex items-center gap-4 mb-4">
@@ -573,7 +562,7 @@
     <img src="./images/showroom.png" alt="오브제 디자인랩 논현동 쇼룸 내부" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex items-center">
-        <div class="grid grid-cols-12 gap-8 items-center w-full fade-in-section">
+        <div class="grid grid-cols-12 gap-8 items-center w-full scale-in">
             <div class="col-span-12 md:col-span-7">
                 <p class="text-xs uppercase tracking-[0.2em] text-white/50 mb-4">Showroom</p>
                 <h2 class="text-3xl md:text-[40px] font-semibold text-white leading-tight tracking-tight">
@@ -611,7 +600,7 @@
 <section id="contact" class="relative w-full min-h-[60vh]">
     <img src="./images/cta.png" alt="프리미엄 인테리어 공간" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-black/70"></div>
-    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center fade-in-section">
+    <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col justify-center items-center text-center scale-in">
         <p class="text-xs uppercase tracking-[0.25em] text-white/40 mb-6">Free Consultation</p>
         <h2 class="text-3xl md:text-[48px] font-semibold text-white leading-tight tracking-tight">
             첫 만남은<br>무료입니다
@@ -692,20 +681,23 @@
     // Intersection Observer for scroll animations
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -20px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
     // Observe fade-in sections
-    document.querySelectorAll('.fade-in-section').forEach(el => {
+    document.querySelectorAll('.fade-up').forEach(el => {
         observer.observe(el);
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     });
 
     // Observe stagger items with delay
@@ -723,8 +715,8 @@
 
     // Reduced motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transition = 'none';
         });
     }
@@ -746,5 +738,35 @@
     });
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

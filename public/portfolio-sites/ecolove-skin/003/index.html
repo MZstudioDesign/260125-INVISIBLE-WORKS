@@ -61,12 +61,12 @@
     body { font-family: var(--font-data); color: var(--text-primary); background: var(--bg-page); }
 
     /* Scroll Animations */
-    .fade-in-section {
+    .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.5s ease-out;
     }
-    .fade-in-section.is-visible {
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -81,14 +81,11 @@
     }
 
     /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
-      html { scroll-behavior: auto; }
+    }
     }
 
     /* Tab Interaction */
@@ -210,7 +207,7 @@
     <!-- SECTION 2: SEASONAL RITUAL | MOVE: M-LAY-EDITORIAL-MOSAIC -->
     <!-- COMPONENT_REF: asymmetric-mosaic-tiles-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 80% -->
     <!-- ========================================== -->
-    <section id="seasonal" class="fade-in-section w-full py-20 lg:py-28 bg-page" aria-label="사계절 리추얼">
+    <section id="seasonal" class="fade-up w-full py-20 lg:py-28 bg-page" aria-label="사계절 리추얼">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section Header -->
         <div class="mb-14">
@@ -285,7 +282,7 @@
     <!-- SECTION 3: PRODUCT LINEUP (Tab UI) | MOVE: M-INT-HOVER-REVEAL -->
     <!-- COMPONENT_REF: asymmetric-tabs3-image5-desc4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 75% -->
     <!-- ========================================== -->
-    <section id="products" class="fade-in-section w-full py-20 lg:py-28 bg-surface" aria-label="제품 라인업">
+    <section id="products" class="fade-left w-full py-20 lg:py-28 bg-surface" aria-label="제품 라인업">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section Header -->
         <div class="mb-14">
@@ -435,7 +432,7 @@
     <!-- SECTION 5: INGREDIENTS | MOVE: M-LAY-EDITORIAL-STORY -->
     <!-- COMPONENT_REF: split-text4-gap1-image7-editorial | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/split-layout/ | FIDELITY: 80% -->
     <!-- ========================================== -->
-    <section id="ingredients" class="fade-in-section w-full py-20 lg:py-28 bg-page" aria-label="성분 철학">
+    <section id="ingredients" class="fade-right w-full py-20 lg:py-28 bg-page" aria-label="성분 철학">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-6 lg:gap-0 items-center">
           <!-- Text Block (col-span-4) -->
@@ -563,7 +560,7 @@
     <!-- SECTION 7: FOUNDER STORY | MOVE: M-LAY-EDITORIAL-FEATURE -->
     <!-- COMPONENT_REF: asymmetric-blog-large7-small5-stack | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/ | FIDELITY: 80% -->
     <!-- ========================================== -->
-    <section id="founder" class="fade-in-section w-full py-20 lg:py-28 bg-page" aria-label="창업자 이야기">
+    <section id="founder" class="scale-in w-full py-20 lg:py-28 bg-page" aria-label="창업자 이야기">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-6 lg:gap-10">
           <!-- Large Image (col-span-7) -->
@@ -605,7 +602,7 @@
     <!-- SECTION 8: REVIEWS | MOVE: M-LAY-EDITORIAL-TYPO -->
     <!-- COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/ | FIDELITY: 80% -->
     <!-- ========================================== -->
-    <section class="fade-in-section w-full py-20 lg:py-28 bg-surface" aria-label="고객 리뷰">
+    <section class="fade-up w-full py-20 lg:py-28 bg-surface" aria-label="고객 리뷰">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <!-- Section Header -->
         <div class="text-center mb-14">
@@ -682,7 +679,7 @@
     <!-- SECTION 9: PURCHASE FAQ | MOVE: M-LAY-ASYM-GRID -->
     <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/ | FIDELITY: 85% -->
     <!-- ========================================== -->
-    <section id="purchase" class="fade-in-section w-full py-20 lg:py-28 bg-page" aria-label="구매 FAQ">
+    <section id="purchase" class="fade-up w-full py-20 lg:py-28 bg-page" aria-label="구매 FAQ">
       <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-12 gap-10">
           <!-- Left: Header (col-span-5 on lg) -->
@@ -861,35 +858,38 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add('visible');
             // Stagger children
             const staggerItems = entry.target.querySelectorAll('.stagger-item');
             staggerItems.forEach((item, i) => {
               item.style.transitionDelay = `${i * 0.1}s`;
-              setTimeout(() => item.classList.add('is-visible'), 10);
+              setTimeout(() => item.classList.add('visible'), 10);
             });
             observer.unobserve(entry.target);
           }
         });
       }, {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -20px 0px'
       });
 
-      document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+      document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 
       // Also observe standalone stagger items not inside fade-in-section
       const standaloneStagger = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add('visible');
             standaloneStagger.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
       document.querySelectorAll('.stagger-item').forEach(el => {
-        if (!el.closest('.fade-in-section')) {
+        if (!el.closest('.fade-up')) {
           standaloneStagger.observe(el);
         }
       });
@@ -936,5 +936,35 @@
     });
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 export type CategoryKey =
   | 'education' | 'beauty' | 'brand' | 'fitness' | 'medical'
   | 'business' | 'architecture' | 'design' | 'legal'
-  | 'production' | 'tech' | 'veterinary' | 'fnb';
+  | 'production' | 'tech' | 'veterinary' | 'restaurant' | 'cafe';
 
 export interface DesignVariant {
   id: string;
@@ -25,19 +25,20 @@ export interface PortfolioProject {
 export const CATEGORIES: CategoryKey[] = [
   'education', 'beauty', 'brand', 'fitness', 'medical',
   'business', 'architecture', 'design', 'legal',
-  'production', 'tech', 'veterinary', 'fnb',
+  'production', 'tech', 'veterinary', 'restaurant', 'cafe',
 ];
 
 export const REPRESENTATIVE_CATEGORIES: CategoryKey[] = [
-  'education', 'beauty', 'medical', 'business', 'fnb', 'tech',
+  'education', 'beauty', 'medical', 'business', 'restaurant', 'cafe', 'tech',
 ];
 
 export const REPRESENTATIVE_PROJECTS: Record<string, string> = {
-  education: 'codelab-academy',
+  education: 'flow-english-studio',
   beauty: 'maison-de-cher',
-  medical: 'lumere-clinic',
-  business: 'stratium-consulting',
-  fnb: 'somu-dining',
+  medical: 'prime-motion-orthopedics',
+  business: 'bridge-tax-accounting',
+  restaurant: 'morning-kitchen',
+  cafe: 'nyang-ground',
   tech: 'spectra-ai',
 };
 
@@ -168,14 +169,23 @@ export const portfolioProjects: PortfolioProject[] = [
     'Premium Veterinary Hospital',
     [['Soft Blue', 'Warm / Professional'], ['Green', 'Natural / Caring'], ['White', 'Clean / Medical']]),
 
-  // === F&B ===
-  makeProject('morning-kitchen', 'Morning Kitchen', 'fnb',
+  // === Restaurant ===
+  makeProject('morning-kitchen', 'Morning Kitchen', 'restaurant',
     'Brunch Cafe',
     [['Warm Cream', 'Natural / Emotional'], ['White', 'Clean / Bright'], ['Brown', 'Cozy / Rustic']]),
 
-  makeProject('somu-dining', 'Somu Dining', 'fnb',
+  makeProject('somu-dining', 'Somu Dining', 'restaurant',
     'Omakase Fine Dining',
     [['Dark + Gold', 'Luxury / Sophisticated'], ['Black', 'Premium / Dramatic'], ['Charcoal', 'Elegant / Intimate']]),
+
+  // === Cafe ===
+  makeProject('ondo-coffee', 'Ondo Coffee', 'cafe',
+    'Specialty Coffee',
+    [['Warm Copper', 'Warm / Minimal'], ['Sage Green', 'Natural / Organic'], ['Dark Moody', 'Premium / Intimate']]),
+
+  makeProject('nyang-ground', 'Nyang Ground', 'cafe',
+    'Cat Cafe',
+    [['Soft Playful', 'Warm / Cute'], ['Warm Natural', 'Cozy / Natural'], ['Cool Modern', 'Clean / Trendy']]),
 ];
 
 export function getProjectById(id: string): PortfolioProject | undefined {

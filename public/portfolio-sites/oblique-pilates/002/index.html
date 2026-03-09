@@ -56,24 +56,17 @@
         }
 
         /* === SCROLL ANIMATIONS === */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-section.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .stagger-item.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
         /* === TRANSITIONS === */
         button, a { transition: all 0.2s ease-in-out; }
@@ -112,14 +105,11 @@
         }
 
         /* === REDUCED MOTION === */
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section,
-            .stagger-item {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .img-mono { transition: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
             .faq-content { transition: none; }
         }
     </style>
@@ -204,7 +194,7 @@
          SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO
          COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 75%
     ============================================================ -->
-    <section id="philosophy" class="fade-in-section w-full bg-white border-t border-gray-200">
+    <section id="philosophy" class="fade-up w-full bg-white border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
             <div class="text-center max-w-2xl mx-auto">
                 <span class="font-serif italic text-muted text-sm">Our Philosophy</span>
@@ -226,7 +216,7 @@
          SECTION: STUDIO GALLERY | MOVE: M-INT-HSCROLL-GALLERY
          COMPONENT_REF: custom-hscroll-gallery | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a
     ============================================================ -->
-    <section id="studio" class="fade-in-section w-full bg-surface border-t border-gray-200">
+    <section id="studio" class="fade-left w-full bg-surface border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 pt-20 md:pt-28 pb-8">
             <span class="font-serif italic text-muted text-sm">The Space</span>
             <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
@@ -297,7 +287,7 @@
          SECTION: SCHEDULE & PRICING | MOVE: M-LAY-ASYM-GRID
          COMPONENT_REF: asymmetric-impact-cards-3-5-4 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-impact-cards-3-5-4-reference.html | FIDELITY: 70%
     ============================================================ -->
-    <section id="programs" class="fade-in-section w-full bg-white border-t border-gray-200">
+    <section id="programs" class="fade-right w-full bg-white border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <span class="font-serif italic text-muted text-sm">Programs & Schedule</span>
             <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-deep mt-4 leading-[1.2]">
@@ -394,7 +384,7 @@
          SECTION: INSTRUCTOR | MOVE: M-LAY-EDITORIAL-FEATURE
          COMPONENT_REF: asymmetric-featured-image5-content7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-featured-image5-content7-reference.html | FIDELITY: 70%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-surface border-t border-gray-200">
+    <section class="scale-in w-full bg-surface border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 <!-- Left: Large image (col-span-7) -->
@@ -446,7 +436,7 @@
         <div class="absolute inset-0 bg-black/80"></div>
         <!-- Content -->
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-            <div class="fade-in-section">
+            <div class="fade-up">
                 <span class="font-serif italic text-white/60 text-sm">The Journey</span>
                 <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-white mt-4 leading-[1.2]">
                     첫 방문부터<br>달라지는 4주
@@ -487,7 +477,7 @@
          SECTION: TESTIMONIALS | MOVE: M-LAY-EDITORIAL-TYPO (Quote)
          COMPONENT_REF: text-testimonial-quote | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-testimonial-quote-reference.html | FIDELITY: 75%
     ============================================================ -->
-    <section class="fade-in-section w-full bg-white border-t border-gray-200">
+    <section class="fade-up w-full bg-white border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="text-center mb-14">
                 <span class="font-serif italic text-muted text-sm">Voices</span>
@@ -524,7 +514,7 @@
          SECTION: FAQ | MOVE: INTERACTION (Accordion)
          COMPONENT_REF: custom-faq-accordion | GRADE: n/a | MODE: fallback | SNIPPET_PATH: n/a | FIDELITY: n/a
     ============================================================ -->
-    <section class="fade-in-section w-full bg-surface border-t border-gray-200">
+    <section class="fade-left w-full bg-surface border-t border-gray-200">
         <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
                 <!-- Left: Title -->
@@ -618,7 +608,7 @@
         <div class="absolute inset-0 bg-black/75"></div>
         <!-- Content -->
         <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-24 md:py-32 flex flex-col items-center justify-center text-center min-h-[60vh]">
-            <div class="fade-in-section">
+            <div class="fade-right">
                 <span class="font-serif italic text-white/50 text-sm">Get Started</span>
                 <h2 class="font-serif text-[clamp(1.75rem,3vw,2.75rem)] font-semibold text-white mt-4 leading-[1.2]">
                     당신의 균형을<br>시작하세요
@@ -665,16 +655,19 @@
     ============================================================ -->
     <script>
     // === INTERSECTION OBSERVER (Scroll Animations) ===
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+    document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
     document.querySelectorAll('.stagger-item').forEach((el, index) => {
         const parent = el.closest('.grid, .h-scroll-container');
         if (parent) {
@@ -763,13 +756,43 @@
 
     // === REDUCED MOTION GUARD ===
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-            el.classList.add('animate-in');
+        document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+            el.classList.add('visible');
             el.style.transition = 'none';
             el.style.transitionDelay = '0s';
         });
     }
     </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

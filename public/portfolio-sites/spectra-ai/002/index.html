@@ -221,24 +221,17 @@
     }
 
     /* Scroll Reveal Animations */
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .stagger-item {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
-    .stagger-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
     /* FAQ Accordion */
     .accordion-content {
@@ -257,18 +250,11 @@
     }
 
     /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
-      .animate-gradient,
-      .border-beam-dot,
-      .marquee-track {
-        animation: none;
-      }
+    }
       .animate-gradient {
         -webkit-text-fill-color: var(--accent-primary);
       }
@@ -383,7 +369,7 @@
      ============================================================ -->
 <section class="w-full" style="background: var(--bg-card); border-top: 1px solid var(--border-default); border-bottom: 1px solid var(--border-default);" aria-label="신뢰 지표">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 text-center fade-in-section">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 text-center fade-up">
       <!-- Stat 1 -->
       <div class="stagger-item">
         <div class="text-3xl lg:text-4xl font-bold mb-2" style="font-family: var(--font-ui); color: var(--accent-primary);">
@@ -425,7 +411,7 @@
 <section class="w-full" id="workflow" style="background: var(--bg-page);" aria-label="워크플로우 3단계">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <!-- Section Header -->
-    <div class="text-center mb-16 fade-in-section">
+    <div class="text-center mb-16 fade-left">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">WORKFLOW</span>
       <h2 style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
         세 단계로 완성되는<br>AI 워크플로우
@@ -491,7 +477,7 @@
 <section class="w-full" style="background: var(--bg-surface);" aria-label="활용 사례">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <!-- Section Header -->
-    <div class="text-center mb-16 fade-in-section">
+    <div class="text-center mb-16 fade-right">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">USE CASES</span>
       <h2 style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
         팀마다 다른 방식으로,<br>같은 효과를 경험합니다
@@ -573,7 +559,7 @@
 <section class="w-full" style="background: var(--bg-page);" aria-label="연동 서비스">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <!-- Section Header -->
-    <div class="text-center mb-16 fade-in-section">
+    <div class="text-center mb-16 scale-in">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">INTEGRATIONS</span>
       <h2 style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
         이미 사용 중인 도구와<br>바로 연결됩니다
@@ -581,7 +567,7 @@
     </div>
 
     <!-- Row 1: Image(7) + Text(5) -->
-    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center mb-16 lg:mb-24 fade-in-section">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center mb-16 lg:mb-24 fade-up">
       <div class="col-span-12 md:col-span-7">
         <img src="images/integration_1.png" alt="Slack, Notion, Jira 연동 인터페이스 화면" width="700" height="438" loading="lazy" class="w-full aspect-[16/10] object-cover rounded-[14px]" style="box-shadow: var(--sh-md);">
       </div>
@@ -608,7 +594,7 @@
     </div>
 
     <!-- Row 2: Text(5) + Image(7) — order swapped -->
-    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center fade-in-section">
+    <div class="grid grid-cols-12 gap-6 lg:gap-10 items-center fade-up">
       <div class="col-span-12 md:col-span-5 md:order-1">
         <h3 class="text-xl font-semibold mb-4" style="font-family: var(--font-ui); color: var(--text-primary);">데이터 & CRM 연동</h3>
         <p class="mb-6" style="color: var(--text-muted); font-size: var(--type-body); line-height: var(--lh-body);">
@@ -645,7 +631,7 @@
 <section class="w-full" style="background: var(--bg-surface);" aria-label="고객 후기">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <!-- Section Header -->
-    <div class="text-center mb-16 fade-in-section">
+    <div class="text-center mb-16 fade-left">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">CUSTOMER STORIES</span>
       <h2 style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
         실제 팀이 경험한 변화
@@ -734,7 +720,7 @@
       </div>
     </div>
 
-    <div class="fade-in-section">
+    <div class="fade-right">
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="font-family: var(--font-ui); letter-spacing: var(--ls-tight); line-height: var(--lh-section-title);">
         지금 바로 Spectra를<br>경험하세요
       </h2>
@@ -758,7 +744,7 @@
 <section class="w-full" style="background: var(--bg-page);" aria-label="요금제">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <!-- Section Header -->
-    <div class="text-center mb-16 fade-in-section">
+    <div class="text-center mb-16 scale-in">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">PRICING</span>
       <h2 style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
         팀 규모에 맞는<br>합리적인 플랜
@@ -875,7 +861,7 @@
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12" style="padding-top: 96px; padding-bottom: 96px;">
     <div class="grid grid-cols-12 gap-8 lg:gap-12">
       <!-- Left: Header + Images (5 cols) -->
-      <div class="col-span-12 md:col-span-5 fade-in-section">
+      <div class="col-span-12 md:col-span-5 fade-up">
         <span class="inline-block text-sm font-medium tracking-widest uppercase mb-4" style="color: var(--accent-primary); font-family: var(--font-data);">FAQ</span>
         <h2 class="mb-8" style="font-size: var(--type-section-title); font-weight: var(--w-semibold); letter-spacing: var(--ls-snug); line-height: var(--lh-section-title); color: var(--text-primary);">
           자주 묻는 질문
@@ -887,7 +873,7 @@
       </div>
 
       <!-- Right: Accordion (7 cols) -->
-      <div class="col-span-12 md:col-span-7 fade-in-section" style="transition-delay: 0.15s;">
+      <div class="col-span-12 md:col-span-7 fade-up" style="transition-delay: 0.15s;">
         <div class="divide-y" style="border-color: var(--border-default);">
           <!-- Q1 -->
           <div class="accordion-item py-6 cursor-pointer" data-accordion>
@@ -969,7 +955,7 @@
   <img src="images/cta.png" alt="" width="1920" height="1080" loading="lazy" class="absolute inset-0 w-full h-full object-cover" role="presentation">
   <div class="absolute inset-0" style="background: rgba(30,27,75,0.82);"></div>
   <div class="relative z-10 flex flex-col items-center justify-center text-center text-white" style="min-height: 60vh; padding: 96px 24px;">
-    <div class="fade-in-section">
+    <div class="fade-left">
       <span class="inline-block text-sm font-medium tracking-widest uppercase mb-6" style="opacity: 0.7; font-family: var(--font-data);">GET STARTED</span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style="font-family: var(--font-ui); letter-spacing: var(--ls-tight); line-height: var(--lh-section-title);">
         워크플로우의 다음 단계,<br>Spectra와 시작하세요
@@ -1058,10 +1044,10 @@
 <script>
   // Scroll Reveal — IntersectionObserver
   (function() {
-    const sections = document.querySelectorAll('.fade-in-section');
+    const sections = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in');
     const staggerItems = document.querySelectorAll('.stagger-item');
 
-    const observerOptions = { threshold: 0.1, rootMargin: '-50px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '-20px' };
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1118,7 +1104,7 @@
           tickerObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.05 });
 
     tickers.forEach(el => tickerObserver.observe(el));
   })();
@@ -1152,5 +1138,35 @@
   })();
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

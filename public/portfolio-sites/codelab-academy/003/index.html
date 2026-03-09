@@ -55,17 +55,26 @@
             --font-data: 'IBM Plex Mono', monospace;
         }
         html { scroll-behavior: smooth; }
-        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
-        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-        .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
         button, a { transition: all 0.2s ease-in-out; }
         .typing-cursor::after { content: '|'; animation: blink 1s infinite; color: var(--accent-primary); }
         @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
         .counter-number { font-variant-numeric: tabular-nums; }
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
-            .typing-cursor::after { animation: none; }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
         }
     </style>
     <script type="application/ld+json">
@@ -160,7 +169,7 @@
 
 <!-- SECTION: PHILOSOPHY | MOVE: M-LAY-EDITORIAL-TYPO -->
 <!-- COMPONENT_REF: text-only-about-section | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/text-only-about-section-reference.html | FIDELITY: 80% -->
-<section id="philosophy" class="fade-in-section w-full bg-bg-surface">
+<section id="philosophy" class="fade-up w-full bg-bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="grid grid-cols-12 gap-8 items-start">
             <div class="col-span-12 lg:col-span-5">
@@ -189,7 +198,7 @@
 
 <!-- SECTION: JOURNEY PROCESS | MOVE: M-LAY-TIMELINE-STEPPER -->
 <!-- COMPONENT_REF: accordion-numbered-facts-5-7 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/accordion-collage/accordion-numbered-facts-5-7-reference.html | FIDELITY: 70% -->
-<section id="journey" class="fade-in-section w-full bg-bg-page">
+<section id="journey" class="fade-left w-full bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="text-center mb-16">
             <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Your Journey</p>
@@ -278,7 +287,7 @@
 
 <!-- SECTION: CURRICULUM TRACKS | MOVE: M-LAY-EDITORIAL-FEATURE -->
 <!-- COMPONENT_REF: asymmetric-blog-large7-small5-stack | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/asymmetric-grid/asymmetric-blog-large7-small5-stack-reference.html | FIDELITY: 70% -->
-<section id="curriculum" class="fade-in-section w-full bg-bg-surface">
+<section id="curriculum" class="fade-right w-full bg-bg-surface">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
             <div>
@@ -389,7 +398,7 @@
 
 <!-- SECTION: MENTORS | MOVE: M-INT-HOVER-REVEAL -->
 <!-- COMPONENT_REF: staggered-lookbook-dark-offset-mt12 | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/staggered-gallery/staggered-lookbook-dark-offset-mt12-reference.html | FIDELITY: 70% -->
-<section id="mentors" class="fade-in-section w-full bg-bg-page">
+<section id="mentors" class="scale-in w-full bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="text-center mb-16">
             <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">Mentors</p>
@@ -461,19 +470,19 @@
             </h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 text-center">
-            <div class="fade-in-section">
+            <div class="fade-up">
                 <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="94">0</p>
                 <p class="text-sm text-bg-page/70 mt-2">취업률 (%)</p>
             </div>
-            <div class="fade-in-section">
+            <div class="fade-up">
                 <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="4200">0</p>
                 <p class="text-sm text-bg-page/70 mt-2">평균 초봉 (만원)</p>
             </div>
-            <div class="fade-in-section">
+            <div class="fade-left">
                 <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="1247">0</p>
                 <p class="text-sm text-bg-page/70 mt-2">누적 수료생</p>
             </div>
-            <div class="fade-in-section">
+            <div class="fade-right">
                 <p class="font-mono text-4xl md:text-5xl font-bold text-bg-page counter-number" data-target="47">0</p>
                 <p class="text-sm text-bg-page/70 mt-2">파트너 기업</p>
             </div>
@@ -490,7 +499,7 @@
 
 <!-- SECTION: TESTIMONIALS | MOVE: M-LAY-ALTERNATING-ROWS -->
 <!-- COMPONENT_REF: dark-testimonial-cards-text | GRADE: A | MODE: adapted | SNIPPET_PATH: SNIPPETS/html/content-sections/dark-testimonial-cards-text-reference.html | FIDELITY: 75% -->
-<section class="fade-in-section w-full bg-bg-page">
+<section class="scale-in w-full bg-bg-page">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
             <div>
@@ -567,7 +576,7 @@
 
 <!-- SECTION: FAQ | MOVE: M-INTERACTION-ACCORDION -->
 <!-- COMPONENT_REF: (custom) | GRADE: - | MODE: fallback | SNIPPET_PATH: - | FIDELITY: n/a -->
-<section class="fade-in-section w-full bg-bg-surface">
+<section class="fade-up w-full bg-bg-surface">
     <div class="max-w-[840px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="text-center mb-14">
             <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent mb-4">FAQ</p>
@@ -720,12 +729,15 @@
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
+            entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
-document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-left').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-right').forEach(el => observer.observe(el));
+document.querySelectorAll('.scale-in').forEach(el => observer.observe(el));
 document.querySelectorAll('.stagger-item').forEach((el, index) => {
     const parent = el.closest('.grid, .space-y-3');
     if (parent) {
@@ -761,7 +773,7 @@ const counterObserver = new IntersectionObserver((entries) => {
             animateCounter(entry.target);
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.05 });
 
 document.querySelectorAll('.counter-number').forEach(el => counterObserver.observe(el));
 
@@ -808,8 +820,8 @@ if (menuBtn && mobileMenu) {
 
 // Reduced Motion Support
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-        el.classList.add('animate-in');
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+        el.classList.add('visible');
         el.style.transition = 'none';
     });
     document.querySelectorAll('.counter-number').forEach(el => {
@@ -819,5 +831,35 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

@@ -79,14 +79,14 @@
     }
 
     /* ===== Scroll Animations ===== */
-    .fade-in-section {
+    .fade-up {
       opacity: 0;
       transform: translateY(36px);
       transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
                   transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .fade-in-section.is-visible {
+    .fade-up.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -104,16 +104,11 @@
     }
 
     /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-section,
-      .stagger-item {
-        opacity: 1;
-        transform: none;
-        transition: none;
+        @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
       }
-      .marquee-track {
-        animation: none !important;
-      }
+    }
       html {
         scroll-behavior: auto;
       }
@@ -308,7 +303,7 @@
 
     <!-- Content -->
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 w-full">
-      <div class="max-w-2xl fade-in-section">
+      <div class="max-w-2xl fade-up">
         <!-- Eyebrow -->
         <p class="eyebrow mb-6 flex items-center gap-2">
           <span class="gold-line inline-block"></span>
@@ -345,7 +340,7 @@
   <section class="bg-page py-20 md:py-28">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Header -->
-      <div class="mb-14 fade-in-section">
+      <div class="mb-14 fade-left">
         <p class="eyebrow mb-4">PRACTICE AREAS</p>
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary">전문 분야</h2>
       </div>
@@ -435,7 +430,7 @@
   <section class="bg-surface py-20 md:py-28">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Header -->
-      <div class="mb-16 fade-in-section">
+      <div class="mb-16 fade-right">
         <p class="eyebrow mb-4">OUR ATTORNEYS</p>
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary leading-tight">
           신뢰할 수 있는<br>법률 파트너
@@ -443,7 +438,7 @@
       </div>
 
       <!-- Attorney 1: 이준혁 — Image Left, Text Right -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center mb-20 md:mb-28 fade-in-section">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center mb-20 md:mb-28 scale-in">
         <div class="md:col-span-5">
           <div class="relative rounded-md overflow-hidden aspect-[3/4]">
             <img src="./images/profile_1.png" alt="이준혁 대표변호사" loading="lazy" class="w-full h-full object-cover" />
@@ -474,7 +469,7 @@
       </div>
 
       <!-- Attorney 2: 박서연 — Text Left, Image Right (reversed) -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center mb-20 md:mb-28 fade-in-section">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center mb-20 md:mb-28 fade-up">
         <div class="md:col-span-6 order-2 md:order-1">
           <div class="gold-line mb-6"></div>
           <p class="text-accent text-[13px] font-medium tracking-wider uppercase mb-2">Senior Partner</p>
@@ -505,7 +500,7 @@
       </div>
 
       <!-- Attorney 3: 김도현 — Image Left, Text Right -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center fade-in-section">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center fade-up">
         <div class="md:col-span-5">
           <div class="relative rounded-md overflow-hidden aspect-[3/4]">
             <img src="./images/profile_3.png" alt="김도현 변호사" loading="lazy" class="w-full h-full object-cover" />
@@ -550,7 +545,7 @@
 
     <!-- Content -->
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 w-full">
-      <div class="text-center mb-14 fade-in-section">
+      <div class="text-center mb-14 fade-left">
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary">결과로 증명합니다</h2>
       </div>
 
@@ -598,7 +593,7 @@
   <section class="bg-page py-20 md:py-28 overflow-hidden">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Header -->
-      <div class="text-center mb-14 fade-in-section">
+      <div class="text-center mb-14 fade-right">
         <p class="eyebrow mb-4">TRUSTED BY</p>
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary mb-4">함께한 기업들</h2>
         <p class="text-text-secondary text-[15px] md:text-[16px] max-w-xl mx-auto">
@@ -608,7 +603,7 @@
     </div>
 
     <!-- Marquee Row 1 -->
-    <div class="marquee-wrapper mb-5 fade-in-section">
+    <div class="marquee-wrapper mb-5 scale-in">
       <div class="marquee-track">
         <!-- Set 1 -->
         <div class="flex gap-5 mr-5">
@@ -675,7 +670,7 @@
   <section class="bg-surface py-20 md:py-28">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Header -->
-      <div class="mb-16 fade-in-section">
+      <div class="mb-16 fade-up">
         <p class="eyebrow mb-4">PROCESS</p>
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary leading-tight">
           체계적 법률 대응<br>5단계 프로세스
@@ -787,7 +782,7 @@
     <div class="absolute inset-0 bg-black/65"></div>
 
     <!-- Content -->
-    <div class="relative z-10 text-center max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 fade-in-section">
+    <div class="relative z-10 text-center max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 fade-up">
       <div class="gold-line mx-auto mb-8"></div>
       <h2 class="font-heading text-[28px] md:text-[40px] lg:text-[48px] font-semibold text-text-primary leading-tight">
         법 앞에서 당신은<br>혼자가 아닙니다
@@ -802,13 +797,13 @@
   <section class="bg-page py-20 md:py-28">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12">
       <!-- Header -->
-      <div class="mb-14 fade-in-section">
+      <div class="mb-14 fade-left">
         <p class="eyebrow mb-4">FAQ</p>
         <h2 class="font-heading text-[32px] md:text-[40px] font-semibold text-text-primary">자주 묻는 질문</h2>
       </div>
 
       <!-- Accordion -->
-      <div class="max-w-3xl fade-in-section">
+      <div class="max-w-3xl fade-right">
 
         <!-- FAQ Item 1 -->
         <div class="border-b border-border-default">
@@ -929,7 +924,7 @@
     <!-- Content -->
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 w-full py-20">
       <!-- CTA Block -->
-      <div class="text-center mb-16 fade-in-section">
+      <div class="text-center mb-16 scale-in">
         <div class="gold-line mx-auto mb-8"></div>
         <h2 class="font-heading text-[32px] md:text-[44px] lg:text-[52px] font-semibold text-text-primary leading-tight mb-6">
           지금 비밀 상담을<br>예약하세요
@@ -1001,17 +996,20 @@
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add('visible');
               fadeObserver.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
       );
 
-      document.querySelectorAll('.fade-in-section').forEach((el) => {
+      document.querySelectorAll('.fade-up').forEach((el) => {
         fadeObserver.observe(el);
       });
+      document.querySelectorAll('.fade-left').forEach(el => fadeObserver.observe(el));
+      document.querySelectorAll('.fade-right').forEach(el => fadeObserver.observe(el));
+      document.querySelectorAll('.scale-in').forEach(el => fadeObserver.observe(el));
 
       // ===== IntersectionObserver: Stagger Items =====
       const staggerObserver = new IntersectionObserver(
@@ -1023,7 +1021,7 @@
               const siblings = parent.querySelectorAll('.stagger-item');
               siblings.forEach((sibling, index) => {
                 setTimeout(() => {
-                  sibling.classList.add('is-visible');
+                  sibling.classList.add('visible');
                 }, index * 120);
               });
               // Unobserve all siblings
@@ -1039,8 +1037,8 @@
       });
     } else {
       // If reduced motion is preferred, show everything immediately
-      document.querySelectorAll('.fade-in-section, .stagger-item').forEach((el) => {
-        el.classList.add('is-visible');
+      document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach((el) => {
+        el.classList.add('visible');
       });
     }
 
@@ -1090,7 +1088,7 @@
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.05 }
     );
 
     // Observe the case results section container
@@ -1127,5 +1125,35 @@
     });
   </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>

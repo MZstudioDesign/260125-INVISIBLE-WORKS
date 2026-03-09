@@ -63,14 +63,23 @@
         .skip-link:focus { top: 0; }
 
         /* Animations */
-        .fade-in-section { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
-        .fade-in-section.animate-in { opacity: 1; transform: translateY(0); }
-        .stagger-item { opacity: 0; transform: translateY(22px); transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); }
-        .stagger-item.animate-in { opacity: 1; transform: translateY(0); }
+    /* Scroll Animations — Enhanced */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .scale-in.visible { opacity: 1; transform: scale(1); }
 
-        @media (prefers-reduced-motion: reduce) {
-            .fade-in-section, .stagger-item { opacity: 1; transform: none; transition: none; }
-        }
+            @media (prefers-reduced-motion: reduce) {
+      .fade-up, .fade-left, .fade-right, .stagger-item, .scale-in {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
 
         /* Button transitions */
         button, a { transition: all 0.2s ease; }
@@ -178,7 +187,7 @@
 <!-- ============================================================ -->
 <section class="w-full bg-white" aria-label="의료 철학">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-in-section">
+        <div class="grid grid-cols-12 gap-6 lg:gap-8 items-start fade-up">
             <!-- Text Block: 4 cols with top offset -->
             <div class="col-span-12 md:col-span-4 md:pt-16">
                 <p class="eyebrow text-gold mb-4">OUR PHILOSOPHY</p>
@@ -216,7 +225,7 @@
     <img src="./images/stories_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="800">
     <div class="absolute inset-0 bg-black/88"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="text-center mb-16 fade-in-section">
+        <div class="text-center mb-16 fade-left">
             <p class="eyebrow text-gold mb-4">SPECIALTIES</p>
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-white leading-tight">전문 진료 분야</h2>
         </div>
@@ -264,7 +273,7 @@
 <!-- ============================================================ -->
 <section id="team" class="w-full bg-white" aria-label="의료진 소개">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="text-center mb-16 fade-in-section">
+        <div class="text-center mb-16 fade-right">
             <p class="eyebrow text-gold mb-4">MEDICAL TEAM</p>
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 당신의 회복을 이끌<br>전문 의료진
@@ -327,7 +336,7 @@
 <!-- ============================================================ -->
 <section id="equipment" class="w-full bg-surface" aria-label="첨단 장비">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="text-center mb-16 fade-in-section">
+        <div class="text-center mb-16 scale-in">
             <p class="eyebrow text-gold mb-4">EQUIPMENT</p>
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 정밀 진단을 위한<br>첨단 장비
@@ -389,7 +398,7 @@
 <!-- ============================================================ -->
 <section id="process" class="w-full bg-white" aria-label="진료 절차">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="text-center mb-16 fade-in-section">
+        <div class="text-center mb-16 fade-up">
             <p class="eyebrow text-gold mb-4">PROCESS</p>
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 첫 상담부터 완전한 회복까지
@@ -452,7 +461,7 @@
             </div>
         </div>
         <!-- Booking CTA (mid-page) -->
-        <div class="text-center mt-16 fade-in-section">
+        <div class="text-center mt-16 fade-up">
             <a href="#booking" class="btn-gold">지금 예약하기</a>
         </div>
     </div>
@@ -467,7 +476,7 @@
     <img src="./images/recovery.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="800">
     <div class="absolute inset-0 bg-navy/80"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="text-center mb-14 fade-in-section">
+        <div class="text-center mb-14 fade-left">
             <p class="eyebrow text-gold mb-4">STORIES</p>
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-white leading-tight">
                 일상으로 돌아온<br>환자들의 이야기
@@ -535,7 +544,7 @@
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
         <div class="grid grid-cols-12 gap-8 lg:gap-12">
             <!-- Left: Header -->
-            <div class="col-span-12 lg:col-span-5 fade-in-section">
+            <div class="col-span-12 lg:col-span-5 fade-right">
                 <p class="eyebrow text-gold mb-4">FAQ</p>
                 <h2 class="font-heading text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                     자주 묻는 질문
@@ -612,7 +621,7 @@
 <!-- ============================================================ -->
 <section id="location" class="w-full bg-surface" aria-label="오시는 길">
     <div class="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-28">
-        <div class="grid grid-cols-12 gap-8 lg:gap-12 fade-in-section">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12 scale-in">
             <!-- Left: Info -->
             <div class="col-span-12 lg:col-span-5">
                 <p class="eyebrow text-gold mb-4">LOCATION</p>
@@ -676,15 +685,15 @@
     <img src="./images/cta_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" width="1920" height="800">
     <div class="absolute inset-0 bg-black/88"></div>
     <div class="relative max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 min-h-[60vh] flex flex-col items-center justify-center text-center py-20">
-        <p class="eyebrow text-gold mb-6 fade-in-section">BOOK NOW</p>
-        <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight fade-in-section">
+        <p class="eyebrow text-gold mb-6 fade-up">BOOK NOW</p>
+        <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight fade-up">
             지금 바로<br>상담을 시작하세요
         </h2>
-        <p class="mt-6 text-white/70 text-lg max-w-[420px] fade-in-section">
+        <p class="mt-6 text-white/70 text-lg max-w-[420px] fade-left">
             온라인 예약 또는 전화 상담으로<br>
             가장 가까운 진료 일정을 확인하세요.
         </p>
-        <div class="flex flex-wrap gap-4 mt-10 fade-in-section">
+        <div class="flex flex-wrap gap-4 mt-10 fade-right">
             <a href="#" class="btn-gold">온라인 예약하기</a>
             <a href="tel:02-555-9900" class="btn-outline-light">
                 <span class="flex items-center gap-2">
@@ -724,16 +733,19 @@
 <!-- SCRIPTS -->
 <script>
 // Scroll Animation Observer
-const observerOpts = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observerOpts = { threshold: 0.1, rootMargin: '0px 0px -20px 0px' };
 const animObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
+            entry.target.classList.add('visible');
         }
     });
 }, observerOpts);
 
-document.querySelectorAll('.fade-in-section').forEach(el => animObserver.observe(el));
+document.querySelectorAll('.fade-up').forEach(el => animObserver.observe(el));
+document.querySelectorAll('.fade-left').forEach(el => animObserver.observe(el));
+document.querySelectorAll('.fade-right').forEach(el => animObserver.observe(el));
+document.querySelectorAll('.scale-in').forEach(el => animObserver.observe(el));
 document.querySelectorAll('.stagger-item').forEach((el, index) => {
     const parent = el.closest('.grid, .space-y-0');
     if (parent) {
@@ -748,8 +760,8 @@ document.querySelectorAll('.stagger-item').forEach((el, index) => {
 
 // Reduced Motion Guard
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.fade-in-section, .stagger-item').forEach(el => {
-        el.classList.add('animate-in');
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-item').forEach(el => {
+        el.classList.add('visible');
         el.style.transition = 'none';
     });
 }
@@ -786,5 +798,35 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 
+
+<script>
+// Backup scroll animation observer — catches any elements still at opacity:0
+(function(){
+  var sel = '.fade-up,.fade-left,.fade-right,.scale-in,.stagger-item';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.style.opacity='1';
+        e.target.style.transform='none';
+        var items = e.target.querySelectorAll('.stagger-item');
+        items.forEach(function(item,i){
+          item.style.transitionDelay=(i*0.08)+'s';
+          item.classList.add('visible');
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.02, rootMargin:'0px 0px 0px 0px'});
+  // Wait a tick so existing observers run first
+  setTimeout(function(){
+    document.querySelectorAll(sel).forEach(function(el){
+      if(!el.classList.contains('visible')){
+        obs.observe(el);
+      }
+    });
+  }, 100);
+})();
+</script>
 </body>
 </html>
