@@ -15,9 +15,16 @@ import { useTranslations } from 'next-intl';
 type ViewportMode = 'desktop' | 'tablet' | 'mobile';
 
 const VIEWPORT_WIDTHS: Record<ViewportMode, string> = {
-  desktop: 'max-w-[1280px]',
+  desktop: 'max-w-full',
   tablet: 'max-w-[768px]',
-  mobile: 'max-w-[375px]',
+  mobile: 'max-w-[390px]',
+};
+
+// Actual pixel widths for iframe rendering (iframe gets this as real width)
+const IFRAME_WIDTHS: Record<ViewportMode, number> = {
+  desktop: 1280,
+  tablet: 768,
+  mobile: 390,
 };
 
 interface ViewportToggleProps {
@@ -209,15 +216,15 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
               </div>
 
               {/* iframe Area */}
-              <div className="flex-1 flex items-start justify-center overflow-hidden bg-[#e8f0f6]/50 p-4 md:p-6">
+              <div className="flex-1 min-h-0 flex items-stretch justify-center overflow-hidden bg-[#e8f0f6]/50 p-2 md:p-4">
                 <motion.div
                   className={cn(
-                    'w-full h-full rounded-xl overflow-hidden',
+                    'w-full h-full overflow-hidden',
                     'bg-white shadow-[0_8px_32px_rgba(0,0,0,0.12)]',
-                    'border border-[#7fa8c9]/10',
                     'transition-all duration-500 ease-out',
-                    VIEWPORT_WIDTHS[viewport],
-                    viewport !== 'desktop' && 'mx-auto'
+                    viewport === 'desktop' && 'rounded-xl border border-[#7fa8c9]/10',
+                    viewport === 'tablet' && 'rounded-xl border border-[#7fa8c9]/10 max-w-[768px] mx-auto',
+                    viewport === 'mobile' && 'rounded-2xl border-2 border-[#1a1a1a]/10 max-w-[390px] mx-auto'
                   )}
                   layout
                   transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
@@ -228,6 +235,7 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
                       src={activeDesign.htmlPath}
                       className="w-full h-full border-0"
                       title={`${project.name} - Design ${activeVariant}`}
+                      sandbox="allow-same-origin allow-scripts"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
