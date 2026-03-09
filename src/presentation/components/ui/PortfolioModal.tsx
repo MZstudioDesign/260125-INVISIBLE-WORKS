@@ -222,7 +222,7 @@ export function PortfolioModal({ project, onClose, categoryLabel }: PortfolioMod
                     'w-full h-full overflow-hidden',
                     'bg-white shadow-[0_8px_32px_rgba(0,0,0,0.12)]',
                     'transition-all duration-500 ease-out',
-                    viewport === 'desktop' && 'rounded-xl border border-[#7fa8c9]/10',
+                    viewport === 'desktop' && 'rounded-xl border border-[#7fa8c9]/10 max-w-[9999px]',
                     viewport === 'tablet' && 'rounded-xl border border-[#7fa8c9]/10 max-w-[768px] box-content mx-auto',
                     viewport === 'mobile' && 'rounded-2xl border-2 border-[#1a1a1a]/10 max-w-[390px] box-content mx-auto'
                   )}
