@@ -361,7 +361,7 @@ function CompanySettings({ settings, onUpdate }: CompanySettingsProps) {
         onChange={(value) => onUpdate({ address: value })}
       />
       <TextInput
-        label="웹사이트"
+        label="홈페이지"
         value={settings.companyInfo.website}
         onChange={(value) => onUpdate({ website: value })}
       />

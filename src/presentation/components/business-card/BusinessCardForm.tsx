@@ -93,7 +93,7 @@ export function BusinessCardForm({ data, onChange, className }: BusinessCardForm
         </div>
 
         <InputField
-          label="웹사이트"
+          label="홈페이지"
           value={data.website}
           onChange={(website) => onChange({ website })}
           placeholder="www.company.com"

@@ -59,7 +59,7 @@ export default function DesignSystemPage() {
       id: '1',
       number: '01',
       title: locale === 'ko' ? '내용 전달' : 'Share Content',
-      content: <p className="text-[#1a1a1a]/60">{locale === 'ko' ? '웹사이트에 들어갈 자료를 전달합니다.' : 'Send materials for the website.'}</p>,
+      content: <p className="text-[#1a1a1a]/60">{locale === 'ko' ? '홈페이지에 들어갈 자료를 전달합니다.' : 'Send materials for the website.'}</p>,
     },
     {
       id: '2',
@@ -80,8 +80,8 @@ export default function DesignSystemPage() {
     {
       id: '3',
       number: '03',
-      title: locale === 'ko' ? '웹사이트 완성' : 'Complete Website',
-      content: <p className="text-[#1a1a1a]/60">{locale === 'ko' ? '선택한 디자인으로 웹사이트를 완성합니다.' : 'Complete the website with chosen design.'}</p>,
+      title: locale === 'ko' ? '홈페이지 완성' : 'Complete Website',
+      content: <p className="text-[#1a1a1a]/60">{locale === 'ko' ? '선택한 디자인으로 홈페이지를 완성합니다.' : 'Complete the website with chosen design.'}</p>,
     },
   ];
 
@@ -364,7 +364,7 @@ export default function DesignSystemPage() {
           <h3 className="text-lg font-medium text-[#1a1a1a]/70 mb-4">CTASection</h3>
           <GlassCard className="p-8" hover={false}>
             <CTASection
-              text={locale === 'ko' ? '내 웹사이트 디자인 보러가기' : 'See your website design'}
+              text={locale === 'ko' ? '내 홈페이지 디자인 보러가기' : 'See your website design'}
               href="#"
             />
           </GlassCard>

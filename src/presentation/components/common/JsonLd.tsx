@@ -6,7 +6,7 @@ export function OrganizationJsonLd() {
     url: 'https://invisibleworks.co',
     logo: 'https://invisibleworks.co/og-image.png',
     description:
-      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 웹사이트를 만들어 드립니다.',
+      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 홈페이지를 만들어 드립니다.',
     foundingDate: '2025',
     areaServed: {
       '@type': 'Country',

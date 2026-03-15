@@ -397,7 +397,7 @@ export function generateEstimateQuoteItems(
     const minCost = applyUiuxMultiplier(pageCosts.min, isFancy, settings);
     const maxCost = applyUiuxMultiplier(pageCosts.max, isFancy, settings);
 
-    const desc = `웹사이트 기획 및 디자인/개발 (${screenBlocks.min}~${screenBlocks.max} 블록)`;
+    const desc = `홈페이지 기획 및 디자인/개발 (${screenBlocks.min}~${screenBlocks.max} 블록)`;
     const subItems = [];
     if (isFancy) subItems.push('UI/UX: 화려한 스타일 적용 (1.2배)');
     else subItems.push('UI/UX: 일반 스타일 적용');

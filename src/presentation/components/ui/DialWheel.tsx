@@ -26,7 +26,7 @@ interface DialWheelProps {
  * - 최소 블러
  * - 부드러운 스크롤 애니메이션
  * 
- * "웹사이트는 신경쓸 게 많다, 끝이 안보인다" 느낌 표현
+ * "홈페이지는 신경쓸 게 많다, 끝이 안보인다" 느낌 표현
  */
 export function DialWheel({
   items: customItems,
@@ -206,7 +206,7 @@ interface DialWheelSectionProps {
 
 export function DialWheelSection({
   items,
-  title = '신경 쓸 게 너무 많은 웹사이트',
+  title = '신경 쓸 게 너무 많은 홈페이지',
   subtitle,
 }: DialWheelSectionProps) {
   return (

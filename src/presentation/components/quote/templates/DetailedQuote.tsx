@@ -34,8 +34,8 @@ const COMPACT_TERMS = [
 
 // 실효형 약관 (2페이지용)
 const DETAILED_TERMS = {
-  title: 'Invisible Works 웹사이트 제작 견적서 부속 약관',
-  intro: '본 약관은 Invisible Works(이하 "제작사")가 제공하는 웹사이트 제작 서비스와 관련하여, 견적서와 함께 적용되는 기본 조건을 규정한다.',
+  title: 'Invisible Works 홈페이지 제작 견적서 부속 약관',
+  intro: '본 약관은 Invisible Works(이하 "제작사")가 제공하는 홈페이지 제작 서비스와 관련하여, 견적서와 함께 적용되는 기본 조건을 규정한다.',
   sections: [
     {
       title: '제1조 (문서의 성격 및 적용 범위)',
@@ -122,7 +122,7 @@ const DETAILED_TERMS = {
     {
       title: '제10조 (검수 및 납품)',
       content: [
-        '① 납품물은 견적서 및 협의된 범위에 따라 제작된 웹사이트 및 관련 산출물이다.',
+        '① 납품물은 견적서 및 협의된 범위에 따라 제작된 홈페이지 및 관련 산출물이다.',
         '② 고객은 전달일로부터 7일 이내 검수를 진행해야 하며, 기한 내 회신이 없는 경우 납품 승인으로 간주할 수 있다.',
         '③ 브라우저 및 디바이스 호환은 주요 최신 버전을 기준으로 대응한다.',
       ],
@@ -187,7 +187,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
   const total = calculateTotal(subtotal, vat);
   const balanceDue = calculateBalanceDue(subtotal, vat, data.discount || 0);
 
-  // QR 값 - invisibleworks.co 웹사이트로 고정
+  // QR 값 - invisibleworks.co 홈페이지로 고정
   const qrValue = 'https://invisibleworks.co';
 
   // 2페이지: 세부 약관
@@ -567,7 +567,7 @@ export function DetailedQuote({ data, pageNumber = 1 }: TemplateProps) {
               )}
             </div>
 
-            {/* QR Code - 웹사이트 링크 */}
+            {/* QR Code - 홈페이지 링크 */}
             <div style={{ marginTop: '8px' }}>
               <div style={{ fontSize: '7px', color: '#666', marginBottom: '3px' }}>
                 SCAN TO VISIT WEBSITE

@@ -104,7 +104,7 @@ const translations: Record<string, {
       { id: 'logo', label: '로고가 있어요' },
       { id: 'photos', label: '사진(매장/제품)이 있어요' },
       { id: 'content', label: '소개글/메뉴/가격표가 있어요' },
-      { id: 'website', label: '기존 웹사이트가 있어요' },
+      { id: 'website', label: '기존 홈페이지가 있어요' },
       { id: 'none', label: '아직 없어요', recommended: true },
     ],
     quoteOptions: [
@@ -143,9 +143,9 @@ const translations: Record<string, {
       { id: 'other', label: '직접 입력' },
     ],
     stepTitles: [
-      { title: '어떤 웹사이트를\n만들고 싶으신가요?', sub: '업종을 선택해주세요' },
-      { title: '웹사이트로\n무엇을 하고 싶으세요?', sub: '목적을 알려주세요' },
-      { title: '선호하는 색상이\n있으신가요?', sub: '웹사이트의 전체적인 색감이에요' },
+      { title: '어떤 홈페이지를\n만들고 싶으신가요?', sub: '업종을 선택해주세요' },
+      { title: '홈페이지로\n무엇을 하고 싶으세요?', sub: '목적을 알려주세요' },
+      { title: '선호하는 색상이\n있으신가요?', sub: '홈페이지의 전체적인 색감이에요' },
       { title: '어떤 분위기를\n원하시나요?', sub: '톤앤매너를 선택해주세요' },
       { title: '현재 갖고 계신 게\n있으신가요?', sub: '여러 개 선택 가능해요' },
       { title: '다른 곳에서\n견적을 받아보셨나요?', sub: '비교해보시면 판단이 쉬워져요' },

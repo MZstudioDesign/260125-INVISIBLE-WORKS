@@ -27,13 +27,13 @@ interface PortfolioItem {
 // Portfolio Data
 // ============================================
 
-const categories = ['전체', '웹사이트', '랜딩페이지', '웹앱'];
+const categories = ['전체', '홈페이지', '랜딩페이지', '웹앱'];
 
 const portfolioItems: PortfolioItem[] = [
   {
     id: '1',
     title: 'Modern E-Commerce',
-    category: '웹사이트',
+    category: '홈페이지',
     description: '세련된 쇼핑 경험을 제공하는 이커머스 플랫폼',
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80',
     tags: ['Next.js', 'Stripe', 'Tailwind'],
@@ -57,8 +57,8 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: '4',
     title: 'Restaurant Branding',
-    category: '웹사이트',
-    description: '로컬 레스토랑을 위한 브랜드 웹사이트',
+    category: '홈페이지',
+    description: '로컬 레스토랑을 위한 브랜드 홈페이지',
     imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=600&fit=crop&q=80',
     tags: ['Branding', 'Photography'],
   },
@@ -81,7 +81,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: '7',
     title: 'Portfolio Site',
-    category: '웹사이트',
+    category: '홈페이지',
     description: '디자이너를 위한 미니멀한 포트폴리오 사이트',
     imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop&q=80',
     tags: ['Minimal', 'Gallery'],
@@ -97,8 +97,8 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: '9',
     title: 'Real Estate',
-    category: '웹사이트',
-    description: '부동산 매물 검색 및 상담 웹사이트',
+    category: '홈페이지',
+    description: '부동산 매물 검색 및 상담 홈페이지',
     imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80',
     tags: ['Search', 'Map', 'Listing'],
   },
@@ -121,8 +121,8 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: '12',
     title: 'Medical Clinic',
-    category: '웹사이트',
-    description: '의료 클리닉을 위한 신뢰감 있는 웹사이트',
+    category: '홈페이지',
+    description: '의료 클리닉을 위한 신뢰감 있는 홈페이지',
     imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&q=80',
     tags: ['Healthcare', 'Booking'],
   },
@@ -180,9 +180,9 @@ export default function PortfolioPage() {
               Portfolio
             </h1>
             <p className="text-xl text-[#1a1a1a]/60 max-w-2xl leading-relaxed">
-              복잡한 과정 없이 완성된 웹사이트들입니다.
+              복잡한 과정 없이 완성된 홈페이지들입니다.
               <br />
-              여러분의 다음 웹사이트도 이렇게 만들어집니다.
+              여러분의 다음 홈페이지도 이렇게 만들어집니다.
             </p>
           </motion.div>
         </div>

@@ -5,13 +5,13 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Invisible Works | 웹사이트 제작 전문',
+    default: 'Invisible Works | 홈페이지 제작 전문',
     template: '%s | Invisible Works',
   },
   description:
-    '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 웹사이트를 만들어 드립니다. 무료 디자인 시안 제공.',
+    '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 홈페이지를 만들어 드립니다. 무료 디자인 시안 제공.',
   keywords: [
-    '웹사이트 제작',
+    '홈페이지 제작',
     '홈페이지 제작',
     '랜딩페이지',
     '웹디자인',
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     alternateLocale: ['en_US', 'zh_CN', 'zh_TW'],
     url: 'https://invisibleworks.co',
     siteName: 'Invisible Works',
-    title: 'Invisible Works | 웹사이트 제작 전문',
+    title: 'Invisible Works | 홈페이지 제작 전문',
     description:
-      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 웹사이트를 만들어 드립니다.',
+      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 홈페이지를 만들어 드립니다.',
     images: [
       {
         url: '/og-image.png',
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Invisible Works | 웹사이트 제작 전문',
+    title: 'Invisible Works | 홈페이지 제작 전문',
     description:
-      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 웹사이트를 만들어 드립니다.',
+      '투명한 가격, 전문적인 디자인. 복잡한 과정 없이 깔끔한 홈페이지를 만들어 드립니다.',
     images: ['/og-image.png'],
   },
   robots: {

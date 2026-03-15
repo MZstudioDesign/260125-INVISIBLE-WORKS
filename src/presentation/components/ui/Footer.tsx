@@ -30,8 +30,8 @@ export function Footer({ className = '', locale = 'ko' }: FooterProps) {
   // CTA 텍스트 (언어별)
   const ctaText: Record<string, { mobile: string[]; desktop: string }> = {
     ko: {
-      mobile: ['내 웹사이트 디자인', '보러 가기'],
-      desktop: '내 웹사이트 디자인 보러 가기',
+      mobile: ['내 홈페이지 디자인', '보러 가기'],
+      desktop: '내 홈페이지 디자인 보러 가기',
     },
     en: {
       mobile: ['See your website', 'design'],

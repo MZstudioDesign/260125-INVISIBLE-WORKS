@@ -125,7 +125,7 @@ export function QuoteForm({ data, onChange, activeTab = 'simple', className, val
             label="견적서 제목"
             value={data.invoiceSubject}
             onChange={(v) => onChange({ invoiceSubject: v })}
-            placeholder="웹사이트 제작 프로젝트"
+            placeholder="홈페이지 제작 프로젝트"
           />
         )}
       </div>
