@@ -92,7 +92,7 @@
       "medical": "Hospital/Clinic",
       "brand": "Brand/Manufacturing",
       "fitness": "Fitness/Pilates",
-      "office": "Office/Consulting",
+      "office": "Business/B2B",
       "other": "Other (Enter manually)"
     },
     "purposes": {
@@ -224,7 +224,7 @@
       "education": "Academy/Education",
       "medical": "Hospital/Clinic",
       "brand": "Brand/Manufacturing",
-      "office": "Office",
+      "office": "Business/B2B",
       "other": "Other (Enter manually)"
     },
     "purposes": {

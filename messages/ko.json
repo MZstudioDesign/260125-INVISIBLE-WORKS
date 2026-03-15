@@ -92,7 +92,7 @@
       "medical": "병원/클리닉",
       "brand": "브랜드/제조",
       "fitness": "헬스/필라테스",
-      "office": "사무소/컨설팅",
+      "office": "비즈니스/B2B",
       "other": "기타 (직접 입력)"
     },
     "purposes": {
@@ -224,7 +224,7 @@
       "education": "학원/교육",
       "medical": "병원/클리닉",
       "brand": "브랜드/제조",
-      "office": "사무실/오피스",
+      "office": "비즈니스/B2B",
       "other": "기타 (직접 입력)"
     },
     "purposes": {

@@ -89,7 +89,7 @@ const translations: Record<string, {
       { id: 'education', label: '학원/교육' },
       { id: 'medical', label: '병원/클리닉' },
       { id: 'brand', label: '브랜드/제조' },
-      { id: 'office', label: '사무실/오피스' },
+      { id: 'office', label: '비즈니스/B2B' },
       { id: 'other', label: '기타 (직접 입력)' },
     ],
     purposes: [
@@ -190,7 +190,7 @@ const translations: Record<string, {
       { id: 'education', label: 'Academy/Education' },
       { id: 'medical', label: 'Hospital/Clinic' },
       { id: 'brand', label: 'Brand/Manufacturing' },
-      { id: 'office', label: 'Office' },
+      { id: 'office', label: 'Business/B2B' },
       { id: 'other', label: 'Other (Enter manually)' },
     ],
     purposes: [
@@ -291,7 +291,7 @@ const translations: Record<string, {
       { id: 'education', label: '培训/教育' },
       { id: 'medical', label: '医院/诊所' },
       { id: 'brand', label: '品牌/制造' },
-      { id: 'office', label: '办公室' },
+      { id: 'office', label: '商务/B2B' },
       { id: 'other', label: '其他（手动输入）' },
     ],
     purposes: [
@@ -392,7 +392,7 @@ const translations: Record<string, {
       { id: 'education', label: '培訓/教育' },
       { id: 'medical', label: '醫院/診所' },
       { id: 'brand', label: '品牌/製造' },
-      { id: 'office', label: '辦公室' },
+      { id: 'office', label: '商務/B2B' },
       { id: 'other', label: '其他（手動輸入）' },
     ],
     purposes: [

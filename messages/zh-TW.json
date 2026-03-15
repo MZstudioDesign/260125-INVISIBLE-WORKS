@@ -92,7 +92,7 @@
       "medical": "醫院/診所",
       "brand": "品牌/製造",
       "fitness": "健身/普拉提",
-      "office": "辦公室/諮詢",
+      "office": "商務/B2B",
       "other": "其他（手動輸入）"
     },
     "purposes": {
@@ -224,7 +224,7 @@
       "education": "培訓/教育",
       "medical": "醫院/診所",
       "brand": "品牌/製造",
-      "office": "辦公室",
+      "office": "商務/B2B",
       "other": "其他（手動輸入）"
     },
     "purposes": {
